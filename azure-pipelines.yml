@@ -1,0 +1,46 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '$(solution)'
+
+- task: VSBuild@1
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/t:publish /p:PublishSingleFile=True /p:SkipInvalidConfigurations=true /p:outputpath=$(Build.ArtifactStagingDirectory)\'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'    
+
+- task: CopyFiles@2    
+  displayName: 'Copy Files to: $(build.artifactstagingdirectory)'    
+  inputs:    
+    SourceFolder: '$(system.defaultworkingdirectory)'    
+    Contents: '**/bin/**'    
+    TargetFolder: '$(build.artifactstagingdirectory)'    
+    condition: succeededOrFailed()
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.ArtifactStagingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber).zip'
+    replaceExistingArchive: true  
+       
+- task: PublishBuildArtifacts@1    
+  displayName: 'Publish Artifact: drop'    
+  inputs:    
+    PathtoPublish: '$(build.artifactstagingdirectory)'    
+  condition: succeededOrFailed()
