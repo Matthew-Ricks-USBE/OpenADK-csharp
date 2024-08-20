@@ -7,7 +7,7 @@ pool:
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Debug'
+  buildConfiguration: 'Release'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -19,7 +19,7 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
-    msbuildArgs: '/t:publish /p:PublishSingleFile=True /p:SkipInvalidConfigurations=true /p:outputpath=$(Build.ArtifactStagingDirectory)\'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:outputpath=$(Build.ArtifactStagingDirectory)\'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'    
 
