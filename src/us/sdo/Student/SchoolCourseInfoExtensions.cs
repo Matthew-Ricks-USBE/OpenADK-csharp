@@ -95,4 +95,24 @@ public class SchoolCourseInfoExtensions : SifElement
 		}
 	}
 
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;ExcludeFromStateReporting&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>ExcludeFromStateReporting</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string ExcludeFromStateReporting
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING, new SifString( value ), value );
+		}
+	}
+
 }}

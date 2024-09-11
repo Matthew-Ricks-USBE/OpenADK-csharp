@@ -208,4 +208,364 @@ public class StudentSchoolEnrollmentExtensions : SifDataObject
 		}
 	}
 
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;ExcusedAbsences&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>ExcusedAbsences</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string ExcusedAbsences
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EXCUSEDABSENCES ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EXCUSEDABSENCES, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;UnexcusedAbsences&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>UnexcusedAbsences</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string UnexcusedAbsences
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_UNEXCUSEDABSENCES ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_UNEXCUSEDABSENCES, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;AbsencesDueToSuspension&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>AbsencesDueToSuspension</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string AbsencesDueToSuspension
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ABSENCESDUETOSUSPENSION ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ABSENCESDUETOSUSPENSION, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;NonAttender&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>NonAttender</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string NonAttender
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NONATTENDER ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NONATTENDER, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;ResidentStatusX&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>ResidentStatusX</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string ResidentStatusX
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_RESIDENTSTATUSX ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_RESIDENTSTATUSX, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1Math&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1Math</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1Math
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1MATH ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1MATH, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1ELA&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1ELA</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1ELA
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ELA ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ELA, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1Science&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1Science</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1Science
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SCIENCE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SCIENCE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1Health&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1Health</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1Health
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1HEALTH ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1HEALTH, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1AcademicGuidance&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1AcademicGuidance</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1AcademicGuidance
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ACADEMICGUIDANCE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ACADEMICGUIDANCE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1SocialStudies&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1SocialStudies</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1SocialStudies
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SOCIALSTUDIES ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SOCIALSTUDIES, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1Vocational&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1Vocational</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1Vocational
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1VOCATIONAL ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1VOCATIONAL, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;IntergenerationalPovertyGrant&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>IntergenerationalPovertyGrant</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string IntergenerationalPovertyGrant
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_INTERGENERATIONALPOVERTYGRANT ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_INTERGENERATIONALPOVERTYGRANT, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;AfterSchool21CCLC&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>AfterSchool21CCLC</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string AfterSchool21CCLC
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_AFTERSCHOOL21CCLC ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_AFTERSCHOOL21CCLC, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;ELStateSoftware&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>ELStateSoftware</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string ELStateSoftware
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ELSTATESOFTWARE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ELSTATESOFTWARE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;EarlyChildhoodReadingStateSoftware&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>EarlyChildhoodReadingStateSoftware</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string EarlyChildhoodReadingStateSoftware
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EARLYCHILDHOODREADINGSTATESOFTWARE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EARLYCHILDHOODREADINGSTATESOFTWARE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;NCLBSchoolChoice&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>NCLBSchoolChoice</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string NCLBSchoolChoice
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NCLBSCHOOLCHOICE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NCLBSCHOOLCHOICE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;Title1ParaPros&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>Title1ParaPros</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string Title1ParaPros
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1PARAPROS ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1PARAPROS, new SifString( value ), value );
+		}
+	}
+
 }}

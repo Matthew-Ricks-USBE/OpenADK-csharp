@@ -88,4 +88,44 @@ public class SchoolInfoExtensions : SifElement
 		SetField( StudentDTD.SCHOOLINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING, val );
 	}
 
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;DaysInSession&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>DaysInSession</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string DaysInSession
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.SCHOOLINFOEXTENSIONS_DAYSINSESSION ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.SCHOOLINFOEXTENSIONS_DAYSINSESSION, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;LastInstructionDate&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>LastInstructionDate</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string LastInstructionDate
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.SCHOOLINFOEXTENSIONS_LASTINSTRUCTIONDATE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.SCHOOLINFOEXTENSIONS_LASTINSTRUCTIONDATE, new SifString( value ), value );
+		}
+	}
+
 }}

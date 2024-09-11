@@ -63,15 +63,15 @@ public class StudentSectionEnrollmentExtensions : SifElement
 	/// <para>Version: 2.4</para>
 	/// <para>Since: 2.4</para>
 	/// </remarks>
-	public decimal? GradeEarned
+	public string GradeEarned
 	{
 		get
 		{
-			return (decimal?) GetSifSimpleFieldValue( StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_GRADEEARNED ) ;
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_GRADEEARNED ) ;
 		}
 		set
 		{
-			SetFieldValue( StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_GRADEEARNED, new SifDecimal( value ), value );
+			SetFieldValue( StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_GRADEEARNED, new SifString( value ), value );
 		}
 	}
 
