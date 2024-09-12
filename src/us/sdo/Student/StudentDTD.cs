@@ -1006,13 +1006,15 @@ namespace OpenADK.Library.us.Student
 	/** SIF 2.0 and later: Defines the built-in SIF_Metadata element common to all SIF Data Objects */
 	public static IElementDef SCHOOLCOURSEINFO_SIF_METADATA = null;
 
-	// Field elements of SCHOOLCOURSEINFOEXTENSIONS (3 fields)
+	// Field elements of SCHOOLCOURSEINFOEXTENSIONS (4 fields)
 	/** Defines the &lt;TermCode&gt; element as a child of &lt;SchoolCourseInfoExtensions&gt; */
 	public static IElementDef SCHOOLCOURSEINFOEXTENSIONS_TERMCODE = null;
 	/** Defines the &lt;SemesterLength&gt; element as a child of &lt;SchoolCourseInfoExtensions&gt; */
 	public static IElementDef SCHOOLCOURSEINFOEXTENSIONS_SEMESTERLENGTH = null;
 	/** Defines the &lt;CIPCodeNumber&gt; element as a child of &lt;SchoolCourseInfoExtensions&gt; */
 	public static IElementDef SCHOOLCOURSEINFOEXTENSIONS_CIPCODENUMBER = null;
+	/** Defines the &lt;ExcludeFromStateReporting&gt; element as a child of &lt;SchoolCourseInfoExtensions&gt; */
+	public static IElementDef SCHOOLCOURSEINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING = null;
 
 	// Field elements of SCHOOLCOURSEINFOOVERRIDE (8 fields)
 	/** Defines the Override attribute as a child of &lt;SchoolCourseInfoOverride&gt; */
@@ -1096,11 +1098,15 @@ namespace OpenADK.Library.us.Student
 	/** SIF 2.0 and later: Defines the built-in SIF_Metadata element common to all SIF Data Objects */
 	public static IElementDef SCHOOLINFO_SIF_METADATA = null;
 
-	// Field elements of SCHOOLINFOEXTENSIONS (2 fields)
+	// Field elements of SCHOOLINFOEXTENSIONS (4 fields)
 	/** Defines the &lt;ScheduleDayType&gt; element as a child of &lt;SchoolInfoExtensions&gt; */
 	public static IElementDef SCHOOLINFOEXTENSIONS_SCHEDULEDAYTYPE = null;
 	/** Defines the &lt;ExcludeFromStateReporting&gt; element as a child of &lt;SchoolInfoExtensions&gt; */
 	public static IElementDef SCHOOLINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING = null;
+	/** Defines the &lt;DaysInSession&gt; element as a child of &lt;SchoolInfoExtensions&gt; */
+	public static IElementDef SCHOOLINFOEXTENSIONS_DAYSINSESSION = null;
+	/** Defines the &lt;LastInstructionDate&gt; element as a child of &lt;SchoolInfoExtensions&gt; */
+	public static IElementDef SCHOOLINFOEXTENSIONS_LASTINSTRUCTIONDATE = null;
 
 	// Field elements of SCHOOLJURISDICTION (1 fields)
 	/** Defines the Code attribute as a child of &lt;SchoolJurisdiction&gt; */
@@ -1606,7 +1612,7 @@ namespace OpenADK.Library.us.Student
 	/** SIF 2.0 and later: Defines the built-in SIF_Metadata element common to all SIF Data Objects */
 	public static IElementDef STUDENTPERSONAL_SIF_METADATA = null;
 
-	// Field elements of STUDENTPERSONALEXTENSIONS (32 fields)
+	// Field elements of STUDENTPERSONALEXTENSIONS (40 fields)
 	/** Defines the &lt;DistrictOfResidence&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
 	public static IElementDef STUDENTPERSONALEXTENSIONS_DISTRICTOFRESIDENCE = null;
 	/** Defines the &lt;AccompaniedStudent&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
@@ -1671,6 +1677,22 @@ namespace OpenADK.Library.us.Student
 	public static IElementDef STUDENTPERSONALEXTENSIONS_REFUGEESTUDENT = null;
 	/** Defines the &lt;HighSchlComplStatus&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
 	public static IElementDef STUDENTPERSONALEXTENSIONS_HIGHSCHLCOMPLSTATUS = null;
+	/** Defines the &lt;SpecialEdExitDate&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_SPECIALEDEXITDATE = null;
+	/** Defines the &lt;BeginYearROGLCompositeScore&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_BEGINYEARROGLCOMPOSITESCORE = null;
+	/** Defines the &lt;MidYearROGLCompositeScore&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_MIDYEARROGLCOMPOSITESCORE = null;
+	/** Defines the &lt;EndYearROGLCompositeScore&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_ENDYEARROGLCOMPOSITESCORE = null;
+	/** Defines the &lt;GeoCode&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_GEOCODE = null;
+	/** Defines the &lt;MesaProgram&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_MESAPROGRAM = null;
+	/** Defines the &lt;NCLBSuppServMath&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVMATH = null;
+	/** Defines the &lt;NCLBSuppServLang&gt; element as a child of &lt;StudentPersonalExtensions&gt; */
+	public static IElementDef STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVLANG = null;
 
 	// Field elements of STUDENTPICTURE (4 fields)
 	/** Defines the StudentPersonalRefId attribute as a child of &lt;StudentPicture&gt; */
@@ -1740,7 +1762,7 @@ namespace OpenADK.Library.us.Student
 	/** SIF 2.0 and later: Defines the built-in SIF_Metadata element common to all SIF Data Objects */
 	public static IElementDef STUDENTSCHOOLENROLLMENT_SIF_METADATA = null;
 
-	// Field elements of STUDENTSCHOOLENROLLMENTEXTENSIONS (8 fields)
+	// Field elements of STUDENTSCHOOLENROLLMENTEXTENSIONS (26 fields)
 	/** Defines the &lt;KindergartenType&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
 	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_KINDERGARTENTYPE = null;
 	/** Defines the &lt;EnrollmentValidationType&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
@@ -1757,6 +1779,42 @@ namespace OpenADK.Library.us.Student
 	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_PARTTIMEHOMESCHOOL = null;
 	/** Defines the &lt;DaysAttended&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
 	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_DAYSATTENDED = null;
+	/** Defines the &lt;ExcusedAbsences&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_EXCUSEDABSENCES = null;
+	/** Defines the &lt;UnexcusedAbsences&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_UNEXCUSEDABSENCES = null;
+	/** Defines the &lt;AbsencesDueToSuspension&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_ABSENCESDUETOSUSPENSION = null;
+	/** Defines the &lt;NonAttender&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_NONATTENDER = null;
+	/** Defines the &lt;ResidentStatusX&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_RESIDENTSTATUSX = null;
+	/** Defines the &lt;Title1Math&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1MATH = null;
+	/** Defines the &lt;Title1ELA&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ELA = null;
+	/** Defines the &lt;Title1Science&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SCIENCE = null;
+	/** Defines the &lt;Title1Health&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1HEALTH = null;
+	/** Defines the &lt;Title1AcademicGuidance&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ACADEMICGUIDANCE = null;
+	/** Defines the &lt;Title1SocialStudies&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SOCIALSTUDIES = null;
+	/** Defines the &lt;Title1Vocational&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1VOCATIONAL = null;
+	/** Defines the &lt;IntergenerationalPovertyGrant&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_INTERGENERATIONALPOVERTYGRANT = null;
+	/** Defines the &lt;AfterSchool21CCLC&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_AFTERSCHOOL21CCLC = null;
+	/** Defines the &lt;ELStateSoftware&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_ELSTATESOFTWARE = null;
+	/** Defines the &lt;EarlyChildhoodReadingStateSoftware&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_EARLYCHILDHOODREADINGSTATESOFTWARE = null;
+	/** Defines the &lt;NCLBSchoolChoice&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_NCLBSCHOOLCHOICE = null;
+	/** Defines the &lt;Title1ParaPros&gt; element as a child of &lt;StudentSchoolEnrollmentExtensions&gt; */
+	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1PARAPROS = null;
 	/** SIF 1.5 and later: Defines the built-in SIF_ExtendedElements element common to all SIF Data Objects */
 	public static IElementDef STUDENTSCHOOLENROLLMENTEXTENSIONS_SIF_EXTENDEDELEMENTS = null;
 	/** SIF 2.0 and later: Defines the built-in SIF_Metadata element common to all SIF Data Objects */
@@ -2531,10 +2589,11 @@ namespace OpenADK.Library.us.Student
 		SCHOOLCOURSEINFO_SIF_EXTENDEDELEMENTS = new ElementDefImpl( SCHOOLCOURSEINFO, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		SCHOOLCOURSEINFO_SIF_METADATA = new ElementDefImpl( SCHOOLCOURSEINFO, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
 
-		// <SchoolCourseInfoExtensions> fields (3 entries)
+		// <SchoolCourseInfoExtensions> fields (4 entries)
 		StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_TERMCODE = new ElementDefImpl( SCHOOLCOURSEINFOEXTENSIONS, "TermCode", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_SEMESTERLENGTH = new ElementDefImpl( SCHOOLCOURSEINFOEXTENSIONS, "SemesterLength", null, 2, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.INT );
 		StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_CIPCODENUMBER = new ElementDefImpl( SCHOOLCOURSEINFOEXTENSIONS, "CIPCodeNumber", null, 3, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING = new ElementDefImpl( SCHOOLCOURSEINFOEXTENSIONS, "ExcludeFromStateReporting", null, 4, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 
 		// <SchoolCourseInfoOverride> fields (8 entries)
 		StudentDTD.SCHOOLCOURSEINFOOVERRIDE_OVERRIDE = new ElementDefImpl( SCHOOLCOURSEINFOOVERRIDE, "Override", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF11, SifVersion.SIF26, SifTypeConverters.STRING );
@@ -2617,9 +2676,11 @@ namespace OpenADK.Library.us.Student
 		SCHOOLINFO_SIF_EXTENDEDELEMENTS = new ElementDefImpl( SCHOOLINFO, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		SCHOOLINFO_SIF_METADATA = new ElementDefImpl( SCHOOLINFO, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
 
-		// <SchoolInfoExtensions> fields (2 entries)
+		// <SchoolInfoExtensions> fields (4 entries)
 		StudentDTD.SCHOOLINFOEXTENSIONS_SCHEDULEDAYTYPE = new ElementDefImpl( SCHOOLINFOEXTENSIONS, "ScheduleDayType", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.SCHOOLINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING = new ElementDefImpl( SCHOOLINFOEXTENSIONS, "ExcludeFromStateReporting", null, 2, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.SCHOOLINFOEXTENSIONS_DAYSINSESSION = new ElementDefImpl( SCHOOLINFOEXTENSIONS, "DaysInSession", null, 3, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.SCHOOLINFOEXTENSIONS_LASTINSTRUCTIONDATE = new ElementDefImpl( SCHOOLINFOEXTENSIONS, "LastInstructionDate", null, 4, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 
 		// <SchoolJurisdiction> fields (1 entries)
 		StudentDTD.SCHOOLJURISDICTION_CODE = new ElementDefImpl( SCHOOLJURISDICTION, "Code", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF11, SifVersion.SIF15r1, SifTypeConverters.STRING );
@@ -2988,7 +3049,7 @@ namespace OpenADK.Library.us.Student
 		STUDENTPERSONAL_SIF_EXTENDEDELEMENTS = new ElementDefImpl( STUDENTPERSONAL, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		STUDENTPERSONAL_SIF_METADATA = new ElementDefImpl( STUDENTPERSONAL, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
 
-		// <StudentPersonalExtensions> fields (32 entries)
+		// <StudentPersonalExtensions> fields (40 entries)
 		StudentDTD.STUDENTPERSONALEXTENSIONS_DISTRICTOFRESIDENCE = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "DistrictOfResidence", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTPERSONALEXTENSIONS_ACCOMPANIEDSTUDENT = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "AccompaniedStudent", null, 2, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTPERSONALEXTENSIONS_MEALSTATUS = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "MealStatus", null, 3, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
@@ -3021,6 +3082,14 @@ namespace OpenADK.Library.us.Student
 		StudentDTD.STUDENTPERSONALEXTENSIONS_HIGHSCHLCOMPL = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "HighSchlCompl", null, 30, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTPERSONALEXTENSIONS_REFUGEESTUDENT = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "RefugeeStudent", null, 31, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTPERSONALEXTENSIONS_HIGHSCHLCOMPLSTATUS = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "HighSchlComplStatus", null, 32, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_SPECIALEDEXITDATE = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "SpecialEdExitDate", null, 33, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_BEGINYEARROGLCOMPOSITESCORE = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "BeginYearROGLCompositeScore", null, 34, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_MIDYEARROGLCOMPOSITESCORE = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "MidYearROGLCompositeScore", null, 35, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_ENDYEARROGLCOMPOSITESCORE = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "EndYearROGLCompositeScore", null, 36, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_GEOCODE = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "GeoCode", null, 37, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_MESAPROGRAM = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "MesaProgram", null, 38, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVMATH = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "NCLBSuppServMath", null, 39, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVLANG = new ElementDefImpl( STUDENTPERSONALEXTENSIONS, "NCLBSuppServLang", null, 40, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 
 		// <StudentPicture> fields (4 entries)
 		StudentDTD.STUDENTPICTURE_STUDENTPERSONALREFID = new ElementDefImpl( STUDENTPICTURE, "StudentPersonalRefId", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF11, SifVersion.SIF26, SifTypeConverters.STRING );
@@ -3092,7 +3161,7 @@ namespace OpenADK.Library.us.Student
 		STUDENTSCHOOLENROLLMENT_SIF_EXTENDEDELEMENTS = new ElementDefImpl( STUDENTSCHOOLENROLLMENT, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		STUDENTSCHOOLENROLLMENT_SIF_METADATA = new ElementDefImpl( STUDENTSCHOOLENROLLMENT, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
 
-		// <StudentSchoolEnrollmentExtensions> fields (8 entries)
+		// <StudentSchoolEnrollmentExtensions> fields (26 entries)
 		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_KINDERGARTENTYPE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "KindergartenType", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ENROLLMENTVALIDATIONTYPE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "EnrollmentValidationType", null, 2, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_STUDENTSTATEPROVIDENCEID = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "StudentStateProvidenceId", null, 3, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
@@ -3101,6 +3170,24 @@ namespace OpenADK.Library.us.Student
 		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_REPORTEDEXITDATE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "ReportedExitDate", null, 6, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_PARTTIMEHOMESCHOOL = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "PartTimeHomeSchool", null, 7, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_DAYSATTENDED = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "DaysAttended", null, 8, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EXCUSEDABSENCES = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "ExcusedAbsences", null, 9, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_UNEXCUSEDABSENCES = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "UnexcusedAbsences", null, 10, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ABSENCESDUETOSUSPENSION = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "AbsencesDueToSuspension", null, 11, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NONATTENDER = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "NonAttender", null, 12, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_RESIDENTSTATUSX = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "ResidentStatusX", null, 13, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1MATH = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1Math", null, 14, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ELA = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1ELA", null, 15, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SCIENCE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1Science", null, 16, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1HEALTH = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1Health", null, 17, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ACADEMICGUIDANCE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1AcademicGuidance", null, 18, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SOCIALSTUDIES = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1SocialStudies", null, 19, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1VOCATIONAL = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1Vocational", null, 20, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_INTERGENERATIONALPOVERTYGRANT = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "IntergenerationalPovertyGrant", null, 21, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_AFTERSCHOOL21CCLC = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "AfterSchool21CCLC", null, 22, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ELSTATESOFTWARE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "ELStateSoftware", null, 23, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EARLYCHILDHOODREADINGSTATESOFTWARE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "EarlyChildhoodReadingStateSoftware", null, 24, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NCLBSCHOOLCHOICE = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "NCLBSchoolChoice", null, 25, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
+		StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1PARAPROS = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "Title1ParaPros", null, 26, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		STUDENTSCHOOLENROLLMENTEXTENSIONS_SIF_EXTENDEDELEMENTS = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		STUDENTSCHOOLENROLLMENTEXTENSIONS_SIF_METADATA = new ElementDefImpl( STUDENTSCHOOLENROLLMENTEXTENSIONS, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
 
@@ -3123,7 +3210,7 @@ namespace OpenADK.Library.us.Student
 
 		// <StudentSectionEnrollmentExtensions> fields (5 entries)
 		StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_COURSEMEMBERSHIP = new ElementDefImpl( STUDENTSECTIONENROLLMENTEXTENSIONS, "CourseMembership", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
-		StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_GRADEEARNED = new ElementDefImpl( STUDENTSECTIONENROLLMENTEXTENSIONS, "GradeEarned", null, 2, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.DECIMAL );
+		StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_GRADEEARNED = new ElementDefImpl( STUDENTSECTIONENROLLMENTEXTENSIONS, "GradeEarned", null, 2, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_CREDITSEARNED = new ElementDefImpl( STUDENTSECTIONENROLLMENTEXTENSIONS, "CreditsEarned", null, 3, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.DECIMAL );
 		StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_REPORTEDEXITDATE = new ElementDefImpl( STUDENTSECTIONENROLLMENTEXTENSIONS, "ReportedExitDate", null, 4, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
 		StudentDTD.STUDENTSECTIONENROLLMENTEXTENSIONS_CONCURRENROLLED = new ElementDefImpl( STUDENTSECTIONENROLLMENTEXTENSIONS, "ConcurrEnrolled", null, 5, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF24, SifTypeConverters.STRING );
@@ -3270,7 +3357,9 @@ namespace OpenADK.Library.us.Student
 		dictionary["Victim_SIF_RefId"] = StudentDTD.VICTIM_SIF_REFID ;
 		dictionary["Victim_Type"] = StudentDTD.VICTIM_TYPE ;
 		dictionary[ "SchoolInfoExtensions" ] = SCHOOLINFOEXTENSIONS;
+		dictionary["SchoolInfoExtensions_DaysInSession"] = StudentDTD.SCHOOLINFOEXTENSIONS_DAYSINSESSION ;
 		dictionary["SchoolInfoExtensions_ExcludeFromStateReporting"] = StudentDTD.SCHOOLINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING ;
+		dictionary["SchoolInfoExtensions_LastInstructionDate"] = StudentDTD.SCHOOLINFOEXTENSIONS_LASTINSTRUCTIONDATE ;
 		dictionary["SchoolInfoExtensions_ScheduleDayType"] = StudentDTD.SCHOOLINFOEXTENSIONS_SCHEDULEDAYTYPE ;
 		dictionary[ "TeacherAttendance" ] = TEACHERATTENDANCE;
 		dictionary["TeacherAttendance_AttendanceValue"] = StudentDTD.TEACHERATTENDANCE_ATTENDANCEVALUE ;
@@ -3329,6 +3418,7 @@ namespace OpenADK.Library.us.Student
 		dictionary["OffenderList_Offender"] = StudentDTD.OFFENDERLIST_OFFENDER ;
 		dictionary[ "StudentPersonalExtensions" ] = STUDENTPERSONALEXTENSIONS;
 		dictionary["StudentPersonalExtensions_AccompaniedStudent"] = StudentDTD.STUDENTPERSONALEXTENSIONS_ACCOMPANIEDSTUDENT ;
+		dictionary["StudentPersonalExtensions_BeginYearROGLCompositeScore"] = StudentDTD.STUDENTPERSONALEXTENSIONS_BEGINYEARROGLCOMPOSITESCORE ;
 		dictionary["StudentPersonalExtensions_Biliteracy1Language"] = StudentDTD.STUDENTPERSONALEXTENSIONS_BILITERACY1LANGUAGE ;
 		dictionary["StudentPersonalExtensions_Biliteracy1Level"] = StudentDTD.STUDENTPERSONALEXTENSIONS_BILITERACY1LEVEL ;
 		dictionary["StudentPersonalExtensions_Biliteracy2Language"] = StudentDTD.STUDENTPERSONALEXTENSIONS_BILITERACY2LANGUAGE ;
@@ -3345,13 +3435,19 @@ namespace OpenADK.Library.us.Student
 		dictionary["StudentPersonalExtensions_EarlyNumeracyStatusEOY"] = StudentDTD.STUDENTPERSONALEXTENSIONS_EARLYNUMERACYSTATUSEOY ;
 		dictionary["StudentPersonalExtensions_EarlyNumeracyStatusMOY"] = StudentDTD.STUDENTPERSONALEXTENSIONS_EARLYNUMERACYSTATUSMOY ;
 		dictionary["StudentPersonalExtensions_EconomicDisadv"] = StudentDTD.STUDENTPERSONALEXTENSIONS_ECONOMICDISADV ;
+		dictionary["StudentPersonalExtensions_EndYearROGLCompositeScore"] = StudentDTD.STUDENTPERSONALEXTENSIONS_ENDYEARROGLCOMPOSITESCORE ;
 		dictionary["StudentPersonalExtensions_ExcludeFromStateReporting"] = StudentDTD.STUDENTPERSONALEXTENSIONS_EXCLUDEFROMSTATEREPORTING ;
+		dictionary["StudentPersonalExtensions_GeoCode"] = StudentDTD.STUDENTPERSONALEXTENSIONS_GEOCODE ;
 		dictionary["StudentPersonalExtensions_HighSchlCompl"] = StudentDTD.STUDENTPERSONALEXTENSIONS_HIGHSCHLCOMPL ;
 		dictionary["StudentPersonalExtensions_HighSchlComplStatus"] = StudentDTD.STUDENTPERSONALEXTENSIONS_HIGHSCHLCOMPLSTATUS ;
 		dictionary["StudentPersonalExtensions_HighSchoolExitDate"] = StudentDTD.STUDENTPERSONALEXTENSIONS_HIGHSCHOOLEXITDATE ;
 		dictionary["StudentPersonalExtensions_LimitedEnglish"] = StudentDTD.STUDENTPERSONALEXTENSIONS_LIMITEDENGLISH ;
 		dictionary["StudentPersonalExtensions_MealStatus"] = StudentDTD.STUDENTPERSONALEXTENSIONS_MEALSTATUS ;
+		dictionary["StudentPersonalExtensions_MesaProgram"] = StudentDTD.STUDENTPERSONALEXTENSIONS_MESAPROGRAM ;
+		dictionary["StudentPersonalExtensions_MidYearROGLCompositeScore"] = StudentDTD.STUDENTPERSONALEXTENSIONS_MIDYEARROGLCOMPOSITESCORE ;
 		dictionary["StudentPersonalExtensions_MilitaryChild"] = StudentDTD.STUDENTPERSONALEXTENSIONS_MILITARYCHILD ;
+		dictionary["StudentPersonalExtensions_NCLBSuppServLang"] = StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVLANG ;
+		dictionary["StudentPersonalExtensions_NCLBSuppServMath"] = StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVMATH ;
 		dictionary["StudentPersonalExtensions_PassedCivicsExam"] = StudentDTD.STUDENTPERSONALEXTENSIONS_PASSEDCIVICSEXAM ;
 		dictionary["StudentPersonalExtensions_RaceObserved"] = StudentDTD.STUDENTPERSONALEXTENSIONS_RACEOBSERVED ;
 		dictionary["StudentPersonalExtensions_ReadGradeLevel"] = StudentDTD.STUDENTPERSONALEXTENSIONS_READGRADELEVEL ;
@@ -3360,6 +3456,7 @@ namespace OpenADK.Library.us.Student
 		dictionary["StudentPersonalExtensions_ReadingIntervention"] = StudentDTD.STUDENTPERSONALEXTENSIONS_READINGINTERVENTION ;
 		dictionary["StudentPersonalExtensions_RefugeeStudent"] = StudentDTD.STUDENTPERSONALEXTENSIONS_REFUGEESTUDENT ;
 		dictionary["StudentPersonalExtensions_ResidentStatus"] = StudentDTD.STUDENTPERSONALEXTENSIONS_RESIDENTSTATUS ;
+		dictionary["StudentPersonalExtensions_SpecialEdExitDate"] = StudentDTD.STUDENTPERSONALEXTENSIONS_SPECIALEDEXITDATE ;
 		dictionary[ "TimetableDayList" ] = TIMETABLEDAYLIST;
 		dictionary["TimetableDayList_TimetableDay"] = StudentDTD.TIMETABLEDAYLIST_TIMETABLEDAY ;
 		dictionary[ "StudentPersonal" ] = STUDENTPERSONAL;
@@ -3498,6 +3595,7 @@ namespace OpenADK.Library.us.Student
 		dictionary["StaffAssignment_TeachingAssignment"] = StudentDTD.STAFFASSIGNMENT_TEACHINGASSIGNMENT ;
 		dictionary[ "SchoolCourseInfoExtensions" ] = SCHOOLCOURSEINFOEXTENSIONS;
 		dictionary["SchoolCourseInfoExtensions_CIPCodeNumber"] = StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_CIPCODENUMBER ;
+		dictionary["SchoolCourseInfoExtensions_ExcludeFromStateReporting"] = StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_EXCLUDEFROMSTATEREPORTING ;
 		dictionary["SchoolCourseInfoExtensions_SemesterLength"] = StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_SEMESTERLENGTH ;
 		dictionary["SchoolCourseInfoExtensions_TermCode"] = StudentDTD.SCHOOLCOURSEINFOEXTENSIONS_TERMCODE ;
 		dictionary[ "StudentActivityInfoLocation" ] = STUDENTACTIVITYINFOLOCATION;
@@ -3982,14 +4080,32 @@ namespace OpenADK.Library.us.Student
 		dictionary[ "StudentSchoolEnrollmentExtensions" ] = STUDENTSCHOOLENROLLMENTEXTENSIONS;
 		dictionary[ "StudentSchoolEnrollmentExtensions_SIF_ExtendedElements" ] = STUDENTSCHOOLENROLLMENTEXTENSIONS_SIF_EXTENDEDELEMENTS ;
 		dictionary[ "StudentSchoolEnrollmentExtensions_SIF_Metadata" ] = STUDENTSCHOOLENROLLMENTEXTENSIONS_SIF_METADATA;
+		dictionary["StudentSchoolEnrollmentExtensions_AbsencesDueToSuspension"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ABSENCESDUETOSUSPENSION ;
+		dictionary["StudentSchoolEnrollmentExtensions_AfterSchool21CCLC"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_AFTERSCHOOL21CCLC ;
 		dictionary["StudentSchoolEnrollmentExtensions_DaysAttended"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_DAYSATTENDED ;
 		dictionary["StudentSchoolEnrollmentExtensions_DaysInMembership"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_DAYSINMEMBERSHIP ;
+		dictionary["StudentSchoolEnrollmentExtensions_ELStateSoftware"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ELSTATESOFTWARE ;
+		dictionary["StudentSchoolEnrollmentExtensions_EarlyChildhoodReadingStateSoftware"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EARLYCHILDHOODREADINGSTATESOFTWARE ;
 		dictionary["StudentSchoolEnrollmentExtensions_EnrollmentValidationType"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_ENROLLMENTVALIDATIONTYPE ;
 		dictionary["StudentSchoolEnrollmentExtensions_ExcludeFromStateReporting"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EXCLUDEFROMSTATEREPORTING ;
+		dictionary["StudentSchoolEnrollmentExtensions_ExcusedAbsences"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_EXCUSEDABSENCES ;
+		dictionary["StudentSchoolEnrollmentExtensions_IntergenerationalPovertyGrant"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_INTERGENERATIONALPOVERTYGRANT ;
 		dictionary["StudentSchoolEnrollmentExtensions_KindergartenType"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_KINDERGARTENTYPE ;
+		dictionary["StudentSchoolEnrollmentExtensions_NCLBSchoolChoice"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NCLBSCHOOLCHOICE ;
+		dictionary["StudentSchoolEnrollmentExtensions_NonAttender"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_NONATTENDER ;
 		dictionary["StudentSchoolEnrollmentExtensions_PartTimeHomeSchool"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_PARTTIMEHOMESCHOOL ;
 		dictionary["StudentSchoolEnrollmentExtensions_ReportedExitDate"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_REPORTEDEXITDATE ;
+		dictionary["StudentSchoolEnrollmentExtensions_ResidentStatusX"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_RESIDENTSTATUSX ;
 		dictionary["StudentSchoolEnrollmentExtensions_StudentStateProvidenceId"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_STUDENTSTATEPROVIDENCEID ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1AcademicGuidance"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ACADEMICGUIDANCE ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1ELA"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1ELA ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1Health"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1HEALTH ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1Math"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1MATH ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1ParaPros"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1PARAPROS ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1Science"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SCIENCE ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1SocialStudies"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1SOCIALSTUDIES ;
+		dictionary["StudentSchoolEnrollmentExtensions_Title1Vocational"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_TITLE1VOCATIONAL ;
+		dictionary["StudentSchoolEnrollmentExtensions_UnexcusedAbsences"] = StudentDTD.STUDENTSCHOOLENROLLMENTEXTENSIONS_UNEXCUSEDABSENCES ;
 		dictionary[ "TimetableDay" ] = TIMETABLEDAY;
 		dictionary["TimetableDay_Identifier"] = StudentDTD.TIMETABLEDAY_IDENTIFIER ;
 		dictionary["TimetableDay_Name"] = StudentDTD.TIMETABLEDAY_NAME ;

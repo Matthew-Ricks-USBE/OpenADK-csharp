@@ -675,4 +675,164 @@ public class StudentPersonalExtensions : SifElement
 		}
 	}
 
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;SpecialEdExitDate&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>SpecialEdExitDate</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string SpecialEdExitDate
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_SPECIALEDEXITDATE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_SPECIALEDEXITDATE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;BeginYearROGLCompositeScore&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>BeginYearROGLCompositeScore</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string BeginYearROGLCompositeScore
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_BEGINYEARROGLCOMPOSITESCORE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_BEGINYEARROGLCOMPOSITESCORE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;MidYearROGLCompositeScore&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>MidYearROGLCompositeScore</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string MidYearROGLCompositeScore
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_MIDYEARROGLCOMPOSITESCORE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_MIDYEARROGLCOMPOSITESCORE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;EndYearROGLCompositeScore&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>EndYearROGLCompositeScore</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string EndYearROGLCompositeScore
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_ENDYEARROGLCOMPOSITESCORE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_ENDYEARROGLCOMPOSITESCORE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;GeoCode&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>GeoCode</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string GeoCode
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_GEOCODE ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_GEOCODE, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;MesaProgram&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>MesaProgram</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string MesaProgram
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_MESAPROGRAM ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_MESAPROGRAM, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;NCLBSuppServMath&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>NCLBSuppServMath</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string NCLBSuppServMath
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVMATH ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVMATH, new SifString( value ), value );
+		}
+	}
+
+	/// <summary>
+	/// Gets or sets the value of the <c>&lt;NCLBSuppServLang&gt;</c> element.
+	/// </summary>
+	/// <value> The <c>NCLBSuppServLang</c> element of this object.</value>
+	/// <remarks>
+	/// <para>Version: 2.4</para>
+	/// <para>Since: 2.4</para>
+	/// </remarks>
+	public string NCLBSuppServLang
+	{
+		get
+		{
+			return (string) GetSifSimpleFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVLANG ) ;
+		}
+		set
+		{
+			SetFieldValue( StudentDTD.STUDENTPERSONALEXTENSIONS_NCLBSUPPSERVLANG, new SifString( value ), value );
+		}
+	}
+
 }}
