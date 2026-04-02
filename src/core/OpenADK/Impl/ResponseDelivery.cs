@@ -5,6 +5,7 @@
 
 using System;
 using System.IO;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using OpenADK.Library.Global;
@@ -486,12 +487,12 @@ namespace OpenADK.Library.Impl
 
 	    private static String serializeToken(String destinationId) {
 		    destinationId = destinationId.Replace( ".", "~~" );
-            destinationId = System.Web.HttpUtility.UrlEncode( destinationId, Encoding.UTF8 );
+            destinationId = WebUtility.UrlEncode( destinationId );
 		    return destinationId;
 	    }
 
 	    private static String deserializeToken(String destinationId ) {
-		    destinationId = System.Web.HttpUtility.UrlDecode( destinationId, Encoding.UTF8 );
+		    destinationId = WebUtility.UrlDecode( destinationId );
 		    destinationId = destinationId.Replace( "~~", "." );
 		    return destinationId;
 	    }
