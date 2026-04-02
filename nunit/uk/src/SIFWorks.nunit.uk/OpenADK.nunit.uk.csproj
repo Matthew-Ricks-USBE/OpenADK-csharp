@@ -1,4 +1,4 @@
-﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -34,6 +34,8 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +45,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -51,6 +54,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
@@ -64,10 +68,6 @@
     <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\lib\nunit\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="OpenADK.Sdo-UK, Version=9.2.4.12, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\framework\src\bin\Debug\OpenADK.Sdo-UK.dll</HintPath>
     </Reference>
     <Reference Include="Org.Mentalis.Security, Version=1.0.14.25108, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -199,11 +199,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\core\OpenADK-NET-Core.csproj">
-      <Project>{F50DBBCA-3AA9-4B8E-8B43-71F5DE0B7EB0}</Project>
+      <Project>{99bbf567-55a8-4322-ab2b-4a2f43a7d99d}</Project>
       <Name>OpenADK-NET-Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\..\src\uk\OpenADK-UK-SDO.csproj">
-      <Project>{4E8A65A3-204A-4D82-A66C-627E3183A500}</Project>
+      <Project>{4e8a65a3-204a-4d82-a66c-627e3183a500}</Project>
       <Name>OpenADK-UK-SDO</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\core\src\OpenADK-Nunit-Core.csproj">
@@ -211,7 +211,7 @@
       <Name>OpenADK-Nunit-Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\framework\src\OpenADK.UnitTesting.csproj">
-      <Project>{FC272D01-101F-4F63-A9F9-EB498D6BF74A}</Project>
+      <Project>{50daca02-66fb-47a4-93ad-b87af55cfaf9}</Project>
       <Name>OpenADK.UnitTesting</Name>
     </ProjectReference>
   </ItemGroup>

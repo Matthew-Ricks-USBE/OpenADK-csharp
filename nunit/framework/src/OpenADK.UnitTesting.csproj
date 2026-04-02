@@ -18,7 +18,7 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>2.0</OldToolsVersion>
@@ -125,12 +125,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\core\OpenADK-NET-Core.csproj">
-      <Project>{F50DBBCA-3AA9-4B8E-8B43-71F5DE0B7EB0}</Project>
-      <Name>SIFWorks-ADK-NET-US</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\uk\OpenADK-UK-SDO.csproj">
-      <Project>{4E8A65A3-204A-4D82-A66C-627E3183A500}</Project>
-      <Name>OpenADK-UK-SDO</Name>
+      <Project>{99bbf567-55a8-4322-ab2b-4a2f43a7d99d}</Project>
+      <Name>OpenADK-NET-Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -35,7 +35,7 @@
     </UpgradeBackupLocation>
     <SccAuxPath>
     </SccAuxPath>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <OldToolsVersion>2.0</OldToolsVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -1028,11 +1028,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\core\OpenADK-NET-Core.csproj">
-      <Project>{F50DBBCA-3AA9-4B8E-8B43-71F5DE0B7EB0}</Project>
+      <Project>{99bbf567-55a8-4322-ab2b-4a2f43a7d99d}</Project>
       <Name>OpenADK-NET-Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\src\us\OpenADK-US-SDO.csproj">
-      <Project>{B706E722-0A7F-4527-BBA7-963C08C7678D}</Project>
+      <Project>{ecfae610-4e30-47db-9fbe-7c6ede4ff035}</Project>
       <Name>OpenADK-US-SDO</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\core\src\OpenADK-Nunit-Core.csproj">
@@ -1040,7 +1040,7 @@
       <Name>OpenADK-Nunit-Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\framework\src\OpenADK.UnitTesting.csproj">
-      <Project>{FC272D01-101F-4F63-A9F9-EB498D6BF74A}</Project>
+      <Project>{50daca02-66fb-47a4-93ad-b87af55cfaf9}</Project>
       <Name>OpenADK.UnitTesting</Name>
     </ProjectReference>
   </ItemGroup>

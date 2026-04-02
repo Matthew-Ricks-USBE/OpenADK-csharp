@@ -5,6 +5,7 @@ using OpenADK.Library;
 using NUnit.Framework;
 using Library.UnitTesting.Framework;
 using Library.UnitTesting.Framework.Validation;
+using System.Xml;
 
 namespace OpenADK.Library.Nunit.UK.Validation
 {
@@ -49,7 +50,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
             DirectoryInfo workingDirectory = new DirectoryInfo(Environment.CurrentDirectory);
             String testVersionStr = getShortenedVersion(testVersion);
 
-            SchemaValidator sv = SchemaValidator.NewInstance(workingDirectory.FullName + "\\schemas\\" + testVersionStr + "\\SIF_Message.xsd");
+            SchemaValidator sv = SchemaValidator.NewInstance(new StreamReader(workingDirectory.FullName + "\\schemas\\" + testVersionStr + "\\SIF_Message.xsd"), new XmlUrlResolver());
             sv.IgnoreEnumerationErrors = ignoreEnumerationErrors;
 
             String dataVersionStr = getShortenedVersion(dataVersion);

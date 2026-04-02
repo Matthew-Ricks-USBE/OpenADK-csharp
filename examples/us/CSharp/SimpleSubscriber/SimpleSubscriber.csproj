@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -18,7 +18,7 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <OldToolsVersion>3.5</OldToolsVersion>
@@ -49,6 +49,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -57,15 +58,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseDocs|AnyCPU' ">
     <OutputPath>bin\ReleaseDocs\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Internal|AnyCPU' ">
     <OutputPath>bin\Internal\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Eval|AnyCPU' ">
     <OutputPath>bin\Eval\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ADKExamples.cs" />
@@ -99,13 +104,13 @@
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\core\SIFWorks-ADK-NET-Core.csproj">
-      <Project>{F50DBBCA-3AA9-4B8E-8B43-71F5DE0B7EB0}</Project>
-      <Name>SIFWorks-ADK-NET-Core</Name>
+    <ProjectReference Include="..\..\..\..\src\core\OpenADK-NET-Core.csproj">
+      <Project>{99bbf567-55a8-4322-ab2b-4a2f43a7d99d}</Project>
+      <Name>OpenADK-NET-Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\src\us\SIFWorks-ADK-US-SDO.csproj">
-      <Project>{B706E722-0A7F-4527-BBA7-963C08C7678D}</Project>
-      <Name>SIFWorks-ADK-US-SDO</Name>
+    <ProjectReference Include="..\..\..\..\src\us\OpenADK-US-SDO.csproj">
+      <Project>{ecfae610-4e30-47db-9fbe-7c6ede4ff035}</Project>
+      <Name>OpenADK-US-SDO</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
