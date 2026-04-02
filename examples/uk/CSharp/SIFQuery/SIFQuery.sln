@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIFQuery", "SIFQuery.csproj", "{746564BE-479B-4408-8DBA-79DF129C0B7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-NET-Core", "..\..\..\..\src\core\OpenADK-NET-Core.csproj", "{F50DBBCA-3AA9-4B8E-8B43-71F5DE0B7EB0}"
@@ -49,5 +51,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68D0AFCF-CCD6-4D7D-87A3-72372545F1CB}
 	EndGlobalSection
 EndGlobal

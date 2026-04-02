@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.nunit.uk", "OpenADK.nunit.uk.csproj", "{308B403D-7654-4AC2-89E8-8C67ABF08743}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.UnitTesting", "..\..\..\framework\src\OpenADK.UnitTesting.csproj", "{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}"
@@ -84,5 +86,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD83758B-0300-48F5-A049-5AC3D84DA55E}
 	EndGlobalSection
 EndGlobal

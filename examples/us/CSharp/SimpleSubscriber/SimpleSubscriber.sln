@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSubscriber", "SimpleSubscriber.csproj", "{8A40B063-92E6-4F42-8E86-1E95AA712FA3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIFWorks-ADK-US-SDO", "..\..\..\..\src\us\SIFWorks-ADK-US-SDO.csproj", "{B706E722-0A7F-4527-BBA7-963C08C7678D}"
@@ -49,5 +51,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B1FC63A9-1CFD-4EAD-91C8-84B8044F23C8}
 	EndGlobalSection
 EndGlobal

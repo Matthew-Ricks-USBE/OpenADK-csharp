@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mappings", "CSharp\Mappings\Mappings.csproj", "{A31C068B-067F-4903-A3BB-A7F7C7C37A3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.Chameleon", "CSharp\Chameleon\OpenADK.Chameleon.csproj", "{A90FA52D-5CDC-4823-BC3D-AA87973067C5}"
@@ -97,5 +99,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51E3DB2E-1E72-4998-A141-6ACD13BF255D}
 	EndGlobalSection
 EndGlobal

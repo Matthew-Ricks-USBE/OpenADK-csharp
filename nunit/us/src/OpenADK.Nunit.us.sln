@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88 stable
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.Nunit.us", "OpenADK.Nunit.us.csproj", "{95C75EB1-9CD1-42B1-AA8F-F615B0C8DE96}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-Nunit-Core", "..\..\core\src\OpenADK-Nunit-Core.csproj", "{96E593B8-5673-4F26-BAD8-746174CE802A}"
@@ -84,5 +86,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D38F34D3-F246-499E-A276-784853080B1A}
 	EndGlobalSection
 EndGlobal
