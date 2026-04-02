@@ -65,12 +65,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\core\OpenADK-NET-Core.csproj" />
     <ProjectReference Include="..\..\..\src\us\OpenADK-US-SDO.csproj" />
     <ProjectReference Include="..\..\framework\src\OpenADK.UnitTesting.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="res\" />
   </ItemGroup>
   <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
     <Compile Remove="infra\SIF_ProvisionTests.cs" />

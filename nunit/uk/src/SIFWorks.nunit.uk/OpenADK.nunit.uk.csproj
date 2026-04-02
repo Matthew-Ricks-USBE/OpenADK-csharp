@@ -161,7 +161,6 @@
     <ProjectReference Include="..\..\..\..\src\core\OpenADK-NET-Core.csproj" />
     <ProjectReference Include="..\..\..\..\src\uk\OpenADK-UK-SDO.csproj" />
     <ProjectReference Include="..\..\..\core\src\OpenADK-Nunit-Core.csproj" />
-    <ProjectReference Include="..\..\..\framework\src\OpenADK.UnitTesting.csproj" />
   </ItemGroup>
   <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
     <Compile Remove="Backup\Validation\VersioningTests.cs" />
