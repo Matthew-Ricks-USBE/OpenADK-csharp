@@ -289,7 +289,7 @@ namespace OpenADK.Library.Impl
                     else
                     {
                         fClientAuthCertificate = cert.ToX509();
-                        ServicePointManager.CertificatePolicy = fTransport.GetServerCertificatePolicy();
+                        ServicePointManager.ServerCertificateValidationCallback = fTransport.ValidateServerCertificate;
                     }
             }
 

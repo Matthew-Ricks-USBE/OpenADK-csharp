@@ -3,6 +3,8 @@
 // All rights reserved.
 //
 
+#pragma warning disable SYSLIB0011 // BinaryFormatter is obsolete - serialization migration needed
+
 using System;
 using System.Collections;
 using System.IO;

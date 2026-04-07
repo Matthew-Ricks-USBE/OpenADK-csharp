@@ -47,14 +47,14 @@ namespace OpenADK.Library
                 StringBuilder keyBuilder = new StringBuilder();
                 IElementDef [] keys = this.KeyFields;
                 for ( int a = 0; a < keys.Length; a++ ) {
-                    SimpleField field = GetField( keys[a] );
-                    if (field == null)
+                    SimpleField keyField = GetField( keys[a] );
+                    if (keyField == null)
                     {
                         keyBuilder.Append( (object)null);
                     }
                     else
                     {
-                        keyBuilder.Append(field.SifValue.ToString(formatter));
+                        keyBuilder.Append(keyField.SifValue.ToString(formatter));
                     }
                     if ( a < (keys.Length - 1) ) {
                         keyBuilder.Append( '.' );
