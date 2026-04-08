@@ -23,9 +23,7 @@
     <DebugType></DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\..\lib\log4net.dll</HintPath>
-    </Reference>
+    <PackageReference Include="log4net" Version="2.0.14" />
     <Reference Include="Org.Mentalis.Security">
       <HintPath>..\..\..\..\lib\Org.Mentalis.Security.dll</HintPath>
     </Reference>

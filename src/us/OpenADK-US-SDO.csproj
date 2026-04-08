@@ -29,10 +29,7 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\log4net.dll</HintPath>
-    </Reference>
+    <PackageReference Include="log4net" Version="2.0.14" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\OpenADK-NET-Core.csproj" />

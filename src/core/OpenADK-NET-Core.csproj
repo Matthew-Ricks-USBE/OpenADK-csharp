@@ -40,10 +40,7 @@
     <Reference Update="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\log4net.dll</HintPath>
-    </Reference>
+    <PackageReference Include="log4net" Version="2.0.14" />
     <Reference Include="Org.Mentalis.Security, Version=1.0.14.25108, Culture=neutral, PublicKeyToken=null">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Org.Mentalis.Security.dll</HintPath>
