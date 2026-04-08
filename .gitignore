@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/.vs/CopilotSnapshots/C97C3A7F9413D84CA2F578F394B2F988
+/src/.vs/OpenADK-NET-US/copilot-chat/3707ccea/sessions
+/src/.vs/OpenADK-NET-US/CopilotIndices/18.0.991.28364
+/src/.vs/OpenADK-NET-US/DesignTimeBuild
+/src/.vs/OpenADK-NET-US
+/src/.vs/ProjectEvaluation
+/src/.vs/upgrade/assessment
+/.vs/Openadk-CSharp.slnx
+/.github/upgrades/assessment.csv
+/.github/upgrades/tasks.md
+/.github/upgrades/execution-log.md
+/.github/upgrades/assessment.json
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
