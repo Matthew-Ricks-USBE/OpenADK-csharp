@@ -6,13 +6,13 @@
 using System;
 using System.Collections;
 using System.Data;
-using Edustructures.SifWorks;
-using Edustructures.SifWorks.us;
-using Edustructures.SifWorks.Infra;
-using Edustructures.SifWorks.us.Student;
-using Edustructures.SifWorks.Tools.Cfg;
-using Edustructures.SifWorks.Tools.Mapping;
-using Edustructures.Util;
+using OpenADK.Library;
+using OpenADK.Library.us;
+using OpenADK.Library.Infra;
+using OpenADK.Library.us.Student;
+using OpenADK.Library.Tools.Cfg;
+using OpenADK.Library.Tools.Mapping;
+using OpenADK.Util;
 using System.Collections.Generic;
 
 namespace SifWorks.Examples.Mapping
@@ -176,7 +176,7 @@ namespace SifWorks.Examples.Mapping
             outStream.Filter = query;
 
             //  Get the root Mappings object from the configuration file
-            Edustructures.SifWorks.Tools.Mapping.Mappings m = fCfg.Mappings.GetMappings("Default");
+            OpenADK.Library.Tools.Mapping.Mappings m = fCfg.Mappings.GetMappings("Default");
 
             //  Ask the root Mappings instance to select a Mappings from its
             //  hierarchy. For example, you might have customized the agent.cfg
@@ -314,7 +314,7 @@ namespace SifWorks.Examples.Mapping
             }
 
             //  Get the root Mappings object from the configuration file
-            Edustructures.SifWorks.Tools.Mapping.Mappings m = fCfg.Mappings.GetMappings("Default");
+            OpenADK.Library.Tools.Mapping.Mappings m = fCfg.Mappings.GetMappings("Default");
 
             //  Ask the root Mappings instance to select a Mappings from its
             //  hierarchy. For example, you might have customized the agent.cfg

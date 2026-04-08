@@ -5,10 +5,10 @@
 
 using System;
 using System.Collections;
-using Edustructures.SifWorks;
-using Edustructures.SifWorks.Infra;
-using Edustructures.SifWorks.Tools.Cfg;
-using Edustructures.Util;
+using OpenADK.Library;
+using OpenADK.Library.Infra;
+using OpenADK.Library.Tools.Cfg;
+using OpenADK.Util;
 
 namespace SifWorks.Examples.Chameleon
 {

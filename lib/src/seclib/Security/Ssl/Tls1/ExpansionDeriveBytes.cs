@@ -1,7 +1,7 @@
 /*
  *   Mentalis.org Security Library
  * 
- *     Copyright © 2002-2005, The Mentalis.org Team
+ *     Copyright ï¿½ 2002-2005, The Mentalis.org Team
  *     All rights reserved.
  *     http://www.mentalis.org/
  *
@@ -33,7 +33,6 @@
 
 using System;
 using System.Text;
-using System.Security.Cryptography;
 using Org.Mentalis.Security.Cryptography;
 
 namespace Org.Mentalis.Security.Ssl.Tls1 {
@@ -45,16 +44,16 @@ namespace Org.Mentalis.Security.Ssl.Tls1 {
 		   A(0) = seed
 		   A(i) = HMAC_hash(secret, A(i-1))
 	 */
-	internal class ExpansionDeriveBytes : DeriveBytes, IDisposable {
-		public ExpansionDeriveBytes(HashAlgorithm hash, byte[] secret, string seed) {
+	internal class ExpansionDeriveBytes : System.Security.Cryptography.DeriveBytes, IDisposable {
+		public ExpansionDeriveBytes(System.Security.Cryptography.HashAlgorithm hash, byte[] secret, string seed) {
 			if (seed == null)
 				throw new ArgumentNullException();
 			Initialize(hash, secret, Encoding.ASCII.GetBytes(seed));
 		}
-		public ExpansionDeriveBytes(HashAlgorithm hash, byte[] secret, byte[] seed) {
+		public ExpansionDeriveBytes(System.Security.Cryptography.HashAlgorithm hash, byte[] secret, byte[] seed) {
 			Initialize(hash, secret, seed);
 		}
-		protected void Initialize(HashAlgorithm hash, byte[] secret, byte[] seed) {
+		protected void Initialize(System.Security.Cryptography.HashAlgorithm hash, byte[] secret, byte[] seed) {
 			if (seed == null || secret == null || hash == null)
 				throw new ArgumentNullException();
 			m_Disposed = false;

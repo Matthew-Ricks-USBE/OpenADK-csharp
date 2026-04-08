@@ -7,8 +7,8 @@ using System;
 using System.Collections;
 using System.Collections.Specialized;
 using System.IO;
-using Edustructures.SifWorks;
-using Edustructures.Util;
+using OpenADK.Library;
+using OpenADK.Util;
 
 namespace SifWorks.Examples
 {

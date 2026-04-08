@@ -2,28 +2,6 @@
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SifWorks.Examples.Chameleon</RootNamespace>
-    <ApplicationIcon>App.ico</ApplicationIcon>
-    <StartupObject>SifWorks.Examples.Chameleon.Chameleon</StartupObject>
-    <SccProjectName></SccProjectName>
-    <SccLocalPath></SccLocalPath>
-    <SccAuxPath></SccAuxPath>
-    <SccProvider></SccProvider>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseDocs|AnyCPU' ">
@@ -36,18 +14,13 @@
     <OutputPath>bin\Eval\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="log4net">
-      <HintPath>..\..\..\..\bin\log4net.dll</HintPath>
+    <PackageReference Include="log4net" Version="2.0.14" />
+    <Reference Include="Org.Mentalis.Security, Version=1.0.14.25108, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\lib\Org.Mentalis.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Org.Mentalis.Security">
-      <HintPath>..\..\..\..\bin\Org.Mentalis.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="SifWorks.Adk">
-      <HintPath>..\..\..\..\bin\SifWorks.Adk.dll</HintPath>
-    </Reference>
-    <Reference Include="SifWorks.Sdo-US">
-      <HintPath>..\..\..\..\bin\SifWorks.Sdo-US.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\..\..\..\src\core\OpenADK-NET-Core.csproj" />
+    <ProjectReference Include="..\..\..\..\src\us\OpenADK-US-SDO.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
@@ -58,23 +31,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
     <Compile Remove="Backup\Properties\AssemblyInfo.cs" />
     <Compile Remove="Backup\ObjectLogger.cs" />
     <Compile Remove="Backup\Chameleon.cs" />

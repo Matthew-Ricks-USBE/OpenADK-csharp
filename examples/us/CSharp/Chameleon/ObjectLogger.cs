@@ -8,9 +8,9 @@ using System.Collections;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Edustructures.SifWorks;
-using Edustructures.SifWorks.Infra;
-using Edustructures.SifWorks.Log;
+using OpenADK.Library;
+using OpenADK.Library.Infra;
+using OpenADK.Library.Log;
 
 namespace SifWorks.Examples.Chameleon
 {
@@ -210,7 +210,7 @@ namespace SifWorks.Examples.Chameleon
             SifMessageInfo smi = (SifMessageInfo) info;
             if ( messageType == SifMessageType.SIF_Response ) {
                 // Log Query responses in the standard Edustructures Message tracing format
-                //N-ObjectType-ZoneID-SourceID-PacketNum|”error”.txt
+                //N-ObjectType-ZoneID-SourceID-PacketNum|ï¿½errorï¿½.txt
                 fileName =
                     string.Format
                         ( "{0:00000}-{1}-{2}-{3}-{4}.txt", fResponseOrdinal++,

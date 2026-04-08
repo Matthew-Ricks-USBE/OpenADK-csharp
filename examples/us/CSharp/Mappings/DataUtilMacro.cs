@@ -6,8 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Edustructures.SifWorks;
-using Edustructures.SifWorks.Tools.Mapping;
+using OpenADK.Library;
+using OpenADK.Library.Tools.Mapping;
 
 namespace SifWorks.Examples.Mapping
 {
@@ -56,7 +56,7 @@ namespace SifWorks.Examples.Mapping
     public class DataUtilMacro : DefaultValueBuilder
     {
         /// <summary>
-        /// Constructor called by the ADK. Set the <seealso cref="Edustructures.SifWorks.DefaultValueBuilder.DefaultClass">DefaultClass</seealso> property here so the ADK can find your macro method to call.
+        /// Constructor called by the ADK. Set the <seealso cref="OpenADK.Library.DefaultValueBuilder.DefaultClass">DefaultClass</seealso> property here so the ADK can find your macro method to call.
         /// </summary>
         /// <param name="data"></param>
         public DataUtilMacro(IFieldAdaptor data)
