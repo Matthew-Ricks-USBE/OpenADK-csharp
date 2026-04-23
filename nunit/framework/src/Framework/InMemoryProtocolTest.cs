@@ -11,6 +11,7 @@ namespace Library.UnitTesting.Framework
     {
         protected Agent fAgent;
         protected TestZoneImpl fZone;
+        protected SifVersion fOriginalVersion;
 
         protected const string TEST_URL = "http://localhost:7003?%20%34%"; 
 
@@ -18,6 +19,7 @@ namespace Library.UnitTesting.Framework
         public virtual void Setup()
         {
             Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.All );
+            fOriginalVersion = Adk.SifVersion;
             //uses transportplugin interface , and factory method Createthat
             //returns new instance of class we're looking for 
             TransportPlugin tp = new InMemoryTransportPlugin();
@@ -34,7 +36,7 @@ namespace Library.UnitTesting.Framework
         [TearDown]
         public virtual void TearDown()
         {
-            
+            Adk.SifVersion = fOriginalVersion;
         }
 
 

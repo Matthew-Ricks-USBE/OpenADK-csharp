@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Text;
-using OpenADK.Library;
 using NUnit.Framework;
 using Library.UnitTesting.Framework;
 using Library.UnitTesting.Framework.Validation;
@@ -10,7 +9,7 @@ using System.Xml;
 namespace OpenADK.Library.Nunit.UK.Validation
 {
     [TestFixture]
-    public class VersioningTests : AdkTest
+    public class VersioningTests : UkAdkTest
     {
         private const bool VERBOSE = false;
 

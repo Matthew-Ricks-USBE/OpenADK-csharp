@@ -83,11 +83,11 @@ namespace Library.Nunit.Core.Tools.XPath
             Assert.AreEqual(name, ((AdkNodeNameTest) step.NodeTest).NodeName);
             Assert.IsNotNull(step.Predicates);
             Assert.AreEqual(1, step.Predicates.Length);
-            Assert.IsInstanceOfType(typeof (AdkEqualOperation), step.Predicates[0]);
+            Assert.IsInstanceOf<AdkEqualOperation>(step.Predicates[0]);
 
             AdkExpression[] components = ((AdkEqualOperation) step.Predicates[0]).Arguments;
             Assert.AreEqual(2, components.Length);
-            Assert.IsInstanceOfType(typeof (AdkLocPath), components[0]);
+            Assert.IsInstanceOf<AdkLocPath>(components[0]);
             AdkLocPath lp = (AdkLocPath) components[0];
 
             AdkNodeNameTest attrName = (AdkNodeNameTest) lp.Steps[0].NodeTest;

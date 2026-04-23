@@ -155,6 +155,7 @@ namespace Library.UnitTesting.Framework
         {
             SifElement returnVal;
 
+            Adk.SifVersion = version;
             if ( o is SifMessagePayload )
             {
                 o.SifVersion = version;

@@ -81,19 +81,17 @@ namespace Library.Nunit.US
         }
 
         [Test]
-        [ExpectedException( typeof (AdkParsingException), "Unexpected SIF_Message encountered in parsing")]
         public void UnexpectedEmbeddedSIFMessage()
         {
             // this test should throw an exception because we are not passing "ExpectInnerEnvelope" in the 
             // parser flags
-            using (Stream aStream = GetResourceStream("GetNextMessageResponse.xml"))
+            Assert.Throws<AdkParsingException>(() =>
             {
-                TextReader aReader = new StreamReader(aStream);
+                using Stream aStream = GetResourceStream("GetNextMessageResponse.xml");
+                using TextReader aReader = new StreamReader(aStream);
                 SifParser parser = SifParser.NewInstance();
                 SifElement element = parser.Parse(aReader, null, SifParserFlags.None, SifVersion.SIF11);
-                aReader.Close();
-                aStream.Close();
-            }
+            });
         }
 
         [Test]

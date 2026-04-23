@@ -13,17 +13,25 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
     [TestFixture]
     public class XPathSurrogateTests
     {
-        [SetUp]
-	public void setUp() {
-		Adk.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
-	}
+		protected SifVersion fOriginalVersion;
 
-	/**
-	 * This test asserts that SIF 1.x elements that are rendered using the XPathSurrogate
-	 * in the StudentSchoolEnrollment class return the proper and expected values.
-	 * @throws Exception
-	 */
-	[Test]
+        [SetUp]
+		public void SetUp() {
+			Adk.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
+			fOriginalVersion = Adk.SifVersion;
+        }
+
+		[TearDown]
+		public void TearDown() {
+			Adk.SifVersion = fOriginalVersion;
+        }
+
+        /**
+		 * This test asserts that SIF 1.x elements that are rendered using the XPathSurrogate
+		 * in the StudentSchoolEnrollment class return the proper and expected values.
+		 * @throws Exception
+		 */
+        [Test]
         public void testSSE_Get_XPathSurrogate_SIF15r1() {
 
 		Adk.SifVersion=SifVersion.SIF15r1;
@@ -49,28 +57,28 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
 		StudentSchoolEnrollment sse = (StudentSchoolEnrollment) parseSIF15r1XML(sXML);
 		sse = (StudentSchoolEnrollment)AdkObjectParseHelper.WriteParseAndReturn( sse, SifVersion.SIF15r1 );
-		Assertion.AssertNotNull( sse );
+		Assert.IsNotNull( sse );
 
 		// Check getting Homeroom and Residency status using APIs
-		Assertion.AssertNotNull( "Homeroom", sse.Homeroom );
-		Assertion.AssertEquals( "Homeroom", "D7510D3E34B3591A8C3D00AA001A1651", sse.Homeroom.Value );
+		Assert.IsNotNull(sse.Homeroom,  "Homeroom");
+		Assert.AreEqual("D7510D3E34B3591A8C3D00AA001A1651", sse.Homeroom.Value, "Homeroom");
 
 
 		ResidencyStatus rs = sse.ResidencyStatus;
-		Assertion.AssertNotNull( "ResidencyStatus", rs );
-		Assertion.AssertEquals( "ResidencyStatus", "1653", rs.Code );
+		Assert.IsNotNull(rs, "ResidencyStatus");
+		Assert.AreEqual( "1653", rs.Code, "ResidencyStatus" );
 
 		//	Check getting Homeroom and Residency status using SIF 1.5 xpaths
 		// Homeroom
 		Element value = sse.GetElementOrAttribute( "Homeroom/@RoomInfoRefId" );
-		Assertion.AssertNotNull( "Homeroom", value );
-		Assertion.AssertEquals( "Homeroom", "D7510D3E34B3591A8C3D00AA001A1651", value.TextValue );
+		Assert.IsNotNull( value, "Homeroom" );
+		Assert.AreEqual( "D7510D3E34B3591A8C3D00AA001A1651", value.TextValue, "Homeroom" );
 
 
 		// ResidencyStatus
 		value = sse.GetElementOrAttribute( "ResidencyStatus" );
-		Assertion.AssertNotNull( "ResidencyStatus", value );
-		Assertion.AssertEquals( "ResidencyStatus", "1653", value.TextValue );
+		Assert.IsNotNull( value, "ResidencyStatus" );
+		Assert.AreEqual( "1653", value.TextValue, "ResidencyStatus" );
 
 
 	}
@@ -83,3 +91,4 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
     }
 }
+

@@ -11,16 +11,16 @@ namespace Library.Nunit.US.Library.Tools.Mapping
     {
         public SIF20MappingTests() :
             base( SifVersion.SIF20,
-                  "..\\..\\Library\\Tools\\Mapping\\SIF2.0.agent.cfg")
+                  "..\\..\\OpenADK\\Tools\\Mapping\\SIF2.0.agent.cfg")
         {
         }
 
 
         protected override void assertStudentPlacement( StudentPlacement sp )
         {
-            Assertion.AssertEquals( "RefID", "0000000000000000", sp.RefId );
-            Assertion.AssertEquals( "StudentPersonalRefid", "0000000000000000", sp.StudentPersonalRefId );
-            Assertion.AssertEquals( "Service/@Code", "ZZZ99987", sp.Service.Code );
+            Assert.AreEqual("0000000000000000", sp.RefId, "RefID");
+            Assert.AreEqual( "0000000000000000", sp.StudentPersonalRefId, "StudentPersonalRefid" );
+            Assert.AreEqual( "ZZZ99987", sp.Service.Code, "Service/@Code" );
         }
 
 

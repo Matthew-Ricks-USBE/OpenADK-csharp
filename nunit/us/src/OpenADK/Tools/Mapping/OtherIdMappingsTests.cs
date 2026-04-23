@@ -31,7 +31,7 @@ namespace Library.Nunit.US.Tools.Mapping
             sourceMap.Add( "FIELD2", "5678" );
             StringMapAdaptor sma = new StringMapAdaptor( sourceMap );
             StudentPersonal sp = mapToStudentPersonal( sma, otherIdMapping, null );
-            Assertion.AssertNotNull( "Student should not be null", sp );
+            Assert.IsNotNull(sp, "Student should not be null");
 
             IDictionary destinationMap = doInboundMapping( otherIdMapping, sp );
             assertMapsAreEqual( sourceMap, destinationMap );

@@ -24,29 +24,29 @@ namespace Library.Nunit.US.Student
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF15r1);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assertion.AssertEquals("No StudentPersonal/Email", 0, sp.GetChildList( CommonDTD.EMAIL).Count );
-		Assertion.AssertNotNull("StudentPersonal/EmailList", sp.EmailList);
-        Assertion.Assert("StudentPersonal/EmailList/Email", sp.EmailList.ChildCount > 0);
+		Assert.AreEqual(0, sp.GetChildList( CommonDTD.EMAIL).Count, "No StudentPersonal/Email");
+		Assert.IsNotNull(sp.EmailList, "StudentPersonal/EmailList");
+        Assert.True(sp.EmailList.ChildCount > 0, "StudentPersonal/EmailList/Email");
 
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF20);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assertion.AssertEquals("No StudentPersonal/Email", 0, sp.GetChildList(CommonDTD.EMAIL).Count );
-        Assertion.AssertNotNull("StudentPersonal/EmailList", sp.EmailList);
-        Assertion.Assert("StudentPersonal/EmailList/Email", sp.EmailList.ChildCount > 0);
+		Assert.AreEqual(0, sp.GetChildList(CommonDTD.EMAIL).Count, "No StudentPersonal/Email");
+        Assert.IsNotNull(sp.EmailList, "StudentPersonal/EmailList");
+        Assert.True(sp.EmailList.ChildCount > 0, "StudentPersonal/EmailList/Email");
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF11);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assertion.AssertEquals("No StudentPersonal/Email", 0, sp.GetChildList(CommonDTD.EMAIL).Count );
-        Assertion.AssertNotNull("StudentPersonal/EmailList", sp.EmailList);
-        Assertion.Assert("StudentPersonal/EmailList/Email", sp.EmailList.ChildCount > 0);
+		Assert.AreEqual(0, sp.GetChildList(CommonDTD.EMAIL).Count, "No StudentPersonal/Email");
+        Assert.IsNotNull(sp.EmailList, "StudentPersonal/EmailList");
+        Assert.True(sp.EmailList.ChildCount > 0, "StudentPersonal/EmailList/Email");
 
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF22);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assertion.AssertEquals("No StudentPersonal/Email", 0, sp.GetChildList(CommonDTD.EMAIL).Count );
-        Assertion.AssertNotNull("StudentPersonal/EmailList", sp.EmailList);
-        Assertion.Assert("StudentPersonal/EmailList/Email", sp.EmailList.ChildCount > 0);
+		Assert.AreEqual(0, sp.GetChildList(CommonDTD.EMAIL).Count, "No StudentPersonal/Email");
+        Assert.IsNotNull(sp.EmailList, "StudentPersonal/EmailList");
+        Assert.True(sp.EmailList.ChildCount > 0, "StudentPersonal/EmailList/Email");
 
 	}
 

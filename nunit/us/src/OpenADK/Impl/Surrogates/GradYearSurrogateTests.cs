@@ -11,10 +11,20 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
     [TestFixture]
     public class GradYearSurrogateTests
     {
+        protected SifVersion fOriginalVersion;
+
         [SetUp]
-        public void setUp()
+        public void SetUp()
         {
-            Adk.Initialize( SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
+            fOriginalVersion = Adk.SifVersion;
+            Adk.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student);
+            Adk.SifVersion = SifVersion.SIF15r1;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Adk.SifVersion = fOriginalVersion;
         }
 
         [Test]
@@ -26,23 +36,20 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
             StudentPersonal sp = (StudentPersonal) parseSIF15r1XML( sXML );
             sp = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn( sp, SifVersion.SIF11 );
-            Assertion.AssertNotNull( sp );
-            Assertion.AssertNotNull( "On Time Grad Year", sp.OnTimeGraduationYear );
-            Assertion.AssertEquals( "On Time Grad Year", 1971, (int) sp
-                                                                         .OnTimeGraduationYear );
+            Assert.IsNotNull( sp );
+            Assert.IsNotNull(sp.OnTimeGraduationYear, "On Time Grad Year");
+            Assert.AreEqual(1971, (int) sp.OnTimeGraduationYear, "On Time Grad Year");
 
-            Adk.SifVersion = SifVersion.SIF15r1;
             sp = new StudentPersonal();
             sp.SetElementOrAttribute( "GradYear[@Type='Original']", "8877" );
-            Assertion.AssertNotNull( "On Time Grad Year", sp.OnTimeGraduationYear );
-            Assertion.AssertEquals( "On Time Grad Year", 8877, (int) sp
-                                                                         .OnTimeGraduationYear );
+            Assert.IsNotNull(sp.OnTimeGraduationYear, "On Time Grad Year");
+            Assert.AreEqual(8877, (int) sp.OnTimeGraduationYear, "On Time Grad Year");
 
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Original']" );
-            Assertion.AssertNotNull( "On Time Grad Year", gradValue );
+            Assert.IsNotNull( gradValue, "On Time Grad Year" );
             int gradYear = (int) gradValue.SifValue.RawValue;
-            Assertion.AssertNotNull( "On Time Grad Year", gradYear );
-            Assertion.AssertEquals( "On Time Grad Year", 8877, gradYear );
+            Assert.IsNotNull(gradYear, "On Time Grad Year");
+            Assert.AreEqual(8877, gradYear, "On Time Grad Year");
         }
 
         public void testParseProjectedGradYear()
@@ -53,23 +60,20 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
             StudentPersonal sp = (StudentPersonal) parseSIF15r1XML( sXML );
             sp = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn( sp, SifVersion.SIF11 );
-            Assertion.AssertNotNull( sp );
-            Assertion.AssertNotNull( "Projected Grad Year", sp.ProjectedGraduationYear );
-            Assertion.AssertEquals( "Projected Grad Year", 2012, (int) sp
-                                                                           .ProjectedGraduationYear );
+            Assert.IsNotNull( sp );
+            Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
+            Assert.AreEqual( 2012, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
 
-            Adk.SifVersion = SifVersion.SIF15r1;
             sp = new StudentPersonal();
             sp.SetElementOrAttribute( "GradYear[@Type='Projected']", "2089" );
-            Assertion.AssertNotNull( "Projected Grad Year", sp.ProjectedGraduationYear );
-            Assertion.AssertEquals( "Projected Grad Year", 2089, (int) sp
-                                                                           .ProjectedGraduationYear );
+            Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
+            Assert.AreEqual( 2089, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
 
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Projected']" );
-            Assertion.AssertNotNull( "Projected Grad Year", gradValue );
+            Assert.IsNotNull( gradValue, "Projected Grad Year" );
             int gradYear = (int) gradValue.SifValue.RawValue;
-            Assertion.AssertNotNull( "Projected Grad Year", gradYear );
-            Assertion.AssertEquals( "Projected Grad Year", 2089, gradYear );
+            Assert.IsNotNull( gradYear, "Projected Grad Year" );
+            Assert.AreEqual( 2089, gradYear, "Projected Grad Year" );
         }
 
         public void testParseGraduationDate()
@@ -80,23 +84,22 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
             StudentPersonal sp = (StudentPersonal) parseSIF15r1XML( sXML );
             sp = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn( sp, SifVersion.SIF11 );
-            Assertion.AssertNotNull( sp );
+            Assert.IsNotNull( sp );
             PartialDateType gd = sp.GraduationDate;
-            Assertion.AssertNotNull( "Actual Grad Year", gd );
-            Assertion.AssertEquals( "Actual Grad Year", 2005, (int) gd.Year );
+            Assert.IsNotNull( gd, "Actual Grad Year" );
+            Assert.AreEqual( 2005, (int) gd.Year, "Actual Grad Year" );
 
-            Adk.SifVersion = SifVersion.SIF15r1;
             sp = new StudentPersonal();
             sp.SetElementOrAttribute( "GradYear[@Type='Actual']", "2054" );
             gd = sp.GraduationDate;
-            Assertion.AssertNotNull( "Actual Grad Year", gd );
-            Assertion.AssertNotNull( "GraduationDate/getYear()", gd.Year );
-            Assertion.AssertEquals( "Actual Grad Year", 2054, gd.Year.Value );
+            Assert.IsNotNull( gd, "Actual Grad Year" );
+            Assert.IsNotNull( gd.Year, "GraduationDate/getYear()" );
+            Assert.AreEqual( 2054, gd.Year.Value, "Actual Grad Year" );
 
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Actual']" );
-            Assertion.AssertNotNull( "Actual Grad Year", gradValue );
+            Assert.IsNotNull( gradValue, "Actual Grad Year" );
             PartialDateType pdt = (PartialDateType) gradValue;
-            Assertion.AssertEquals( "Actual Grad Year", 2054, pdt.Year.Value );
+            Assert.AreEqual( 2054, pdt.Year.Value, "Actual Grad Year" );
         }
 
         public void testParseOnTimeGradYearSS()
@@ -107,21 +110,19 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
             StudentSnapshot sp = (StudentSnapshot) parseSIF15r1XML( sXML );
             sp = (StudentSnapshot) AdkObjectParseHelper.WriteParseAndReturn( sp, SifVersion.SIF15r1 );
-            Assertion.AssertNotNull( sp );
-            Assertion.AssertNotNull( "On Time Grad Year", sp.OnTimeGraduationYear );
-            Assertion.AssertEquals( "On Time Grad Year", 1971, (int) sp
-                                                                         .OnTimeGraduationYear );
+            Assert.IsNotNull( sp );
+            Assert.IsNotNull( sp.OnTimeGraduationYear, "On Time Grad Year" );
+            Assert.AreEqual( 1971, (int) sp.OnTimeGraduationYear, "On Time Grad Year" );
 
-            Adk.SifVersion = SifVersion.SIF15r1;
             sp = new StudentSnapshot();
             sp.SetElementOrAttribute( "GradYear[@Type='Original']", "8877" );
-            Assertion.AssertNotNull( "On Time Grad Year", sp.OnTimeGraduationYear );
-            Assertion.AssertEquals( "On Time Grad Year", 8877, (int) sp.OnTimeGraduationYear );
+            Assert.IsNotNull( sp.OnTimeGraduationYear, "On Time Grad Year" );
+            Assert.AreEqual( 8877, (int) sp.OnTimeGraduationYear, "On Time Grad Year" );
 
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Original']" );
-            Assertion.AssertNotNull( "On Time Grad Year is null", gradValue );
+            Assert.IsNotNull( gradValue, "On Time Grad Year is null" );
             SifInt intValue = (SifInt) gradValue.SifValue;
-            Assertion.AssertEquals( "On Time Grad Year", 8877, intValue.RawValue );
+            Assert.AreEqual( 8877, intValue.RawValue, "On Time Grad Year" );
         }
 
         public void testParseProjectedGradYearSS()
@@ -132,21 +133,19 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
             StudentSnapshot sp = (StudentSnapshot) parseSIF15r1XML( sXML );
             sp = (StudentSnapshot) AdkObjectParseHelper.WriteParseAndReturn( sp, SifVersion.SIF15r1 );
-            Assertion.AssertNotNull( sp );
-            Assertion.AssertNotNull( "Projected Grad Year", sp.ProjectedGraduationYear );
-            Assertion.AssertEquals( "Projected Grad Year", 2012, (int) sp
-                                                                           .ProjectedGraduationYear );
+            Assert.IsNotNull( sp );
+            Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
+            Assert.AreEqual( 2012, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
 
-            Adk.SifVersion = SifVersion.SIF15r1;
             sp = new StudentSnapshot();
             sp.SetElementOrAttribute( "GradYear[@Type='Projected']", "2089" );
-            Assertion.AssertNotNull( "Projected Grad Year", sp.ProjectedGraduationYear );
-            Assertion.AssertEquals( "Projected Grad Year", 2089, (int) sp.ProjectedGraduationYear );
+            Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
+            Assert.AreEqual( 2089, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
 
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Projected']" );
-            Assertion.AssertNotNull( "Projected Grad Year", gradValue );
+            Assert.IsNotNull( gradValue, "Projected Grad Year" );
             SifInt intValue = (SifInt) gradValue.SifValue;
-            Assertion.AssertEquals( "Projected Grad Year", 2089, intValue.Value.Value );
+            Assert.AreEqual( 2089, intValue.Value.Value, "Projected Grad Year" );
         }
 
         public void testParseGraduationDateSS()
@@ -157,23 +156,22 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
             StudentSnapshot sp = (StudentSnapshot) parseSIF15r1XML( sXML );
             sp = (StudentSnapshot) AdkObjectParseHelper.WriteParseAndReturn( sp, SifVersion.SIF15r1 );
-            Assertion.AssertNotNull( sp );
+            Assert.IsNotNull( sp );
             PartialDateType gd = sp.GraduationDate;
-            Assertion.AssertNotNull( "Actual Grad Year", gd );
-            Assertion.AssertEquals( "Actual Grad Year", 2005, (int) gd.Year );
+            Assert.IsNotNull( gd, "Actual Grad Year" );
+            Assert.AreEqual( 2005, (int) gd.Year, "Actual Grad Year" );
 
-            Adk.SifVersion = SifVersion.SIF15r1;
             sp = new StudentSnapshot();
             sp.SetElementOrAttribute( "GradYear[@Type='Actual']", "2054" );
             gd = sp.GraduationDate;
-            Assertion.AssertNotNull( "Actual Grad Year", gd );
-            Assertion.AssertEquals( "Actual Grad Year", 2054, (int) gd.Year );
+            Assert.IsNotNull( gd, "Actual Grad Year" );
+            Assert.AreEqual( 2054, (int) gd.Year, "Actual Grad Year" );
 
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Actual']" );
-            Assertion.AssertNotNull( "Actual Grad Year", gradValue );
+            Assert.IsNotNull( gradValue, "Actual Grad Year" );
             Assert.IsTrue( gradValue is PartialDateType, "Should be a partial date type" );
             PartialDateType gradYear = (PartialDateType) gradValue;
-            Assertion.AssertEquals( "Actual Grad Year", 2054, gradYear.Year.Value );
+            Assert.AreEqual( 2054, gradYear.Year.Value, "Actual Grad Year" );
         }
 
         private SifElement parseSIF15r1XML( String xml )

@@ -10,11 +10,12 @@ using Library.Nunit.US.Tools.Mapping;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
+    [TestFixture]
     public class SIF15MappingTests : MappingTests
     {
         public SIF15MappingTests()
             : base( SifVersion.SIF15r1,
-                    "..\\..\\Library\\Tools\\Mapping\\SIF1.5.agent.cfg")
+                    "..\\..\\OpenADK\\Tools\\Mapping\\SIF1.5.agent.cfg")
         {
         }
 
@@ -61,27 +62,26 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             StudentPersonal sp = doOutboundMappingSelect( sma, configFileText1_,
                                                           "Zone A", null, null );
 
-            Assertion.AssertNotNull( "Student should not be null", sp );
+            Assert.IsNotNull(sp, "Student should not be null");
 
             SifElement address = (SifElement) sp
                                                   .GetElementOrAttribute(
                                                   "StudentAddress[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='01']" );
-            Assertion.AssertNotNull( "Student Address should have mapped", address );
+            Assert.IsNotNull(address, "Student Address should have mapped");
 
             SifElement name = (SifElement) sp
                                                .GetElementOrAttribute( "Name[@Type='06']" );
-            Assertion.AssertNotNull( "Name should have mapped to '06'", name );
+            Assert.IsNotNull(name, "Name should have mapped to '06'");
         }
 
 
         protected override void assertStudentPlacement( StudentPlacement sp )
         {
-            Assertion.AssertEquals( "RefID", "0000000000000000", sp.RefId );
-            Assertion.AssertEquals( "StudentPersonalRefid", "0000000000000000", sp.StudentPersonalRefId );
-            Assertion.AssertEquals( "Code Type", "Local", sp.Service.CodeType );
-            Assertion.AssertEquals( "Type", "Related Service", sp.Service.Type );
-            // Note: Currently mapping the Service value out in SIF 1.5 does not work as expected
-            //Assertion.AssertEquals( "Service/@Code", "ZZZ99987", sp.Service().Code());
+            Assert.AreEqual( "0000000000000000", sp.RefId, "RefID" );
+            Assert.AreEqual( "0000000000000000", sp.StudentPersonalRefId, "StudentPersonalRefid" );
+            Assert.AreEqual( "Local", sp.Service.CodeType, "Code Type" );
+            Assert.AreEqual( "Related Service", sp.Service.Type, "Type" );
+            Assert.AreEqual( "ZZZ99987", sp.Service.TextValue, "Service" );
         }
 
 
@@ -90,9 +90,10 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             IDictionary data = new Hashtable();
             data.Add( "REFID", "0000000000000000" );
             data.Add( "STU_REFID", "0000000000000000" );
-            //data.Add("SERVICE_CODE", "ZZZ99987");
+            data.Add("SERVICE_CODE", "ZZZ99987");
             data.Add( "SERVICE_TYPE", "Related Service" );
             return data;
         }
     }
 }
+

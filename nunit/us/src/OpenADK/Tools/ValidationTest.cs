@@ -42,7 +42,7 @@ namespace Library.Nunit.US.Library.Tools
 			outWriter.Write( se, fVersion );
 			outWriter.Flush();
 			fSchemaValidator.PrintProblems( fOutput );
-			Assertion.Assert( "Errors validating...", false );
+			Assert.Fail("Errors validating...");
 		}
 		
 
@@ -79,3 +79,5 @@ namespace Library.Nunit.US.Library.Tools
         }
     }
 }
+
+

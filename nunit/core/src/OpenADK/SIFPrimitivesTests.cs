@@ -14,7 +14,6 @@ namespace Library.NUnit.Core.Library
         {
             base.TearDown();
             // Clean up any properties that have been set and reset the ADK version
-            Adk.SifVersion = SifVersion.LATEST;
             Agent.Properties.Clear();
         }
 

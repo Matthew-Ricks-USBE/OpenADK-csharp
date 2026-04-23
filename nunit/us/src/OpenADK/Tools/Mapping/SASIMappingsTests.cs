@@ -11,21 +11,19 @@ using Library.UnitTesting.Framework.Validation;
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
     [TestFixture]
-    public class SASIMappingsTests
+    public class SASIMappingsTests : UsAdkTest
     {
         private SifVersion fVersion = SifVersion.SIF15r1;
 
         private AgentConfig fCfg;
+
         [SetUp]
-        public void setUp()
+        public virtual void SetUp()
         {
-            if( !Adk.Initialized )
-            {
-                Adk.Initialize( );
-            }
+            base.SetUp();
             Adk.SifVersion = fVersion;
             fCfg = new AgentConfig();
-            fCfg.Read("..\\..\\Library\\Tools\\Mapping\\SASI2.0.cfg", false);
+            fCfg.Read("..\\..\\OpenADK\\Tools\\Mapping\\SASI2.0.cfg", false);
         }
 
         [Test]
@@ -73,11 +71,11 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                 if ( "ZZ".Equals( oid.Type )
                      && oid.Value.StartsWith( "GRADE" ) )
                 {
-                    Assertion.AssertEquals( "OtherId[@Type=ZZ]GRADE: mapping", "GRADE:09", oid.Value );
+                    Assert.AreEqual("GRADE:09", oid.Value, "OtherId[@Type=ZZ]GRADE: mapping");
                     gradeMappingFound = true;
                 }
             }
-            Assertion.Assert( "GradeMapping found", gradeMappingFound );
+            Assert.True( gradeMappingFound, "GradeMapping found" );
         }
 
         [Test]
@@ -96,8 +94,8 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Console.WriteLine( ss.ToXml() );
 
             int? onTimeGradYear = ss.OnTimeGraduationYear;
-            Assertion.Assert( "onTimeGraduationYear is null", onTimeGradYear.HasValue );
-            Assertion.AssertEquals( "OnTimeGraduationYear", 2000, onTimeGradYear.Value );
+            Assert.True( onTimeGradYear.HasValue, "onTimeGraduationYear is null" );
+            Assert.AreEqual( 2000, onTimeGradYear.Value, "OnTimeGraduationYear" );
 
             SchemaValidator sv = USSchemaValidator.NewInstance( SifVersion.SIF15r1 );
 
@@ -108,7 +106,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             if ( !validated )
             {
                 sv.PrintProblems( Console.Out );
-                Assertion.Fail( "Schema Validation Failed:" );
+                Assert.Fail( "Schema Validation Failed:" );
             }
         }
 
@@ -124,8 +122,8 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Console.WriteLine( ss.ToXml() );
 
             int? onTimeGradYear = ss.OnTimeGraduationYear;
-            Assertion.Assert( "onTimeGraduationYear is null", onTimeGradYear.HasValue );
-            Assertion.AssertEquals( "OnTimeGraduationYear", 2000, onTimeGradYear.Value );
+            Assert.True( onTimeGradYear.HasValue, "onTimeGraduationYear is null" );
+            Assert.AreEqual( 2000, onTimeGradYear.Value, "OnTimeGraduationYear" );
         }
 
 
@@ -146,7 +144,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Console.WriteLine( ss.ToXml() );
 
             int? onTimeGradYear = ss.OnTimeGraduationYear;
-            Assertion.Assert( "onTimeGraduationYear is not null", !onTimeGradYear.HasValue );
+            Assert.True(!onTimeGradYear.HasValue, "onTimeGraduationYear should be null" );
         }
 
 
@@ -167,7 +165,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Console.WriteLine( ss.ToXml() );
 
             int? onTimeGradYear = ss.OnTimeGraduationYear;
-            Assertion.Assert( "onTimeGraduationYear is not null", !onTimeGradYear.HasValue );
+            Assert.True( !onTimeGradYear.HasValue, "onTimeGraduationYear should be null" );
         }
 
 
@@ -188,7 +186,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Console.WriteLine( ss.ToXml() );
 
             int? onTimeGradYear = ss.OnTimeGraduationYear;
-            Assertion.Assert( "onTimeGraduationYear is not null", !onTimeGradYear.HasValue );
+            Assert.True( !onTimeGradYear.HasValue, "onTimeGraduationYear should be null" );
         }
 
 
@@ -209,7 +207,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Console.WriteLine( ss.ToXml() );
 
             int? onTimeGradYear = ss.OnTimeGraduationYear;
-            Assertion.Assert( "onTimeGraduationYear is not null", !onTimeGradYear.HasValue );
+            Assert.True( !onTimeGradYear.HasValue, "onTimeGraduationYear should be null" );
         }
 
 
@@ -229,7 +227,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             String value = ss.ToXml();
             Console.WriteLine( value );
 
-            Assertion.Assert( "Last Name should be null", value.IndexOf( "LastName" ) == -1 );
+            Assert.True(value.IndexOf( "LastName" ) == -1, "Last Name should be null");
         }
 
 
@@ -250,7 +248,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             String value = ss.ToXml();
             Console.WriteLine( value );
 
-            Assertion.Assert( "Last Name should be null", value.IndexOf( "LastName" ) == -1 );
+            Assert.True( value.IndexOf( "LastName" ) == -1, "Last Name should be null" );
         }
 
 
@@ -265,8 +263,8 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             m.MapOutbound( sma, ss, SifVersion.SIF20r1 );
 
             int? onTimeGradYear = ss.OnTimeGraduationYear;
-            Assertion.Assert( "onTimeGraduationYear is null", onTimeGradYear.HasValue );
-            Assertion.AssertEquals( "OnTimeGraduationYear", 2000, onTimeGradYear.Value );
+            Assert.True( onTimeGradYear.HasValue, "onTimeGraduationYear is null" );
+            Assert.AreEqual( 2000, onTimeGradYear.Value, "OnTimeGraduationYear" );
 
             Console.WriteLine( ss.ToXml() );
         }
@@ -348,7 +346,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
             Element e = sp
                 .GetElementOrAttribute( "OtherId[@Type='ZZ' and starts-with(., 'HOMEROOM') ]" );
-            Assertion.AssertNull( "HOMEROOM should not have been mapped", e );
+            Assert.IsNull( e, "HOMEROOM should not have been mapped" );
         }
 
         [Test]
@@ -382,18 +380,16 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Element e = sp
                 .GetElementOrAttribute(
                 "StudentAddress[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='M']/Street/Line1" );
-            Assertion.AssertNotNull( "Mailing Address was not mapped ", e );
-            Assertion.AssertEquals( "Mailing Address", "PO Box 80077", e.TextValue );
+            Assert.IsNotNull(e, "Mailing Address was not mapped ");
+            Assert.AreEqual("PO Box 80077", e.TextValue, "Mailing Address");
 
             e = sp
                 .GetElementOrAttribute(
                 "StudentAddress[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='P']/Street/Line1" );
-            Assertion.AssertNotNull( "Residential Address was not mapped ", e );
-            Assertion.AssertEquals( "Mailing Address", "528 Big CottonWood Rd", e
-                                                                                    .TextValue );
+            Assert.IsNotNull(e, "Residential Address was not mapped ");
+            Assert.AreEqual( "528 Big CottonWood Rd", e.TextValue, "Residential Address");
             StudentAddressList children = sp.AddressList;
-            Assertion.AssertEquals( "Should have two StudentAddress elements", 2,
-                                    children.Count );
+            Assert.AreEqual(2, children.Count, "Should have two StudentAddress elements");
         }
 
         [Test]
@@ -426,20 +422,18 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
             Element e = sp
                 .GetElementOrAttribute( "AddressList/Address[@Type='0123']/Street/Line1" );
-            Assertion.AssertNotNull( "Mailing Address was not mapped ", e );
-            Assertion.AssertEquals( "Mailing Address", "PO Box 80077", e.TextValue );
+            Assert.IsNotNull(e, "Mailing Address was not mapped ");
+            Assert.AreEqual("PO Box 80077", e.TextValue, "Mailing Address");
 
             e = sp
                 .GetElementOrAttribute( "AddressList/Address[@Type='0765']/Street/Line1" );
-            Assertion.AssertNotNull( "Residential Address was not mapped ", e );
-            Assertion.AssertEquals( "Mailing Address", "528 Big CottonWood Rd", e
-                                                                                    .TextValue );
+            Assert.IsNotNull(e, "Residential Address was not mapped ");
+            Assert.AreEqual( "528 Big CottonWood Rd", e.TextValue, "Residential Address" );
 
             StudentAddressList[] list = sp.AddressLists;
             SifElementList children = sp.GetChildList( CommonDTD.ADDRESSLIST );
-            Assertion.AssertEquals( "Should have one StudentAddress elements", 1,
-                                    children.Count );
-            Assertion.AssertEquals( "Should have two address elements", 2, children[0].ChildCount );
+            Assert.AreEqual(1, children.Count, "Should have one StudentAddress elements");
+            Assert.AreEqual(2, children[0].ChildCount, "Should have two address elements");
         }
 
         [Test]
@@ -495,7 +489,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
             Element e = s
                 .GetElementOrAttribute( "PhoneNumber[@Format='NA' and @Type='WP']" );
-            Assertion.AssertNull( "PhoneNumber should be null", e );
+            Assert.IsNull( e, "PhoneNumber should be null" );
         }
 
         [Test]
@@ -531,10 +525,10 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
             Element e = s
                 .GetElementOrAttribute( "PhoneNumber[@Format='NA' and @Type='HP']" );
-            Assertion.AssertNull( "Home PhoneNumber should not be mapped", e );
+            Assert.IsNull( e, "Home PhoneNumber should not be mapped" );
             e = s.GetElementOrAttribute( "PhoneNumber[@Format='NA' and @Type='WP']" );
-            Assertion.AssertNotNull( "School PhoneNumber should be mapped", e );
-            Assertion.AssertEquals( "School phone", "1234567890", e.TextValue );
+            Assert.IsNotNull(e, "School PhoneNumber should be mapped");
+            Assert.AreEqual("1234567890", e.TextValue, "School phone");
         }
 
         [Test]
@@ -550,33 +544,33 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
             //	Verify that the phone number is properly escaped
             int loc = value.IndexOf( "<PhoneNumber Format=\"NA\" Type=\"EX\">M&amp;W</PhoneNumber>" );
-            Assertion.Assert( "Phone number should be escaped", loc > -1 );
+            Assert.True(loc > -1, "Phone number should be escaped");
 
             Element e = sc
                 .GetElementOrAttribute( "PhoneNumber[@Format='NA' and @Type='HP']" );
-            Assertion.AssertNotNull( "School PhoneNumber should be mapped", e );
-            Assertion.AssertEquals( "School phone", "8014504555", e.TextValue );
+            Assert.IsNotNull(e, "School PhoneNumber should be mapped");
+            Assert.AreEqual("8014504555", e.TextValue, "School phone");
 
             e = sc
                 .GetElementOrAttribute( "PhoneNumber[@Format='NA' and @Type='AP']" );
-            Assertion.AssertNotNull( "School PhoneNumber should be mapped", e );
+            Assert.IsNotNull(e, "School PhoneNumber should be mapped");
             // Note the " " Space at the end of the value. This should be there,
             // according to the mapping
-            Assertion.AssertEquals( "School phone", "8014505555 ", e.TextValue );
+            Assert.AreEqual( "8014505555 ", e.TextValue, "School phone" );
 
             e = sc
                 .GetElementOrAttribute( "PhoneNumber[@Format='NA' and @Type='WP']" );
-            Assertion.AssertNull( "School PhoneNumber should not be mapped", e );
+            Assert.IsNull( e, "School PhoneNumber should not be mapped" );
 
             AddressList al = sc.AddressList;
             if ( al != null )
             {
                 foreach ( Address addr in al )
                 {
-                    Assertion.AssertNull( "Country should be null", addr.Country );
+                    Assert.IsNull( addr.Country, "Country should be null" );
                     if ( addr.Type.Equals( "O" ) )
                     {
-                        Assertion.AssertNull( "State should be null", addr.StateProvince );
+                        Assert.IsNull( addr.StateProvince, "State should be null" );
                     }
                 }
             }
@@ -617,36 +611,36 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
             // Verify that the phone number is properly escaped
             int loc = value.IndexOf( "<Number>M&amp;W</Number>" );
-            Assertion.Assert( "Phone number should be escaped", loc > -1 );
+            Assert.True(loc > -1, "Phone number should be escaped");
 
             // Verify that the @Type attribute is not rendered in SIF 2.0
             loc = value.IndexOf( "Type=\"E4\"" );
-            Assertion.AssertEquals( "Type Attribute should not be rendered", -1, loc );
+            Assert.AreEqual( -1, loc, "Type Attribute should not be rendered" );
 
             sc.SifVersion = SifVersion.SIF20r1;
             Element e = sc
                 .GetElementOrAttribute( "//PhoneNumber[@Type='0096']/Number" );
-            Assertion.AssertNotNull( "School PhoneNumber should be mapped", e );
-            Assertion.AssertEquals( "School phone", "8014504555", e.TextValue );
+            Assert.IsNotNull(e, "School PhoneNumber should be mapped");
+            Assert.AreEqual("8014504555", e.TextValue, "School phone");
 
             e = sc.GetElementOrAttribute( "//PhoneNumber[@Type='0350'][1]/Number" );
-            Assertion.AssertNotNull( "School PhoneNumber should be mapped", e );
+            Assert.IsNotNull(e, "School PhoneNumber should be mapped");
             // Note the " " Space at the end of the value. This should be there,
             // according to the mapping
-            Assertion.AssertEquals( "School phone", "8014505555 ", e.TextValue );
+            Assert.AreEqual( "8014505555 ", e.TextValue, "School phone" );
 
             e = sc.GetElementOrAttribute( "//PhoneNumber[@Type='0350'][2]/Number" );
-            Assertion.AssertNull( "School PhoneNumber should not be mapped", e );
+            Assert.IsNull( e, "School PhoneNumber should not be mapped" );
 
             AddressList al = sc.AddressList;
             if ( al != null )
             {
                 foreach ( Address addr in al )
                 {
-                    Assertion.AssertNull( "Country should be null", addr.Country );
+                    Assert.IsNull( addr.Country, "Country should be null" );
                     if ( addr.Type.Equals( "1075" ) )
                     {
-                        Assertion.AssertNull( "State should be null", addr.StateProvince );
+                        Assert.IsNull( addr.StateProvince, "State should be null" );
                     }
                 }
             }
@@ -701,12 +695,12 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Console.WriteLine( sc.ToXml() );
 
             Element e = sc.GetElementOrAttribute( "CourseCredits[@Code='01']" );
-            Assertion.AssertNotNull( "credits", e );
-            Assertion.AssertEquals( "credits", "0", e.TextValue );
+            Assert.IsNotNull(e, "credits");
+            Assert.AreEqual( "0", e.TextValue, "credits" );
 
             e = sc.GetElementOrAttribute( "CourseCredits[@Code='02']" );
-            Assertion.AssertNotNull( "maxcredits", e );
-            Assertion.AssertEquals( "maxcredits", "1", e.TextValue );
+            Assert.IsNotNull( e, "maxcredits" );
+            Assert.AreEqual( "1", e.TextValue, "maxcredits" );
         }
     }
 }

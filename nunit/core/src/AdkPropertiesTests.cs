@@ -9,6 +9,7 @@ namespace Library.NUnit.Core
     [TestFixture]
     public class AdkPropertiesTests
     {
+        [Test]
         public void TestReturnDefaultValue()
         {
             AdkProperties props = new AdkProperties( null );
@@ -21,6 +22,7 @@ namespace Library.NUnit.Core
 
         }
 
+        [Test]
         public void TestReturnDefaultValueWithInheritance()
         {
             AdkProperties parent = new AdkProperties(null);

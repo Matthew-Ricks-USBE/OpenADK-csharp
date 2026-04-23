@@ -74,7 +74,7 @@ namespace Library.Nunit.US.Impl
 
             fRC.Close();
             fRC = RequestCache.GetInstance(fAgent);
-            Assertion.AssertEquals("Should have zero pending requests", 0, fRC.ActiveRequestCount);
+            Assert.AreEqual(0, fRC.ActiveRequestCount, "Should have zero pending requests");
         }
 
 
@@ -121,13 +121,13 @@ namespace Library.Nunit.US.Impl
             IRequestInfo ri = cache.GetRequestInfo(requestMsgId, null);
 
             //if state is null, should still return ri object
-            Assertion.AssertNotNull("RequestInfo was null", ri);
-            Assertion.AssertEquals("MessageId", requestMsgId, ri.MessageId);
-            Assertion.AssertEquals("ObjectType", testObjectType, ri.ObjectType);
+            Assert.IsNotNull(ri, "RequestInfo was null");
+            Assert.AreEqual(requestMsgId, ri.MessageId, "MessageId");
+            Assert.AreEqual(testObjectType, ri.ObjectType, "ObjectType");
             ts = (TestState) ri.UserData;
             // In order for this to be a valid test, the TestState class should have thrown
             // an exception during deserialization and should be null here.
-            Assertion.AssertNull("UserData should be null", ts);
+            Assert.IsNull(ts, "UserData should be null");
         }
 
         [Test]
@@ -186,18 +186,18 @@ namespace Library.Nunit.US.Impl
                 fRC.GetRequestInfo(fMsgIds[i], null);
             }
 
-            Assertion.AssertEquals("Before closing Should have five objects", 5, fRC.ActiveRequestCount);
+            Assert.AreEqual(5, fRC.ActiveRequestCount, "Before closing Should have five objects");
             fRC.Close();
 
             // Create a new instance. This one should retrieve its settings from the persistence mechanism
             fRC = RequestCache.GetInstance(fAgent);
-            Assertion.AssertEquals("After Re-Openeing Should have five objects", 5, fRC.ActiveRequestCount);
+            Assert.AreEqual(5, fRC.ActiveRequestCount, "After Re-Openeing Should have five objects");
             for (int i = 1; i < 10; i += 2)
             {
                 IRequestInfo cachedInfo = fRC.GetRequestInfo(fMsgIds[i], null);
-                Assertion.AssertNotNull("No cachedID returned for " + i, cachedInfo);
+                Assert.IsNotNull(cachedInfo, "No cachedID returned for " + i);
             }
-            Assertion.AssertEquals("Should have zero objects", 0, fRC.ActiveRequestCount);
+            Assert.AreEqual(0, fRC.ActiveRequestCount, "Should have zero objects");
         }
 
 
@@ -230,21 +230,13 @@ namespace Library.Nunit.US.Impl
             fi.IsReadOnly = true;
             try
             {
-                fRC = RequestCache.GetInstance(fAgent); //this should throw adk exception
-            }
-            catch (AdkException)
-            {
-                return;
+                Assert.Throws<AdkException>(() => RequestCache.GetInstance(fAgent));
             }
             finally
             {
                 fi.IsReadOnly = false;
                 fi.Delete();
             }
-            //should never get here
-
-            Assertion.AssertEquals("Exception should have been thrown because request cache file is readonly", true,
-                                   false);
         }
 
 
@@ -286,7 +278,7 @@ namespace Library.Nunit.US.Impl
             // Copy the legacy requests.adk file to the agent work directory
             //FileInfo legacyFile = new FileInfo("requests.adk");
 
-            //Assertion.Assert("Saved legacy file does [not?] exist", legacyFile.Exists);
+            //Assert.True(legacyFile.Exists, "Saved legacy file does [not?] exist");
             //FileInfo copiedFile = new FileInfo(fAgent.HomeDir + Path.DirectorySeparatorChar + "work" + Path.DirectorySeparatorChar + "requests.adk");
             //if (copiedFile.Exists)
             //{
@@ -323,25 +315,25 @@ namespace Library.Nunit.US.Impl
             }
 
 
-            Assertion.AssertEquals("Active request count", 10, fRC.ActiveRequestCount);
+            Assert.AreEqual(10, fRC.ActiveRequestCount, "Active request count");
 
 
             // Lookup each setting, 
             for (int i = 0; i < 10; i++)
             {
                 IRequestInfo reqInfo = fRC.LookupRequestInfo(fMsgIds[i], null);
-                Assertion.AssertEquals("Initial lookup", "Object_" + i.ToString(), reqInfo.ObjectType);
+                Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
             }
 
             // Lookup each setting, 
             for (int i = 0; i < 10; i++)
             {
                 IRequestInfo reqInfo = fRC.GetRequestInfo(fMsgIds[i], null);
-                Assertion.AssertEquals("Initial lookup", "Object_" + i.ToString(), reqInfo.ObjectType);
+                Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
             }
 
             // all messages should now be removed from the queue
-            Assertion.AssertEquals("Cache should be empty", 0, fRC.ActiveRequestCount);
+            Assert.AreEqual(0, fRC.ActiveRequestCount, "Cache should be empty");
 
             // Now run one of our other tests
             testPersistence();
@@ -412,15 +404,15 @@ namespace Library.Nunit.US.Impl
 
         private void assertStoredRequests(RequestCache cache, Boolean testRemoval)
         {
-            Assertion.AssertEquals("Active request count", fMsgIds.Length, cache.ActiveRequestCount);
+            Assert.AreEqual(fMsgIds.Length, cache.ActiveRequestCount, "Active request count");
 
             // Lookup each setting, 
             for (int i = 0; i < fMsgIds.Length; i++)
             {
                 IRequestInfo reqInfo = cache.LookupRequestInfo(fMsgIds[i], null);
-                Assertion.AssertEquals("Initial lookup", "Object_" + i.ToString(), reqInfo.ObjectType);
-                Assertion.AssertEquals("User Data is missing for " + i, fStateObjects[i],
-                                       (String) ((TestState) reqInfo.UserData).State);
+                Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
+                Assert.AreEqual(fStateObjects[i],
+                                       (String) ((TestState) reqInfo.UserData).State, "User Data is missing for " + i);
             }
 
             if (testRemoval)
@@ -429,14 +421,16 @@ namespace Library.Nunit.US.Impl
                 for (int i = 0; i < fMsgIds.Length; i++)
                 {
                     IRequestInfo reqInfo = cache.GetRequestInfo(fMsgIds[i], null);
-                    Assertion.AssertEquals("Initial lookup", "Object_" + i.ToString(), reqInfo.ObjectType);
-                    Assertion.AssertEquals("User Data is missing for " + i, fStateObjects[i],
-                                           (String) ((TestState) reqInfo.UserData).State);
+                    Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
+                    Assert.AreEqual(fStateObjects[i],
+                                           (String) ((TestState) reqInfo.UserData).State, "User Data is missing for " + i);
                 }
 
                 // all messages should now be removed from the queue
-                Assertion.AssertEquals("Cache should be empty", 0, cache.ActiveRequestCount);
+                Assert.AreEqual(0, cache.ActiveRequestCount, "Cache should be empty");
             }
         }
     } //end class
 } //end namespace
+
+

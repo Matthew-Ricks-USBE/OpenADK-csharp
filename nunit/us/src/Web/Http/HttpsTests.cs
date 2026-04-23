@@ -40,7 +40,7 @@ namespace OpenADK.Web.Http
         /// <summary>
         /// This method runs once at the start of this fixture
         /// </summary>
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetupTestFixture()
         {
             CertificateStore store = new CertificateStore(StoreLocation.LocalMachine, CertificateStore.RootStore);

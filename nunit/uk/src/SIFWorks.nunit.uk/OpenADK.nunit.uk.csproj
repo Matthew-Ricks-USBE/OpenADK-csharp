@@ -4,116 +4,23 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Edustructures.SIFWorks.Nunit.UK</RootNamespace>
     <AssemblyName>Edustructures.SIFWorks.nunit.uk</AssemblyName>
+	<LangVersion>latest</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Eval;Internal;PerfTest;Release;ReleaseDocs</Configurations>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.14" />
-    <Reference Include="nunit.core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\nunit\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\lib\nunit\nunit.framework.dll</HintPath>
-    </Reference>
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
     <Reference Include="Org.Mentalis.Security, Version=1.0.14.25108, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\us\src\bin\Debug\Org.Mentalis.Security.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="data\SIF20r1\ContactPersonal.xml">
+    <Content Include="data\SIF*\*.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="data\SIF20r1\LAInfo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\LearnerAttendanceSummary.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\LearnerContact.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\LearnerExclusion.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\LearnerGroupEnrolment.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\LearnerPersonal.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\LearnerSchoolEnrolment.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\LearnerSpecialNeeds.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\PersonPicture.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\SchoolGroup.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\SchoolGroupType.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\SchoolInfo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\TermInfo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF20r1\WorkforcePersonal.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\AssessmentLearnerSet.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\AssessmentResponseComponent.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\AssessmentResponseComponentGroup.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\AssessmentResultComponent.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\AssessmentResultComponentGroup.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\AssessmentResultGradeSet.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\AssessmentSession.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\Identity1.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\Identity2.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\LAInfo.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\LearnerAssessmentResponseSet.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\LearnerAssessmentResult.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\SIF21\LearnerAttendance.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="schemas\SIF20r1\SIF_Message.xsd">
-      <SubType></SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="schemas\SIF21\SIF_Message.xsd">
+    <None Update="schemas\SIF*\*.xsd">
       <SubType></SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -122,10 +29,5 @@
     <ProjectReference Include="..\..\..\..\src\core\OpenADK-NET-Core.csproj" />
     <ProjectReference Include="..\..\..\..\src\uk\OpenADK-UK-SDO.csproj" />
     <ProjectReference Include="..\..\..\core\src\OpenADK-Nunit-Core.csproj" />
-  </ItemGroup>
-  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
-    <Compile Remove="Backup\Validation\VersioningTests.cs" />
-    <Compile Remove="Backup\SifWriterTests.cs" />
-    <Compile Remove="Backup\Properties\AssemblyInfo.cs" />
   </ItemGroup>
 </Project>

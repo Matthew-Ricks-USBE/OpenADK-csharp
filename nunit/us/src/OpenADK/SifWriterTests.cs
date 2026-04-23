@@ -76,13 +76,13 @@ namespace Library.Nunit.US
 
          StudentPersonal sp11 = (StudentPersonal)AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.SIF11);
 
-         Assertion.AssertNull("LocalID", sp11.LocalId);
-         Assertion.AssertNull("StatePRID", sp11.StateProvinceId);
+          Assert.IsNull(sp11.LocalId, "LocalID");
+          Assert.IsNull(sp11.StateProvinceId, "StatePRID");
 
          StudentPersonal sp15 = (StudentPersonal)AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.SIF15r1);
 
-         Assertion.AssertNotNull("LocalID", sp15.LocalId);
-         Assertion.AssertNotNull("StatePRID", sp15.StateProvinceId);
+         Assert.IsNotNull(sp15.LocalId, "LocalID");
+         Assert.IsNotNull(sp15.StateProvinceId, "StatePRID");
       }
 
 
@@ -239,3 +239,5 @@ namespace Library.Nunit.US
        }
    }
 }
+
+

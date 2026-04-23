@@ -17,7 +17,7 @@ namespace Library.Nunit.US.Library.Student
 
 		sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
 				SifVersion.SIF15r1);
-		Assertion.AssertNull("Primary Assignment", sa.PrimaryAssignment);
+		Assert.IsNull(sa.PrimaryAssignment, "Primary Assignment");
 	}
 
     [Test]
@@ -26,8 +26,9 @@ namespace Library.Nunit.US.Library.Student
 		sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
 				SifVersion.SIF20r1);
 
-		Assertion.AssertEquals("Primary Assignment", "Yes", sa.PrimaryAssignment );
+		Assert.AreEqual("Yes", sa.PrimaryAssignment, "Primary Assignment");
 
 	}
     }
 }
+

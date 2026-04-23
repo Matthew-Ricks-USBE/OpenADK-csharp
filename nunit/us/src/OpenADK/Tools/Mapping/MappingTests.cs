@@ -33,9 +33,9 @@ namespace Library.Nunit.US.Tools.Mapping
         }
 
         [SetUp]
-        public override void setUp()
+        public override void SetUp()
         {
-            base.setUp();
+            base.SetUp();
             Adk.SifVersion = fVersion;
             fCfg = new AgentConfig();
             fCfg.Read( fFileName, false );
@@ -71,16 +71,14 @@ namespace Library.Nunit.US.Tools.Mapping
             // For the purposes of this test, all we care about is the Ethnicity
             // mapping.
             // It should have the default outbound value we specified, which is "7"
-            Assertion.AssertEquals( "Middle Name should be Jerry", "Jerry", sp
-                                                                                .Name.MiddleName );
+            Assert.AreEqual("Jerry", sp.Name.MiddleName, "Middle Name should be Jerry");
 
             // Now, remap the student back into application fields
             IDictionary restoredData = new Hashtable();
             adaptor.Dictionary = restoredData;
             mappings.MapInbound( sp, adaptor );
 
-            Assertion.AssertEquals( "Middle Name should be Jerry", "Jerry",
-                                    restoredData["MIDDLE_NAME"] );
+            Assert.AreEqual("Jerry", restoredData["MIDDLE_NAME"], "Middle Name should be Jerry");
 
             sp.Name.LastName = null;
             // Now, remap the student back into application fields
@@ -90,7 +88,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             Object lastName = restoredData["LAST_NAME"];
             Console.WriteLine( sp.ToXml() );
-            Assertion.AssertNull( "Last Name should be null", lastName );
+            Assert.IsNull( lastName, "Last Name should be null" );
         }
 
         /**
@@ -132,7 +130,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             // There's no default value defined, so we expect that what get's put in
             // is what we get out
-            Assertion.AssertEquals( "Outbound Ethnicity", "abcdefg", sp.Demographics.RaceList.ItemAt( 0 ).Code );
+            Assert.AreEqual( "abcdefg", sp.Demographics.RaceList.ItemAt( 0 ).Code, "Outbound Ethnicity" );
 
             // Now, remap the student back into application fields
             IDictionary restoredData = new Hashtable();
@@ -142,7 +140,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             // The value "abcdefg" does not have a match in the value set
             // It should be passed back through
-            Assertion.AssertEquals( "Inbound Ethnicity", "abcdefg", restoredData["ETHNICITY"] );
+            Assert.AreEqual( "abcdefg", restoredData["ETHNICITY"], "Inbound Ethnicity" );
 
             inboundEthnicityRule.DefaultValue = "11111";
             outboundEthnicityRule.DefaultValue = "99999";
@@ -150,7 +148,7 @@ namespace Library.Nunit.US.Tools.Mapping
             MapOutbound( sp, mappings, map );
 
             // It should have the default value we specified, which is "99999"
-            Assertion.AssertEquals( "Outbound Ethnicity", "99999", sp.Demographics.RaceList.ItemAt( 0 ).Code );
+            Assert.AreEqual( "99999", sp.Demographics.RaceList.ItemAt( 0 ).Code, "Outbound Ethnicity" );
 
             // Now, remap the student back into application fields
             restoredData = new Hashtable();
@@ -159,7 +157,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             // The value "9999" does not have a match in the value set
             // we want it to take on the default value, which is "111111"
-            Assertion.AssertEquals( "Inbound Ethnicity", "11111", restoredData["ETHNICITY"] );
+            Assert.AreEqual( "11111", restoredData["ETHNICITY"], "Inbound Ethnicity" );
 
             // Now, do the mapping again, this time with the Ethnicity value
             // completely missing
@@ -170,8 +168,8 @@ namespace Library.Nunit.US.Tools.Mapping
             // Ethnicity should be set to "99999" in this case because we didn't set
             // the "ifNull" behavior and the
             // default behavior is "NULL_DEFAULT"
-            Assertion.AssertEquals( "Outbound Ethnicity", "99999", sp.Demographics
-                                                                       .RaceList.ItemAt( 0 ).Code );
+            Assert.AreEqual( "99999", sp.Demographics
+                                                                       .RaceList.ItemAt( 0 ).Code, "Outbound Ethnicity" );
 
             // Now, do the mapping again, this time with the NULL_DEFALT behavior.
             // The result should be the same
@@ -181,7 +179,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             // Ethnicity should be set to "99999" in this case because we set the
             // ifnull behavior to "NULL_DEFAULT"
-            Assertion.AssertEquals( "Outbound Ethnicity", "99999", sp.Demographics.RaceList.ItemAt( 0 ).Code );
+            Assert.AreEqual( "99999", sp.Demographics.RaceList.ItemAt( 0 ).Code, "Outbound Ethnicity" );
 
             outboundEthnicityRule.NullBehavior = MappingBehavior.IfNullSuppress;
             sp = new StudentPersonal();
@@ -189,7 +187,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             // Ethnicity should be null in this case because we told it to suppress
             // set the "ifNull" behavior
-            Assertion.AssertNull( "Ethnicity should not be set", sp.Demographics.RaceList );
+            Assert.IsNull( sp.Demographics.RaceList, "Ethnicity should not be set" );
         }
 
         /**
@@ -210,7 +208,7 @@ namespace Library.Nunit.US.Tools.Mapping
             writer.Write( sc );
             writer.Flush();
 
-            Assertion.AssertEquals( "Testing Pickup Rights", "Yes", sc.ContactFlags.PickupRights );
+            Assert.AreEqual("Yes", sc.ContactFlags.PickupRights, "Testing Pickup Rights" );
         }
 
         /**
@@ -238,21 +236,20 @@ namespace Library.Nunit.US.Tools.Mapping
             ValueSet vs = mappings.GetValueSet( "Ethnicity", false );
 
             // Normal Translation
-            Assertion.AssertEquals( "Translate", "A", vs.Translate( "1" ) );
-            Assertion.AssertEquals( "TranslateReverse", "1", vs.TranslateReverse( "A" ) );
+            Assert.AreEqual("A", vs.Translate( "1" ), "Translate" );
+            Assert.AreEqual( "1", vs.TranslateReverse( "A" ), "TranslateReverse" );
             // Default Values
-            Assertion.AssertEquals( "Translate", "ZZZ", vs.Translate( "foo", "ZZZ" ) );
-            Assertion.AssertEquals( "TranslateReverse", "AAA", vs.TranslateReverse( "foo",
-                                                                                    "AAA" ) );
+            Assert.AreEqual("ZZZ", vs.Translate( "foo", "ZZZ" ), "Translate" );
+            Assert.AreEqual( "AAA", vs.TranslateReverse( "foo",
+                                                                                    "AAA" ), "TranslateReverse" );
 
             // Test Null behavior
-            Assertion.AssertNull( "TranslateNull", vs.Translate( null ) );
-            Assertion.AssertNull( "TranslateReverseNull", vs.TranslateReverse( null ) );
+            Assert.IsNull( vs.Translate( null ), "TranslateNull" );
+            Assert.IsNull( vs.TranslateReverse( null ), "TranslateReverseNull" );
 
             // No Match (this time should return what we pass in)
-            Assertion.AssertEquals( "TranslateNoMatch", "QQQQ", vs.Translate( "QQQQ" ) );
-            Assertion.AssertEquals( "TranslateReverseNoMath", "QQQQ", vs
-                                                                          .TranslateReverse( "QQQQ" ) );
+            Assert.AreEqual("QQQQ", vs.Translate( "QQQQ" ), "TranslateNoMatch" );
+            Assert.AreEqual("QQQQ", vs.TranslateReverse( "QQQQ" ), "TranslateReverseNoMatch" );
 
             // //////////////////////////////////
             //
@@ -262,20 +259,20 @@ namespace Library.Nunit.US.Tools.Mapping
             vs.SetAppDefault( "6", false );
 
             // Normal Translation
-            Assertion.AssertEquals( "Translate", "A", vs.Translate( "1" ) );
-            Assertion.AssertEquals( "TranslateReverse", "1", vs.TranslateReverse( "A" ) );
+            Assert.AreEqual("A", vs.Translate( "1" ), "Translate" );
+            Assert.AreEqual( "1", vs.TranslateReverse( "A" ), "TranslateReverse" );
             // Default Values
-            Assertion.AssertEquals( "Translate", "ZZZ", vs.Translate( "foo", "ZZZ" ) );
-            Assertion.AssertEquals( "TranslateReverse", "AAA", vs.TranslateReverse( "foo",
-                                                                                    "AAA" ) );
+            Assert.AreEqual( "ZZZ", vs.Translate( "foo", "ZZZ" ), "Translate" );
+            Assert.AreEqual( "AAA", vs.TranslateReverse( "foo",
+                                                                                    "AAA" ), "TranslateReverse" );
 
             // Test Null behavior
-            Assertion.AssertNull( "TranslateNull", vs.Translate( null ) );
-            Assertion.AssertNull( "TranslateReverseNull", vs.TranslateReverse( null ) );
+            Assert.IsNull( vs.Translate( null ), "TranslateNull" );
+            Assert.IsNull( vs.TranslateReverse( null ), "TranslateReverseNull" );
 
             // No Match (this time should return a default for app value)
-            Assertion.AssertEquals( "TranslateNoMatch", "QQQQ", vs.Translate( "QQQQ" ) );
-            Assertion.AssertEquals( "TranslateReverseNoMath", "6", vs.TranslateReverse( "QQQQ" ) );
+            Assert.AreEqual("QQQQ", vs.Translate( "QQQQ" ), "TranslateNoMatch" );
+            Assert.AreEqual( "6", vs.TranslateReverse( "QQQQ" ), "TranslateReverseNoMatch" );
 
             // ////////////////////////////////
             //
@@ -285,21 +282,21 @@ namespace Library.Nunit.US.Tools.Mapping
             vs.SetSifDefault( "H", false );
 
             // Normal Translation
-            Assertion.AssertEquals( "Translate", "A", vs.Translate( "1" ) );
-            Assertion.AssertEquals( "TranslateReverse", "1", vs.TranslateReverse( "A" ) );
+            Assert.AreEqual("A", vs.Translate( "1" ), "Translate" );
+            Assert.AreEqual( "1", vs.TranslateReverse( "A" ), "TranslateReverse" );
             // Default Values
-            Assertion.AssertEquals( "Translate", "ZZZ", vs.Translate( "foo", "ZZZ" ) );
-            Assertion.AssertEquals( "TranslateReverse", "AAA", vs.TranslateReverse( "foo",
-                                                                                    "AAA" ) );
+            Assert.AreEqual( "ZZZ", vs.Translate( "foo", "ZZZ" ), "Translate" );
+            Assert.AreEqual( "AAA", vs.TranslateReverse( "foo",
+                                                                                    "AAA" ), "TranslateReverse" );
 
             // Test Null behavior
-            Assertion.AssertNull( "TranslateNull", vs.Translate( null ) );
-            Assertion.AssertNull( "TranslateReverseNull", vs.TranslateReverse( null ) );
+            Assert.IsNull( vs.Translate( null ), "TranslateNull" );
+            Assert.IsNull( vs.TranslateReverse( null ), "TranslateReverseNull" );
 
             // No Match (this time should return a default for app value and sif
             // value)
-            Assertion.AssertEquals( "TranslateNoMatch", "H", vs.Translate( "QQQQ" ) );
-            Assertion.AssertEquals( "TranslateReverseNoMath", "6", vs.TranslateReverse( "QQQQ" ) );
+            Assert.AreEqual( "H", vs.Translate( "QQQQ" ), "TranslateNoMatch" );
+            Assert.AreEqual( "6", vs.TranslateReverse( "QQQQ" ), "TranslateReverseNoMatch" );
 
             // //////////////////////////////////
             //
@@ -310,22 +307,21 @@ namespace Library.Nunit.US.Tools.Mapping
             vs.SetAppDefault( "7", true );
 
             // Normal Translation
-            Assertion.AssertEquals( "Translate", "A", vs.Translate( "1" ) );
-            Assertion.AssertEquals( "TranslateReverse", "1", vs.TranslateReverse( "A" ) );
+            Assert.AreEqual("A", vs.Translate( "1" ), "Translate" );
+            Assert.AreEqual( "1", vs.TranslateReverse( "A" ), "TranslateReverse" );
             // Default Values
-            Assertion.AssertEquals( "Translate", "ZZZ", vs.Translate( "foo", "ZZZ" ) );
-            Assertion.AssertEquals( "TranslateReverse", "AAA", vs.TranslateReverse( "foo",
-                                                                                    "AAA" ) );
+            Assert.AreEqual( "ZZZ", vs.Translate( "foo", "ZZZ" ), "Translate" );
+            Assert.AreEqual( "AAA", vs.TranslateReverse( "foo",
+                                                                                    "AAA" ), "TranslateReverse" );
 
             // Test Null behavior
-            Assertion.AssertEquals( "TranslateNullReturnsDefault", "C", vs.Translate( null ) );
-            Assertion.AssertEquals( "TranslateReverseNullReturnsDefault", "7", vs
-                                                                                   .TranslateReverse( null ) );
+            Assert.AreEqual( "C", vs.Translate( null ), "TranslateNullReturnsDefault" );
+            Assert.AreEqual( "7", vs.TranslateReverse( null ), "TranslateReverseNullReturnsDefault" );
 
             // No Match (this time should return a default for app value and sif
             // value)
-            Assertion.AssertEquals( "TranslateNoMatch", "C", vs.Translate( "QQQQ" ) );
-            Assertion.AssertEquals( "TranslateReverseNoMath", "7", vs.TranslateReverse( "QQQQ" ) );
+            Assert.AreEqual( "C", vs.Translate( "QQQQ" ), "TranslateNoMatch" );
+            Assert.AreEqual( "7", vs.TranslateReverse( "QQQQ" ), "TranslateReverseNoMatch" );
         }
 
         /**
@@ -419,10 +415,10 @@ namespace Library.Nunit.US.Tools.Mapping
 
             // Assert that the object was mapped correctly
             FSAmounts amounts = sm.Amounts;
-            Assertion.AssertNotNull( amounts );
+            Assert.IsNotNull( amounts );
             FSAmount amount = amounts.ItemAt( 0 );
-            Assertion.Assert( amount.Value.HasValue );
-            Assertion.AssertEquals( 10.55, amount.Value.Value );
+            Assert.True( amount.Value.HasValue );
+            Assert.AreEqual( 10.55, amount.Value.Value );
 
 
             // Now, map the object back to a hashmap and assert it
@@ -457,14 +453,14 @@ namespace Library.Nunit.US.Tools.Mapping
 
             // Assert that the object was mapped correctly
             ScheduleInfoList sil = si.ScheduleInfoList;
-            Assertion.AssertNotNull( sil );
+            Assert.IsNotNull( sil );
             ScheduleInfo schedule = sil.ItemAt( 0 );
-            Assertion.AssertNotNull( schedule );
+            Assert.IsNotNull( schedule );
             TeacherList tl = schedule.TeacherList;
-            Assertion.AssertNotNull( tl );
+            Assert.IsNotNull( tl );
             StaffPersonalRefId refId = tl.ItemAt( 0 );
-            Assertion.AssertNotNull( refId );
-            Assertion.AssertEquals( "123456789ABCDEF", refId.Value );
+            Assert.IsNotNull( refId );
+            Assert.AreEqual( "123456789ABCDEF", refId.Value );
 
 
             // Now, map the object back to a hashmap and assert it
@@ -485,10 +481,10 @@ namespace Library.Nunit.US.Tools.Mapping
                                     String assertedValue )
         {
             Element e = (Element) context.GetValue( xPath );
-            Assertion.AssertNotNull( "Field is null for path " + xPath, e );
+            Assert.IsNotNull(e, "Field is null for path " + xPath);
             SifSimpleType value = e.SifValue;
-            Assertion.AssertNotNull( "Value is null for path " + xPath, value );
-            Assertion.AssertEquals( xPath, assertedValue, value.ToString() );
+            Assert.IsNotNull(value, "Value is null for path " + xPath);
+            Assert.AreEqual(assertedValue, value.ToString(), xPath);
         }
 
         protected StringMapAdaptor createStudentContactFields()
@@ -602,9 +598,16 @@ namespace Library.Nunit.US.Tools.Mapping
         {
             Assert.AreEqual( "0000000000000000", sp.RefId, "RefID" );
             Assert.AreEqual("0000000000000000", sp.StudentPersonalRefId, "StudentPersonalRefid");
-            Assert.AreEqual("Local", sp.Service.CodeType, "Code Type");
-            Assert.AreEqual("Related Service", sp.Service.Type, "Type");
-            Assert.AreEqual("ZZZ99987", sp.Service.TextValue, "Service");
+            if (sp.SifVersion >= SifVersion.SIF20)
+            {
+                Assert.AreEqual("ZZZ99987", sp.Service.Code, "Service Code");
+            }
+            else
+            {
+                Assert.AreEqual("Local", sp.Service.CodeType, "Code Type");
+                Assert.AreEqual("Related Service", sp.Service.Type, "Type");
+                Assert.AreEqual("ZZZ99987", sp.Service.TextValue, "Service");
+            }
         }
 
 
@@ -612,25 +615,24 @@ namespace Library.Nunit.US.Tools.Mapping
         {
             DateTime birthDate = new DateTime( 1990, 1, 1 );
 
-            Assertion.AssertEquals( "First Name", "Betty", sp.Name.FirstName );
-            Assertion.AssertEquals( "Middle Name", "George", sp.Name.MiddleName );
-            Assertion.AssertEquals( "Last Name", "Johnson", sp.Name.LastName );
-            Assertion.AssertEquals( "Student Number", "998", sp.OtherIdList.ItemAt( 0 ).TextValue );
-            Assertion.AssertEquals( "Birthdate", birthDate, sp.Demographics.BirthDate.Value );
-            Assertion.AssertEquals( "Ethnicity", "H", sp.Demographics.RaceList.ItemAt( 0 ).Code );
+            Assert.AreEqual( "Betty", sp.Name.FirstName, "First Name" );
+            Assert.AreEqual( "George", sp.Name.MiddleName, "Middle Name" );
+            Assert.AreEqual( "Johnson", sp.Name.LastName, "Last Name" );
+            Assert.AreEqual( "998", sp.OtherIdList.ItemAt( 0 ).TextValue, "Student Number" );
+            Assert.AreEqual( birthDate, sp.Demographics.BirthDate.Value, "Birthdate" );
+            Assert.AreEqual( "H", sp.Demographics.RaceList.ItemAt( 0 ).Code, "Ethnicity" );
 
             PhoneNumberList pnl = sp.PhoneNumberList;
-            Assertion.AssertNotNull( "PhoneNumberList", pnl );
+            Assert.IsNotNull(pnl, "PhoneNumberList");
 
             PhoneNumber homePhone = pnl[PhoneNumberType.SIF1x_HOME_PHONE];
-            Assertion.AssertNotNull( "Home Phone is null", homePhone );
-            Assertion.AssertEquals( "Home Phone", "202-358-6687", homePhone
-                                                                      .Number );
+            Assert.IsNotNull(homePhone, "Home Phone is null");
+            Assert.AreEqual( "202-358-6687", homePhone.Number, "Home Phone" );
 
             PhoneNumber cellPhone = pnl
                 [PhoneNumberType.SIF1x_PERSONAL_CELL];
-            Assertion.AssertNotNull( "cellPhone Phone is null", cellPhone );
-            Assertion.AssertEquals( "Cell Phone", "202-502-4856", cellPhone.Number );
+            Assert.IsNotNull( cellPhone, "cellPhone Phone is null" );
+            Assert.AreEqual( "202-502-4856", cellPhone.Number, "Cell Phone" );
 
             SifXPathContext xpathContext = SifXPathContext.NewSIFContext( sp, SifVersion.SIF20r1 );
             assertByXPath( xpathContext, "AddressList/Address/Street/Line1",
@@ -649,15 +651,14 @@ namespace Library.Nunit.US.Tools.Mapping
              * currently support Repeatable elements that have wildcard attributes
              *
              * PhoneNumber number = sp.PhoneNumber( PhoneNumberType.PHONE );
-             * Assertion.AssertNotNull( "Alternate Phone Element is null", number );
-             * Assertion.AssertEquals( "Alternate Phone", "201-668-1245",
-             * number.ToString() );
+             * Assert.IsNotNull(number, "Alternate Phone Element is null");
+             * Assert.AreEqual("201-668-1245", number.ToString(), "Alternate Phone");
              */
 
-            Assertion.AssertEquals( "OriginalGradYear", 2005, sp.OnTimeGraduationYear.Value );
-            Assertion.AssertEquals( "Projected", 2007, sp.ProjectedGraduationYear.Value );
-            Assertion.AssertNotNull( "Actual Grad Year", sp.GraduationDate.Value );
-            Assertion.AssertEquals( "OriginalGradYear", 2007, sp.GraduationDate.Year );
+            Assert.AreEqual(2005, sp.OnTimeGraduationYear.Value, "OriginalGradYear");
+            Assert.AreEqual(2007, sp.ProjectedGraduationYear.Value, "ProjectedGradYear");
+            Assert.IsNotNull( sp.GraduationDate.Value, "Actual Grad Year" );
+            Assert.AreEqual( 2007, sp.GraduationDate.Year, "OriginalGradYear" );
         }
 
 

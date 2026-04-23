@@ -46,9 +46,9 @@ namespace Library.Nunit.US.Tools.Mapping
             DefaultValueBuilder.AddAlias( "flattenDate", GetType().AssemblyQualifiedName );
             Adk.SifVersion = SifVersion.SIF20;
             StudentPersonal sp = mapToStudentPersonal( sma, flattenDateFunctionCall, tvb );
-            Assertion.Assert( "flattenDate should have been called", tvb.WasCalled );
-            Assertion.AssertNotNull( "Student should not be null", sp );
-            Assertion.AssertNotNull( "BirthDate should not be null", sp.Demographics.BirthDate );
+            Assert.True(tvb.WasCalled, "flattenDate should have been called");
+            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.IsNotNull( sp.Demographics.BirthDate, "BirthDate should not be null" );
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace Library.Nunit.US.Tools.Mapping
             map.Add( "DOB", "19900904" );
             StringMapAdaptor sma = new StringMapAdaptor( map );
             StudentPersonal sp = mapToStudentPersonal( sma, flattenDateFunctionCall, null );
-            Assertion.AssertNotNull( "Student should not be null", sp );
-            Assertion.AssertNotNull( "BirthDate should not be null", sp.Demographics.BirthDate );
+            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.IsNotNull( sp.Demographics.BirthDate, "BirthDate should not be null" );
         }
 
         [Test]
@@ -89,9 +89,8 @@ namespace Library.Nunit.US.Tools.Mapping
             //		IDictionary map = doInboundMapping( customMappings, sp );
             //		assertTrue("ProperCase should have been called", tvb.getWasCalled());
             //		
-            //		Assertion.AssertNotNull("Student should not be null", sp);
-            //		Assertion.AssertNotNull("BirthDate should not be null", sp.getDemographics()
-            //				.getBirthDate());
+            //		Assert.IsNotNull(sp, "Student should not be null");
+            //		Assert.IsNotNull( sp.Demographics.BirthDate, "BirthDate should not be null");
         }
 
         [Test]
@@ -113,9 +112,9 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assertion.AssertEquals( "First Name", "ahmad", map["FIRSTNAME"] );
-            Assertion.AssertEquals( "Last Name", "O'TOOLE", map["LASTNAME"] );
-            Assertion.AssertEquals( "Full Name", "Ahmad O'Toole", map["FULLNAME"] );
+            Assert.AreEqual("ahmad", map["FIRSTNAME"], "First Name");
+            Assert.AreEqual("O'TOOLE", map["LASTNAME"], "Last Name");
+            Assert.AreEqual("Ahmad O'Toole", map["FULLNAME"], "Full Name");
         }
 
 
@@ -141,8 +140,8 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assertion.AssertEquals( "STUDENT_NUM", "998", map["STUDENT_NUM"] );
-            Assertion.AssertEquals( "HOMEROOM", "998", map["HOMEROOM"] );
+            Assert.AreEqual("998", map["STUDENT_NUM"], "STUDENT_NUM");
+            Assert.AreEqual("998", map["HOMEROOM"], "HOMEROOM");
 
             Console.WriteLine( "HomeRoom = " + map["HOMEROOM"] );
         }
@@ -166,9 +165,9 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assertion.AssertEquals( "First Name", "Jimmy", map["FIRSTNAME"] );
-            Assertion.AssertEquals( "Last Name", "Johnson", map["LASTNAME"] );
-            Assertion.AssertEquals( "Full Name", "Jimmy Johnson", map["FULLNAME"] );
+            Assert.AreEqual("Jimmy", map["FIRSTNAME"], "First Name");
+            Assert.AreEqual("Johnson", map["LASTNAME"], "Last Name");
+            Assert.AreEqual("Jimmy Johnson", map["FULLNAME"], "Full Name");
         }
 
         [Test]
@@ -195,7 +194,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             String csz = (String) map["CITY_STATE_ZIP"];
             Console.WriteLine( "City State Zip=" + csz );
-            Assertion.AssertEquals( "CityStateZip", "Chicago, IL  50001", map["CITY_STATE_ZIP"] );
+            Assert.AreEqual("Chicago, IL  50001", map["CITY_STATE_ZIP"], "City State Zip");
         }
 
         [Test]
@@ -217,9 +216,9 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assertion.AssertEquals( "First Name", "Jimmy", map["FIRSTNAME"] );
-            Assertion.AssertEquals( "Last Name", "Johnson", map["LASTNAME"] );
-            Assertion.AssertEquals( "Full Name", "Jimmy Johnson", map["FULLNAME"] );
+            Assert.AreEqual("Jimmy", map["FIRSTNAME"], "First Name");
+            Assert.AreEqual("Johnson", map["LASTNAME"], "Last Name");
+            Assert.AreEqual("Jimmy Johnson", map["FULLNAME"], "Full Name");
         }
 
         [Test]
@@ -247,12 +246,12 @@ namespace Library.Nunit.US.Tools.Mapping
             TestValueBuilder tvb = new TestValueBuilder( sma );
             StudentPersonal sp = mapToStudentPersonal( sma, configFileText, tvb );
 
-            Assertion.AssertNotNull( "Student should not be null", sp );
+            Assert.IsNotNull(sp, "Student should not be null");
 
             SimpleField fullName = (SimpleField) sp
                                                      .GetElementOrAttribute( "Name/FullName" );
-            Assertion.AssertNotNull( "FullName", fullName );
-            Assertion.AssertEquals( "FullName", "Finale, Prima Mediccio", fullName.Value );
+            Assert.IsNotNull(fullName, "FullName");
+            Assert.AreEqual("Finale, Prima Mediccio", fullName.Value, "FullName");
         }
 
         [Test]
@@ -276,12 +275,12 @@ namespace Library.Nunit.US.Tools.Mapping
             TestValueBuilder tvb = new TestValueBuilder( sma );
             StudentPersonal sp = mapToStudentPersonal( sma, configFileText, tvb );
 
-            Assertion.AssertNotNull( "Student should not be null", sp );
+            Assert.IsNotNull(sp, "Student should not be null");
 
             SimpleField fullName = (SimpleField) sp
                                                      .GetElementOrAttribute( "Name/FullName" );
-            Assertion.AssertNotNull( "FullName", fullName );
-            Assertion.AssertEquals( "FullName", "NAME:Finale, Prima Mediccio", fullName.Value );
+            Assert.IsNotNull(fullName, "FullName");
+            Assert.AreEqual("NAME:Finale, Prima Mediccio", fullName.Value, "FullName");
         }
 
         [Explicit]
@@ -326,16 +325,16 @@ namespace Library.Nunit.US.Tools.Mapping
             StringMapAdaptor sma = new StringMapAdaptor( psValueMap );
             StudentPersonal sp = doOutboundMappingSelect( sma, configFileText1_, "Zone A", null, null );
 
-            Assertion.AssertNotNull( "Student should not be null", sp );
+            Assert.IsNotNull(sp, "Student should not be null");
 
             SifElement address = (SifElement) sp
                                                   .GetElementOrAttribute(
                                                   "AddressList[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='01']" );
-            Assertion.AssertNotNull( "Student Address should have mapped", address );
+            Assert.IsNotNull(address, "Student Address should have mapped");
 
             SifElement name = (SifElement) sp
                                                .GetElementOrAttribute( "Name[@Type='06']" );
-            Assertion.AssertNotNull( "Name should have mapped to '06'", name );
+            Assert.IsNotNull(name, "Name should have mapped to '06'" );
         }
 
 
@@ -359,14 +358,14 @@ namespace Library.Nunit.US.Tools.Mapping
             map.Add( "PHONE", "715-555-5555" );
             StringMapAdaptor sma = new StringMapAdaptor( map );
             StudentPersonal sp = mapToStudentPersonal( sma, mapping, null );
-            Assertion.AssertNotNull( "Student should not be null", sp );
+            Assert.IsNotNull(sp, "Student should not be null");
             PhoneNumberList phoneList = sp.PhoneNumberList;
-            Assertion.AssertEquals( "One Phone", 1, phoneList.ChildCount );
+            Assert.AreEqual(1, phoneList.ChildCount, "One Phone");
 
             PhoneNumber phone = (PhoneNumber) phoneList.GetChildList()[0];
-            Assertion.AssertNotNull( "Phone should not be null", phone );
-            Assertion.AssertEquals( "Phone type", "1234", phone.Type );
-            Assertion.AssertEquals( "PhoneNumber", "715-555-5555", phone.Number );
+            Assert.IsNotNull( phone, "Phone should not be null" );
+            Assert.AreEqual( "1234", phone.Type, "Phone type" );
+            Assert.AreEqual( "715-555-5555", phone.Number, "PhoneNumber" );
         }
     }
 }

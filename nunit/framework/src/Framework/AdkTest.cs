@@ -9,14 +9,19 @@ namespace Library.UnitTesting.Framework
     /// </summary>
     public class AdkTest
     {
+        protected SifVersion fOriginalVersion;
+
         [SetUp]
-        public virtual void setUp()
+        public virtual void SetUp()
         {
-            if (! Adk.Initialized)
-            {
-                Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.All);
-            }
-            Adk.SifVersion = SifVersion.LATEST;
+            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.All);
+            fOriginalVersion = Adk.SifVersion;
+        }
+
+        [TearDown]
+        public virtual void TearDown()
+        {
+            Adk.SifVersion = fOriginalVersion;
         }
     }
 }

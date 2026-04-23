@@ -12,11 +12,7 @@ namespace Library.Nunit.Core
         [SetUp]
         public virtual void SetUp()
         {
-            if (!Adk.Initialized)
-            {
-                Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.Infra);
-            }
-            Adk.SifVersion = SifVersion.LATEST;
+            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.Infra);
         }
 
 
@@ -54,11 +50,30 @@ namespace Library.Nunit.Core
             assertSIFVersion(SifVersion.Parse("2.2"), 2, 2, 0, "2.2");
             Assert.AreEqual(SifVersion.SIF22, SifVersion.Parse("2.2"));
             Assert.IsTrue(Adk.IsSIFVersionSupported(SifVersion.SIF22));
-            Assert.AreEqual(4, Array.BinarySearch(versions, SifVersion.SIF21), "2.2");
+            Assert.AreEqual(5, Array.BinarySearch(versions, SifVersion.SIF22), "2.2");
 
-            Assert.AreEqual( SifVersion.LATEST, SifVersion.Parse( "2.4" ) );
+            assertSIFVersion(SifVersion.Parse("2.3"), 2, 3, 0, "2.3");
+            Assert.AreEqual(SifVersion.SIF23, SifVersion.Parse("2.3"));
+            Assert.IsTrue(Adk.IsSIFVersionSupported(SifVersion.SIF23));
+            Assert.AreEqual(6, Array.BinarySearch(versions, SifVersion.SIF23), "2.3");
 
-            Assert.IsTrue(SifVersion.Parse("2.4").Equals( SifVersion.LATEST ), "Latest");
+            assertSIFVersion(SifVersion.Parse("2.4"), 2, 4, 0, "2.4");
+            Assert.AreEqual(SifVersion.SIF24, SifVersion.Parse("2.4"));
+            Assert.IsTrue(Adk.IsSIFVersionSupported(SifVersion.SIF24));
+            Assert.AreEqual(7, Array.BinarySearch(versions, SifVersion.SIF24), "2.4");
+
+            assertSIFVersion(SifVersion.Parse("2.5"), 2, 5, 0, "2.5");
+            Assert.AreEqual(SifVersion.SIF25, SifVersion.Parse("2.5"));
+            Assert.IsTrue(Adk.IsSIFVersionSupported(SifVersion.SIF25));
+            Assert.AreEqual(8, Array.BinarySearch(versions, SifVersion.SIF25), "2.5");
+
+            assertSIFVersion(SifVersion.Parse("2.6"), 2, 6, 0, "2.6");
+            Assert.AreEqual(SifVersion.SIF26, SifVersion.Parse("2.6"));
+            Assert.IsTrue(Adk.IsSIFVersionSupported(SifVersion.SIF26));
+            Assert.AreEqual(9, Array.BinarySearch(versions, SifVersion.SIF26), "2.6");
+
+            Assert.AreEqual( SifVersion.LATEST, SifVersion.Parse( "2.6" ) );
+            Assert.IsTrue(SifVersion.Parse("2.6").Equals( SifVersion.LATEST ), "Latest");
         }
 
         [Test]
@@ -226,7 +241,7 @@ namespace Library.Nunit.Core
 
 // JEN           testedVersion = SifVersion.ParseXmlns(SifDtd.XMLNS_BASE + "/2.x");
             testedVersion = SifVersion.ParseXmlns(Adk.Dtd.BaseNamespace + "/2.x");
-            Assert.AreEqual(SifVersion.SIF24, testedVersion, "LATEST");
+            Assert.AreEqual(SifVersion.SIF26, testedVersion, "LATEST");
 
 // JEN          testedVersion = SifVersion.ParseXmlns(SifDtd.XMLNS_BASE + "/9.x");
             testedVersion = SifVersion.ParseXmlns(Adk.Dtd.BaseNamespace + "/9.x");

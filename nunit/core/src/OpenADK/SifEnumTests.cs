@@ -8,6 +8,7 @@ namespace Library.Nunit.Core
     /// <summary>
     /// Summary description for EnumTests.
     /// </summary>
+    [TestFixture]
     public class SifEnumTests
     {
         /**

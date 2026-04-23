@@ -16,105 +16,114 @@ namespace Library.Nunit.US.Library.Student
     [TestFixture]
     public class LEAInfoTests
     {
+        protected SifVersion fOriginalVersion;
 
         [SetUp]
-        public void setUp()
+        public void SetUp()
         {
             Adk.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student);
+            fOriginalVersion = Adk.SifVersion;
+            Adk.SifVersion = SifVersion.SIF15r1;
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Adk.SifVersion = fOriginalVersion;
         }
 
         [Test]
         public void testLeaInfoParseFrom15r1() {
-		Adk.SifVersion = SifVersion.SIF15r1;
-		String leaInfoXML = "	<LEAInfo RefId='1234' xmlns='http://www.sifinfo.org/infrastructure/1.x'>"
-				+ "    <LocalId>1234</LocalId>"
-				+ "    <StatePrId>4567</StatePrId>"
-				+ "    <LEAName>Tom District</LEAName>"
-				+ "    <PhoneNumber Format='NA' Type='TE'>814.455.4658</PhoneNumber>"
-				+ "    <Address Type='07'>"
-				+ "      <Street>"
-				+ "        <Line1>1232 Bateman Point Drive</Line1>"
-				+ "        <Line2></Line2>"
-				+ "        <Line3></Line3>"
-				+ "      </Street>"
-				+ "      <City>West Jordan</City>"
-				+ "      <StatePr Code='Utah' />"
-				+ "      <PostalCode>84084</PostalCode>"
-				+ "    </Address>"
-				+ "    <LEAContact>"
-				+ "      <ContactInfo>"
-				+ "        <Name Type='04'>"
-				+ "          <LastName>Ngo</LastName>"
-				+ "          <FirstName>Tom</FirstName>"
-				+ "          <MiddleName>C.</MiddleName>"
-				+ "        </Name>"
-				+ "        <PositionTitle>Principal</PositionTitle>"
-				+ "        <PhoneNumber Format='NA' Type='TE'></PhoneNumber>"
-				+ "        <Email Type='Primary'>tngo@OpenADK.com</Email>"
-				+ "      </ContactInfo>" + "    </LEAContact>" + "  </LEAInfo>";
+		    Adk.SifVersion = SifVersion.SIF15r1;
+		    String leaInfoXML = "	<LEAInfo RefId='1234' xmlns='http://www.sifinfo.org/infrastructure/1.x'>"
+				    + "    <LocalId>1234</LocalId>"
+				    + "    <StatePrId>4567</StatePrId>"
+				    + "    <LEAName>Tom District</LEAName>"
+				    + "    <PhoneNumber Format='NA' Type='TE'>814.455.4658</PhoneNumber>"
+				    + "    <Address Type='07'>"
+				    + "      <Street>"
+				    + "        <Line1>1232 Bateman Point Drive</Line1>"
+				    + "        <Line2></Line2>"
+				    + "        <Line3></Line3>"
+				    + "      </Street>"
+				    + "      <City>West Jordan</City>"
+				    + "      <StatePr Code='Utah' />"
+				    + "      <PostalCode>84084</PostalCode>"
+				    + "    </Address>"
+				    + "    <LEAContact>"
+				    + "      <ContactInfo>"
+				    + "        <Name Type='04'>"
+				    + "          <LastName>Ngo</LastName>"
+				    + "          <FirstName>Tom</FirstName>"
+				    + "          <MiddleName>C.</MiddleName>"
+				    + "        </Name>"
+				    + "        <PositionTitle>Principal</PositionTitle>"
+				    + "        <PhoneNumber Format='NA' Type='TE'></PhoneNumber>"
+				    + "        <Email Type='Primary'>tngo@OpenADK.com</Email>"
+				    + "      </ContactInfo>" + "    </LEAContact>" + "  </LEAInfo>";
 
-        String agentCFG = "<agent id='Repro' sifVersion='2.0'>"
-                        + "   <mappings id='Default'>"
-                        + "     <object object='LEAInfo'>"
-                        + "     <field name='LOCALID'>LocalId</field>"
-                        + "     <field name='STATEPRID' sifVersion='+2.0'>StateProvinceId</field>"
-                        + "     <field name='STATEPRID' sifVersion='-1.5r1'>StatePrId</field>"
-                        + "     <field name='NAME'>LEAName</field>"
-                        + "     <field name='DISTRICT_PHONE' sifVersion='+2.0'>PhonenumberList/PhoneNumber[@Type='0096']/Number</field>"
-                        + "     <field name='DISTRICT_PHONE' sifVersion='-1.5r1'>PhoneNumber[@Format='NA',@Type='TE']</field>"
-                        + "     <field name='DISTRICT_ADDR1' sifVersion='+2.0'>AddressList/Address[@Type='2382']/Street/Line1</field>"
-                        + "     <field name='DISTRICT_ADDR1' sifVersion='-1.5r1'>Address[@Type='07']/Street/Line1</field>"
-                        + "     <field name='DISTRICT_ADDR2' sifVersion='+2.0'>AddressList/Address[@Type='2382']/Street/Line2</field>"
-                        + "     <field name='DISTRICT_ADDR2' sifVersion='-1.5r1'>Address[@Type='07']/Street/Line2</field>"
-                        + "     <field name='DISTRICT_ADDR3' sifVersion='+2.0'>AddressList/Address[@Type='2382']/Street/Line3</field>"
-                        + "     <field name='DISTRICT_ADDR3' sifVersion='-1.5r1'>Address[@Type='07']/Street/Line3</field>"
-                        + "     <field name='DISTRICT_CITY' sifVersion='+2.0'>AddressList/Address[@Type='0123']/City</field>"
-                        + "     <field name='DISTRICT_CITY' sifVersion='-1.5r1'>Address[@Type='07']/City</field>"
-                        + "     <field name='DISTRICT_STATE' sifVersion='+2.0'>AddressList/Address[@Type='0123']/StateProvince</field>"
-                        + "     <field name='DISTRICT_STATE' sifVersion='-1.5r1'>Address[@Type='07']/StatePr/@Code</field>"
-                        + "     <field name='DISTRICT_COUNTRY' sifVersion='+2.0'>AddressList/Address[@Type='0123']/Country=US</field>"
-                        + "     <field name='DISTRICT_COUNTRY' sifVersion='-1.5r1'>Address[@Type='07']/Country[@Code='US']</field>"
-                        + "     <field name='DISTRICT_ZIPCODE' sifVersion='+2.0'>AddressList/Address[@Type='0123']/PostalCode</field>"
-                        + "     <field name='DISTRICT_ZIPCODE' sifVersion='-1.5r1'>Address[@Type='07']/PostalCode</field>"
-                        + "     <field name='CONTACT_POSITION' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/PositionTitle</field>"
-                        + "     <field name='CONTACT_POSITION' sifVersion='-1.5r1'>LEAContact/ContactInfo/PositionTitle</field>"
-                        + "     <field name='CONTACT_PHONE' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/PhonenumberList/PhoneNumber[@Type='0096']/Number</field>"
-                        + "     <field name='CONTACT_PHONE' sifVersion='-1.5r1'>LEAContact/ContactInfo/PhoneNumber[@Format='NA',@Type='TE']</field>"
-                        + "     <field name='CONTACT_EMAIL' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/EmailList/Email[@Type='Primary']</field>"
-                        + "     <field name='CONTACT_EMAIL' sifVersion='-1.5r1'>LEAContact/ContactInfo/Email[@Type='Primary']</field>"
-                        + "     <field name='CONTACT_FIRSTNAME' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/Name[@Type='04']/FirstName</field>"
-                        + "     <field name='CONTACT_FIRSTNAME' sifVersion='-1.5r1'>LEAContact/ContactInfo/Name[@Type='04']/FirstName</field>"
-                        + "     <field name='CONTACT_MIDDLENAME' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/Name[@Type='04']/MiddleName</field>"
-                        + "     <field name='CONTACT_MIDDLENAME' sifVersion='-1.5r1'>LEAContact/ContactInfo/Name[@Type='04']/MiddleName</field>"
-                        + "     <field name='CONTACT_LASTNAME' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/Name[@Type='04']/LastName</field>"
-                        + "     <field name='CONTACT_LASTNAME' sifVersion='-1.5r1'>LEAContact/ContactInfo/Name[@Type='04']/LastName</field>"
-                        + "</object></mappings></agent>";
+            String agentCFG = "<agent id='Repro' sifVersion='2.0'>"
+                            + "   <mappings id='Default'>"
+                            + "     <object object='LEAInfo'>"
+                            + "     <field name='LOCALID'>LocalId</field>"
+                            + "     <field name='STATEPRID' sifVersion='+2.0'>StateProvinceId</field>"
+                            + "     <field name='STATEPRID' sifVersion='-1.5r1'>StatePrId</field>"
+                            + "     <field name='NAME'>LEAName</field>"
+                            + "     <field name='DISTRICT_PHONE' sifVersion='+2.0'>PhonenumberList/PhoneNumber[@Type='0096']/Number</field>"
+                            + "     <field name='DISTRICT_PHONE' sifVersion='-1.5r1'>PhoneNumber[@Format='NA',@Type='TE']</field>"
+                            + "     <field name='DISTRICT_ADDR1' sifVersion='+2.0'>AddressList/Address[@Type='2382']/Street/Line1</field>"
+                            + "     <field name='DISTRICT_ADDR1' sifVersion='-1.5r1'>Address[@Type='07']/Street/Line1</field>"
+                            + "     <field name='DISTRICT_ADDR2' sifVersion='+2.0'>AddressList/Address[@Type='2382']/Street/Line2</field>"
+                            + "     <field name='DISTRICT_ADDR2' sifVersion='-1.5r1'>Address[@Type='07']/Street/Line2</field>"
+                            + "     <field name='DISTRICT_ADDR3' sifVersion='+2.0'>AddressList/Address[@Type='2382']/Street/Line3</field>"
+                            + "     <field name='DISTRICT_ADDR3' sifVersion='-1.5r1'>Address[@Type='07']/Street/Line3</field>"
+                            + "     <field name='DISTRICT_CITY' sifVersion='+2.0'>AddressList/Address[@Type='0123']/City</field>"
+                            + "     <field name='DISTRICT_CITY' sifVersion='-1.5r1'>Address[@Type='07']/City</field>"
+                            + "     <field name='DISTRICT_STATE' sifVersion='+2.0'>AddressList/Address[@Type='0123']/StateProvince</field>"
+                            + "     <field name='DISTRICT_STATE' sifVersion='-1.5r1'>Address[@Type='07']/StatePr/@Code</field>"
+                            + "     <field name='DISTRICT_COUNTRY' sifVersion='+2.0'>AddressList/Address[@Type='0123']/Country=US</field>"
+                            + "     <field name='DISTRICT_COUNTRY' sifVersion='-1.5r1'>Address[@Type='07']/Country[@Code='US']</field>"
+                            + "     <field name='DISTRICT_ZIPCODE' sifVersion='+2.0'>AddressList/Address[@Type='0123']/PostalCode</field>"
+                            + "     <field name='DISTRICT_ZIPCODE' sifVersion='-1.5r1'>Address[@Type='07']/PostalCode</field>"
+                            + "     <field name='CONTACT_POSITION' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/PositionTitle</field>"
+                            + "     <field name='CONTACT_POSITION' sifVersion='-1.5r1'>LEAContact/ContactInfo/PositionTitle</field>"
+                            + "     <field name='CONTACT_PHONE' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/PhonenumberList/PhoneNumber[@Type='0096']/Number</field>"
+                            + "     <field name='CONTACT_PHONE' sifVersion='-1.5r1'>LEAContact/ContactInfo/PhoneNumber[@Format='NA',@Type='TE']</field>"
+                            + "     <field name='CONTACT_EMAIL' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/EmailList/Email[@Type='Primary']</field>"
+                            + "     <field name='CONTACT_EMAIL' sifVersion='-1.5r1'>LEAContact/ContactInfo/Email[@Type='Primary']</field>"
+                            + "     <field name='CONTACT_FIRSTNAME' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/Name[@Type='04']/FirstName</field>"
+                            + "     <field name='CONTACT_FIRSTNAME' sifVersion='-1.5r1'>LEAContact/ContactInfo/Name[@Type='04']/FirstName</field>"
+                            + "     <field name='CONTACT_MIDDLENAME' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/Name[@Type='04']/MiddleName</field>"
+                            + "     <field name='CONTACT_MIDDLENAME' sifVersion='-1.5r1'>LEAContact/ContactInfo/Name[@Type='04']/MiddleName</field>"
+                            + "     <field name='CONTACT_LASTNAME' sifVersion='+2.0'>LEAContactList/LEAContact/ContactInfo/Name[@Type='04']/LastName</field>"
+                            + "     <field name='CONTACT_LASTNAME' sifVersion='-1.5r1'>LEAContact/ContactInfo/Name[@Type='04']/LastName</field>"
+                            + "</object></mappings></agent>";
 
 
-		SifParser p = SifParser.NewInstance();
-		LEAInfo leaObject = (LEAInfo) p.Parse(leaInfoXML, null, 0, SifVersion.SIF15r1);
+		    SifParser p = SifParser.NewInstance();
+		    LEAInfo leaObject = (LEAInfo) p.Parse(leaInfoXML, null, 0, SifVersion.SIF15r1);
 
-		PhoneNumber phone = leaObject.PhoneNumberList.ItemAt( 0 );
-		Assertion.AssertEquals( "Format", "NA", phone.Format);
-		Assertion.AssertEquals("Type", "TE", phone.Type);
-		Assertion.AssertEquals("District Phone", "814.455.4658", phone.Number);
+		    PhoneNumber phone = leaObject.PhoneNumberList.ItemAt( 0 );
+		    Assert.AreEqual("NA", phone.Format, "Format");
+		    Assert.AreEqual("TE", phone.Type, "Type");
+		    Assert.AreEqual("814.455.4658", phone.Number, "District Phone");
 
-            phone = leaObject.LEAContactList.ItemAt( 0 ).ContactInfo.PhoneNumberList.ItemAt( 0 );
-		Assertion.AssertEquals("Format", "NA", phone.Format);
-		Assertion.AssertEquals("Type", "TE", phone.Type);
-		Assertion.AssertEquals("Contact Phone", "", phone.Number);
+                phone = leaObject.LEAContactList.ItemAt( 0 ).ContactInfo.PhoneNumberList.ItemAt( 0 );
+		    Assert.AreEqual("NA", phone.Format, "Format");
+		    Assert.AreEqual("TE", phone.Type, "Type");
+		    Assert.AreEqual("", phone.Number, "Contact Phone");
 
-		AgentConfig cfg = createConfig(agentCFG);
-		Mappings m = cfg.Mappings.GetMappings("Default").Select(null, null, null);
-		IDictionary target = new Hashtable();
-		m.MapInbound(leaObject, new StringMapAdaptor(target));
+		    AgentConfig cfg = createConfig(agentCFG);
+		    Mappings m = cfg.Mappings.GetMappings("Default").Select(null, null, null);
+		    IDictionary target = new Hashtable();
+		    m.MapInbound(leaObject, new StringMapAdaptor(target));
 
-		Console.WriteLine( leaObject.SifVersion );
+		    Console.WriteLine( leaObject.SifVersion );
 
-		Assertion.AssertEquals("District Phone", "814.455.4658", target["DISTRICT_PHONE"]);
-		Assertion.AssertEquals("District Phone", "", target["CONTACT_PHONE"]);
+		    Assert.AreEqual("814.455.4658", target["DISTRICT_PHONE"], "District Phone");
+		    Assert.AreEqual("", target["CONTACT_PHONE"], "Contact Phone");
 
-	}
+	    }
 
         private AgentConfig createConfig(String cfg)
         {
@@ -135,3 +144,4 @@ namespace Library.Nunit.US.Library.Student
         }
     }
 }
+

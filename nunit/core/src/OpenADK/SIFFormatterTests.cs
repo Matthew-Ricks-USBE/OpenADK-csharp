@@ -23,14 +23,14 @@ namespace Library.Nunit.Core
             SifFormatter SIF1x = new Sif1xFormatter();
 
 
-            Assertion.AssertNull( "Should be null", SIF1x.ToBool( "" ) );
-            Assertion.AssertNull( "Should be null", SIF1x.ToBool( "  " ) );
-            Assertion.AssertNull( "Should be null", SIF1x.ToDecimal( "" ) );
-            Assertion.AssertNull( "Should be null", SIF1x.ToDecimal( "  " ) );
-            Assertion.AssertNull( "Should be null", SIF1x.ToInt( "" ) );
-            Assertion.AssertNull( "Should be null", SIF1x.ToInt( "  " ) );
-            Assertion.AssertNull( "Should be null", SIF1x.ToDateTime( "" ) );
-            Assertion.AssertNull( "Should be null", SIF1x.ToDateTime( "  " ) );
+            Assert.IsNull( SIF1x.ToBool( "" ), "Should be null" );
+            Assert.IsNull( SIF1x.ToBool( "  " ), "Should be null" );
+            Assert.IsNull( SIF1x.ToDecimal( "" ), "Should be null" );
+            Assert.IsNull( SIF1x.ToDecimal( "  " ), "Should be null" );
+            Assert.IsNull( SIF1x.ToInt( "" ), "Should be null" );
+            Assert.IsNull( SIF1x.ToInt( "  " ), "Should be null" );
+            Assert.IsNull( SIF1x.ToDateTime( "" ), "Should be null" );
+            Assert.IsNull( SIF1x.ToDateTime( "  " ), "Should be null" );
         }
 
         [Test]
@@ -82,14 +82,14 @@ namespace Library.Nunit.Core
             int intValue = 9998877; // new int(9998877);
 
             assertintParsing(SIF1x, "9998877", intValue);
-            Assertion.AssertEquals("Null int Value", "", SIF1x.ToString(intNull));
+            Assert.AreEqual("", SIF1x.ToString(intNull), "Null int Value");
             assertintParsing(SIF2x, "9998877", intValue);
-            Assertion.AssertNull("Null int Value", SIF2x.ToString(intNull));
+            Assert.IsNull(SIF2x.ToString(intNull), "Null int Value");
             DateTime? sampleDate = new DateTime(1999, 10, 01);
             AssertDateParsing(SIF1x, "19991001", sampleDate);
-            Assertion.AssertEquals("Null Value", "", SIF1x.ToDateString(null));
+            Assert.AreEqual("", SIF1x.ToDateString(null), "Null Value");
             AssertDateParsing(SIF2x, "1999-10-01" /* + tzOffset */, sampleDate);
-            Assertion.AssertNull("Null Date Value", SIF2x.ToDateString(null));
+            Assert.IsNull(SIF2x.ToDateString(null), "Null Date Value");
         }
 
         [Test]
@@ -106,97 +106,16 @@ namespace Library.Nunit.Core
 
         private void assertThrowsFormatException(SifFormatter formatter)
         {
-            bool threwProperException = false;
+            Assert.Throws<FormatException>(() => formatter.ToBool("asdf"), "ToBool() should throw FormatException");
+            Assert.Throws<FormatException>(() => formatter.ToInt("asdf"), "ToInt() should throw FormatException");
+            Assert.Throws<FormatException>(() => formatter.ToDecimal("asdf"), "ToDecimal() should throw FormatException");
+            Assert.Throws<FormatException>(() => formatter.ToDate("asdf"), "ToDate() should throw FormatException");
+            Assert.Throws<FormatException>(() => formatter.ToTime("asdf"), "ToTime() should throw FormatException");
 
-            // Boolean
-            try
-            {
-                formatter.ToBool("asdf");
-            }
-            catch (FormatException )
-            {
-                threwProperException = true;
-            }
-            Assertion.Assert("NumberFormatException was not thrown for toBoolean()", threwProperException);
-
-            // DECIMAL
-            threwProperException = false;
-            try
-            {
-                formatter.ToDecimal("asdf");
-            }
-            catch (FormatException)
-            {
-                threwProperException = true;
-            }
-            Assertion.Assert("IllegalArgumentException was not thrown for toDecimal()", threwProperException);
-
-            // DATE
-            threwProperException = false;
-            try
-            {
-                formatter.ToDate("asdf");
-            }
-            catch (FormatException)
-            {
-                threwProperException = true;
-            }
-            Assertion.Assert("IllegalArgumentException was not thrown for ToDate()", threwProperException);
-
-
-            //
             // DateTime and Duration are not supported by the SIF1xFormatter
-            //
-            if (!(formatter is Sif1xFormatter))
-            {
-                // DATETIME
-                threwProperException = false;
-                try
-                {
-                    formatter.ToDateTime("asdf");
-                }
-                catch (FormatException)
-                {
-                    threwProperException = true;
-                }
-                Assertion.Assert("IllegalArgumentException was not thrown for ToDateTime()", threwProperException);
-
-                // DURATION
-                threwProperException = false;
-                try
-                {
-                    formatter.ToTimeSpan("asdf");
-                }
-                catch (FormatException)
-                {
-                    threwProperException = true;
-                }
-
-                Assertion.Assert("IllegalArgumentException was not thrown for toDuration()", threwProperException);
-            }
-            // INT
-            threwProperException = false;
-            try
-            {
-                formatter.ToInt("asdf");
-            }
-            catch (FormatException)
-            {
-                threwProperException = true;
-            }
-            Assertion.Assert("IllegalArgumentException was not thrown for toint()", threwProperException);
-
-            // TIME
-            threwProperException = false;
-            try
-            {
-                formatter.ToTime("asdf");
-            }
-            catch (FormatException)
-            {
-                threwProperException = true;
-            }
-            Assertion.Assert("IllegalArgumentException was not thrown for toTime()", threwProperException);
+            if (formatter is Sif1xFormatter) return;
+            Assert.Throws<FormatException>(() => formatter.ToDateTime("asdf"), "ToDateTime() should throw FormatException");
+            Assert.Throws<FormatException>(() => formatter.ToTimeSpan("asdf"), "ToTimeSpan() should throw FormatException");
         }
 
         private void AssertDateParsing(SifFormatter formatter, String stringValue, DateTime? value)
@@ -204,11 +123,11 @@ namespace Library.Nunit.Core
             Console.WriteLine("Testing Date parse of '" + stringValue + "' using " + formatter.ToString());
             //Calendar testValue = formatter.ToDate(stringValue);
             DateTime? testValue = formatter.ToDate(stringValue);
-            Assertion.AssertEquals("Date Value", value.Value, testValue.Value);
-            Assertion.AssertEquals("String Value", stringValue, (String) formatter.ToDateString(testValue));
+            Assert.AreEqual(value.Value, testValue.Value, "Date Value");
+            Assert.AreEqual(stringValue, (String) formatter.ToDateString(testValue), "String Value");
 
             testValue = (DateTime?) formatter.ToDate(null);
-            Assertion.AssertNull("Date value should be null", testValue);
+            Assert.IsNull(testValue, "Date value should be null");
         }
 
         private void AssertDateParsing(SifFormatter formatter, String stringValue, Calendar value)
@@ -216,11 +135,11 @@ namespace Library.Nunit.Core
             Console.WriteLine("Testing Date parse of '" + stringValue + "' using " + formatter.ToString());
             //Calendar testValue = formatter.ToDate(stringValue);
             DateTime testValue = (DateTime) formatter.ToDate(stringValue);
-            Assertion.AssertEquals("Date Value", value, testValue);
-            Assertion.AssertEquals("String Value", stringValue, (String) formatter.ToDateString(testValue));
+            Assert.AreEqual(value, testValue, "Date Value");
+            Assert.AreEqual(stringValue, (String) formatter.ToDateString(testValue), "String Value");
 
             testValue = (DateTime) formatter.ToDate(null);
-            Assertion.AssertNull("Date value should be null", testValue);
+            Assert.IsNull(testValue, "Date value should be null");
         }
 
         [Test]
@@ -344,31 +263,31 @@ namespace Library.Nunit.Core
 
         private void assertTimes(String text, DateTime? expectedValue, DateTime? testValue)
         {
-            Assertion.AssertEquals(text + " HOUR: ", expectedValue.Value.Hour, testValue.Value.Hour);
-            Assertion.AssertEquals(text + " MINUTE: ", expectedValue.Value.Minute, testValue.Value.Minute);
-            Assertion.AssertEquals(text + " SECOND: ", expectedValue.Value.Second, testValue.Value.Second);
+            Assert.AreEqual(expectedValue.Value.Hour, testValue.Value.Hour, text + " HOUR: ");
+            Assert.AreEqual(expectedValue.Value.Minute, testValue.Value.Minute, text + " MINUTE: ");
+            Assert.AreEqual(expectedValue.Value.Second, testValue.Value.Second, text + " SECOND: ");
         }
 
         private void assertBooleanParsing(SifFormatter formatter, String stringValue, Boolean value)
         {
             Console.WriteLine("Testing Boolean parse of '" + stringValue + "' using " + formatter.ToString());
             Boolean? testValue = formatter.ToBool(stringValue);
-            Assertion.AssertEquals("Boolean Value", value, testValue);
-            Assertion.AssertEquals("String Value", stringValue, formatter.ToString(value));
+            Assert.AreEqual(value, testValue, "Boolean Value");
+            Assert.AreEqual(stringValue, formatter.ToString(value), "String Value");
 
             testValue = formatter.ToBool(null);
-            Assertion.AssertNull("Boolean value should be null", testValue);
+            Assert.IsNull(testValue, "Boolean value should be null");
         }
 
         private void assertintParsing(SifFormatter formatter, String stringValue, int value)
         {
             Console.WriteLine("Testing int parse of '" + stringValue + "' using " + formatter.ToString());
             int? testValue = formatter.ToInt(stringValue);
-            Assertion.AssertEquals("int Value", value, testValue);
-            Assertion.AssertEquals("String Value", stringValue, formatter.ToString(value));
+            Assert.AreEqual(value, testValue, "int Value");
+            Assert.AreEqual(stringValue, formatter.ToString(value), "String Value");
 
             testValue = formatter.ToInt(null);
-            Assertion.AssertNull("int value should be null", testValue);
+            Assert.IsNull(testValue, "int value should be null");
         } 
 
         /// <summary>
@@ -447,3 +366,5 @@ namespace Library.Nunit.Core
         }
     } 
 } 
+
+

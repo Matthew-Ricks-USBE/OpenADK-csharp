@@ -1,6 +1,6 @@
 <!--SIF Implementation Specification UK 1.1-3 (June 19, 2008)-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.sifinfo.org/uk/infrastructure/2.x" xmlns:sif="http://www.sifinfo.org/uk/infrastructure/2.x" elementFormDefault="qualified">
-  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="imports/xml/xml.xsd" />
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2001/xml.xsd" />
 
   <!--Infrastructure Common Elements-->
 

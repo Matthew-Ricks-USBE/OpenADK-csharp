@@ -156,42 +156,6 @@ namespace Library.Nunit.US
          Assert.AreEqual(0, sp.SIFExtendedElements.Length, "Result should be 0");
 
       }
-
-
-
-
-
-      //[Test]
-      //public void testSIF1_5XPaths_Address()
-      //{
-      //   Adk.SifVersion = SifVersion.SIF15r1;
-      //   StudentPersonal sp = new StudentPersonal();
-
-      //   // StudentAddress
-      //   sp.SetElementOrAttribute(
-      //       "StudentAddress[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='01']/Street/Line1", "321 Oak St");
-
-      //   // Assert Student address
-      //   StudentAddressList[] addrList = sp.AddressLists;
-
-      //   Assertion.AssertNotNull("AddressList", addrList);
-      //   Assertion.AssertEquals("One AddrList", 1, addrList.Length);
-
-      //   //Address addr = addrList[0].getAddress(AddressType.Wrap("01"));
-      //   Address addr = sp.AddressList[AddressType.Wrap("01")];
-
-
-      //   Assertion.AssertNotNull("Address", addr);
-      //   //Assertion.AssertEquals("Street", "321 Oak St", addr.Street.Line1);
-      //   //SimpleField line1 = (SimpleField)sp.GetElementOrAttribute("StudentAddress[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='01']/Street/Line1");
-      //   //Assertion.AssertNotNull("Line1 By xPath", line1);
-      //   //Assertion.AssertEquals("Street", "321 Oak St", line1.TextValue());
-      //}
-
-
-
-
-
-
    }
 }
+

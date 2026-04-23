@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
     [TestFixture]
-    public class MappingsSpeedTests
+    public class MappingsSpeedTests : UsAdkTest
     {
         private AgentConfig fCfg;
 
@@ -33,7 +33,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             fCfg = new AgentConfig();
             fCfg
                 .Read(
-                "..\\..\\Library\\Tools\\Mapping\\MultiVersion.agent.cfg",
+                "..\\..\\OpenADK\\Tools\\Mapping\\MultiVersion.agent.cfg",
                 false );
 
             int mappingIterations = 0;
@@ -82,7 +82,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             fCfg = new AgentConfig();
             fCfg
                 .Read(
-                "..\\..\\Library\\Tools\\Mapping\\MultiVersion.agent.cfg",
+                "..\\..\\OpenADK\\Tools\\Mapping\\MultiVersion.agent.cfg",
                 false );
 
             int mappingIterations = 0;
@@ -130,7 +130,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             fCfg = new AgentConfig();
             fCfg
                 .Read(
-                "..\\..\\Library\\Tools\\Mapping\\MultiVersion.agent.cfg",
+                "..\\..\\OpenADK\\Tools\\Mapping\\MultiVersion.agent.cfg",
                 false );
 
             int mappingIterations = 0;
@@ -183,7 +183,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             fCfg = new AgentConfig();
             fCfg
                 .Read(
-                "..\\..\\Library\\Tools\\Mapping\\MultiVersion.agent.cfg",
+                "..\\..\\OpenADK\\Tools\\Mapping\\MultiVersion.agent.cfg",
                 false );
 
             int mappingIterations = 0;

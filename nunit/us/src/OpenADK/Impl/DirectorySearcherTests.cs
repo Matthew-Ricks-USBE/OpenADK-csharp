@@ -72,7 +72,7 @@ namespace Library.Nunit.US.Impl
 
             public string SearchPattern
             {
-                get { return "Library.*.dll"; }
+                get { return "OpenADK.*.dll"; }
             }
 
             #endregion

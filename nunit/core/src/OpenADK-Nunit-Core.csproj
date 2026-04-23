@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <OutputType>Library</OutputType>
-    <RootNamespace>SIFWorks.NUnit.Core</RootNamespace>
-    <AssemblyName>SIFWorks.NUnit.Core</AssemblyName>
+    <RootNamespace>OpenADK.NUnit.Core</RootNamespace>
+    <AssemblyName>OpenADK.NUnit.Core</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <OutputPath>bin\</OutputPath>
     <Configurations>Debug;Eval;Internal;Release;ReleaseDocs</Configurations>
@@ -20,19 +20,12 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.core, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\nunit\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>..\..\..\lib\nunit\nunit.framework.dll</HintPath>
-    </Reference>
+    <PackageReference Include="NUnit" Version="3.14.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\us\OpenADK-US-SDO.csproj" />
     <ProjectReference Include="..\..\framework\src\OpenADK.UnitTesting.csproj" />
-  </ItemGroup>
-  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
-    <Compile Remove="infra\SIF_ProvisionTests.cs" />
   </ItemGroup>
 </Project>

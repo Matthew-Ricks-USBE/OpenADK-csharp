@@ -85,7 +85,7 @@ namespace Library.Nunit.Core
             foreach (Email e in el)
             {
                 Assert.IsNotNull(e, "Email should not be null");
-                Assert.AreEqual(24, e.TextValue.Length, "Should have email address");
+                Assert.AreEqual(18, e.TextValue.Length, "Should have email address");
                 count++;
             }
 

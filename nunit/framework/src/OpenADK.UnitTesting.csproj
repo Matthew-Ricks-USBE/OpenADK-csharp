@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <OutputType>Library</OutputType>
-    <RootNamespace>SIFWorks.UnitTesting</RootNamespace>
-    <AssemblyName>SIFWorks.UnitTesting</AssemblyName>
+    <RootNamespace>OpenADK.UnitTesting</RootNamespace>
+    <AssemblyName>OpenADK.UnitTesting</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Eval;Internal;Release;ReleaseDocs</Configurations>
   </PropertyGroup>
@@ -18,25 +18,9 @@
     <OutputPath>bin\Internal\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.14" />
-    <Reference Include="nunit.core, Version=2.2.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\nunit\nunit.core.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.4.3.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\lib\nunit\nunit.framework.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Framework\.MySCMServerInfo" />
+    <PackageReference Include="NUnit" Version="3.14.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\core\OpenADK-NET-Core.csproj" />
-  </ItemGroup>
-  <ItemGroup Label="Compile items now included by globbing that were not in the original project file">
-    <Compile Remove="Framework\InMemoryProgocolTest.cs" />
-    <Compile Remove="AdkTest.cs" />
-    <Compile Remove="AdkObjectParseHelper.cs" />
   </ItemGroup>
 </Project>

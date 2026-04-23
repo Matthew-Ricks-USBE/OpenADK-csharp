@@ -19,7 +19,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         {
             Adk.Initialize();
             fCfg = new AgentConfig();
-            fCfg.Read( "..\\..\\Library\\Tools\\Mapping\\SIF1.5.agent.cfg",
+            fCfg.Read( "..\\..\\OpenADK\\Tools\\Mapping\\SIF1.5.agent.cfg",
                        false );
         }
 
@@ -312,106 +312,100 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         private void assertMappings( Mappings m )
         {
             Mappings test = m.GetMappings( "Test" );
-            Assertion.AssertNotNull( "Test mappings is not present", test );
-            Assertion.AssertEquals( "Should have a single Object Mapping", 1, test.GetObjectMappings().Length );
+            Assert.IsNotNull(test, "Test mappings is not present");
+            Assert.AreEqual(1, test.GetObjectMappings().Length, "Should have a single Object Mapping");
 
             // TODO: Test the version and sourceId filters more carefully
             /*
-		 * Assertion.AssertEquals( "SifVersion attr should be empty", 0,
-		 * test.SifVersionFilter().Length ); Assertion.AssertEquals( "SourceId attr
-		 * should be empty", 0, test.SourceIdFilter().Length ); Assertion.AssertEquals(
-		 * "Zone attr should be empty", 0, test.ZoneIdFilter().Length );
+		 * Assert.AreEqual(0, test.SifVersionFilter().Length,  "SifVersion attr should be empty");
+         * Assert.AreEqual(0, test.SourceIdFilter().Length, "SourceId attr should be empty");
+         * Assert.AreEqual(0, test.ZoneIdFilter().Length, "Zone attr should be empty");
 		 */
 
             // assert the object mapping
             ObjectMapping om = test.GetObjectMapping( "StudentPersonal", false );
-            Assertion.AssertNotNull( "StudentPersonal mappings", om );
-            Assertion.AssertEquals( "There should be five rules", 5, om.RuleCount );
+            Assert.IsNotNull(om, "StudentPersonal mappings is not present");
+            Assert.AreEqual(5, om.RuleCount, "There should be five rules");
             IList<FieldMapping> rules = om.GetRulesList( false );
 
             // Field 1
-            Assertion.AssertEquals( "FIELD1 name", "FIELD1", rules[0].FieldName );
-            Assertion.AssertEquals( "FIELD1 rule", "Name/FirstName", rules[0].GetRule().ToString() );
-            Assertion.AssertEquals( "FIELD1 ifNull", MappingBehavior.IfNullUnspecified, rules[0].NullBehavior );
+            Assert.AreEqual("Name/FirstName", rules[0].GetRule().ToString(), "FIELD1 rule");
+            Assert.AreEqual("FIELD1", rules[0].FieldName, "FIELD1 name");
+            Assert.AreEqual(MappingBehavior.IfNullUnspecified, rules[0].NullBehavior, "FIELD1 ifNull");
 
             // Field 2
-            Assertion.AssertEquals( "FIELD2 name", "FIELD2", rules[1].FieldName );
-            Assertion.AssertEquals( "FIELD2 rule", "Name/LastName", rules[1].GetRule().ToString() );
-            Assertion.AssertEquals( "FIELD2 valueset", "VS1", rules[1].ValueSetID );
-            Assertion.AssertEquals( "FIELD2 alias", "ALIAS1", rules[1].Alias );
-            Assertion.AssertEquals( "FIELD2 default", "DEFAULT1", rules[1].DefaultValue );
+            Assert.AreEqual("FIELD2", rules[1].FieldName, "FIELD2 name");
+            Assert.AreEqual("Name/LastName", rules[1].GetRule().ToString(), "FIELD2 rule");
+            Assert.AreEqual("VS1", rules[1].ValueSetID, "FIELD2 valueset");
+            Assert.AreEqual("ALIAS1", rules[1].Alias, "FIELD2 alias");
+            Assert.AreEqual("DEFAULT1", rules[1].DefaultValue, "FIELD2 default");
             MappingsFilter filter = rules[1].Filter;
-            Assertion.AssertNotNull( "FIELD2 filter is null", filter );
-            Assertion.AssertEquals( "filter direction", MappingDirection.Inbound, filter
-                                                                                      .Direction );
-            Assertion.AssertEquals( "filter sif version", "=" + SifVersion.SIF11.ToString(),
-                                    filter.SifVersion );
+            Assert.IsNotNull(filter, "FIELD2 filter is null");
+            Assert.AreEqual(MappingDirection.Inbound, filter.Direction, "filter direction");
+            Assert.AreEqual("=" + SifVersion.SIF11.ToString(), filter.SifVersion, "filter sif version");
 
             // Field 3
-            Assertion.AssertEquals( "FIELD3 name", "FIELD3", rules[2].FieldName );
-            Assertion.AssertEquals( "FIELD3 rule", "Name/MiddleName", rules[2].GetRule().ToString() );
-            Assertion.AssertEquals( "FIELD3 valueset", "VS2", rules[2].ValueSetID );
-            Assertion.AssertEquals( "FIELD3 alias", "ALIAS2", rules[2].Alias );
-            Assertion.AssertEquals( "FIELD3 default", "DEFAULT2", rules[2].DefaultValue );
-            Assertion.AssertEquals( "FIELD3 ifNull", MappingBehavior.IfNullDefault, rules[2].NullBehavior );
+            Assert.AreEqual("FIELD3", rules[2].FieldName, "FIELD3 name");
+            Assert.AreEqual("Name/MiddleName", rules[2].GetRule().ToString(), "FIELD3 rule");
+            Assert.AreEqual("VS2", rules[2].ValueSetID, "FIELD3 valueset");
+            Assert.AreEqual("ALIAS2", rules[2].Alias, "FIELD3 alias");
+            Assert.AreEqual("DEFAULT2", rules[2].DefaultValue, "FIELD3 default");
+            Assert.AreEqual(MappingBehavior.IfNullDefault, rules[2].NullBehavior, "FIELD3 ifNull");
             MappingsFilter filter2 = rules[2].Filter;
-            Assertion.AssertNotNull( "FIELD3 filter is null", filter2 );
-            Assertion.AssertEquals( "filter2 direction", MappingDirection.Outbound, filter2.Direction );
-            Assertion.AssertEquals( "filter2 sif version",
-                                    "=" + SifVersion.SIF15r1.ToString(), filter2.SifVersion );
+            Assert.IsNotNull(filter2, "FIELD3 filter is null");
+            Assert.AreEqual(MappingDirection.Outbound, filter2.Direction, "filter2 direction");
+            Assert.AreEqual("=" + SifVersion.SIF15r1.ToString(), filter2.SifVersion, "filter2 sif version");
 
             // Field 4
-            Assertion.AssertEquals( "FIELD4 name", "FIELD4", rules[3].FieldName );
-            Assertion.AssertNull( "FIELD4 valueset", rules[3].ValueSetID );
-            Assertion.AssertNull( "FIELD4 alias", rules[3].Alias );
-            Assertion.AssertNull( "FIELD4 default", rules[3].DefaultValue );
-            Assertion.AssertEquals( "FIELD4 ifNull", MappingBehavior.IfNullSuppress, rules[3].NullBehavior );
+            Assert.AreEqual("FIELD4", rules[3].FieldName, "FIELD4 name");
+            Assert.IsNull( rules[3].ValueSetID, "FIELD4 valueset" );
+            Assert.IsNull( rules[3].Alias, "FIELD4 alias" );
+            Assert.IsNull( rules[3].DefaultValue, "FIELD4 default" );
+            Assert.AreEqual( MappingBehavior.IfNullSuppress, rules[3].NullBehavior, "FIELD4 ifNull" );
             Rule r = rules[3].GetRule();
-            Assertion.Assert( "Rule should be OtherIdRule", r is OtherIdRule );
+            Assert.True(r is OtherIdRule, "Rule should be OtherIdRule");
 
-            Assertion.AssertEquals( "FIELD5 name", "FIELD5", rules[4].FieldName );
-            Assertion.AssertEquals( "FIELD5 datatype", SifDataType.Date, rules[4]
-                                                                             .DataType );
+            Assert.AreEqual("FIELD5", rules[4].FieldName, "FIELD5 name");
+            Assert.AreEqual(SifDataType.Date, rules[4].DataType, "FIELD5 datatype");
 
             // TODO: The OtherIdRule doesn't have an API to get at the
             // OtherIdMapping. For now, just
             // convert it to a string and assert the results
             String ruleStr = r.ToString();
-            Assertion.Assert( "prefix should be BUSROUTE", ruleStr
-                                                               .IndexOf( "prefix='BUSROUTE'" ) > 1 );
-            Assertion.Assert( "type should be ZZ", ruleStr.IndexOf( "type='ZZ'" ) > 1 );
+            Assert.True(ruleStr.IndexOf( "prefix='BUSROUTE'" ) > 1, "prefix should be BUSROUTE");
+            Assert.True(ruleStr.IndexOf( "type='ZZ'" ) > 1, "type should be ZZ");
 
             ValueSet vs = test.GetValueSet( "VS1", false );
-            Assertion.AssertNotNull( "ValueSet VS1 should not be null", vs );
-            Assertion.AssertEquals( "VS1 should have 12 entries", 12, vs.Entries.Length );
+            Assert.IsNotNull(vs, "ValueSet VS1 should not be null");
+            Assert.AreEqual(12, vs.Entries.Length, "VS1 should have 12 entries");
             for ( int a = 0; a < 10; a++ )
             {
-                Assertion.AssertEquals( "Mapping by appvalue", "SifValue" + a, vs.Translate( "Value" + a ) );
-                Assertion.AssertEquals( "Mapping by sifvalue", "Value" + a, vs.TranslateReverse( "SifValue" + a ) );
+                Assert.AreEqual("SifValue" + a, vs.Translate( "Value" + a ), "Mapping by appvalue");
+                Assert.AreEqual("Value" + a, vs.TranslateReverse( "SifValue" + a ), "Mapping by sifvalue");
             }
             // Test the default value entries
-            Assertion.AssertEquals( "Expecting app default value", "AppDefault", vs.TranslateReverse( "abcdefg" ) );
-            Assertion.AssertEquals( "Expecting app default value", "AppDefault", vs.TranslateReverse( null ) );
-            Assertion.AssertEquals( "Expecting sif default value", "SifDefault", vs.Translate( "abcdefg" ) );
-            Assertion.AssertNull( "Expecting NULL value", vs.Translate( null ) );
+            Assert.AreEqual( "AppDefault", vs.TranslateReverse( "abcdefg" ), "Expecting app default value" );
+            Assert.AreEqual( "AppDefault", vs.TranslateReverse( null ), "Expecting app default value" );
+            Assert.AreEqual( "SifDefault", vs.Translate( "abcdefg" ), "Expecting sif default value" );
+            Assert.IsNull( vs.Translate( null ), "Expecting NULL value" );
 
             vs = test.GetValueSet( "VS2", false );
-            Assertion.AssertNotNull( "ValueSet VS2 should not be null", vs );
-            Assertion.AssertEquals( "VS2 should have 4 entries", 4, vs.Entries.Length );
+            Assert.IsNotNull( vs, "ValueSet VS2 should not be null" );
+            Assert.AreEqual( 4, vs.Entries.Length, "VS2 should have 4 entries" );
             for ( int a = 0; a < 3; a++ )
             {
-                Assertion.AssertEquals( "Mapping by appvalue", "w" + a, vs.Translate( "q" + a ) );
-                Assertion.AssertEquals( "Mapping by sifvalue", "q" + a, vs
-                                                                            .TranslateReverse( "w" + a ) );
+                Assert.AreEqual( "w" + a, vs.Translate( "q" + a ), "Mapping by appvalue" );
+                Assert.AreEqual( "q" + a, vs
+                                                                            .TranslateReverse( "w" + a ), "Mapping by sifvalue" );
             }
             // Test the default value entries
-            Assertion.AssertEquals( "Expecting app default value", "AppDefault", vs
-                                                                                     .TranslateReverse( "abcdefg" ) );
-            Assertion.AssertEquals( "Expecting app default value", "AppDefault", vs
-                                                                                     .TranslateReverse( null ) );
-            Assertion.AssertEquals( "Expecting sif default value", "0000", vs
-                                                                               .Translate( "abcdefg" ) );
-            Assertion.AssertEquals( "Expecting sif default value", "0000", vs.Translate( null ) );
+            Assert.AreEqual( "AppDefault", vs
+                                                                                     .TranslateReverse( "abcdefg" ), "Expecting app default value" );
+            Assert.AreEqual( "AppDefault", vs
+                                                                                     .TranslateReverse( null ), "Expecting app default value" );
+            Assert.AreEqual( "0000", vs
+                                                                               .Translate( "abcdefg" ), "Expecting sif default value" );
+            Assert.AreEqual( "0000", vs.Translate( null ), "Expecting sif default value" );
         }
     }
 }

@@ -7,13 +7,11 @@ using OpenADK.Library.Infra;
 using OpenADK.Library.uk.Learner;
 using OpenADK.Library.uk.School;
 using NUnit.Framework;
-using Library.UnitTesting.Framework;
-using OpenADK.Library;
 
 namespace OpenADK.Library.Nunit.UK
 {
     [TestFixture]
-    public class SifWriterTests : AdkTest
+    public class SifWriterTests : UkAdkTest
     {
         [Test]
         public void TestxsiNill_SIFMessagePayload()
@@ -76,34 +74,6 @@ namespace OpenADK.Library.Nunit.UK
             SifSimpleType msgValue = msg.SifValue;
             Assert.IsNotNull( msgValue );
             Assert.IsNull( msgValue.RawValue );
-
-
-
-
-        }
-
-        [Test]
-        public void testmeth()
-        {
-            String c = GetColumnName( 1, 1 );
-            Assert.AreEqual( "A1", c );
-            c = GetColumnName(27, 1);
-            Assert.AreEqual("AA1", c);
-
-            c = GetColumnName(28, 1);
-            Assert.AreEqual("AB1", c);
-        }
-
-        private String GetColumnName(int ordinal, int Row)
-        {
-            if (ordinal < 27)
-            {
-                return ((char)(ordinal + 'A' - 1)).ToString() + Row.ToString();
-            }
-            int charIndex = ordinal % 26;
-            char c1 = (char)( charIndex + 'A' - 1);
-            char c2 = (char)(ordinal - (charIndex * 26) + 'A' - 1);
-            return c1.ToString() + c2.ToString() + Row.ToString();
         }
 
         [Test]
@@ -161,7 +131,7 @@ namespace OpenADK.Library.Nunit.UK
             Assert.IsNull(msgValue.RawValue);
         }
 
-
+        [Test]
         public void TestXsiNill_AllChildrenNil()
         {
             SchoolInfo si = new SchoolInfo();
@@ -219,6 +189,7 @@ namespace OpenADK.Library.Nunit.UK
 
         }
 
+        [Test]
         public void TestXsiNill_AllChildrenNilMultiple()
         {
 

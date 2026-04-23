@@ -12,17 +12,15 @@ namespace Library.Nunit.US.Library.Tools.Mapping
     [TestFixture]
     public class DestinyMappingTests : UsAdkTest
     {
-        private SifVersion fVersion = SifVersion.SIF15r1;
-
         private AgentConfig fCfg;
 
         [SetUp]
-        public override void setUp()
+        public override void SetUp()
         {
-            base.setUp();
+            base.SetUp();
             Adk.SifVersion = SifVersion.SIF15r1;
             fCfg = new AgentConfig();
-            fCfg.Read("..\\..\\Library\\Tools\\Mapping\\Destiny2.0.cfg", false);
+            fCfg.Read("..\\..\\OpenADK\\Tools\\Mapping\\Destiny2.0.cfg", false);
         }
 
         [Test]
@@ -75,8 +73,8 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                                             schoolInfoResp, null );
 
             // Verify that it is parsing the correct version
-            Assertion.AssertEquals( "Version", SifVersion.SIF15r1, smi.SifVersion );
-            Assertion.AssertEquals( "Version attribute", "1.5r1", smi.VersionAttribute );
+            Assert.AreEqual(SifVersion.SIF15r1, smi.SifVersion, "Version");
+            Assert.AreEqual("1.5r1", smi.VersionAttribute, "Version attribute");
 
             SifDataObject sdo = (SifDataObject) ((SIF_Response) smi)
                                                     .SIF_ObjectData.GetChildList()[0];
@@ -87,8 +85,8 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Mappings m = fCfg.Mappings.GetMappings( "Default" ).Select( "asdf","SASIxp", smi.SifVersion );
 
             m.MapInbound( sdo, sma, smi.SifVersion );
-            Assertion.Assert( "Elements Mapped", fields.Count > 0 );
-            Assertion.AssertEquals( "Phone Number", "888-9877", fields["FAX"] );
+            Assert.True(fields.Count > 0, "Elements Mapped");
+            Assert.AreEqual( "888-9877", fields["FAX"], "Phone Number" );
         }
     }
 }

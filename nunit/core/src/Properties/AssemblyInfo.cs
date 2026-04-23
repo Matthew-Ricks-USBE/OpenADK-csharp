@@ -31,3 +31,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 [assembly : AssemblyVersion("1.0.0.0")]
 [assembly : AssemblyFileVersion("1.0.0.0")]
+
+// The global Adk can cause cross-test contamination.
+// This gives the tests a chance to set up and clean up their unique prerequisites.
+[assembly: NUnit.Framework.NonParallelizable]

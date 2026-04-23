@@ -18,9 +18,9 @@ namespace Library.Nunit.US
         private byte[] f64BitKey;
         private byte[] f128BitKey;
         private byte[] f192BitKey;
-        private const string DEFAULT_ENCRYPTED_STRING = "¿sècrèt";
+        private const string DEFAULT_ENCRYPTED_STRING = "ï¿½sï¿½crï¿½t";
 
-        [TestFixtureSetUp]
+        [OneTimeSetUp]
         public void SetUp()
         {
             Adk.Initialize();
