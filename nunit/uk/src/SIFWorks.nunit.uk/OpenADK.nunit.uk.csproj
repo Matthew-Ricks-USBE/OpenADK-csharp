@@ -11,10 +11,6 @@
   <ItemGroup>
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
 	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
-    <Reference Include="Org.Mentalis.Security, Version=1.0.14.25108, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\us\src\bin\Debug\Org.Mentalis.Security.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\SIF*\*.xml">

@@ -5,9 +5,10 @@
 
 using System;
 using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using OpenADK.Library;
 using log4net;
-using Org.Mentalis.Security.Ssl;
 
 namespace OpenADK.Web.Http
 {
@@ -29,7 +30,7 @@ namespace OpenADK.Web.Http
         /// <summary>
         /// Shuts down the server, optionally removing all socket listeners
         /// </summary>
-        void Shutdown( bool clearAllListeners );
+        void Shutdown(bool clearAllListeners);
 
         /// <summary>
         /// Returns true if the server is started
@@ -41,7 +42,7 @@ namespace OpenADK.Web.Http
         /// </summary>
         /// <param name="port"></param>
         /// <returns></returns>
-        AdkSocketBinding GetListener( int port );
+        AdkSocketBinding GetListener(int port);
         /// <summary>
         /// Creates a new socket listener for HTTP
         /// </summary>
@@ -50,14 +51,15 @@ namespace OpenADK.Web.Http
         /// <summary>
         /// Creates a new socket listener for HTTPS
         /// </summary>
-        /// <param name="options">Options for the secure socket</param>
+        /// <param name="certificate">The server certificate</param>
+        /// <param name="validator">Optional client certificate validator</param>
         /// <returns></returns>
-        AdkSocketBinding CreateHttpsListener( SecurityOptions options );
+        AdkSocketBinding CreateHttpsListener(X509Certificate2 certificate, RemoteCertificateValidationCallback validator = null);
 
         /// <summary>
         /// Adds a new Socket Listener
         /// </summary>
         /// <param name="listener"></param>
-        void AddListener( AdkSocketBinding listener );
+        void AddListener(AdkSocketBinding listener);
     }
 }

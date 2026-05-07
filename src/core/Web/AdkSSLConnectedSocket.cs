@@ -6,8 +6,8 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Security;
 using System.Net.Sockets;
-using Org.Mentalis.Security.Ssl;
 
 namespace OpenADK.Web
 {
@@ -16,11 +16,13 @@ namespace OpenADK.Web
     /// </summary>
     public class AdkSSLConnectedSocket : IConnectedSocket
     {
-        private SecureSocket fSocket;
+        private SslStream fStream;
+        private Socket fSocket;
 
-        public AdkSSLConnectedSocket( SecureSocket wrappedSocket )
+        public AdkSSLConnectedSocket(Socket socket, SslStream sslStream)
         {
-            fSocket = wrappedSocket;
+            fSocket = socket;
+            fStream = sslStream;
         }
 
         public bool Connected
@@ -28,26 +30,27 @@ namespace OpenADK.Web
             get { return fSocket.Connected; }
         }
 
-        public void SetSocketOption( SocketOptionLevel level,
+        public void SetSocketOption(SocketOptionLevel level,
                                      SocketOptionName name,
-                                     int val )
+                                     int val)
         {
-            fSocket.SetSocketOption( level, name, val );
+            fSocket.SetSocketOption(level, name, val);
         }
 
         public void Close()
         {
-            fSocket.Close();
+            fStream?.Close();
+            fSocket?.Close();
         }
 
-        public void Shutdown( SocketShutdown shutDownType )
+        public void Shutdown(SocketShutdown shutDownType)
         {
-            fSocket.Shutdown( shutDownType );
+            fSocket.Shutdown(shutDownType);
         }
 
         public EndPoint LocalEndPoint
         {
-            get { return fSocket.RemoteEndPoint; }
+            get { return fSocket.LocalEndPoint; }
         }
 
 
@@ -56,10 +59,10 @@ namespace OpenADK.Web
             get { return fSocket.RemoteEndPoint; }
         }
 
-        public Stream CreateStream( FileAccess access,
-                                    bool ownsSocket )
+        public Stream CreateStream(FileAccess access,
+                                    bool ownsSocket)
         {
-            return new SecureNetworkStream( fSocket, access, ownsSocket );
+            return fStream;
         }
     }
 }

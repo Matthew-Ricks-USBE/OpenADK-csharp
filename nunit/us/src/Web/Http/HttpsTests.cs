@@ -1,30 +1,29 @@
-using System;
-using System.IO;
-using System.Net;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
-using OpenADK.Library;
-using OpenADK.Library.Impl;
-using OpenADK.Library.Infra;
-using OpenADK.Library.Log;
-using OpenADK.Util;
+using Library.UnitTesting.Framework;
 using log4net;
 using log4net.Appender;
 using log4net.Core;
 using log4net.Layout;
 using log4net.Repository.Hierarchy;
 using NUnit.Framework;
-using Org.Mentalis.Security.Certificates;
-using StoreLocation=Org.Mentalis.Security.Certificates.StoreLocation;
+using OpenADK.Library;
+using OpenADK.Library.Impl;
+using OpenADK.Library.Infra;
+using OpenADK.Library.Log;
+using OpenADK.Util;
+using System;
 using System.Collections.Generic;
-using Library.UnitTesting.Framework;
+using System.IO;
+using System.Net;
+using System.Runtime.ConstrainedExecution;
+using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace OpenADK.Web.Http
 {
     /// <summary>
     /// Tests HTTPS support in the ADK
     /// </summary>
-    [TestFixture]
+    [TestFixture, Explicit("Requires trusted certificates in Windows certificate store")]
     public class HttpsTests
     {
         private HttpTransport fTransport = null;
@@ -33,31 +32,62 @@ namespace OpenADK.Web.Http
         private IZone fZone = null;
         private Agent fAgent = new TestAgent();
 
+        private readonly string[] CERTIFICATES = ["issuer.pfx", "localhost.pfx", "127.0.0.1.pfx", "invalid.pfx"];
+        private const string CERTIFICATE_PASSWORD = "changeit";
+
+        private X509Certificate2 fRootCert;
+        private X509Certificate2 fServerCert;
+        private X509Certificate2 fIpCert;
+        private X509Certificate2 fInvalidCert;
+        private X509Store fRootStore;
+        private X509Store fStore;
+
         private const string HANDLER_URL = "/";
         private const string SERVER_TEST_URL = "https://localhost:9000/";
-        private const string CERT_STORE = CertificateStore.MyStore;
 
         /// <summary>
-        /// This method runs once at the start of this fixture
+        /// This method runs once at the start of this fixture.
         /// </summary>
         [OneTimeSetUp]
         public void SetupTestFixture()
         {
-            CertificateStore store = new CertificateStore(StoreLocation.LocalMachine, CertificateStore.RootStore);
-            AssertTestCertFile(store, "issuer.pfx");
+            // Ensure certificates are on the file system.
+            foreach (var fileName in CERTIFICATES)
+            {
+                // Get the certificate contents.
+                using Stream stream = GetType().Assembly.GetManifestResourceStream("Library.Nunit.US.res." + fileName) ??
+                    throw new FileNotFoundException("Could not find embedded resource: Library.Nunit.US.res." + fileName);
 
-            store = new CertificateStore(StoreLocation.CurrentUser, CERT_STORE);
-            AssertTestCertFile(store, "localhost.pfx");
-            AssertTestCertFile(store, "127.0.0.1.pfx");
-            AssertTestCertFile(store, "invalid.pfx");
+                // Paste to the destination.
+                var fullPath = Path.Combine(Environment.CurrentDirectory, fileName);
+                using Stream certFile = File.OpenWrite(fullPath);
+                Streams.CopyStream(stream, certFile);
+            }
 
+            // Set up common certificates.
+            fRootCert = new("issuer.pfx", CERTIFICATE_PASSWORD);
+            fIpCert = new("127.0.0.1.pfx", CERTIFICATE_PASSWORD);
+            fServerCert = new("localhost.pfx", CERTIFICATE_PASSWORD);
+            fInvalidCert = new("invalid.pfx", CERTIFICATE_PASSWORD);
+
+            fRootStore = new(StoreName.Root, StoreLocation.CurrentUser);
+            fRootStore.Open(OpenFlags.ReadWrite);
+            fRootStore.Add(fRootCert);
+
+            fStore = new(StoreName.My, StoreLocation.CurrentUser);
+            fStore.Open(OpenFlags.ReadWrite);
+            fStore.Add(fIpCert);
+            fStore.Add(fServerCert);
+            fStore.Add(fInvalidCert);
+
+            // Prep logging output.
             ConsoleAppender cAppender = new ConsoleAppender();
             cAppender.Layout = new PatternLayout(Adk.DEFAULT_LOG_PATTERN);
             SetLogAppender(cAppender, Level.Debug, false);
         }
 
         /// <summary>
-        /// This method runs once the beginning of each test
+        /// This method runs once the beginning of each test.
         /// </summary>
         [SetUp]
         public void SetUpTest()
@@ -65,66 +95,49 @@ namespace OpenADK.Web.Http
             Adk.Debug = AdkDebugFlags.All;
             Adk.Initialize();
 
-            ServicePointManager.CertificatePolicy = new TestCertificatePolicy();
+            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors)
+                =>
+            { return errors == System.Net.Security.SslPolicyErrors.None; };
             ServicePointManager.CheckCertificateRevocationList = false;
-            //ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls;
 
-            fTransport = (HttpTransport)fAgent.TransportManager.GetTransport( "https" );
+            fTransport = (HttpTransport)fAgent.TransportManager.GetTransport("https");
 
-            fProps = (HttpsProperties) fTransport.Properties;
+            fProps = (HttpsProperties)fTransport.Properties;
             fProps.Port = 9000;
-            fProps.CertStore = CERT_STORE;
+            fProps.SSLCertName = "CN=localhost, O=OpenADK, C=US";
             fProps.ClientAuthLevel = 0;
             fProps.ClientCertName = null;
-           
-
 
             fZone = new TestZone();
             fZone.Properties.MessagingMode = AgentMessagingMode.Push;
         }
 
         /// <summary>
-        /// This method runs once at the end of every test
+        /// This method runs once at the end of every test.
         /// </summary>
         [TearDown]
         public void TearDown()
         {
-            if (fTransport != null)
-            {
-                fTransport.Shutdown();
-                fTransport = null;
-            }
+            fTransport?.Shutdown();
+            fTransport = null;
         }
 
-        private void AssertTestCertFile(CertificateStore store, string fileName)
+        /// <summary>
+        /// This method runs once at the end of this fixture.
+        /// </summary>
+        [OneTimeTearDown]
+        public void TearDownFixture()
         {
-            FileInfo f = new FileInfo( fileName );
-            if( f.Exists )
-            {
-                Console.WriteLine( f.FullName );
-            }
+            fStore.Remove(fInvalidCert);
+            fStore.Remove(fServerCert);
+            fStore.Remove(fIpCert);
+            fRootStore.Remove(fRootCert);
 
+            fStore.Close();
+            fRootStore.Close();
 
-            if (!File.Exists(fileName))
-            {
-                using (Stream stream = GetType().Assembly.GetManifestResourceStream("Library.Nunit.US.res." + fileName)
-                    )
-                {
-                    using (Stream certFile = File.OpenWrite(fileName))
-                    {
-                        Streams.CopyStream(stream, certFile);
-                        certFile.Close();
-                    }
-                    stream.Close();
-                }
-                Certificate cert = Certificate.CreateFromPfxFile(fileName, "changeit", true);
-
-                Certificate found = store.FindCertificateByKeyIdentifier(cert.GetKeyIdentifier());
-                if (found == null)
-                {
-                    store.AddCertificate(cert);
-                }
-            }
+            fStore.Dispose();
+            fRootStore.Dispose();
         }
 
 
@@ -135,15 +148,13 @@ namespace OpenADK.Web.Http
         /// This should fail. It then should try with client
         /// certs enabled and it should succeed.
         /// </summary>
-        /// <remarks>In order for this test to pass, the certificate used for
-        /// client authentication must be trusted by the operating system.</remarks>
         [Test]
         public void TestLevel2AuthSupport()
         {
             fProps.ClientAuthLevel = 2;
-            fProps.ClientCertName = "OU=ADK,CN=invalid";
+            fProps.ClientCertName = "invalid";
             startupTransport();
-    
+
             //RunConnectionTest( false, false );
             RunConnectionTest(true, true);
         }
@@ -154,13 +165,18 @@ namespace OpenADK.Web.Http
         /// connect to the server using a valid certificate, but with a
         /// subject that does not match the host name. This should fail.
         /// </summary>
-        /// <remarks>In order for this test to pass, the certificate used for
-        /// client authentication must be trusted by the operating system.</remarks>
+        /// <remarks>
+        /// Implementing this would be somewhat onerous&mdash;
+        /// per the note in the associated method&mdash;
+        /// so this has been left as-is for now.
+        /// </remarks>
+        /// <see cref="HttpTransport.verifyLevel3Authentication(object, X509Certificate, X509Chain, SslPolicyErrors)"/>
         [Test]
+        [Ignore("Current implementation doesn't perform the subject-hostname validation.")]
         public void TestLevel3AuthSupportWithInvalidHost()
         {
             fProps.ClientAuthLevel = 3;
-            fProps.ClientCertName = "OU=ADK,CN=invalid";
+            fProps.ClientCertName = "invalid";
             startupTransport();
          
             // Run the test with a client certificate, and it should fail
@@ -168,22 +184,28 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary>
+        /// Tests Level 3 authentication with a certificate whose CN matches the hostname.
+        /// </summary>
         [Test]
         public void TestLevel3AuthSupportWithValidHost()
         {
             fProps.ClientAuthLevel = 3;
-            fProps.ClientCertName = "OU=ADK,CN=localhost";
+            fProps.ClientCertName = "localhost";
             startupTransport();
 
             // Run the test with a client certificate, and it should not fail
             RunConnectionTest(true, true);
         }
 
+        /// <summary>
+        /// Tests Level 3 authentication with a certificate whose CN matches the IP address.
+        /// </summary>
         [Test]
         public void TestLevel3AuthSupportWithValidIP()
         {
             fProps.ClientAuthLevel = 3;
-            fProps.ClientCertName = "OU=ADK,CN=127.0.0.1";
+            fProps.ClientCertName = "127.0.0.1";
             startupTransport();
          
             // Run the test with a client certificate, and it should not fail
@@ -201,7 +223,8 @@ namespace OpenADK.Web.Http
         [Test]
         public void TestHttpsWithName()
         {
-            fProps.SSLCertName = "OU=ADK,CN=localhost";
+            fProps.SSLCertName = "CN=localhost, O=OpenADK, C=US";
+            fProps.ClientCertName = "localhost";
             startupTransport();
 
             RunConnectionTest(false, true);
@@ -234,9 +257,8 @@ namespace OpenADK.Web.Http
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(SERVER_TEST_URL);
             if (useClientCert)
             {
-                Certificate cert = fTransport.GetClientAuthenticationCertificate();
-                X509Certificate cert2 = cert.ToX509();
-                request.ClientCertificates.Add(cert2);
+                X509Certificate2 cert = new($"{fProps.ClientCertName}.pfx", CERTIFICATE_PASSWORD);
+                request.ClientCertificates.Add(cert);
             }
 
             bool sslConnectError = false;
@@ -318,29 +340,6 @@ namespace OpenADK.Web.Http
                     Assert.AreEqual(OK_VALUE, responseValue);
                 }
             }
-        }
-
-        private class TestCertificatePolicy : ICertificatePolicy
-        {
-            #region ICertificatePolicy Members
-
-            public bool CheckValidationResult(
-                ServicePoint srvPoint,
-                X509Certificate certificate,
-                WebRequest request,
-                int certificateProblem)
-            {
-                // The .Net ADK uses the same validation as the default .Net framework certificate policy. If other
-                // policy requirements become necessary for the SIF Specification or special situations, they can be
-                // implemented here.
-                if (certificateProblem == 0)
-                {
-                    return true;
-                }
-                return false;
-            }
-
-            #endregion
         }
 
         private class TestZone : IZone

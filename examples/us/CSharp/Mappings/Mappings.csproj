@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -35,9 +35,6 @@
     <PackageReference Include="log4net" Version="2.0.14" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Org.Mentalis.Security">
-      <HintPath>..\..\..\..\lib\Org.Mentalis.Security.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\core\OpenADK-NET-Core.csproj" />

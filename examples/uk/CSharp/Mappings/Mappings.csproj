@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net481</TargetFramework>
     <OutputType>Exe</OutputType>
@@ -24,9 +24,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.14" />
-    <Reference Include="Org.Mentalis.Security">
-      <HintPath>..\..\..\..\lib\Org.Mentalis.Security.dll</HintPath>
-    </Reference>
     <Reference Include="System.Design">
       <Name>System.Design</Name>
     </Reference>

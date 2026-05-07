@@ -9,7 +9,6 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using OpenADK.Library.Infra;
 using OpenADK.Util;
-using Org.Mentalis.Security.Certificates;
 
 namespace OpenADK.Library.Impl
 {
@@ -275,26 +274,36 @@ namespace OpenADK.Library.Impl
         /// adds it to the client certificate collection of the HttpWebRequest.
         /// </summary>
         /// <param name="conn"></param>
-        protected void ApplySSLAttributes( HttpWebRequest conn )
+        protected void ApplySSLAttributes(HttpWebRequest conn)
         {
-            if ( !fSSLInitialized ) {
+            if (!fSSLInitialized)
+            {
                 fSSLInitialized = true;
-                    Certificate cert = fTransport.GetClientAuthenticationCertificate();
+                X509Certificate2 cert = fTransport.GetClientAuthenticationCertificate();
 
-                    if ( cert == null )
+                if (cert == null)
+                {
+                    fTransport.DebugTransport
+                        ("No certificate found for client authentication", new object[0]);
+                }
+                else
+                {
+                    fClientAuthCertificate = cert;
+                    ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) =>
                     {
-                        fTransport.DebugTransport
-                            ( "No certificate found for client authentication", new object[0] );
-                    }
-                    else
-                    {
-                        fClientAuthCertificate = cert.ToX509();
-                        ServicePointManager.CertificatePolicy = fTransport.GetServerCertificatePolicy();
-                    }
+                        var policy = fTransport.GetServerCertificatePolicy();
+                        return policy.CheckValidationResult(
+                            sender as ServicePoint,
+                            certificate,
+                            null,
+                            (int)errors);
+                    };
+                }
             }
 
-            if ( fClientAuthCertificate != null ) {
-                conn.ClientCertificates.Add( fClientAuthCertificate );
+            if (fClientAuthCertificate != null)
+            {
+                conn.ClientCertificates.Add(fClientAuthCertificate);
             }
         }
 

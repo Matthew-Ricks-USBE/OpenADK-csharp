@@ -12,7 +12,7 @@ namespace OpenADK.Library.Impl.Surrogates
     /// </summary>
     internal sealed class SimpleMultiField : SimpleField
     {
-        protected readonly IElementDef[] elementDefs;
+        private readonly IElementDef[] elementDefs;
 
         /// <summary>
         /// Constructor

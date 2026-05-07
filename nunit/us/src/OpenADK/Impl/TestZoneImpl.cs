@@ -52,8 +52,9 @@ namespace Library.Nunit.US.Impl
 
       protected void SetProto(IProtocolHandler proto)
       {
-         fProtocolHandler = this.fProtocolHandler;
+         fProtocolHandler = proto;
       }
+
       public IProtocolHandler getProto()
       {
          return this.fProtocolHandler;

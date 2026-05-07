@@ -8,8 +8,6 @@ using System.Net;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
 using log4net;
-using Org.Mentalis.Security.Certificates;
-using Org.Mentalis.Security.Ssl;
 
 namespace OpenADK.Web.Http
 {
@@ -26,7 +24,7 @@ namespace OpenADK.Web.Http
         /// Creates an instance of an AdkHttpApplicationServer
         /// </summary>
         /// <param name="transport">The Http transport</param>
-        public AdkHttpApplicationServer( HttpTransport transport )
+        public AdkHttpApplicationServer(HttpTransport transport)
         {
             fTransport = transport;
         }
@@ -39,34 +37,34 @@ namespace OpenADK.Web.Http
         /// <param name="handler">The handler that will handle requests on this path</param>
         /// <param name="force">If set to true, the handler will replace any other handlers defined at the path, if false, an exception will
         /// be thrown if any handlers are already defined at the path</param>
-        public void AddHandlerContext( string hostName,
+        public void AddHandlerContext(string hostName,
                                        string virtualPath,
                                        IAdkHttpHandler handler,
-                                       bool force )
+                                       bool force)
         {
             AdkHttpHandlerListeningContext contextHandler =
-                new AdkHttpHandlerListeningContext( handler );
-            this.AddHandlerContext( hostName, virtualPath, contextHandler, force );
+                new AdkHttpHandlerListeningContext(handler);
+            this.AddHandlerContext(hostName, virtualPath, contextHandler, force);
         }
 
-        public void RemoveHandlerContext( string virtualPath )
+        public void RemoveHandlerContext(string virtualPath)
         {
-            this.RemoveHandlerContext( "", virtualPath );
+            this.RemoveHandlerContext("", virtualPath);
         }
 
-        public void SetAnonymousHandler( IAdkHttpHandler handler )
+        public void SetAnonymousHandler(IAdkHttpHandler handler)
         {
             this.Listener.AnonymousHandler = handler;
         }
 
         private class AdkHttpHandlerListeningContext : IAdkHttpHandlerFactory
         {
-            public AdkHttpHandlerListeningContext( IAdkHttpHandler handler )
+            public AdkHttpHandlerListeningContext(IAdkHttpHandler handler)
             {
                 fHandler = handler;
             }
 
-            IAdkHttpHandler IAdkHttpHandlerFactory.CreateHandler( AdkHttpRequest request )
+            IAdkHttpHandler IAdkHttpHandlerFactory.CreateHandler(AdkHttpRequest request)
             {
                 return fHandler;
             }
@@ -78,8 +76,10 @@ namespace OpenADK.Web.Http
 
         void IHttpServer.Start()
         {
-            lock ( this ) {
-                if ( !this.IsStarted ) {
+            lock (this)
+            {
+                if (!this.IsStarted)
+                {
 
                     base.StartServer();
                 }
@@ -88,13 +88,13 @@ namespace OpenADK.Web.Http
 
         public void Shutdown()
         {
-            base.StopServer( false );
+            base.StopServer(false);
         }
 
-        public void Shutdown( bool clearAllListeners )
+        public void Shutdown(bool clearAllListeners)
         {
-            if( clearAllListeners )
-            base.StopServer( clearAllListeners );
+            if (clearAllListeners)
+                base.StopServer(clearAllListeners);
         }
 
 

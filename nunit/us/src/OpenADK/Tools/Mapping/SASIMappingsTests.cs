@@ -18,7 +18,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         private AgentConfig fCfg;
 
         [SetUp]
-        public virtual void SetUp()
+        public override void SetUp()
         {
             base.SetUp();
             Adk.SifVersion = fVersion;
