@@ -39,11 +39,6 @@ public class R : SifKeyedList<C>
 		this.SafeAddChild( InfraDTD.R_C, c );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected R( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;C&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;C&amp;gt; element</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class R : SifKeyedList<C>
 	}
 
 }}
+

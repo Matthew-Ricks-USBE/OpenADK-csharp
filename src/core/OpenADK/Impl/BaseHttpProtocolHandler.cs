@@ -6,6 +6,8 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
 using OpenADK.Library.Infra;
 using OpenADK.Util;
@@ -26,7 +28,7 @@ namespace OpenADK.Library.Impl
         private ZoneImpl fZone;
         protected readonly HttpTransport fTransport;
 
-        private X509Certificate fClientAuthCertificate;
+        private X509Certificate2 fClientAuthCertificate;
         private bool fSSLInitialized;
 
 
@@ -98,29 +100,12 @@ namespace OpenADK.Library.Impl
             try {
                 return TrySend( msg );
             }
-            catch ( WebException webEx ) {
-                if ( webEx.Status == WebExceptionStatus.ConnectionClosed ) {
-                    // Try one more time, the underlying keep-alive connection must have
-                    // been closed by the ZIS. Trying again will start with a fresh,
-                    // new connection
-                    try {
-                        return TrySend( msg );
-                    }
-                    catch ( AdkException ) {
-                        throw;
-                    }
-                    catch ( Exception ex ) {
-                        throw new AdkMessagingException
-                            ( "HttpProtocolHandler: Unexpected error sending message retry: " + ex,
-                              fZone );
-                    }
-                }
-                else {
-                    // This code should never be hit because TrySend() should never emit this exception
-                    // Leaving the code here for defensive purposes
-                    throw new AdkMessagingException
-                        ( "HttpProtocolHandler: Unexpected error sending message: " + webEx, fZone );
-                }
+            catch ( AdkException ) {
+                throw;
+            }
+            catch ( Exception ex ) {
+                throw new AdkMessagingException
+                    ( "HttpProtocolHandler: Unexpected error sending message: " + ex, fZone, ex );
             }
         }
 
@@ -150,31 +135,7 @@ namespace OpenADK.Library.Impl
         private IMessageInputStream TrySend( IMessageOutputStream msg )
         {
             MessageStreamImpl returnStream;
-            Stream reqStream;
-
-            HttpWebRequest conn = GetConnection( fZoneUrl );
-            conn.ContentLength = msg.Length;
-
-            try {
-                reqStream = conn.GetRequestStream();
-            }
-            catch ( WebException webEx ) {
-                if ( webEx.Status == WebExceptionStatus.ConnectionClosed ) {
-                    // This could be a keep-alive connection that was closed unexpectedly
-                    // rethrow so that retry handling can take affect
-                    throw;
-                }
-                else {
-                    throw new AdkTransportException
-                        ( "Could not establish a connection to the ZIS (" + fZoneUrl.AbsoluteUri +
-                          "): " + webEx, fZone, webEx );
-                }
-            }
-            catch ( Exception thr ) {
-                throw new AdkTransportException
-                    ( "Could not establish a connection to the ZIS (" + fZoneUrl.AbsoluteUri + "): " +
-                      thr, fZone, thr );
-            }
+            using HttpRequestMessage request = CreateRequestMessage( fZoneUrl, msg );
 
             try {
                 if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 ) {
@@ -183,26 +144,21 @@ namespace OpenADK.Library.Impl
                 if ( (Adk.Debug & AdkDebugFlags.Message_Content) != 0 ) {
                     fZone.Log.Debug( msg.Decode() );
                 }
-                try {
-                    msg.CopyTo( reqStream );
-                    reqStream.Flush();
-                    reqStream.Close();
-                }
-                catch ( Exception thr ) {
-                    throw new AdkMessagingException
-                        ( "HttpProtocolHandler: Unexpected error sending message: " + thr, fZone );
-                }
 
                 try {
-                    using ( WebResponse response = conn.GetResponse() ) {
+                    using HttpClient client = CreateHttpClient();
+                    using HttpResponseMessage response =
+                        client.Send( request, HttpCompletionOption.ResponseHeadersRead );
+                    response.EnsureSuccessStatusCode();
+
                         if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 ) {
                             fZone.Log.Debug
-                                ( "Expecting reply (" + response.ContentLength + " bytes)" );
+                                ( "Expecting reply (" + response.Content.Headers.ContentLength +
+                                  " bytes)" );
                         }
 
-                        returnStream = new MessageStreamImpl( response.GetResponseStream() );
-
-                        response.Close();
+                        returnStream =
+                            new MessageStreamImpl( response.Content.ReadAsStream() );
 
                         if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 ) {
                             fZone.Log.Debug( "Received reply (" + returnStream.Length + " bytes)" );
@@ -210,12 +166,11 @@ namespace OpenADK.Library.Impl
                         if ( (Adk.Debug & AdkDebugFlags.Message_Content) != 0 ) {
                             fZone.Log.Debug( returnStream.Decode() );
                         }
-                    }
                 }
                 catch ( Exception thr ) {
                     throw new AdkTransportException
                         ( "An unexpected error occurred while receiving data from the ZIS: " + thr,
-                          fZone );
+                          fZone, thr );
                 }
             }
             catch ( AdkException ) {
@@ -241,40 +196,50 @@ namespace OpenADK.Library.Impl
 
 
         /// <summary>  Get an outbound connection to the ZIS</summary>
-        /// <returns> Either an HttpsURLConnection or an HttpURLConnection depending
-        /// on whether the associated transport protocol is secure or not
-        /// </returns>
-        protected HttpWebRequest GetConnection( Uri uri )
+        protected HttpRequestMessage CreateRequestMessage( Uri uri, IMessageOutputStream msg )
         {
             try {
-                HttpWebRequest conn = (HttpWebRequest) WebRequest.Create( uri );
-                conn.Method = "POST";
-                conn.ContentType = SifIOFormatter.CONTENTTYPE;
-                conn.UserAgent = fHttpUserAgent;
-                conn.KeepAlive = fKeepAliveOnSend;
+                MemoryStream requestStream = new MemoryStream();
+                msg.CopyTo( requestStream );
+                requestStream.Seek( 0, SeekOrigin.Begin );
 
-                // If the transport is an HTTPS transport, attempt to set an SSL
-                // client certificate
-                if ( fTransport.Secure ) {
-                    ApplySSLAttributes( conn );
-                }
+                HttpRequestMessage request = new HttpRequestMessage( HttpMethod.Post, uri );
+                request.Headers.TryAddWithoutValidation( "User-Agent", fHttpUserAgent );
+                request.Headers.ConnectionClose = !fKeepAliveOnSend;
 
-                return conn;
+                StreamContent content = new StreamContent( requestStream );
+                content.Headers.ContentType = MediaTypeHeaderValue.Parse( SifIOFormatter.CONTENTTYPE );
+                content.Headers.ContentLength = msg.Length;
+                request.Content = content;
+
+                return request;
             }
-            catch ( WebException webEx ) {
+            catch ( Exception webEx ) {
                 throw new AdkTransportException
-                    ( "Failed to create HttpWebRequest " + fZoneUrl.AbsoluteUri + ": " + webEx, fZone,
+                    ( "Failed to create HTTP request " + fZoneUrl.AbsoluteUri + ": " + webEx, fZone,
                       webEx );
             }
+        }
+
+        protected HttpClient CreateHttpClient()
+        {
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+
+            if ( fTransport.Secure ) {
+                ApplySSLAttributes( handler );
+            }
+
+            return new HttpClient( handler, true );
         }
 
 
         /// <summary>
         /// Retrieves a certificate to use for client authentication, if available and 
-        /// adds it to the client certificate collection of the HttpWebRequest.
+        /// adds it to the client certificate collection of the request handler.
         /// </summary>
-        /// <param name="conn"></param>
-        protected void ApplySSLAttributes(HttpWebRequest conn)
+        /// <param name="handler"></param>
+        protected void ApplySSLAttributes(HttpClientHandler handler)
         {
             if (!fSSLInitialized)
             {
@@ -289,21 +254,29 @@ namespace OpenADK.Library.Impl
                 else
                 {
                     fClientAuthCertificate = cert;
-                    ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) =>
-                    {
-                        var policy = fTransport.GetServerCertificatePolicy();
-                        return policy.CheckValidationResult(
-                            sender as ServicePoint,
-                            certificate,
-                            null,
-                            (int)errors);
-                    };
                 }
             }
 
+            handler.ServerCertificateCustomValidationCallback = (request, certificate, chain, errors) =>
+            {
+                // Accept valid certificates or certificates with no errors
+                if (errors == System.Net.Security.SslPolicyErrors.None)
+                {
+                    return true;
+                }
+                // Log certificate rejection for debugging
+                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                {
+                    fTransport.DebugTransport(
+                        "Certificate validation failed with errors: " + errors.ToString(),
+                        new object[0]);
+                }
+                return false;
+            };
+
             if (fClientAuthCertificate != null)
             {
-                conn.ClientCertificates.Add(fClientAuthCertificate);
+                handler.ClientCertificates.Add(fClientAuthCertificate);
             }
         }
 

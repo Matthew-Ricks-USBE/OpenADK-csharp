@@ -40,11 +40,6 @@ public class ItemQuantities : SifList<ItemQuantity>
 		this.SafeAddChild( FoodDTD.ITEMQUANTITIES_ITEMQUANTITY, itemQuantity );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ItemQuantities( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ItemQuantity&gt;</c> element.</summary>
 	/// <param name="FoodserviceItemPortionRefId">GUID of FoodserviceItemPortion object</param>
 	/// <param name="Value">The value of item quantity</param>
@@ -59,3 +54,4 @@ public class ItemQuantities : SifList<ItemQuantity>
 	}
 
 }}
+

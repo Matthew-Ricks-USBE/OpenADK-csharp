@@ -19,17 +19,6 @@ namespace OpenADK.Library
         /// <param name="def"></param>
         public SifActionList( IElementDef def )
             : base( def ) {}
-
-
-        /// <summary>
-        /// .Net Serialization Constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected SifActionList( SerializationInfo info,
-                                 StreamingContext context )
-            : base( info, context ) {}
-
     }
 }
+

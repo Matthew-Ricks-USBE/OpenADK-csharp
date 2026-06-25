@@ -40,11 +40,6 @@ public class Evaluations : SifKeyedList<Evaluation>
 		this.SafeAddChild( LearningDTD.EVALUATIONS_EVALUATION, evaluation );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Evaluations( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Evaluation&gt;</c> element.</summary>
 	/// <param name="RefId">A RefId</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Evaluations : SifKeyedList<Evaluation>
 	}
 
 }}
+

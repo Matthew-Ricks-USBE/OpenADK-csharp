@@ -40,11 +40,6 @@ public class SectionRoomList : SifKeyedList<RoomInfoRefId>
 		this.SafeAddChild( StudentDTD.SECTIONROOMLIST_ROOMINFOREFID, roomInfoRefId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SectionRoomList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;RoomInfoRefId&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;RoomInfoRefId&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class SectionRoomList : SifKeyedList<RoomInfoRefId>
 	}
 
 }}
+

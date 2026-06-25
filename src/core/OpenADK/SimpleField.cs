@@ -143,18 +143,6 @@ namespace OpenADK.Library
         }
 
 
-        /// <summary>
-        /// Used by the Serialization Formatter
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter = true )]
-        protected SimpleField( SerializationInfo info,
-                               StreamingContext context )
-            : base( info, context )
-        {
-            info.AddValue( "fValue", Value );
-        }
 
         /// <summary>
         /// Called when the object is being deserialized
@@ -168,3 +156,4 @@ namespace OpenADK.Library
         //}
     }
 }
+

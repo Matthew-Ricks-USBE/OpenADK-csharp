@@ -40,11 +40,6 @@ public class Prices : SifKeyedList<Price>
 		this.SafeAddChild( FoodDTD.PRICES_PRICE, price );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Prices( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Price&gt;</c> element.</summary>
 	/// <param name="Value">The price value</param>
 	/// <param name="MealStatus">This gives information about a student's meal status.</param>
@@ -61,3 +56,4 @@ public class Prices : SifKeyedList<Price>
 	}
 
 }}
+

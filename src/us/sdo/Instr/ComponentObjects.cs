@@ -40,11 +40,6 @@ public class ComponentObjects : SifKeyedList<ComponentObject>
 		this.SafeAddChild( InstrDTD.COMPONENTOBJECTS_COMPONENTOBJECT, componentObject );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ComponentObjects( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ComponentObject&gt;</c> element.</summary>
 	/// <param name="SifRefObject">The type of learning object being referenced.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;ComponentObject&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class ComponentObjects : SifKeyedList<ComponentObject>
 	}
 
 }}
+

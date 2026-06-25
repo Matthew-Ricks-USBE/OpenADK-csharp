@@ -42,9 +42,5 @@ public class CourseHistory : SifList<Term>
 		this.SafeAddChild( EtranscriptsDTD.COURSEHISTORY_TERM, term );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected CourseHistory( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

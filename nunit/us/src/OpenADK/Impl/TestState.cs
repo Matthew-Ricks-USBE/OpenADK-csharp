@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Security.Permissions;
 using OpenADK.Library;
 
 namespace Library.Nunit.US.Impl
@@ -21,12 +20,12 @@ namespace Library.Nunit.US.Impl
         }
 
 
-        private String fState;
+       private String fState;
 
-        /**
+       /**
        *
        */
-        private Boolean fCreateError;
+       private Boolean fCreateError;
 
         public TestState()
         {
@@ -90,7 +89,6 @@ namespace Library.Nunit.US.Impl
 
         // This is the serialization constructor.
         // Satisfies rule: ImplementSerializationConstructors.
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             info.AddValue("fState", fState);

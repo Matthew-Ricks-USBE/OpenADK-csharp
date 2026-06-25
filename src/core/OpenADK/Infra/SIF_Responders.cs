@@ -39,11 +39,6 @@ public class SIF_Responders : SifKeyedList<SIF_Responder>
 		this.SafeAddChild( InfraDTD.SIF_RESPONDERS_SIF_RESPONDER, sifResponder );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Responders( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_Responder&gt;</c> element.</summary>
 	/// <param name="SourceId">The identifier of the SIF node that is providing objects. This is the agent or ZIS identifier that would appear in the SIF_SourceId field of any SIF_Header created by the SIF node.</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SIF_Responders : SifKeyedList<SIF_Responder>
 	}
 
 }}
+

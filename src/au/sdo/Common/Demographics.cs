@@ -30,11 +30,6 @@ public class Demographics : SifElement
 	public Demographics() : base ( CommonDTD.DEMOGRAPHICS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Demographics( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;IndigenousStatus&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>IndigenousStatus</c> element of this object.</value>
@@ -833,3 +828,4 @@ public class Demographics : SifElement
 	}
 
 }}
+

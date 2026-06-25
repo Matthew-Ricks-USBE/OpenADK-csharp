@@ -29,11 +29,6 @@ public class LRContact : SifElement
 	/// </summary>
 	public LRContact() : base ( CommonDTD.LRCONTACT ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LRContact( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	/// <summary>Adds a new <c>&lt;Name&gt;</c> child element.</summary>
 	/// <param name="val">A Name object</param>
 	/// <remarks>
@@ -237,3 +232,4 @@ public class LRContact : SifElement
 	}
 
 }}
+

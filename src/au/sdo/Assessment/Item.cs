@@ -31,11 +31,6 @@ public class Item : SifElement
 	public Item() : base ( AssessmentDTD.ITEM ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Item( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Response&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Response</c> element of this object.</value>
@@ -281,3 +276,4 @@ public class Item : SifElement
 	}
 
 }}
+

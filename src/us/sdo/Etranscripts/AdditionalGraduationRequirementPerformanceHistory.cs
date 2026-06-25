@@ -42,11 +42,6 @@ public class AdditionalGraduationRequirementPerformanceHistory : SifList<Require
 		this.SafeAddChild( EtranscriptsDTD.ADDITIONALGRADUATIONREQUIREMENTPERFORMANCEHISTORY_REQUIREMENT, requirement );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AdditionalGraduationRequirementPerformanceHistory( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Requirement&gt;</c> element.</summary>
 	/// <param name="Method">The method by which the requirement was met.</param>
 	/// <param name="StatusDeterminationDate">Date the student's status was determined.</param>
@@ -61,3 +56,4 @@ public class AdditionalGraduationRequirementPerformanceHistory : SifList<Require
 	}
 
 }}
+

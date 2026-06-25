@@ -39,11 +39,6 @@ public class ExtendedParameters : SifList<ExtendedParameter>
 		this.SafeAddChild( CommonDTD.EXTENDEDPARAMETERS_EXTENDEDPARAMETER, extendedParameter );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ExtendedParameters( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ExtendedParameter&gt;</c> element.</summary>
 	/// <param name="SifName">The name of the parameter</param>
 	/// <param name="SifValue">The value of the parameter</param>
@@ -58,3 +53,4 @@ public class ExtendedParameters : SifList<ExtendedParameter>
 	}
 
 }}
+

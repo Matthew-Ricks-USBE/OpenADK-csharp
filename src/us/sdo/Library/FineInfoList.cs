@@ -40,11 +40,6 @@ public class FineInfoList : SifKeyedList<FineInfo>
 		this.SafeAddChild( LibraryDTD.FINEINFOLIST_FINEINFO, fineInfo );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected FineInfoList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;FineInfo&gt;</c> element.</summary>
 	/// <param name="Type">Type of fine assessed to this patron and item.  A corresponding ItemInfo is required for all FineInfo types except "Other" and "Refund" where it is permissible to omit the ItemInfo element if there isn't an item associated with the fine.</param>
 	/// <param name="Assessed">The date and time that this fine was assessed to the patron.</param>
@@ -60,3 +55,4 @@ public class FineInfoList : SifKeyedList<FineInfo>
 	}
 
 }}
+

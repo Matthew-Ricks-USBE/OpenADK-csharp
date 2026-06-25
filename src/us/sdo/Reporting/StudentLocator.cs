@@ -50,11 +50,6 @@ public class StudentLocator : SifDataObject
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentLocator( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>IdStatus</c> attribute.
 	/// </summary>
 	/// <value> The <c>IdStatus</c> attribute of this object.</value>
@@ -833,3 +828,4 @@ public class StudentLocator : SifDataObject
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class SENTypeList : SifKeyedList<SENType>
 		this.SafeAddChild( LearnerDTD.SENTYPELIST_SENTYPE, senType );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SENTypeList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SENType&gt;</c> element.</summary>
 	/// <param name="Ranking">A value (starting at 1) indicating the order of significance of special educational need in relation to other SEN types listed here. CBDS: 100080</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SENType&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class SENTypeList : SifKeyedList<SENType>
 	}
 
 }}
+

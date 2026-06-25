@@ -25,11 +25,6 @@ namespace Library.Nunit.US
         {
             Adk.Initialize();
 
-            /* 
-			f64BitKey = new byte[8];
-			RNGCryptoServiceProvider.Create().GetBytes( f64BitKey );
-			*/
-
             f64BitKey = Convert.FromBase64String("dW7SKzwdn0Q=");
             f128BitKey = Convert.FromBase64String("TcdilmUZ6qvbmegl2it2pA==");
             f192BitKey = Convert.FromBase64String("mECbXMo+fOMWRwam7tyUEE59jbO9O0Z4");
@@ -44,11 +39,6 @@ namespace Library.Nunit.US
             builder.Append("\r\nBase 64 Value: ");
             builder.Append(Convert.ToBase64String(f64BitKey));
             Console.WriteLine(builder.ToString());
-
-            /*
-			f128BitKey = new byte[16];
-			RNGCryptoServiceProvider.Create().GetBytes( f128BitKey );
-			*/
 
             builder = new StringBuilder();
             builder.Append("Created Unique 128-bit Encryption Key: ");
@@ -206,11 +196,11 @@ namespace Library.Nunit.US
                 HashAlgorithm hasher = null;
                 if (returnValue.PasswordList.ItemAt(0).Algorithm == PasswordAlgorithm.SHA1.Value)
                 {
-                    hasher = new SHA1CryptoServiceProvider();
+                    hasher = SHA1.Create();
                 }
                 else if (returnValue.PasswordList.ItemAt(0).Algorithm == PasswordAlgorithm.MD5.Value)
                 {
-                    hasher = new MD5CryptoServiceProvider();
+                    hasher = MD5.Create();
                 }
                 byte[] preHashed = Encoding.UTF8.GetBytes(passwordText);
                 byte[] hashed = hasher.ComputeHash(preHashed);

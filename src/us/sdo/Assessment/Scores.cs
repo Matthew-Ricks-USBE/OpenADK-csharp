@@ -40,11 +40,6 @@ public class Scores : SifKeyedList<Score>
 		this.SafeAddChild( AssessmentDTD.SCORES_SCORE, score );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Scores( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Score&gt;</c> element.</summary>
 	/// <param name="AssessmentSubTestRefId">References the AssessmentSubTest that defines the score.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Scores : SifKeyedList<Score>
 	}
 
 }}
+

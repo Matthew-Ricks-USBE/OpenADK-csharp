@@ -39,11 +39,6 @@ public class SchoolContactList : SifKeyedList<SchoolContact>
 		this.SafeAddChild( CommonDTD.SCHOOLCONTACTLIST_SCHOOLCONTACT, schoolContact );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SchoolContactList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SchoolContact&gt;</c> element.</summary>
 	/// <param name="ContactInfo">For a description of this element, see 5.1.3 ContactInfo.</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SchoolContactList : SifKeyedList<SchoolContact>
 	}
 
 }}
+

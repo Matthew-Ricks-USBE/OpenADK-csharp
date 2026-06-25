@@ -40,9 +40,5 @@ public class TransactionList : SifList<Transaction>
 		this.SafeAddChild( LibraryDTD.TRANSACTIONLIST_TRANSACTION, transaction );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TransactionList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

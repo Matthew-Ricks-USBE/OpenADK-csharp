@@ -40,11 +40,6 @@ public class MenuPlanQuantities : SifKeyedList<MenuPlanQuantity>
 		this.SafeAddChild( FoodDTD.MENUPLANQUANTITIES_MENUPLANQUANTITY, menuPlanQuantity );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MenuPlanQuantities( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;MenuPlanQuantity&gt;</c> element.</summary>
 	/// <param name="FoodserviceItemPortionRefId">Item portion amount</param>
 	/// <param name="MenuCategory">A MenuCategory</param>
@@ -60,3 +55,4 @@ public class MenuPlanQuantities : SifKeyedList<MenuPlanQuantity>
 	}
 
 }}
+

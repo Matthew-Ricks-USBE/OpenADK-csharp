@@ -40,11 +40,6 @@ public class TeacherList : SifKeyedList<StaffPersonalRefId>
 		this.SafeAddChild( StudentDTD.TEACHERLIST_STAFFPERSONALREFID, staffPersonalRefId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TeacherList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;StaffPersonalRefId&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;StaffPersonalRefId&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class TeacherList : SifKeyedList<StaffPersonalRefId>
 	}
 
 }}
+

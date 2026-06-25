@@ -40,11 +40,6 @@ public class Counts : SifKeyedList<Count>
 		this.SafeAddChild( FoodDTD.COUNTS_COUNT, count );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Counts( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Count&gt;</c> element.</summary>
 	/// <param name="Value">The value of the count.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Counts : SifKeyedList<Count>
 	}
 
 }}
+

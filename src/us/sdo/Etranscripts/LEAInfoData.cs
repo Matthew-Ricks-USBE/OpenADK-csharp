@@ -33,11 +33,6 @@ public class LEAInfoData : SifElement
 	public LEAInfoData() : base ( EtranscriptsDTD.LEAINFODATA ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LEAInfoData( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;LocalId&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>LocalId</c> element of this object.</value>
@@ -118,3 +113,4 @@ public class LEAInfoData : SifElement
 	}
 
 }}
+

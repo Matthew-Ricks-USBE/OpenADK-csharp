@@ -39,11 +39,6 @@ public class OtherIdList : SifKeyedList<OtherId>
 		this.SafeAddChild( CommonDTD.OTHERIDLIST_OTHERID, otherId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected OtherIdList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;OtherId&gt;</c> element.</summary>
 	/// <param name="Type">
 	/// Code that defines the type of this other ID. Note: A
@@ -60,3 +55,4 @@ public class OtherIdList : SifKeyedList<OtherId>
 	}
 
 }}
+

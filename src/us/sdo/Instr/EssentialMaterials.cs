@@ -40,11 +40,6 @@ public class EssentialMaterials : SifKeyedList<EssentialMaterial>
 		this.SafeAddChild( InstrDTD.ESSENTIALMATERIALS_ESSENTIALMATERIAL, essentialMaterial );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EssentialMaterials( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;EssentialMaterial&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;EssentialMaterial&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class EssentialMaterials : SifKeyedList<EssentialMaterial>
 	}
 
 }}
+

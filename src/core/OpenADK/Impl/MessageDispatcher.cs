@@ -1200,7 +1200,7 @@ namespace OpenADK.Library.Impl
                 }
 
                 //	rethrow all errors at this point
-                throw se;
+                throw;
 
 
                 //                //  Capture the SifException so it can be written to the output stream

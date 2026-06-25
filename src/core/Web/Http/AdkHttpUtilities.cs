@@ -5,6 +5,7 @@
 
 using System;
 using Microsoft.Win32;
+using System.Runtime.Versioning;
 
 namespace OpenADK.Web.Http
 {
@@ -20,6 +21,16 @@ namespace OpenADK.Web.Http
         /// <returns></returns>
         public static string GetMimeType( string extension )
         {
+            if ( !OperatingSystem.IsWindows() ) {
+                return "text/html";
+            }
+
+            return GetWindowsMimeType( extension );
+        }
+
+        [SupportedOSPlatform( "windows" )]
+        private static string GetWindowsMimeType( string extension )
+        {
             using ( RegistryKey aFileKey = Registry.ClassesRoot.OpenSubKey( extension ) ) {
                 if ( aFileKey != null ) {
                     string aVal = (string) aFileKey.GetValue( "Content Type" );
@@ -27,8 +38,9 @@ namespace OpenADK.Web.Http
                         return aVal;
                     }
                 }
-                return "text/html";
             }
+
+            return "text/html";
         }
     }
 }

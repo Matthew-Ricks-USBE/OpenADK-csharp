@@ -31,11 +31,6 @@ public class ContentElement : SifElement
 	public ContentElement() : base ( AssessmentDTD.CONTENTELEMENT ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ContentElement( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;XMLData&gt;</c> element.
 	/// </summary>
 	/// <value> A XMLData </value>
@@ -178,3 +173,4 @@ public class ContentElement : SifElement
 	}
 
 }}
+

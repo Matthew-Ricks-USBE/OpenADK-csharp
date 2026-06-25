@@ -33,11 +33,6 @@ public class AcademicPerformanceSummary : SifElement
 	public AcademicPerformanceSummary() : base ( EtranscriptsDTD.ACADEMICPERFORMANCESUMMARY ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AcademicPerformanceSummary( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;TotalCreditsAttempted&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>TotalCreditsAttempted</c> element of this object.</value>
@@ -429,3 +424,4 @@ public class AcademicPerformanceSummary : SifElement
 	}
 
 }}
+

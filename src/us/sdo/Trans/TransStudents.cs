@@ -40,11 +40,6 @@ public class TransStudents : SifList<TransStudent>
 		this.SafeAddChild( TransDTD.TRANSSTUDENTS_STUDENT, student );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TransStudents( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Student&gt;</c> element.</summary>
 	/// <param name="StudentPersonalRefId">GUID that identifies the student that this element refers to.</param>
 	/// <param name="Status">Boarding status of this student</param>
@@ -60,3 +55,4 @@ public class TransStudents : SifList<TransStudent>
 	}
 
 }}
+

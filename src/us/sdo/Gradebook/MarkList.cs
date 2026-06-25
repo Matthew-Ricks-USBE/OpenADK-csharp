@@ -40,11 +40,6 @@ public class MarkList : SifKeyedList<Mark>
 		this.SafeAddChild( GradebookDTD.MARKLIST_MARK, mark );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MarkList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Mark&gt;</c> element.</summary>
 	/// <param name="MarkInfoRefId">The ID (GUID) that identifies a mark that was given for this student.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class MarkList : SifKeyedList<Mark>
 	}
 
 }}
+

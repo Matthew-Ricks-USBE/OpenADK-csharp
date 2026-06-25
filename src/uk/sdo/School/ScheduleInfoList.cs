@@ -40,9 +40,5 @@ public class ScheduleInfoList : SifList<ScheduleInfo>
 		this.SafeAddChild( SchoolDTD.SCHEDULEINFOLIST_SCHEDULEINFO, scheduleInfo );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ScheduleInfoList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

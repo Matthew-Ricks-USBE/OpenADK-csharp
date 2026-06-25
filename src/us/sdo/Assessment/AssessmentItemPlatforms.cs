@@ -31,11 +31,6 @@ public class AssessmentItemPlatforms : SifElement
 	public AssessmentItemPlatforms() : base ( AssessmentDTD.ASSESSMENTITEMPLATFORMS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AssessmentItemPlatforms( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;AssessmentItemPlatform&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>AssessmentItemPlatform</c> element of this object.</value>
@@ -71,3 +66,4 @@ public class AssessmentItemPlatforms : SifElement
 	}
 
 }}
+

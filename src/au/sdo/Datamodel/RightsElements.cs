@@ -40,9 +40,5 @@ public class RightsElements : SifList<RightsElement>
 		this.SafeAddChild( DatamodelDTD.RIGHTSELEMENTS_RIGHTSELEMENT, rightsElement );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected RightsElements( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

@@ -40,11 +40,6 @@ public class PredecessorItems : SifKeyedList<LearningResourceRefIds>
 		this.SafeAddChild( LearningDTD.PREDECESSORITEMS_LEARNINGRESOURCEREFID, learningResourceRefId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PredecessorItems( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;LearningResourceRefId&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;LearningResourceRefIds&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class PredecessorItems : SifKeyedList<LearningResourceRefIds>
 	}
 
 }}
+

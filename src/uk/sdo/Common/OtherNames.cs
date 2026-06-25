@@ -39,11 +39,6 @@ public class OtherNames : SifKeyedList<Name>
 		this.SafeAddChild( CommonDTD.OTHERNAMES_NAME, name );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected OtherNames( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Name&gt;</c> element.</summary>
 	/// <param name="Type">Code that specifies what type of name this is</param>
 	/// <param name="FamilyName">Full legal family name. That part of the person's name which is used to describe family, clan, tribal group, or marital association. Note that this element is always required.  However, when associated with a contact it may not be possible to know the family name in which case you should add the available information to the FullName element. CBDS: 100003, 100162, 100288, 100280, 900001</param>
@@ -59,3 +54,4 @@ public class OtherNames : SifKeyedList<Name>
 	}
 
 }}
+

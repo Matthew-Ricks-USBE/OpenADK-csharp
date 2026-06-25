@@ -40,11 +40,6 @@ public class Approvals : SifList<Approval>
 		this.SafeAddChild( LearningDTD.APPROVALS_APPROVAL, approval );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Approvals( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Approval&gt;</c> element.</summary>
 	/// <param name="Organization">An Organization</param>
 	/// <param name="Date">A Date</param>
@@ -59,3 +54,4 @@ public class Approvals : SifList<Approval>
 	}
 
 }}
+

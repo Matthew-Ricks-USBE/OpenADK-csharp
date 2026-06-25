@@ -31,11 +31,6 @@ public class BackgroundCheck : SifElement
 	public BackgroundCheck() : base ( ProfdevDTD.BACKGROUNDCHECK ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected BackgroundCheck( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Type&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Type</c> element of this object.</value>
@@ -128,3 +123,4 @@ public class BackgroundCheck : SifElement
 	}
 
 }}
+

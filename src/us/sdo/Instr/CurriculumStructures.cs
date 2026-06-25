@@ -40,11 +40,6 @@ public class CurriculumStructures : SifKeyedList<CurriculumStructureRefId>
 		this.SafeAddChild( InstrDTD.CURRICULUMSTRUCTURES_CURRICULUMSTRUCTUREREFID, curriculumStructureRefId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected CurriculumStructures( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;CurriculumStructureRefId&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;CurriculumStructureRefId&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class CurriculumStructures : SifKeyedList<CurriculumStructureRefId>
 	}
 
 }}
+

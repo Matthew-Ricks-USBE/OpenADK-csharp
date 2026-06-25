@@ -31,11 +31,6 @@ public class Numeric : SifElement
 	public Numeric() : base ( GradebookDTD.NUMERIC ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Numeric( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>IsAccepted</c> attribute.
 	/// </summary>
 	/// <value> The <c>IsAccepted</c> attribute of this object.</value>
@@ -141,3 +136,4 @@ public class Numeric : SifElement
 	}
 
 }}
+

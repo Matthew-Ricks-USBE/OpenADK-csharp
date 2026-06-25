@@ -31,11 +31,6 @@ public class Measurement : SifElement
 	public Measurement() : base ( AssessmentDTD.MEASUREMENT ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Measurement( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>MeasurementCode</c> attribute.
 	/// </summary>
 	/// <value> The <c>MeasurementCode</c> attribute of this object.</value>
@@ -176,3 +171,4 @@ public class Measurement : SifElement
 	}
 
 }}
+

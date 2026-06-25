@@ -39,11 +39,6 @@ public class SoftwareRequirementList : SifKeyedList<SoftwareRequirement>
 		this.SafeAddChild( CommonDTD.SOFTWAREREQUIREMENTLIST_SOFTWAREREQUIREMENT, softwareRequirement );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SoftwareRequirementList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SoftwareRequirement&gt;</c> element.</summary>
 	/// <param name="SoftwareTitle">This is the title of the specific software. This does not include the vendor. For example, Flash not Adobe.</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SoftwareRequirementList : SifKeyedList<SoftwareRequirement>
 	}
 
 }}
+

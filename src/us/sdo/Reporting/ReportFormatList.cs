@@ -41,11 +41,6 @@ public class ReportFormatList : SifKeyedList<ReportFormat>
 		this.SafeAddChild( ReportingDTD.REPORTFORMATLIST_REPORTFORMAT, reportFormat );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ReportFormatList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ReportFormat&gt;</c> element.</summary>
 	/// <param name="Type">This attribute indicates the encoding of the format reference.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;ReportFormat&amp;gt; element</param>
@@ -60,3 +55,4 @@ public class ReportFormatList : SifKeyedList<ReportFormat>
 	}
 
 }}
+

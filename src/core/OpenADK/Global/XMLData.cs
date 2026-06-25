@@ -29,11 +29,6 @@ public class XMLData : SifElement
 	public XMLData() : base ( GlobalDTD.XMLDATA ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected XMLData( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>Description</c> attribute.
 	/// </summary>
 	/// <value> The <c>Description</c> attribute of this object.</value>
@@ -83,3 +78,4 @@ public class XMLData : SifElement
 
 		#endregion // EXTRA METHODS
 }}
+

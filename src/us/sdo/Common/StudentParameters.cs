@@ -30,11 +30,6 @@ public class StudentParameters : SifDataObject
 	public StudentParameters() : base( Adk.SifVersion, CommonDTD.STUDENTPARAMETERS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentParameters( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;StateProvinceId&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>StateProvinceId</c> element of this object.</value>
@@ -474,3 +469,4 @@ public class StudentParameters : SifDataObject
 	}
 
 }}
+

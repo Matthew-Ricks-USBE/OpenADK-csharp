@@ -31,9 +31,5 @@ public class ReportInfo : SifElement
 	/// </summary>
 	public ReportInfo() : base ( ReportingDTD.REPORTINFO ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ReportInfo( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

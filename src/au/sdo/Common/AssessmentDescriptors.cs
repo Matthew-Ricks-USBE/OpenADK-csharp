@@ -39,11 +39,6 @@ public class AssessmentDescriptors : SifKeyedList<AssessmentDescriptor>
 		this.SafeAddChild( CommonDTD.ASSESSMENTDESCRIPTORS_ASSESSMENTDESCRIPTOR, assessmentDescriptor );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AssessmentDescriptors( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;AssessmentDescriptor&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;AssessmentDescriptor&amp;gt; element</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class AssessmentDescriptors : SifKeyedList<AssessmentDescriptor>
 	}
 
 }}
+

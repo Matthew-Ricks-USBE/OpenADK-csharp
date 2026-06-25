@@ -42,11 +42,6 @@ public class SchoolAttendanceHistory : SifKeyedList<SchoolAttended>
 		this.SafeAddChild( EtranscriptsDTD.SCHOOLATTENDANCEHISTORY_SCHOOLATTENDED, schoolAttended );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SchoolAttendanceHistory( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SchoolAttended&gt;</c> element.</summary>
 	/// <param name="RefId">ID used internally to StudentAcademicRecord to avoid duplication of school-related data.</param>
 	///<remarks>
@@ -60,3 +55,4 @@ public class SchoolAttendanceHistory : SifKeyedList<SchoolAttended>
 	}
 
 }}
+

@@ -39,11 +39,6 @@ public class SIF_Providers : SifKeyedList<SIF_Provider>
 		this.SafeAddChild( InfraDTD.SIF_PROVIDERS_SIF_PROVIDER, sifProvider );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Providers( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_Provider&gt;</c> element.</summary>
 	/// <param name="SourceId">The identifier of the SIF node that is providing objects. This is the agent or ZIS identifier that would appear in the SIF_SourceId field of any SIF_Header created by the SIF node.</param>
 	/// <param name="SifObjectList">The name of the object that is being provided by this SIF_SIFNode</param>
@@ -58,3 +53,4 @@ public class SIF_Providers : SifKeyedList<SIF_Provider>
 	}
 
 }}
+

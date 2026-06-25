@@ -31,11 +31,6 @@ public class InterventionProviderName : SifElement
 	public InterventionProviderName() : base ( InstrDTD.INTERVENTIONPROVIDERNAME ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected InterventionProviderName( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>StaffPersonalRefId</c> attribute.
 	/// </summary>
 	/// <value> The <c>StaffPersonalRefId</c> attribute of this object.</value>
@@ -78,3 +73,4 @@ public class InterventionProviderName : SifElement
 	}
 
 }}
+

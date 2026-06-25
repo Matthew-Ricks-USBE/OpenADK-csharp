@@ -29,9 +29,5 @@ public class SIF_GetMessage : SifElement
 	/// </summary>
 	public SIF_GetMessage() : base ( InfraDTD.SIF_GETMESSAGE ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_GetMessage( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

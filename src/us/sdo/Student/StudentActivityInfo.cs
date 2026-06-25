@@ -31,11 +31,6 @@ public class StudentActivityInfo : SifElement
 	public StudentActivityInfo() : base ( StudentDTD.STUDENTACTIVITYINFO ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentActivityInfo( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>RefId</c> attribute.
 	/// </summary>
 	/// <value> The <c>RefId</c> attribute of this object.</value>
@@ -230,3 +225,4 @@ public class StudentActivityInfo : SifElement
 	}
 
 }}
+

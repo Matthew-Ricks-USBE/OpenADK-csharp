@@ -43,11 +43,6 @@ public class SystenRoleSIF_RefId : SifKeyedElement
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SystenRoleSIF_RefId( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -129,3 +124,4 @@ public class SystenRoleSIF_RefId : SifKeyedElement
 	}
 
 }}
+

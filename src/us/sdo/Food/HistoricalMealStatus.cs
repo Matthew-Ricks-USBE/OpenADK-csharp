@@ -46,11 +46,6 @@ public class HistoricalMealStatus : SifKeyedList<MealStatus>
 		this.SafeAddChild( FoodDTD.HISTORICALMEALSTATUS_MEALSTATUS, mealStatus );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected HistoricalMealStatus( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;MealStatus&gt;</c> element.</summary>
 	/// <param name="Type">Meal status type.</param>
 	///<remarks>
@@ -64,3 +59,4 @@ public class HistoricalMealStatus : SifKeyedList<MealStatus>
 	}
 
 }}
+

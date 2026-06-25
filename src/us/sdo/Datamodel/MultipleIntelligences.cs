@@ -40,11 +40,6 @@ public class MultipleIntelligences : SifKeyedList<MultipleIntelligence>
 		this.SafeAddChild( DatamodelDTD.MULTIPLEINTELLIGENCES_MULTIPLEINTELLIGENCE, multipleIntelligence );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MultipleIntelligences( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;MultipleIntelligence&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;MultipleIntelligence&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class MultipleIntelligences : SifKeyedList<MultipleIntelligence>
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class ModificationHistory : SifKeyedList<Modified>
 		this.SafeAddChild( DatamodelDTD.MODIFICATIONHISTORY_MODIFIED, modified );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ModificationHistory( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Modified&gt;</c> element.</summary>
 	/// <param name="By">Identifier of the system or person that modified the data.</param>
 	/// <param name="DateTime">The date/time the modification occurred.</param>
@@ -59,3 +54,4 @@ public class ModificationHistory : SifKeyedList<Modified>
 	}
 
 }}
+

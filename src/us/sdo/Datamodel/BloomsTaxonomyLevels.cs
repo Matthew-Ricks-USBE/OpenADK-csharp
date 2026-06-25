@@ -40,11 +40,6 @@ public class BloomsTaxonomyLevels : SifKeyedList<BloomsTaxonomyLevel>
 		this.SafeAddChild( DatamodelDTD.BLOOMSTAXONOMYLEVELS_BLOOMSTAXONOMYLEVEL, bloomsTaxonomyLevel );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected BloomsTaxonomyLevels( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;BloomsTaxonomyLevel&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;BloomsTaxonomyLevel&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class BloomsTaxonomyLevels : SifKeyedList<BloomsTaxonomyLevel>
 	}
 
 }}
+

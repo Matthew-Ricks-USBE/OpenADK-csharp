@@ -39,11 +39,6 @@ public class LearningStandardItemRefIds : SifKeyedList<LearningStandardItemRefId
 		this.SafeAddChild( CommonDTD.LEARNINGSTANDARDITEMREFIDS_LEARNINGSTANDARDITEMREFID, learningStandardItemRefId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LearningStandardItemRefIds( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;LearningStandardItemRefId&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;LearningStandardItemRefId&amp;gt; element</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class LearningStandardItemRefIds : SifKeyedList<LearningStandardItemRefId
 	}
 
 }}
+

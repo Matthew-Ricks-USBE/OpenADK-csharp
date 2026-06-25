@@ -39,11 +39,6 @@ public class RaceList : SifKeyedList<Race>
 		this.SafeAddChild( CommonDTD.RACELIST_RACE, race );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected RaceList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Race&gt;</c> element.</summary>
 	/// <param name="Type">A code that specifies the coding structure used. The default is "NA".</param>
 	/// <param name="Code">The general racial category which reflects the individual's recognition of his or her community or with which the individual most identifies.</param>
@@ -58,3 +53,4 @@ public class RaceList : SifKeyedList<Race>
 	}
 
 }}
+

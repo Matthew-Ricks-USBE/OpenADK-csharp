@@ -42,11 +42,6 @@ public class StudentSpecialConditions : SifKeyedList<StudentSpecialCondition>
 		this.SafeAddChild( AssessmentDTD.STUDENTSPECIALCONDITIONS_STUDENTSPECIALCONDITION, studentSpecialCondition );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentSpecialConditions( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;StudentSpecialCondition&gt;</c> element.</summary>
 	/// <param name="Code">A code indicating the type of special condition.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;StudentSpecialCondition&amp;gt; element</param>
@@ -61,3 +56,4 @@ public class StudentSpecialConditions : SifKeyedList<StudentSpecialCondition>
 	}
 
 }}
+

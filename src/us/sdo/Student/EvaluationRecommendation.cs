@@ -31,11 +31,6 @@ public class EvaluationRecommendation : SifElement
 	public EvaluationRecommendation() : base ( StudentDTD.EVALUATIONRECOMMENDATION ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EvaluationRecommendation( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Code&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Code</c> element of this object.</value>
@@ -83,3 +78,4 @@ public class EvaluationRecommendation : SifElement
 	}
 
 }}
+

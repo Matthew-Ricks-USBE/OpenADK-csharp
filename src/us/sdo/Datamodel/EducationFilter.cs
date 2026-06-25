@@ -31,11 +31,6 @@ public class EducationFilter : SifElement
 	public EducationFilter() : base ( DatamodelDTD.EDUCATIONFILTER ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EducationFilter( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;MediaTypes&gt;</c> element.
 	/// </summary>
 	/// <value> A MediaTypes </value>
@@ -347,3 +342,4 @@ public class EducationFilter : SifElement
 	}
 
 }}
+

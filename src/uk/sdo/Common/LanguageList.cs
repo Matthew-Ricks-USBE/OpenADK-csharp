@@ -39,11 +39,6 @@ public class LanguageList : SifKeyedList<Language>
 		this.SafeAddChild( CommonDTD.LANGUAGELIST_LANGUAGE, language );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LanguageList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Language&gt;</c> element.</summary>
 	/// <param name="Code">This is the code that specifies the person's language. CBDS: 100046, 100047, 100171, P158</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class LanguageList : SifKeyedList<Language>
 	}
 
 }}
+

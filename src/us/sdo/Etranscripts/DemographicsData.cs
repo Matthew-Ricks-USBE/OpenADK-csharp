@@ -33,11 +33,6 @@ public class DemographicsData : SifElement
 	public DemographicsData() : base ( EtranscriptsDTD.DEMOGRAPHICSDATA ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected DemographicsData( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;RaceList&gt;</c> element.
 	/// </summary>
 	/// <value> A RaceList </value>
@@ -278,3 +273,4 @@ public class DemographicsData : SifElement
 	}
 
 }}
+

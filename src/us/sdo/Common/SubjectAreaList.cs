@@ -39,11 +39,6 @@ public class SubjectAreaList : SifKeyedList<SubjectArea>
 		this.SafeAddChild( CommonDTD.SUBJECTAREALIST_SUBJECTAREA, subjectArea );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SubjectAreaList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SubjectArea&gt;</c> element.</summary>
 	/// <param name="Code">The subject area code (i.e. the first two digits of the course classification code)</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SubjectAreaList : SifKeyedList<SubjectArea>
 	}
 
 }}
+

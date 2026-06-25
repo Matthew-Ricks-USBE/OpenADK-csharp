@@ -32,11 +32,6 @@ public class SectionInfoData : SifElement
 	/// </summary>
 	public SectionInfoData() : base ( EtranscriptsDTD.SECTIONINFODATA ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SectionInfoData( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;MediumOfInstruction&gt;</c> element.</summary>
 	/// <param name="Code">Code representing the medium of instruction.</param>
 	///<remarks>
@@ -77,3 +72,4 @@ public class SectionInfoData : SifElement
 	}
 
 }}
+

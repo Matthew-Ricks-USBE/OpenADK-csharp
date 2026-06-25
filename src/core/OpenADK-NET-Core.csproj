@@ -1,12 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net481</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <AssemblyName>OpenADK.Core</AssemblyName>
     <OutputType>Library</OutputType>
     <RootNamespace>OpenADK</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <UseWindowsForms>true</UseWindowsForms>
-    <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
     <Configurations>Debug;Eval;Internal;Release;ReleaseDocs</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -40,7 +38,8 @@
     <Reference Update="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <PackageReference Include="log4net" Version="2.0.14" />
-    <Reference Include="System.Configuration" />
+    <PackageReference Include="log4net" Version="3.3.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+    <PackageReference Include="MessagePack" Version="3.1.7" />
   </ItemGroup>
 </Project>

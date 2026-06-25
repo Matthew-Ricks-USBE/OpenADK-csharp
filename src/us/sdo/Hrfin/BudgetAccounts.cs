@@ -40,11 +40,6 @@ public class BudgetAccounts : SifList<BudgetAccount>
 		this.SafeAddChild( HrfinDTD.BUDGETACCOUNTS_BUDGETACCOUNT, budgetAccount );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected BudgetAccounts( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;BudgetAccount&gt;</c> element.</summary>
 	/// <param name="AccountClass">Classification of budgetary account code summary</param>
 	/// <param name="FunctionBreakdown">Function breakdown of account code for summarization.</param>
@@ -60,3 +55,4 @@ public class BudgetAccounts : SifList<BudgetAccount>
 	}
 
 }}
+

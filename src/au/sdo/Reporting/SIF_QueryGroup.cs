@@ -42,11 +42,6 @@ public class SIF_QueryGroup : SifKeyedList<SIF_Query>
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_QueryGroup( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -69,3 +64,4 @@ public class SIF_QueryGroup : SifKeyedList<SIF_Query>
 	}
 
 }}
+

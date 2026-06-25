@@ -30,11 +30,6 @@ public class Transaction : SifElement
 	/// </summary>
 	public Transaction() : base ( LibraryDTD.TRANSACTION ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Transaction( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;ItemInfo&gt;</c> element.</summary>
 	/// <param name="Type">A Type</param>
 	/// <param name="Title">The title of the item being referenced by this Transaction.</param>
@@ -168,3 +163,4 @@ public class Transaction : SifElement
 	}
 
 }}
+

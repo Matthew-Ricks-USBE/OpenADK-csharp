@@ -32,14 +32,5 @@ namespace OpenADK.Util
                                        Exception internalException )
             : base( msg, internalException ) {}
 
-        /// <summary>
-        /// The .Net Serialization constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected InternalErrorException( SerializationInfo info,
-                                          StreamingContext context )
-            : base( info, context ) {}
     }
 }

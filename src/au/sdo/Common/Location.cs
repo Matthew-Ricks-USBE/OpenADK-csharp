@@ -30,11 +30,6 @@ public class Location : SifElement
 	public Location() : base ( CommonDTD.LOCATION ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Location( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>Type</c> attribute.
 	/// </summary>
 	/// <value> The <c>Type</c> attribute of this object.</value>
@@ -128,3 +123,4 @@ public class Location : SifElement
 	}
 
 }}
+

@@ -31,11 +31,6 @@ public class RoleScope : SifElement
 	public RoleScope() : base ( SystemDTD.ROLESCOPE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected RoleScope( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;RoleScopeName&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>RoleScopeName</c> element of this object.</value>
@@ -95,3 +90,4 @@ public class RoleScope : SifElement
 	}
 
 }}
+

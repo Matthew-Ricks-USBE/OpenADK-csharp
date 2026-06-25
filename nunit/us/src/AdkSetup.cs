@@ -2,7 +2,7 @@
 using OpenADK.Library;
 using OpenADK.Library.us;
 
-#pragma warning disable S3903 // Types should be defined in named namespaces
+#pragma warning disable S3903,CA1050 // Declare types in namespaces
 /// <summary>
 /// Sets up (global) Adk once for all tests in this assembly
 /// superceding any other Adk setup.
@@ -15,7 +15,7 @@ using OpenADK.Library.us;
 /// <see href="https://docs.nunit.org/articles/nunit/writing-tests/attributes/setupfixture.html"/>
 [SetUpFixture]
 public class AdkSetup
-#pragma warning restore S3903
+#pragma warning restore S3903,CA1050
 {
     [OneTimeSetUp]
     public void Setup()

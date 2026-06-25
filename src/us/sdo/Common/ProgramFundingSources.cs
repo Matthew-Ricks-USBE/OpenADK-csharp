@@ -39,9 +39,5 @@ public class ProgramFundingSources : SifList<ProgramFundingSource>
 		this.SafeAddChild( CommonDTD.PROGRAMFUNDINGSOURCES_PROGRAMFUNDINGSOURCE, programFundingSource );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ProgramFundingSources( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

@@ -40,9 +40,5 @@ public class CurriculumHierarchyList : SifList<CurriculumHierarchy>
 		this.SafeAddChild( InstrDTD.CURRICULUMHIERARCHYLIST_CURRICULUMHIERARCHY, curriculumHierarchy );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected CurriculumHierarchyList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

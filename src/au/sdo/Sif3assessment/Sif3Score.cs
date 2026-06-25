@@ -31,11 +31,6 @@ public class Sif3Score : SifElement
 	public Sif3Score() : base ( Sif3assessmentDTD.SIF3SCORE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Sif3Score( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;ScoreCode&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>ScoreCode</c> element of this object.</value>
@@ -177,3 +172,4 @@ public class Sif3Score : SifElement
 	}
 
 }}
+

@@ -39,11 +39,6 @@ public class SIF_SIFNodes : SifKeyedList<SIF_SIFNode>
 		this.SafeAddChild( InfraDTD.SIF_SIFNODES_SIF_SIFNODE, sifsifNode );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_SIFNodes( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_SIFNode&gt;</c> element.</summary>
 	/// <param name="Type">The type of node ("Agent" or "ZIS")</param>
 	/// <param name="SifName">The descriptive name of the SIF node (i.e. Ramsey Food Services).</param>
@@ -62,3 +57,4 @@ public class SIF_SIFNodes : SifKeyedList<SIF_SIFNode>
 	}
 
 }}
+

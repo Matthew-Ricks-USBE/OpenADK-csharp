@@ -43,11 +43,6 @@ public class StandardHierarchyLevel : SifElement
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StandardHierarchyLevel( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>Description</c> attribute.
 	/// </summary>
 	/// <value> The <c>Description</c> attribute of this object.</value>
@@ -95,3 +90,4 @@ public class StandardHierarchyLevel : SifElement
 	}
 
 }}
+

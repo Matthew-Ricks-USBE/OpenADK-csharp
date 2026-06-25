@@ -30,11 +30,6 @@ public class StudentRecordExchangeData : SifElement
 	/// </summary>
 	public StudentRecordExchangeData() : base ( CommonDTD.STUDENTRECORDEXCHANGEDATA ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentRecordExchangeData( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;StudentRecordExchange&gt;</c> element.</summary>
 	/// <param name="RefId">The GUID that uniquely identifies an instance of this object.</param>
 	///<remarks>
@@ -238,3 +233,4 @@ public class StudentRecordExchangeData : SifElement
 	}
 
 }}
+

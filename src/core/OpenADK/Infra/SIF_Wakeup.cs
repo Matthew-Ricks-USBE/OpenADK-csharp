@@ -29,9 +29,5 @@ public class SIF_Wakeup : SifElement
 	/// </summary>
 	public SIF_Wakeup() : base ( InfraDTD.SIF_WAKEUP ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Wakeup( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

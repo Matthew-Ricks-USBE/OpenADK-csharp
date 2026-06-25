@@ -31,11 +31,6 @@ public class Descriptive : SifElement
 	public Descriptive() : base ( AssessmentDTD.DESCRIPTIVE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Descriptive( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;PValue&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>PValue</c> element of this object.</value>
@@ -149,3 +144,4 @@ public class Descriptive : SifElement
 	}
 
 }}
+

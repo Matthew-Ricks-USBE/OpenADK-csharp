@@ -39,11 +39,6 @@ public class SIF_SupportedAuthentication : SifKeyedList<SIF_ProtocolName>
 		this.SafeAddChild( InfraDTD.SIF_SUPPORTEDAUTHENTICATION_SIF_PROTOCOLNAME, sifProtocolName );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_SupportedAuthentication( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_ProtocolName&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SIF_ProtocolName&amp;gt; element</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SIF_SupportedAuthentication : SifKeyedList<SIF_ProtocolName>
 	}
 
 }}
+

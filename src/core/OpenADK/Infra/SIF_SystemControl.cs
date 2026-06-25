@@ -36,11 +36,6 @@ public class SIF_SystemControl : SifMessagePayload
 	public SIF_SystemControl( SifVersion sifVersion ) : base( sifVersion, InfraDTD.SIF_SYSTEMCONTROL ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_SystemControl( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;SIF_Header&gt;</c> element.
 	/// </summary>
 	/// <value> A SIF_Header </value>
@@ -93,3 +88,4 @@ public class SIF_SystemControl : SifMessagePayload
 	}
 
 }}
+

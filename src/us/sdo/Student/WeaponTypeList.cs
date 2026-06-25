@@ -40,11 +40,6 @@ public class WeaponTypeList : SifKeyedList<WeaponType>
 		this.SafeAddChild( StudentDTD.WEAPONTYPELIST_WEAPONTYPE, weaponType );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected WeaponTypeList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;WeaponType&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;WeaponType&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class WeaponTypeList : SifKeyedList<WeaponType>
 	}
 
 }}
+

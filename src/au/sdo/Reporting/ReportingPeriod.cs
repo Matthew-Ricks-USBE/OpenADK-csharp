@@ -32,11 +32,6 @@ public class ReportingPeriod : SifElement
 	public ReportingPeriod() : base ( ReportingDTD.REPORTINGPERIOD ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ReportingPeriod( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;BeginReportDate&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>BeginReportDate</c> element of this object.</value>
@@ -142,3 +137,4 @@ public class ReportingPeriod : SifElement
 	}
 
 }}
+

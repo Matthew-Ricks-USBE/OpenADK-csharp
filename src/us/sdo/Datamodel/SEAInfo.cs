@@ -31,11 +31,6 @@ public class SEAInfo : SifElement
 	public SEAInfo() : base ( DatamodelDTD.SEAINFO ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SEAInfo( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>RefId</c> attribute.
 	/// </summary>
 	/// <value> The <c>RefId</c> attribute of this object.</value>
@@ -302,3 +297,4 @@ public class SEAInfo : SifElement
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class FeesForUse : SifKeyedList<FeeForUse>
 		this.SafeAddChild( DatamodelDTD.FEESFORUSE_FEEFORUSE, feeForUse );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected FeesForUse( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;FeeForUse&gt;</c> element.</summary>
 	/// <param name="MeteringType">A MeteringType</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class FeesForUse : SifKeyedList<FeeForUse>
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class VictimList : SifKeyedList<Victim>
 		this.SafeAddChild( StudentDTD.VICTIMLIST_VICTIM, victim );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected VictimList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Victim&gt;</c> element.</summary>
 	/// <param name="Type">Identifies the type of individual victimized in the incident.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class VictimList : SifKeyedList<Victim>
 	}
 
 }}
+

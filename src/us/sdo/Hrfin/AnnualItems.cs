@@ -40,11 +40,6 @@ public class AnnualItems : SifList<AnnualItem>
 		this.SafeAddChild( HrfinDTD.ANNUALITEMS_ANNUALITEM, annualItem );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AnnualItems( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;AnnualItem&gt;</c> element.</summary>
 	/// <param name="AccountType">Classification of budgetary account code summary</param>
 	/// <param name="FundType">Is the account a general or special account code designation?</param>
@@ -61,3 +56,4 @@ public class AnnualItems : SifList<AnnualItem>
 	}
 
 }}
+

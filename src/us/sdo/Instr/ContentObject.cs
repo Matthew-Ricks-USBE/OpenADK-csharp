@@ -30,11 +30,6 @@ public class ContentObject : SifElement
 	/// </summary>
 	public ContentObject() : base ( InstrDTD.CONTENTOBJECT ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ContentObject( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;SourceObject&gt;</c> element.</summary>
 	/// <param name="SifRefObject">The type of learning object the source object is.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SourceObject&amp;gt; element</param>
@@ -116,3 +111,4 @@ public class ContentObject : SifElement
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class SalesAmounts : SifKeyedList<SalesAmount>
 		this.SafeAddChild( FoodDTD.SALESAMOUNTS_SALESAMOUNT, salesAmount );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SalesAmounts( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SalesAmount&gt;</c> element.</summary>
 	/// <param name="Type">Type of SalesAmount. This denotes the form of incoming funds for the sales done.</param>
 	/// <param name="AccountType">Type of account to which sales amounts apply.  This is set to NA when Type is set as Earned.</param>
@@ -60,3 +55,4 @@ public class SalesAmounts : SifKeyedList<SalesAmount>
 	}
 
 }}
+

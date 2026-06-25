@@ -40,11 +40,6 @@ public class SIF_RefObject : SifKeyedElement
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_RefObject( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -76,3 +71,4 @@ public class SIF_RefObject : SifKeyedElement
 	}
 
 }}
+

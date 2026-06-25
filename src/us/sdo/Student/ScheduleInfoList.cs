@@ -40,11 +40,6 @@ public class ScheduleInfoList : SifKeyedList<ScheduleInfo>
 		this.SafeAddChild( StudentDTD.SCHEDULEINFOLIST_SCHEDULEINFO, scheduleInfo );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ScheduleInfoList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ScheduleInfo&gt;</c> element.</summary>
 	/// <param name="TermInfoRefId">The schedule-related information for a section repeating for each term in which the section is scheduled. The TermInfoRefId attribute value should repeat as necessary to show the appropriate relationship between meeting times, teachers and rooms.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class ScheduleInfoList : SifKeyedList<ScheduleInfo>
 	}
 
 }}
+

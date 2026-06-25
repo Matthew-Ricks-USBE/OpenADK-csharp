@@ -39,11 +39,6 @@ public class LearningObjectives : SifKeyedList<LearningObjective>
 		this.SafeAddChild( CommonDTD.LEARNINGOBJECTIVES_LEARNINGOBJECTIVE, learningObjective );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LearningObjectives( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;LearningObjective&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;LearningObjective&amp;gt; element</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class LearningObjectives : SifKeyedList<LearningObjective>
 	}
 
 }}
+

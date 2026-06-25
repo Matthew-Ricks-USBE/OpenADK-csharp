@@ -31,11 +31,6 @@ public class TeacherAttendance : SifElement
 	public TeacherAttendance() : base ( StudentDTD.TEACHERATTENDANCE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TeacherAttendance( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;CountsTowardAttendance&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>CountsTowardAttendance</c> element of this object.</value>
@@ -91,3 +86,4 @@ public class TeacherAttendance : SifElement
 	}
 
 }}
+

@@ -38,11 +38,6 @@ public class MediaTypes : SifKeyedList<MediaType>
 		this.SafeAddChild( GlobalDTD.MEDIATYPES_MEDIATYPE, mediaType );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MediaTypes( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;MediaType&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;MediaType&amp;gt; element</param>
 	///<remarks>
@@ -56,3 +51,4 @@ public class MediaTypes : SifKeyedList<MediaType>
 	}
 
 }}
+

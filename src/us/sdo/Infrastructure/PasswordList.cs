@@ -41,11 +41,6 @@ public class PasswordList : SifKeyedList<Password>
 		this.SafeAddChild( InfrastructureDTD.PASSWORDLIST_PASSWORD, password );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PasswordList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Password&gt;</c> element.</summary>
 	/// <param name="Algorithm">The method used to encrypt the user's password. See the implementation details below.</param>
 	/// <param name="KeyName">The name of the key to be used for decryption of the password.  Left blank for plain, encoded text (Algorithm attribute value of "base64") and hash algorithms.</param>
@@ -61,3 +56,4 @@ public class PasswordList : SifKeyedList<Password>
 	}
 
 }}
+

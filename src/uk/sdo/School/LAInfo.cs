@@ -47,11 +47,6 @@ public class LAInfo : SifDataObject
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LAInfo( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -364,3 +359,4 @@ public class LAInfo : SifDataObject
 	}
 
 }}
+

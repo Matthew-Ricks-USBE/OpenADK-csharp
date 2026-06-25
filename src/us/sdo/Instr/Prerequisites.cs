@@ -40,11 +40,6 @@ public class Prerequisites : SifKeyedList<Prerequisite>
 		this.SafeAddChild( InstrDTD.PREREQUISITES_PREREQUISITE, prerequisite );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Prerequisites( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Prerequisite&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;Prerequisite&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Prerequisites : SifKeyedList<Prerequisite>
 	}
 
 }}
+

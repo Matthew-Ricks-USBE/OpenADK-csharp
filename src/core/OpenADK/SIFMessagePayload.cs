@@ -481,14 +481,6 @@ namespace OpenADK.Library
         }
 
 
-        /// <summary>
-        /// .Net Serialization Constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected SifMessagePayload(SerializationInfo info,
-                                     StreamingContext context)
-            : base(info, context) { }
     }
 }
+

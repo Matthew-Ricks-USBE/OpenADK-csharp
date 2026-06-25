@@ -36,11 +36,6 @@ public class SIF_Unregister : SifMessagePayload
 	public SIF_Unregister( SifVersion sifVersion ) : base( sifVersion, InfraDTD.SIF_UNREGISTER ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Unregister( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;SIF_Header&gt;</c> element.
 	/// </summary>
 	/// <value> A SIF_Header </value>
@@ -66,3 +61,4 @@ public class SIF_Unregister : SifMessagePayload
 	}
 
 }}
+

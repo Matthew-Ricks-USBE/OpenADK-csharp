@@ -46,15 +46,5 @@ namespace OpenADK.Library
                                       IZone zone,
                                       Exception innerException )
             : base( msg, zone, innerException ) {}
-
-        /// <summary>
-        /// The .Net Serialization constructor, used to allow exception to be serialized across AppDomain boundaries
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected AdkTransportException( SerializationInfo info,
-                                         StreamingContext context )
-            : base( info, context ) {}
     }
 }

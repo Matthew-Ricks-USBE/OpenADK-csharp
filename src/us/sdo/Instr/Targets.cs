@@ -31,11 +31,6 @@ public class Targets : SifElement
 	public Targets() : base ( InstrDTD.TARGETS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Targets( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Target&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Target</c> element of this object.</value>
@@ -57,3 +52,4 @@ public class Targets : SifElement
 	}
 
 }}
+

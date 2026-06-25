@@ -1,12 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net481</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
+	<IsTestProject>false</IsTestProject><!-- Test helpers, not a test project. -->
     <RootNamespace>OpenADK.UnitTesting</RootNamespace>
     <AssemblyName>OpenADK.UnitTesting</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Eval;Internal;Release;ReleaseDocs</Configurations>
   </PropertyGroup>
+  <ItemGroup>
+    <!-- Remove the capability flag that IDE extensions use for test discovery. -->
+    <ProjectCapability Remove="TestContainer" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Eval|AnyCPU' ">
     <OutputPath>bin\Eval\</OutputPath>
     <Optimize>true</Optimize>

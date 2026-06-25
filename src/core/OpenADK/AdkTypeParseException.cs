@@ -22,9 +22,5 @@ namespace OpenADK.Library
         public AdkTypeParseException( string msg, IZone zone ) : base( msg, zone )
         {
         }
-
-        public AdkTypeParseException( SerializationInfo info, StreamingContext context ) : base( info, context )
-        {
-        }
     }
 }

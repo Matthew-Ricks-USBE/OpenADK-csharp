@@ -29,9 +29,5 @@ public class SIF_GetAgentACL : SifElement
 	/// </summary>
 	public SIF_GetAgentACL() : base ( InfraDTD.SIF_GETAGENTACL ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_GetAgentACL( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

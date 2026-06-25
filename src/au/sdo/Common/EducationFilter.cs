@@ -29,11 +29,6 @@ public class EducationFilter : SifElement
 	/// </summary>
 	public EducationFilter() : base ( CommonDTD.EDUCATIONFILTER ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EducationFilter( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;LearningStandardItems&gt;</c> element.</summary>
 	/// <param name="LearningStandardItemRefId">A LearningStandardItemRefId</param>
 	///<remarks>
@@ -74,3 +69,4 @@ public class EducationFilter : SifElement
 	}
 
 }}
+

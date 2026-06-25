@@ -33,11 +33,6 @@ public class SchoolCourseInfoData : SifElement
 	public SchoolCourseInfoData() : base ( EtranscriptsDTD.SCHOOLCOURSEINFODATA ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SchoolCourseInfoData( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;CourseCode&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>CourseCode</c> element of this object.</value>
@@ -281,3 +276,4 @@ public class SchoolCourseInfoData : SifElement
 	}
 
 }}
+

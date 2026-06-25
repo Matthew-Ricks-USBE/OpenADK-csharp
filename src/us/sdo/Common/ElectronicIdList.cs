@@ -39,11 +39,6 @@ public class ElectronicIdList : SifKeyedList<ElectronicId>
 		this.SafeAddChild( CommonDTD.ELECTRONICIDLIST_ELECTRONICID, electronicId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ElectronicIdList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ElectronicId&gt;</c> element.</summary>
 	/// <param name="Type">Electronic ID type.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;ElectronicId&amp;gt; element</param>
@@ -58,3 +53,4 @@ public class ElectronicIdList : SifKeyedList<ElectronicId>
 	}
 
 }}
+

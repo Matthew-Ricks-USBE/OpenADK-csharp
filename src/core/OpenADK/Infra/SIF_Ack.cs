@@ -36,11 +36,6 @@ public class SIF_Ack : SifMessagePayload
 	public SIF_Ack( SifVersion sifVersion ) : base( sifVersion, InfraDTD.SIF_ACK ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Ack( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;SIF_Header&gt;</c> element.
 	/// </summary>
 	/// <value> A SIF_Header </value>
@@ -272,3 +267,4 @@ public class SIF_Ack : SifMessagePayload
 
 		#endregion // EXTRA METHODS
 }}
+

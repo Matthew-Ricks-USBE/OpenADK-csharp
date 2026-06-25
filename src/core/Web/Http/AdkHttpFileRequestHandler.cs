@@ -5,6 +5,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.Versioning;
 using OpenADK.Util;
 using Microsoft.Win32;
 
@@ -75,8 +76,17 @@ namespace OpenADK.Web.Http
 
         private string GetContentType( FileInfo file )
         {
+            if ( !OperatingSystem.IsWindows() ) {
+                return "text/html";
+            }
+            return GetWindowsContentType( file.Extension );
+        }
+
+        [SupportedOSPlatform( "windows" )]
+        private static string GetWindowsContentType( string extension )
+        {
             string aReturnVal = "text/html";
-            using ( RegistryKey aKey = Registry.ClassesRoot.OpenSubKey( file.Extension, false ) ) {
+            using ( RegistryKey aKey = Registry.ClassesRoot.OpenSubKey( extension, false ) ) {
                 if ( aKey != null ) {
                     string aVal = (string) aKey.GetValue( "Content Type" );
                     if ( aVal != null ) {

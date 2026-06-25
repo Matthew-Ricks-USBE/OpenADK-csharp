@@ -39,14 +39,5 @@ namespace OpenADK.Library.Tools.Queries
                 SifErrorCategoryCode.RequestResponse, SifErrorCodes.REQRSP_UNSUPPORTED_QUERY_9, msg,
                 null, innerException ) {}
 
-        /// <summary>
-        /// The .Net Serialization constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected QueryFormatterException( SerializationInfo info,
-                                           StreamingContext context )
-            : base( info, context ) {}
     }
 }

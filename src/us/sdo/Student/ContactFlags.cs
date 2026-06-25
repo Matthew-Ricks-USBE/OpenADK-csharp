@@ -31,11 +31,6 @@ public class ContactFlags : SifElement
 	public ContactFlags() : base ( StudentDTD.CONTACTFLAGS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ContactFlags( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;PickupRights&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>PickupRights</c> element of this object.</value>
@@ -351,3 +346,4 @@ public class ContactFlags : SifElement
 	}
 
 }}
+

@@ -65,10 +65,10 @@ namespace OpenADK.Web.Http
             }
 
             // Set up common certificates.
-            fRootCert = new("issuer.pfx", CERTIFICATE_PASSWORD);
-            fIpCert = new("127.0.0.1.pfx", CERTIFICATE_PASSWORD);
-            fServerCert = new("localhost.pfx", CERTIFICATE_PASSWORD);
-            fInvalidCert = new("invalid.pfx", CERTIFICATE_PASSWORD);
+            fRootCert = X509CertificateLoader.LoadPkcs12FromFile("issuer.pfx", CERTIFICATE_PASSWORD);
+            fIpCert = X509CertificateLoader.LoadPkcs12FromFile("127.0.0.1.pfx", CERTIFICATE_PASSWORD);
+            fServerCert = X509CertificateLoader.LoadPkcs12FromFile("localhost.pfx", CERTIFICATE_PASSWORD);
+            fInvalidCert = X509CertificateLoader.LoadPkcs12FromFile("invalid.pfx", CERTIFICATE_PASSWORD);
 
             fRootStore = new(StoreName.Root, StoreLocation.CurrentUser);
             fRootStore.Open(OpenFlags.ReadWrite);
@@ -257,7 +257,7 @@ namespace OpenADK.Web.Http
             HttpWebRequest request = (HttpWebRequest) WebRequest.Create(SERVER_TEST_URL);
             if (useClientCert)
             {
-                X509Certificate2 cert = new($"{fProps.ClientCertName}.pfx", CERTIFICATE_PASSWORD);
+                X509Certificate2 cert = X509CertificateLoader.LoadPkcs12FromFile($"{fProps.ClientCertName}.pfx", CERTIFICATE_PASSWORD);
                 request.ClientCertificates.Add(cert);
             }
 

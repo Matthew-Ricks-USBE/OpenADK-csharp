@@ -40,11 +40,6 @@ public class ResourceEvaluations : SifKeyedList<ResourceEvaluation>
 		this.SafeAddChild( InstrDTD.RESOURCEEVALUATIONS_EVALUATION, evaluation );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ResourceEvaluations( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Evaluation&gt;</c> element.</summary>
 	/// <param name="RefId">GUID assigned to an evaluation.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class ResourceEvaluations : SifKeyedList<ResourceEvaluation>
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class AssociatedObjects : SifKeyedList<AssociatedObject>
 		this.SafeAddChild( LearningDTD.ASSOCIATEDOBJECTS_ASSOCIATEDOBJECT, associatedObject );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AssociatedObjects( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;AssociatedObject&gt;</c> element.</summary>
 	/// <param name="SifRefObject">A SIF_RefObject</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;AssociatedObject&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class AssociatedObjects : SifKeyedList<AssociatedObject>
 	}
 
 }}
+

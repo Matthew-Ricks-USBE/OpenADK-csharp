@@ -40,9 +40,5 @@ public class Contacts : SifList<Contact>
 		this.SafeAddChild( LearningDTD.CONTACTS_CONTACT, contact );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Contacts( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

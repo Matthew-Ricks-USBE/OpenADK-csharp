@@ -31,11 +31,6 @@ public class FeedbackItemSif3StudentScoreSet : SifElement
 	public FeedbackItemSif3StudentScoreSet() : base ( AssessmentDTD.FEEDBACKITEMSIF3STUDENTSCORESET ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected FeedbackItemSif3StudentScoreSet( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;DiagnosticStatement&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>DiagnosticStatement</c> element of this object.</value>
@@ -120,3 +115,4 @@ public class FeedbackItemSif3StudentScoreSet : SifElement
 	}
 
 }}
+

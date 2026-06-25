@@ -41,11 +41,6 @@ public class Sif3Organizations : SifList<Sif3Organization>
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Sif3Organizations( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -56,3 +51,4 @@ public class Sif3Organizations : SifList<Sif3Organization>
 	}
 
 }}
+

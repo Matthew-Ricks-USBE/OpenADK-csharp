@@ -331,16 +331,6 @@ namespace OpenADK.Library
             }
         }
 
-        /// <summary>
-        /// The .Net Serialization constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected SifException( SerializationInfo info,
-                                StreamingContext context )
-            : base( info, context ) {}
-
 
         /// <summary>  Determines if this SifException describes any SIF_Errors</summary>
         /// <returns> true if the exception wraps at least on SIF_Error

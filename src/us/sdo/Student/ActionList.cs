@@ -40,11 +40,6 @@ public class ActionList : SifList<Action>
 		this.SafeAddChild( StudentDTD.ACTIONLIST_ACTION, action );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ActionList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Action&gt;</c> element.</summary>
 	/// <param name="Code">A Code</param>
 	/// <param name="StartDate">The date on which the disciplinary action begins.</param>
@@ -67,3 +62,4 @@ public class ActionList : SifList<Action>
 	}
 
 }}
+

@@ -29,9 +29,5 @@ public class SIF_Body : SifElement
 	/// </summary>
 	public SIF_Body() : base ( InfraDTD.SIF_BODY ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Body( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

@@ -40,11 +40,6 @@ public class Rates : SifKeyedList<Rate>
 		this.SafeAddChild( FoodDTD.RATES_RATE, rate );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Rates( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Rate&gt;</c> element.</summary>
 	/// <param name="SevereNeed">
 	///         Severe need identifier for the rate. When SevereNeed is Yes then the rate shown is the combined rate.
@@ -64,3 +59,4 @@ public class Rates : SifKeyedList<Rate>
 	}
 
 }}
+

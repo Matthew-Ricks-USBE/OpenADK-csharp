@@ -40,11 +40,6 @@ public class TransferPoints : SifList<TransferPoint>
 		this.SafeAddChild( TransDTD.TRANSFERPOINTS_TRANSFERPOINT, transferPoint );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TransferPoints( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;TransferPoint&gt;</c> element.</summary>
 	/// <param name="EmbarkBusRouteDetail">The GUID that identifies the bus stop/route when the student gets on the bus.</param>
 	/// <param name="DisembarkBusRouteDetail">The GUID that identifies the bus stop/route when the student gets off the bus.</param>
@@ -59,3 +54,4 @@ public class TransferPoints : SifList<TransferPoint>
 	}
 
 }}
+

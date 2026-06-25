@@ -34,11 +34,6 @@ public class ItemCharacteristics : SifDataObject
 	public ItemCharacteristics() : base( Adk.SifVersion, AssessmentDTD.ITEMCHARACTERISTICS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ItemCharacteristics( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -290,3 +285,4 @@ public class ItemCharacteristics : SifDataObject
 	}
 
 }}
+

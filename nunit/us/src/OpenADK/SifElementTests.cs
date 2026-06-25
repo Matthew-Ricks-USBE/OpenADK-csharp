@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
@@ -37,52 +36,6 @@ namespace Library.Nunit.US
          Assert.IsNull(period.EndSubmitDate, "EndSubmitDate contains an empty date element");
 
       }//end TestSIFDate
-      [Test]
-      public void TestSerializeable()
-      {
-         MemoryStream ms = new MemoryStream();
-         BinaryFormatter formatter = new BinaryFormatter();
-        
-         //************************************************************************
-         //Serialize / Deserialize Name object                           **********
-         Name name = new Name(NameType.LEGAL, "Nahorniak", "Mike");
-         Name result;
-         formatter.Serialize(ms, name);
-         ms.Seek(0, SeekOrigin.Begin);
-         result = (Name)formatter.Deserialize(ms);
-         Assert.AreEqual(name.FirstName, result.FirstName, "Name.FirstName field did not properly deserialize");
-         Assert.AreEqual(name.FirstName, result.FirstName, "Name.LastName field did not properly deserialize");
-
-         //************************************************************************
-         //Serialize / Deserialize StudentPersonal object                **********        
-         ms.SetLength(0);
-         ms.Position = 0;
-         StudentPersonal sp = new StudentPersonal();
-         StudentPersonal spResult;
-         formatter.Serialize(ms, sp);
-         ms.Seek(0, SeekOrigin.Begin);
-         spResult = (StudentPersonal)formatter.Deserialize(ms);
-         Assert.AreEqual(sp.Name, spResult.Name, "Deserialized StudentPersonal Name elements do not match");
-      
-         //************************************************************************
-         //Serialize / Deserialize SIF_ERROR object                      **********
-         ms.SetLength(0);
-         ms.Position = 0;
-         SIF_Error error = new SIF_Error
-          ((int)SifErrorCategoryCode.Generic,
-           SifErrorCodes.GENERIC_GENERIC_ERROR_1,
-           "Could not serialize the SIF_Err object");
-         SIF_Error result_error;
-
-         formatter.Serialize(ms, error);
-         ms.Seek(0, SeekOrigin.Begin);
-         result_error = (SIF_Error)formatter.Deserialize(ms);
-         Assert.AreEqual(error.ToString(), result_error.ToString(), "Deserialized SIF_Error  match");
-         ms.Close();
-
-
-      }
-
 
       [Test]
       public void SharedChildren()

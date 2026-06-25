@@ -40,9 +40,5 @@ public class PreviousEstablishmentList : SifList<PreviousEstablishment>
 		this.SafeAddChild( LearnerDTD.PREVIOUSESTABLISHMENTLIST_PREVIOUSESTABLISHMENT, previousEstablishment );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PreviousEstablishmentList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

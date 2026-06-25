@@ -40,11 +40,6 @@ public class InterestLevels : SifKeyedList<InterestLevel>
 		this.SafeAddChild( DatamodelDTD.INTERESTLEVELS_INTERESTLEVEL, interestLevel );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected InterestLevels( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;InterestLevel&gt;</c> element.</summary>
 	/// <param name="Code">Code representing the grade level.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class InterestLevels : SifKeyedList<InterestLevel>
 	}
 
 }}
+

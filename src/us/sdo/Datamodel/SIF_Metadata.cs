@@ -31,11 +31,6 @@ public class SIF_Metadata : SifElement
 	public SIF_Metadata() : base ( DatamodelDTD.SIF_METADATA ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Metadata( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;TimeElements&gt;</c> element.
 	/// </summary>
 	/// <value> A TimeElements </value>
@@ -136,3 +131,4 @@ public class SIF_Metadata : SifElement
 	}
 
 }}
+

@@ -68,7 +68,7 @@ namespace OpenADK.Library.Impl
     /// </author>
     /// <version>  Adk 1.0
     /// </version>
-    public class HttpTransport : TransportImpl, ICertificatePolicy
+    public class HttpTransport : TransportImpl
     {
         private const string OID_SERVER_AUTHENTICATION = "1.3.6.1.5.5.7.3.1";
         private const string OID_CLIENT_AUTHENTICATION = "1.3.6.1.5.5.7.3.2";
@@ -806,57 +806,6 @@ namespace OpenADK.Library.Impl
 
 
         /// <summary>
-        /// Returns the class that will verify server certificates
-        /// </summary>
-        /// <returns></returns>
-        public ICertificatePolicy GetServerCertificatePolicy()
-        {
-            return this;
-        }
-
-        #region ICertificatePolicy Members
-
-        /// <summary>
-        /// Called by the .Net framework when it is initiating an SSL connection. Allows the client
-        /// to examine the certificate and verify whether it should be used or not.
-        /// </summary>
-        /// <param name="srvPoint">The service point representing the server</param>
-        /// <param name="certificate">The certificate received from the server</param>
-        /// <param name="request">The request that initiated the connection</param>
-        /// <param name="certificateProblem">The problem, if any that the cryptography subsystem uncovered, or zero</param>
-        /// <returns>True if the certificate is validated, otherwise false</returns>
-        bool ICertificatePolicy.CheckValidationResult(
-            ServicePoint srvPoint,
-            X509Certificate certificate,
-            WebRequest request,
-            int certificateProblem )
-        {
-            // The .Net ADK uses the same validation as the default .Net framework certificate policy. If other
-            // policy requirements become necessary for the SIF Specification or special situations, they can be
-            // implemented here.
-            if ( certificateProblem == 0 )
-            {
-                return true;
-            }
-            else
-            {
-                if ( (Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0 )
-                {
-                    if ( log.IsDebugEnabled )
-                    {
-                        log.Debug
-                            ( string.Format
-                                  ( "Certificate is being rejected for reason {0} : {1}",
-                                    certificateProblem, certificate.ToString( true ) ) );
-                    }
-                }
-                return false;
-            }
-        }
-
-        #endregion
-
-        /// <summary>
         /// Gets the certificate that should be used for server authentication ( SSL )
         /// </summary>
         /// <remarks>
@@ -962,7 +911,12 @@ namespace OpenADK.Library.Impl
                         try
                         {
                             string cfp = props.SSLCertFilePassword;
-                            X509Certificate2 fileCert = new X509Certificate2(info.FullName, cfp);
+                            X509Certificate2 fileCert =
+                                X509CertificateLoader.LoadPkcs12FromFile(
+                                    info.FullName,
+                                    cfp,
+                                    X509KeyStorageFlags.DefaultKeySet,
+                                    Pkcs12LoaderLimits.Defaults);
                             DebugTransport("Using certificate file '{0}'", info.FullName);
                             return fileCert;
                         }

@@ -39,11 +39,6 @@ public class SIF_VersionList : SifKeyedList<SIF_Version>
 		this.SafeAddChild( InfraDTD.SIF_VERSIONLIST_SIF_VERSION, sifVersion );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_VersionList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_Version&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SIF_Version&amp;gt; element</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SIF_VersionList : SifKeyedList<SIF_Version>
 	}
 
 }}
+

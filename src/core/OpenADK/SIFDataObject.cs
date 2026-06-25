@@ -557,27 +557,6 @@ namespace OpenADK.Library
                 }
             }
         }
-
-        #region Serialization
-
-        // TODO: Andy E Serialization still does not work in the .Net ADK. We need to modify
-        // adkgen so that the protected serialization constructor is added to each
-        // subclass of Element
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter = true )]
-        protected SifDataObject( SerializationInfo info,
-                                 StreamingContext context )
-            : base( info, context )
-        {
-            string versionString = info.GetString( "fVersion" );
-            fVersion = SifVersion.Parse( versionString );
-        }
-
-        //protected override void OnGetObjectData(SerializationInfo info,
-        //                                         StreamingContext context)
-        //{
-        //   info.AddValue("fVersion", this.SifVersion.ToString());
-        //}
-
-        #endregion
     }
 }
+

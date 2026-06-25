@@ -32,11 +32,6 @@ public class CurrentCourseActivity : SifElement
 	/// </summary>
 	public CurrentCourseActivity() : base ( EtranscriptsDTD.CURRENTCOURSEACTIVITY ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected CurrentCourseActivity( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;TermInfoData&gt;</c> element.</summary>
 	/// <param name="SchoolAttendedRefId">Reference to the school of record for the courses being taken (see SchoolAttended).</param>
 	///<remarks>
@@ -101,3 +96,4 @@ public class CurrentCourseActivity : SifElement
 	}
 
 }}
+

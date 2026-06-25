@@ -42,11 +42,6 @@ public class Courses : SifList<Course>
 		this.SafeAddChild( EtranscriptsDTD.COURSES_COURSE, course );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Courses( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Course&gt;</c> element.</summary>
 	/// <param name="MarkingPeriod">A MarkingPeriod</param>
 	/// <param name="MarkingPeriods">A MarkingPeriods</param>
@@ -61,3 +56,4 @@ public class Courses : SifList<Course>
 	}
 
 }}
+

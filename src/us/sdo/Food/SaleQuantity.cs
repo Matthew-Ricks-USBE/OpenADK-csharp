@@ -47,11 +47,6 @@ public class SaleQuantity : SifElement
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SaleQuantity( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Value&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Value</c> element of this object.</value>
@@ -171,3 +166,4 @@ public class SaleQuantity : SifElement
 	}
 
 }}
+

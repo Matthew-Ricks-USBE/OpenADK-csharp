@@ -29,11 +29,6 @@ public class SIF_AgentACL : SifDataObject
 	/// </summary>
 	public SIF_AgentACL() : base( Adk.SifVersion, InfraDTD.SIF_AGENTACL ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_AgentACL( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;SIF_ProvideAccess&gt;</c> element.</summary>
 	/// <param name="SifObject">A SIF_Object</param>
 	///<remarks>
@@ -301,3 +296,4 @@ public class SIF_AgentACL : SifDataObject
 	}
 
 }}
+

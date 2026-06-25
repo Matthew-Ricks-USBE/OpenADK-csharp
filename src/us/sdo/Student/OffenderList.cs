@@ -40,11 +40,6 @@ public class OffenderList : SifKeyedList<Offender>
 		this.SafeAddChild( StudentDTD.OFFENDERLIST_OFFENDER, offender );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected OffenderList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Offender&gt;</c> element.</summary>
 	/// <param name="Type">Identifies the type of offender involved in the incident.</param>
 	/// <param name="Injury">Identifies whether or not this specific offender was physically injured, and if so, identifies whether the injury was major or minor.</param>
@@ -59,3 +54,4 @@ public class OffenderList : SifKeyedList<Offender>
 	}
 
 }}
+

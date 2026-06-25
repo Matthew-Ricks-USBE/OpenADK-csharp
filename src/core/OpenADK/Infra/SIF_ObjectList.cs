@@ -39,11 +39,6 @@ public class SIF_ObjectList : SifKeyedList<SIF_Object>
 		this.SafeAddChild( InfraDTD.SIF_OBJECTLIST_SIF_OBJECT, sifObject );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_ObjectList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_Object&gt;</c> element.</summary>
 	/// <param name="ObjectName">The name of a SIF data object</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SIF_ObjectList : SifKeyedList<SIF_Object>
 	}
 
 }}
+

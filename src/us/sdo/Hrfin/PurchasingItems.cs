@@ -40,11 +40,6 @@ public class PurchasingItems : SifKeyedList<PurchasingItem>
 		this.SafeAddChild( HrfinDTD.PURCHASINGITEMS_PURCHASINGITEM, purchasingItem );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PurchasingItems( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;PurchasingItem&gt;</c> element.</summary>
 	/// <param name="ItemDescription">Description of the item.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class PurchasingItems : SifKeyedList<PurchasingItem>
 	}
 
 }}
+

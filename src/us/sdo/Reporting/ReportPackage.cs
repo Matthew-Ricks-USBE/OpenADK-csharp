@@ -32,11 +32,6 @@ public class ReportPackage : SifDataObject
 	public ReportPackage() : base( Adk.SifVersion, ReportingDTD.REPORTPACKAGE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ReportPackage( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;XMLData&gt;</c> element.
 	/// </summary>
 	/// <value> A XMLData </value>
@@ -179,3 +174,4 @@ public class ReportPackage : SifDataObject
 	}
 
 }}
+

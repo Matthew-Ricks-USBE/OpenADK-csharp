@@ -33,11 +33,6 @@ public class Advisor : SifElement
 	public Advisor() : base ( EtranscriptsDTD.ADVISOR ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Advisor( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;StaffPersonalData&gt;</c> element.
 	/// </summary>
 	/// <value> A StaffPersonalData </value>
@@ -63,3 +58,4 @@ public class Advisor : SifElement
 	}
 
 }}
+

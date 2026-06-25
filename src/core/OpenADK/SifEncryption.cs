@@ -22,7 +22,7 @@ namespace OpenADK.Library
     /// <listheader><term>Settings Key</term><description>Description</description></listheader>
     /// <item><term>adk.encryption.algorithm</term><description>The default algorithm used for writing passwords</description></item>
     /// <item><term>adk.encryption.key</term><description>The name of the default key to use for encryption</description></item>
-    /// <item><term>adk.encryption.keys.[keyname]</term><description>The actual key to use for encryption or decryption where “keyname” matches the @KeyName attribute of the Password object</description></item>
+    /// <item><term>adk.encryption.keys.[keyname]</term><description>The actual key to use for encryption or decryption where ï¿½keynameï¿½ matches the @KeyName attribute of the Password object</description></item>
     /// </list>
     /// 
     /// </remarks>
@@ -144,26 +144,26 @@ namespace OpenADK.Library
                 sCurrentInstance = new SifClearTextEncryption( algorithm, keyName );
             }
             else if ( algorithm.Value == PasswordAlgorithm.SHA1.Value ) {
-                sCurrentInstance = new SifHashEncryption( algorithm, keyName, new SHA1Managed() );
+                sCurrentInstance = new SifHashEncryption( algorithm, keyName, SHA1.Create() );
             }
             else if ( algorithm.Value == PasswordAlgorithm.MD5.Value ) {
                 sCurrentInstance =
-                    new SifHashEncryption( algorithm, keyName, new MD5CryptoServiceProvider() );
+                    new SifHashEncryption( algorithm, keyName, MD5.Create() );
             }
             else if ( algorithm.Value == PasswordAlgorithm.DES.Value ) {
                 sCurrentInstance =
                     new SifSymmetricEncryption
-                        ( algorithm, keyName, new DESCryptoServiceProvider(), key );
+                        ( algorithm, keyName, DES.Create(), key );
             }
             else if ( algorithm.Value == PasswordAlgorithm.TRIPLEDES.Value ) {
                 sCurrentInstance =
                     new SifSymmetricEncryption
-                        ( algorithm, keyName, new TripleDESCryptoServiceProvider(), key );
+                        ( algorithm, keyName, TripleDES.Create(), key );
             }
             else if ( algorithm.Value == PasswordAlgorithm.RC2.Value ) {
                 sCurrentInstance =
                     new SifSymmetricEncryption
-                        ( algorithm, keyName, new RC2CryptoServiceProvider(), key );
+                        ( algorithm, keyName, RC2.Create(), key );
             }
             else {
                 throw new AdkNotSupportedException

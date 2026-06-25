@@ -40,11 +40,6 @@ public class HoldInfoList : SifKeyedList<HoldInfo>
 		this.SafeAddChild( LibraryDTD.HOLDINFOLIST_HOLDINFO, holdInfo );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected HoldInfoList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;HoldInfo&gt;</c> element.</summary>
 	/// <param name="Type">The type of hold being referenced.</param>
 	/// <param name="DatePlaced">The date that the patron placed the hold.</param>
@@ -59,3 +54,4 @@ public class HoldInfoList : SifKeyedList<HoldInfo>
 	}
 
 }}
+

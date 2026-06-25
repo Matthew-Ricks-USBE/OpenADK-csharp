@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net481</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>Edustructures.SIFWorks.Nunit.UK</RootNamespace>
     <AssemblyName>Edustructures.SIFWorks.nunit.uk</AssemblyName>
@@ -9,8 +9,9 @@
     <Configurations>Debug;Eval;Internal;PerfTest;Release;ReleaseDocs</Configurations>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="NUnit" Version="3.14.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
-	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.4.0" />
+	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\SIF*\*.xml">

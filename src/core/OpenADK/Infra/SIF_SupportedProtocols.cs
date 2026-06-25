@@ -39,11 +39,6 @@ public class SIF_SupportedProtocols : SifKeyedList<SIF_Protocol>
 		this.SafeAddChild( InfraDTD.SIF_SUPPORTEDPROTOCOLS_SIF_PROTOCOL, sifProtocol );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_SupportedProtocols( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_Protocol&gt;</c> element.</summary>
 	/// <param name="Type">Identifies the type being used (e.g. "HTTP", "HTTPS", "MSMQ", etc.)</param>
 	/// <param name="Secure">Indicates if the protocol provides a secure channel</param>
@@ -58,3 +53,4 @@ public class SIF_SupportedProtocols : SifKeyedList<SIF_Protocol>
 	}
 
 }}
+

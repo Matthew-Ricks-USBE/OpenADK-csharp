@@ -40,11 +40,6 @@ public class Authors : SifKeyedList<Author>
 		this.SafeAddChild( InstrDTD.AUTHORS_AUTHOR, author );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Authors( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Author&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;Author&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Authors : SifKeyedList<Author>
 	}
 
 }}
+

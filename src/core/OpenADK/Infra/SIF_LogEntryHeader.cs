@@ -29,11 +29,6 @@ public class SIF_LogEntryHeader : SifElement
 	/// </summary>
 	public SIF_LogEntryHeader() : base ( InfraDTD.SIF_LOGENTRYHEADER ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_LogEntryHeader( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;SIF_Header&gt;</c> element.</summary>
 	/// <param name="SifMsgId">SIF_MsgId is a globally unique message identifier from the Agent or ZIS that sends out the message.</param>
 	/// <param name="SifTimestamp">Timestamp of when the message was sent.</param>
@@ -75,3 +70,4 @@ public class SIF_LogEntryHeader : SifElement
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class ScheduleInfoOverrideList : SifList<ScheduleInfoOverride>
 		this.SafeAddChild( StudentDTD.SCHEDULEINFOOVERRIDELIST_SCHEDULEINFOOVERRIDE, scheduleInfoOverride );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ScheduleInfoOverrideList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ScheduleInfoOverride&gt;</c> element.</summary>
 	/// <param name="Override">Designates whether or not scheduling information has been overridden with different values for this student.</param>
 	/// <param name="TermInfoRefId">The ID (GUID) of the term to which this override information relates for this student.</param>
@@ -59,3 +54,4 @@ public class ScheduleInfoOverrideList : SifList<ScheduleInfoOverride>
 	}
 
 }}
+

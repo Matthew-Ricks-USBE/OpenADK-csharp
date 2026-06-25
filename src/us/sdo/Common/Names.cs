@@ -39,11 +39,6 @@ public class Names : SifActionList<Name>
 		this.SafeAddChild( CommonDTD.NAMES_NAME, name );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Names( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Name&gt;</c> element.</summary>
 	/// <param name="Type">Code that specifies what type of name this is.  If unsure, use 04.</param>
 	/// <param name="LastName">The last name.</param>
@@ -59,3 +54,4 @@ public class Names : SifActionList<Name>
 	}
 
 }}
+

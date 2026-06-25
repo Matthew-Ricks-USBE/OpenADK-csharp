@@ -40,11 +40,6 @@ public class BusStaffList : SifKeyedList<BusStaff>
 		this.SafeAddChild( TransDTD.BUSSTAFFLIST_BUSSTAFF, busStaff );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected BusStaffList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;BusStaff&gt;</c> element.</summary>
 	/// <param name="Status">Boarding status of this staff member.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class BusStaffList : SifKeyedList<BusStaff>
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class ExpenseAccounts : SifList<ExpenseAccount>
 		this.SafeAddChild( HrfinDTD.EXPENSEACCOUNTS_EXPENSEACCOUNT, expenseAccount );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ExpenseAccounts( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ExpenseAccount&gt;</c> element.</summary>
 	/// <param name="AccountCode">Account code charged to this item.</param>
 	/// <param name="Amount">Amount charged to this account.</param>
@@ -59,3 +54,4 @@ public class ExpenseAccounts : SifList<ExpenseAccount>
 	}
 
 }}
+

@@ -30,11 +30,6 @@ public class Contact : SifElement
 	/// </summary>
 	public Contact() : base ( LearningDTD.CONTACT ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Contact( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;Name&gt;</c> element.</summary>
 	/// <param name="Type">
 	/// Code that specifies what type of name this is. If
@@ -202,3 +197,4 @@ public class Contact : SifElement
 	}
 
 }}
+

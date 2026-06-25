@@ -40,11 +40,6 @@ public class AdditionalProgramAvailabilityList : SifKeyedList<ProgramAvailabilit
 		this.SafeAddChild( ProgramsDTD.ADDITIONALPROGRAMAVAILABILITYLIST_PROGRAMAVAILABILITY, programAvailability );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AdditionalProgramAvailabilityList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ProgramAvailability&gt;</c> element.</summary>
 	/// <param name="Code">Describes the availability of the program.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class AdditionalProgramAvailabilityList : SifKeyedList<ProgramAvailabilit
 	}
 
 }}
+

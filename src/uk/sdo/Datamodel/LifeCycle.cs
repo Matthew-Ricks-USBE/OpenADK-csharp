@@ -30,11 +30,6 @@ public class LifeCycle : SifElement
 	/// </summary>
 	public LifeCycle() : base ( DatamodelDTD.LIFECYCLE ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LifeCycle( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;Created&gt;</c> element.</summary>
 	/// <param name="DateTime">A DateTime</param>
 	///<remarks>
@@ -124,3 +119,4 @@ public class LifeCycle : SifElement
 	}
 
 }}
+

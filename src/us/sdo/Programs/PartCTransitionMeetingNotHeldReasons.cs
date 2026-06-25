@@ -40,9 +40,5 @@ public class PartCTransitionMeetingNotHeldReasons : SifList<PartCTransitionMeeti
 		this.SafeAddChild( ProgramsDTD.PARTCTRANSITIONMEETINGNOTHELDREASONS_PARTCTRANSITIONMEETINGNOTHELDREASON, partcTransitionMeetingNotHeldReason );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PartCTransitionMeetingNotHeldReasons( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

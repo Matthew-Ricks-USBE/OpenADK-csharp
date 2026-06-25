@@ -41,11 +41,6 @@ public class OtherCodeList : SifKeyedList<OtherCode>
 		this.SafeAddChild( CommonDTD.OTHERCODELIST_OTHERCODE, otherCode );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected OtherCodeList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;OtherCode&gt;</c> element.</summary>
 	/// <param name="Codeset">Describes the OtherCode element content as either a
 	/// state/province code, a local code, other code, or text string.</param>
@@ -61,3 +56,4 @@ public class OtherCodeList : SifKeyedList<OtherCode>
 	}
 
 }}
+

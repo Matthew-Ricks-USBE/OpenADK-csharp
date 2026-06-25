@@ -29,9 +29,5 @@ public class SIF_Ping : SifElement
 	/// </summary>
 	public SIF_Ping() : base ( InfraDTD.SIF_PING ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Ping( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

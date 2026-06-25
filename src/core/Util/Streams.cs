@@ -116,7 +116,7 @@ namespace OpenADK.Util
         {
             byte [] aReturnData = new byte[inStream.Length];
             inStream.Seek( 0, SeekOrigin.Begin );
-            inStream.Read( aReturnData, 0, aReturnData.Length );
+            inStream.ReadExactly( aReturnData, 0, aReturnData.Length );
             return aReturnData;
         }
 

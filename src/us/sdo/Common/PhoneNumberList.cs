@@ -39,11 +39,6 @@ public class PhoneNumberList : SifActionList<PhoneNumber>
 		this.SafeAddChild( CommonDTD.PHONENUMBERLIST_PHONENUMBER, phoneNumber );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PhoneNumberList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;PhoneNumber&gt;</c> element.</summary>
 	/// <param name="Type">Code that specifies what type of phone number this is.  Note: A subset of valid values may be specified in data objects.</param>
 	/// <param name="Number">Phone number.  Acceptable formats:</param>
@@ -58,3 +53,4 @@ public class PhoneNumberList : SifActionList<PhoneNumber>
 	}
 
 }}
+

@@ -17,14 +17,6 @@ namespace OpenADK.Util
     [Serializable]
     public class AdkPropertyCollection : NameValueCollection, IPropertyCollection
     {
-        /// <summary>
-        /// DeSerialization constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        protected AdkPropertyCollection( SerializationInfo info,
-                                         StreamingContext context )
-            : base( info, context ) {}
 
         /// <summary>
         /// Public Constructor

@@ -150,7 +150,7 @@ namespace Library.Nunit.Core
             Assert.IsNull(testValue, "Date value should be null" );
 
             DateTime assertedDate = new DateTime(1999, 9, 1, 22, 2, 4 );
-            TimeSpan utcOffset = TimeZone.CurrentTimeZone.GetUtcOffset(assertedDate);
+            TimeSpan utcOffset = TimeZoneInfo.Local.GetUtcOffset(assertedDate);
             Console.Write( "UTC Offset: ");
             Console.WriteLine( utcOffset );
             Console.WriteLine();
@@ -366,5 +366,4 @@ namespace Library.Nunit.Core
         }
     } 
 } 
-
 

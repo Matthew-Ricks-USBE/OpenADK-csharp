@@ -159,9 +159,9 @@ namespace Library.Nunit.US.Impl
             {
                 doBehavior(zone);
             }
-            catch (SifException sifex)
+            catch (SifException)
             {
-                throw sifex;
+                throw;
             }
             catch (AdkException adke)
             {

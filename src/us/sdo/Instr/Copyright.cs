@@ -31,11 +31,6 @@ public class Copyright : SifElement
 	public Copyright() : base ( InstrDTD.COPYRIGHT ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Copyright( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Date&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Date</c> element of this object.</value>
@@ -78,3 +73,4 @@ public class Copyright : SifElement
 	}
 
 }}
+

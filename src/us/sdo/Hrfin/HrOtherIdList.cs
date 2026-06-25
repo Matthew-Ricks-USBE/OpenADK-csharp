@@ -40,11 +40,6 @@ public class HrOtherIdList : SifKeyedList<OtherId>
 		this.SafeAddChild( HrfinDTD.HROTHERIDLIST_OTHERID, otherId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected HrOtherIdList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;OtherId&gt;</c> element.</summary>
 	/// <param name="Type">Code that defines the type of this other ID.  Note: A subset of valid values may be specified in data objects.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;OtherId&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class HrOtherIdList : SifKeyedList<OtherId>
 	}
 
 }}
+

@@ -31,11 +31,6 @@ public class Sif3Organization : SifElement
 	public Sif3Organization() : base ( Sif3assessmentDTD.SIF3ORGANIZATION ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Sif3Organization( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;LEAInfoRefId&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>LEAInfoRefId</c> element of this object.</value>
@@ -76,3 +71,4 @@ public class Sif3Organization : SifElement
 	}
 
 }}
+

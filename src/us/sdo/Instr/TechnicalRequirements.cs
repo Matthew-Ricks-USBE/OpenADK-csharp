@@ -40,11 +40,6 @@ public class TechnicalRequirements : SifKeyedList<TechnicalRequirement>
 		this.SafeAddChild( InstrDTD.TECHNICALREQUIREMENTS_TECHNICALREQUIREMENT, technicalRequirement );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TechnicalRequirements( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;TechnicalRequirement&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;TechnicalRequirement&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class TechnicalRequirements : SifKeyedList<TechnicalRequirement>
 	}
 
 }}
+

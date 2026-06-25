@@ -40,11 +40,6 @@ public class SchoolProgramList : SifKeyedList<Program>
 		this.SafeAddChild( SchoolDTD.SCHOOLPROGRAMLIST_PROGRAM, program );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SchoolProgramList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Program&gt;</c> element.</summary>
 	/// <param name="Type">Program Type</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class SchoolProgramList : SifKeyedList<Program>
 	}
 
 }}
+

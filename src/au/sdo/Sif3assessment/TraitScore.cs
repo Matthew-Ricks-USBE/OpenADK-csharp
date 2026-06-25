@@ -31,11 +31,6 @@ public class TraitScore : SifElement
 	public TraitScore() : base ( Sif3assessmentDTD.TRAITSCORE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TraitScore( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;TraitScoreType&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>TraitScoreType</c> element of this object.</value>
@@ -96,3 +91,4 @@ public class TraitScore : SifElement
 	}
 
 }}
+

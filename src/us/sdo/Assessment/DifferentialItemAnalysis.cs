@@ -31,11 +31,6 @@ public class DifferentialItemAnalysis : SifElement
 	public DifferentialItemAnalysis() : base ( AssessmentDTD.DIFFERENTIALITEMANALYSIS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected DifferentialItemAnalysis( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;CMH&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>CMH</c> element of this object.</value>
@@ -78,3 +73,4 @@ public class DifferentialItemAnalysis : SifElement
 	}
 
 }}
+

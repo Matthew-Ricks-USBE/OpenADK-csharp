@@ -30,11 +30,6 @@ public class FurtherInformation : SifElement
 	/// </summary>
 	public FurtherInformation() : base ( StudentDTD.FURTHERINFORMATION ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected FurtherInformation( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;ContactName&gt;</c> element.</summary>
 	/// <param name="Type">A Type</param>
 	///<remarks>
@@ -153,3 +148,4 @@ public class FurtherInformation : SifElement
 	}
 
 }}
+

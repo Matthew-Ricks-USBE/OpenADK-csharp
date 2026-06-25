@@ -39,11 +39,6 @@ public class SIF_Rows : SifList<R>
 		this.SafeAddChild( InfraDTD.SIF_ROWS_R,  new R( r ) );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Rows( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;R&gt;</c> element.</summary>
 	/// <param name="C">A C</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class SIF_Rows : SifList<R>
 	}
 
 }}
+

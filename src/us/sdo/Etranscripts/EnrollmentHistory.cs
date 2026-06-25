@@ -42,11 +42,6 @@ public class EnrollmentHistory : SifKeyedList<StudentSchoolEnrollmentHistory>
 		this.SafeAddChild( EtranscriptsDTD.ENROLLMENTHISTORY_STUDENTSCHOOLENROLLMENTDATA, studentSchoolEnrollmentData );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EnrollmentHistory( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;StudentSchoolEnrollmentData&gt;</c> element.</summary>
 	/// <param name="SchoolAttendedRefId">Reference to School Attended.</param>
 	/// <param name="SchoolYear">A SchoolYear</param>
@@ -62,3 +57,4 @@ public class EnrollmentHistory : SifKeyedList<StudentSchoolEnrollmentHistory>
 	}
 
 }}
+

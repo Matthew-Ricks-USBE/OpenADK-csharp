@@ -33,11 +33,6 @@ public class ActivityAward : SifElement
 	public ActivityAward() : base ( EtranscriptsDTD.ACTIVITYAWARD ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ActivityAward( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Name&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Name</c> element of this object.</value>
@@ -330,3 +325,4 @@ public class ActivityAward : SifElement
 	}
 
 }}
+

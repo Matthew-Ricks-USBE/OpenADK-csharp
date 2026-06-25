@@ -39,11 +39,6 @@ public class SpanGaps : SifList<SpanGap>
 		this.SafeAddChild( CommonDTD.SPANGAPS_SPANGAP, spanGap );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SpanGaps( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SpanGap&gt;</c> element.</summary>
 	/// <param name="Type">A Type</param>
 	/// <param name="Code">This element provides a place for the application to send structured data (code values, unique identifier, timestamps). This code value can, depending upon the use case agreement between agents, be used to qualify the data in the Value element.</param>
@@ -60,3 +55,4 @@ public class SpanGaps : SifList<SpanGap>
 	}
 
 }}
+

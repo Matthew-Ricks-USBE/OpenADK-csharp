@@ -31,11 +31,6 @@ public class PreviousEstablishment : SifElement
 	public PreviousEstablishment() : base ( LearnerDTD.PREVIOUSESTABLISHMENT ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PreviousEstablishment( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;EstablishmentId&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>EstablishmentId</c> element of this object.</value>
@@ -211,3 +206,4 @@ public class PreviousEstablishment : SifElement
 	}
 
 }}
+

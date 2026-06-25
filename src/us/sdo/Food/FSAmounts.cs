@@ -40,11 +40,6 @@ public class FSAmounts : SifKeyedList<FSAmount>
 		this.SafeAddChild( FoodDTD.FSAMOUNTS_AMOUNT, amount );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected FSAmounts( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Amount&gt;</c> element.</summary>
 	/// <param name="Type">
 	///         Type of amount. The currency unit is implied; namely USD. Note that when this common element is used not all of the following values apply. There are notes to indicate values that are applicable.
@@ -65,3 +60,4 @@ public class FSAmounts : SifKeyedList<FSAmount>
 	}
 
 }}
+

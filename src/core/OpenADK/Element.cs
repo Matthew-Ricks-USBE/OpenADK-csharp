@@ -357,49 +357,6 @@ namespace OpenADK.Library
             return TextValue;
         }
 
-        #region Serialization
-
-        // TODO: Andy E Serialization still does not work in the .Net ADK. We need to modify
-        // adkgen so that the protected serialization constructor is added to each
-        // subclass of Element
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected Element( SerializationInfo info,
-                           StreamingContext context )
-        {
-            fFlags = (ElementFlags) info.GetInt32( "fFlags" );
-            fParent = (Element) info.GetValue( "fParent", typeof ( Element ) );
-            IElementDef foundElementDef = null;
-            string path = info.GetString( "fElementDef.SDOPath" );
-            if ( path.Length > 0 ) {
-                foundElementDef = Adk.Dtd.LookupElementDef( path );
-            }
-            if ( foundElementDef == null ) {
-                // TODO:  MLW - I consider this a hack.  On deserialization, the no-arguments constructor is 
-                // not called.  Also, SIFElements that were serialized without a parent but normally do have a parent
-                // are not returned by the lookupElementDef() call above.  To fix this, I instantiate
-                // a new object of this type, and then see what the elementdef of that object is.
-                SifElement instanceOfThisType =
-                    (SifElement) Activator.CreateInstance( this.GetType() );
-                foundElementDef = instanceOfThisType.ElementDef;
-            }
-            fElementDef = foundElementDef;
-        }
-
-        //[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        //void ISerializable.GetObjectData( SerializationInfo info,
-        //                                  StreamingContext context )
-        //{
-        //    info.AddValue( "fFlags", fFlags );
-        //    info.AddValue( "fParent", fParent );
-        //    info.AddValue( "fElementDef.SDOPath", fElementDef.SDOPath );
-        //    OnGetObjectData( info, context );
-        //}
-
-        //protected abstract void OnGetObjectData( SerializationInfo info,
-        //                                         StreamingContext context );
-
-        #endregion
-
         #region ICloneable Members
 
         public abstract object Clone();
@@ -407,3 +364,4 @@ namespace OpenADK.Library
         #endregion
     }
 }
+

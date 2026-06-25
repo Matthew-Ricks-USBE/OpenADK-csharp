@@ -31,11 +31,6 @@ public class CatalogLearningStandardsDocument : SifElement
 	public CatalogLearningStandardsDocument() : base ( InstrDTD.CATALOGLEARNINGSTANDARDSDOCUMENT ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected CatalogLearningStandardsDocument( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Title&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Title</c> element of this object.</value>
@@ -134,3 +129,4 @@ public class CatalogLearningStandardsDocument : SifElement
 	}
 
 }}
+

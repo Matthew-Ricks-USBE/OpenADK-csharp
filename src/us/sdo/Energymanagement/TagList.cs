@@ -40,11 +40,6 @@ public class TagList : SifKeyedList<Tag>
 		this.SafeAddChild( EnergymanagementDTD.TAGLIST_TAG, tag );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TagList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Tag&gt;</c> element.</summary>
 	/// <param name="Name">Name of the tag</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class TagList : SifKeyedList<Tag>
 	}
 
 }}
+

@@ -3,14 +3,16 @@
 // All rights reserved.
 //
 
+using MessagePack;
+using MessagePack.Formatters;
+using MessagePack.Resolvers;
+using OpenADK.Library.Infra;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.IO;
+using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters;
-using System.Runtime.Serialization.Formatters.Binary;
-using OpenADK.Library.Infra;
 
 namespace OpenADK.Library.Impl
 {
@@ -24,9 +26,11 @@ namespace OpenADK.Library.Impl
     /// </version>
     internal class RequestCacheFile : RequestCache
     {
+        private static readonly AdkSerializerOptions s_messagePackOptions = new();
+
         private Hashtable fCache = new Hashtable();
         private FileStream fFile;
-        private BinaryFormatter fFormatter;
+
         /// <summary>
         /// The Entry class is serialized to the Request cache file
         /// </summary>
@@ -51,9 +55,6 @@ namespace OpenADK.Library.Impl
         private void Initialize(Agent agent,
                                  bool isRetry)
         {
-            fFormatter = new BinaryFormatter();
-            fFormatter.Binder = new SimpleObjectBinder();
-            fFormatter.AssemblyFormat = FormatterAssemblyStyle.Simple;
             //  Ensure the requests.adk file exists in the work directory
             String fileName = agent.WorkDir + Path.DirectorySeparatorChar + "requests.adk";
             FileInfo currentCacheFile = new FileInfo(fileName);
@@ -246,18 +247,6 @@ namespace OpenADK.Library.Impl
                                                        Query q,
                                                        IZone zone)
         {
-            // validate that the userdata supplied with the query is serializable
-            if (q.UserData != null)
-            {
-                Type userDataType = q.UserData.GetType();
-                if (!userDataType.IsSerializable)
-                {
-                    throw new ArgumentException
-                        ("Query.UserData contains " + userDataType.AssemblyQualifiedName +
-                          " which is not serializable");
-                }
-            }
-
             try
             {
                 RequestCacheFileEntry entry = new RequestCacheFileEntry(true);
@@ -333,15 +322,14 @@ namespace OpenADK.Library.Impl
         private object ReadNext(FileStream outStream)
         {
             byte[] rawLength = new byte[4];
-            outStream.Read(rawLength, 0, 4);
+            outStream.ReadExactly(rawLength, 0, 4);
 
             int objectLength = BitConverter.ToInt32(rawLength, 0);
             if (objectLength > 0)
             {
                 byte[] serializedObject = new byte[objectLength];
-                outStream.Read(serializedObject, 0, objectLength);
-                MemoryStream ms = new MemoryStream(serializedObject, false);
-                return fFormatter.Deserialize( ms );
+                outStream.ReadExactly(serializedObject, 0, objectLength);
+                return MessagePackSerializer.Typeless.Deserialize(serializedObject, s_messagePackOptions);
             }
             return null;
         }
@@ -377,7 +365,8 @@ namespace OpenADK.Library.Impl
                 try
                 {
                     //serialize and write object to fs
-                    fFormatter.Serialize(outStream, serializedObject);
+                    byte[] messagePackBytes = MessagePackSerializer.Typeless.Serialize(serializedObject, s_messagePackOptions);
+                    outStream.Write(messagePackBytes, 0, messagePackBytes.Length);
                 }
                 catch (Exception ex)
                 {
@@ -532,33 +521,448 @@ namespace OpenADK.Library.Impl
             return e;
         }
 
-        private class SimpleObjectBinder : SerializationBinder
+        /// <summary>
+        /// <see cref="MessagePackSerializerOptions"/> designed for <see cref="RequestCacheFile"/>.
+        /// </summary>
+        internal class AdkSerializerOptions : MessagePackSerializerOptions
         {
             /// <summary>
-            /// This method uses a simple algorithm to ensure that objects are able to be deserialized
-            /// across major versions in .Net. The default serialization binder will throw an exception
-            /// if the object being deserialized is either 
-            /// 
-            /// 1) strong-named and any version part is different or
-            /// 
-            /// 2) not strong-named, but differs by major or minor version parts.
+            /// ADK default options based on <see cref="MessagePackSerializerOptions.Standard"/>
+            /// with the following changes:
+            /// <list type="bullet">
+            ///     <item>
+            ///         <term>Security</term>
+            ///         <description><see cref="MessagePackSecurity.UntrustedData"/></description>
+            ///     </item>
+            ///     <item>
+            ///         <term>Resolver</term>
+            ///         <description>
+            ///             <see cref="CompositeResolver"/> of
+            ///             <see cref="AdkResolver"/> and
+            ///             <see cref="TypelessContractlessStandardResolver"/>
+            ///         </description>
+            ///     </item>
+            /// </list>
             /// </summary>
-            /// <param name="assemblyName">The assembly name of the object</param>
-            /// <param name="typeName">The type name of the object</param>
-            /// <returns>The Type of the object</returns>
-            public override Type BindToType(
-                string assemblyName,
-                string typeName)
+            internal AdkSerializerOptions() : base(Standard
+                .WithSecurity(MessagePackSecurity.UntrustedData)
+                .WithResolver(CompositeResolver.Create(
+                    AdkResolver.Instance,
+                    TypelessContractlessStandardResolver.Instance))) { }
+
+            /// <summary>
+            /// Clone constructor.
+            /// </summary>
+            /// <param name="options">Options to clone.</param>
+            protected AdkSerializerOptions(AdkSerializerOptions options) : base(options) { }
+
+            /// <inheritdoc />
+            public override Type LoadType(string typeName)
             {
-                int assemblyNamePart = assemblyName.IndexOf(',');
-                if (assemblyNamePart == -1)
+                var type = base.LoadType(typeName);
+                if (type.Namespace.StartsWith("OpenADK.")) return type;
+                return type.Namespace switch
                 {
-                    assemblyNamePart = assemblyName.Length;
+                    "System" => type,
+                    "System.Collections" => type,
+                    "System.Collections.Generic" => type,
+                    _ => null, // Unknown, potentially unsafe type. Refuse to load.
+                };
+            }
+
+            /// <inheritdoc />
+            protected override MessagePackSerializerOptions Clone()
+            {
+                if (this.GetType() != typeof(AdkSerializerOptions))
+                {
+                    throw new NotSupportedException($"The derived type {this.GetType().FullName} did not override the {nameof(Clone)} method as required.");
                 }
-                string className =
-                    string.Format
-                        ("{0},{1}", typeName, assemblyName.Substring(0, assemblyNamePart));
-                return Type.GetType(className);
+                return new AdkSerializerOptions(this);
+            }
+        }
+
+        /// <summary>
+        /// Wrapper for serializing <see cref="SifElement"/> instances via their XML representation.
+        /// </summary>
+        [MessagePackObject]
+        public class SifElementWrapper
+        {
+            [Key(0)]
+            public string TypeName { get; set; }
+
+            [Key(1)]
+            public string XmlContent { get; set; }
+        }
+
+        /// <summary>
+        /// Custom formatter helper for <see cref="SifElement"/> subclasses. Serializes to XML via
+        /// <see cref="SifWriter"/> and restores via <see cref="SifParser"/>.
+        /// Not registered directly as an <c>IMessagePackFormatter&lt;object&gt;</c> to avoid
+        /// conflicts; used only through <see cref="SifElementFormatterWrapper{T}"/>.
+        /// </summary>
+        internal class SifElementFormatter
+        {
+            public static readonly SifElementFormatter Instance = new();
+
+            public void Serialize(ref MessagePackWriter writer, object value, MessagePackSerializerOptions options)
+            {
+                if (value == null)
+                {
+                    writer.WriteNil();
+                    return;
+                }
+
+                var element = (SifElement)value;
+
+                // SifWriter skips elements not marked as changed (dirty). Ensure the element
+                // is marked changed so all its content is written to the XML representation.
+                element.SetChanged(true);
+
+                using var ms = new MemoryStream();
+                var sifWriter = new SifWriter(ms);
+                sifWriter.Write(element);
+                sifWriter.Flush();
+                string xmlContent = System.Text.Encoding.UTF8.GetString(ms.ToArray());
+
+                var wrapper = new SifElementWrapper
+                {
+                    TypeName = value.GetType().AssemblyQualifiedName,
+                    XmlContent = xmlContent
+                };
+
+                var wrapperBytes = MessagePackSerializer.Serialize(wrapper, options);
+                writer.WriteRaw(wrapperBytes);
+            }
+
+            public object Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            {
+                if (reader.IsNil)
+                {
+                    reader.ReadNil();
+                    return null;
+                }
+
+                var wrapperBytes = reader.ReadRaw();
+                var wrapper = MessagePackSerializer.Deserialize<SifElementWrapper>(wrapperBytes, options);
+
+                if (wrapper?.XmlContent == null)
+                    return null;
+
+                var element = SifParser.NewInstance().Parse(wrapper.XmlContent);
+
+                // SifParser returns null for empty XML elements (no fields/children).
+                // Fall back to creating a new instance via the stored type name.
+                if (element == null && wrapper.TypeName != null)
+                {
+                    var type = Type.GetType(wrapper.TypeName);
+                    if (type != null && typeof(SifElement).IsAssignableFrom(type))
+                    {
+                        element = (SifElement)Activator.CreateInstance(type);
+                    }
+                }
+
+                return element;
+            }
+        }
+
+        /// <summary>
+        /// Custom formatter for <see cref="SifElementWrapper"/> to avoid MessagePack's dynamic
+        /// code generation failing on the type nested inside an internal class.
+        /// </summary>
+        internal class SifElementWrapperFormatter : IMessagePackFormatter<SifElementWrapper>
+        {
+            public static readonly SifElementWrapperFormatter Instance = new();
+
+            public void Serialize(ref MessagePackWriter writer, SifElementWrapper value, MessagePackSerializerOptions options)
+            {
+                if (value == null) { writer.WriteNil(); return; }
+                writer.WriteArrayHeader(2);
+                writer.Write(value.TypeName);
+                writer.Write(value.XmlContent);
+            }
+
+            public SifElementWrapper Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            {
+                if (reader.IsNil) { reader.ReadNil(); return null; }
+                int count = reader.ReadArrayHeader();
+                var wrapper = new SifElementWrapper();
+                if (count > 0) wrapper.TypeName = reader.ReadString();
+                if (count > 1) wrapper.XmlContent = reader.ReadString();
+                return wrapper;
+            }
+        }
+
+        /// <summary>
+        /// Generic typed wrapper for SifElement formatters.
+        /// </summary>
+        internal class SifElementFormatterWrapper<T> : IMessagePackFormatter<T> where T : SifElement
+        {
+            public void Serialize(ref MessagePackWriter writer, T value, MessagePackSerializerOptions options)
+            {
+                SifElementFormatter.Instance.Serialize(ref writer, (object)value, options);
+            }
+
+            public T Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            {
+                return (T)SifElementFormatter.Instance.Deserialize(ref reader, options);
+            }
+        }
+
+        /// <summary>
+        /// Wrapper for serializing SifSimpleType instances that don't have parameterless constructors.
+        /// </summary>
+        [MessagePackObject]
+        public class SifSimpleTypeWrapper
+        {
+            [Key(0)]
+            public string TypeName { get; set; }
+
+            [Key(1)]
+            public object Value { get; set; }
+        }
+
+        /// <summary>
+        /// Custom formatter for <see cref="SifSimpleType"/> subclasses that don't have parameterless constructors.
+        /// Serializes to a wrapper object, then reconstructs during deserialization.
+        /// </summary>
+        internal class SifSimpleTypeFormatter : IMessagePackFormatter<object>
+        {
+            public static readonly SifSimpleTypeFormatter Instance = new();
+
+            public void Serialize(ref MessagePackWriter writer, object value, MessagePackSerializerOptions options)
+            {
+                if (value == null)
+                {
+                    writer.WriteNil();
+                    return;
+                }
+
+                var sifType = value as SifSimpleType;
+                if (sifType == null)
+                {
+                    // Not a SifSimpleType, shouldn't happen if resolver is correct
+                    throw new MessagePackSerializationException($"Expected SifSimpleType, got {value.GetType().Name}");
+                }
+
+                // Serialize as a wrapper with type name and raw value
+                var wrapper = new SifSimpleTypeWrapper
+                {
+                    TypeName = value.GetType().FullName,
+                    Value = sifType.RawValue
+                };
+
+                // Use MessagePackSerializer to serialize the wrapper
+                var wrapperBytes = MessagePackSerializer.Serialize(wrapper, options);
+                writer.WriteRaw(wrapperBytes);
+            }
+
+            public object Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            {
+                if (reader.IsNil)
+                {
+                    reader.ReadNil();
+                    return null;
+                }
+
+                // Deserialize the wrapper
+                var wrapperBytes = reader.ReadRaw();
+                var wrapper = MessagePackSerializer.Deserialize<SifSimpleTypeWrapper>(wrapperBytes, options);
+
+                if (wrapper == null)
+                {
+                    return null;
+                }
+
+                var type = Type.GetType(wrapper.TypeName);
+                if (type == null || !typeof(SifSimpleType).IsAssignableFrom(type))
+                {
+                    throw new MessagePackSerializationException($"Unknown or invalid SifSimpleType: {wrapper.TypeName}");
+                }
+
+                // Find the best constructor for this type
+                var constructors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
+                if (constructors.Length == 0)
+                {
+                    throw new MessagePackSerializationException($"No public constructors found for {type.FullName}");
+                }
+
+                // Prefer non-obsolete constructors
+                ConstructorInfo targetConstructor = null;
+                foreach (var ctor in constructors)
+                {
+                    var obsoleteAttr = ctor.GetCustomAttribute<ObsoleteAttribute>();
+                    if (obsoleteAttr == null)
+                    {
+                        targetConstructor = ctor;
+                        break;
+                    }
+                    if (targetConstructor == null)
+                    {
+                        targetConstructor = ctor;
+                    }
+                }
+
+                if (targetConstructor == null)
+                {
+                    throw new MessagePackSerializationException($"No suitable constructor found for {type.FullName}");
+                }
+
+                try
+                {
+                    return targetConstructor.Invoke(new[] { wrapper.Value });
+                }
+                catch (Exception ex) when (!(ex is MessagePackSerializationException))
+                {
+                    throw new MessagePackSerializationException($"Failed to instantiate {type.FullName}: {ex.Message}", ex);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Composite resolver supporting SifSimpleType subclasses.
+        /// </summary>
+        /// <summary>
+        /// Custom formatter for <see cref="RequestCacheFileEntry"/> instances.
+        /// Serializes only the fields that should be persisted to the cache file.
+        /// </summary>
+        internal class RequestCacheFileEntryFormatter : IMessagePackFormatter<RequestCacheFileEntry>
+        {
+            public static readonly RequestCacheFileEntryFormatter Instance = new();
+
+            public void Serialize(ref MessagePackWriter writer, RequestCacheFileEntry value, MessagePackSerializerOptions options)
+            {
+                if (value == null)
+                {
+                    writer.WriteNil();
+                    return;
+                }
+                writer.WriteArrayHeader(3);
+                writer.Write(value.ObjectType);
+                writer.Write(value.MessageId);
+                options.Resolver.GetFormatterWithVerify<DateTime>().Serialize(ref writer, value.RequestTime, options);
+            }
+
+            public RequestCacheFileEntry Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            {
+                if (reader.IsNil)
+                {
+                    reader.ReadNil();
+                    return null;
+                }
+                int count = reader.ReadArrayHeader();
+                var entry = new RequestCacheFileEntry(true);
+                if (count > 0) entry.SetObjectType(reader.ReadString());
+                if (count > 1) entry.SetMessageId(reader.ReadString());
+                if (count > 2) entry.SetRequestTime(options.Resolver.GetFormatterWithVerify<DateTime>().Deserialize(ref reader, options));
+                return entry;
+            }
+        }
+
+        /// <summary>
+        /// Custom formatter for <see cref="SifSimpleTypeWrapper"/> to avoid MessagePack's dynamic
+        /// code generation failing on the type nested inside an internal class.
+        /// </summary>
+        internal class SifSimpleTypeWrapperFormatter : IMessagePackFormatter<SifSimpleTypeWrapper>
+        {
+            public static readonly SifSimpleTypeWrapperFormatter Instance = new();
+
+            public void Serialize(ref MessagePackWriter writer, SifSimpleTypeWrapper value, MessagePackSerializerOptions options)
+            {
+                if (value == null)
+                {
+                    writer.WriteNil();
+                    return;
+                }
+                writer.WriteArrayHeader(2);
+                writer.Write(value.TypeName);
+                TypelessFormatter.Instance.Serialize(ref writer, value.Value, options);
+            }
+
+            public SifSimpleTypeWrapper Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            {
+                if (reader.IsNil)
+                {
+                    reader.ReadNil();
+                    return null;
+                }
+                int count = reader.ReadArrayHeader();
+                var wrapper = new SifSimpleTypeWrapper();
+                if (count > 0) wrapper.TypeName = reader.ReadString();
+                if (count > 1) wrapper.Value = TypelessFormatter.Instance.Deserialize(ref reader, options);
+                return wrapper;
+            }
+        }
+
+        internal class AdkResolver : IFormatterResolver
+        {
+            public static readonly AdkResolver Instance = new();
+
+            protected readonly ConcurrentDictionary<Type, IMessagePackFormatter> FormatterCache = new();
+
+            public IMessagePackFormatter<T> GetFormatter<T>()
+            {
+                var type = typeof(T);
+
+                if (type == typeof(RequestCacheFileEntry))
+                {
+                    var formatter = FormatterCache.GetOrAdd(type, RequestCacheFileEntryFormatter.Instance);
+                    return (IMessagePackFormatter<T>)formatter;
+                }
+
+                if (type == typeof(SifSimpleTypeWrapper))
+                {
+                    var formatter = FormatterCache.GetOrAdd(type, SifSimpleTypeWrapperFormatter.Instance);
+                    return (IMessagePackFormatter<T>)formatter;
+                }
+
+                if (type == typeof(SifElementWrapper))
+                {
+                    var formatter = FormatterCache.GetOrAdd(type, SifElementWrapperFormatter.Instance);
+                    return (IMessagePackFormatter<T>)formatter;
+                }
+
+                // Check if T is a SifSimpleType subclass
+                if (typeof(SifSimpleType).IsAssignableFrom(type))
+                {
+                    // Create a formatter for this specific type using dynamic wrapping
+                    var formatter = FormatterCache.GetOrAdd(type, t =>
+                    {
+                        var formatterType = typeof(SifSimpleTypeFormatterWrapper<>).MakeGenericType(t);
+                        return (IMessagePackFormatter)Activator.CreateInstance(formatterType);
+                    });
+                    return (IMessagePackFormatter<T>)formatter;
+                }
+
+                // Check if T is a SifElement subclass
+                if (typeof(SifElement).IsAssignableFrom(type))
+                {
+                    var formatter = FormatterCache.GetOrAdd(type, t =>
+                    {
+                        var formatterType = typeof(SifElementFormatterWrapper<>).MakeGenericType(t);
+                        return (IMessagePackFormatter)Activator.CreateInstance(formatterType);
+                    });
+                    return (IMessagePackFormatter<T>)formatter;
+                }
+
+                // Return null for fallback mechanism.
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Generic wrapper for SifSimpleType formatters.
+        /// </summary>
+        internal class SifSimpleTypeFormatterWrapper<T> : IMessagePackFormatter<T> where T : SifSimpleType
+        {
+            public void Serialize(ref MessagePackWriter writer, T value, MessagePackSerializerOptions options)
+            {
+                SifSimpleTypeFormatter.Instance.Serialize(ref writer, (object)value, options);
+            }
+
+            public T Deserialize(ref MessagePackReader reader, MessagePackSerializerOptions options)
+            {
+                var result = SifSimpleTypeFormatter.Instance.Deserialize(ref reader, options);
+                return (T)result;
             }
         }
     }

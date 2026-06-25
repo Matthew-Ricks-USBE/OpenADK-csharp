@@ -39,11 +39,6 @@ public class MedicalAlertMsgList : SifKeyedList<MedicalAlertMsg>
 		this.SafeAddChild( CommonDTD.MEDICALALERTMSGLIST_MEDICALALERTMSG, medicalAlertMsg );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MedicalAlertMsgList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;MedicalAlertMsg&gt;</c> element.</summary>
 	/// <param name="Severity">The level of severity of this medical alert.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;MedicalAlertMsg&amp;gt; element</param>
@@ -58,3 +53,4 @@ public class MedicalAlertMsgList : SifKeyedList<MedicalAlertMsg>
 	}
 
 }}
+

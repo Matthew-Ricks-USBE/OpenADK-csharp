@@ -40,11 +40,6 @@ public class IncidentActionList : SifList<IncidentAction>
 		this.SafeAddChild( StudentDTD.INCIDENTACTIONLIST_INCIDENTACTION, incidentAction );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected IncidentActionList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;IncidentAction&gt;</c> element.</summary>
 	/// <param name="StartDate">The date on which the action begins.</param>
 	/// <param name="EndDate">The date through which the action is in effect, inclusive.</param>
@@ -63,3 +58,4 @@ public class IncidentActionList : SifList<IncidentAction>
 	}
 
 }}
+

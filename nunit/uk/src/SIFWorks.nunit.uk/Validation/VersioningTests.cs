@@ -11,8 +11,6 @@ namespace OpenADK.Library.Nunit.UK.Validation
     [TestFixture]
     public class VersioningTests : UkAdkTest
     {
-        private const bool VERBOSE = false;
-
         /*
          * Reads all supported SIF UK 1.0 objects - Writes them IN SIF UK 1.0 - Validates
          * them with the SIF UK 1.0 Schema - Parses them back into ADK Objects
@@ -89,10 +87,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
         {
             sv.Clear();
 
-            if (VERBOSE)
-            {
-                output.Write("Running test on " + fileName + "\r\n");
-            }
+            output.Write("Running test on " + fileName + "\r\n");
 
             // 1) Read the object into memory
             SifElement se = null;
@@ -141,12 +136,9 @@ namespace OpenADK.Library.Nunit.UK.Validation
             // 4) If validation failed, write the object out for tracing purposes
             if (!validated)
             {
-                if (VERBOSE)
-                {
-                    SifWriter outWriter = new SifWriter(output);
-                    outWriter.Write(se, writeVersion );
-                    outWriter.Flush();
-                }
+                SifWriter outWriter = new SifWriter(output);
+                outWriter.Write(se, writeVersion );
+                outWriter.Flush();
                 output.WriteLine("Errors reading/writing " + fileName );
                 sv.PrintProblems(output);
                 return false;

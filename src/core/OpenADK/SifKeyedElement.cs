@@ -17,16 +17,6 @@ namespace OpenADK.Library
     public abstract class SifKeyedElement : SifElement
     {
         /// <summary>
-        /// Used by the Serialization Formatter
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter = true )]
-        protected SifKeyedElement( SerializationInfo info,
-                                   StreamingContext context )
-            : base( info, context ) {}
-
-        /// <summary>
         /// Creates a new instance of a SifKeyedElement
         /// </summary>
         /// <param name="def"></param>
@@ -47,14 +37,14 @@ namespace OpenADK.Library
                 StringBuilder keyBuilder = new StringBuilder();
                 IElementDef [] keys = this.KeyFields;
                 for ( int a = 0; a < keys.Length; a++ ) {
-                    SimpleField field = GetField( keys[a] );
-                    if (field == null)
+                    SimpleField fieldValue = GetField( keys[a] );
+                    if (fieldValue == null)
                     {
                         keyBuilder.Append( (object)null);
                     }
                     else
                     {
-                        keyBuilder.Append(field.SifValue.ToString(formatter));
+                        keyBuilder.Append(fieldValue.SifValue.ToString(formatter));
                     }
                     if ( a < (keys.Length - 1) ) {
                         keyBuilder.Append( '.' );
@@ -115,3 +105,4 @@ namespace OpenADK.Library
         }
     }
 }
+

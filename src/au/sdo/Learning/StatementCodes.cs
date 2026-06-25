@@ -40,11 +40,6 @@ public class StatementCodes : SifKeyedList<StatementCode>
 		this.SafeAddChild( LearningDTD.STATEMENTCODES_STATEMENTCODE, statementCode );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StatementCodes( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;StatementCode&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;StatementCode&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class StatementCodes : SifKeyedList<StatementCode>
 	}
 
 }}
+

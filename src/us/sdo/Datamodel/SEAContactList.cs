@@ -31,11 +31,6 @@ public class SEAContactList : SifElement
 	public SEAContactList() : base ( DatamodelDTD.SEACONTACTLIST ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SEAContactList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;SEAContact&gt;</c> element.
 	/// </summary>
 	/// <value> A SEAContact </value>
@@ -62,3 +57,4 @@ public class SEAContactList : SifElement
 	}
 
 }}
+

@@ -42,11 +42,6 @@ public class AcademicSubjects : SifKeyedList<AcademicSubject>
 		this.SafeAddChild( EtranscriptsDTD.ACADEMICSUBJECTS_ACADEMICSUBJECT, academicSubject );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AcademicSubjects( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;AcademicSubject&gt;</c> element.</summary>
 	/// <param name="Code">A code to depict an academic or vocational discipline studied by an individual in an educational program (based on NCES CIP 2000).</param>
 	///<remarks>
@@ -60,3 +55,4 @@ public class AcademicSubjects : SifKeyedList<AcademicSubject>
 	}
 
 }}
+

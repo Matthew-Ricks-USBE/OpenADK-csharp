@@ -40,11 +40,6 @@ public class RelatedLearningStandardItems : SifKeyedList<RelatedLearningStandard
 		this.SafeAddChild( LearningDTD.RELATEDLEARNINGSTANDARDITEMS_RELATEDLEARNINGSTANDARDITEM, relatedLearningStandardItem );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected RelatedLearningStandardItems( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;RelatedLearningStandardItem&gt;</c> element.</summary>
 	/// <param name="RelationshipType">A RelationshipType</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;RelatedLearningStandardItem&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class RelatedLearningStandardItems : SifKeyedList<RelatedLearningStandard
 	}
 
 }}
+

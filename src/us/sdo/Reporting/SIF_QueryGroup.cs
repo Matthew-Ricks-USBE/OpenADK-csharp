@@ -41,11 +41,6 @@ public class SIF_QueryGroup : SifKeyedList<SIF_Query>
 		this.SafeAddChild( ReportingDTD.SIF_QUERYGROUP_SIF_QUERY, sifQuery );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_QueryGroup( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_Query&gt;</c> element.</summary>
 	/// <param name="SifQueryObject">A SIF_QueryObject</param>
 	///<remarks>
@@ -59,3 +54,4 @@ public class SIF_QueryGroup : SifKeyedList<SIF_Query>
 	}
 
 }}
+

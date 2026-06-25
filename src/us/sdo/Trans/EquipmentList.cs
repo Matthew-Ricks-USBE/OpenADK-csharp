@@ -40,11 +40,6 @@ public class EquipmentList : SifKeyedList<Equipment>
 		this.SafeAddChild( TransDTD.EQUIPMENTLIST_EQUIPMENT, equipment );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EquipmentList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Equipment&gt;</c> element.</summary>
 	/// <param name="BusEquipmentRefId">GUID that identifies the type of equipment</param>
 	/// <param name="Count">The number of pieces of this type of equipment</param>
@@ -59,3 +54,4 @@ public class EquipmentList : SifKeyedList<Equipment>
 	}
 
 }}
+

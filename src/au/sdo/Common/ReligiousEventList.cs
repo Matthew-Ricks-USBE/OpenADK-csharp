@@ -39,11 +39,6 @@ public class ReligiousEventList : SifList<ReligiousEvent>
 		this.SafeAddChild( CommonDTD.RELIGIOUSEVENTLIST_RELIGIOUSEVENT, religiousEvent );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ReligiousEventList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ReligiousEvent&gt;</c> element.</summary>
 	/// <param name="Type">Religious Event - Currently Free Text</param>
 	/// <param name="Date">Date of Religions Event</param>
@@ -58,3 +53,4 @@ public class ReligiousEventList : SifList<ReligiousEvent>
 	}
 
 }}
+

@@ -36,11 +36,6 @@ public class SIF_Provide : SifMessagePayload
 	public SIF_Provide( SifVersion sifVersion ) : base( sifVersion, InfraDTD.SIF_PROVIDE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Provide( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;SIF_Header&gt;</c> element.
 	/// </summary>
 	/// <value> A SIF_Header </value>
@@ -130,3 +125,4 @@ public class SIF_Provide : SifMessagePayload
 	}
 
 }}
+

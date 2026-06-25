@@ -40,11 +40,6 @@ public class Certifications : SifKeyedList<Certification>
 		this.SafeAddChild( ProfdevDTD.CERTIFICATIONS_CERTIFICATION, certification );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Certifications( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Certification&gt;</c> element.</summary>
 	/// <param name="Description">Certification description as defined by state</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Certifications : SifKeyedList<Certification>
 	}
 
 }}
+

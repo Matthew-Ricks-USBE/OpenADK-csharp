@@ -40,11 +40,6 @@ public class AlertMessages : SifKeyedList<AlertMessage>
 		this.SafeAddChild( StudentDTD.ALERTMESSAGES_ALERTMESSAGE, alertMessage );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AlertMessages( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;AlertMessage&gt;</c> element.</summary>
 	/// <param name="Type">This attribute specifies what type of alert message this is.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;AlertMessage&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class AlertMessages : SifKeyedList<AlertMessage>
 	}
 
 }}
+

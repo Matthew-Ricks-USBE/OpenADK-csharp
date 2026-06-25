@@ -30,11 +30,6 @@ public class MeetingTime : SifElement
 	public MeetingTime() : base ( CommonDTD.MEETINGTIME ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MeetingTime( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;TimetableDay&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>TimetableDay</c> element of this object.</value>
@@ -77,3 +72,4 @@ public class MeetingTime : SifElement
 	}
 
 }}
+

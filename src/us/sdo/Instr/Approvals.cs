@@ -40,9 +40,5 @@ public class Approvals : SifList<Approval>
 		this.SafeAddChild( InstrDTD.APPROVALS_APPROVAL, approval );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Approvals( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

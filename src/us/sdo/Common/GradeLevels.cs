@@ -39,11 +39,6 @@ public class GradeLevels : SifKeyedList<GradeLevel>
 		this.SafeAddChild( CommonDTD.GRADELEVELS_GRADELEVEL, gradeLevel );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected GradeLevels( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;GradeLevel&gt;</c> element.</summary>
 	/// <param name="Code">Code representing the grade level.</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class GradeLevels : SifKeyedList<GradeLevel>
 	}
 
 }}
+

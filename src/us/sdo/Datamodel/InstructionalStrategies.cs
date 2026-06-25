@@ -40,11 +40,6 @@ public class InstructionalStrategies : SifKeyedList<InstructionalStrategy>
 		this.SafeAddChild( DatamodelDTD.INSTRUCTIONALSTRATEGIES_INSTRUCTIONALSTRATEGY, instructionalStrategy );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected InstructionalStrategies( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;InstructionalStrategy&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;InstructionalStrategy&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class InstructionalStrategies : SifKeyedList<InstructionalStrategy>
 	}
 
 }}
+

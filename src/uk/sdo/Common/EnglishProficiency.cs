@@ -30,11 +30,6 @@ public class EnglishProficiency : SifElement
 	public EnglishProficiency() : base ( CommonDTD.ENGLISHPROFICIENCY ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EnglishProficiency( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;EALSteps&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>EALSteps</c> element of this object.</value>
@@ -105,3 +100,4 @@ public class EnglishProficiency : SifElement
 	}
 
 }}
+

@@ -39,11 +39,6 @@ public class AddressList : SifActionList<Address>
 		this.SafeAddChild( CommonDTD.ADDRESSLIST_ADDRESS, address );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AddressList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Address&gt;</c> element.</summary>
 	/// <param name="Type">Code that defines the location of the address.  Note:  A subset of specific valid values for each instance in a data object may be listed in that object.</param>
 	/// <param name="Street">The street part of the address</param>
@@ -62,3 +57,4 @@ public class AddressList : SifActionList<Address>
 	}
 
 }}
+

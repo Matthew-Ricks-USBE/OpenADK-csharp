@@ -42,9 +42,5 @@ public class AcademicPerformanceHistory : SifList<TermPerformance>
 		this.SafeAddChild( EtranscriptsDTD.ACADEMICPERFORMANCEHISTORY_TERMPERFORMANCE, termPerformance );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AcademicPerformanceHistory( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

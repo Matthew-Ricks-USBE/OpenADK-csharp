@@ -31,11 +31,6 @@ public class Narrative : SifElement
 	public Narrative() : base ( GradebookDTD.NARRATIVE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Narrative( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>IsAccepted</c> attribute.
 	/// </summary>
 	/// <value> The <c>IsAccepted</c> attribute of this object.</value>
@@ -78,3 +73,4 @@ public class Narrative : SifElement
 	}
 
 }}
+

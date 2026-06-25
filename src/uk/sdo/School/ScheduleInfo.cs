@@ -30,11 +30,6 @@ public class ScheduleInfo : SifElement
 	/// </summary>
 	public ScheduleInfo() : base ( SchoolDTD.SCHEDULEINFO ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ScheduleInfo( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;TeacherList&gt;</c> element.</summary>
 	/// <param name="Teacher">A Teacher</param>
 	///<remarks>
@@ -74,3 +69,4 @@ public class ScheduleInfo : SifElement
 	}
 
 }}
+

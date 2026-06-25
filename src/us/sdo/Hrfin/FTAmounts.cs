@@ -40,11 +40,6 @@ public class FTAmounts : SifList<FTAmount>
 		this.SafeAddChild( HrfinDTD.FTAMOUNTS_AMOUNT, amount );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected FTAmounts( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Amount&gt;</c> element.</summary>
 	/// <param name="FinancialAccountAccountingPeriodLocationInfoRefId">Account.</param>
 	/// <param name="Type">Values: Debit, Credit</param>
@@ -60,3 +55,4 @@ public class FTAmounts : SifList<FTAmount>
 	}
 
 }}
+

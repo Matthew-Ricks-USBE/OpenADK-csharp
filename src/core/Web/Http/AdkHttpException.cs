@@ -41,18 +41,8 @@ namespace OpenADK.Web.Http
             fCode = _getErrorCode( code );
         }
 
-        /// <summary>
-        /// The "magic" constructor used in .Net serialization
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected AdkHttpException( SerializationInfo info,
-                                    StreamingContext context )
-        {
-            fCode = (AdkHttpStatusCode) info.GetInt32( "fCode" );
-        }
 
+        [Obsolete]
         public override void GetObjectData( SerializationInfo info,
                                             StreamingContext context )
         {

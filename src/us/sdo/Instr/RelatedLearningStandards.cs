@@ -40,11 +40,6 @@ public class RelatedLearningStandards : SifKeyedList<LearningStandardDocumentRef
 		this.SafeAddChild( InstrDTD.RELATEDLEARNINGSTANDARDS_LEARNINGSTANDARDDOCUMENTREFID, learningStandardDocumentRefId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected RelatedLearningStandards( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;LearningStandardDocumentRefId&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;LearningStandardDocumentRefId&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class RelatedLearningStandards : SifKeyedList<LearningStandardDocumentRef
 	}
 
 }}
+

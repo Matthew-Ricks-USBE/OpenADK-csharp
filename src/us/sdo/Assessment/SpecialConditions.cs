@@ -40,11 +40,6 @@ public class SpecialConditions : SifActionList<SpecialCondition>
 		this.SafeAddChild( AssessmentDTD.SPECIALCONDITIONS_SPECIALCONDITION, specialCondition );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SpecialConditions( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SpecialCondition&gt;</c> element.</summary>
 	/// <param name="Code">This is the primary key for the list of special conditions.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SpecialCondition&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class SpecialConditions : SifActionList<SpecialCondition>
 	}
 
 }}
+

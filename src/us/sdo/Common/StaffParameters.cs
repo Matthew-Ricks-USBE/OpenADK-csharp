@@ -30,11 +30,6 @@ public class StaffParameters : SifDataObject
 	public StaffParameters() : base( Adk.SifVersion, CommonDTD.STAFFPARAMETERS ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StaffParameters( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;StateProvinceId&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>StateProvinceId</c> element of this object.</value>
@@ -354,3 +349,4 @@ public class StaffParameters : SifDataObject
 	}
 
 }}
+

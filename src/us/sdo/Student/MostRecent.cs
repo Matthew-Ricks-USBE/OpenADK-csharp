@@ -31,11 +31,6 @@ public class MostRecent : SifElement
 	public MostRecent() : base ( StudentDTD.MOSTRECENT ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MostRecent( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;SchoolLocalId&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>SchoolLocalId</c> element of this object.</value>
@@ -117,3 +112,4 @@ public class MostRecent : SifElement
 	}
 
 }}
+

@@ -24,17 +24,6 @@ namespace OpenADK.Library
 
 
         /// <summary>
-        /// .Net Serialization Constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected SifKeyedList(SerializationInfo info,
-                                 StreamingContext context )
-            : base( info, context ) {}
-
-
-        /// <summary>
         /// Removes the child indicated by the specified key
         /// </summary>
         /// <param name="key">The key for the repeatable child element</param>
@@ -302,3 +291,4 @@ namespace OpenADK.Library
         //}
     }
 }
+

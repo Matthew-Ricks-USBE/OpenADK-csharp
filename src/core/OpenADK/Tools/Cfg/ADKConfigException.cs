@@ -34,14 +34,5 @@ namespace OpenADK.Library.Tools.Cfg
                                    Exception innerException )
             : base( msg, null, innerException ) {}
 
-        /// <summary>
-        /// The .Net Serialization constructor, used to allow exception to be serialized across AppDomain boundaries
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected AdkConfigException( SerializationInfo info,
-                                      StreamingContext context )
-            : base( info, context ) {}
     }
 }

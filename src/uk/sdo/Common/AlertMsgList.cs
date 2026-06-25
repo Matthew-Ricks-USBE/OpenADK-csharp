@@ -39,11 +39,6 @@ public class AlertMsgList : SifKeyedList<AlertMsg>
 		this.SafeAddChild( CommonDTD.ALERTMSGLIST_ALERTMSG, alertMsg );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AlertMsgList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;AlertMsg&gt;</c> element.</summary>
 	/// <param name="Type">This attribute specifies what type of alert message this is.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;AlertMsg&amp;gt; element</param>
@@ -58,3 +53,4 @@ public class AlertMsgList : SifKeyedList<AlertMsg>
 	}
 
 }}
+

@@ -40,11 +40,6 @@ public class Strategies : SifKeyedList<Strategy>
 		this.SafeAddChild( LearningDTD.STRATEGIES_STRATEGY, strategy );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Strategies( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Strategy&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;Strategy&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Strategies : SifKeyedList<Strategy>
 	}
 
 }}
+

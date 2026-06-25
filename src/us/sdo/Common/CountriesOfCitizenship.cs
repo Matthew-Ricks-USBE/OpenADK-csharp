@@ -39,11 +39,6 @@ public class CountriesOfCitizenship : SifKeyedList<Country>
 		this.SafeAddChild( CommonDTD.COUNTRIESOFCITIZENSHIP_COUNTRYOFCITIZENSHIP, countryOfCitizenship );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected CountriesOfCitizenship( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;CountryOfCitizenship&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;Country&amp;gt; element</param>
 	///<remarks>
@@ -57,3 +52,4 @@ public class CountriesOfCitizenship : SifKeyedList<Country>
 	}
 
 }}
+

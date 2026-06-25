@@ -40,11 +40,6 @@ public class RecognitionList : SifKeyedList<Recognition>
 		this.SafeAddChild( StudentDTD.RECOGNITIONLIST_RECOGNITION, recognition );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected RecognitionList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Recognition&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;Recognition&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class RecognitionList : SifKeyedList<Recognition>
 	}
 
 }}
+

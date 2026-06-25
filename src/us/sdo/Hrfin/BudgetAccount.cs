@@ -45,11 +45,6 @@ public class BudgetAccount : SifElement
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected BudgetAccount( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;AccountClass&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>AccountClass</c> element of this object.</value>
@@ -202,3 +197,4 @@ public class BudgetAccount : SifElement
 	}
 
 }}
+

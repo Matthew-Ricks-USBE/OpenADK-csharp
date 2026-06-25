@@ -40,11 +40,6 @@ public class Items : SifKeyedList<Item>
 		this.SafeAddChild( AssessmentDTD.ITEMS_ITEM, item );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Items( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Item&gt;</c> element.</summary>
 	/// <param name="Response">Learner selection or response in raw format.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class Items : SifKeyedList<Item>
 	}
 
 }}
+

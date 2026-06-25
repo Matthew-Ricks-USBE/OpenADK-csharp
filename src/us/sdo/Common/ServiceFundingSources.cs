@@ -39,9 +39,5 @@ public class ServiceFundingSources : SifList<ServiceFundingSource>
 		this.SafeAddChild( CommonDTD.SERVICEFUNDINGSOURCES_SERVICEFUNDINGSOURCE, serviceFundingSource );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ServiceFundingSources( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

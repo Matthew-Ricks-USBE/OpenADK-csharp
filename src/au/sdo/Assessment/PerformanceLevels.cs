@@ -40,11 +40,6 @@ public class PerformanceLevels : SifKeyedList<PerformanceLevel>
 		this.SafeAddChild( AssessmentDTD.PERFORMANCELEVELS_PERFORMANCELEVEL, performanceLevel );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PerformanceLevels( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;PerformanceLevel&gt;</c> element.</summary>
 	/// <param name="LevelName">The name of the performance level.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class PerformanceLevels : SifKeyedList<PerformanceLevel>
 	}
 
 }}
+

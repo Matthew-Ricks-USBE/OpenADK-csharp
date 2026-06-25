@@ -31,11 +31,6 @@ public class SCEDCode : SifElement
 	public SCEDCode() : base ( StudentDTD.SCEDCODE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SCEDCode( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;CourseDescription&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>CourseDescription</c> element of this object.</value>
@@ -154,3 +149,4 @@ public class SCEDCode : SifElement
 	}
 
 }}
+

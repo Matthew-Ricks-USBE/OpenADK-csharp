@@ -40,11 +40,6 @@ public class TransactionTypes : SifKeyedList<TransactionType>
 		this.SafeAddChild( FoodDTD.TRANSACTIONTYPES_TRANSACTIONTYPE, transactionType );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TransactionTypes( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;TransactionType&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;TransactionType&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class TransactionTypes : SifKeyedList<TransactionType>
 	}
 
 }}
+

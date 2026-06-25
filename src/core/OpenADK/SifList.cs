@@ -341,17 +341,6 @@ namespace OpenADK.Library
                       ElementDef.Name, child.ElementDef.Name));
         }
 
-        /// <summary>
-        /// .Net Serialization Constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter=true)]
-        protected SifList(SerializationInfo info,
-                          StreamingContext context)
-            : base(info, context)
-        {
-        }
 
 
         private class SifListEnumerator : IEnumerator<TValue>
@@ -406,3 +395,4 @@ namespace OpenADK.Library
         }
     }
 }
+

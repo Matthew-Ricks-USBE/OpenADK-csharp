@@ -31,11 +31,6 @@ public class ManifestationDetermination : SifElement
 	public ManifestationDetermination() : base ( StudentDTD.MANIFESTATIONDETERMINATION ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ManifestationDetermination( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;MeetingHeld&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>MeetingHeld</c> element of this object.</value>
@@ -148,3 +143,4 @@ public class ManifestationDetermination : SifElement
 	}
 
 }}
+

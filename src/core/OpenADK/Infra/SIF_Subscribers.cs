@@ -39,11 +39,6 @@ public class SIF_Subscribers : SifKeyedList<SIF_Subscriber>
 		this.SafeAddChild( InfraDTD.SIF_SUBSCRIBERS_SIF_SUBSCRIBER, sifSubscriber );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Subscribers( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_Subscriber&gt;</c> element.</summary>
 	/// <param name="SourceId">The identifier of the SIF node that is subscribing to the object events. This is the agent or ZIS identifier that would appear in the SIF_SourceId field of any SIF_Header created by the SIF node.</param>
 	/// <param name="SifObjectList">The name of the object being subscribed to by this SIF_SIFNode</param>
@@ -58,3 +53,4 @@ public class SIF_Subscribers : SifKeyedList<SIF_Subscriber>
 	}
 
 }}
+

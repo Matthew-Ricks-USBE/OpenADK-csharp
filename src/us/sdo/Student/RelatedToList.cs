@@ -40,11 +40,6 @@ public class RelatedToList : SifKeyedList<RelatedTo>
 		this.SafeAddChild( StudentDTD.RELATEDTOLIST_RELATEDTO, relatedTo );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected RelatedToList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;RelatedTo&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;RelatedTo&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class RelatedToList : SifKeyedList<RelatedTo>
 	}
 
 }}
+

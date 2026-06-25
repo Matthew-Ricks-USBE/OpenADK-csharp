@@ -40,11 +40,6 @@ public class TransactionPayMethods : SifKeyedList<TransactionPayMethod>
 		this.SafeAddChild( FoodDTD.TRANSACTIONPAYMETHODS_TRANSACTIONPAYMETHOD, transactionPayMethod );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TransactionPayMethods( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;TransactionPayMethod&gt;</c> element.</summary>
 	/// <param name="Type">This refers to the way the payment was made.</param>
 	/// <param name="Amounts">AmountThis amount is the form of the incoming funds for this transaction. For example; the payment can be made by a credit card.</param>
@@ -59,3 +54,4 @@ public class TransactionPayMethods : SifKeyedList<TransactionPayMethod>
 	}
 
 }}
+

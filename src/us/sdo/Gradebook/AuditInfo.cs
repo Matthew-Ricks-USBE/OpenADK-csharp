@@ -30,11 +30,6 @@ public class AuditInfo : SifElement
 	/// </summary>
 	public AuditInfo() : base ( GradebookDTD.AUDITINFO ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AuditInfo( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;CreationUser&gt;</c> element.</summary>
 	/// <param name="Type">The role of the staff member for that created this attendance record.</param>
 	/// <param name="UserId">Unique identifier of the user that created the attendance record.  This will depend on the user and the source.  The preferred identifier would be a RefId for a StaffPersonal, StudentContact, or StudentPersonal Object.  However, the user may not be associated with any of these SIF objects.  In that case a unique ID given by the source should be used.</param>
@@ -96,3 +91,4 @@ public class AuditInfo : SifElement
 	}
 
 }}
+

@@ -39,11 +39,6 @@ public class SIF_LogObjects : SifKeyedList<SIF_LogObject>
 		this.SafeAddChild( InfraDTD.SIF_LOGOBJECTS_SIF_LOGOBJECT, sifLogObject );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_LogObjects( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_LogObject&gt;</c> element.</summary>
 	/// <param name="ObjectName">The name of the SIF object referenced (e.g. StudentPersonal).</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SIF_LogObject&amp;gt; element</param>
@@ -58,3 +53,4 @@ public class SIF_LogObjects : SifKeyedList<SIF_LogObject>
 	}
 
 }}
+

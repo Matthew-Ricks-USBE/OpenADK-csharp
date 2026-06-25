@@ -40,11 +40,6 @@ public class LEAContactList : SifKeyedList<LEAContact>
 		this.SafeAddChild( StudentDTD.LEACONTACTLIST_LEACONTACT, leaContact );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LEAContactList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;LEAContact&gt;</c> element.</summary>
 	/// <param name="ContactInfo">For a description of this element, see 5.1.3 ContactInfo.</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class LEAContactList : SifKeyedList<LEAContact>
 	}
 
 }}
+

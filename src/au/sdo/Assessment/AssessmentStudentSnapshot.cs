@@ -31,11 +31,6 @@ public class AssessmentStudentSnapshot : SifElement
 	public AssessmentStudentSnapshot() : base ( AssessmentDTD.ASSESSMENTSTUDENTSNAPSHOT ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AssessmentStudentSnapshot( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Sex&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Sex</c> element of this object.</value>
@@ -92,3 +87,4 @@ public class AssessmentStudentSnapshot : SifElement
 	}
 
 }}
+

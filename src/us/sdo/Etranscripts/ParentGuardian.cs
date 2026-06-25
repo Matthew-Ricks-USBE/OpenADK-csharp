@@ -32,11 +32,6 @@ public class ParentGuardian : SifElement
 	/// </summary>
 	public ParentGuardian() : base ( EtranscriptsDTD.PARENTGUARDIAN ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ParentGuardian( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;Name&gt;</c> element.</summary>
 	/// <param name="Type">Code that specifies what type of name this is.  If unsure, use 04.</param>
 	/// <param name="LastName">The last name.</param>
@@ -128,3 +123,4 @@ public class ParentGuardian : SifElement
 	}
 
 }}
+

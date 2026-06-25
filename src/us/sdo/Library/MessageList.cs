@@ -40,11 +40,6 @@ public class MessageList : SifKeyedList<Message>
 		this.SafeAddChild( LibraryDTD.MESSAGELIST_MESSAGE, message );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MessageList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Message&gt;</c> element.</summary>
 	/// <param name="Priority">The level of urgency associated with this message.</param>
 	/// <param name="Text">The contents of the message.</param>
@@ -59,3 +54,4 @@ public class MessageList : SifKeyedList<Message>
 	}
 
 }}
+

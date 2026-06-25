@@ -38,11 +38,6 @@ public class SIF_ExtendedElements : SifActionList<SIF_ExtendedElement>
 		this.SafeAddChild( GlobalDTD.SIF_EXTENDEDELEMENTS_SIF_EXTENDEDELEMENT, sifExtendedElement );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_ExtendedElements( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SIF_ExtendedElement&gt;</c> element.</summary>
 	/// <param name="Name">The name of the extended element. As it is possible that names for extended elements may collide from agent to agent, it is recommended that the names of extended elements be configurable in an agent, or that agents use URIs for the names of extended elements.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SIF_ExtendedElement&amp;gt; element</param>
@@ -57,3 +52,4 @@ public class SIF_ExtendedElements : SifActionList<SIF_ExtendedElement>
 	}
 
 }}
+

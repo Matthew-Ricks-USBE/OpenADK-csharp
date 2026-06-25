@@ -1406,31 +1406,6 @@ namespace OpenADK.Library
                 throw new ArgumentException("IElementDef cannot be null");
             }
         }
-
-        #region Serialization
-
-        // TODO: Andy E Serialization is an unsupported feature of the .Net ADK. We need to create
-        // Unit tests for this and work out any issues
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected SifElement(SerializationInfo info,
-                             StreamingContext context)
-            : base(info, context)
-        {
-            fXmlId = info.GetString("fId");
-            fChildren = (List<SifElement>)info.GetValue("fId", typeof(List<SifElement>));
-            fFields =
-                (Dictionary<String, SimpleField>)
-                info.GetValue("fFields", typeof(Dictionary<String, SimpleField>));
-        }
-
-        //protected override void OnGetObjectData(SerializationInfo info,
-        //                                        StreamingContext context)
-        //{
-        //   info.AddValue("fId", fXmlId);
-        //   info.AddValue("fChildren", fChildren);
-        //   info.AddValue("fFields", fFields);
-        //}
-
-        #endregion
     }
 }
+

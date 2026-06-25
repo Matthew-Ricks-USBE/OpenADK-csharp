@@ -40,9 +40,5 @@ public class Items : SifList<Item>
 		this.SafeAddChild( AssessmentDTD.ITEMS_ITEM, item );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Items( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

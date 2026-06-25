@@ -36,11 +36,6 @@ public class SIF_ServiceNotify : SifMessagePayload
 	public SIF_ServiceNotify( SifVersion sifVersion ) : base( sifVersion, InfraDTD.SIF_SERVICENOTIFY ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_ServiceNotify( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;SIF_Header&gt;</c> element.
 	/// </summary>
 	/// <value> A SIF_Header </value>
@@ -237,3 +232,4 @@ public class SIF_ServiceNotify : SifMessagePayload
 	}
 
 }}
+

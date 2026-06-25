@@ -39,11 +39,6 @@ public class EmailList : SifActionList<Email>
 		this.SafeAddChild( CommonDTD.EMAILLIST_EMAIL, email );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EmailList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Email&gt;</c> element.</summary>
 	/// <param name="Type">This attribute specifies the type of e-mail address.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;Email&amp;gt; element</param>
@@ -58,3 +53,4 @@ public class EmailList : SifActionList<Email>
 	}
 
 }}
+

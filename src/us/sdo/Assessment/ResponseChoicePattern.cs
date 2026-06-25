@@ -30,11 +30,6 @@ public class ResponseChoicePattern : SifElement
 	/// </summary>
 	public ResponseChoicePattern() : base ( AssessmentDTD.RESPONSECHOICEPATTERN ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ResponseChoicePattern( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;Choice&gt;</c> element.</summary>
 	/// <param name="ChoiceContent">The text of the choice, such as true, 27, or Important economic and social factors.</param>
 	///<remarks>
@@ -74,3 +69,4 @@ public class ResponseChoicePattern : SifElement
 	}
 
 }}
+

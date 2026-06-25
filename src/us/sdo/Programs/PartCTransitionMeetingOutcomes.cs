@@ -40,9 +40,5 @@ public class PartCTransitionMeetingOutcomes : SifList<PartCTransitionMeetingOutc
 		this.SafeAddChild( ProgramsDTD.PARTCTRANSITIONMEETINGOUTCOMES_PARTCTRANSITIONMEETINGOUTCOME, partcTransitionMeetingOutcome );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PartCTransitionMeetingOutcomes( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

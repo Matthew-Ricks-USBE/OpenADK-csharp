@@ -41,11 +41,6 @@ public class LearningObjectiveList : SifKeyedList<LearningObjective>
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LearningObjectiveList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -68,3 +63,4 @@ public class LearningObjectiveList : SifKeyedList<LearningObjective>
 	}
 
 }}
+

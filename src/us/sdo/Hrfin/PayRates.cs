@@ -40,11 +40,6 @@ public class PayRates : SifKeyedList<PayRate>
 		this.SafeAddChild( HrfinDTD.PAYRATES_PAYRATE, payRate );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PayRates( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;PayRate&gt;</c> element.</summary>
 	/// <param name="Type">Type of pay</param>
 	/// <param name="Amount">Pay amount.</param>
@@ -60,3 +55,4 @@ public class PayRates : SifKeyedList<PayRate>
 	}
 
 }}
+

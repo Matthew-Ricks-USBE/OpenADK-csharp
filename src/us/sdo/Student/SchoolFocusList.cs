@@ -40,11 +40,6 @@ public class SchoolFocusList : SifKeyedList<SchoolFocus>
 		this.SafeAddChild( StudentDTD.SCHOOLFOCUSLIST_SCHOOLFOCUS, schoolFocus );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SchoolFocusList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SchoolFocus&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SchoolFocus&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class SchoolFocusList : SifKeyedList<SchoolFocus>
 	}
 
 }}
+

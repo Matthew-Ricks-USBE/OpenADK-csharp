@@ -41,11 +41,6 @@ public class ProgramExitReason : SifElement
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ProgramExitReason( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>CodeType</c> attribute.
 	/// </summary>
 	/// <value> The <c>CodeType</c> attribute of this object.</value>
@@ -141,3 +136,4 @@ public class ProgramExitReason : SifElement
 	}
 
 }}
+

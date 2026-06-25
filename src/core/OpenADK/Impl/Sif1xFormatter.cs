@@ -18,7 +18,7 @@ namespace OpenADK.Library.Impl
 
         public static string FormatTimeZone(DateTime date)
         {
-            TimeSpan difference = TimeZone.CurrentTimeZone.GetUtcOffset(date);
+            TimeSpan difference = TimeZoneInfo.Local.GetUtcOffset(date);
             return
                 String.Format
                     ("UTC{0:00}:{1:00}", new object[] {difference.Hours, difference.Minutes});

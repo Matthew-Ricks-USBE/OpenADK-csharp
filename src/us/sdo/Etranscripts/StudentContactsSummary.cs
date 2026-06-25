@@ -33,11 +33,6 @@ public class StudentContactsSummary : SifElement
 	public StudentContactsSummary() : base ( EtranscriptsDTD.STUDENTCONTACTSSUMMARY ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentContactsSummary( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;ParentGuardian1&gt;</c> element.
 	/// </summary>
 	/// <value> A ParentGuardian </value>
@@ -88,3 +83,4 @@ public class StudentContactsSummary : SifElement
 	}
 
 }}
+

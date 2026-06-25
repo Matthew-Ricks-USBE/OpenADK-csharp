@@ -41,11 +41,6 @@ public class TermMarkLists : SifList<MarkInfoList>
 	}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected TermMarkLists( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
 	/// </summary>
 	/// <value>
@@ -132,3 +127,4 @@ public class TermMarkLists : SifList<MarkInfoList>
 	}
 
 }}
+

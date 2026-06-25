@@ -40,11 +40,6 @@ public class ExclusionRules : SifKeyedList<ExclusionRule>
 		this.SafeAddChild( DwDTD.EXCLUSIONRULES_EXCLUSIONRULE, exclusionRule );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ExclusionRules( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ExclusionRule&gt;</c> element.</summary>
 	/// <param name="Type">Values: Sample, Size, Description</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;ExclusionRule&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class ExclusionRules : SifKeyedList<ExclusionRule>
 	}
 
 }}
+

@@ -94,17 +94,6 @@ namespace OpenADK.Library
         }
 
 
-        /// <summary>
-        /// The .Net Serialization constructor
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-        protected AdkException(SerializationInfo info,
-                                StreamingContext context)
-            : base(info, context) { }
-
-
 
 
 

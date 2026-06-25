@@ -40,9 +40,5 @@ public class StudentProgramAccommodations : SifList<StudentProgramAccommodation>
 		this.SafeAddChild( ProgramsDTD.STUDENTPROGRAMACCOMMODATIONS_STUDENTPROGRAMACCOMMODATION, studentProgramAccommodation );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentProgramAccommodations( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

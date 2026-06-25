@@ -40,11 +40,6 @@ public class EmployeeAssignments : SifKeyedList<EmplAssignment>
 		this.SafeAddChild( ProfdevDTD.EMPLOYEEASSIGNMENTS_ASSIGNMENT, assignment );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EmployeeAssignments( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Assignment&gt;</c> element.</summary>
 	/// <param name="SchoolInfoRefId">References SchoolInfo object to determine school in which this assignment pertains.</param>
 	/// <param name="GradeLevels">A GradeLevels</param>
@@ -60,3 +55,4 @@ public class EmployeeAssignments : SifKeyedList<EmplAssignment>
 	}
 
 }}
+

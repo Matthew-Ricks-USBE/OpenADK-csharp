@@ -4,8 +4,6 @@
 //
 
 using System;
-using System.Runtime.Serialization;
-using System.Security.Permissions;
 
 namespace OpenADK.Library
 {
@@ -13,12 +11,12 @@ namespace OpenADK.Library
    /// Represents informaton about an outstanding SIF_Request that has been made to the zone
    /// </summary>
    [Serializable]
-   public class RequestCacheFileEntry : ISerializable, IRequestInfo
+   public class RequestCacheFileEntry : IRequestInfo
    {
       private string fObjType;
       private string fMessageId;
       private DateTime fRequestTime;
-      [NonSerialized]
+      [MessagePack.IgnoreMember]
       private object fState;
 
       /// <summary>
@@ -62,49 +60,6 @@ namespace OpenADK.Library
          }
       }
 
-
-      /// <summary>
-      /// The .Net Serialization constructor
-      /// </summary>
-      /// <param name="info"></param>
-      /// <param name="context"></param>
-      [SecurityPermission(SecurityAction.Demand, SerializationFormatter = true)]
-      private RequestCacheFileEntry(SerializationInfo info,
-                                     StreamingContext context)
-      {
-         fObjType = info.GetString("fObjType");
-         fMessageId = info.GetString("fMessageId");
-         fRequestTime = info.GetDateTime("fRequestTime");
-
-         // fState is set by second desserialize call,
-         //which sets State Property
-         //try
-         //{
-         //   fState = info.GetValue("fState", typeof(Object));
-         //}
-         //catch (Exception ex)
-         //{
-         //   Agent.Log.Error
-         //       ("Error retrieving custom UserData from RequestCache: " + ex.Message, ex);
-         //}
-      }
-
-      void ISerializable.GetObjectData(SerializationInfo info,
-                                        StreamingContext context)
-      {
-         info.AddValue("fObjType", fObjType);
-         info.AddValue("fMessageId", fMessageId);
-         info.AddValue("fRequestTime", fRequestTime);
-         //try
-         //{
-         //   info.AddValue("fState", fState);
-         //}
-         //catch (Exception ex)
-         //{
-         //   Agent.Log.Error
-         //       ("Error storing custom UserData to RequestCache: " + ex.Message, ex);
-         //}
-      }
 
       /// <summary>
       /// The Object Type of the Request. e.g. "StudentPersonal"

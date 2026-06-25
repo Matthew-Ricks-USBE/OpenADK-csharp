@@ -42,11 +42,6 @@ public class MarkingSystems : SifKeyedList<MarkValueInfoData>
 		this.SafeAddChild( EtranscriptsDTD.MARKINGSYSTEMS_MARKVALUEINFODATA, markValueInfoData );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MarkingSystems( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;MarkValueInfoData&gt;</c> element.</summary>
 	/// <param name="RefId">ID used internally to StudentAcademicRecord to link marks to their marking systems.</param>
 	///<remarks>
@@ -60,3 +55,4 @@ public class MarkingSystems : SifKeyedList<MarkValueInfoData>
 	}
 
 }}
+

@@ -30,11 +30,6 @@ public class AbstractContentElementType : SifElement
 	public AbstractContentElementType() : base ( CommonDTD.ABSTRACTCONTENTELEMENTTYPE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AbstractContentElementType( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;XMLData&gt;</c> element.
 	/// </summary>
 	/// <value> A XMLData </value>
@@ -177,3 +172,4 @@ public class AbstractContentElementType : SifElement
 	}
 
 }}
+

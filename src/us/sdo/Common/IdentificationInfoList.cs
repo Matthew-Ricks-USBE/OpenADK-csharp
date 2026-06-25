@@ -39,11 +39,6 @@ public class IdentificationInfoList : SifKeyedList<IdentificationInfo>
 		this.SafeAddChild( CommonDTD.IDENTIFICATIONINFOLIST_IDENTIFICATIONINFO, identificationInfo );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected IdentificationInfoList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;IdentificationInfo&gt;</c> element.</summary>
 	/// <param name="Code">Code indicating which identification system is used.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;IdentificationInfo&amp;gt; element</param>
@@ -58,3 +53,4 @@ public class IdentificationInfoList : SifKeyedList<IdentificationInfo>
 	}
 
 }}
+

@@ -30,11 +30,6 @@ public class AddressableObjectName : SifElement
 	public AddressableObjectName() : base ( CommonDTD.ADDRESSABLEOBJECTNAME ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AddressableObjectName( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Description&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Description</c> element of this object.</value>
@@ -140,3 +135,4 @@ public class AddressableObjectName : SifElement
 	}
 
 }}
+

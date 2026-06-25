@@ -32,11 +32,6 @@ public class StudentParticipationData : SifElement
 	/// </summary>
 	public StudentParticipationData() : base ( EtranscriptsDTD.STUDENTPARTICIPATIONDATA ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentParticipationData( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;ProgramType&gt;</c> element.</summary>
 	/// <param name="Code">The type of the program. Type identifies the list of values.</param>
 	///<remarks>
@@ -426,3 +421,4 @@ public class StudentParticipationData : SifElement
 	}
 
 }}
+

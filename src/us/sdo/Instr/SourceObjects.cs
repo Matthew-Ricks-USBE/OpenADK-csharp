@@ -40,11 +40,6 @@ public class SourceObjects : SifKeyedList<SourceObject>
 		this.SafeAddChild( InstrDTD.SOURCEOBJECTS_SOURCEOBJECT, sourceObject );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SourceObjects( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;SourceObject&gt;</c> element.</summary>
 	/// <param name="SifRefObject">The type of learning object the source object is.</param>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;SourceObject&amp;gt; element</param>
@@ -59,3 +54,4 @@ public class SourceObjects : SifKeyedList<SourceObject>
 	}
 
 }}
+

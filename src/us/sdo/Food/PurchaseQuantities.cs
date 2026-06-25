@@ -40,11 +40,6 @@ public class PurchaseQuantities : SifList<PurchaseQuantity>
 		this.SafeAddChild( FoodDTD.PURCHASEQUANTITIES_PURCHASEQUANTITY, purchaseQuantity );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected PurchaseQuantities( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;PurchaseQuantity&gt;</c> element.</summary>
 	/// <param name="FoodserviceItemPortionRefId">Item portion amount</param>
 	/// <param name="Earned">Identifies whether the item being purchased is earned i.e., at no cost to the buyer. It is used when FoodserviceTransaction object's TransactionType element has the value "Purchase".</param>
@@ -61,3 +56,4 @@ public class PurchaseQuantities : SifList<PurchaseQuantity>
 	}
 
 }}
+

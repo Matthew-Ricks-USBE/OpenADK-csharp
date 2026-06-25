@@ -39,11 +39,6 @@ public class ExceptionalityCategories : SifKeyedList<ExceptionalityCategory>
 		this.SafeAddChild( CommonDTD.EXCEPTIONALITYCATEGORIES_EXCEPTIONALITYCATEGORY, exceptionalityCategory );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ExceptionalityCategories( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;ExceptionalityCategory&gt;</c> element.</summary>
 	/// <param name="CodeType">If CodeType = "NCES" then use code set 0768 Primary Disability Type [NCES Handbooks]</param>
 	/// <param name="ExceptionalityPriority">Identifies priority of the exceptionality.  "Primary" is the first and is required even if only one exceptionality is specified. "Secondary", etc. are of lower priority. Primary, Secondary, and Tertiary must be specified before "Additional" is used.</param>
@@ -59,3 +54,4 @@ public class ExceptionalityCategories : SifKeyedList<ExceptionalityCategory>
 	}
 
 }}
+

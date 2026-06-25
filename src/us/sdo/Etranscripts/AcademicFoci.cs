@@ -42,11 +42,6 @@ public class AcademicFoci : SifKeyedList<AcademicFocus>
 		this.SafeAddChild( EtranscriptsDTD.ACADEMICFOCI_ACADEMICFOCUS, academicFocus );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected AcademicFoci( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;AcademicFocus&gt;</c> element.</summary>
 	/// <param name="Code">A code to depict the focus of the educational program (replaces deprecated AcademicTrack.</param>
 	///<remarks>
@@ -60,3 +55,4 @@ public class AcademicFoci : SifKeyedList<AcademicFocus>
 	}
 
 }}
+

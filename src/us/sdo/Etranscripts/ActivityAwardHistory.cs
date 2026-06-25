@@ -42,9 +42,5 @@ public class ActivityAwardHistory : SifList<ActivityAward>
 		this.SafeAddChild( EtranscriptsDTD.ACTIVITYAWARDHISTORY_ACTIVITYAWARD, activityAward );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected ActivityAwardHistory( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

@@ -1620,7 +1620,7 @@ namespace OpenADK.Library.us.Assessment
 
 		ADMINISTRATIONASSESSMENT = new ElementDefImpl( null, "AdministrationAssessment", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26, SifTypeConverters.STRING );
 		ADMINISTRATIONASSESSMENTS = new ElementDefImpl( null, "AdministrationAssessments", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
-		ASSESSMENT = new ElementDefImpl( null, "Assessment", null, 0, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_OBJECT), SifVersion.SIF20, SifVersion.SIF26 );
+		ASSESSMENT = new ElementDefImpl( null, "Assessment", null, 0, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_OBJECT), SifVersion.SIF15r1, SifVersion.SIF26 );
 		ASSESSMENTADMINISTRATION = new ElementDefImpl( null, "AssessmentAdministration", null, 0, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_OBJECT), SifVersion.SIF20, SifVersion.SIF26 );
 		ASSESSMENTASSETREFID = new ElementDefImpl( null, "AssessmentAssetRefId", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26, SifTypeConverters.STRING );
 		ASSESSMENTASSETREFIDS = new ElementDefImpl( null, "AssessmentAssetRefIds", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );

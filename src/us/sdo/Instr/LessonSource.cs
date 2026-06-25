@@ -40,9 +40,5 @@ public class LessonSource : SifList<SourceAuthor>
 		this.SafeAddChild( InstrDTD.LESSONSOURCE_AUTHOR, author );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected LessonSource( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

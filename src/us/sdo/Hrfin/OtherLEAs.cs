@@ -40,11 +40,6 @@ public class OtherLEAs : SifKeyedList<LEAInfoRefId>
 		this.SafeAddChild( HrfinDTD.OTHERLEAS_LEAINFOREFID, leaInfoRefId );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected OtherLEAs( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;LEAInfoRefId&gt;</c> element.</summary>
 	/// <param name="Value">Gets or sets the content value of the &amp;lt;LEAInfoRefId&amp;gt; element</param>
 	///<remarks>
@@ -58,3 +53,4 @@ public class OtherLEAs : SifKeyedList<LEAInfoRefId>
 	}
 
 }}
+

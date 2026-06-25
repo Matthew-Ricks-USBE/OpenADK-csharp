@@ -29,9 +29,5 @@ public class SIF_Sleep : SifElement
 	/// </summary>
 	public SIF_Sleep() : base ( InfraDTD.SIF_SLEEP ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected SIF_Sleep( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

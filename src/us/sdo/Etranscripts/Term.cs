@@ -32,11 +32,6 @@ public class Term : SifElement
 	/// </summary>
 	public Term() : base ( EtranscriptsDTD.TERM ){}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Term( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Sets the value of the <c>&lt;TermInfoData&gt;</c> element.</summary>
 	/// <param name="SchoolAttendedRefId">Reference to the school of record for the courses being taken (see SchoolAttended).</param>
 	///<remarks>
@@ -126,3 +121,4 @@ public class Term : SifElement
 	}
 
 }}
+

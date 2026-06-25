@@ -40,11 +40,6 @@ public class Agencies : SifKeyedList<Agency>
 		this.SafeAddChild( FoodDTD.AGENCIES_AGENCY, agency );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Agencies( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Agency&gt;</c> element.</summary>
 	/// <param name="Type">Type of the reimbursing agency. Values: Federal, State, Local, Other</param>
 	/// <param name="Name">The name of the reimbursing agency. This element is to be used when the Type is set as Other.</param>
@@ -60,3 +55,4 @@ public class Agencies : SifKeyedList<Agency>
 	}
 
 }}
+

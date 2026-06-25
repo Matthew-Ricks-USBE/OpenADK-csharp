@@ -40,11 +40,6 @@ public class Components : SifList<Component>
 		this.SafeAddChild( InstrDTD.COMPONENTS_COMPONENT, component );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected Components( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;Component&gt;</c> element.</summary>
 	/// <param name="ResourceComponentRefId">GUID for resource component</param>
 	/// <param name="Name">Name of learning resource component within the resource, i.e. "Chapter 1, Section 4.</param>
@@ -60,3 +55,4 @@ public class Components : SifList<Component>
 	}
 
 }}
+

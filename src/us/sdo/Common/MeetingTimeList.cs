@@ -39,9 +39,5 @@ public class MeetingTimeList : SifList<MeetingTime>
 		this.SafeAddChild( CommonDTD.MEETINGTIMELIST_MEETINGTIME, meetingTime );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected MeetingTimeList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

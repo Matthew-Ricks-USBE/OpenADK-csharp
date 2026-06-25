@@ -33,11 +33,6 @@ public class StudentSchoolRelationship : SifElement
 	public StudentSchoolRelationship() : base ( EtranscriptsDTD.STUDENTSCHOOLRELATIONSHIP ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentSchoolRelationship( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;MembershipType&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>MembershipType</c> element of this object.</value>
@@ -134,3 +129,4 @@ public class StudentSchoolRelationship : SifElement
 	}
 
 }}
+

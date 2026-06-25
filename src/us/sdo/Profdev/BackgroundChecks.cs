@@ -40,9 +40,5 @@ public class BackgroundChecks : SifList<BackgroundCheck>
 		this.SafeAddChild( ProfdevDTD.BACKGROUNDCHECKS_BACKGROUNDCHECK, backgroundCheck );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected BackgroundChecks( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 }}
+

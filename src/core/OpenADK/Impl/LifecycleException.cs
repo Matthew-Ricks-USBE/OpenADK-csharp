@@ -22,14 +22,5 @@ namespace OpenADK.Library.Impl
         public LifecycleException( string msg )
             : base( msg ) {}
 
-        /// <summary>
-        /// The .Net Serialization constructor, used to allow exception to be serialized across AppDomain boundaries
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        [SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )]
-        protected LifecycleException( SerializationInfo info,
-                                      StreamingContext context )
-            : base( info, context ) {}
     }
 }

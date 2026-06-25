@@ -40,11 +40,6 @@ public class NationalCurriculumList : SifKeyedList<NationalCurriculum>
 		this.SafeAddChild( LearnerDTD.NATIONALCURRICULUMLIST_NATIONALCURRICULUM, nationalCurriculum );
 	}
 
-	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected NationalCurriculumList( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
 	///<summary>Adds the value of the <c>&lt;NationalCurriculum&gt;</c> element.</summary>
 	/// <param name="Modification">How is the National Curriculum used for this learner?</param>
 	/// <param name="Subject">National Curriculum subject(s) for which modification or disapplication applies.</param>
@@ -59,3 +54,4 @@ public class NationalCurriculumList : SifKeyedList<NationalCurriculum>
 	}
 
 }}
+

@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net481</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <RootNamespace>SifWorks.Examples.Mapping</RootNamespace>
     <AssemblyName>Mappings</AssemblyName>
@@ -32,7 +32,7 @@
     <OutputPath>bin\Eval\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.14" />
+    <PackageReference Include="log4net" Version="3.3.1" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

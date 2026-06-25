@@ -31,11 +31,6 @@ public class EDENInfoType : SifElement
 	public EDENInfoType() : base ( DatamodelDTD.EDENINFOTYPE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected EDENInfoType( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;FIPSStateCode&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>FIPSStateCode</c> element of this object.</value>
@@ -78,3 +73,4 @@ public class EDENInfoType : SifElement
 	}
 
 }}
+

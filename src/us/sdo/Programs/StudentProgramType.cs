@@ -31,11 +31,6 @@ public class StudentProgramType : SifElement
 	public StudentProgramType() : base ( ProgramsDTD.STUDENTPROGRAMTYPE ){}
 
 	/// <summary>
-	/// Constructor used by the .Net Serialization formatter
-	/// </summary>
-	[SecurityPermission( SecurityAction.Demand, SerializationFormatter=true )] 
-	protected StudentProgramType( SerializationInfo info, StreamingContext context ) : base( info, context ) {} 
-	/// <summary>
 	/// Gets or sets the value of the <c>&lt;Code&gt;</c> element.
 	/// </summary>
 	/// <value> The <c>Code</c> element of this object.</value>
@@ -82,3 +77,4 @@ public class StudentProgramType : SifElement
 	}
 
 }}
+
