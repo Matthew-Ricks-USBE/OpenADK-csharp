@@ -1,0 +1,21 @@
+<StaffEvaluation>
+  <StaffPersonalRefId>B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3</StaffPersonalRefId>
+  <SchoolInfoRefId>39FA2714A63543B0A7732796825E9C68</SchoolInfoRefId>
+  <EvaluationDate>2007-04-15</EvaluationDate>
+  <EvaluationSystem>APPR Evaluation Framework 2012</EvaluationSystem>
+  <EvaluationParts>
+    <EvaluationPart>
+      <Name>Classroom Observation</Name>
+      <Score>3</Score>
+      <Scale>4</Scale>
+    </EvaluationPart>
+    <EvaluationPart>
+      <Name>Student Growth</Name>
+      <Score>4</Score>
+      <Scale>4</Scale>
+    </EvaluationPart>
+  </EvaluationParts>
+  <EvaluationHolisticScore>3.5</EvaluationHolisticScore>
+  <EvaluationHolisticScale>4</EvaluationHolisticScale>
+  <EvaluationRecommendation>Highly Effective</EvaluationRecommendation>
+</StaffEvaluation>

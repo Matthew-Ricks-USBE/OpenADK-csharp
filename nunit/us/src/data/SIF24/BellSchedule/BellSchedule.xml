@@ -1,0 +1,41 @@
+<BellSchedule RefId="E5F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0">
+  <SchoolInfoRefId>39FA2714A63543B0A7732796825E9C68</SchoolInfoRefId>
+  <SchoolYear>2006</SchoolYear>
+  <BellScheduleName>Regular Day</BellScheduleName>
+  <TimetableDayList>
+    <TimetableDay>
+      <Identifier>MON</Identifier>
+      <Name>Monday</Name>
+    </TimetableDay>
+    <TimetableDay>
+      <Identifier>TUE</Identifier>
+      <Name>Tuesday</Name>
+    </TimetableDay>
+  </TimetableDayList>
+  <TimetablePeriodList>
+    <TimetablePeriod>
+      <Identifier>1</Identifier>
+      <Name>Period 1</Name>
+    </TimetablePeriod>
+    <TimetablePeriod>
+      <Identifier>2</Identifier>
+      <Name>Period 2</Name>
+    </TimetablePeriod>
+  </TimetablePeriodList>
+  <BellPeriodList>
+    <BellPeriod>
+      <TimetableDayIdentifier>MON</TimetableDayIdentifier>
+      <TimetablePeriodIdentifier>1</TimetablePeriodIdentifier>
+      <StartTime>08:00:00</StartTime>
+      <EndTime>09:00:00</EndTime>
+      <InstructionalMinutes>60</InstructionalMinutes>
+    </BellPeriod>
+    <BellPeriod>
+      <TimetableDayIdentifier>MON</TimetableDayIdentifier>
+      <TimetablePeriodIdentifier>2</TimetablePeriodIdentifier>
+      <StartTime>09:10:00</StartTime>
+      <EndTime>10:10:00</EndTime>
+      <InstructionalMinutes>60</InstructionalMinutes>
+    </BellPeriod>
+  </BellPeriodList>
+</BellSchedule>

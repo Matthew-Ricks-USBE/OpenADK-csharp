@@ -1,0 +1,16 @@
+<ItemCharacteristics RefId="A1B2C3D4E5F6A7B8C9D0E1F2A3B4C5D6" AssessmentItemRefId="C294F3E190F019AD8E1DFC8367537EC8" AssessmentFormRefId="9372CB8EA910FF87D5672CAEF01387AA">
+  <PercentCorrect>78.5</PercentCorrect>
+  <SampleSize>1200</SampleSize>
+  <Descriptive>
+    <PValue>0.785</PValue>
+    <SampleSize>1200</SampleSize>
+    <PointBiserial>0.52</PointBiserial>
+    <Biserial>0.65</Biserial>
+    <DiscriminationIndex>0.42</DiscriminationIndex>
+  </Descriptive>
+  <SampleDescription>Statewide pilot sample fall 2005, Grades 9-12</SampleDescription>
+  <Measurements>
+    <Measurement MeasurementCode="PVal">0.785</Measurement>
+    <Measurement MeasurementCode="PBi">0.52</Measurement>
+  </Measurements>
+</ItemCharacteristics>

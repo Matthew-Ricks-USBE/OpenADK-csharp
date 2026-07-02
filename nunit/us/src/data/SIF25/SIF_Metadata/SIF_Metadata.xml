@@ -1,6 +1,6 @@
 <AssessmentItem RefId="C294F3E190F019AD8E1DFC8367537EC8" AssessmentFormRefId="9372CB8EA910FF87D5672CAEF01387AA" ResponseType="multiple-choice">
   <ItemLabel>5</ItemLabel>
-  <ItemName>Geometry diagnostic</ItemName>
+  <ItemName>Geometry diagnostic (SIF 2.5 Advanced Assessment)</ItemName>
   <LearningStandardItems>
     <LearningStandardItemRefId>DE072A87EFAD4B778AF9FAF83C94839E</LearningStandardItemRefId>
   </LearningStandardItems>
@@ -67,8 +67,12 @@
   <EducationFilter>
     <BloomsTaxonomyLevels>
       <BloomsTaxonomyLevel>Knowledge</BloomsTaxonomyLevel>
+      <BloomsTaxonomyLevel>Comprehension</BloomsTaxonomyLevel>
+      <BloomsTaxonomyLevel>Application</BloomsTaxonomyLevel>
+      <BloomsTaxonomyLevel>Analysis</BloomsTaxonomyLevel>
     </BloomsTaxonomyLevels>
   </EducationFilter>
 </SIF_Metadata>
 </AssessmentItem>
+
 

@@ -1,0 +1,25 @@
+<ResponseToIntervention RefId="A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2">
+  <StudentPersonalRefId>D932E34082D04C048112729922B58A93</StudentPersonalRefId>
+  <SchoolInfoRefId>39FA2714A63543B0A7732796825E9C68</SchoolInfoRefId>
+  <StaffPersonalRefId>B8C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3</StaffPersonalRefId>
+  <StudentPlacementRefId>C9D0E1F2A3B4C5D6E7F8A9B0C1D2E3F4</StudentPlacementRefId>
+  <RTILocalId>RTI-2006-0042</RTILocalId>
+  <LocationWhereInterventionDelivered>Classroom</LocationWhereInterventionDelivered>
+  <Tier>2</Tier>
+  <Interventions>
+    <Intervention>
+      <InterventionName>Guided Reading Intervention</InterventionName>
+      <InterventionDescription>30-minute small group guided reading sessions focusing on phonemic awareness and reading fluency.</InterventionDescription>
+      <InterventionType>Face-to-face</InterventionType>
+      <InterventionDelivery>Group</InterventionDelivery>
+    </Intervention>
+  </Interventions>
+  <SubjectArea>
+    <Code>01</Code>
+  </SubjectArea>
+  <EntryDate>2006-09-01</EntryDate>
+  <ProjectedExitDate>2007-01-15</ProjectedExitDate>
+  <FrequencyTime>
+    <Code>S001</Code>
+  </FrequencyTime>
+</ResponseToIntervention>

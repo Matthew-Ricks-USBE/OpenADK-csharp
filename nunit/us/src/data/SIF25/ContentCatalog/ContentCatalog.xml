@@ -1,0 +1,17 @@
+<ContentCatalog xml:lang="en">
+  <ContentObject>
+    <SourceObject SIF_RefObject="LearningResource">DE072A87EFAD4B778AF9FAF83C94839E</SourceObject>
+  </ContentObject>
+  <Title>Introduction to Algebra - Grade 8</Title>
+  <Description>A comprehensive introduction to algebraic concepts for 8th grade students.</Description>
+  <GradeLevels>
+    <GradeLevel>
+      <Code>08</Code>
+    </GradeLevel>
+  </GradeLevels>
+  <SubjectAreas>
+    <SubjectArea>
+      <Code>02</Code>
+    </SubjectArea>
+  </SubjectAreas>
+</ContentCatalog>

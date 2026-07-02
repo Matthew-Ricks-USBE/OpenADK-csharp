@@ -1,0 +1,20 @@
+<StudentContactPersonal RefId="F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1">
+  <PersonInfo>
+    <Name Type="04">
+      <LastName>Smith</LastName>
+      <FirstName>Jane</FirstName>
+    </Name>
+    <EmailList>
+      <Email Type="Primary">jsmith@email.com</Email>
+    </EmailList>
+    <PhoneNumberList>
+      <PhoneNumber Type="0096">
+        <Number>2065551234</Number>
+      </PhoneNumber>
+    </PhoneNumberList>
+  </PersonInfo>
+  <EducationLevel>
+    <Code>1051</Code>
+  </EducationLevel>
+  <OptOutEmail>No</OptOutEmail>
+</StudentContactPersonal>

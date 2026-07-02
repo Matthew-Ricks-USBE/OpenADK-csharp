@@ -1,0 +1,16 @@
+<StudentContactRelationship>
+  <StudentPersonalRefId>D932E34082D04C048112729922B58A93</StudentPersonalRefId>
+  <StudentContactPersonalRefId>F6A7B8C9D0E1F2A3B4C5D6E7F8A9B0C1</StudentContactPersonalRefId>
+  <Relationship>
+    <Code>1727</Code>
+  </Relationship>
+  <ContactFlags>
+    <PickupRights>Yes</PickupRights>
+    <LivesWith>Yes</LivesWith>
+    <AccessToRecords>Yes</AccessToRecords>
+    <EmergencyContact>Yes</EmergencyContact>
+    <ParentLegalGuardian>Yes</ParentLegalGuardian>
+    <HasCustody>Yes</HasCustody>
+  </ContactFlags>
+  <ContactSequence>1</ContactSequence>
+</StudentContactRelationship>
