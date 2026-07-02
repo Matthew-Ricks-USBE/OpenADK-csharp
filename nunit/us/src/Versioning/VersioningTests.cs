@@ -106,6 +106,161 @@ namespace OpenADK.Library.Nunit.US.Validation
         {
             RunVersioningTests(SifVersion.SIF22, SifVersion.SIF20r1, false);
         }
+
+        
+        [Test]
+        public void ReadSIF23Write23()
+        {
+            RunVersioningTests(SifVersion.SIF23, SifVersion.SIF23, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF23Write22()
+        {
+            RunVersioningTests(SifVersion.SIF23, SifVersion.SIF22, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF23Write21()
+        {
+            RunVersioningTests(SifVersion.SIF23, SifVersion.SIF21, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF23Write20r1()
+        {
+            RunVersioningTests(SifVersion.SIF23, SifVersion.SIF20r1, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF24Write24()
+        {
+            RunVersioningTests(SifVersion.SIF24, SifVersion.SIF24, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF24Write23()
+        {
+            RunVersioningTests(SifVersion.SIF24, SifVersion.SIF23, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF24Write22()
+        {
+            RunVersioningTests(SifVersion.SIF24, SifVersion.SIF22, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF24Write21()
+        {
+            RunVersioningTests(SifVersion.SIF24, SifVersion.SIF21, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF24Write20r1()
+        {
+            RunVersioningTests(SifVersion.SIF24, SifVersion.SIF20r1, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF25Write25()
+        {
+            RunVersioningTests(SifVersion.SIF25, SifVersion.SIF25, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF25Write24()
+        {
+            RunVersioningTests(SifVersion.SIF25, SifVersion.SIF24, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF25Write23()
+        {
+            RunVersioningTests(SifVersion.SIF25, SifVersion.SIF23, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF25Write22()
+        {
+            RunVersioningTests(SifVersion.SIF25, SifVersion.SIF22, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF25Write21()
+        {
+            RunVersioningTests(SifVersion.SIF25, SifVersion.SIF21, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF25Write20r1()
+        {
+            RunVersioningTests(SifVersion.SIF25, SifVersion.SIF20r1, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF26Write26()
+        {
+            RunVersioningTests(SifVersion.SIF26, SifVersion.SIF26, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF26Write25()
+        {
+            RunVersioningTests(SifVersion.SIF26, SifVersion.SIF25, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF26Write24()
+        {
+            RunVersioningTests(SifVersion.SIF26, SifVersion.SIF24, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF26Write23()
+        {
+            RunVersioningTests(SifVersion.SIF26, SifVersion.SIF23, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF26Write22()
+        {
+            RunVersioningTests(SifVersion.SIF26, SifVersion.SIF22, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF26Write21()
+        {
+            RunVersioningTests(SifVersion.SIF26, SifVersion.SIF21, false);
+        }
+
+        
+        [Test]
+        public void ReadSIF26Write20r1()
+        {
+            RunVersioningTests(SifVersion.SIF26, SifVersion.SIF20r1, false);
+        }
+
         
 
 
