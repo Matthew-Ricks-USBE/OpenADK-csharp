@@ -400,7 +400,7 @@ namespace OpenADK.Library.Impl
 
                 for (int i = 0; i < sSifVersions.Length; i++)
                 {
-                    if (fInfo[i] != null)
+                    if (fInfo[i] != null && !(fInfo[i] is GapVersionInfo))
                     {
                         return sSifVersions[i];
                     }
@@ -558,9 +558,30 @@ namespace OpenADK.Library.Impl
         /// <returns> <c>TRUE</c> if the metadata is included in the specified version of SIF</returns>
         public bool IsSupported(SifVersion version)
         {
-            SifVersion earliestVersion = EarliestVersion;
-            return (earliestVersion == null || earliestVersion.CompareTo( version ) < 1) &&
-                   (fLatestVersion == null || fLatestVersion.CompareTo( version ) > -1);
+            // Version must not exceed the declared latest version
+            if (fLatestVersion != null && fLatestVersion.CompareTo(version) < 0)
+                return false;
+            // And the element must have applicable version info (handles both pre-earliest and
+            // intra-range gaps marked via DefineVersionAbsent)
+            return GetVersionInfo(version) != null;
+        }
+
+        /// <summary>
+        /// Marks this element as absent (not present) in the specified SIF version.
+        /// Use this to express gaps when an element exists in an earlier and a later version
+        /// but was removed in an intermediate version range.
+        /// </summary>
+        /// <param name="version">The SIF version in which this element is absent</param>
+        public void DefineVersionAbsent(SifVersion version)
+        {
+            for (int i = 0; i < sSifVersions.Length; i++)
+            {
+                if (version == sSifVersions[i])
+                {
+                    fInfo[i] = GapVersionInfo.Instance;
+                    break;
+                }
+            }
         }
 
         public virtual bool IsDeprecated(SifVersion version)
@@ -641,13 +662,22 @@ namespace OpenADK.Library.Impl
             // Search the list of SIFVersions that the ADK supports. The list
             // is searched incrementally, starting with the oldest version. If
             // a version is found that directly matches the requested SIF Version, 
-            // return that entry. Otherwise, return the next previous entry from the list
+            // return that entry. Otherwise, return the next previous entry from the list.
+            // A GapVersionInfo entry acts as a gap marker: it resets the search so that
+            // versions after the gap are not considered supported until a new entry is found.
             for (int i = 0; i < sSifVersions.Length; i++)
             {
                 int comparison = sSifVersions[i].CompareTo( version );
-                if (comparison < 1 && fInfo[i] != null)
+                if (comparison < 1)
                 {
-                    last = i;
+                    if (fInfo[i] is GapVersionInfo)
+                    {
+                        last = -1;
+                    }
+                    else if (fInfo[i] != null)
+                    {
+                        last = i;
+                    }
                 }
 
                 if (comparison > -1)
@@ -883,6 +913,20 @@ namespace OpenADK.Library.Impl
 
                 return fSurrogate;
             }
+        }
+
+        /// <summary>
+        /// A sentinel version info that marks an element as absent (not present) in a specific SIF version.
+        /// When <see cref="GetAbstractVersionInfo"/> encounters this marker it resets the search, preventing
+        /// inheritance of earlier version info across a gap.
+        /// </summary>
+        private sealed class GapVersionInfo : AbstractVersionInfo
+        {
+            public static readonly GapVersionInfo Instance = new GapVersionInfo();
+
+            private GapVersionInfo() : base(null) { }
+
+            public override IRenderSurrogate GetSurrogate() => null;
         }
     }
 }

@@ -199,6 +199,13 @@ namespace OpenADK.Library
                                 int flags );
 
         /// <summary>
+        /// Marks this element as absent (not present) in the specified SIF version,
+        /// expressing a gap in an otherwise discontinuous version range.
+        /// </summary>
+        /// <param name="version">The SIF version in which this element is absent</param>
+        void DefineVersionAbsent( SifVersion version );
+
+        /// <summary>
         /// The Type converter suitable for parsing the SIF XML value of this element into
         /// the native data type
         /// </summary>

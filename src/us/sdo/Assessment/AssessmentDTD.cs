@@ -1685,6 +1685,14 @@ namespace OpenADK.Library.us.Assessment
 		ASSESSMENTREGISTRATION = new ElementDefImpl( null, "AssessmentRegistration", null, 0, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_OBJECT), SifVersion.SIF20, SifVersion.SIF26 );
 		ASSESSMENTSECTION = new ElementDefImpl( null, "AssessmentSection", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
 		ASSESSMENTSECTION.DefineVersionInfo( SifVersion.SIF15r1, "AssessmentSection", 0, 0 );
+		// AssessmentSection was absent in SIF 2.0–2.5 and reintroduced in SIF 2.6.
+		ASSESSMENTSECTION.DefineVersionAbsent( SifVersion.SIF20 );
+		ASSESSMENTSECTION.DefineVersionAbsent( SifVersion.SIF20r1 );
+		ASSESSMENTSECTION.DefineVersionAbsent( SifVersion.SIF21 );
+		ASSESSMENTSECTION.DefineVersionAbsent( SifVersion.SIF22 );
+		ASSESSMENTSECTION.DefineVersionAbsent( SifVersion.SIF23 );
+		ASSESSMENTSECTION.DefineVersionAbsent( SifVersion.SIF24 );
+		ASSESSMENTSECTION.DefineVersionAbsent( SifVersion.SIF25 );
 		ASSESSMENTSECTIONS = new ElementDefImpl( null, "AssessmentSections", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
 		ASSESSMENTSTUDENTSNAPSHOT = new ElementDefImpl( null, "AssessmentStudentSnapshot", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF22, SifVersion.SIF26 );
 		ASSESSMENTSTUDENTSNAPSHOTSIF3 = new ElementDefImpl( null, "AssessmentStudentSnapshotSif3", "AssessmentStudentSnapshot", 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
@@ -1877,10 +1885,11 @@ namespace OpenADK.Library.us.Assessment
 		// SIF 1.5r1 AssessmentItem fields.
 		// DefineVersionInfo(SIF15r1) makes IsSupported(SIF15r1)=true so the SIFParser
 		// while-loop does not prematurely pop AssessmentItem off the element stack.
-		// NOTE: AssessmentItem was absent in SIF 2.0r1 and 2.1; the [SIF15r1, SIF26]
-		// range here does yield a false-positive IsSupported for those gap versions,
-		// but no gap-marker mechanism currently exists to express discontinuous ranges.
+		// AssessmentItem was absent in SIF 2.0–2.1 and reintroduced in SIF 2.2.
 		ASSESSMENTITEM.DefineVersionInfo( SifVersion.SIF15r1, "AssessmentItem", 0, ElementDefImpl.FD_OBJECT );
+		ASSESSMENTITEM.DefineVersionAbsent( SifVersion.SIF20 );
+		ASSESSMENTITEM.DefineVersionAbsent( SifVersion.SIF20r1 );
+		ASSESSMENTITEM.DefineVersionAbsent( SifVersion.SIF21 );
 		AssessmentDTD.ASSESSMENTITEM_REFID.DefineVersionInfo( SifVersion.SIF15r1, "RefId", 1, ElementDefImpl.FD_ATTRIBUTE );
 		AssessmentDTD.ASSESSMENTITEM_LANGUAGE = new ElementDefImpl( ASSESSMENTITEM, "Language", "xml:lang", 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
 		AssessmentDTD.ASSESSMENTITEM_TITLE = new ElementDefImpl( ASSESSMENTITEM, "Title", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
