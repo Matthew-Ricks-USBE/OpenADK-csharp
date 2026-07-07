@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Xml;
 using OpenADK.Library;
 using OpenADK.Library.Global;
 using OpenADK.Library.us.Common;
@@ -237,6 +238,92 @@ namespace Library.Nunit.US
 
 
        }
+
+       [Test]
+       public void TestSIFExtendedElementPlainText()
+       {
+           // SIF specification sample 1: plain text content
+           // <SIF_ExtendedElement Name="ApplicationSubmissionStatus">4</SIF_ExtendedElement>
+           StudentPersonal sp = new StudentPersonal();
+           sp.RefId = Adk.MakeGuid();
+           sp.LocalId = "P00001";
+           sp.Name = new Name(NameType.LEGAL, "Student", "Joe");
+
+           SIF_ExtendedElement see = new SIF_ExtendedElement("ApplicationSubmissionStatus", "4");
+           sp.SIFExtendedElementsContainer.Add(see);
+
+           StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
+
+           see = copy.GetSIFExtendedElement("ApplicationSubmissionStatus");
+           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
+           Assert.AreEqual("4", see.Value, "Plain text value should round-trip unchanged");
+           Assert.IsNull(see.Xml, "Xml property should be null for plain-text content");
+       }
+
+       [Test]
+       public void TestSIFExtendedElementXmlContent()
+       {
+           // SIF specification sample 2: arbitrary XML element as content
+           // <SIF_ExtendedElement Name="DynamicXml">
+           //   <Parent xmlns="http://myapplication.com">
+           //     <Child n="1">one</Child><Child n="2"/><Child n="3">three</Child>
+           //   </Parent>
+           // </SIF_ExtendedElement>
+           StudentPersonal sp = new StudentPersonal();
+           sp.RefId = Adk.MakeGuid();
+           sp.LocalId = "P00002";
+           sp.Name = new Name(NameType.LEGAL, "Student", "Jane");
+
+           SIF_ExtendedElement see = new SIF_ExtendedElement();
+           see.Name = "DynamicXml";
+           XmlDocument doc = new XmlDocument();
+           doc.LoadXml("<Parent xmlns=\"http://myapplication.com\">" +
+                       "<Child n=\"1\">one</Child><Child n=\"2\"/><Child n=\"3\">three</Child>" +
+                       "</Parent>");
+           see.Xml = doc;
+           sp.SIFExtendedElementsContainer.Add(see);
+
+           StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
+
+           see = copy.GetSIFExtendedElement("DynamicXml");
+           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
+           Assert.IsNotNull(see.Xml, "Xml property should be non-null after round-trip");
+           Assert.AreEqual("Parent", see.Xml.DocumentElement.LocalName, "Root XML element name should be preserved");
+           Assert.AreEqual("http://myapplication.com", see.Xml.DocumentElement.NamespaceURI, "Namespace should be preserved");
+           Assert.AreEqual(3, see.Xml.DocumentElement.ChildNodes.Count, "Child element count should be preserved");
+           Assert.AreEqual("one", see.Xml.DocumentElement.ChildNodes[0].InnerText, "First child text should be preserved");
+       }
+
+       [Test]
+       public void TestSIFExtendedElementMixedContent()
+       {
+           // SIF specification sample 3: mixed XML element + trailing text
+           // <SIF_ExtendedElement Name="Note">
+           //   <xhtml:strong xmlns:xhtml="http://www.w3.org/1999/xhtml">Double</xhtml:strong>-check submission status.
+           // </SIF_ExtendedElement>
+           StudentPersonal sp = new StudentPersonal();
+           sp.RefId = Adk.MakeGuid();
+           sp.LocalId = "P00003";
+           sp.Name = new Name(NameType.LEGAL, "Student", "Bob");
+
+           SIF_ExtendedElement see = new SIF_ExtendedElement();
+           see.Name = "Note";
+           XmlDocument doc = new XmlDocument();
+           doc.LoadXml("<xhtml:strong xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">Double</xhtml:strong>");
+           see.Xml = doc;
+           see.Value = "-check submission status.";
+           sp.SIFExtendedElementsContainer.Add(see);
+
+           StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
+
+           see = copy.GetSIFExtendedElement("Note");
+           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
+           Assert.IsNotNull(see.Xml, "Xml property should be non-null for mixed content");
+           Assert.AreEqual("strong", see.Xml.DocumentElement.LocalName, "XML element local name should be preserved");
+           Assert.AreEqual("Double", see.Xml.DocumentElement.InnerText, "XML element text content should be preserved");
+           Assert.AreEqual("-check submission status.", see.Value, "Trailing text should be preserved");
+       }
+
    }
 }
 

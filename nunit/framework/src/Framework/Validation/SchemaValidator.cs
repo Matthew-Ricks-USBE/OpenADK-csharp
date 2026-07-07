@@ -98,6 +98,15 @@ namespace Library.UnitTesting.Framework.Validation
                 return;
             }
 
+            // XMLData and SIF_ExtendedElement are specified to allow arbitrary XML content.
+            // The SIF schema has no knowledge of that content, so "no schema information" 
+            // warnings are expected and structurally correct — suppress them.
+            if ( e.Severity == XmlSeverityType.Warning &&
+                 e.Message.IndexOf( "Could not find schema information" ) >= 0 )
+            {
+                return;
+            }
+
             switch ( e.Severity )
             {
                 case XmlSeverityType.Error:

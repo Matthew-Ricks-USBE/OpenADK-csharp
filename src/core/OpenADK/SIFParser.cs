@@ -484,14 +484,27 @@ namespace OpenADK.Library
                                     ParseLegacyXML(reader, version, zone, currentElement, formatter, xmlName);
                                     continue;
                                 }
-                                else if (currentElement != null && currentElement.ElementDef.Name.Equals("XMLData"))
+                                else if (currentElement != null && 
+                                         (currentElement.ElementDef.Name.Equals("XMLData") ||
+                                          currentElement is SIF_ExtendedElement))
                                 {
-                                    // Parse this into a DOM and set on the XMLData
-                                    // element
-                                    XmlReader nestedReader = reader.ReadSubtree();
+                                    // Parse arbitrary XML child content into a DOM and store on the element.
+                                    // XMLData uses ReadSubtree (single root XML child, no trailing text).
+                                    // SIF_ExtendedElement uses ReadOuterXml so the reader is positioned at the
+                                    // next sibling after the XML element, allowing trailing text (mixed content)
+                                    // to be captured by the XmlNodeType.Text case below.
                                     XmlDocument doc = new XmlDocument();
-                                    doc.Load( nestedReader );
-                                    ((XMLData)currentElement).Xml = doc;
+                                    if (currentElement is SIF_ExtendedElement see)
+                                    {
+                                        doc.LoadXml( reader.ReadOuterXml() );
+                                        see.Xml = doc;
+                                    }
+                                    else
+                                    {
+                                        XmlReader nestedReader = reader.ReadSubtree();
+                                        doc.Load( nestedReader );
+                                        ((XMLData)currentElement).Xml = doc;
+                                    }
                                     continue;
                                 }
                                 else

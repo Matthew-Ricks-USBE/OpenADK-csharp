@@ -148,5 +148,14 @@ public class SIF_ExtendedElement : SifKeyedElement
 		SetField( GlobalDTD.SIF_EXTENDEDELEMENT_SIF_ACTION, val );
 	}
 
+    /// <summary>Gets or sets the XML document that is a child of this element.</summary>
+    /// <remarks>
+    /// An optional XML document representing arbitrary XML child content of this element,
+    /// as permitted by the SIF specification. When set, this document's root element is
+    /// written as the child content of the SIF_ExtendedElement tag. Any trailing text
+    /// (mixed content) is stored separately in <see cref="Value"/>.
+    /// </remarks>
+    public System.Xml.XmlDocument Xml { get; set; }
+
 }}
 
