@@ -333,6 +333,47 @@ namespace OpenADK.Library.us.Assessment
 	/** Defines the &lt;UnusualEvents&gt; SIF Data Object */
 	public static IElementDef UNUSUALEVENTS = null;
 
+	// SIF 1.5r1 Assessment fields
+	public static IElementDef ASSESSMENT_LANGUAGE = null;
+	public static IElementDef ASSESSMENT_TITLE = null;
+	public static IElementDef ASSESSMENT_ASSESSMENTINSTANCEFORM = null;
+	public static IElementDef ASSESSMENT_PAUSEFLAG = null;
+	// SIF 1.5r1 AssessmentSection fields
+	public static IElementDef ASSESSMENTSECTION_REFID = null;
+	public static IElementDef ASSESSMENTSECTION_LANGUAGE = null;
+	public static IElementDef ASSESSMENTSECTION_TITLE = null;
+	public static IElementDef ASSESSMENTSECTION_PAUSEFLAG = null;
+	// SIF 1.5r1 AssessmentItem fields
+	public static IElementDef ASSESSMENTITEM_LANGUAGE = null;
+	public static IElementDef ASSESSMENTITEM_TITLE = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION_INSTRUCTION = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION_CONTENT = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION_WIDTH = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION_HEIGHT = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION_X0 = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION_Y0 = null;
+	public static IElementDef ASSESSMENTITEM_PRESENTATION_LANGUAGE = null;
+	public static IElementDef ASSESSMENTITEM_ITEMCONTENT = null;
+	public static IElementDef ASSESSMENTITEM_ITEMCONTENT_VIEW = null;
+	public static IElementDef ASSESSMENTITEM_ITEMCONTENT_ITEMANSWER = null;
+	// SIF 1.5r1 AssessmentSubTest fields
+	public static IElementDef ASSESSMENTSUBTEST_LANGUAGE = null;
+	public static IElementDef ASSESSMENTSUBTEST_ASSESSMENTREFID = null;
+	public static IElementDef ASSESSMENTSUBTEST_SUBTESTNAME = null;
+	// SIF 1.5r1 StudentResultSet
+	public static IElementDef STUDENTRESULTSET = null;
+	public static IElementDef STUDENTRESULTSET_REFID = null;
+	public static IElementDef STUDENTRESULTSET_LANGUAGE = null;
+	public static IElementDef STUDENTRESULTSET_STUDENTPERSONALREFID = null;
+	public static IElementDef STUDENTRESULTSET_RESULT = null;
+	public static IElementDef STUDENTRESULTSET_RESULT_TYPE = null;
+	public static IElementDef STUDENTRESULTSET_RESULT_SCORE = null;
+	// SIF 1.5r1 Score children
+	public static IElementDef SCORE_MIN = null;
+	public static IElementDef SCORE_MAX = null;
+	public static IElementDef SCORE_SCOREREFID = null;
+	public static IElementDef SCORE_REFIDTYPE = null;
 
 	// Field elements of ADMINISTRATIONASSESSMENT (0 fields)
 
@@ -1643,6 +1684,7 @@ namespace OpenADK.Library.us.Assessment
 		ASSESSMENTPLATFORMS = new ElementDefImpl( null, "AssessmentPlatforms", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
 		ASSESSMENTREGISTRATION = new ElementDefImpl( null, "AssessmentRegistration", null, 0, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_OBJECT), SifVersion.SIF20, SifVersion.SIF26 );
 		ASSESSMENTSECTION = new ElementDefImpl( null, "AssessmentSection", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
+		ASSESSMENTSECTION.DefineVersionInfo( SifVersion.SIF15r1, "AssessmentSection", 0, 0 );
 		ASSESSMENTSECTIONS = new ElementDefImpl( null, "AssessmentSections", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
 		ASSESSMENTSTUDENTSNAPSHOT = new ElementDefImpl( null, "AssessmentStudentSnapshot", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF22, SifVersion.SIF26 );
 		ASSESSMENTSTUDENTSNAPSHOTSIF3 = new ElementDefImpl( null, "AssessmentStudentSnapshotSif3", "AssessmentStudentSnapshot", 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF26, SifVersion.SIF26 );
@@ -1755,6 +1797,11 @@ namespace OpenADK.Library.us.Assessment
 
 		// <Assessment> fields (5 entries)
 		AssessmentDTD.ASSESSMENT_REFID = new ElementDefImpl( ASSESSMENT, "RefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF20, SifVersion.SIF26, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENT_REFID.DefineVersionInfo( SifVersion.SIF15r1, "RefId", 1, ElementDefImpl.FD_ATTRIBUTE );
+		AssessmentDTD.ASSESSMENT_LANGUAGE = new ElementDefImpl( ASSESSMENT, "Language", "xml:lang", 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENT_TITLE = new ElementDefImpl( ASSESSMENT, "Title", null, 3, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENT_ASSESSMENTINSTANCEFORM = new ElementDefImpl( ASSESSMENT, "AssessmentInstanceForm", null, 5, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENT_PAUSEFLAG = new ElementDefImpl( ASSESSMENT, "PauseFlag", null, 8, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
 		AssessmentDTD.ASSESSMENT_NAME = new ElementDefImpl( ASSESSMENT, "Name", null, 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF20, SifVersion.SIF26, SifTypeConverters.STRING );
 		AssessmentDTD.ASSESSMENT_ASSESSMENTID = new ElementDefImpl( ASSESSMENT, "AssessmentId", null, 3, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF21, SifVersion.SIF26, SifTypeConverters.STRING );
 		AssessmentDTD.ASSESSMENT_ASSESSMENTPACKAGEREFID = new ElementDefImpl( ASSESSMENT, "AssessmentPackageRefId", null, 3, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF20, SifVersion.SIF26, SifTypeConverters.STRING );
@@ -1827,8 +1874,27 @@ namespace OpenADK.Library.us.Assessment
 		AssessmentDTD.ASSESSMENTITEM_PERFORMANCELEVELS = new ElementDefImpl( ASSESSMENTITEM, "PerformanceLevels", null, 12, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF24, SifVersion.SIF26 );
 		ASSESSMENTITEM_SIF_EXTENDEDELEMENTS = new ElementDefImpl( ASSESSMENTITEM, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		ASSESSMENTITEM_SIF_METADATA = new ElementDefImpl( ASSESSMENTITEM, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
-
-		// <AssessmentItemAssetRefId> fields (0 entries)
+		// SIF 1.5r1 AssessmentItem fields.
+		// DefineVersionInfo(SIF15r1) makes IsSupported(SIF15r1)=true so the SIFParser
+		// while-loop does not prematurely pop AssessmentItem off the element stack.
+		// NOTE: AssessmentItem was absent in SIF 2.0r1 and 2.1; the [SIF15r1, SIF26]
+		// range here does yield a false-positive IsSupported for those gap versions,
+		// but no gap-marker mechanism currently exists to express discontinuous ranges.
+		ASSESSMENTITEM.DefineVersionInfo( SifVersion.SIF15r1, "AssessmentItem", 0, ElementDefImpl.FD_OBJECT );
+		AssessmentDTD.ASSESSMENTITEM_REFID.DefineVersionInfo( SifVersion.SIF15r1, "RefId", 1, ElementDefImpl.FD_ATTRIBUTE );
+		AssessmentDTD.ASSESSMENTITEM_LANGUAGE = new ElementDefImpl( ASSESSMENTITEM, "Language", "xml:lang", 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_TITLE = new ElementDefImpl( ASSESSMENTITEM, "Title", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION = new ElementDefImpl( ASSESSMENTITEM, "Presentation", null, 10, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF15r1, SifVersion.SIF15r1 );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION_WIDTH = new ElementDefImpl( ASSESSMENTITEM_PRESENTATION, "Width", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION_HEIGHT = new ElementDefImpl( ASSESSMENTITEM_PRESENTATION, "Height", null, 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION_X0 = new ElementDefImpl( ASSESSMENTITEM_PRESENTATION, "X0", null, 3, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION_Y0 = new ElementDefImpl( ASSESSMENTITEM_PRESENTATION, "Y0", null, 4, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION_LANGUAGE = new ElementDefImpl( ASSESSMENTITEM_PRESENTATION, "Language", "xml:lang", 5, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION_INSTRUCTION = new ElementDefImpl( ASSESSMENTITEM_PRESENTATION, "Instruction", null, 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_PRESENTATION_CONTENT = new ElementDefImpl( ASSESSMENTITEM_PRESENTATION, "Content", null, 3, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_ITEMCONTENT = new ElementDefImpl( ASSESSMENTITEM, "ItemContent", null, 13, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF15r1, SifVersion.SIF15r1 );
+		AssessmentDTD.ASSESSMENTITEM_ITEMCONTENT_VIEW = new ElementDefImpl( ASSESSMENTITEM_ITEMCONTENT, "View", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTITEM_ITEMCONTENT_ITEMANSWER = new ElementDefImpl( ASSESSMENTITEM_ITEMCONTENT, "ItemAnswer", null, 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
 
 		// <AssessmentItemAssetRefIds> fields (1 entries)
 		AssessmentDTD.ASSESSMENTITEMASSETREFIDS_ASSESSMENTITEMASSETREFID = new ElementDefImpl( ASSESSMENTITEMASSETREFIDS, "AssessmentItemAssetRefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF26, SifVersion.SIF26, SifTypeConverters.STRING );
@@ -1886,8 +1952,11 @@ namespace OpenADK.Library.us.Assessment
 		// <AssessmentSection> fields (2 entries)
 		AssessmentDTD.ASSESSMENTSECTION_ASSESSMENTSECTIONREFID = new ElementDefImpl( ASSESSMENTSECTION, "AssessmentSectionRefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF26, SifVersion.SIF26, SifTypeConverters.STRING );
 		AssessmentDTD.ASSESSMENTSECTION_ASSESSMENTSECTIONSEQUENCE = new ElementDefImpl( ASSESSMENTSECTION, "AssessmentSectionSequence", null, 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF26, SifVersion.SIF26, SifTypeConverters.STRING );
-
-		// <AssessmentSections> fields (1 entries)
+		// SIF 1.5r1 AssessmentSection fields
+		AssessmentDTD.ASSESSMENTSECTION_REFID = new ElementDefImpl( ASSESSMENTSECTION, "RefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTSECTION_LANGUAGE = new ElementDefImpl( ASSESSMENTSECTION, "Language", "xml:lang", 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTSECTION_TITLE = new ElementDefImpl( ASSESSMENTSECTION, "Title", null, 3, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTSECTION_PAUSEFLAG = new ElementDefImpl( ASSESSMENTSECTION, "PauseFlag", null, 6, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
 		AssessmentDTD.ASSESSMENTSECTIONS_ASSESSMENTSECTION = new ElementDefImpl( ASSESSMENTSECTIONS, "AssessmentSection", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF26, SifVersion.SIF26 );
 
 		// <AssessmentStudentSnapshot> fields (6 entries)
@@ -1940,8 +2009,24 @@ namespace OpenADK.Library.us.Assessment
 		AssessmentDTD.ASSESSMENTSUBTEST_CONTAINERONLY = new ElementDefImpl( ASSESSMENTSUBTEST, "ContainerOnly", null, 13, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF24, SifVersion.SIF26, SifTypeConverters.BOOLEAN );
 		ASSESSMENTSUBTEST_SIF_EXTENDEDELEMENTS = new ElementDefImpl( ASSESSMENTSUBTEST, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		ASSESSMENTSUBTEST_SIF_METADATA = new ElementDefImpl( ASSESSMENTSUBTEST, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
-
-		// <AssessmentSubTestRefId> fields (0 entries)
+		// SIF 1.5r1 AssessmentSubTest fields
+		AssessmentDTD.ASSESSMENTSUBTEST.DefineVersionInfo( SifVersion.SIF15r1, "AssessmentSubTest", 0, 0 );
+		AssessmentDTD.ASSESSMENTSUBTEST_REFID.DefineVersionInfo( SifVersion.SIF15r1, "RefId", 1, ElementDefImpl.FD_ATTRIBUTE );
+		AssessmentDTD.ASSESSMENTSUBTEST_LANGUAGE = new ElementDefImpl( ASSESSMENTSUBTEST, "Language", "xml:lang", 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTSUBTEST_ASSESSMENTREFID = new ElementDefImpl( ASSESSMENTSUBTEST, "AssessmentRefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.ASSESSMENTSUBTEST_SUBTESTNAME = new ElementDefImpl( ASSESSMENTSUBTEST, "SubTestName", null, 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		// SIF 1.5r1 StudentResultSet
+		AssessmentDTD.STUDENTRESULTSET = new ElementDefImpl( null, "StudentResultSet", null, 0, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF15r1, SifVersion.SIF15r1 );
+		AssessmentDTD.STUDENTRESULTSET_REFID = new ElementDefImpl( STUDENTRESULTSET, "RefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.STUDENTRESULTSET_LANGUAGE = new ElementDefImpl( STUDENTRESULTSET, "Language", "xml:lang", 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.STUDENTRESULTSET_STUDENTPERSONALREFID = new ElementDefImpl( STUDENTRESULTSET, "StudentPersonalRefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.STUDENTRESULTSET_RESULT = new ElementDefImpl( STUDENTRESULTSET, "Result", null, 6, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF15r1, SifVersion.SIF26 );
+		AssessmentDTD.STUDENTRESULTSET_RESULT_TYPE = new ElementDefImpl( STUDENTRESULTSET_RESULT, "Type", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.STUDENTRESULTSET_RESULT_SCORE = new ElementDefImpl( STUDENTRESULTSET_RESULT, "Score", null, 3, SifDtd.ASSESSMENT, "us", 0, SifVersion.SIF15r1, SifVersion.SIF26 );
+		AssessmentDTD.SCORE_MIN = new ElementDefImpl( STUDENTRESULTSET_RESULT_SCORE, "Min", null, 3, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.SCORE_MAX = new ElementDefImpl( STUDENTRESULTSET_RESULT_SCORE, "Max", null, 5, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.SCORE_SCOREREFID = new ElementDefImpl( STUDENTRESULTSET_RESULT_SCORE, "ScoreRefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
+		AssessmentDTD.SCORE_REFIDTYPE = new ElementDefImpl( STUDENTRESULTSET_RESULT_SCORE, "RefIdType", null, 2, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
 
 		// <AssessmentSubTestRefIds> fields (1 entries)
 		AssessmentDTD.ASSESSMENTSUBTESTREFIDS_ASSESSMENTSUBTESTREFID = new ElementDefImpl( ASSESSMENTSUBTESTREFIDS, "AssessmentSubTestRefId", null, 1, SifDtd.ASSESSMENT, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF20, SifVersion.SIF26, SifTypeConverters.STRING );
@@ -3173,6 +3258,42 @@ namespace OpenADK.Library.us.Assessment
 		dictionary["AssessmentAdministration_SpecialConditions"] = AssessmentDTD.ASSESSMENTADMINISTRATION_SPECIALCONDITIONS ;
 		dictionary["AssessmentAdministration_StaffPersonalRefId"] = AssessmentDTD.ASSESSMENTADMINISTRATION_STAFFPERSONALREFID ;
 		dictionary["AssessmentAdministration_StartDateTime"] = AssessmentDTD.ASSESSMENTADMINISTRATION_STARTDATETIME ;
+		// SIF 1.5r1 Assessment mappings
+		dictionary["Assessment_xml:lang"] = AssessmentDTD.ASSESSMENT_LANGUAGE;
+		dictionary["Assessment_Title"] = AssessmentDTD.ASSESSMENT_TITLE;
+		dictionary["Assessment_AssessmentInstanceForm"] = AssessmentDTD.ASSESSMENT_ASSESSMENTINSTANCEFORM;
+		dictionary["Assessment_PauseFlag"] = AssessmentDTD.ASSESSMENT_PAUSEFLAG;
+		dictionary["AssessmentSection_RefId"] = AssessmentDTD.ASSESSMENTSECTION_REFID;
+		dictionary["AssessmentSection_xml:lang"] = AssessmentDTD.ASSESSMENTSECTION_LANGUAGE;
+		dictionary["AssessmentSection_Title"] = AssessmentDTD.ASSESSMENTSECTION_TITLE;
+		dictionary["AssessmentSection_PauseFlag"] = AssessmentDTD.ASSESSMENTSECTION_PAUSEFLAG;
+		dictionary["AssessmentItem_xml:lang"] = AssessmentDTD.ASSESSMENTITEM_LANGUAGE;
+		dictionary["AssessmentItem_Title"] = AssessmentDTD.ASSESSMENTITEM_TITLE;
+		dictionary["AssessmentItem_Presentation"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION;
+		dictionary["Presentation_Width"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION_WIDTH;
+		dictionary["Presentation_Height"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION_HEIGHT;
+		dictionary["Presentation_X0"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION_X0;
+		dictionary["Presentation_Y0"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION_Y0;
+		dictionary["Presentation_xml:lang"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION_LANGUAGE;
+		dictionary["Presentation_Instruction"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION_INSTRUCTION;
+		dictionary["Presentation_Content"] = AssessmentDTD.ASSESSMENTITEM_PRESENTATION_CONTENT;
+		dictionary["AssessmentItem_ItemContent"] = AssessmentDTD.ASSESSMENTITEM_ITEMCONTENT;
+		dictionary["ItemContent_View"] = AssessmentDTD.ASSESSMENTITEM_ITEMCONTENT_VIEW;
+		dictionary["ItemContent_ItemAnswer"] = AssessmentDTD.ASSESSMENTITEM_ITEMCONTENT_ITEMANSWER;
+		dictionary["AssessmentSubTest_xml:lang"] = AssessmentDTD.ASSESSMENTSUBTEST_LANGUAGE;
+		dictionary["AssessmentSubTest_AssessmentRefId"] = AssessmentDTD.ASSESSMENTSUBTEST_ASSESSMENTREFID;
+		dictionary["AssessmentSubTest_SubTestName"] = AssessmentDTD.ASSESSMENTSUBTEST_SUBTESTNAME;
+		dictionary["StudentResultSet"] = AssessmentDTD.STUDENTRESULTSET;
+		dictionary["StudentResultSet_RefId"] = AssessmentDTD.STUDENTRESULTSET_REFID;
+		dictionary["StudentResultSet_xml:lang"] = AssessmentDTD.STUDENTRESULTSET_LANGUAGE;
+		dictionary["StudentResultSet_StudentPersonalRefId"] = AssessmentDTD.STUDENTRESULTSET_STUDENTPERSONALREFID;
+		dictionary["StudentResultSet_Result"] = AssessmentDTD.STUDENTRESULTSET_RESULT;
+		dictionary["Result_Type"] = AssessmentDTD.STUDENTRESULTSET_RESULT_TYPE;
+		dictionary["Result_Score"] = AssessmentDTD.STUDENTRESULTSET_RESULT_SCORE;
+		dictionary["Score_Min"] = AssessmentDTD.SCORE_MIN;
+		dictionary["Score_Max"] = AssessmentDTD.SCORE_MAX;
+		dictionary["Score_ScoreRefId"] = AssessmentDTD.SCORE_SCOREREFID;
+		dictionary["Score_RefIdType"] = AssessmentDTD.SCORE_REFIDTYPE;
 	}
 	#endregion
 }}

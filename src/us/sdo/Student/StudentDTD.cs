@@ -2047,6 +2047,7 @@ namespace OpenADK.Library.us.Student
 
 		// <ContactFlags> fields (9 entries)
 		StudentDTD.CONTACTFLAGS_PICKUPRIGHTS = new ElementDefImpl( CONTACTFLAGS, "PickupRights", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF11, SifVersion.SIF26, SifTypeConverters.STRING );
+		StudentDTD.CONTACTFLAGS_PICKUPRIGHTS.DefineVersionInfo(SifVersion.SIF15r1, "PickupRights", 13, (ElementDefImpl.FD_FIELD)); // Fix ordering in SIF15r1: seq 13 matches collapsed STUDENTCONTACT_CONTACTFLAGS position
 		StudentDTD.CONTACTFLAGS_PICKUPRIGHTS.DefineVersionInfo(SifVersion.SIF20, "PickupRights", 2, (ElementDefImpl.FD_FIELD)); // (Sif 20 alias)
 		StudentDTD.CONTACTFLAGS_PARENTLEGALGUARDIAN = new ElementDefImpl( CONTACTFLAGS, "ParentLegalGuardian", null, 1, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF20, SifVersion.SIF26, SifTypeConverters.STRING );
 		StudentDTD.CONTACTFLAGS_LIVESWITH = new ElementDefImpl( CONTACTFLAGS, "LivesWith", null, 3, SifDtd.STUDENT, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF20, SifVersion.SIF26, SifTypeConverters.STRING );

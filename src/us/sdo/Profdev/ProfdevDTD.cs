@@ -405,7 +405,7 @@ namespace OpenADK.Library.us.Profdev
 		ProfdevDTD.EMPLOYEECREDENTIAL_CERTIFICATIONS.DefineVersionInfo(SifVersion.SIF20, "Certifications", 9, 0); // (Sif 20 alias)
 		ProfdevDTD.EMPLOYEECREDENTIAL_SALARY = new ElementDefAlias( EMPLOYEECREDENTIAL, "Salary", null, "MonetaryAmount", 10, SifDtd.GLOBAL, null, 0, SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.DECIMAL );
 		ProfdevDTD.EMPLOYEECREDENTIAL_SALARY.DefineVersionInfo(SifVersion.SIF20, "Salary", 10, 0); // (Sif 20 alias)
-		ProfdevDTD.EMPLOYEECREDENTIAL_STATUS = new ElementDefImpl( EMPLOYEECREDENTIAL, "Status", "~XPathSurrogate{Status/@Code=.}", 11, SifDtd.PROFDEV, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );
+		ProfdevDTD.EMPLOYEECREDENTIAL_STATUS = new ElementDefImpl( EMPLOYEECREDENTIAL, "Status", null, 11, SifDtd.PROFDEV, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );
 		ProfdevDTD.EMPLOYEECREDENTIAL_STATUS.DefineVersionInfo(SifVersion.SIF20, "Status", 11, (ElementDefImpl.FD_FIELD)); // (Sif 20 alias)
 		ProfdevDTD.EMPLOYEECREDENTIAL_LEAVE = new ElementDefImpl( EMPLOYEECREDENTIAL, "Leave", null, 12, SifDtd.PROFDEV, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );
 		ProfdevDTD.EMPLOYEECREDENTIAL_LEAVE.DefineVersionInfo(SifVersion.SIF20, "Leave", 12, (ElementDefImpl.FD_FIELD)); // (Sif 20 alias)
@@ -585,6 +585,7 @@ namespace OpenADK.Library.us.Profdev
 		dictionary["BackgroundCheck_DateChecked"] = ProfdevDTD.BACKGROUNDCHECK_DATE ;
 		dictionary["BackgroundCheck_Description"] = ProfdevDTD.BACKGROUNDCHECK_DESCRIPTION ;
 		dictionary["BackgroundCheck_Type"] = ProfdevDTD.BACKGROUNDCHECK_TYPE ;//2.0 alias
+		dictionary[ "ProfDevActivities" ] = PROFESSIONALDEVELOPMENTACTIVITIES; // SIF15r1 legacy alias
 		dictionary[ "ProfessionalDevelopmentActivities" ] = PROFESSIONALDEVELOPMENTACTIVITIES;
 		dictionary[ "ProfessionalDevelopmentActivities_SIF_ExtendedElements" ] = PROFESSIONALDEVELOPMENTACTIVITIES_SIF_EXTENDEDELEMENTS ;
 		dictionary[ "ProfessionalDevelopmentActivities_SIF_Metadata" ] = PROFESSIONALDEVELOPMENTACTIVITIES_SIF_METADATA;

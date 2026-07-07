@@ -89,6 +89,22 @@ namespace OpenADK.Library.Impl.Surrogates
                 {
                     writer.WriteStartElement( finalSegment );
                     currentSegment++;
+
+                    // Write FD_ATTRIBUTE fields of the element (e.g. HierarchyLevelName, HierarchyLevelDescription)
+                    if ( o is SifElement )
+                    {
+                        foreach ( SimpleField attrField in ((SifElement) o).GetFields() )
+                        {
+                            IElementVersionInfo attrVi = attrField.ElementDef.GetVersionInfo( version );
+                            if ( attrVi != null && attrVi.IsAttribute )
+                            {
+                                SifSimpleType attrValue = attrField.SifValue;
+                                writer.WriteAttributeString(
+                                    attrVi.Tag,
+                                    attrValue != null ? attrValue.ToString( formatter ) : string.Empty );
+                            }
+                        }
+                    }
                 }
                 writer.WriteValue( value.ToString( formatter ) );
             }
@@ -110,6 +126,7 @@ namespace OpenADK.Library.Impl.Surrogates
             SifFormatter formatter )
         {
             String value = null;
+            System.Collections.Generic.Dictionary<string, string> elementAttributes = null;
             // 
             // STEP 1
             // Determine if this surrogate can handle the parsing of this node.
@@ -154,6 +171,21 @@ namespace OpenADK.Library.Impl.Surrogates
                     }
                     else
                     {
+                        // Save XML attributes from the current element before consuming text content.
+                        // These will be set on the child SifElement after it is created (STEP 2 below).
+                        if ( reader.HasAttributes )
+                        {
+                            for ( int i = 0; i < reader.AttributeCount; i++ )
+                            {
+                                reader.MoveToAttribute( i );
+                                if ( elementAttributes == null )
+                                {
+                                    elementAttributes = new System.Collections.Generic.Dictionary<string, string>();
+                                }
+                                elementAttributes[reader.LocalName] = reader.Value;
+                            }
+                            reader.MoveToElement();
+                        }
                         value = ReadElementTextValue( reader );
                     }
 
@@ -197,6 +229,21 @@ namespace OpenADK.Library.Impl.Surrogates
 
                 formatter.AddChild( parent, targetElement, version );
 
+                // Set any XML attributes saved during STEP 1 on the new child element
+                if ( elementAttributes != null )
+                {
+                    foreach ( var kvp in elementAttributes )
+                    {
+                        IElementDef attrDef = Adk.Dtd.LookupElementDef( fElementDef, kvp.Key );
+                        if ( attrDef != null )
+                        {
+                            TypeConverter attrConverter = attrDef.TypeConverter ?? SifTypeConverters.STRING;
+                            SifSimpleType attrData = attrConverter.Parse( formatter, kvp.Value );
+                            targetElement.SetField( attrDef, attrData );
+                        }
+                    }
+                }
+
                 if ( fValueXpath.Equals( "." ) )
                 {
                     fieldDef = fElementDef;
@@ -219,6 +266,11 @@ namespace OpenADK.Library.Impl.Surrogates
                       "} is not supported by XPathSurrogate." );
             }
 
+            // Skip fields not supported in the current SIF version (e.g. SIF20+-only fields during SIF15r1 parse)
+            if ( !fieldDef.IsSupported( version ) )
+            {
+                return true;
+            }
 
             //
             // STEP 3

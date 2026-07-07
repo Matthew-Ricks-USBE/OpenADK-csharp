@@ -735,6 +735,7 @@ namespace OpenADK.Library.us.Food
 
 		// <Agencies> fields (1 entries)
 		FoodDTD.AGENCIES_AGENCY = new ElementDefImpl( AGENCIES, "Agency", null, 1, SifDtd.FOOD, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF20, SifVersion.SIF26 );
+		FoodDTD.AGENCIES_AGENCY.DefineVersionInfo(SifVersion.SIF15r1, "Agency", 1, (ElementDefImpl.FD_REPEATABLE));
 
 		// <Agency> fields (3 entries)
 		FoodDTD.AGENCY_TYPE = new ElementDefImpl( AGENCY, "Type", null, 1, SifDtd.FOOD, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );

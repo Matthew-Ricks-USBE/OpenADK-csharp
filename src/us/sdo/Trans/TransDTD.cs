@@ -664,9 +664,9 @@ namespace OpenADK.Library.us.Trans
 		TransDTD.TELEMETRYLIST_TELEMETRY = new ElementDefImpl( TELEMETRYLIST, "Telemetry", null, 1, SifDtd.TRANS, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );
 
 		// <TransferPoint> fields (2 entries)
-		TransDTD.TRANSFERPOINT_EMBARKBUSROUTEDETAIL = new ElementDefImpl( TRANSFERPOINT, "EmbarkBusRouteDetail", "~XPathSurrogate{@EmbarkBusRouteDetailRefId=.}", 1, SifDtd.TRANS, "us", 0, SifVersion.SIF11, SifVersion.SIF26, SifTypeConverters.STRING );
+		TransDTD.TRANSFERPOINT_EMBARKBUSROUTEDETAIL = new ElementDefImpl( TRANSFERPOINT, "EmbarkBusRouteDetail", "~XPathSurrogate{@EmbarkBusRouteDetailRefId=.}", 1, SifDtd.TRANS, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF11, SifVersion.SIF26, SifTypeConverters.STRING );
 		TransDTD.TRANSFERPOINT_EMBARKBUSROUTEDETAIL.DefineVersionInfo(SifVersion.SIF20, "EmbarkBusRouteDetail", 1, 0); // (Sif 20 alias)
-		TransDTD.TRANSFERPOINT_DISEMBARKBUSROUTEDETAIL = new ElementDefImpl( TRANSFERPOINT, "DisembarkBusRouteDetail", "~XPathSurrogate{@DisembarkBusRouteDetailRefId=.}", 2, SifDtd.TRANS, "us", 0, SifVersion.SIF11, SifVersion.SIF26, SifTypeConverters.STRING );
+		TransDTD.TRANSFERPOINT_DISEMBARKBUSROUTEDETAIL = new ElementDefImpl( TRANSFERPOINT, "DisembarkBusRouteDetail", "~XPathSurrogate{@DisembarkBusRouteDetailRefId=.}", 2, SifDtd.TRANS, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF11, SifVersion.SIF26, SifTypeConverters.STRING );
 		TransDTD.TRANSFERPOINT_DISEMBARKBUSROUTEDETAIL.DefineVersionInfo(SifVersion.SIF20, "DisembarkBusRouteDetail", 2, 0); // (Sif 20 alias)
 
 		// <TransferPoints> fields (1 entries)
@@ -687,7 +687,9 @@ namespace OpenADK.Library.us.Trans
 	{
 		dictionary[ "TransferPoint" ] = TRANSFERPOINT;
 		dictionary["TransferPoint_DisembarkBusRouteDetail"] = TransDTD.TRANSFERPOINT_DISEMBARKBUSROUTEDETAIL ;
+		dictionary["TransferPoint_DisembarkBusRouteDetailRefId"] = TransDTD.TRANSFERPOINT_DISEMBARKBUSROUTEDETAIL ; // SIF15r1 attribute alias
 		dictionary["TransferPoint_EmbarkBusRouteDetail"] = TransDTD.TRANSFERPOINT_EMBARKBUSROUTEDETAIL ;
+		dictionary["TransferPoint_EmbarkBusRouteDetailRefId"] = TransDTD.TRANSFERPOINT_EMBARKBUSROUTEDETAIL ; // SIF15r1 attribute alias
 		dictionary[ "Equipment" ] = EQUIPMENT;
 		dictionary["Equipment_BusEquipmentRefId"] = TransDTD.EQUIPMENT_BUSEQUIPMENTREFID ;
 		dictionary["Equipment_Count"] = TransDTD.EQUIPMENT_COUNT ;

@@ -654,6 +654,8 @@ namespace OpenADK.Library.us.Instr
 	public static IElementDef LEARNINGRESOURCE_SUBJECTAREAS = null;
 	/** Defines the &lt;MediaTypes&gt; element as a child of &lt;LearningResource&gt; */
 	public static IElementDef LEARNINGRESOURCE_MEDIATYPES = null;
+	/** Defines the &lt;ResourceMedia&gt; element as a child of &lt;LearningResource&gt; (SIF 1.5r1 only) */
+	public static IElementDef LEARNINGRESOURCE_RESOURCEMEDIA = null;
 	/** Defines the &lt;UseAgreement&gt; element as a child of &lt;LearningResource&gt; */
 	public static IElementDef LEARNINGRESOURCE_USEAGREEMENT = null;
 	/** Defines the &lt;AgreementDate&gt; element as a child of &lt;LearningResource&gt; */
@@ -1358,7 +1360,7 @@ namespace OpenADK.Library.us.Instr
 		InstrDTD.ASSIGNMENT_ASSIGNMENTTIME = new ElementDefImpl( ASSIGNMENT, "AssignmentTime", null, 13, SifDtd.INSTR, "us", 0, SifVersion.SIF15r1, SifVersion.SIF26 );
 		InstrDTD.ASSIGNMENT_ASSIGNMENTTIME.DefineVersionInfo(SifVersion.SIF20, "AssignmentTime", 13, 0); // (Sif 20 alias)
 		InstrDTD.ASSIGNMENT_MAXATTEMPTSALLOWED = new ElementDefImpl( ASSIGNMENT, "MaxAttemptsAllowed", null, 14, SifDtd.INSTR, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.INT );
-		InstrDTD.ASSIGNMENT_ADDTOGRADEBOOKFLAG = new ElementDefImpl( ASSIGNMENT, "AddToGradeBookFlag", null, 15, SifDtd.INSTR, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.BOOLEAN );
+		InstrDTD.ASSIGNMENT_ADDTOGRADEBOOKFLAG = new ElementDefImpl( ASSIGNMENT, "AddToGradeBookFlag", null, 15, SifDtd.INSTR, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );
 		InstrDTD.ASSIGNMENT_SOFTWAREREQUIREMENTLIST = new ElementDefImpl( ASSIGNMENT, "SoftwareRequirementList", null, 16, SifDtd.COMMON, "us", 0, SifVersion.SIF24, SifVersion.SIF26 );
 		ASSIGNMENT_SIF_EXTENDEDELEMENTS = new ElementDefImpl( ASSIGNMENT, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
 		ASSIGNMENT_SIF_METADATA = new ElementDefImpl( ASSIGNMENT, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, "us", (0), SifVersion.SIF20, SifVersion.SIF26 );
@@ -1559,6 +1561,7 @@ namespace OpenADK.Library.us.Instr
 		InstrDTD.LEARNINGRESOURCE_SUBJECTAREAS.DefineVersionInfo(SifVersion.SIF20, "SubjectAreas", 10, 0); // (Sif 20 alias)
 		InstrDTD.LEARNINGRESOURCE_MEDIATYPES = new ElementDefImpl( LEARNINGRESOURCE, "MediaTypes", null, 11, SifDtd.GLOBAL, null, (ElementDefImpl.FD_COLLAPSE), SifVersion.SIF15r1, SifVersion.SIF26 );
 		InstrDTD.LEARNINGRESOURCE_MEDIATYPES.DefineVersionInfo(SifVersion.SIF20, "MediaTypes", 11, 0); // (Sif 20 alias)
+		InstrDTD.LEARNINGRESOURCE_RESOURCEMEDIA = new ElementDefImpl( LEARNINGRESOURCE, "ResourceMedia", null, 11, SifDtd.INSTR, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
 		InstrDTD.LEARNINGRESOURCE_USEAGREEMENT = new ElementDefImpl( LEARNINGRESOURCE, "UseAgreement", null, 12, SifDtd.INSTR, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );
 		InstrDTD.LEARNINGRESOURCE_AGREEMENTDATE = new ElementDefImpl( LEARNINGRESOURCE, "AgreementDate", null, 13, SifDtd.INSTR, "us", (ElementDefImpl.FD_FIELD), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.DATE );
 		InstrDTD.LEARNINGRESOURCE_APPROVALS = new ElementDefImpl( LEARNINGRESOURCE, "Approvals", null, 14, SifDtd.INSTR, "us", (ElementDefImpl.FD_COLLAPSE), SifVersion.SIF15r1, SifVersion.SIF26 );
@@ -2153,6 +2156,7 @@ namespace OpenADK.Library.us.Instr
 		dictionary["LearningResource_Contacts"] = InstrDTD.LEARNINGRESOURCE_CONTACTS ;
 		dictionary["LearningResource_Description"] = InstrDTD.LEARNINGRESOURCE_DESCRIPTION ;//2.0 alias
 		dictionary["LearningResource_Evaluations"] = InstrDTD.LEARNINGRESOURCE_EVALUATIONS ;
+		dictionary["LearningResource_ResourceEvaluations"] = InstrDTD.LEARNINGRESOURCE_EVALUATIONS ;
 		dictionary["LearningResource_GradeLevels"] = InstrDTD.LEARNINGRESOURCE_GRADELEVELS ;
 		dictionary["LearningResource_LearningResourcePackageRefId"] = InstrDTD.LEARNINGRESOURCE_LEARNINGRESOURCEPACKAGEREFID ;
 		dictionary["LearningResource_LearningStandardItemRefId"] = InstrDTD.LEARNINGSTANDARDS_LEARNINGSTANDARDITEMREFID ;//Collapsed in 1.5r1
@@ -2160,6 +2164,7 @@ namespace OpenADK.Library.us.Instr
 		dictionary["LearningResource_Location"] = InstrDTD.LEARNINGRESOURCE_LOCATION ;//2.0 alias
 		dictionary["LearningResource_MediaType"] = GlobalDTD.MEDIATYPES_MEDIATYPE ;//Collapsed in 1.5r1
 		dictionary["LearningResource_MediaTypes"] = InstrDTD.LEARNINGRESOURCE_MEDIATYPES ;
+		dictionary["LearningResource_ResourceMedia"] = InstrDTD.LEARNINGRESOURCE_RESOURCEMEDIA ;//SIF 1.5r1 name for MediaType
 		dictionary["LearningResource_Name"] = InstrDTD.LEARNINGRESOURCE_NAME ;//2.0 alias
 		dictionary["LearningResource_RefId"] = InstrDTD.LEARNINGRESOURCE_REFID ;
 		dictionary["LearningResource_ResourceApproval"] = InstrDTD.APPROVALS_APPROVAL ;//Collapsed in 1.5r1

@@ -1028,7 +1028,7 @@ namespace OpenADK.Library.us.Hrfin
 		HrfinDTD.EXPENSEACCOUNT_AMOUNT = new ElementDefAlias( EXPENSEACCOUNT, "Amount", null, "MonetaryAmount", 2, SifDtd.GLOBAL, null, 0, SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.DECIMAL );
 
 		// <ExpenseAccounts> fields (1 entries)
-		HrfinDTD.EXPENSEACCOUNTS_EXPENSEACCOUNT = new ElementDefImpl( EXPENSEACCOUNTS, "ExpenseAccount", null, 1, SifDtd.HRFIN, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF20, SifVersion.SIF26 );
+		HrfinDTD.EXPENSEACCOUNTS_EXPENSEACCOUNT = new ElementDefImpl( EXPENSEACCOUNTS, "ExpenseAccount", null, 1, SifDtd.HRFIN, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF15r1, SifVersion.SIF26 );
 
 		// <FederalTaxId> fields (1 entries)
 		HrfinDTD.FEDERALTAXID_CODE = new ElementDefImpl( FEDERALTAXID, "Code", null, 1, SifDtd.HRFIN, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.STRING );
@@ -1121,6 +1121,7 @@ namespace OpenADK.Library.us.Hrfin
 
 		// <FISAmounts> fields (1 entries)
 		HrfinDTD.FISAMOUNTS_AMOUNT = new ElementDefAlias( FISAMOUNTS, "Amount", "FISAmount", "FISAmount", 1, SifDtd.HRFIN, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF15r1, SifVersion.SIF26, SifTypeConverters.DECIMAL );
+		HrfinDTD.FISAMOUNTS_AMOUNT.DefineVersionInfo(SifVersion.SIF15r1, "FISAmount", 6, (ElementDefImpl.FD_REPEATABLE)); // Fix ordering: seq 6 matches collapsed FINANCIALINCOMESTATEMENT_AMOUNTS position
 		HrfinDTD.FISAMOUNTS_AMOUNT.DefineVersionInfo(SifVersion.SIF20, "Amount", 1, (ElementDefImpl.FD_REPEATABLE)); // (Sif 20 alias)
 
 		// <FiscalYear> fields (4 entries)
@@ -1248,6 +1249,7 @@ namespace OpenADK.Library.us.Hrfin
 
 		// <PurchasingItems> fields (1 entries)
 		HrfinDTD.PURCHASINGITEMS_PURCHASINGITEM = new ElementDefImpl( PURCHASINGITEMS, "PurchasingItem", null, 1, SifDtd.HRFIN, "us", (ElementDefImpl.FD_REPEATABLE), SifVersion.SIF20, SifVersion.SIF26 );
+		HrfinDTD.PURCHASINGITEMS_PURCHASINGITEM.DefineVersionInfo(SifVersion.SIF15r1, "PurchasingItem", 1, (ElementDefImpl.FD_REPEATABLE));
 
 		// <School> fields (1 entries)
 		HrfinDTD.SCHOOL_SCHOOLINFOREFID = new ElementDefImpl( SCHOOL, "SchoolInfoRefId", null, 1, SifDtd.HRFIN, "us", (ElementDefImpl.FD_ATTRIBUTE), SifVersion.SIF15r1, SifVersion.SIF15r1, SifTypeConverters.STRING );
@@ -1394,6 +1396,7 @@ namespace OpenADK.Library.us.Hrfin
 		dictionary["W4_W4Date"] = HrfinDTD.W4_W4DATE ;
 		dictionary[ "ParentLocationInfo" ] = PARENTLOCATIONINFO;
 		dictionary["ParentLocationInfo_SIF_RefObject"] = HrfinDTD.PARENTLOCATIONINFO_SIF_REFOBJECT ;
+		dictionary[ "FinBudget" ] = FINANCIALBUDGET; // SIF15r1 legacy alias
 		dictionary[ "FinancialBudget" ] = FINANCIALBUDGET;
 		dictionary[ "FinancialBudget_SIF_ExtendedElements" ] = FINANCIALBUDGET_SIF_EXTENDEDELEMENTS ;
 		dictionary[ "FinancialBudget_SIF_Metadata" ] = FINANCIALBUDGET_SIF_METADATA;
@@ -1479,6 +1482,7 @@ namespace OpenADK.Library.us.Hrfin
 		dictionary["Billing_EntityId"] = HrfinDTD.BILLING_ENTITYID ;
 		dictionary["Billing_RefId"] = HrfinDTD.BILLING_REFID ;
 		dictionary["Billing_TransactionDescription"] = HrfinDTD.BILLING_TRANSACTIONDESCRIPTION ;
+		dictionary[ "EmployeeHR" ] = EMPLOYMENTRECORD; // SIF15r1 legacy alias
 		dictionary[ "EmploymentRecord" ] = EMPLOYMENTRECORD;
 		dictionary[ "EmploymentRecord_SIF_ExtendedElements" ] = EMPLOYMENTRECORD_SIF_EXTENDEDELEMENTS ;
 		dictionary[ "EmploymentRecord_SIF_Metadata" ] = EMPLOYMENTRECORD_SIF_METADATA;
@@ -1646,6 +1650,7 @@ namespace OpenADK.Library.us.Hrfin
 		dictionary["BilledEntity_SIF_RefObject"] = HrfinDTD.BILLEDENTITY_SIF_REFOBJECT ;
 		dictionary[ "AnnualItems" ] = ANNUALITEMS;
 		dictionary["AnnualItems_AnnualItem"] = HrfinDTD.ANNUALITEMS_ANNUALITEM ;
+		dictionary[ "FinAnnual" ] = FINANCIALANNUAL; // SIF15r1 legacy alias
 		dictionary[ "FinancialAnnual" ] = FINANCIALANNUAL;
 		dictionary[ "FinancialAnnual_SIF_ExtendedElements" ] = FINANCIALANNUAL_SIF_EXTENDEDELEMENTS ;
 		dictionary[ "FinancialAnnual_SIF_Metadata" ] = FINANCIALANNUAL_SIF_METADATA;

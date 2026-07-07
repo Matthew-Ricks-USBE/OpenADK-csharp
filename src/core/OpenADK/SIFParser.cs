@@ -605,7 +605,7 @@ namespace OpenADK.Library
                         if ( currentElement.Parent != null )
                         {
                             currentElement = (SifElement) currentElement.Parent;
-                            while ( legacyParse && currentElement.ElementDef.IsCollapsed( version ) )
+                            while ( legacyParse && (!currentElement.ElementDef.IsSupported( version ) || currentElement.ElementDef.IsCollapsed( version )) )
                             {
                                 currentElement = (SifElement) currentElement.Parent;
                             }

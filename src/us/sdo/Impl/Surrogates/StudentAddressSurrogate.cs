@@ -41,7 +41,7 @@ namespace OpenADK.Library.Impl.Surrogates
                 // Create a nested SIF writer to write the address element
                 SifWriter addressWriter = new SifWriter(writer);
                 addressWriter.SuppressNamespace( true );
-                addressWriter.Write( address );
+                addressWriter.Write( address, version );
 
                 writer.WriteEndElement();
             }

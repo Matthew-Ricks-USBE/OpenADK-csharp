@@ -335,7 +335,7 @@ namespace OpenADK.Library.Impl
                 // container element and add the child to it, instead of to "this"
                 String tag = elementParentDef.Tag(Adk.SifVersion);
                 IElementDef missingLink = Adk.Dtd.LookupElementDef(contentParent.ElementDef, tag);
-                if (missingLink != null && missingLink.IsCollapsed(version))
+                if (missingLink != null && missingLink.IsSupported(version) && missingLink.IsCollapsed(version))
                 {
                     SifElement container = contentParent.GetChild(missingLink);
                     if (container == null)

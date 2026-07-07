@@ -11,7 +11,7 @@ using Library.UnitTesting.Framework.Validation;
 
 namespace OpenADK.Library.Nunit.US.Validation
 {
-    [TestFixture, Explicit]
+    [TestFixture]
     public class VersioningTests : AdkTest
     {
         private const bool VERBOSE = true;

@@ -446,6 +446,16 @@ namespace OpenADK.Library
                 String path = ElementDef.Tag(adkVersion) + "_" +
                               candidate.ElementDef.Tag(adkVersion);
                 IElementDef implDef = Adk.Dtd.LookupElementDef(path);
+                if (implDef == null && ElementDef is OpenADK.Library.Impl.ElementDefAlias)
+                {
+                    // For alias element defs (e.g. CONTACTS_CONTACT with ClassName="LRContact"),
+                    // fall back to looking up using the alias class name so that surrogate-created
+                    // children (like PhoneNumber inside LRContact/ResourceContact) get the
+                    // context-specific def with the correct sequence number.
+                    String altPath = ElementDef.Name + "_" +
+                                     candidate.ElementDef.Tag(adkVersion);
+                    implDef = Adk.Dtd.LookupElementDef(altPath);
+                }
                 if (implDef != null)
                 {
                     candidate.ElementDef = implDef;
