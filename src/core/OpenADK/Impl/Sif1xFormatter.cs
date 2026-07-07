@@ -76,7 +76,7 @@ namespace OpenADK.Library.Impl
         {
             if (!decimalValue.HasValue)
             {
-                return "";
+                return String.Empty;
             }
             return Convert.ToString(decimalValue.Value);
         }
@@ -219,7 +219,11 @@ namespace OpenADK.Library.Impl
         /// <returns></returns>
         public override string ToString( TimeSpan? duration )
         {
-            throw new NotImplementedException( "XML Durations are not supported in SIF 1.x" );
+            if ( !duration.HasValue )
+            {
+                return String.Empty;
+            }
+            return System.Xml.XmlConvert.ToString(duration.Value);
         }
 
         /// <summary>
