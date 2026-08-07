@@ -50,7 +50,7 @@ public class LearnerPersonalHandler : IQueryResults, ISubscriber
 	public void sync( IZone zone )
 	{
 		// This class simply requests all LearnerPersonal objects from the zone
-		Query q = new Query( LearnerDTD.LEARNERPERSONAL );
+		Query q = zone.Agent.Objects.CreateQuery( LearnerDTD.LEARNERPERSONAL );
 		// Add any query conditions you may have
 		//q.addCondition( LearnerDTD.LEARNERPERSONAL_UPN, ComparisonOperators.LE, "M830540004340" );
 		zone.Query( q );

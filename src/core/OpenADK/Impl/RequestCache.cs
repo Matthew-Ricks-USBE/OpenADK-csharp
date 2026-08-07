@@ -10,7 +10,7 @@ using OpenADK.Util;
 namespace OpenADK.Library.Impl
 {
     /// <summary>  Stores the message ID and SIF Data Object type of each pending SIF_Request
-    /// message. The RequestCache is a global resource of the class framework. It is
+    /// message. Each agent owns its request cache. It is
     /// only necessary because of an inconsistency in the SIF 1.0r2 Specification in
     /// which a SIF_Response with a SIF_Error must have an empty SIF_ObjectData
     /// element, which prevents the framework from determining the associated object
@@ -24,37 +24,9 @@ namespace OpenADK.Library.Impl
     /// </version>
     public abstract class RequestCache
     {
-        private static RequestCache sSingleton = null;
-
-        /// <summary>  Protected constructor; clients must use getInstance</summary>
+        /// <summary>Protected constructor; instances are created by the agent's component factory.</summary>
         protected internal RequestCache() {}
 
-
-        /// <summary>  Get a RequestCache instance</summary>
-        public static RequestCache GetInstance( Agent agent )
-        {
-            if ( sSingleton == null ) {
-                String cls = Properties.GetProperty( "adkglobal.factory.RequestCache" );
-                try {
-                    if ( cls == null ) {
-                        sSingleton = new RequestCacheFile();
-                    }
-                    else {
-                        sSingleton = (RequestCache) ClassFactory.CreateInstance( cls );
-                    }
-
-                    sSingleton.Initialize( agent );
-                }
-                catch ( Exception thr ) {
-                    sSingleton = null;
-                    throw new AdkException
-                        ( "Adk could not create an instance of the class " + cls + ": " + thr, null,
-                          thr );
-                }
-            }
-
-            return sSingleton;
-        }
 
         /// <summary>  Initialize the RequestCache</summary>
         protected internal abstract void Initialize( Agent agent );
@@ -62,7 +34,6 @@ namespace OpenADK.Library.Impl
         /// <summary>  Closes the RequestCache</summary>
         public virtual void Close()
         {
-            sSingleton = null;
         }
 
         /// <summary>

@@ -32,7 +32,7 @@ public class StudentLocator : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentLocator
 	/// </summary>
-	public StudentLocator() : base( Adk.SifVersion, ReportingDTD.STUDENTLOCATOR ){}
+	public StudentLocator() : base( SifVersion.LATEST, ReportingDTD.STUDENTLOCATOR ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -42,7 +42,7 @@ public class StudentLocator : SifDataObject
 	///<param name="transactionId">GUID that allows requesters and responders to refer to the same logical StudentLocator "transaction" over more than one
 	/// SIF_Request/SIF_Response exchange.</param>
 	///
-	public StudentLocator( IdStatus idStatus, string stateProvinceId, string transactionId ) : base( Adk.SifVersion, ReportingDTD.STUDENTLOCATOR )
+	public StudentLocator( IdStatus idStatus, string stateProvinceId, string transactionId ) : base( SifVersion.LATEST, ReportingDTD.STUDENTLOCATOR )
 	{
 		this.SetIdStatus( idStatus );
 		this.StateProvinceId = stateProvinceId;
@@ -828,4 +828,3 @@ public class StudentLocator : SifDataObject
 	}
 
 }}
-

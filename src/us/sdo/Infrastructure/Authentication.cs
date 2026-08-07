@@ -29,7 +29,7 @@ public class Authentication : SifDataObject
 	/// <summary>
 	/// Creates an instance of an Authentication
 	/// </summary>
-	public Authentication() : base( Adk.SifVersion, InfrastructureDTD.AUTHENTICATION ){}
+	public Authentication() : base( SifVersion.LATEST, InfrastructureDTD.AUTHENTICATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class Authentication : SifDataObject
 	///<param name="sifRefId">The SIF RefId of a student or staff member</param>
 	///<param name="sifRefObject">The type of SIF object that the SIF_RefId attribute identifies.</param>
 	///
-	public Authentication( string refId, string sifRefId, AuthSifRefIdType sifRefObject ) : base( Adk.SifVersion, InfrastructureDTD.AUTHENTICATION )
+	public Authentication( string refId, string sifRefId, AuthSifRefIdType sifRefObject ) : base( SifVersion.LATEST, InfrastructureDTD.AUTHENTICATION )
 	{
 		this.RefId = refId;
 		this.SIF_RefId = sifRefId;
@@ -187,4 +187,3 @@ public class Authentication : SifDataObject
 	}
 
 }}
-

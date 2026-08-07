@@ -5,6 +5,7 @@
 
 using System;
 using System.Data;
+using OpenADK.Library.Impl;
 
 namespace OpenADK.Library
 {
@@ -58,7 +59,9 @@ namespace OpenADK.Library
         /// <returns></returns>
         public virtual String ToString( SifVersion version )
         {
-            return ToString( Adk.Dtd.GetFormatter( version ) );
+            return ToString(version.Major == 2
+                ? DTDInternals.SIF_2X_FORMATTER
+                : DTDInternals.SIF_1X_FORMATTER);
         }
 
         /// <summary>
@@ -71,7 +74,7 @@ namespace OpenADK.Library
         /// <returns></returns>
         public override String ToString()
         {
-            return ToString( Adk.TextFormatter );
+            return ToString(DTDInternals.SIF_1X_FORMATTER);
         }
 
         /// <summary>

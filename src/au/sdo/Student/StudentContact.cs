@@ -28,7 +28,7 @@ public class StudentContact : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentContact
 	/// </summary>
-	public StudentContact() : base( Adk.SifVersion, StudentDTD.STUDENTCONTACT ){}
+	public StudentContact() : base( SifVersion.LATEST, StudentDTD.STUDENTCONTACT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class StudentContact : SifDataObject
 	///<param name="name">The name of the contact.  Note: Type attribute value of 04 must be used here.</param>
 	///<param name="contactFlags">A ContactFlags</param>
 	///
-	public StudentContact( string refId, string studentPersonalRefId, Name name, ContactFlags contactFlags ) : base( Adk.SifVersion, StudentDTD.STUDENTCONTACT )
+	public StudentContact( string refId, string studentPersonalRefId, Name name, ContactFlags contactFlags ) : base( SifVersion.LATEST, StudentDTD.STUDENTCONTACT )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -575,4 +575,3 @@ public class StudentContact : SifDataObject
 	}
 
 }}
-

@@ -11,18 +11,20 @@ namespace OpenADK.Library.Tools.Policy
 {
     public class PolicyManagerImpl : PolicyManager
     {
+        private readonly IAdkRuntime fRuntime;
         private readonly PolicyFactory fPolicyFactory;
 	
-	public PolicyManagerImpl( Agent agentInstance )
+	public PolicyManagerImpl(IAdkRuntime runtime, PolicyFactory policyFactory)
 	{
-		fPolicyFactory = (PolicyFactory)ObjectFactory.GetInstance().CreateInstance( ObjectFactory.ADKFactoryType.POLICY_FACTORY, agentInstance );
+		fRuntime = runtime ?? throw new ArgumentNullException(nameof(runtime));
+		fPolicyFactory = policyFactory ?? throw new ArgumentNullException(nameof(policyFactory));
 	}
 	
 	
 	
 	public override void ApplyOutboundPolicy(SifMessagePayload msg, IZone zone ) {
 		
-		SifMessageType pload = Adk.Dtd.GetElementType(msg.ElementDef.Name);
+		SifMessageType pload = fRuntime.Dtd.GetElementType(msg.ElementDef.Name);
 		switch( pload ){
             case SifMessageType.SIF_Request:
 			    SetRequestPolicy((SIF_Request)msg, zone );
@@ -54,7 +56,7 @@ namespace OpenADK.Library.Tools.Policy
 			//
 			String requestVersions = requestPolicy.RequestVersion;
 			if( requestVersions != null ){
-				if( (Adk.Debug & AdkDebugFlags.Policy ) > 0 ){
+				if( (fRuntime.Debug & AdkDebugFlags.Policy ) > 0 ){
 					zone.Log.Info( "POLICY: Setting SIF_Request/SIF_Version to " + requestVersions );
 				}
 				// Clear the list of SIF Versions
@@ -114,7 +116,7 @@ namespace OpenADK.Library.Tools.Policy
 						}
 					}
 					if( newMsgVersion != null ){
-						if( (Adk.Debug & AdkDebugFlags.Policy ) > 0 ){
+						if( (fRuntime.Debug & AdkDebugFlags.Policy ) > 0 ){
 							zone.Log.Info( "POLICY: Setting SIF_Messaage/@Version to " + newMsgVersion );
 						}
 						request.SifVersion = newMsgVersion;
@@ -127,7 +129,7 @@ namespace OpenADK.Library.Tools.Policy
 			//
 			String requestSourceId = requestPolicy.RequestSourceId ;
 			if( requestSourceId != null ){
-				if( (Adk.Debug & AdkDebugFlags.Policy) > 0 ){
+				if( (fRuntime.Debug & AdkDebugFlags.Policy) > 0 ){
 					zone.Log.Info( "POLICY: Setting SIF_Request SIF_DestinationID to " + requestPolicy.RequestSourceId );
 				}
 				request.SIF_Header.SIF_DestinationId = requestSourceId;

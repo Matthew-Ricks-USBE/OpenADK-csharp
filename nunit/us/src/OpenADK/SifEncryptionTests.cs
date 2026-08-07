@@ -13,17 +13,17 @@ namespace Library.Nunit.US
     /// Summary description for SifEncryptionTests.
     /// </summary>
     [TestFixture]
-    public class SifEncryptionTests
+    public class SifEncryptionTests : AdkTest
     {
         private byte[] f64BitKey;
         private byte[] f128BitKey;
         private byte[] f192BitKey;
         private const string DEFAULT_ENCRYPTED_STRING = "�s�cr�t";
 
-        [OneTimeSetUp]
-        public void SetUp()
+        [SetUp]
+        public override void SetUp()
         {
-            Adk.Initialize();
+            base.SetUp();
 
             f64BitKey = Convert.FromBase64String("dW7SKzwdn0Q=");
             f128BitKey = Convert.FromBase64String("TcdilmUZ6qvbmegl2it2pA==");
@@ -72,7 +72,7 @@ namespace Library.Nunit.US
                 new AuthenticationInfo(new AuthSystem(AuthSystemType.APPLICATION, "Sample SIF Application"));
             inf.DistinguishedName = "cn=Example User, cn=Users, dc=sifinfo, dc=org";
             inf.Username = "example_user";
-            Authentication auth = new Authentication(Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.STAFFPERSONAL);
+            Authentication auth = new Authentication(Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.STAFFPERSONAL);
             auth.AuthenticationInfo = inf;
             return auth;
         }
@@ -179,7 +179,7 @@ namespace Library.Nunit.US
 
             // Write the object to and and read from xml to assure that the values are being persisted properly
             Authentication reparsedAuth =
-                (Authentication) AdkObjectParseHelper.WriteParseAndReturn(auth, Adk.SifVersion);
+                (Authentication) AdkObjectParseHelper.WriteParseAndReturn(auth, Runtime.SifVersion);
             returnValue = reparsedAuth.AuthenticationInfo;
 
             SifEncryption decryptor =

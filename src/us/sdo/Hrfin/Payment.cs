@@ -28,7 +28,7 @@ public class Payment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Payment
 	/// </summary>
-	public Payment() : base( Adk.SifVersion, HrfinDTD.PAYMENT ){}
+	public Payment() : base( SifVersion.LATEST, HrfinDTD.PAYMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class Payment : SifDataObject
 	///<param name="receivedAmount">Amount received.</param>
 	///<param name="receivedTransactionId">Memo transaction ID from other vendor software.</param>
 	///
-	public Payment( string refId, string entityId, string billingRefId, DateTime? receivedDate, string transactionDescription, MonetaryAmount receivedAmount, string receivedTransactionId ) : base( Adk.SifVersion, HrfinDTD.PAYMENT )
+	public Payment( string refId, string entityId, string billingRefId, DateTime? receivedDate, string transactionDescription, MonetaryAmount receivedAmount, string receivedTransactionId ) : base( SifVersion.LATEST, HrfinDTD.PAYMENT )
 	{
 		this.RefId = refId;
 		this.EntityId = entityId;
@@ -228,4 +228,3 @@ public class Payment : SifDataObject
 	}
 
 }}
-

@@ -15,6 +15,13 @@ namespace OpenADK.Library.Impl
     /// </summary>
     internal class SIFPrimitives : ISIFPrimitives
     {
+        private readonly IAdkRuntime fRuntime;
+
+        public SIFPrimitives(IAdkRuntime runtime)
+        {
+            fRuntime = runtime ?? throw new ArgumentNullException(nameof(runtime));
+        }
+
         /**
 	 *  SIF_Register
 	 */
@@ -125,7 +132,7 @@ namespace OpenADK.Library.Impl
             else
             {
 
-                SifVersion zisVer = SifVersion.Parse(zone.Properties.ZisVersion);
+                SifVersion zisVer = SifVersion.Parse(zone.Properties.ZisVersion, fRuntime.SifVersion);
 
                 if (zisVer.CompareTo(SifVersion.SIF11) >= 0)
                 {
@@ -141,7 +148,7 @@ namespace OpenADK.Library.Impl
                     // receive 2.0 events. However, this seems to be the best approach
                     // because it ensures greater compatibility with older ZIS's that will
                     // otherwise fail if they get a 2.0 version in the SIF_Register message
-                    SifVersion[] supported = Adk.SupportedSIFVersions;
+                    SifVersion[] supported = fRuntime.SupportedSIFVersions;
                     for (int i = 0; i < supported.Length; i++)
                     {
                         // Exclude the version added above
@@ -154,7 +161,7 @@ namespace OpenADK.Library.Impl
                 }
                 else
                 {
-                    msg.AddSIF_Version(new SIF_Version(Adk.SifVersion));
+                    msg.AddSIF_Version(new SIF_Version(fRuntime.SifVersion));
                 }
             }
 
@@ -380,7 +387,7 @@ namespace OpenADK.Library.Impl
             {
                 // This query will be satisfied by the ZIS. Use the ZIS compatibility
                 // version, which returns the highest version supported by the ZIS 
-                // (Default to Adk.SIFVersion() if not specified in the config)
+                // (Default to fRuntime.SifVersion() if not specified in the config)
                 highestRequestVersion = ((ZoneImpl)zone).HighestEffectiveZISVersion;
                 msg.AddSIF_Version(new SIF_Version(highestRequestVersion));
             }
@@ -397,7 +404,7 @@ namespace OpenADK.Library.Impl
 					}
 				}
 			} else {
-				highestRequestVersion = Adk.SifVersion;
+				highestRequestVersion = fRuntime.SifVersion;
 				if( highestRequestVersion.Major == 1 ){
 					msg.AddSIF_Version(  new SIF_Version( highestRequestVersion ) );
 				} else {
@@ -523,7 +530,7 @@ namespace OpenADK.Library.Impl
                     }
                     if (path != null)
                     {
-                        path = Adk.Dtd.TranslateSQP(query.ObjectType, path, version);
+                        path = query.ObjectType.Dtd.TranslateSQP(query.ObjectType, path, version);
                         sqo.AddSIF_Element(new SIF_Element(path));
                     }
                 }

@@ -4,11 +4,14 @@
 //
 
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 using System.Runtime.CompilerServices;
 using OpenADK.Library.Global;
 using OpenADK.Util;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 /**
  * 	This private interface is implemented by the SIFDTD classes of each 
@@ -22,6 +25,9 @@ namespace OpenADK.Library.Impl
 {
     public abstract class DTDInternals : IDtd
     {
+        private static readonly object MetadataLoadLock = new object();
+
+        public ILogger Logger { get; internal set; } = NullLogger.Instance;
 
         // SIF_Message mapping used internally by SIFParser
         public static IElementDef SIF_MESSAGE = new ElementDefImpl(null, "SIF_Message", null, 0, "Impl", SifVersion.SIF11, SifVersion.LATEST);
@@ -29,14 +35,14 @@ namespace OpenADK.Library.Impl
 
         protected DTDInternals()
 	    {
-            fElementDefs = new Dictionary<String, IElementDef>(704);
+            fElementDefs = new ConcurrentDictionary<String, IElementDef>(StringComparer.Ordinal);
 		    fElementDefs[ "SIF_Message" ] = SIF_MESSAGE;
 		    fElementDefs[ "SIF_Message_Version" ] = SIF_MESSAGE_VERSION;
 	    }
 
 
         protected int fLoaded = 0;
-        protected IDictionary<String, IElementDef> fElementDefs;
+        protected ConcurrentDictionary<String, IElementDef> fElementDefs;
 
         public abstract string BaseNamespace { get;}
         public abstract string BasePackageName { get; }
@@ -51,6 +57,18 @@ namespace OpenADK.Library.Impl
             IElementDef returnValue;
             fElementDefs.TryGetValue(key, out returnValue);
             return returnValue;
+        }
+
+        public void AddElementDef(string key, IElementDef definition)
+        {
+            if (key == null) throw new ArgumentNullException(nameof(key));
+            if (definition == null) throw new ArgumentNullException(nameof(definition));
+            if (definition is ElementDefImpl implementation)
+            {
+                implementation.Dtd ??= this;
+            }
+            if (!fElementDefs.TryAdd(key, definition))
+                throw new ArgumentException($"An element definition with key '{key}' already exists.");
         }
 
         /// <summary>
@@ -70,29 +88,39 @@ namespace OpenADK.Library.Impl
         /// Loads the SDO Libraries specified by using flags from the <c>SdoLibraryType</c> enum
         /// </summary>
         /// <param name="libraries"></param>
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        public void LoadLibraries(int libraries)
+        internal void LoadLibraries(int libraries)
         {
-            string adkAssembly = GetType().Assembly.GetName().Name;
-            string sdoAssembly = this.SDOAssembly;
-            if (fLoaded == 0)
+            lock (MetadataLoadLock)
             {
-                foreach (int intrinsic in GetSdoTypes(IntrinsicLibraries))
+                string adkAssembly = GetType().Assembly.GetName().Name;
+                string sdoAssembly = this.SDOAssembly;
+                if (fLoaded == 0)
                 {
-                    LoadLibrary(intrinsic, adkAssembly);
+                    foreach (int intrinsic in GetSdoTypes(IntrinsicLibraries))
+                    {
+                        LoadLibrary(intrinsic, adkAssembly);
+                    }
                 }
-            }
 
-            LoadLibrary((int)IntrinsicLibraryType.Common, sdoAssembly);
+                LoadLibrary((int)IntrinsicLibraryType.Common, sdoAssembly);
  
-            //Remove the libraries that have already been loaded.
-            int toLoad = libraries & ~IntrinsicLibraries;
+                //Remove the libraries that have already been loaded.
+                int toLoad = libraries & ~IntrinsicLibraries;
 
-            toLoad = toLoad & ~(int) IntrinsicLibraryType.Common;
+                toLoad = toLoad & ~(int) IntrinsicLibraryType.Common;
 
-            foreach (int lib in GetSdoTypes(toLoad))
-            {
-                LoadLibrary(lib, sdoAssembly);
+                foreach (int lib in GetSdoTypes(toLoad))
+                {
+                    LoadLibrary(lib, sdoAssembly);
+                }
+
+                foreach (IElementDef definition in fElementDefs.Values)
+                {
+                    if (definition is ElementDefImpl implementation)
+                    {
+                        implementation.Dtd ??= this;
+                    }
+                }
             }
         }
 
@@ -135,7 +163,7 @@ namespace OpenADK.Library.Impl
                 }
                 else
                 {
-                    baseNamespace = typeof (Adk).Namespace;
+                    baseNamespace = typeof(AdkRuntime).Namespace;
                 }
                 string name = GetLibraryName(type);
                 String cls = baseNamespace + "." + name + "." + name + "DTD";
@@ -143,6 +171,7 @@ namespace OpenADK.Library.Impl
                 try
                 {
                     SdoLibraryImpl lib = (SdoLibraryImpl)ClassFactory.CreateInstance(cls);
+                    lib.Dtd = this;
                     lib.Load();
                     lib.AddElementMappings(fElementDefs);
                 }
@@ -172,7 +201,7 @@ namespace OpenADK.Library.Impl
         /// <returns>An array of SdoLibraryTypes naming all Sdo Libraries identified by the
         /// libraries value</returns>
         protected abstract List<int> GetSdoTypes(int libraryTypes);
-        
+
 
         /// <summary>  Get the SIF namespace for a given version of the specification.</summary>
         /// <returns> If the SifVersion is less than SIF 1.1, a namespace in the form
@@ -182,10 +211,7 @@ namespace OpenADK.Library.Impl
         /// is returned, where only the major version number is included in the
         /// namespace.
         /// </returns>
-        public string GetNamespace(SifVersion version)
-        {
-            return version.Xmlns;
-        }
+        public string GetNamespace(SifVersion version) => version.Xmlns;
 
         /// <summary>
         /// Gets the element tag name of a SifMessageType
@@ -248,7 +274,7 @@ namespace OpenADK.Library.Impl
                 List<Segment> segments = ParseSQP(objectType, path);
                 if (segments == null)
                 {
-                    Adk.Log.Warn("Unable to translate SIF Query Pattern: " + path);
+                    Logger.Warn("Unable to translate SIF Query Pattern: " + path);
                     return string.Empty;
                 }
                 if (segments.Count > 0)
@@ -272,7 +298,7 @@ namespace OpenADK.Library.Impl
             }
             catch (Exception iae)
             {
-                Adk.Log.Warn("Unable to translate SIF Query Pattern: " + path + " Error: " + iae, iae);
+                Logger.Warn("Unable to translate SIF Query Pattern: " + path + " Error: " + iae, iae);
             }
             return returnValue;
         }
@@ -378,7 +404,7 @@ namespace OpenADK.Library.Impl
             {
                 if (token.Length == 0)
                 {
-                    Adk.Log.Warn("Unable to parse empty segment in SQP: " + query);
+                    Logger.Warn("Unable to parse empty segment in SQP: " + query);
                     // Empty segment. Exit 
                     // We could throw an exception here, but the previous ADK code
                     // allowed for empty segments (and returned null).
@@ -711,75 +737,6 @@ namespace OpenADK.Library.Impl
             return result;
         }
 
-
-        /// <summary>
-        /// Create all elements and attributes referenced by the XPath-like query string.
-        /// </summary>
-        /// <param name="relativeTo">The element that is the starting point of the path</param>
-        /// <param name="query">The xPath query to build out</param>
-        /// <param name="valueBuilder">The class to use for </param>
-        /// <returns></returns>
-        public Element CreateElementOrAttributeFromXPath(
-            SifElement relativeTo,
-            String query,
-            IValueBuilder valueBuilder)
-        {
-            SifVersion version = Adk.SifVersion;
-            SifFormatter pathFormatter = GetFormatter(version);
-            SifFormatter textFormatter = Adk.TextFormatter;
-            return CreateElementOrAttributeFromXPath(
-                relativeTo, query, valueBuilder, version, textFormatter, pathFormatter);
-        }
-
-
-        /// <summary>
-        /// Create all elements and attributes referenced by the XPath-like query string.
-        /// </summary>
-        /// <param name="relativeTo">The element that is the starting point of the path</param>
-        /// <param name="query">The xPath query to build out</param>
-        /// <param name="valueBuilder">The class to use for</param>
-        /// <param name="version">The version of SIF for which this mapping operation is being evaluated</param>
-        /// <param name="textFormatter">The SIFFormatter instance used to parse strings into strongly-typed data values.
-        /// For many uses of this API, this formatter is equivalent to Adk.TextFormatter</param>
-        /// <param name="pathFormatter">The SIFFormatter instance used for setting child SIFElements on their parents.
-        /// This formatter may be different than the text formatter. The text formatter is, for
-        /// compatibility's sake defaulted to SIF 1.x. However, the path formatter must be 
-        /// correct for the mappings path being evaluated. </param>
-        /// <returns></returns>
-        public Element CreateElementOrAttributeFromXPath(
-            SifElement relativeTo,
-            String query,
-            IValueBuilder valueBuilder,
-            SifVersion version,
-            SifFormatter textFormatter,
-            SifFormatter pathFormatter)
-        {
-            int i = query.IndexOf('/');
-            String currentSegment;
-            String nextSegment = null;
-            if (i == -1)
-            {
-                currentSegment = query;
-            }
-            else
-            {
-                currentSegment = query.Substring(0, i);
-                nextSegment = query.Substring(i + 1);
-            }
-            Element result = _xpathBuild(relativeTo,
-                                          new StringBuilder(),
-                                          currentSegment,
-                                          nextSegment,
-                                          null,
-                                          valueBuilder,
-                                          version,
-                                          textFormatter,
-                                          pathFormatter);
-
-            return result;
-        }
-
-
         /// <summary>  Recursively parse an XPath-like query.</summary>
         /// <param name="relativeTo">The SifElement this iteration is relative to. For the
         /// first call to this method, the <i>relativeTo</i> parameter is usually
@@ -1101,10 +1058,10 @@ namespace OpenADK.Library.Impl
                         //
 
                         //  Lookup the IElementDef of relativeTo
-                        IElementDef subEleDef = Adk.Dtd.LookupElementDef(relativeTo.ElementDef, subEleTag);
+                        IElementDef subEleDef = this.LookupElementDef(relativeTo.ElementDef, subEleTag);
                         if (subEleDef == null)
                         {
-                            subEleDef = Adk.Dtd.LookupElementDef(subEleTag);
+                            subEleDef = this.LookupElementDef(subEleTag);
                             if (subEleDef == null)
                             {
                                 throw new AdkSchemaException(subEleTag + " is not a recognized attribute of " +
@@ -1321,7 +1278,7 @@ namespace OpenADK.Library.Impl
         {
             for (int i = 0; i < attributes.Length; i++)
             {
-                IElementDef attrDef = Adk.Dtd.LookupElementDef(dst.ElementDef + "_" + attributes[i]);
+                IElementDef attrDef = this.LookupElementDef(dst.ElementDef + "_" + attributes[i]);
                 dst.SetField(attrDef, attributes[++i]);
             }
         }
@@ -1360,10 +1317,10 @@ namespace OpenADK.Library.Impl
             }
 
             //  Lookup the IElementDef
-            IElementDef def = Adk.Dtd.LookupElementDef(relativeTo.ElementDef, _tag);
+            IElementDef def = this.LookupElementDef(relativeTo.ElementDef, _tag);
             if (def == null)
             {
-                def = Adk.Dtd.LookupElementDef(_tag);
+                def = this.LookupElementDef(_tag);
             }
             if (def == null)
             {
@@ -1424,7 +1381,7 @@ namespace OpenADK.Library.Impl
         private SimpleField _createField(SifElement parent, string attr, string val)
         {
             //  Lookup the IElementDef relative to the parent
-            IElementDef def = Adk.Dtd.LookupElementDef(parent.ElementDef, attr);
+            IElementDef def = this.LookupElementDef(parent.ElementDef, attr);
             if (def == null)
             {
                 throw new AdkSchemaException(attr + " is not a recognized attribute of " + parent.Tag);

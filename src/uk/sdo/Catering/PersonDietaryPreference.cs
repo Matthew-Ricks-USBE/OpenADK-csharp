@@ -28,7 +28,7 @@ public class PersonDietaryPreference : SifDataObject
 	/// <summary>
 	/// Creates an instance of a PersonDietaryPreference
 	/// </summary>
-	public PersonDietaryPreference() : base( Adk.SifVersion, CateringDTD.PERSONDIETARYPREFERENCE ){}
+	public PersonDietaryPreference() : base( SifVersion.LATEST, CateringDTD.PERSONDIETARYPREFERENCE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class PersonDietaryPreference : SifDataObject
 	///<param name="refId">A RefId</param>
 	///<param name="personRefId">The ID (GUID) of the person to whom the Dietary preference is linked.</param>
 	///
-	public PersonDietaryPreference( string refId, string personRefId ) : base( Adk.SifVersion, CateringDTD.PERSONDIETARYPREFERENCE )
+	public PersonDietaryPreference( string refId, string personRefId ) : base( SifVersion.LATEST, CateringDTD.PERSONDIETARYPREFERENCE )
 	{
 		this.RefId = refId;
 		this.PersonRefId = personRefId;
@@ -170,4 +170,3 @@ public class PersonDietaryPreference : SifDataObject
 	}
 
 }}
-

@@ -153,12 +153,12 @@ namespace Library.UnitTesting.Framework.Validation
 
             SIF_Response rsp = new SIF_Response();
             rsp.SetSIF_MorePackets( YesNo.NO );
-            rsp.SIF_RequestMsgId = Adk.MakeGuid();
+            rsp.SIF_RequestMsgId = SifFormatter.GuidToSifRefID(Guid.NewGuid());
             rsp.SIF_PacketNumber = 1;
 
             SIF_Header hdr = rsp.Header;
             hdr.SIF_Timestamp = DateTime.Now;
-            hdr.SIF_MsgId = Adk.MakeGuid();
+            hdr.SIF_MsgId = SifFormatter.GuidToSifRefID(Guid.NewGuid());
             hdr.SIF_SourceId = "ADK Unit Tests";
             hdr.SetSIF_Security( new SIF_SecureChannel( AuthenticationLevel.ZERO,
                                                         EncryptionLevel.ZERO ) );
@@ -186,7 +186,7 @@ namespace Library.UnitTesting.Framework.Validation
         {
             using ( FileStream outputStream = new FileStream( fileName, FileMode.Create ) )
             {
-                SifWriter writer = new SifWriter( outputStream );
+                SifWriter writer = new SifWriter( outputStream, smp.ElementDef.Dtd, writeVersion );
                 smp.SetChanged( true );
                 smp.SifVersion = writeVersion;
                 writer.Write( smp );

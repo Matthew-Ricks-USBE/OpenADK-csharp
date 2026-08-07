@@ -30,7 +30,7 @@ public class StudentAcademicRecord : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentAcademicRecord
 	/// </summary>
-	public StudentAcademicRecord() : base( Adk.SifVersion, EtranscriptsDTD.STUDENTACADEMICRECORD ){}
+	public StudentAcademicRecord() : base( SifVersion.LATEST, EtranscriptsDTD.STUDENTACADEMICRECORD ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class StudentAcademicRecord : SifDataObject
 	///<param name="sifRefId">The GUID of an associated object, either StudentRecordExchange or StudentPersonal.</param>
 	///<param name="sifRefObject">The associated object type.</param>
 	///
-	public StudentAcademicRecord( string refId, string sifRefId, TranscriptRecordRefObject sifRefObject ) : base( Adk.SifVersion, EtranscriptsDTD.STUDENTACADEMICRECORD )
+	public StudentAcademicRecord( string refId, string sifRefId, TranscriptRecordRefObject sifRefObject ) : base( SifVersion.LATEST, EtranscriptsDTD.STUDENTACADEMICRECORD )
 	{
 		this.RefId = refId;
 		this.SIF_RefId = sifRefId;
@@ -470,4 +470,3 @@ public class StudentAcademicRecord : SifDataObject
 	}
 
 }}
-

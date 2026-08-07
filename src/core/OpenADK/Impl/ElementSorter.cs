@@ -31,7 +31,7 @@ namespace OpenADK.Library.Impl
         {
             if( version == null )
             {
-                version = Adk.SifVersion;
+                version = SifVersion.LATEST;
             }
             fVersion = version;
         }
@@ -43,7 +43,7 @@ namespace OpenADK.Library.Impl
         {
             if( version == null )
             {
-                version = Adk.SifVersion;
+                version = SifVersion.LATEST;
             }
 
             if( version.CompareTo( SifVersion.SIF20 ) < 0 )

@@ -29,7 +29,7 @@ public class ReportPackage : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ReportPackage
 	/// </summary>
-	public ReportPackage() : base( Adk.SifVersion, ReportingDTD.REPORTPACKAGE ){}
+	public ReportPackage() : base( SifVersion.LATEST, ReportingDTD.REPORTPACKAGE ){}
 
 	/// <summary>
 	/// Gets or sets the value of the <c>&lt;XMLData&gt;</c> element.
@@ -174,4 +174,3 @@ public class ReportPackage : SifDataObject
 	}
 
 }}
-

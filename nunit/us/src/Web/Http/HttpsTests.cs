@@ -1,9 +1,5 @@
 using Library.UnitTesting.Framework;
-using log4net;
-using log4net.Appender;
-using log4net.Core;
-using log4net.Layout;
-using log4net.Repository.Hierarchy;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
@@ -24,13 +20,13 @@ namespace OpenADK.Web.Http
     /// Tests HTTPS support in the ADK
     /// </summary>
     [TestFixture, Explicit("Requires trusted certificates in Windows certificate store")]
-    public class HttpsTests
+    public class HttpsTests : AdkTest
     {
         private HttpTransport fTransport = null;
         private SimpleHandler fHandler = null;
         private HttpsProperties fProps = null;
         private IZone fZone = null;
-        private Agent fAgent = new TestAgent();
+        private Agent fAgent;
 
         private readonly string[] CERTIFICATES = ["issuer.pfx", "localhost.pfx", "127.0.0.1.pfx", "invalid.pfx"];
         private const string CERTIFICATE_PASSWORD = "changeit";
@@ -80,10 +76,6 @@ namespace OpenADK.Web.Http
             fStore.Add(fServerCert);
             fStore.Add(fInvalidCert);
 
-            // Prep logging output.
-            ConsoleAppender cAppender = new ConsoleAppender();
-            cAppender.Layout = new PatternLayout(Adk.DEFAULT_LOG_PATTERN);
-            SetLogAppender(cAppender, Level.Debug, false);
         }
 
         /// <summary>
@@ -92,8 +84,9 @@ namespace OpenADK.Web.Http
         [SetUp]
         public void SetUpTest()
         {
-            Adk.Debug = AdkDebugFlags.All;
-            Adk.Initialize();
+            Runtime.Debug = AdkDebugFlags.All;
+            fAgent = CreateTestAgent();
+            fAgent.Initialize();
 
             ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors)
                 =>
@@ -288,26 +281,6 @@ namespace OpenADK.Web.Http
             else
             {
                 Assert.IsTrue(sslConnectError, "Should have received an exception");
-            }
-        }
-
-
-        private static void SetLogAppender(IAppender appender, Level level, bool additive)
-        {
-            Hierarchy hierarchy = LogManager.GetRepository() as Hierarchy;
-            if (hierarchy != null)
-            {
-                if (!additive)
-                {
-                    hierarchy.Root.RemoveAllAppenders();
-                }
-                hierarchy.Root.AddAppender(appender);
-                hierarchy.Threshold = level;
-                hierarchy.Configured = true;
-            }
-            else
-            {
-                throw new AdkException("Unable to initialize log4net framework", null);
             }
         }
 
@@ -535,7 +508,7 @@ namespace OpenADK.Web.Http
                 }
             }
 
-            public ILog Log
+            public ILogger Log
             {
                 get
                 {

@@ -100,7 +100,7 @@ namespace Library.Nunit.US.Impl
             //  Write SIF_Response -- without its SIF_ObjectData payload -- to a buffer
             using (MemoryStream envelope = new MemoryStream())
             {
-                SifWriter writer = new SifWriter(envelope);
+                SifWriter writer = new SifWriter(envelope, Runtime);
                 writer.Write(rsp);
                 writer.Flush();
 
@@ -137,7 +137,7 @@ namespace Library.Nunit.US.Impl
 
 
             // Try parsing the final stream to see if it is a valid message
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             ms.Seek(0, SeekOrigin.Begin);
             StreamReader reader = new StreamReader(ms);
             SifElement o = parser.Parse(reader, null, SifParserFlags.None, version);

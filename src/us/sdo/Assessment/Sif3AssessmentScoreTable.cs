@@ -28,7 +28,7 @@ public class Sif3AssessmentScoreTable : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentScoreTable
 	/// </summary>
-	public Sif3AssessmentScoreTable() : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTSCORETABLE ){}
+	public Sif3AssessmentScoreTable() : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTSCORETABLE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class Sif3AssessmentScoreTable : SifDataObject
 	///<param name="refId">The GUID that uniquely identifies an instance of the object.</param>
 	///<param name="scoreTableName">The user defined name of the score table.</param>
 	///
-	public Sif3AssessmentScoreTable( string refId, string scoreTableName ) : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTSCORETABLE )
+	public Sif3AssessmentScoreTable( string refId, string scoreTableName ) : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTSCORETABLE )
 	{
 		this.RefId = refId;
 		this.ScoreTableName = scoreTableName;
@@ -214,4 +214,3 @@ public class Sif3AssessmentScoreTable : SifDataObject
 	}
 
 }}
-

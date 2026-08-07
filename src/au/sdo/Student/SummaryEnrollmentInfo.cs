@@ -28,7 +28,7 @@ public class SummaryEnrollmentInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SummaryEnrollmentInfo
 	/// </summary>
-	public SummaryEnrollmentInfo() : base( Adk.SifVersion, StudentDTD.SUMMARYENROLLMENTINFO ){}
+	public SummaryEnrollmentInfo() : base( SifVersion.LATEST, StudentDTD.SUMMARYENROLLMENTINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class SummaryEnrollmentInfo : SifDataObject
 	///<param name="personInfo">A PersonInfo</param>
 	///<param name="schoolEnrollmentList">A SchoolEnrollmentList</param>
 	///
-	public SummaryEnrollmentInfo( string refId, int? schoolYear, ParentObjectRefId parentObjectRefId, string localId, PersonInfo personInfo, SchoolEnrollment schoolEnrollmentList ) : base( Adk.SifVersion, StudentDTD.SUMMARYENROLLMENTINFO )
+	public SummaryEnrollmentInfo( string refId, int? schoolYear, ParentObjectRefId parentObjectRefId, string localId, PersonInfo personInfo, SchoolEnrollment schoolEnrollmentList ) : base( SifVersion.LATEST, StudentDTD.SUMMARYENROLLMENTINFO )
 	{
 		this.RefId = refId;
 		this.SchoolYear = schoolYear;
@@ -258,4 +258,3 @@ public class SummaryEnrollmentInfo : SifDataObject
 	}
 
 }}
-

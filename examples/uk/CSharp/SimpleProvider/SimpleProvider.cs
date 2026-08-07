@@ -8,13 +8,14 @@ using System.Collections.Specialized;
 using OpenADK.Library;
 using OpenADK.Library.uk;
 using OpenADK.Util;
+using Microsoft.Extensions.DependencyInjection;
 
 
 internal class SimpleProvider : Agent
 {
     // Call the superclass constructor with the agent ID
-    protected SimpleProvider()
-        : base("SimpleProvider")
+    public SimpleProvider(IAdkRuntime runtime, IAdkComponentFactory components)
+        : base("SimpleProvider", runtime, components)
     {
     }
 
@@ -33,6 +34,7 @@ internal class SimpleProvider : Agent
     public static int Main(string[] args)
     {
         SimpleProvider agent = null;
+        ServiceProvider services = null;
         try
         {
             if (args.Length < 2)
@@ -48,14 +50,18 @@ internal class SimpleProvider : Agent
             Console.ForegroundColor = ConsoleColor.Green;
 
             //	Pre-parse the command-line before initializing the ADK
-            Adk.Debug = AdkDebugFlags.None;
             AdkExamples.parseCL(null, args);
 
             //  Initialize the ADK with the specified version, loading only the Student SDO package
-            Adk.Initialize(SifVersion.SIF23, SIFVariant.SIF_UK, (int)SdoLibraryType.All );
-
-            //  Start the agent...
-            agent = new SimpleProvider();
+            services = new ServiceCollection().AddOpenAdk(options =>
+            {
+                options.SifVersion = SifVersion.SIF23;
+                options.Variant = SIFVariant.SIF_UK;
+                options.SdoLibraries = (int)SdoLibraryType.All;
+                options.Debug = AdkExamples.Debug;
+            }).AddSingleton<SimpleProvider>().BuildServiceProvider();
+            agent = services.GetRequiredService<SimpleProvider>();
+            if (!String.IsNullOrEmpty(AdkExamples.LogFilePath)) agent.Runtime.SetLogFile(AdkExamples.LogFilePath);
             
             // Call StartAgent. This method does not return until the agent shuts down
             agent.startAgent(args);
@@ -85,6 +91,7 @@ internal class SimpleProvider : Agent
                     Console.WriteLine(adkEx);
                 }
             }
+            services?.Dispose();
         }
         return 0;
     }
@@ -115,13 +122,13 @@ internal class SimpleProvider : Agent
 
         // 2) Create an instance of the the LearnerPersonalProvider class
         // This class is responsible for publishing LearnerPersonal
-        LearnerPersonalProvider lpp = new LearnerPersonalProvider();
+        LearnerPersonalProvider lpp = new LearnerPersonalProvider(Runtime);
         // The LearnerPersonalProvider is allowed to provision itself with the zone
         lpp.provision(zone);
 
         // 2) Create an instance of the the LearnerPersonalProvider class
         // This class is responsible for publishing LearnerPersonal
-        WorkforcePersonalProvider wpp = new WorkforcePersonalProvider();
+        WorkforcePersonalProvider wpp = new WorkforcePersonalProvider(Runtime);
         // The LearnerPersonalProvider is allowed to provision itself with the zone
 
         wpp.provision(zone);

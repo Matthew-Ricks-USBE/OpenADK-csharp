@@ -28,7 +28,7 @@ public class StaffPersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StaffPersonal
 	/// </summary>
-	public StaffPersonal() : base( Adk.SifVersion, StudentDTD.STAFFPERSONAL ){}
+	public StaffPersonal() : base( SifVersion.LATEST, StudentDTD.STAFFPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class StaffPersonal : SifDataObject
 	///<param name="localId">A LocalId</param>
 	///<param name="personInfo">A PersonInfo</param>
 	///
-	public StaffPersonal( string refId, string localId, PersonInfo personInfo ) : base( Adk.SifVersion, StudentDTD.STAFFPERSONAL )
+	public StaffPersonal( string refId, string localId, PersonInfo personInfo ) : base( SifVersion.LATEST, StudentDTD.STAFFPERSONAL )
 	{
 		this.RefId = refId;
 		this.LocalId = localId;
@@ -275,4 +275,3 @@ public class StaffPersonal : SifDataObject
 	}
 
 }}
-

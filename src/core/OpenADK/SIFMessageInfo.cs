@@ -80,11 +80,11 @@ namespace OpenADK.Library
                                IZone zone )
         {
             fZone = zone;
-            fPayload = Adk.Dtd.GetElementType( msg.ElementDef.Name );
+            fPayload = msg.ElementDef.Dtd.GetElementType(msg.ElementDef.Name);
             if ( zone.Properties.KeepMessageContent ) {
                 try {
                     StringWriter sw = new StringWriter();
-                    SifWriter writer = new SifWriter( sw );
+                    SifWriter writer = new SifWriter(sw, zone.Agent.Runtime);
                     writer.Write( msg );
                     writer.Flush();
                     writer.Close();
@@ -159,7 +159,7 @@ namespace OpenADK.Library
         /// </value>
         public string PayloadTag
         {
-            get { return Adk.Dtd.GetElementTag( (int) fPayload ); }
+            get { return fPayload.ToString(); }
         }
 
         /// <summary>  Gets the SIF_Message header timestamp.</summary>
@@ -291,7 +291,18 @@ namespace OpenADK.Library
         /// null if the message is not a SIF_Request message</value>
         public SifVersion LatestSIFRequestVersion
         {
-            get { return Adk.GetLatestSupportedVersion( SIFRequestVersions ); }
+            get
+            {
+                SifVersion latest = null;
+                foreach (SifVersion candidate in SIFRequestVersions ?? Array.Empty<SifVersion>())
+                {
+                    if (latest == null || candidate.CompareTo(latest) > 0)
+                    {
+                        latest = candidate;
+                    }
+                }
+                return latest ?? SifVersion.LATEST;
+            }
         }
 
 
@@ -465,7 +476,7 @@ namespace OpenADK.Library
                                 //  the element is not recognized as a valid payload type for
                                 //  this version of SIF.
                                 //
-                                inf.fPayload = Adk.Dtd.GetElementType( tag.ToString() );
+                                inf.fPayload = zone.Agent.Runtime.Dtd.GetElementType(tag.ToString());
                                 if ( inf.fPayload == 0 )
                                 {
                                     throw new AdkMessagingException(

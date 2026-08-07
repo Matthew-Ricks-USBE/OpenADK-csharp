@@ -28,7 +28,7 @@ public class LocationInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LocationInfo
 	/// </summary>
-	public LocationInfo() : base( Adk.SifVersion, HrfinDTD.LOCATIONINFO ){}
+	public LocationInfo() : base( SifVersion.LATEST, HrfinDTD.LOCATIONINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class LocationInfo : SifDataObject
 	///<param name="name">Text name of the location</param>
 	///<param name="localId">The locally-assigned identifier for this location.</param>
 	///
-	public LocationInfo( string refId, LocationInfoType locationType, string siteCategory, string name, string localId ) : base( Adk.SifVersion, HrfinDTD.LOCATIONINFO )
+	public LocationInfo( string refId, LocationInfoType locationType, string siteCategory, string name, string localId ) : base( SifVersion.LATEST, HrfinDTD.LOCATIONINFO )
 	{
 		this.RefId = refId;
 		this.SetLocationType( locationType );
@@ -446,4 +446,3 @@ public class LocationInfo : SifDataObject
 	}
 
 }}
-

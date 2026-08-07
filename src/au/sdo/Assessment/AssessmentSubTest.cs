@@ -28,14 +28,14 @@ public class AssessmentSubTest : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentSubTest
 	/// </summary>
-	public AssessmentSubTest() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTSUBTEST ){}
+	public AssessmentSubTest() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTSUBTEST ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">The GUID that uniquely identifies an instance of the object.</param>
 	///
-	public AssessmentSubTest( string refId ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTSUBTEST )
+	public AssessmentSubTest( string refId ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTSUBTEST )
 	{
 		this.RefId = refId;
 	}
@@ -398,4 +398,3 @@ public class AssessmentSubTest : SifDataObject
 	}
 
 }}
-

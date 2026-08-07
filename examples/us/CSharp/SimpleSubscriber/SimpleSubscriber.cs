@@ -9,6 +9,7 @@ using System.Collections.Specialized;
 using OpenADK.Util;
 using OpenADK.Library;
 using OpenADK.Library.us;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Library.Examples.SimpleSubscriber
@@ -16,8 +17,8 @@ namespace Library.Examples.SimpleSubscriber
     internal class SimpleSubscriber : Agent
     {
         // Call the superclass constructor with the agent ID
-        protected SimpleSubscriber()
-            : base( "SimpleSubscriber" ) {}
+        public SimpleSubscriber(IAdkRuntime runtime, IAdkComponentFactory components)
+            : base( "SimpleSubscriber", runtime, components ) {}
 
         /// <summary>
         /// Run the agent as an application
@@ -27,6 +28,7 @@ namespace Library.Examples.SimpleSubscriber
         public static void Main( String[] args )
         {
             SimpleSubscriber agent = null;
+            ServiceProvider services = null;
             try {
                 if ( args.Length < 2 ) {
                     Console.WriteLine
@@ -36,14 +38,23 @@ namespace Library.Examples.SimpleSubscriber
                 }
 
                 //	Pre-parse the command-line before initializing the Adk
-                Adk.Debug = AdkDebugFlags.None;
                 AdkExamples.parseCL( null, args );
 
-                //  Initialize the Adk with the specified version, loading only the learner SDO package
-                Adk.Initialize( AdkExamples.Version, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
-
-                //  Start the agent...
-                agent = new SimpleSubscriber();
+                services = new ServiceCollection()
+                    .AddOpenAdk(options =>
+                    {
+                        options.SifVersion = AdkExamples.Version ?? SifVersion.LATEST;
+                        options.Variant = SIFVariant.SIF_US;
+                        options.SdoLibraries = (int)SdoLibraryType.Student;
+                        options.Debug = AdkExamples.Debug;
+                    })
+                    .AddSingleton<SimpleSubscriber>()
+                    .BuildServiceProvider();
+                agent = services.GetRequiredService<SimpleSubscriber>();
+                if (!String.IsNullOrEmpty(AdkExamples.LogFilePath))
+                {
+                    agent.Runtime.SetLogFile(AdkExamples.LogFilePath);
+                }
 
                 // Call StartAgent. This method does not return until the agent shuts down
                 agent.startAgent( args );
@@ -68,6 +79,7 @@ namespace Library.Examples.SimpleSubscriber
                         Console.WriteLine( adkEx );
                     }
                 }
+                services?.Dispose();
             }
         }
 

@@ -28,7 +28,7 @@ public class FiscalYear : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FiscalYear
 	/// </summary>
-	public FiscalYear() : base( Adk.SifVersion, HrfinDTD.FISCALYEAR ){}
+	public FiscalYear() : base( SifVersion.LATEST, HrfinDTD.FISCALYEAR ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class FiscalYear : SifDataObject
 	///<param name="startDate">Start date of the fiscal year.</param>
 	///<param name="endDate">End date of the fiscal year.</param>
 	///
-	public FiscalYear( string refId, DateTime? startDate, DateTime? endDate ) : base( Adk.SifVersion, HrfinDTD.FISCALYEAR )
+	public FiscalYear( string refId, DateTime? startDate, DateTime? endDate ) : base( SifVersion.LATEST, HrfinDTD.FISCALYEAR )
 	{
 		this.RefId = refId;
 		this.StartDate = startDate;
@@ -139,4 +139,3 @@ public class FiscalYear : SifDataObject
 	}
 
 }}
-

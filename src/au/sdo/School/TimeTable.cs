@@ -28,7 +28,7 @@ public class TimeTable : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TimeTable
 	/// </summary>
-	public TimeTable() : base( Adk.SifVersion, SchoolDTD.TIMETABLE ){}
+	public TimeTable() : base( SifVersion.LATEST, SchoolDTD.TIMETABLE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class TimeTable : SifDataObject
 	///<param name="periodsPerDay">Max Number of periods per Time Table Day</param>
 	///<param name="timeTableDayList">A TimeTableDayList</param>
 	///
-	public TimeTable( string refId, int? schoolYear, string title, int? daysPerCycle, int? periodsPerDay, TimeTableDay timeTableDayList ) : base( Adk.SifVersion, SchoolDTD.TIMETABLE )
+	public TimeTable( string refId, int? schoolYear, string title, int? daysPerCycle, int? periodsPerDay, TimeTableDay timeTableDayList ) : base( SifVersion.LATEST, SchoolDTD.TIMETABLE )
 	{
 		this.RefId = refId;
 		this.SchoolYear = schoolYear;
@@ -371,4 +371,3 @@ public class TimeTable : SifDataObject
 	}
 
 }}
-

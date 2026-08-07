@@ -28,7 +28,7 @@ public class FinancialClass : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FinancialClass
 	/// </summary>
-	public FinancialClass() : base( Adk.SifVersion, HrfinDTD.FINANCIALCLASS ){}
+	public FinancialClass() : base( SifVersion.LATEST, HrfinDTD.FINANCIALCLASS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class FinancialClass : SifDataObject
 	///<param name="name">Name of the financial class.</param>
 	///<param name="classType">Values: Asset, Liability, Revenue, Expense</param>
 	///
-	public FinancialClass( string refId, string name, FinancialClassType classType ) : base( Adk.SifVersion, HrfinDTD.FINANCIALCLASS )
+	public FinancialClass( string refId, string name, FinancialClassType classType ) : base( SifVersion.LATEST, HrfinDTD.FINANCIALCLASS )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -158,4 +158,3 @@ public class FinancialClass : SifDataObject
 	}
 
 }}
-

@@ -15,7 +15,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testCountryCodeStudentPersonal()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
                                     + "   <mappings id='Default'>"
@@ -30,7 +30,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     "       <field name='RESCOUNTRY' sifVersion='-1.5r1'>StudentAddress[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='P']/Country[@Code='US']</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "RESCOUNTRY", "" );
@@ -50,7 +50,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testCountryCodeLEAInfo()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
                                     + "   <mappings id='Default'>"
@@ -65,7 +65,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     "     <field name='CONTACT_PHONE' sifVersion='-1.5r1'>LEAContact/ContactInfo/PhoneNumber[@Format='NA',@Type='TE']</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "DISTRICT_COUNTRY", null );
@@ -97,7 +97,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     "     <field name='COUNTRY' sifVersion='-1.5r1'>Address[@Type='SS']/Country[@Code='US']</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "COUNTRY", "" );
@@ -120,7 +120,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     "		<field name='ASTF.COUNTRY' sifVersion='-1.5r1'>Address[@Type='M']/Country[@Code='US']</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "ASTF.COUNTRY", "" );
@@ -143,7 +143,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     "		<field name='APRN.COUNTRY' sifVersion='-1.5r1'>Address[@Type='M']/Country[@Code='US']</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "APRN.COUNTRY", null );
@@ -180,7 +180,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     "		<field name='CONTACT_PHONE' sifVersion='-1.5r1'>LEAContact/ContactInfo/PhoneNumber[@Format='NA',@Type='TE']</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "DISTRICT_PHONE", "912-555-6658" );
@@ -218,7 +218,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     + "     <field name='SCHOOLNUM' sifVersion='-1.5r1'>OtherId[@Type='ZZ'+]=SCHOOL:$(SCHOOLNUM)</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "PERMNUM", "123456" );
@@ -262,7 +262,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     "     <field name='SCHOOLNUM' sifVersion='-1.5r1'>OtherId[@Type='ZZ'+]=SCHOOL:$(SCHOOLNUM)</field>"
                                     + "</object></mappings></agent>";
 
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
 
             IDictionary map = new Hashtable();
             map.Add( "PERMNUM", "123456" );

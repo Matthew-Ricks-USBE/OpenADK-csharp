@@ -37,7 +37,7 @@ namespace OpenADK.Library.Nunit.UK
             Console.WriteLine("Writing to file...");
             using (Stream fos = File.Open("SifWriterTest.Temp.xml", FileMode.Create, FileAccess.Write))
             {
-                SifWriter writer = new SifWriter(fos);
+                SifWriter writer = new SifWriter(fos, Runtime);
                 sifMessage.SetChanged(true);
                 writer.Write( sifMessage );
                 writer.Flush();
@@ -46,7 +46,7 @@ namespace OpenADK.Library.Nunit.UK
 
             //  Parse the object from the file
             Console.WriteLine("Parsing from file...");
-            SifParser p = SifParser.NewInstance();
+            SifParser p = new SifParser(Runtime);
             using (Stream fis = File.OpenRead("SifWriterTest.Temp.xml"))
             {
                 sifMessage = (SIF_Response)p.Parse(fis, null);
@@ -96,7 +96,7 @@ namespace OpenADK.Library.Nunit.UK
             Console.WriteLine("Writing to file...");
             using (Stream fos = File.Open("SifWriterTest.Temp.xml", FileMode.Create, FileAccess.Write))
             {
-                SifWriter writer = new SifWriter(fos);
+                SifWriter writer = new SifWriter(fos, Runtime);
                 lp.SetChanged(true);
                 writer.Write(lp);
                 writer.Flush();
@@ -105,7 +105,7 @@ namespace OpenADK.Library.Nunit.UK
 
             //  Parse the object from the file
             Console.WriteLine("Parsing from file...");
-            SifParser p = SifParser.NewInstance();
+            SifParser p = new SifParser(Runtime);
             using (Stream fis = File.OpenRead("SifWriterTest.Temp.xml"))
             {
                 lp = (LearnerPersonal)p.Parse(fis, null);
@@ -151,7 +151,7 @@ namespace OpenADK.Library.Nunit.UK
             Console.WriteLine("Writing to file...");
             using (Stream fos = File.Open("SifWriterTest.Temp.xml", FileMode.Create, FileAccess.Write))
             {
-                SifWriter writer = new SifWriter(fos);
+                SifWriter writer = new SifWriter(fos, Runtime);
                 si.SetChanged(true);
                 writer.Write(si);
                 writer.Flush();
@@ -160,7 +160,7 @@ namespace OpenADK.Library.Nunit.UK
 
             //  Parse the object from the file
             Console.WriteLine("Parsing from file...");
-            SifParser p = SifParser.NewInstance();
+            SifParser p = new SifParser(Runtime);
             using (Stream fis = File.OpenRead("SifWriterTest.Temp.xml"))
             {
                 si = (SchoolInfo)p.Parse(fis, null);
@@ -217,7 +217,7 @@ namespace OpenADK.Library.Nunit.UK
             Console.WriteLine("Writing to file...");
             using (Stream fos = File.Open("SifWriterTest.Temp.xml", FileMode.Create, FileAccess.Write))
             {
-                SifWriter writer = new SifWriter(fos);
+                SifWriter writer = new SifWriter(fos, Runtime);
                 data.SetChanged(true);
                 writer.Write(data);
                 writer.Flush();
@@ -226,7 +226,7 @@ namespace OpenADK.Library.Nunit.UK
 
             //  Parse the object from the file
             Console.WriteLine("Parsing from file...");
-            SifParser p = SifParser.NewInstance();
+            SifParser p = new SifParser(Runtime);
             using (Stream fis = File.OpenRead("SifWriterTest.Temp.xml"))
             {
                 data = (SIF_Data)p.Parse(fis, null);

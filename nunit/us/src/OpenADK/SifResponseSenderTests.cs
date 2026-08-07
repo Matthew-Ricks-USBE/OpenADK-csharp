@@ -31,7 +31,7 @@ namespace Library.Nunit.US.Library
 
             // Send a single SIF_Response with a small Authentication object
 
-            String SifRequestMsgId = Adk.MakeGuid();
+            String SifRequestMsgId = Runtime.MakeGuid();
             String sourceId = "TEST_SOURCEID";
             SifVersion testVersion = SifVersion.LATEST;
             int maxBufferSize = int.MaxValue;
@@ -39,7 +39,7 @@ namespace Library.Nunit.US.Library
 
             SifResponseSender srs = new SifResponseSender();
             srs.Open( Zone, SifRequestMsgId, sourceId, testVersion, maxBufferSize, testRestrictions );
-            srs.Write( new Authentication( Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
+            srs.Write( new Authentication( Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
             srs.Close();
 
             // Retrieve the SIF_Response message off the protocol handler and asssert the results
@@ -74,7 +74,7 @@ namespace Library.Nunit.US.Library
 
             // Send a single SIF_Response with a small Authentication object
 
-            String SifRequestMsgId = Adk.MakeGuid();
+            String SifRequestMsgId = Runtime.MakeGuid();
             String sourceId = "TEST_SOURCEID";
             SifVersion testVersion = SifVersion.LATEST;
             int maxBufferSize = int.MaxValue;
@@ -82,11 +82,11 @@ namespace Library.Nunit.US.Library
 
             SifResponseSender srs = new SifResponseSender();
             srs.Open( Zone, SifRequestMsgId, sourceId, testVersion, maxBufferSize, testRestrictions );
-            srs.Write( new Authentication( Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
-            srs.Write( new Authentication( Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
-            srs.Write( new Authentication( Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
-            srs.Write( new Authentication( Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
-            srs.Write( new Authentication( Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
+            srs.Write( new Authentication( Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
+            srs.Write( new Authentication( Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
+            srs.Write( new Authentication( Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
+            srs.Write( new Authentication( Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
+            srs.Write( new Authentication( Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
             srs.Close();
 
 
@@ -130,7 +130,7 @@ namespace Library.Nunit.US.Library
 
             // Send a single SIF_Response with a small Authentication object
 
-            String SifRequestMsgId = Adk.MakeGuid();
+            String SifRequestMsgId = Runtime.MakeGuid();
             String sourceId = "TEST_SOURCEID";
             SifVersion testVersion = SifVersion.LATEST;
             int maxBufferSize = int.MaxValue;
@@ -140,7 +140,7 @@ namespace Library.Nunit.US.Library
 
             SifResponseSender srs = new SifResponseSender();
             srs.Open( Zone, SifRequestMsgId, sourceId, testVersion, maxBufferSize, testRestrictions );
-            srs.Write( new Authentication( Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
+            srs.Write( new Authentication( Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL ) );
             srs.Write( error );
             srs.Close();
 
@@ -193,7 +193,7 @@ namespace Library.Nunit.US.Library
 
             // Send a single SIF_Response with a small Authentication object
 
-            String SifRequestMsgId = Adk.MakeGuid();
+            String SifRequestMsgId = Runtime.MakeGuid();
             String sourceId = "TEST_SOURCEID";
             SifVersion testVersion = SifVersion.LATEST;
             int maxBufferSize = int.MaxValue;
@@ -211,7 +211,7 @@ namespace Library.Nunit.US.Library
             Assert.AreEqual(packetNumber, srs.SIF_PacketNumber);
             Assert.AreEqual(morePacketsValue, srs.SIF_MorePackets);
 
-            srs.Write(new Authentication(Adk.MakeGuid(), Adk.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL));
+            srs.Write(new Authentication(Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL));
             srs.Close();
 
             // Assert the values of the properties set after writing
@@ -291,12 +291,12 @@ namespace Library.Nunit.US.Library
                                                 </SectionInfo>";
 
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Query sifquery = (SIF_Query) parser.Parse( queryStr );
             SectionInfo section = (SectionInfo) parser.Parse( sectionInfoStr );
             Query query = new Query( sifquery );
 
-            String SifRequestMsgId = Adk.MakeGuid();
+            String SifRequestMsgId = Runtime.MakeGuid();
             String sourceId = "TEST_SOURCEID";
             SifVersion testVersion = SifVersion.LATEST;
             int maxBufferSize = int.MaxValue;

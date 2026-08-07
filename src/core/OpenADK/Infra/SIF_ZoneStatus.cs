@@ -27,7 +27,7 @@ public class SIF_ZoneStatus : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SIF_ZoneStatus
 	/// </summary>
-	public SIF_ZoneStatus() : base( Adk.SifVersion, InfraDTD.SIF_ZONESTATUS ){}
+	public SIF_ZoneStatus() : base( SifVersion.LATEST, InfraDTD.SIF_ZONESTATUS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -43,7 +43,7 @@ public class SIF_ZoneStatus : SifDataObject
 	///<param name="sifSupportedProtocols">Enumerates the various communication transport protocols that the ZIS supports</param>
 	///<param name="sifSupportedVersions">Enumerates the versions of the SIF Specification that the ZIS can use when communicating with the SIF_SIFNode</param>
 	///
-	public SIF_ZoneStatus( string zoneId, SIF_Providers sifProviders, SIF_Subscribers sifSubscribers, SIF_SIFNodes sifsifNodes, SIF_SupportedAuthentication sifSupportedAuthentication, SIF_SupportedProtocols sifSupportedProtocols, SIF_SupportedVersions sifSupportedVersions ) : base( Adk.SifVersion, InfraDTD.SIF_ZONESTATUS )
+	public SIF_ZoneStatus( string zoneId, SIF_Providers sifProviders, SIF_Subscribers sifSubscribers, SIF_SIFNodes sifsifNodes, SIF_SupportedAuthentication sifSupportedAuthentication, SIF_SupportedProtocols sifSupportedProtocols, SIF_SupportedVersions sifSupportedVersions ) : base( SifVersion.LATEST, InfraDTD.SIF_ZONESTATUS )
 	{
 		this.ZoneId = zoneId;
 		this.SIF_Providers = sifProviders;
@@ -503,4 +503,3 @@ public class SIF_ZoneStatus : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class EmployeePicture : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeePicture
 	/// </summary>
-	public EmployeePicture() : base( Adk.SifVersion, HrfinDTD.EMPLOYEEPICTURE ){}
+	public EmployeePicture() : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEPICTURE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class EmployeePicture : SifDataObject
 	///<param name="employeePersonalRefId">This is the GUID of the Employee whose picture this is.</param>
 	///<param name="pictureSource">This element defines the picture. If the Type attribute is URL, this is the location of the picture in [JPEG] format; if Type is JPEG, this is the [JPEG] image data encoded using the Base64 Content-Transfer-Encoding defined in Section 6.8 of [RFC 2045].</param>
 	///
-	public EmployeePicture( string employeePersonalRefId, PictureSource pictureSource ) : base( Adk.SifVersion, HrfinDTD.EMPLOYEEPICTURE )
+	public EmployeePicture( string employeePersonalRefId, PictureSource pictureSource ) : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEPICTURE )
 	{
 		this.EmployeePersonalRefId = employeePersonalRefId;
 		this.PictureSource = pictureSource;
@@ -114,4 +114,3 @@ public class EmployeePicture : SifDataObject
 	}
 
 }}
-

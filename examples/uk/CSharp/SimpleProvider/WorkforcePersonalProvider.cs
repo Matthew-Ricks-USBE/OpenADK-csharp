@@ -8,6 +8,10 @@ using OpenADK.Library.uk.Workforce;
 
 public class WorkforcePersonalProvider : AbstractPersonProvider
 {
+    public WorkforcePersonalProvider(IAdkRuntime runtime) : base(runtime)
+    {
+    }
+
     protected override IElementDef getElementDef()
     {
         return WorkforceDTD.WORKFORCEPERSONAL;

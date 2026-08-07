@@ -44,7 +44,7 @@ namespace OpenADK.Library
             fField = field;
             fOps = ops;
             fValue = val;
-            fXPath = field.GetSQPPath( Adk.SifVersion );
+            fXPath = field.GetSQPPath(SifVersion.LATEST);
         }
 
 
@@ -75,7 +75,7 @@ namespace OpenADK.Library
             fOps = ops;
             fValue = value;
             fXPath = xPath;
-            IElementDef target = Adk.Dtd.LookupElementDefBySQP( objectDef, xPath );
+            IElementDef target = objectDef.Dtd.LookupElementDefBySQP(objectDef, xPath);
             fField = target;
         }
 
@@ -120,7 +120,7 @@ namespace OpenADK.Library
         /// <returns>The XPath representation of this query path in the specified version of SIF</returns>
         public String GetXPath( Query q, SifVersion version )
         {
-            return Adk.Dtd.TranslateSQP( q.ObjectType, fXPath, version );
+            return q.ObjectType.Dtd.TranslateSQP(q.ObjectType, fXPath, version);
         }
 
 

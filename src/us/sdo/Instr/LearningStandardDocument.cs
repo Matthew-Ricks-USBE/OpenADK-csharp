@@ -28,7 +28,7 @@ public class LearningStandardDocument : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearningStandardDocument
 	/// </summary>
-	public LearningStandardDocument() : base( Adk.SifVersion, InstrDTD.LEARNINGSTANDARDDOCUMENT ){}
+	public LearningStandardDocument() : base( SifVersion.LATEST, InstrDTD.LEARNINGSTANDARDDOCUMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class LearningStandardDocument : SifDataObject
 	///<param name="documentStatus">ValuesDraft,AdoptedArchivedUnknown</param>
 	///<param name="learningStandardItemRefId">Link to the first/top LearningStandardItem in the Standard hierarchy</param>
 	///
-	public LearningStandardDocument( string refId, LanguageCode language, string title, Organization organizations, SubjectAreas subjectAreas, DocumentStatus documentStatus, string learningStandardItemRefId ) : base( Adk.SifVersion, InstrDTD.LEARNINGSTANDARDDOCUMENT )
+	public LearningStandardDocument( string refId, LanguageCode language, string title, Organization organizations, SubjectAreas subjectAreas, DocumentStatus documentStatus, string learningStandardItemRefId ) : base( SifVersion.LATEST, InstrDTD.LEARNINGSTANDARDDOCUMENT )
 	{
 		this.RefId = refId;
 		this.SetLanguage( language );
@@ -608,4 +608,3 @@ public class LearningStandardDocument : SifDataObject
 	}
 
 }}
-

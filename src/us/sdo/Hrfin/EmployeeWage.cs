@@ -28,7 +28,7 @@ public class EmployeeWage : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeeWage
 	/// </summary>
-	public EmployeeWage() : base( Adk.SifVersion, HrfinDTD.EMPLOYEEWAGE ){}
+	public EmployeeWage() : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEWAGE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class EmployeeWage : SifDataObject
 	///<param name="employeePersonalRefId">The GUID that refers to the EmployeePersonal object.</param>
 	///<param name="payRates">Per pay distributions</param>
 	///
-	public EmployeeWage( string refId, string employeePersonalRefId, PayRates payRates ) : base( Adk.SifVersion, HrfinDTD.EMPLOYEEWAGE )
+	public EmployeeWage( string refId, string employeePersonalRefId, PayRates payRates ) : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEWAGE )
 	{
 		this.RefId = refId;
 		this.EmployeePersonalRefId = employeePersonalRefId;
@@ -123,4 +123,3 @@ public class EmployeeWage : SifDataObject
 	}
 
 }}
-

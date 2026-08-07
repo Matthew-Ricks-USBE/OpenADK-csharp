@@ -28,7 +28,7 @@ public class Sif3Assessment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3Assessment
 	/// </summary>
-	public Sif3Assessment() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENT ){}
+	public Sif3Assessment() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class Sif3Assessment : SifDataObject
 	///<param name="refId">The GUID that uniquely identifies an instance of the object.</param>
 	///<param name="name">A Name</param>
 	///
-	public Sif3Assessment( string refId, string name ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENT )
+	public Sif3Assessment( string refId, string name ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENT )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -387,4 +387,3 @@ public class Sif3Assessment : SifDataObject
 	}
 
 }}
-

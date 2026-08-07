@@ -303,7 +303,7 @@ namespace OpenADK.Library
                 throw new ArgumentException("SIF_Query must have a SIF_QueryObject element");
             }
 
-            fObjType = Adk.Dtd.LookupElementDef(qo.ObjectName);
+            fObjType = qo.ElementDef.Dtd.LookupElementDef(qo.ObjectName);
             if (fObjType == null)
             {
                 throw new AdkSchemaException
@@ -367,7 +367,7 @@ namespace OpenADK.Library
                 if (parent is SIF_Request)
                 {
                     SIF_Request request = (SIF_Request)parent;
-                    SifVersion[] versions = request.parseRequestVersions(Adk.Log);
+                    SifVersion[] versions = request.parseRequestVersions(fObjType.Dtd.Logger);
                     if (versions.Length > 0)
                     {
                         reqVersions = versions;
@@ -422,7 +422,7 @@ namespace OpenADK.Library
         /// </returns>
         public string ObjectTag
         {
-            get { return fObjType.Tag(Adk.GetLatestSupportedVersion(fVersions)); }
+            get { return fObjType.Tag(GetLatestVersion(fVersions)); }
         }
 
 
@@ -543,7 +543,7 @@ namespace OpenADK.Library
         /// <seealso cref="Adk.GetLatestSupportedVersion"/>
         public SifVersion EffectiveVersion
         {
-            get { return Adk.GetLatestSupportedVersion(fVersions); }
+            get { return GetLatestVersion(fVersions); }
         }
 
         /// <summary> 	Sets the root ConditionGroup. 
@@ -596,8 +596,8 @@ namespace OpenADK.Library
         public void AddCondition(IElementDef field, ComparisonOperators ops, String value)
         {
             // Do some validation to try to prevent invalid query paths from being created
-            String relativePath = field.GetSQPPath(Adk.SifVersion);
-            IElementDef lookedUp = Adk.Dtd.LookupElementDefBySQP(fObjType, relativePath);
+            String relativePath = field.GetSQPPath(EffectiveVersion);
+            IElementDef lookedUp = fObjType.Dtd.LookupElementDefBySQP(fObjType, relativePath);
             if (lookedUp == null)
             {
                 throw new ArgumentException("Invalid path: " + fObjType.Name + "/" + relativePath +
@@ -671,7 +671,7 @@ namespace OpenADK.Library
             }
             catch (AdkUnknownOperatorException uoe)
             {
-                Adk.Log.WarnFormat("Unable to parse operator: {0} {1}", ops, uoe, uoe);
+                fObjType.Dtd.Logger.Warn("Unable to parse operator '" + ops + "'", uoe);
                 AddCondition(field, ComparisonOperators.EQ, value);
             }
         }
@@ -831,7 +831,7 @@ namespace OpenADK.Library
             {
                 using (StringWriter outStream = new StringWriter())
                 {
-                    SifWriter w = new SifWriter(outStream);
+                    SifWriter w = new SifWriter(outStream, fObjType.Dtd, version);
                     w.Write(sifQ);
                     w.Flush();
                     return outStream.ToString();
@@ -839,7 +839,7 @@ namespace OpenADK.Library
             }
             catch (Exception e)
             {
-                Adk.Log.Warn("Error creating XML equivalent of Query: " + e, e);
+                fObjType.Dtd.Logger.Warn("Error creating XML equivalent of Query: " + e, e);
                 return "";
             }
         }
@@ -851,7 +851,7 @@ namespace OpenADK.Library
         /// <returns>A SIF_Query element</returns>
         public SIF_Query ToSIF_Query()
         {
-            return ToSIF_Query(Adk.SifVersion);
+            return ToSIF_Query(EffectiveVersion);
         }
 
         /// <summary>the SIF_Query representation of this Query in the format required by SIF
@@ -1099,6 +1099,25 @@ namespace OpenADK.Library
                 }
             }
             sdo.EnsureRootElementRendered();
+        }
+
+        private static SifVersion GetLatestVersion(SifVersion[] candidates)
+        {
+            if (candidates == null || candidates.Length == 0)
+            {
+                return SifVersion.LATEST;
+            }
+
+            SifVersion latest = null;
+            foreach (SifVersion candidate in candidates)
+            {
+                if (latest == null || candidate.CompareTo(latest) > 0)
+                {
+                    latest = candidate;
+                }
+            }
+
+            return latest ?? SifVersion.LATEST;
         }
     }
 }

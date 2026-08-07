@@ -14,11 +14,12 @@ namespace Library.Nunit.US.Library.Student
         [Test]
         public void testCourseCodeSIF15r1()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             SchoolCourseInfo sci = new SchoolCourseInfo();
+            sci.SifVersion = Runtime.SifVersion;
             sci.SetCourseCredits( CreditType.C0108_0585, 2 );
 
-            SifXPathContext spc = SifXPathContext.NewSIFContext( sci );
+            SifXPathContext spc = SifXPathContext.NewSIFContext( sci, Runtime.SifVersion );
             Element value = (Element) spc.GetValue( "CourseCredits[@Code='0585']" );
 
             SifSimpleType elementValue = value.SifValue;
@@ -29,8 +30,9 @@ namespace Library.Nunit.US.Library.Student
         [Test]
         public void testSubjectAreaSIF15r1()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             SchoolCourseInfo sci = new SchoolCourseInfo();
+            sci.SifVersion = Runtime.SifVersion;
             SubjectAreaList lst = new SubjectAreaList();
             sci.SubjectAreaList = lst;
 
@@ -42,7 +44,7 @@ namespace Library.Nunit.US.Library.Student
             lst.Add( sa );
 
             StringWriter sw = new StringWriter();
-            SifWriter sifw = new SifWriter( sw );
+            SifWriter sifw = new SifWriter( sw, Runtime );
             sifw.Write( sci );
             sifw.Flush();
             sifw.Close();
@@ -57,11 +59,12 @@ namespace Library.Nunit.US.Library.Student
         [Test]
         public void testCourseCodeSIF20()
         {
-            Adk.SifVersion = SifVersion.SIF20;
+            Runtime.SifVersion = SifVersion.SIF20;
             SchoolCourseInfo sci = new SchoolCourseInfo();
+            sci.SifVersion = Runtime.SifVersion;
             sci.SetCourseCredits( CreditType.C0108_0585, 2 );
 
-            SifXPathContext spc = SifXPathContext.NewSIFContext( sci );
+            SifXPathContext spc = SifXPathContext.NewSIFContext( sci, Runtime.SifVersion );
             Element value = (Element) spc.GetValue( "CourseCredits[@Type='0585']" );
             Assert.IsNotNull(value, "Value by XPath");
 

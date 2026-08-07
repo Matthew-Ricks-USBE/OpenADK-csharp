@@ -28,7 +28,7 @@ public class Sif3AssessmentItemAssociation : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentItemAssociation
 	/// </summary>
-	public Sif3AssessmentItemAssociation() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTITEMASSOCIATION ){}
+	public Sif3AssessmentItemAssociation() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTITEMASSOCIATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class Sif3AssessmentItemAssociation : SifDataObject
 	///<param name="targetAssessmentItemRefId">A TargetAssessmentItemRefId</param>
 	///<param name="associationType">An AssociationType</param>
 	///
-	public Sif3AssessmentItemAssociation( string refId, string assessmentItemRefId, string targetAssessmentItemRefId, AssociationType associationType ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTITEMASSOCIATION )
+	public Sif3AssessmentItemAssociation( string refId, string assessmentItemRefId, string targetAssessmentItemRefId, AssociationType associationType ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTITEMASSOCIATION )
 	{
 		this.RefId = refId;
 		this.AssessmentItemRefId = assessmentItemRefId;
@@ -151,4 +151,3 @@ public class Sif3AssessmentItemAssociation : SifDataObject
 	}
 
 }}
-

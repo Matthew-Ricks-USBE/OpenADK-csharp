@@ -109,7 +109,7 @@ namespace OpenADK.Library.Impl
                                  ResponseDeliveryType source )
         {
             fZone = (ZoneImpl) zone;
-            fParser = SifParser.NewInstance();
+            fParser = new SifParser(fZone.Agent.Runtime);
             fSrc = source;
             fWorkDir = GetSourceDirectory( source, fZone );
         }
@@ -186,7 +186,7 @@ namespace OpenADK.Library.Impl
 
             if ( files != null && files.Length > 0 )
             {
-                if ( ((Adk.Debug & AdkDebugFlags.Messaging_Response_Processing) != 0) )
+                if ( ((fZone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Response_Processing) != 0) )
                 {
                     fZone.Log.Debug
                         ( "Processing " + (files.Length) + " pending SIF_Response packets..." );
@@ -206,7 +206,7 @@ namespace OpenADK.Library.Impl
                         continue;
                     }
 
-                    if ( (Adk.Debug & AdkDebugFlags.Messaging_Response_Processing) != 0 )
+                    if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Response_Processing) != 0 )
                     {
                         fZone.Log.Debug
                             ( "Found " + (packets.Length) +
@@ -322,7 +322,7 @@ namespace OpenADK.Library.Impl
                 }
             }
 
-            if ( (Adk.Debug & AdkDebugFlags.Messaging) != 0 ) {
+            if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Messaging) != 0 ) {
                 fZone.Log.Debug
                     ( "Sending " + (responsePacket.errorPacket ? "SIF_Error response" : "SIF_Response") +
                       " packet #" + responsePacket.packetNumber +
@@ -371,7 +371,7 @@ namespace OpenADK.Library.Impl
 
             //  Write SIF_Response -- without its SIF_ObjectData payload -- to a buffer
             using ( MemoryStream envelope = new MemoryStream() ) {
-                SifWriter writer = new SifWriter( envelope );
+                SifWriter writer = new SifWriter(envelope, fZone.Agent.Runtime);
                 writer.Write( rsp );
                 writer.Flush();
                 envelope.Seek( 0, SeekOrigin.Begin );
@@ -398,10 +398,10 @@ namespace OpenADK.Library.Impl
                         payloads,
                         responsePacket.errorPacket ? "<SIF_Error>" : "<SIF_ObjectData>", responsePacket.errorPacket))
                     {
-                        if ( (Adk.Debug & AdkDebugFlags.Messaging) != 0 ) {
+                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Messaging) != 0 ) {
                             fZone.Log.Debug( "Send SIF_Response" );
                         }
-                        if ( (Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0 ) {
+                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0 ) {
                             fZone.Log.Debug( "  MsgId: " + rsp.MsgId );
                         }
 
@@ -430,11 +430,11 @@ namespace OpenADK.Library.Impl
                     }
                 }
                 catch ( AdkException adke ) {
-                    AdkUtils._throw( adke, fZone.Log );
+                    AdkUtils._throw( adke, fZone.Log, fZone.Agent.Runtime );
                 }
                 catch ( Exception e ) {
                     AdkUtils._throw
-                        ( new AdkException( "Failed to send SIF_Response: " + e, fZone ), fZone.Log );
+                        ( new AdkException( "Failed to send SIF_Response: " + e, fZone ), fZone.Log, fZone.Agent.Runtime );
                 }
                 finally {
                     if ( fs != null ) {

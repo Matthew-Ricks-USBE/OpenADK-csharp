@@ -20,7 +20,7 @@ namespace Library.NUnit.Core.Library
         [Test]
         public void testRegisterSIF20()
         {
-            Adk.SifVersion = (SifVersion.SIF20);
+            Runtime.SifVersion = (SifVersion.SIF20);
             String iconURL = "http://acme.foo.bar/ico";
             AgentProperties props = Agent.Properties;
             props.AgentIconUrl = iconURL;
@@ -53,7 +53,7 @@ namespace Library.NUnit.Core.Library
         [Test]
         public void testRegisterOverrideZISVersion()
         {
-            Adk.SifVersion = (SifVersion.SIF20);
+            Runtime.SifVersion = (SifVersion.SIF20);
             AgentProperties props = Agent.Properties;
             props.OverrideSifVersions = "1.1, 2.5";
             
@@ -72,7 +72,7 @@ namespace Library.NUnit.Core.Library
         [Test]
         public void testRegisterSIF15r1()
         {
-            Adk.SifVersion = (SifVersion.SIF15r1);
+            Runtime.SifVersion = (SifVersion.SIF15r1);
             String iconURL = "http://acme.foo.bar/ico";
             AgentProperties props = Agent.Properties;
             props.AgentIconUrl = iconURL;
@@ -117,7 +117,7 @@ namespace Library.NUnit.Core.Library
         [Test]
         public void testSIFPingDifferentVersions()
         {
-            Adk.SifVersion = (SifVersion.LATEST);
+            Runtime.SifVersion = (SifVersion.LATEST);
             Zone.Connect( ProvisioningFlags.None );
             InMemoryProtocolHandler handler = (InMemoryProtocolHandler) Zone.ProtocolHandler;
             handler.clear();
@@ -127,7 +127,7 @@ namespace Library.NUnit.Core.Library
             Assert.AreEqual( SifVersion.LATEST, ssc.SifVersion, "SifVersion" );
             Assert.AreEqual( SifVersion.LATEST.Xmlns, ssc.GetXmlns(), "SifVersion->Xmlns" );
 
-            foreach ( SifVersion version in Adk.SupportedSIFVersions )
+            foreach ( SifVersion version in Runtime.SupportedSIFVersions )
             {
                 // This may seem strange, but the ADK sometimes has a SIF version in the list of 
                 // supported versions that is not fully supported yet (e.g. preparing the ADK for 
@@ -146,7 +146,7 @@ namespace Library.NUnit.Core.Library
         [Test]
         public void testSynchronousGetZoneStatus()
         {
-            Adk.SifVersion = (SifVersion.LATEST);
+            Runtime.SifVersion = (SifVersion.LATEST);
             Zone.Connect( ProvisioningFlags.None );
             InMemoryProtocolHandler handler = (InMemoryProtocolHandler) Zone.ProtocolHandler;
             Zone.Properties.UseZoneStatusSystemControl = true;
@@ -170,7 +170,7 @@ namespace Library.NUnit.Core.Library
         [Test]
         public void testAsynchronousGetZoneStatus()
         {
-            Adk.SifVersion = (SifVersion.LATEST);
+            Runtime.SifVersion = (SifVersion.LATEST);
             Zone.Connect( ProvisioningFlags.None );
             InMemoryProtocolHandler handler = (InMemoryProtocolHandler) Zone.ProtocolHandler;
             Zone.Properties.UseZoneStatusSystemControl = false;
@@ -216,7 +216,7 @@ namespace Library.NUnit.Core.Library
         [Test]
         public void testSIFRegisterZISVersion15r1()
         {
-            Adk.SifVersion = (SifVersion.LATEST);
+            Runtime.SifVersion = (SifVersion.LATEST);
             String iconURL = "http://acme.foo.bar/ico";
             AgentProperties props = Agent.Properties;
             // Set the ZIS Version to 1.5r1
@@ -269,7 +269,7 @@ namespace Library.NUnit.Core.Library
         {
             String[] expectedMessages =
                 new String[] {"SIF_Register", "SIF_SystemControl", "SIF_SystemControl", "SIF_Provision"};
-            Adk.SifVersion = (SifVersion.LATEST);
+            Runtime.SifVersion = (SifVersion.LATEST);
             Zone.SetSubscriber( this, InfraDTD.SIF_AGENTACL, null );
             assertMessagesInVersion( SifVersion.LATEST, expectedMessages );
         }
@@ -281,7 +281,7 @@ namespace Library.NUnit.Core.Library
         public void testProvisioningSIF15r1()
         {
             String[] expectedMessages = new String[] {"SIF_Register", "SIF_SystemControl", "SIF_Subscribe"};
-            Adk.SifVersion = (SifVersion.SIF15r1);
+            Runtime.SifVersion = (SifVersion.SIF15r1);
             Zone.SetSubscriber(this, InfraDTD.SIF_AGENTACL, null);
             assertMessagesInVersion( SifVersion.SIF15r1, expectedMessages );
         }
@@ -293,7 +293,7 @@ namespace Library.NUnit.Core.Library
         public void testProvisioningZIS15r1()
         {
             String[] expectedMessages = new String[] {"SIF_Register", "SIF_SystemControl", "SIF_Subscribe"};
-            Adk.SifVersion = (SifVersion.LATEST);
+            Runtime.SifVersion = (SifVersion.LATEST);
             Zone.Properties.ZisVersion = SifVersion.SIF15r1.ToString();
             Zone.SetSubscriber(this, InfraDTD.SIF_AGENTACL, null);
             assertMessagesInVersion( SifVersion.SIF15r1, expectedMessages );

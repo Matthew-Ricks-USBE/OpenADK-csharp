@@ -28,7 +28,7 @@ public class Junction : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Junction
 	/// </summary>
-	public Junction() : base( Adk.SifVersion, LearningDTD.JUNCTION ){}
+	public Junction() : base( SifVersion.LATEST, LearningDTD.JUNCTION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class Junction : SifDataObject
 	///<param name="inputList">An InputList</param>
 	///<param name="outputList">An OutputList</param>
 	///
-	public Junction( string refId, string label, string shortLabel, Input inputList, Output outputList ) : base( Adk.SifVersion, LearningDTD.JUNCTION )
+	public Junction( string refId, string label, string shortLabel, Input inputList, Output outputList ) : base( SifVersion.LATEST, LearningDTD.JUNCTION )
 	{
 		this.RefId = refId;
 		this.Label = label;
@@ -216,4 +216,3 @@ public class Junction : SifDataObject
 	}
 
 }}
-

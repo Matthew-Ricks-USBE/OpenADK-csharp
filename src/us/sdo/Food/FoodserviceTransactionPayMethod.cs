@@ -28,7 +28,7 @@ public class FoodserviceTransactionPayMethod : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceTransactionPayMethod
 	/// </summary>
-	public FoodserviceTransactionPayMethod() : base( Adk.SifVersion, FoodDTD.FOODSERVICETRANSACTIONPAYMETHOD ){}
+	public FoodserviceTransactionPayMethod() : base( SifVersion.LATEST, FoodDTD.FOODSERVICETRANSACTIONPAYMETHOD ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class FoodserviceTransactionPayMethod : SifDataObject
 	///<param name="foodserviceTransactionRefId">GUID that identifies food service transaction</param>
 	///<param name="transactionPayMethods">Transaction method</param>
 	///
-	public FoodserviceTransactionPayMethod( string refId, string foodserviceTransactionRefId, TransactionPayMethods transactionPayMethods ) : base( Adk.SifVersion, FoodDTD.FOODSERVICETRANSACTIONPAYMETHOD )
+	public FoodserviceTransactionPayMethod( string refId, string foodserviceTransactionRefId, TransactionPayMethods transactionPayMethods ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICETRANSACTIONPAYMETHOD )
 	{
 		this.RefId = refId;
 		this.FoodserviceTransactionRefId = foodserviceTransactionRefId;
@@ -123,4 +123,3 @@ public class FoodserviceTransactionPayMethod : SifDataObject
 	}
 
 }}
-

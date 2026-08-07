@@ -28,7 +28,7 @@ public class EmployeeRecertification : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeeRecertification
 	/// </summary>
-	public EmployeeRecertification() : base( Adk.SifVersion, ProfdevDTD.EMPLOYEERECERTIFICATION ){}
+	public EmployeeRecertification() : base( SifVersion.LATEST, ProfdevDTD.EMPLOYEERECERTIFICATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -43,7 +43,7 @@ public class EmployeeRecertification : SifDataObject
 	///<param name="dateFrom">Start date of the course or activity</param>
 	///<param name="dateTo">Source: 0613 Employment Status</param>
 	///
-	public EmployeeRecertification( string ssn, string stateProvinceId, Name name, string activityName, ActivityType activityType, decimal? activityHours, Earned earned, DateTime? dateFrom, DateTime? dateTo ) : base( Adk.SifVersion, ProfdevDTD.EMPLOYEERECERTIFICATION )
+	public EmployeeRecertification( string ssn, string stateProvinceId, Name name, string activityName, ActivityType activityType, decimal? activityHours, Earned earned, DateTime? dateFrom, DateTime? dateTo ) : base( SifVersion.LATEST, ProfdevDTD.EMPLOYEERECERTIFICATION )
 	{
 		this.SSN = ssn;
 		this.StateProvinceId = stateProvinceId;
@@ -340,4 +340,3 @@ public class EmployeeRecertification : SifDataObject
 	}
 
 }}
-

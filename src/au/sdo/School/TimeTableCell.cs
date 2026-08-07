@@ -28,7 +28,7 @@ public class TimeTableCell : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TimeTableCell
 	/// </summary>
-	public TimeTableCell() : base( Adk.SifVersion, SchoolDTD.TIMETABLECELL ){}
+	public TimeTableCell() : base( SifVersion.LATEST, SchoolDTD.TIMETABLECELL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -44,7 +44,7 @@ public class TimeTableCell : SifDataObject
 	///<param name="periodId">Period Id within the Day Id</param>
 	///<param name="cellType">Type of Lesson/Session  eg Teaching, Lunch etc</param>
 	///
-	public TimeTableCell( string refId, string timeTableRefId, string timeTableSubjectRefId, string teachingGroupRefId, string roomInfoRefId, string staffPersonalRefId, string roomNumber, string dayId, string periodId, string cellType ) : base( Adk.SifVersion, SchoolDTD.TIMETABLECELL )
+	public TimeTableCell( string refId, string timeTableRefId, string timeTableSubjectRefId, string teachingGroupRefId, string roomInfoRefId, string staffPersonalRefId, string roomNumber, string dayId, string periodId, string cellType ) : base( SifVersion.LATEST, SchoolDTD.TIMETABLECELL )
 	{
 		this.RefId = refId;
 		this.TimeTableRefId = timeTableRefId;
@@ -405,4 +405,3 @@ public class TimeTableCell : SifDataObject
 	}
 
 }}
-

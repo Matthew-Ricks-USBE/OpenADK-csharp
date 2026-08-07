@@ -6,15 +6,13 @@
 using System;
 using System.Collections;
 using System.Collections.Specialized;
-using OpenADK.Util;
 
 namespace OpenADK.Library
 {
     /// <summary>  The abstract base class for agent and zone properties</summary>
     /// <remarks>
     /// <para>
-    /// AdkProperties adds convenience methods to the <c>Configuration.AppSettings</c> class for
-    /// getting and setting property values by data type. In addition, it overrides
+    /// AdkProperties provides methods for getting and setting property values by data type. In addition, it supports
     /// the getProperty method to inherit the property value from its parent if not
     /// defined locally. In the Adk, the properties of a zone are always inherited
     /// from the default properties of the agent.
@@ -66,12 +64,10 @@ namespace OpenADK.Library
             fParent = inherit;
         }
 
-        /// <summary>  Called by the default constructor to set default property values.
-        /// Defaults are usually imported from the app.config file
-        /// </summary>
+        /// <summary>Called by the default constructor to set default property values.
+        /// Override this method to supply application-specific defaults.</summary>
         public virtual void Defaults( Object owner )
         {
-            Properties.CopyDefaultsTo( fProperties );
         }
 
 

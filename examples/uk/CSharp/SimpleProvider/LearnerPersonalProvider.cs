@@ -20,6 +20,10 @@ using OpenADK.Library.uk.Learner;
 
 public class LearnerPersonalProvider : AbstractPersonProvider, IPublisher
 {
+    public LearnerPersonalProvider(IAdkRuntime runtime) : base(runtime)
+    {
+    }
+
     protected override SifDataObject createPersonObject(string id)
     {
         LearnerPersonal lp = new LearnerPersonal();

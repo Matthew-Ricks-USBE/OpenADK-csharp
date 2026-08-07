@@ -33,7 +33,7 @@ namespace OpenADK.Library.Impl
       ///</summary>
       public static void StartProfiling(int sessionId, ObjectTypeCodes otcImpl)
 	{
-		Adk.Log.Debug( "SIFProfilerClient instance name: " + fProfName );
+		Console.WriteLine( "SIFProfilerClient instance name: " + fProfName );
 		ProfilerUtils.setProfilerSessionId( sessionId );
 		ADK.getLog().debug( "SIFProfilerClient session ID: " + fSessionId );
 
@@ -125,7 +125,7 @@ namespace OpenADK.Library.Impl
       public static void profileStart(String oid, IElementDef objType, String msgId)
       {
          ProfilerUtils.
-         Adk.Log.Debug("SIFProfilerClient instance name: " + fProfName);
+         Console.WriteLine("SIFProfilerClient instance name: " + fProfName);
          ProfilerUtils.setProfilerSessionId(sessionId);
          ADK.getLog().debug("SIFProfilerClient session ID: " + fSessionId);
 

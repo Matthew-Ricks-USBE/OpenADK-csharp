@@ -29,12 +29,6 @@ namespace OpenADK.Library.Tools.Policy
         /// <param name="agent">The Agent instance to retrieve policy information for</param>
         /// <returns>an instance of PolicyFactory</returns>
         /// <exception cref="AdkException">If the PolicyFactory instance cannot be created</exception>
-        public static PolicyFactory GetInstance( Agent agent )
-        {
-            return new AdkDefaultPolicy( agent );
-        }
-
-
         /// <summary>
         /// Returns the ObjectRequestyPolicy for the specified SIF Data Object
         /// </summary>

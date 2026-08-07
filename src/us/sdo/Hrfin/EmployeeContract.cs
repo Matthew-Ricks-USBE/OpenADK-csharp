@@ -28,7 +28,7 @@ public class EmployeeContract : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeeContract
 	/// </summary>
-	public EmployeeContract() : base( Adk.SifVersion, HrfinDTD.EMPLOYEECONTRACT ){}
+	public EmployeeContract() : base( SifVersion.LATEST, HrfinDTD.EMPLOYEECONTRACT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class EmployeeContract : SifDataObject
 	///<param name="contractStartDate">Contractual start date.</param>
 	///<param name="contractEndDate">Contractual ending date.</param>
 	///
-	public EmployeeContract( string refId, string employeePersonalRefId, MonetaryAmount baseSalary, DateTime? contractStartDate, DateTime? contractEndDate ) : base( Adk.SifVersion, HrfinDTD.EMPLOYEECONTRACT )
+	public EmployeeContract( string refId, string employeePersonalRefId, MonetaryAmount baseSalary, DateTime? contractStartDate, DateTime? contractEndDate ) : base( SifVersion.LATEST, HrfinDTD.EMPLOYEECONTRACT )
 	{
 		this.RefId = refId;
 		this.EmployeePersonalRefId = employeePersonalRefId;
@@ -269,4 +269,3 @@ public class EmployeeContract : SifDataObject
 	}
 
 }}
-

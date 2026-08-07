@@ -56,13 +56,13 @@ namespace OpenADK.Library.Infra
 	/// ElementDef metadata is grouped into "SDO Libraries", which are organized along 
 	/// SIF Working Group boundaries. SDO Libraries are loaded into the <c>SifDdt</c> 
 	/// class when the Adk is initialized. All or part of the metadata is loaded into depending on the flags passed to the
-	/// <see cref="Adk.Initialize(SifVersion, SdoLibraryType)"/> method,
+	/// <see cref="IAdkRuntime.Initialize()"/> method,
 	/// metadata from one or more SDO Libraries may be loaded. For example, the following
 	/// call loads metadata for the <c>Student Information Working Group Objects</c>  
 	/// and <c>Transportation And Geographic Information Working Group Objects</c> 
 	/// (Common Elements and <c>Infrastructure Working Group Objects</c> metadata is always loaded
 	/// </para>
-	/// <code>Adk.Initialize( SiFVersion.LATEST, SdoLibraryType.Student | SdoLibraryType.Trans )</code>
+	/// <code>runtime.Initialize()</code>
 	/// <para>
 	/// If an given SDO Library is not loaded, all of the SIFDTD constants that belong
 	/// to that library will be <code>null</code> and cannot be referenced. For example,
@@ -1162,7 +1162,7 @@ namespace OpenADK.Library.Infra
 		InfraDTD.SIF_AGENTACL_SIF_REQUESTACCESS = new ElementDefImpl( SIF_AGENTACL, "SIF_RequestAccess", null, 6, SifDtd.INFRA, null, 0, SifVersion.SIF20, SifVersion.SIF26 );
 		InfraDTD.SIF_AGENTACL_SIF_RESPONDACCESS = new ElementDefImpl( SIF_AGENTACL, "SIF_RespondAccess", null, 7, SifDtd.INFRA, null, 0, SifVersion.SIF20, SifVersion.SIF26 );
 		SIF_AGENTACL_SIF_EXTENDEDELEMENTS = new ElementDefImpl( SIF_AGENTACL, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
-		SIF_AGENTACL_SIF_METADATA = new ElementDefImpl( SIF_AGENTACL, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, Adk.Dtd.GetType().Namespace.Substring(Adk.Dtd.GetType().Namespace.LastIndexOf('.') + 1), (0), SifVersion.SIF20, SifVersion.SIF26 );
+		SIF_AGENTACL_SIF_METADATA = new ElementDefImpl( SIF_AGENTACL, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, Dtd.GetType().Namespace.Substring(Dtd.GetType().Namespace.LastIndexOf('.') + 1), (0), SifVersion.SIF20, SifVersion.SIF26 );
 
 		// <SIF_Application> fields (3 entries)
 		InfraDTD.SIF_APPLICATION_SIF_VENDOR = new ElementDefImpl( SIF_APPLICATION, "SIF_Vendor", null, 1, SifDtd.INFRA, null, (ElementDefImpl.FD_FIELD), SifVersion.SIF20, SifVersion.SIF26, SifTypeConverters.STRING );
@@ -1278,7 +1278,7 @@ namespace OpenADK.Library.Infra
 		InfraDTD.SIF_LOGENTRY_SIF_LOGOBJECTS = new ElementDefImpl( SIF_LOGENTRY, "SIF_LogObjects", null, 10, SifDtd.INFRA, null, (ElementDefImpl.FD_COLLAPSE), SifVersion.SIF15r1, SifVersion.SIF26 );
 		InfraDTD.SIF_LOGENTRY_SIF_LOGOBJECTS.DefineVersionInfo(SifVersion.SIF20, "SIF_LogObjects", 10, 0); // (Sif 20 alias)
 		SIF_LOGENTRY_SIF_EXTENDEDELEMENTS = new ElementDefImpl( SIF_LOGENTRY, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
-		SIF_LOGENTRY_SIF_METADATA = new ElementDefImpl( SIF_LOGENTRY, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, Adk.Dtd.GetType().Namespace.Substring(Adk.Dtd.GetType().Namespace.LastIndexOf('.') + 1), (0), SifVersion.SIF20, SifVersion.SIF26 );
+		SIF_LOGENTRY_SIF_METADATA = new ElementDefImpl( SIF_LOGENTRY, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, Dtd.GetType().Namespace.Substring(Dtd.GetType().Namespace.LastIndexOf('.') + 1), (0), SifVersion.SIF20, SifVersion.SIF26 );
 
 		// <SIF_LogEntryHeader> fields (1 entries)
 		InfraDTD.SIF_LOGENTRYHEADER_SIF_HEADER = new ElementDefImpl( SIF_LOGENTRYHEADER, "SIF_Header", null, 1, SifDtd.INFRA, null, 0, SifVersion.SIF15r1, SifVersion.SIF26 );
@@ -1612,7 +1612,7 @@ namespace OpenADK.Library.Infra
 		InfraDTD.SIF_ZONESTATUS_SIF_REQUESTERS = new ElementDefImpl( SIF_ZONESTATUS, "SIF_Requesters", null, 11, SifDtd.INFRA, null, 0, SifVersion.SIF20, SifVersion.SIF26 );
 		InfraDTD.SIF_ZONESTATUS_SIF_CONTEXTS = new ElementDefImpl( SIF_ZONESTATUS, "SIF_Contexts", null, 17, SifDtd.INFRA, null, 0, SifVersion.SIF20, SifVersion.SIF26 );
 		SIF_ZONESTATUS_SIF_EXTENDEDELEMENTS = new ElementDefImpl( SIF_ZONESTATUS, "SIF_ExtendedElements", null, 127, SifDtd.GLOBAL, null, (0), SifVersion.SIF15r1, SifVersion.SIF26 );
-		SIF_ZONESTATUS_SIF_METADATA = new ElementDefImpl( SIF_ZONESTATUS, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, Adk.Dtd.GetType().Namespace.Substring(Adk.Dtd.GetType().Namespace.LastIndexOf('.') + 1), (0), SifVersion.SIF20, SifVersion.SIF26 );
+		SIF_ZONESTATUS_SIF_METADATA = new ElementDefImpl( SIF_ZONESTATUS, "SIF_Metadata", null, 128, SifDtd.DATAMODEL, Dtd.GetType().Namespace.Substring(Dtd.GetType().Namespace.LastIndexOf('.') + 1), (0), SifVersion.SIF20, SifVersion.SIF26 );
 	}
 
 	#region Update SifDtd

@@ -28,7 +28,7 @@ public class BusRouteInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a BusRouteInfo
 	/// </summary>
-	public BusRouteInfo() : base( Adk.SifVersion, TransDTD.BUSROUTEINFO ){}
+	public BusRouteInfo() : base( SifVersion.LATEST, TransDTD.BUSROUTEINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class BusRouteInfo : SifDataObject
 	///<param name="routeNumber">A unique identifier for the route. It may contain any printable ASCII character. For instance, you may have route 16AM in the morning and a 16PM in the afternoon.</param>
 	///<param name="routeType">The type of route.</param>
 	///
-	public BusRouteInfo( string refId, string busInfoRefId, string routeNumber, RouteType routeType ) : base( Adk.SifVersion, TransDTD.BUSROUTEINFO )
+	public BusRouteInfo( string refId, string busInfoRefId, string routeNumber, RouteType routeType ) : base( SifVersion.LATEST, TransDTD.BUSROUTEINFO )
 	{
 		this.RefId = refId;
 		this.BusInfoRefId = busInfoRefId;
@@ -383,4 +383,3 @@ public class BusRouteInfo : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class TTTeacher : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TTTeacher
 	/// </summary>
-	public TTTeacher() : base( Adk.SifVersion, LearnerDTD.TTTEACHER ){}
+	public TTTeacher() : base( SifVersion.LATEST, LearnerDTD.TTTEACHER ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class TTTeacher : SifDataObject
 	///<param name="code">A Code</param>
 	///<param name="description">A Description</param>
 	///
-	public TTTeacher( string refId, string code, string description ) : base( Adk.SifVersion, LearnerDTD.TTTEACHER )
+	public TTTeacher( string refId, string code, string description ) : base( SifVersion.LATEST, LearnerDTD.TTTEACHER )
 	{
 		this.RefId = refId;
 		this.Code = code;
@@ -137,4 +137,3 @@ public class TTTeacher : SifDataObject
 	}
 
 }}
-

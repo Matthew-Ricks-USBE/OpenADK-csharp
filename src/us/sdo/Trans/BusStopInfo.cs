@@ -28,7 +28,7 @@ public class BusStopInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a BusStopInfo
 	/// </summary>
-	public BusStopInfo() : base( Adk.SifVersion, TransDTD.BUSSTOPINFO ){}
+	public BusStopInfo() : base( SifVersion.LATEST, TransDTD.BUSSTOPINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class BusStopInfo : SifDataObject
 	///<param name="refId">GUID that identifies this location.</param>
 	///<param name="description">An explanation of this location.</param>
 	///
-	public BusStopInfo( string refId, string description ) : base( Adk.SifVersion, TransDTD.BUSSTOPINFO )
+	public BusStopInfo( string refId, string description ) : base( SifVersion.LATEST, TransDTD.BUSSTOPINFO )
 	{
 		this.RefId = refId;
 		this.Description = description;
@@ -135,4 +135,3 @@ public class BusStopInfo : SifDataObject
 	}
 
 }}
-

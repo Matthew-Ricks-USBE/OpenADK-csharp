@@ -28,7 +28,7 @@ public class PersonPicture : SifDataObject
 	/// <summary>
 	/// Creates an instance of a PersonPicture
 	/// </summary>
-	public PersonPicture() : base( Adk.SifVersion, SchoolDTD.PERSONPICTURE ){}
+	public PersonPicture() : base( SifVersion.LATEST, SchoolDTD.PERSONPICTURE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class PersonPicture : SifDataObject
 	///<param name="schoolYear">School year for which this enrolment is applicable, expressed as the four-digit year in which the school year ends (e.g. 2007 for the 2006/07 school year).</param>
 	///<param name="pictureSource">This element defines the picture. If the Type attribute is URL, this is the location of the picture in [JPEG] format; if Type is JPEG, this is the [JPEG] image data encoded using the Base64 Content-Transfer-Encoding defined in Section 6.8 of [RFC 2045]. CBDS: 100019</param>
 	///
-	public PersonPicture( string personRefId, SIF_RefObject sifRefObjectList, int? schoolYear, PictureSource pictureSource ) : base( Adk.SifVersion, SchoolDTD.PERSONPICTURE )
+	public PersonPicture( string personRefId, SIF_RefObject sifRefObjectList, int? schoolYear, PictureSource pictureSource ) : base( SifVersion.LATEST, SchoolDTD.PERSONPICTURE )
 	{
 		this.PersonRefId = personRefId;
 		this.SIF_RefObjectList =  new SIF_RefObjectList( sifRefObjectList );
@@ -213,4 +213,3 @@ public class PersonPicture : SifDataObject
 	}
 
 }}
-

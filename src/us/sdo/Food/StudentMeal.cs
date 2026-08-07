@@ -28,14 +28,14 @@ public class StudentMeal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentMeal
 	/// </summary>
-	public StudentMeal() : base( Adk.SifVersion, FoodDTD.STUDENTMEAL ){}
+	public StudentMeal() : base( SifVersion.LATEST, FoodDTD.STUDENTMEAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="studentPersonalRefId">The GUID of the student to whom this object is linked.</param>
 	///
-	public StudentMeal( string studentPersonalRefId ) : base( Adk.SifVersion, FoodDTD.STUDENTMEAL )
+	public StudentMeal( string studentPersonalRefId ) : base( SifVersion.LATEST, FoodDTD.STUDENTMEAL )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 	}
@@ -341,4 +341,3 @@ public class StudentMeal : SifDataObject
 	}
 
 }}
-

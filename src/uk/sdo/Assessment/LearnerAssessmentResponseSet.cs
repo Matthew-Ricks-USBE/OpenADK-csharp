@@ -28,7 +28,7 @@ public class LearnerAssessmentResponseSet : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerAssessmentResponseSet
 	/// </summary>
-	public LearnerAssessmentResponseSet() : base( Adk.SifVersion, AssessmentDTD.LEARNERASSESSMENTRESPONSESET ){}
+	public LearnerAssessmentResponseSet() : base( SifVersion.LATEST, AssessmentDTD.LEARNERASSESSMENTRESPONSESET ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class LearnerAssessmentResponseSet : SifDataObject
 	///<param name="learnerPersonalRefId">The ID (GUID) of the Learner for whom these responses are.</param>
 	///<param name="items">An Items</param>
 	///
-	public LearnerAssessmentResponseSet( string refId, string assessmentResponseComponentRefId, string learnerPersonalRefId, Items items ) : base( Adk.SifVersion, AssessmentDTD.LEARNERASSESSMENTRESPONSESET )
+	public LearnerAssessmentResponseSet( string refId, string assessmentResponseComponentRefId, string learnerPersonalRefId, Items items ) : base( SifVersion.LATEST, AssessmentDTD.LEARNERASSESSMENTRESPONSESET )
 	{
 		this.RefId = refId;
 		this.AssessmentResponseComponentRefId = assessmentResponseComponentRefId;
@@ -145,4 +145,3 @@ public class LearnerAssessmentResponseSet : SifDataObject
 	}
 
 }}
-

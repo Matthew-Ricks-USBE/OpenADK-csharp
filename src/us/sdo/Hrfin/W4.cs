@@ -28,7 +28,7 @@ public class W4 : SifDataObject
 	/// <summary>
 	/// Creates an instance of a W4
 	/// </summary>
-	public W4() : base( Adk.SifVersion, HrfinDTD.W4 ){}
+	public W4() : base( SifVersion.LATEST, HrfinDTD.W4 ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class W4 : SifDataObject
 	///<param name="stateProvince">State of residence.</param>
 	///<param name="exempt">Is this employee exempt from federal and state exemptions?</param>
 	///
-	public W4( string employeePersonalRefId, DateTime? w4Date, MaritalStatusRate maritalStatusRate, int? federalAllowancesNumber, StatePrCode stateProvince, bool? exempt ) : base( Adk.SifVersion, HrfinDTD.W4 )
+	public W4( string employeePersonalRefId, DateTime? w4Date, MaritalStatusRate maritalStatusRate, int? federalAllowancesNumber, StatePrCode stateProvince, bool? exempt ) : base( SifVersion.LATEST, HrfinDTD.W4 )
 	{
 		this.EmployeePersonalRefId = employeePersonalRefId;
 		this.W4Date = w4Date;
@@ -251,4 +251,3 @@ public class W4 : SifDataObject
 	}
 
 }}
-

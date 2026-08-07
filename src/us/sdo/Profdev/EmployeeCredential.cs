@@ -28,7 +28,7 @@ public class EmployeeCredential : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeeCredential
 	/// </summary>
-	public EmployeeCredential() : base( Adk.SifVersion, ProfdevDTD.EMPLOYEECREDENTIAL ){}
+	public EmployeeCredential() : base( SifVersion.LATEST, ProfdevDTD.EMPLOYEECREDENTIAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -47,7 +47,7 @@ public class EmployeeCredential : SifDataObject
 	///<param name="unitYears">Total number of years at current LEA</param>
 	///<param name="education">Highest level of education attained by employee.</param>
 	///
-	public EmployeeCredential( DateTime? reportDate, int? schoolYear, string stateProvinceId, string ssn, Name name, RaceType race, Certifications certifications, MonetaryAmount salary, EmploymentStatus status, YesNo leave, decimal? totalYears, decimal? unitYears, TeachingCredentialBasis education ) : base( Adk.SifVersion, ProfdevDTD.EMPLOYEECREDENTIAL )
+	public EmployeeCredential( DateTime? reportDate, int? schoolYear, string stateProvinceId, string ssn, Name name, RaceType race, Certifications certifications, MonetaryAmount salary, EmploymentStatus status, YesNo leave, decimal? totalYears, decimal? unitYears, TeachingCredentialBasis education ) : base( SifVersion.LATEST, ProfdevDTD.EMPLOYEECREDENTIAL )
 	{
 		this.ReportDate = reportDate;
 		this.SchoolYear = schoolYear;
@@ -679,4 +679,3 @@ public class EmployeeCredential : SifDataObject
 	}
 
 }}
-

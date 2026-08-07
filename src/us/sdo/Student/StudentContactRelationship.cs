@@ -28,7 +28,7 @@ public class StudentContactRelationship : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentContactRelationship
 	/// </summary>
-	public StudentContactRelationship() : base( Adk.SifVersion, StudentDTD.STUDENTCONTACTRELATIONSHIP ){}
+	public StudentContactRelationship() : base( SifVersion.LATEST, StudentDTD.STUDENTCONTACTRELATIONSHIP ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class StudentContactRelationship : SifDataObject
 	///<param name="relationship">The relationship of the contact person to the student</param>
 	///<param name="contactFlags">Contains Yes/No characteristics of the contact person's role. Provide a Yes value for all that apply. At least one of the child elements of ContactFlags must have a Yes value.</param>
 	///
-	public StudentContactRelationship( string studentPersonalRefId, string studentContactPersonalRefId, Relationship relationship, ContactFlags contactFlags ) : base( Adk.SifVersion, StudentDTD.STUDENTCONTACTRELATIONSHIP )
+	public StudentContactRelationship( string studentPersonalRefId, string studentContactPersonalRefId, Relationship relationship, ContactFlags contactFlags ) : base( SifVersion.LATEST, StudentDTD.STUDENTCONTACTRELATIONSHIP )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.StudentContactPersonalRefId = studentContactPersonalRefId;
@@ -185,4 +185,3 @@ public class StudentContactRelationship : SifDataObject
 	}
 
 }}
-

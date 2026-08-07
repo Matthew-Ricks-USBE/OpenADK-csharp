@@ -36,7 +36,7 @@ namespace Library.Examples.SimpleSubscriber
         public void sync( IZone zone )
         {
             // This class simply requests all LearnerPersonal objects from the zone
-            Query q = new Query( StudentDTD.STUDENTPERSONAL );
+            Query q = zone.Agent.Objects.CreateQuery( StudentDTD.STUDENTPERSONAL );
             // Add any query conditions you may have
             //q.addCondition( LearnerDTD.LEARNERPERSONAL_UPN, ComparisonOperators.LE, "M830540004340" );
             zone.Query( q );

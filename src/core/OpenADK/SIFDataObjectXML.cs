@@ -33,7 +33,7 @@ namespace OpenADK.Library
         /// </param>
         public SifDataObjectXml( IElementDef def,
                                  String xml )
-            : base( Adk.SifVersion, def )
+            : base(SifVersion.LATEST, def)
         {
             fXml = xml;
         }

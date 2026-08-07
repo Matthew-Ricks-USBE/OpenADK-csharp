@@ -28,7 +28,7 @@ public class Assignment : SifDataObject
 	/// <summary>
 	/// Creates an instance of an Assignment
 	/// </summary>
-	public Assignment() : base( Adk.SifVersion, InstrDTD.ASSIGNMENT ){}
+	public Assignment() : base( SifVersion.LATEST, InstrDTD.ASSIGNMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class Assignment : SifDataObject
 	///<param name="language">A Language</param>
 	///<param name="assignmentTime">Time structures for the assignment.</param>
 	///
-	public Assignment( string refId, LanguageCode language, AssignmentTime assignmentTime ) : base( Adk.SifVersion, InstrDTD.ASSIGNMENT )
+	public Assignment( string refId, LanguageCode language, AssignmentTime assignmentTime ) : base( SifVersion.LATEST, InstrDTD.ASSIGNMENT )
 	{
 		this.RefId = refId;
 		this.SetLanguage( language );
@@ -475,4 +475,3 @@ public class Assignment : SifDataObject
 	}
 
 }}
-

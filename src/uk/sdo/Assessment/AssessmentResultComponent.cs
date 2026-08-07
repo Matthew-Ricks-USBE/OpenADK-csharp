@@ -28,7 +28,7 @@ public class AssessmentResultComponent : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentResultComponent
 	/// </summary>
-	public AssessmentResultComponent() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESULTCOMPONENT ){}
+	public AssessmentResultComponent() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESULTCOMPONENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class AssessmentResultComponent : SifDataObject
 	///<param name="resultQualifier">Defines the format or type of result(s) awarded.</param>
 	///<param name="assessmentMethod">The method or format of the Assessment.</param>
 	///
-	public AssessmentResultComponent( string refId, string name, string shortDescription, string description, ComponentType componentType, AssessmentResultQualifierType resultQualifier, AssessmentMethodType assessmentMethod ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESULTCOMPONENT )
+	public AssessmentResultComponent( string refId, string name, string shortDescription, string description, ComponentType componentType, AssessmentResultQualifierType resultQualifier, AssessmentMethodType assessmentMethod ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESULTCOMPONENT )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -467,4 +467,3 @@ public class AssessmentResultComponent : SifDataObject
 	}
 
 }}
-

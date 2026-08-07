@@ -8,14 +8,15 @@ using System.Collections.Specialized;
 using OpenADK.Library;
 using OpenADK.Util;
 using OpenADK.Library.au;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Library.Examples.SimpleProvider
 {
     internal class SimpleProvider : Agent
     {
         // Call the superclass constructor with the agent ID
-        protected SimpleProvider()
-            : base( "SimpleProvider" )
+        public SimpleProvider(IAdkRuntime runtime, IAdkComponentFactory components)
+            : base( "SimpleProvider", runtime, components )
         {
         }
 
@@ -31,6 +32,7 @@ namespace Library.Examples.SimpleProvider
         public static void Main( String[] args )
         {
             SimpleProvider agent = null;
+            ServiceProvider services = null;
             try
             {
                 if ( args.Length < 2 )
@@ -42,14 +44,18 @@ namespace Library.Examples.SimpleProvider
                 }
 
                 //	Pre-parse the command-line before initializing the Adk
-                Adk.Debug = AdkDebugFlags.None;
                 AdkExamples.parseCL( null, args );
 
                 //  Initialize the Adk with the specified version, loading only the learner SDO package
-                Adk.Initialize( AdkExamples.Version, SIFVariant.SIF_AU, (int)SdoLibraryType.Student );
-
-                //  Start the agent...
-                agent = new SimpleProvider();
+                services = new ServiceCollection().AddOpenAdk(options =>
+                {
+                    options.SifVersion = AdkExamples.Version ?? SifVersion.LATEST;
+                    options.Variant = SIFVariant.SIF_AU;
+                    options.SdoLibraries = (int)SdoLibraryType.Student;
+                    options.Debug = AdkExamples.Debug;
+                }).AddSingleton<SimpleProvider>().BuildServiceProvider();
+                agent = services.GetRequiredService<SimpleProvider>();
+                if (!String.IsNullOrEmpty(AdkExamples.LogFilePath)) agent.Runtime.SetLogFile(AdkExamples.LogFilePath);
 
                 // Call StartAgent. This method does not return until the agent shuts down
                 agent.StartAgent( args );
@@ -79,6 +85,7 @@ namespace Library.Examples.SimpleProvider
                         Console.WriteLine( adkEx );
                     }
                 }
+                services?.Dispose();
             }
         }
 
@@ -108,7 +115,7 @@ namespace Library.Examples.SimpleProvider
 
             // 2) Create an instance of the the StudentPersonalProvider class
             // This class is responsible for publishing LearnerPersonal
-            StudentPersonalProvider lpp = new StudentPersonalProvider();
+            StudentPersonalProvider lpp = new StudentPersonalProvider(Runtime);
             // The StudentPersonalProvider is allowed to provision itself with the zone
             lpp.Provision( zone );
 

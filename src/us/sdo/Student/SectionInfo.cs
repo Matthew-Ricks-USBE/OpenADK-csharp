@@ -28,7 +28,7 @@ public class SectionInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SectionInfo
 	/// </summary>
-	public SectionInfo() : base( Adk.SifVersion, StudentDTD.SECTIONINFO ){}
+	public SectionInfo() : base( SifVersion.LATEST, StudentDTD.SECTIONINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class SectionInfo : SifDataObject
 	///<param name="schoolYear">School year for which the information is applicable, expressed as the four-digit year in which the school year ends (e.g. 2007 for the 2006-07 school year).</param>
 	///<param name="scheduleInfoList">The schedule-related information for a section</param>
 	///
-	public SectionInfo( string refId, string schoolCourseInfoRefId, int? schoolYear, ScheduleInfoList scheduleInfoList ) : base( Adk.SifVersion, StudentDTD.SECTIONINFO )
+	public SectionInfo( string refId, string schoolCourseInfoRefId, int? schoolYear, ScheduleInfoList scheduleInfoList ) : base( SifVersion.LATEST, StudentDTD.SECTIONINFO )
 	{
 		this.RefId = refId;
 		this.SchoolCourseInfoRefId = schoolCourseInfoRefId;
@@ -464,4 +464,3 @@ public class SectionInfo : SifDataObject
 	}
 
 }}
-

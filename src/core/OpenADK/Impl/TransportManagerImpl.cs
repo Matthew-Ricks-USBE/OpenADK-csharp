@@ -11,8 +11,14 @@ namespace OpenADK.Library.Impl
 {
     internal class TransportManagerImpl : ITransportManager
     {
+        private readonly IAdkRuntime fRuntime;
         private List<ITransport> fTransports = new List<ITransport>();
         private List<TransportProperties> fDefaultTransportProps;
+
+        public TransportManagerImpl(IAdkRuntime runtime)
+        {
+            fRuntime = runtime ?? throw new ArgumentNullException(nameof(runtime));
+        }
 
 
         /// <summary>
@@ -56,7 +62,7 @@ namespace OpenADK.Library.Impl
 
             // No transport has been created for this protocol yet. Create
             // new one using the TransportPlugin
-            TransportPlugin tp = Adk.GetTransportProtocol( protocol );
+            TransportPlugin tp = fRuntime.GetTransportProtocol( protocol );
             TransportProperties defs = GetDefaultTransportProperties( protocol );
 
             ITransport transport = tp.NewInstance( defs );
@@ -100,7 +106,7 @@ namespace OpenADK.Library.Impl
             }
 
             // Didn't find the transport properties above. Create a new one and return it
-            TransportPlugin tp = Adk.GetTransportProtocol( protocol );
+            TransportPlugin tp = fRuntime.GetTransportProtocol( protocol );
             if ( tp == null )
             {
                 throw new AdkTransportException( "The requested transport protocol: '" + protocol +
@@ -137,7 +143,7 @@ namespace OpenADK.Library.Impl
         public void Activate( Agent agent )
         {
             // Initialize each transport supported by the ADK
-            foreach ( String protocol in Adk.TransportProtocols )
+            foreach ( String protocol in fRuntime.TransportProtocols )
             {
                 TransportProperties tp = GetDefaultTransportProperties( protocol );
                 if ( tp.Enabled )

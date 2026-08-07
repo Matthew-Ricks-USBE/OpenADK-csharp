@@ -2,27 +2,13 @@ using System;
 using System.IO;
 using OpenADK.Library;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 
 
 namespace Library.Nunit.US
 {
-    public class UsAdkTest
+    public class UsAdkTest : AdkTest
     {
-        protected SifVersion fOriginalVersion;
-
-        [SetUp]
-        public virtual void SetUp()
-        {
-            Adk.Initialize();
-            fOriginalVersion = Adk.SifVersion;
-        }
-
-        [TearDown]
-        public virtual void TearDown()
-        {
-            Adk.SifVersion = fOriginalVersion;
-        }
-
         protected Stream GetResourceStream(string shortName)
         {
             Type thisType = typeof (UsAdkTest);

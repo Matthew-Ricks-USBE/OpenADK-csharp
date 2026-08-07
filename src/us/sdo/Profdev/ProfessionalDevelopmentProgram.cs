@@ -28,7 +28,7 @@ public class ProfessionalDevelopmentProgram : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ProfessionalDevelopmentProgram
 	/// </summary>
-	public ProfessionalDevelopmentProgram() : base( Adk.SifVersion, ProfdevDTD.PROFESSIONALDEVELOPMENTPROGRAM ){}
+	public ProfessionalDevelopmentProgram() : base( SifVersion.LATEST, ProfdevDTD.PROFESSIONALDEVELOPMENTPROGRAM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class ProfessionalDevelopmentProgram : SifDataObject
 	///<param name="programName">The name or title of the program.</param>
 	///<param name="programType">The type of program whether it be a grant, learning plan, or system training.</param>
 	///
-	public ProfessionalDevelopmentProgram( string refId, string programName, string programType ) : base( Adk.SifVersion, ProfdevDTD.PROFESSIONALDEVELOPMENTPROGRAM )
+	public ProfessionalDevelopmentProgram( string refId, string programName, string programType ) : base( SifVersion.LATEST, ProfdevDTD.PROFESSIONALDEVELOPMENTPROGRAM )
 	{
 		this.RefId = refId;
 		this.ProgramName = programName;
@@ -185,4 +185,3 @@ public class ProfessionalDevelopmentProgram : SifDataObject
 	}
 
 }}
-

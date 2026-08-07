@@ -28,7 +28,7 @@ public class Sif3AssessmentRubric : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentRubric
 	/// </summary>
-	public Sif3AssessmentRubric() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTRUBRIC ){}
+	public Sif3AssessmentRubric() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTRUBRIC ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class Sif3AssessmentRubric : SifDataObject
 	///<param name="refId">A RefId</param>
 	///<param name="rubricName">A RubricName</param>
 	///
-	public Sif3AssessmentRubric( string refId, string rubricName ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTRUBRIC )
+	public Sif3AssessmentRubric( string refId, string rubricName ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTRUBRIC )
 	{
 		this.RefId = refId;
 		this.RubricName = rubricName;
@@ -229,4 +229,3 @@ public class Sif3AssessmentRubric : SifDataObject
 	}
 
 }}
-

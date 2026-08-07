@@ -28,7 +28,7 @@ public class StudentParticipation : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentParticipation
 	/// </summary>
-	public StudentParticipation() : base( Adk.SifVersion, ProgramsDTD.STUDENTPARTICIPATION ){}
+	public StudentParticipation() : base( SifVersion.LATEST, ProgramsDTD.STUDENTPARTICIPATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class StudentParticipation : SifDataObject
 	///<param name="studentParticipationAsOfDate">Effective date (NOT the entry date) of this StudentParticipation instance for the identified student and program.        Each time there is a change to the student's program participation profile, a new instance of this object is to be generated with        the appropriate StudentParticipationAsOfDate and a new RefId.</param>
 	///<param name="managingSchool">A ManagingSchool</param>
 	///
-	public StudentParticipation( string refId, string studentPersonalRefId, DateTime? studentParticipationAsOfDate, ManagingSchool managingSchool ) : base( Adk.SifVersion, ProgramsDTD.STUDENTPARTICIPATION )
+	public StudentParticipation( string refId, string studentPersonalRefId, DateTime? studentParticipationAsOfDate, ManagingSchool managingSchool ) : base( SifVersion.LATEST, ProgramsDTD.STUDENTPARTICIPATION )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -721,4 +721,3 @@ public class StudentParticipation : SifDataObject
 	}
 
 }}
-

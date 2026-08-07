@@ -37,7 +37,7 @@ public class StudentLEARelationship : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentLEARelationship
 	/// </summary>
-	public StudentLEARelationship() : base( Adk.SifVersion, CommonDTD.STUDENTLEARELATIONSHIP ){}
+	public StudentLEARelationship() : base( SifVersion.LATEST, CommonDTD.STUDENTLEARELATIONSHIP ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -50,7 +50,7 @@ public class StudentLEARelationship : SifDataObject
 	///<param name="leaRelationshipType">An instance of the OrganizationRelationshipType common element that describes the details of the student's affiliation with the LEA.</param>
 	///<param name="entryDate">The date from when this affiliation is valid.</param>
 	///
-	public StudentLEARelationship( string refId, string studentPersonalRefId, string leaInfoRefId, int? schoolYear, MembershipType membershipType, OrganizationRelationshipType leaRelationshipType, DateTime? entryDate ) : base( Adk.SifVersion, CommonDTD.STUDENTLEARELATIONSHIP )
+	public StudentLEARelationship( string refId, string studentPersonalRefId, string leaInfoRefId, int? schoolYear, MembershipType membershipType, OrganizationRelationshipType leaRelationshipType, DateTime? entryDate ) : base( SifVersion.LATEST, CommonDTD.STUDENTLEARELATIONSHIP )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -463,4 +463,3 @@ public class StudentLEARelationship : SifDataObject
 	}
 
 }}
-

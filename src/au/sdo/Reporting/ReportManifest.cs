@@ -29,7 +29,7 @@ public class ReportManifest : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ReportManifest
 	/// </summary>
-	public ReportManifest() : base( Adk.SifVersion, ReportingDTD.REPORTMANIFEST ){}
+	public ReportManifest() : base( SifVersion.LATEST, ReportingDTD.REPORTMANIFEST ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class ReportManifest : SifDataObject
 	///<param name="reportName">The authority's accepted name for the report.</param>
 	///<param name="reportDefinitionSource">Indicates where the report definition can be found.        If Type is Embedded or Base64Binary, this element's value contains the report definition.  If Type is        URL, this element's value is the location of the external definition.  A Type value of SIF_Query        indicates that the SIF_QueryGroup element contains the definition.</param>
 	///
-	public ReportManifest( string refId, string reportAuthorityInfoRefId, string sifVersion, int? sifMaxBufferSize, string reportName, ReportDefinitionSource reportDefinitionSource ) : base( Adk.SifVersion, ReportingDTD.REPORTMANIFEST )
+	public ReportManifest( string refId, string reportAuthorityInfoRefId, string sifVersion, int? sifMaxBufferSize, string reportName, ReportDefinitionSource reportDefinitionSource ) : base( SifVersion.LATEST, ReportingDTD.REPORTMANIFEST )
 	{
 		this.RefId = refId;
 		this.ReportAuthorityInfoRefId = reportAuthorityInfoRefId;
@@ -409,4 +409,3 @@ public class ReportManifest : SifDataObject
 	}
 
 }}
-

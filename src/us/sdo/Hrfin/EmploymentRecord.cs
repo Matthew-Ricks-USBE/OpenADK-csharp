@@ -28,7 +28,7 @@ public class EmploymentRecord : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmploymentRecord
 	/// </summary>
-	public EmploymentRecord() : base( Adk.SifVersion, HrfinDTD.EMPLOYMENTRECORD ){}
+	public EmploymentRecord() : base( SifVersion.LATEST, HrfinDTD.EMPLOYMENTRECORD ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class EmploymentRecord : SifDataObject
 	///<param name="leaInfoRefId">The GUID reference to the LEAInfo object representing the LEA
 	///         that employs the staff member.</param>
 	///
-	public EmploymentRecord( string refId, string sifRefObject, string sifRefId, string leaInfoRefId ) : base( Adk.SifVersion, HrfinDTD.EMPLOYMENTRECORD )
+	public EmploymentRecord( string refId, string sifRefObject, string sifRefId, string leaInfoRefId ) : base( SifVersion.LATEST, HrfinDTD.EMPLOYMENTRECORD )
 	{
 		this.RefId = refId;
 		this.SIF_RefObject = sifRefObject;
@@ -355,4 +355,3 @@ public class EmploymentRecord : SifDataObject
 	}
 
 }}
-

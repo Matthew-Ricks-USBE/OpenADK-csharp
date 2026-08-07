@@ -28,7 +28,7 @@ public class AccountingPeriod : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AccountingPeriod
 	/// </summary>
-	public AccountingPeriod() : base( Adk.SifVersion, HrfinDTD.ACCOUNTINGPERIOD ){}
+	public AccountingPeriod() : base( SifVersion.LATEST, HrfinDTD.ACCOUNTINGPERIOD ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class AccountingPeriod : SifDataObject
 	///<param name="startDate">Start date of the accounting period.</param>
 	///<param name="endDate">End date of the accounting period.</param>
 	///
-	public AccountingPeriod( string refId, string name, string fiscalYearRefId, DateTime? startDate, DateTime? endDate ) : base( Adk.SifVersion, HrfinDTD.ACCOUNTINGPERIOD )
+	public AccountingPeriod( string refId, string name, string fiscalYearRefId, DateTime? startDate, DateTime? endDate ) : base( SifVersion.LATEST, HrfinDTD.ACCOUNTINGPERIOD )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -190,4 +190,3 @@ public class AccountingPeriod : SifDataObject
 	}
 
 }}
-

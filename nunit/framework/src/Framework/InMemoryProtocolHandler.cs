@@ -31,23 +31,23 @@ namespace Library.UnitTesting.Framework
 
         public void Start()
         {
-            Adk.Log.Info( "TestProtocolHandler started" );
+            fZone?.Agent.Runtime.Log.Info( "TestProtocolHandler started" );
         }
 
         public void Shutdown()
         {
-            Adk.Log.Info( "TestProtocolHandler shutdown" );
+            fZone?.Agent.Runtime.Log.Info( "TestProtocolHandler shutdown" );
         }
 
 
-        private static IMessageInputStream makeAck()
+        private IMessageInputStream makeAck()
         {
             SIF_Ack retval = new SIF_Ack();
             retval.SIF_Status = new SIF_Status( 0 );
             MemoryStream ms = new MemoryStream();
             try
             {
-                SifWriter sifWriter = new SifWriter( ms );
+                SifWriter sifWriter = new SifWriter( ms, fZone.Agent.Runtime );
                 sifWriter.Write( retval );
                 sifWriter.Flush();
                 //sifWriter.Close();
@@ -80,7 +80,7 @@ namespace Library.UnitTesting.Framework
                     MemoryStream stream = new MemoryStream();
                     msg.CopyTo( stream );
                     stream.Seek( 0, SeekOrigin.Begin );
-                    SifParser parser = SifParser.NewInstance();
+                    SifParser parser = new SifParser(fZone.Agent.Runtime);
                     SifMessagePayload smp = (SifMessagePayload) parser.Parse( stream, fZone );
 
                     fMessages.Add( smp );
@@ -89,11 +89,11 @@ namespace Library.UnitTesting.Framework
                     SIF_Ack ack = smp.ackStatus( 0 );
                     SIF_Header hdr = ack.Header;
                     hdr.SIF_Timestamp = DateTime.Now;
-                    hdr.SIF_MsgId = Adk.MakeGuid();
+                    hdr.SIF_MsgId = fZone.Agent.Runtime.MakeGuid();
                     hdr.SIF_SourceId = fZone.Agent.Id;
 
                     StringWriter str = new StringWriter();
-                    SifWriter writer = new SifWriter( str );
+                    SifWriter writer = new SifWriter( str, fZone.Agent.Runtime );
                     writer.Write( ack );
                     writer.Flush();
                     writer.Close();

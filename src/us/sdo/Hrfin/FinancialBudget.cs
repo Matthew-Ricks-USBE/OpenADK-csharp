@@ -28,7 +28,7 @@ public class FinancialBudget : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FinancialBudget
 	/// </summary>
-	public FinancialBudget() : base( Adk.SifVersion, HrfinDTD.FINANCIALBUDGET ){}
+	public FinancialBudget() : base( SifVersion.LATEST, HrfinDTD.FINANCIALBUDGET ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class FinancialBudget : SifDataObject
 	///<param name="fiscalYear">Fiscal Year of summary account</param>
 	///<param name="budgetAccounts">Information about budget accounts being submitted</param>
 	///
-	public FinancialBudget( DateTime? reportDate, string stateProvinceId, int? fiscalYear, BudgetAccounts budgetAccounts ) : base( Adk.SifVersion, HrfinDTD.FINANCIALBUDGET )
+	public FinancialBudget( DateTime? reportDate, string stateProvinceId, int? fiscalYear, BudgetAccounts budgetAccounts ) : base( SifVersion.LATEST, HrfinDTD.FINANCIALBUDGET )
 	{
 		this.ReportDate = reportDate;
 		this.StateProvinceId = stateProvinceId;
@@ -156,4 +156,3 @@ public class FinancialBudget : SifDataObject
 	}
 
 }}
-

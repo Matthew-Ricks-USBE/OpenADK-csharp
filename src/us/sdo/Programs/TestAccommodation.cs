@@ -28,14 +28,14 @@ public class TestAccommodation : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TestAccommodation
 	/// </summary>
-	public TestAccommodation() : base( Adk.SifVersion, ProgramsDTD.TESTACCOMMODATION ){}
+	public TestAccommodation() : base( SifVersion.LATEST, ProgramsDTD.TESTACCOMMODATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">Unique ID for this set of test accommodations required for a particular student who is participating in a special program and for whom this set of test accommodation(s) is recommended / prescribed for this test administration (specific subject area and level) in a specific special programs plan.</param>
 	///
-	public TestAccommodation( string refId ) : base( Adk.SifVersion, ProgramsDTD.TESTACCOMMODATION )
+	public TestAccommodation( string refId ) : base( SifVersion.LATEST, ProgramsDTD.TESTACCOMMODATION )
 	{
 		this.RefId = refId;
 	}
@@ -541,4 +541,3 @@ public class TestAccommodation : SifDataObject
 	}
 
 }}
-

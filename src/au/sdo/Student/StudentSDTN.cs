@@ -28,7 +28,7 @@ public class StudentSDTN : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentSDTN
 	/// </summary>
-	public StudentSDTN() : base( Adk.SifVersion, StudentDTD.STUDENTSDTN ){}
+	public StudentSDTN() : base( SifVersion.LATEST, StudentDTD.STUDENTSDTN ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class StudentSDTN : SifDataObject
 	///<param name="schoolInfoRefId">GUID that identifies the school that provided the SDTN.</param>
 	///<param name="schoolName">Name of school/campus.</param>
 	///
-	public StudentSDTN( string refId, DateTime? snapDate, string studentPersonalRefId, PersonInfo personInfo, string schoolInfoRefId, string schoolName ) : base( Adk.SifVersion, StudentDTD.STUDENTSDTN )
+	public StudentSDTN( string refId, DateTime? snapDate, string studentPersonalRefId, PersonInfo personInfo, string schoolInfoRefId, string schoolName ) : base( SifVersion.LATEST, StudentDTD.STUDENTSDTN )
 	{
 		this.RefId = refId;
 		this.SnapDate = snapDate;
@@ -974,4 +974,3 @@ public class StudentSDTN : SifDataObject
 	}
 
 }}
-

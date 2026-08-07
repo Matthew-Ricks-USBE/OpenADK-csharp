@@ -187,7 +187,10 @@ namespace OpenADK.Library
         {
             using ( StringWriter buffer = new StringWriter() )
             {
-                SifWriter w = new SifWriter( buffer );
+                SifWriter w = new SifWriter(
+                    buffer,
+                    ElementDef.Dtd,
+                    SifVersion ?? global::OpenADK.Library.SifVersion.LATEST);
                 w.Write( this );
                 w.Flush();
                 return buffer.ToString();
@@ -277,7 +280,6 @@ namespace OpenADK.Library
         public virtual void SetElementOrAttribute( string xpath,
                                                    string valu )
         {
-            SifVersion = Adk.SifVersion;
             SifXPathContext spc = SifXPathContext.NewSIFContext( this );
             spc.SetElementOrAttribute( xpath, valu );
         }
@@ -303,7 +305,6 @@ namespace OpenADK.Library
                                                    string valu,
                                                    IFieldAdaptor adaptor )
         {
-            SifVersion = Adk.SifVersion;
             SifXPathContext spc = SifXPathContext.NewSIFContext( this );
             if ( adaptor is IXPathVariableLibrary )
             {
@@ -358,7 +359,7 @@ namespace OpenADK.Library
             // remember the SIF Version being evaluated
             if (fVersion == null)
             {
-                fVersion = Adk.SifVersion;
+                fVersion = global::OpenADK.Library.SifVersion.LATEST;
             }
             SifXPathContext spc = SifXPathContext.NewSIFContext( this );
             return spc.GetElementOrAttribute( xpath );
@@ -559,4 +560,3 @@ namespace OpenADK.Library
         }
     }
 }
-

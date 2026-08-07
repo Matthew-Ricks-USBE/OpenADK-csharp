@@ -37,9 +37,15 @@ namespace SifWorks.Examples
         /// </summary>
         public static SifVersion Version;
 
+        public static AdkDebugFlags Debug { get; set; } = AdkDebugFlags.None;
+
+        public static string LogFilePath { get; private set; }
+
         /// <summary>  Parsed command-line arguments
         /// </summary>
         private static string[] sArguments = null;
+
+        private static readonly NameValueCollection sPropertyOverrides = new NameValueCollection();
 
         /// <summary>  Parse the command-line. This method may be called repeatedly, usually
         /// once from the sample agent's <c>main</code> function prior to
@@ -87,6 +93,10 @@ namespace SifWorks.Examples
         {
             //  Parse all other options...
             AgentProperties props = agent.Properties;
+            foreach (string key in sPropertyOverrides.AllKeys)
+            {
+                props.SetProperty(key, sPropertyOverrides[key]);
+            }
             NameValueCollection misc = new NameValueCollection();
 
             int port = -1;
@@ -259,37 +269,37 @@ namespace SifWorks.Examples
                     {
                         try
                         {
-                            Adk.Debug = AdkDebugFlags.None;
+                            Debug = AdkDebugFlags.None;
                             int k = Int32.Parse( sArguments[ ++i ] );
                             if( k == 1 )
                             {
-                                Adk.Debug = AdkDebugFlags.Minimal;
+                                Debug = AdkDebugFlags.Minimal;
                             }
                             else if( k == 2 )
                             {
-                                Adk.Debug = AdkDebugFlags.Moderate;
+                                Debug = AdkDebugFlags.Moderate;
                             }
                             else if( k == 3 )
                             {
-                                Adk.Debug = AdkDebugFlags.Detailed;
+                                Debug = AdkDebugFlags.Detailed;
                             }
                             else if( k == 4 )
                             {
-                                Adk.Debug = AdkDebugFlags.Very_Detailed;
+                                Debug = AdkDebugFlags.Very_Detailed;
                             }
                             else if( k == 5 )
                             {
-                                Adk.Debug = AdkDebugFlags.All;
+                                Debug = AdkDebugFlags.All;
                             }
                         }
                         catch( Exception )
                         {
-                            Adk.Debug = AdkDebugFlags.All;
+                            Debug = AdkDebugFlags.All;
                         }
                     }
                     else
                     {
-                        Adk.Debug = AdkDebugFlags.All;
+                        Debug = AdkDebugFlags.All;
                     }
                 }
                 else if( sArguments[ i ].StartsWith( "/D" ) )
@@ -297,7 +307,7 @@ namespace SifWorks.Examples
                     string prop = sArguments[ i ].Substring( 2 );
                     if( i != sArguments.Length - 1 )
                     {
-                        Properties.SetProperty( prop, sArguments[ ++i ] );
+                        sPropertyOverrides[prop] = sArguments[++i];
                     }
                     else
                     {
@@ -309,7 +319,7 @@ namespace SifWorks.Examples
                 {
                     try
                     {
-                        Adk.SetLogFile( sArguments[ ++i ] );
+                        LogFilePath = sArguments[ ++i ];
                     }
                     catch( IOException ioe )
                     {

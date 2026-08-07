@@ -28,7 +28,7 @@ public class StudentPlacement : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentPlacement
 	/// </summary>
-	public StudentPlacement() : base( Adk.SifVersion, ProgramsDTD.STUDENTPLACEMENT ){}
+	public StudentPlacement() : base( SifVersion.LATEST, ProgramsDTD.STUDENTPLACEMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class StudentPlacement : SifDataObject
 	///<param name="studentPersonalRefId">The GUID of the student that this object is linked to.</param>
 	///<param name="service">Specialized instruction or related service provided to this student.</param>
 	///
-	public StudentPlacement( string refId, string studentParticipationRefId, string studentPersonalRefId, Service service ) : base( Adk.SifVersion, ProgramsDTD.STUDENTPLACEMENT )
+	public StudentPlacement( string refId, string studentParticipationRefId, string studentPersonalRefId, Service service ) : base( SifVersion.LATEST, ProgramsDTD.STUDENTPLACEMENT )
 	{
 		this.RefId = refId;
 		this.StudentParticipationRefId = studentParticipationRefId;
@@ -824,4 +824,3 @@ public class StudentPlacement : SifDataObject
 	}
 
 }}
-

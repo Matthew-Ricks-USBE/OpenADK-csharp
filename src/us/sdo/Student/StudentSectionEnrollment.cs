@@ -28,7 +28,7 @@ public class StudentSectionEnrollment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentSectionEnrollment
 	/// </summary>
-	public StudentSectionEnrollment() : base( Adk.SifVersion, StudentDTD.STUDENTSECTIONENROLLMENT ){}
+	public StudentSectionEnrollment() : base( SifVersion.LATEST, StudentDTD.STUDENTSECTIONENROLLMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class StudentSectionEnrollment : SifDataObject
 	///         year ends (e.g. 2007 for the 2006-07 school year).
 	///       </param>
 	///
-	public StudentSectionEnrollment( string refId, string studentPersonalRefId, string sectionInfoRefId, int? schoolYear ) : base( Adk.SifVersion, StudentDTD.STUDENTSECTIONENROLLMENT )
+	public StudentSectionEnrollment( string refId, string studentPersonalRefId, string sectionInfoRefId, int? schoolYear ) : base( SifVersion.LATEST, StudentDTD.STUDENTSECTIONENROLLMENT )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -290,4 +290,3 @@ public class StudentSectionEnrollment : SifDataObject
 	}
 
 }}
-

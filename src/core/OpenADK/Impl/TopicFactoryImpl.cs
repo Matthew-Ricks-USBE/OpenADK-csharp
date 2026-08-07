@@ -74,7 +74,7 @@ namespace OpenADK.Library.Impl
             ITopic topic = null;
             if(!map.TryGetValue( objectType, out topic ))
             {
-                topic = new TopicImpl(objectType, context);
+                topic = new TopicImpl(fAgent, objectType, context);
                 map.Add(objectType, topic);
             }
 

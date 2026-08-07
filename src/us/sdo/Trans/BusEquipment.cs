@@ -28,7 +28,7 @@ public class BusEquipment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a BusEquipment
 	/// </summary>
-	public BusEquipment() : base( Adk.SifVersion, TransDTD.BUSEQUIPMENT ){}
+	public BusEquipment() : base( SifVersion.LATEST, TransDTD.BUSEQUIPMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class BusEquipment : SifDataObject
 	///<param name="refId">GUID that identifies this type of equipment.</param>
 	///<param name="description">Explanation about the type of equipment.</param>
 	///
-	public BusEquipment( string refId, string description ) : base( Adk.SifVersion, TransDTD.BUSEQUIPMENT )
+	public BusEquipment( string refId, string description ) : base( SifVersion.LATEST, TransDTD.BUSEQUIPMENT )
 	{
 		this.RefId = refId;
 		this.Description = description;
@@ -95,4 +95,3 @@ public class BusEquipment : SifDataObject
 	}
 
 }}
-

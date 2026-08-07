@@ -28,7 +28,7 @@ public class ContactPersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ContactPersonal
 	/// </summary>
-	public ContactPersonal() : base( Adk.SifVersion, SchoolDTD.CONTACTPERSONAL ){}
+	public ContactPersonal() : base( SifVersion.LATEST, SchoolDTD.CONTACTPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class ContactPersonal : SifDataObject
 	///<param name="refId">The ID (GUID) of a person referenced as a contact. Note that this GUID may be the same GUID assigned to a LearnerPersonal and/or WorkforcePersonal object record.</param>
 	///<param name="personalInformation">Name, demographic, address, email, and phone information for a person acting as a contact.</param>
 	///
-	public ContactPersonal( string refId, PersonalInformation personalInformation ) : base( Adk.SifVersion, SchoolDTD.CONTACTPERSONAL )
+	public ContactPersonal( string refId, PersonalInformation personalInformation ) : base( SifVersion.LATEST, SchoolDTD.CONTACTPERSONAL )
 	{
 		this.RefId = refId;
 		this.PersonalInformation = personalInformation;
@@ -113,4 +113,3 @@ public class ContactPersonal : SifDataObject
 	}
 
 }}
-

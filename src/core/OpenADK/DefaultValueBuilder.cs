@@ -71,17 +71,17 @@ namespace OpenADK.Library
         /// <value>The name of a class (e.g. "OpenADK.Library.DefaultValueBuilder"). 
         ///     <para>This should be the <seealso cref="System.Type.AssemblyQualifiedName">AssemblyQualifiedName</seealso> of the class.</para> 
         /// </value>
-        public static string DefaultClass
+        public string DefaultClass
         {
-            set { sDefClass = value; }
+            set { fDefaultClass = value; }
         }
 
-        private static string sDefClass = typeof ( DefaultValueBuilder ).AssemblyQualifiedName;
+        private string fDefaultClass;
 
         /// <summary>
         /// The aliases currently in effect
         /// </summary>
-        protected internal static IDictionary sAliases;
+        protected internal IDictionary fAliases;
 
         /// <summary>
         /// The dictionary of variables
@@ -91,7 +91,7 @@ namespace OpenADK.Library
         private SifFormatter fFormatter;
 
         /// <summary>  Constructor</summary>
-        public DefaultValueBuilder( IFieldAdaptor data ) : this( data, Adk.TextFormatter )
+        public DefaultValueBuilder(IFieldAdaptor data) : this(data, Impl.DTDInternals.SIF_1X_FORMATTER)
         {}
 
         /// <summary>
@@ -104,6 +104,8 @@ namespace OpenADK.Library
         {
             fVars = data;
             fFormatter = formatter;
+            fDefaultClass = typeof(DefaultValueBuilder).AssemblyQualifiedName;
+            fAliases = new Hashtable();
         }
 
         /// <summary>  Evaluate an expression that the implementation of this interface
@@ -165,14 +167,14 @@ namespace OpenADK.Library
                             }
                             else {
                                 //  Was an alias registered?
-                                string aliasClass = (string) sAliases[method];
+                                string aliasClass = (string) fAliases[method];
                                 if ( aliasClass != null ) {
                                     targetClass = Type.GetType( aliasClass );
                                 }
                             }
 
                             if ( targetClass == null ) {
-                                targetClass = Type.GetType( sDefClass );
+                                targetClass = Type.GetType( fDefaultClass );
                             }
                         }
                         catch ( TypeLoadException cnfe ) {
@@ -378,15 +380,15 @@ namespace OpenADK.Library
         /// </param>
         /// <param name="method">The fully-qualified .Net method name (e.g. "mycompany.MyValueBuilder.doSomething")
         /// </param>
-        public static void AddAlias( string alias,
-                                     string method )
+        public void AddAlias( string alias,
+                              string method )
         {
             int i = method.LastIndexOf( "." );
             if ( i != - 1 ) {
-                sAliases[alias] = method.Substring( 0, i );
+                fAliases[alias] = method.Substring( 0, i );
             }
             else {
-                sAliases[alias] = method;
+                fAliases[alias] = method;
             }
         }
 
@@ -539,10 +541,6 @@ namespace OpenADK.Library
             }
         }
 
-        static DefaultValueBuilder()
-        {
-            sAliases = new Hashtable();
-        }
     }
 }
 

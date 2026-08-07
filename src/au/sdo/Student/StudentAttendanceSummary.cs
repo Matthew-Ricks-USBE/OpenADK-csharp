@@ -28,7 +28,7 @@ public class StudentAttendanceSummary : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentAttendanceSummary
 	/// </summary>
-	public StudentAttendanceSummary() : base( Adk.SifVersion, StudentDTD.STUDENTATTENDANCESUMMARY ){}
+	public StudentAttendanceSummary() : base( SifVersion.LATEST, StudentDTD.STUDENTATTENDANCESUMMARY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -43,7 +43,7 @@ public class StudentAttendanceSummary : SifDataObject
 	///<param name="unexcusedAbsences">The number of days the student was absent from school without a valid excuse when school was in session between the StartDate and EndDate, inclusive.</param>
 	///<param name="daysInMembership">The number of days the student was present plus the number of days the student was absent when school was in session during the period between the StartDate and EndDate, inclusive.</param>
 	///
-	public StudentAttendanceSummary( string studentPersonalRefId, string schoolInfoRefId, int? schoolYear, DateTime? startDate, DateTime? endDate, decimal? daysAttended, decimal? excusedAbsences, decimal? unexcusedAbsences, decimal? daysInMembership ) : base( Adk.SifVersion, StudentDTD.STUDENTATTENDANCESUMMARY )
+	public StudentAttendanceSummary( string studentPersonalRefId, string schoolInfoRefId, int? schoolYear, DateTime? startDate, DateTime? endDate, decimal? daysAttended, decimal? excusedAbsences, decimal? unexcusedAbsences, decimal? daysInMembership ) : base( SifVersion.LATEST, StudentDTD.STUDENTATTENDANCESUMMARY )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -359,4 +359,3 @@ public class StudentAttendanceSummary : SifDataObject
 	}
 
 }}
-

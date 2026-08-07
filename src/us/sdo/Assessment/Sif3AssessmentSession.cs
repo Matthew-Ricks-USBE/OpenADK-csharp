@@ -28,7 +28,7 @@ public class Sif3AssessmentSession : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentSession
 	/// </summary>
-	public Sif3AssessmentSession() : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTSESSION ){}
+	public Sif3AssessmentSession() : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTSESSION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class Sif3AssessmentSession : SifDataObject
 	///<param name="sessionType">Indicates the type of session that is scheduled.</param>
 	///<param name="assessmentRefId">The RefId of the assessment object used in the assessment administration.</param>
 	///
-	public Sif3AssessmentSession( string refId, string sessionName, SessionType sessionType, string assessmentRefId ) : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTSESSION )
+	public Sif3AssessmentSession( string refId, string sessionName, SessionType sessionType, string assessmentRefId ) : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTSESSION )
 	{
 		this.RefId = refId;
 		this.SessionName = sessionName;
@@ -445,4 +445,3 @@ public class Sif3AssessmentSession : SifDataObject
 	}
 
 }}
-

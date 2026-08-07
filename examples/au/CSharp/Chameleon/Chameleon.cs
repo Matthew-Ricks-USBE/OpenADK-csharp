@@ -9,6 +9,7 @@ using OpenADK.Library;
 using OpenADK.Library.Infra;
 using OpenADK.Library.Tools.Cfg;
 using OpenADK.Util;
+using Microsoft.Extensions.DependencyInjection;
 using OpenADK.Library.au;
 
 namespace Library.Examples.Chameleon
@@ -23,8 +24,8 @@ namespace Library.Examples.Chameleon
         private ObjectLogger fLogger;
         private string fRequestState = Guid.NewGuid().ToString();
 
-        public Chameleon()
-            : base( "Chameleon" )
+        public Chameleon(IAdkRuntime runtime, IAdkComponentFactory components)
+            : base( "Chameleon", runtime, components )
         {
         }
 
@@ -36,11 +37,14 @@ namespace Library.Examples.Chameleon
         {
             try
             {
-                Adk.Debug = AdkDebugFlags.Moderate;
-                Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_AU, (int)SdoLibraryType.All);
-
-                Chameleon agent;
-                agent = new Chameleon();
+                using ServiceProvider services = new ServiceCollection().AddOpenAdk(options =>
+                {
+                    options.SifVersion = SifVersion.LATEST;
+                    options.Variant = SIFVariant.SIF_AU;
+                    options.SdoLibraries = (int)SdoLibraryType.All;
+                    options.Debug = AdkDebugFlags.Moderate;
+                }).AddSingleton<Chameleon>().BuildServiceProvider();
+                Chameleon agent = services.GetRequiredService<Chameleon>();
 
                 //  Start agent...
                 agent.StartAgent( args );
@@ -79,7 +83,7 @@ namespace Library.Examples.Chameleon
             //  Inform the ADK of the version of SIF specified in the sifVersion=
             //  attribute of the <agent> element
             SifVersion version = fCfg.Version;
-            Adk.SifVersion = version;
+            Runtime.SifVersion = version;
 
             //  Now call the superclass initialize once the configuration file has been read
             base.Initialize();
@@ -96,7 +100,7 @@ namespace Library.Examples.Chameleon
             fLogger = new ObjectLogger( this );
 
 
-            Query zoneQuery = new Query( InfraDTD.SIF_ZONESTATUS );
+            Query zoneQuery = Objects.CreateQuery( InfraDTD.SIF_ZONESTATUS );
             zoneQuery.AddFieldRestriction( InfraDTD.SIF_ZONESTATUS_SIF_PROVIDERS );
             //zoneQuery.AddFieldRestriction( SifDtd.SIF_ZONESTATUS_SIF_SIFNODES );
             zoneQuery.UserData = fRequestState;
@@ -136,7 +140,7 @@ namespace Library.Examples.Chameleon
         public void OnQueryPending( IMessageInfo info,
                                     IZone zone )
         {
-            Adk.Log.Info
+            Runtime.Log.Info
                 (
                 string.Format
                     ( "Requested {0} from {1}", ((SifMessageInfo) info).SIFRequestObjectType.Name,
@@ -199,7 +203,7 @@ namespace Library.Examples.Chameleon
                     foreach ( SIF_Object obj in p.SIF_ObjectList )
                     {
                         // Lookup the topic for each provided object in the zone
-                        IElementDef def = Adk.Dtd.LookupElementDef( obj.ObjectName );
+                        IElementDef def = Runtime.Dtd.LookupElementDef( obj.ObjectName );
                         if ( def != null )
                         {
                             objectDefs.Add( def );
@@ -254,12 +258,12 @@ namespace Library.Examples.Chameleon
                 string syncObjects = zone.Properties.GetProperty( "chameleon.syncObjects" );
                 foreach ( IElementDef def in objectDefs )
                 {
-                    if ( def.IsSupported( Adk.SifVersion ) )
+                    if ( def.IsSupported( Runtime.SifVersion ) )
                     {
                         if ( syncObjects == null ||
                              (syncObjects.Length > 0 && syncObjects.IndexOf( def.Name ) > -1) )
                         {
-                            Query q = new Query( def );
+                            Query q = Objects.CreateQuery( def );
 
                             // Query by specific parameters
                             string condition =
@@ -284,7 +288,7 @@ namespace Library.Examples.Chameleon
                                 zone.ServerLog.Log
                                     ( LogLevel.INFO,
                                       "Requesting " + q.ObjectType.Name + " from the zone",
-                                      q.ToXml( Adk.SifVersion ), "1002" );
+                                      q.ToXml( Runtime.SifVersion ), "1002" );
                             }
 
                             zone.Query( q );
@@ -294,7 +298,7 @@ namespace Library.Examples.Chameleon
                     {
                         String debug = "Will not request " + def.Name +
                                        " because it is not supported in " +
-                                       Adk.SifVersion.ToString();
+                                       Runtime.SifVersion.ToString();
                         Console.WriteLine( debug );
                         zone.ServerLog.Log( LogLevel.WARNING, debug, null, "1001" );
                     }

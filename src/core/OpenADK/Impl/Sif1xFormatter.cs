@@ -276,8 +276,8 @@ namespace OpenADK.Library.Impl
                             IElementDef subElementDef = e.ElementDef;
                             if (version.CompareTo(subElementDef.EarliestVersion) >= 0)
                             {
-                                String tag = subElementDef.Tag(Adk.SifVersion);
-                                IElementDef restoredDef = Adk.Dtd.LookupElementDef(element.ElementDef, tag);
+                                String tag = subElementDef.Tag(version);
+                                IElementDef restoredDef = element.ElementDef.Dtd.LookupElementDef(element.ElementDef, tag);
                                 if (restoredDef != null)
                                 {
                                     e.ElementDef = restoredDef;
@@ -333,8 +333,24 @@ namespace OpenADK.Library.Impl
                 // we need to actually find or create an instance of the new
                 // EmailList
                 // container element and add the child to it, instead of to "this"
-                String tag = elementParentDef.Tag(Adk.SifVersion);
-                IElementDef missingLink = Adk.Dtd.LookupElementDef(contentParent.ElementDef, tag);
+                String tag = elementParentDef.IsSupported(version)
+                    ? elementParentDef.Tag(version)
+                    : elementParentDef.Name;
+                IElementDef missingLink = contentParent.ElementDef.Dtd.LookupElementDef(contentParent.ElementDef, tag);
+                if (missingLink == null && contentParent.ElementDef is ElementDefImpl parentDef)
+                {
+                    foreach (IElementDef candidate in parentDef.Children)
+                    {
+                        if (candidate.IsSupported(version) &&
+                            candidate.IsCollapsed(version) &&
+                            String.Equals(candidate.ClassName, elementParentDef.ClassName,
+                                StringComparison.Ordinal))
+                        {
+                            missingLink = candidate;
+                            break;
+                        }
+                    }
+                }
                 if (missingLink != null && missingLink.IsSupported(version) && missingLink.IsCollapsed(version))
                 {
                     SifElement container = contentParent.GetChild(missingLink);

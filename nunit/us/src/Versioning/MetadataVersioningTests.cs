@@ -4,16 +4,17 @@ using System.Text;
 using OpenADK.Library;
 using OpenADK.Library.us.Library;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Versioning
 {
     [TestFixture]
-    public class MetadataVersioningTests
+    public class MetadataVersioningTests : AdkTest
     {
         [SetUp]
         public void setUp()
         {
-            Adk.Initialize();
+            Runtime.Initialize();
         }
 
         [Test]
@@ -34,19 +35,19 @@ namespace Library.Nunit.US.Versioning
         {
             Assert.AreEqual("Transaction", trans.ElementDef.Name, "version-independent name");
 
-            // assert the tag name for SIF 1.1: ìCircTxî
+            // assert the tag name for SIF 1.1: ‚ÄúCircTx‚Äù
             Assert.AreEqual("CircTx", trans.ElementDef.Tag(SifVersion.SIF11), "SIF 1.1 Should be CircTx");
 
-            // assert the tag name for SIF 1.5: ìCircTxî
+            // assert the tag name for SIF 1.5: ‚ÄúCircTx‚Äù
             Assert.AreEqual("CircTx", trans.ElementDef.Tag(SifVersion.Parse("1.5")), "SIF 1.5 Should be CircTx");
 
-            // assert the tag name for SIF 1.5r1: ìCircTxî
+            // assert the tag name for SIF 1.5r1: ‚ÄúCircTx‚Äù
             Assert.AreEqual("CircTx", trans.ElementDef.Tag(SifVersion.SIF15r1), "SIF 1.5r1 Should be CircTx");
 
-            // assert the tag name for SIF 2.0: ìTransactionî
+            // assert the tag name for SIF 2.0: ‚ÄúTransaction‚Äù
             Assert.AreEqual("Transaction", trans.ElementDef.Tag(SifVersion.SIF20), "SIF 2.0 Should be Transaction");
 
-            // assert the tag name for SIF 2.1: ìTransactionî
+            // assert the tag name for SIF 2.1: ‚ÄúTransaction‚Äù
             Assert.AreEqual("Transaction", trans.ElementDef.Tag(SifVersion.SIF21), "SIF 2.1 Should be Transaction");
 
         }

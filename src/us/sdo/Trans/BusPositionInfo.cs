@@ -28,7 +28,7 @@ public class BusPositionInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a BusPositionInfo
 	/// </summary>
-	public BusPositionInfo() : base( Adk.SifVersion, TransDTD.BUSPOSITIONINFO ){}
+	public BusPositionInfo() : base( SifVersion.LATEST, TransDTD.BUSPOSITIONINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class BusPositionInfo : SifDataObject
 	///<param name="time">The time of the report from the bus.</param>
 	///<param name="gridLocation">The location of the bus.</param>
 	///
-	public BusPositionInfo( string busInfoRefId, DateTime? date, DateTime? time, GridLocation gridLocation ) : base( Adk.SifVersion, TransDTD.BUSPOSITIONINFO )
+	public BusPositionInfo( string busInfoRefId, DateTime? date, DateTime? time, GridLocation gridLocation ) : base( SifVersion.LATEST, TransDTD.BUSPOSITIONINFO )
 	{
 		this.BusInfoRefId = busInfoRefId;
 		this.Date = date;
@@ -440,4 +440,3 @@ public class BusPositionInfo : SifDataObject
 	}
 
 }}
-

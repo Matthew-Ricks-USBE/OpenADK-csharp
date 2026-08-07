@@ -28,7 +28,7 @@ public class Scope : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Scope
 	/// </summary>
-	public Scope() : base( Adk.SifVersion, LearningDTD.SCOPE ){}
+	public Scope() : base( SifVersion.LATEST, LearningDTD.SCOPE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -43,7 +43,7 @@ public class Scope : SifDataObject
 	///<param name="schoolYear">A SchoolYear</param>
 	///<param name="status">The "Status" of the timetable transfer 'BT' and 'ET' are sent by TTSoftware when sending a timetable. The others are sent by the MIS after receiving a timetable. (See also "Reasons for Status" below).</param>
 	///
-	public Scope( string refId, string ttScopeName, string supplierName, string product, string version, string schoolInfoRefId, string schoolName, int? schoolYear, ScopeStatus status ) : base( Adk.SifVersion, LearningDTD.SCOPE )
+	public Scope( string refId, string ttScopeName, string supplierName, string product, string version, string schoolInfoRefId, string schoolName, int? schoolYear, ScopeStatus status ) : base( SifVersion.LATEST, LearningDTD.SCOPE )
 	{
 		this.RefId = refId;
 		this.TTScopeName = ttScopeName;
@@ -407,4 +407,3 @@ public class Scope : SifDataObject
 	}
 
 }}
-

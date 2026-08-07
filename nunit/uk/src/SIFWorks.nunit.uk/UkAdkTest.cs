@@ -4,20 +4,10 @@ namespace OpenADK.Library.Nunit.UK;
 
 public class UkAdkTest : UsAdkTest
 {
-    private SifVersion fOriginalUkVersion;
-
-    public override void SetUp()
+    protected override void ConfigureOptions(AdkOptions options)
     {
-        if (!Adk.Initialized)
-        {
-            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_UK, (int)uk.SdoLibraryType.All);
-        }
-        fOriginalUkVersion = Adk.SifVersion;
-        Adk.SifVersion = SifVersion.LATEST;
-    }
-
-    public override void TearDown()
-    {
-        Adk.SifVersion = fOriginalUkVersion;
+        options.SifVersion = SifVersion.LATEST;
+        options.Variant = SIFVariant.SIF_UK;
+        options.SdoLibraries = (int)uk.SdoLibraryType.All;
     }
 }

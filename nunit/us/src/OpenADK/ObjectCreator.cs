@@ -81,10 +81,11 @@ namespace OpenADK.Library
 
       public static StaffAssignment CreateStaffAssignment()
       {
-          StaffAssignment sa = new StaffAssignment(Adk.MakeGuid(),
-                 Adk.MakeGuid(), 2008, Adk.MakeGuid(), YesNo.YES);
+          StaffAssignment sa = new StaffAssignment(SifFormatter.GuidToSifRefID(Guid.NewGuid()),
+                 SifFormatter.GuidToSifRefID(Guid.NewGuid()), 2008,
+                 SifFormatter.GuidToSifRefID(Guid.NewGuid()), YesNo.YES);
           sa.Description = "Description of this Assignment" ;
-          sa.EmployeePersonalRefId = Adk.MakeGuid() ;
+          sa.EmployeePersonalRefId = SifFormatter.GuidToSifRefID(Guid.NewGuid()) ;
           sa.GradeClassification = new GradeClassification( GradeClassificationCode.POSTSECONDARY);
           return sa;
       }

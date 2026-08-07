@@ -27,9 +27,9 @@ namespace Library.Nunit.US.Instr
 
             //  Create a StudentPlacement
             StudentPlacement sp = new StudentPlacement();
-            sp.RefId = Adk.MakeGuid();
-            sp.StudentParticipationRefId = Adk.MakeGuid();
-            sp.StudentPersonalRefId = Adk.MakeGuid();
+            sp.RefId = Runtime.MakeGuid();
+            sp.StudentParticipationRefId = Runtime.MakeGuid();
+            sp.StudentPersonalRefId = Runtime.MakeGuid();
             sp.SetService(ServiceCode.STAFF_PROFESSIONAL_DEVELOPMENT, "foo", "test");
             sp.ServiceProviderAgency = "ABSD";
             sp.ServiceProviderName = "John Smithfield";

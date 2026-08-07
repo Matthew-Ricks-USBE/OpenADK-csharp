@@ -28,7 +28,7 @@ public class FinancialAnnual : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FinancialAnnual
 	/// </summary>
-	public FinancialAnnual() : base( Adk.SifVersion, HrfinDTD.FINANCIALANNUAL ){}
+	public FinancialAnnual() : base( SifVersion.LATEST, HrfinDTD.FINANCIALANNUAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class FinancialAnnual : SifDataObject
 	///<param name="fiscalYear">Fiscal year of summary account</param>
 	///<param name="annualItems">Contains information about the item being summarized.</param>
 	///
-	public FinancialAnnual( DateTime? reportDate, string stateProvinceId, int? fiscalYear, AnnualItems annualItems ) : base( Adk.SifVersion, HrfinDTD.FINANCIALANNUAL )
+	public FinancialAnnual( DateTime? reportDate, string stateProvinceId, int? fiscalYear, AnnualItems annualItems ) : base( SifVersion.LATEST, HrfinDTD.FINANCIALANNUAL )
 	{
 		this.ReportDate = reportDate;
 		this.StateProvinceId = stateProvinceId;
@@ -156,4 +156,3 @@ public class FinancialAnnual : SifDataObject
 	}
 
 }}
-

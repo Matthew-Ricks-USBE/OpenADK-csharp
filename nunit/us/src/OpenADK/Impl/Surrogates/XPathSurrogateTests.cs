@@ -11,19 +11,19 @@ using OpenADK.Library.us;
 namespace Library.Nunit.US.Library.Impl.Surrogates
 {
     [TestFixture]
-    public class XPathSurrogateTests
+    public class XPathSurrogateTests : AdkTest
     {
 		protected SifVersion fOriginalVersion;
 
         [SetUp]
 		public void SetUp() {
-			Adk.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
-			fOriginalVersion = Adk.SifVersion;
+			Runtime.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
+			fOriginalVersion = Runtime.SifVersion;
         }
 
 		[TearDown]
 		public void TearDown() {
-			Adk.SifVersion = fOriginalVersion;
+			Runtime.SifVersion = fOriginalVersion;
         }
 
         /**
@@ -34,7 +34,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
         [Test]
         public void testSSE_Get_XPathSurrogate_SIF15r1() {
 
-		Adk.SifVersion=SifVersion.SIF15r1;
+		Runtime.SifVersion=SifVersion.SIF15r1;
 
 		String sXML = "<StudentSchoolEnrollment RefId=\"A8C3D3E34B359D75101D00AA001A1652\""
 					+ "  StudentPersonalRefId=\"D3E34B359D75101A8C3D00AA001A1652\""
@@ -85,7 +85,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
 
 	private SifElement parseSIF15r1XML(String xml) {
-		SifParser parser = SifParser.NewInstance();
+		SifParser parser = new SifParser(Runtime);
 		return parser.Parse(xml, null, 0, SifVersion.SIF15r1);
 	}
 

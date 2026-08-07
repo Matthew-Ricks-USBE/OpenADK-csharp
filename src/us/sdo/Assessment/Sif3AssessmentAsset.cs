@@ -28,7 +28,7 @@ public class Sif3AssessmentAsset : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentAsset
 	/// </summary>
-	public Sif3AssessmentAsset() : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTASSET ){}
+	public Sif3AssessmentAsset() : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTASSET ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class Sif3AssessmentAsset : SifDataObject
 	///<param name="assetType">An AssetType</param>
 	///<param name="assetContent">Contains the actual asset content. Content could be text, images, audio/video, interactive tools, etc.</param>
 	///
-	public Sif3AssessmentAsset( AssetType assetType, ContentElement assetContent ) : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTASSET )
+	public Sif3AssessmentAsset( AssetType assetType, ContentElement assetContent ) : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTASSET )
 	{
 		this.SetAssetType( assetType );
 		this.AssetContent = assetContent;
@@ -381,4 +381,3 @@ public class Sif3AssessmentAsset : SifDataObject
 	}
 
 }}
-

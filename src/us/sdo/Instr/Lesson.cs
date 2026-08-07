@@ -28,7 +28,7 @@ public class Lesson : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Lesson
 	/// </summary>
-	public Lesson() : base( Adk.SifVersion, InstrDTD.LESSON ){}
+	public Lesson() : base( SifVersion.LATEST, InstrDTD.LESSON ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class Lesson : SifDataObject
 	///<param name="language">A Language</param>
 	///<param name="title">Name of lesson.</param>
 	///
-	public Lesson( string refId, LanguageCode language, string title ) : base( Adk.SifVersion, InstrDTD.LESSON )
+	public Lesson( string refId, LanguageCode language, string title ) : base( SifVersion.LATEST, InstrDTD.LESSON )
 	{
 		this.RefId = refId;
 		this.SetLanguage( language );
@@ -458,4 +458,3 @@ public class Lesson : SifDataObject
 	}
 
 }}
-

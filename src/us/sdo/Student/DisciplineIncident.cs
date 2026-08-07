@@ -28,7 +28,7 @@ public class DisciplineIncident : SifDataObject
 	/// <summary>
 	/// Creates an instance of a DisciplineIncident
 	/// </summary>
-	public DisciplineIncident() : base( Adk.SifVersion, StudentDTD.DISCIPLINEINCIDENT ){}
+	public DisciplineIncident() : base( SifVersion.LATEST, StudentDTD.DISCIPLINEINCIDENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -44,7 +44,7 @@ public class DisciplineIncident : SifDataObject
 	///<param name="offenderList">An OffenderList</param>
 	///<param name="victimList">A VictimList</param>
 	///
-	public DisciplineIncident( string refId, int? schoolYear, AgencyReporting agencyReporting, string incidentNumber, DateTime? incidentDate, IncidentTime incidentTime, IncidentLocation incidentLocation, IncidentCategory incidentCategory, OffenderList offenderList, VictimList victimList ) : base( Adk.SifVersion, StudentDTD.DISCIPLINEINCIDENT )
+	public DisciplineIncident( string refId, int? schoolYear, AgencyReporting agencyReporting, string incidentNumber, DateTime? incidentDate, IncidentTime incidentTime, IncidentLocation incidentLocation, IncidentCategory incidentCategory, OffenderList offenderList, VictimList victimList ) : base( SifVersion.LATEST, StudentDTD.DISCIPLINEINCIDENT )
 	{
 		this.RefId = refId;
 		this.SchoolYear = schoolYear;
@@ -545,4 +545,3 @@ public class DisciplineIncident : SifDataObject
 	}
 
 }}
-

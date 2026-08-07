@@ -88,8 +88,8 @@ namespace OpenADK.Web.Http
                 // Write the Response
                 context.Response.AsyncFinishRequest( socket, context.Request, keepAlive );
 
-                if ( (Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0 &&
-                     fListener.Server.Log.IsDebugEnabled ) {
+                if ( (fListener.Server.Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0 &&
+                     fListener.Server.Log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug) ) {
                     fListener.Server.Log.Info
                         ( string.Format
                               ( "Processed Request for {0}:{1} ( {2} ) in {3} milliseconds",
@@ -105,7 +105,7 @@ namespace OpenADK.Web.Http
 
         private void _logError( Exception ex )
         {
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 ) {
+            if ( (fListener.Server.Runtime.Debug & AdkDebugFlags.Exceptions) != 0 ) {
                 fListener.Server.Log.Error( ex.Message, ex );
             }
         }

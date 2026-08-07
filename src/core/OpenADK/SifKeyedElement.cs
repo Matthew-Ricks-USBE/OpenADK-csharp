@@ -33,7 +33,7 @@ namespace OpenADK.Library
             {
                 // All Key comparisons are done using the latest
                 // SIFVersion
-                SifFormatter formatter = Adk.Dtd.GetFormatter( SifVersion.LATEST );
+                SifFormatter formatter = ElementDef.Dtd.GetFormatter(SifVersion.LATEST);
                 StringBuilder keyBuilder = new StringBuilder();
                 IElementDef [] keys = this.KeyFields;
                 for ( int a = 0; a < keys.Length; a++ ) {

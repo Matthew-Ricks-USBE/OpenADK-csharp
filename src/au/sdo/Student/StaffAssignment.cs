@@ -28,7 +28,7 @@ public class StaffAssignment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StaffAssignment
 	/// </summary>
-	public StaffAssignment() : base( Adk.SifVersion, StudentDTD.STAFFASSIGNMENT ){}
+	public StaffAssignment() : base( SifVersion.LATEST, StudentDTD.STAFFASSIGNMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class StaffAssignment : SifDataObject
 	///<param name="staffPersonalRefId">ID (GUID) of this staff member, as represented in the StaffPersonal object.</param>
 	///<param name="primaryAssignment">Is this the staff member's primary assignment?  Note: There must be one and only one instance of the object with a Yes value in this element per school year.</param>
 	///
-	public StaffAssignment( string refId, string schoolInfoRefId, int? schoolYear, string staffPersonalRefId, AUCodeSetsYesOrNoCategoryType primaryAssignment ) : base( Adk.SifVersion, StudentDTD.STAFFASSIGNMENT )
+	public StaffAssignment( string refId, string schoolInfoRefId, int? schoolYear, string staffPersonalRefId, AUCodeSetsYesOrNoCategoryType primaryAssignment ) : base( SifVersion.LATEST, StudentDTD.STAFFASSIGNMENT )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -473,4 +473,3 @@ public class StaffAssignment : SifDataObject
 	}
 
 }}
-

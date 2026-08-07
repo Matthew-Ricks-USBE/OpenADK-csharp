@@ -28,7 +28,7 @@ public class NonTeachingActivity : SifDataObject
 	/// <summary>
 	/// Creates an instance of a NonTeachingActivity
 	/// </summary>
-	public NonTeachingActivity() : base( Adk.SifVersion, LearningDTD.NONTEACHINGACTIVITY ){}
+	public NonTeachingActivity() : base( SifVersion.LATEST, LearningDTD.NONTEACHINGACTIVITY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class NonTeachingActivity : SifDataObject
 	///<param name="description">A Description</param>
 	///<param name="type">Lesson/meeting type Note this Type over-rides the period type in the cycle definition (in case, for eg, Period 1 is Registration for some classes but not others)</param>
 	///
-	public NonTeachingActivity( string refId, string ntCode, string description, NonTeachingActivityType type ) : base( Adk.SifVersion, LearningDTD.NONTEACHINGACTIVITY )
+	public NonTeachingActivity( string refId, string ntCode, string description, NonTeachingActivityType type ) : base( SifVersion.LATEST, LearningDTD.NONTEACHINGACTIVITY )
 	{
 		this.RefId = refId;
 		this.NTCode = ntCode;
@@ -153,4 +153,3 @@ public class NonTeachingActivity : SifDataObject
 	}
 
 }}
-

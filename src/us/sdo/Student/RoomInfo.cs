@@ -28,7 +28,7 @@ public class RoomInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a RoomInfo
 	/// </summary>
-	public RoomInfo() : base( Adk.SifVersion, StudentDTD.ROOMINFO ){}
+	public RoomInfo() : base( SifVersion.LATEST, StudentDTD.ROOMINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class RoomInfo : SifDataObject
 	///<param name="refId">GUID that identifies this room.</param>
 	///<param name="schoolInfoRefId">GUID that identifies the school that this room belongs to.</param>
 	///
-	public RoomInfo( string refId, string schoolInfoRefId ) : base( Adk.SifVersion, StudentDTD.ROOMINFO )
+	public RoomInfo( string refId, string schoolInfoRefId ) : base( SifVersion.LATEST, StudentDTD.ROOMINFO )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -326,4 +326,3 @@ public class RoomInfo : SifDataObject
 	}
 
 }}
-

@@ -231,7 +231,7 @@ namespace OpenADK.Library
    /// </item>
    /// <item>
    ///	<term>adk.encryption.keys.[KeyName]</term>
-   ///	<description>The actual key to use for encryption or decryption where “keyname” matches the @KeyName attribute of the AuthenticationInfoPassword object</description>
+   ///	<description>The actual key to use for encryption or decryption where ï¿½keynameï¿½ matches the @KeyName attribute of the AuthenticationInfoPassword object</description>
    /// </item>
    /// </list>
    /// 
@@ -239,6 +239,11 @@ namespace OpenADK.Library
    [Serializable]
    public class AgentProperties : AdkProperties
    {
+      private readonly Agent fAgent;
+
+      private IAdkRuntime Runtime => fAgent?.Runtime ??
+         throw new InvalidOperationException("Agent properties are not associated with an agent.");
+
       ///<summary> Gets/Sets the URL to the agent's icon. The icon must meet the requirements for the SIF_Icon
       /// element. If this property is set, the agent will send a &lt;SIF_Icon&gt; element during
       /// agent registration
@@ -642,7 +647,7 @@ namespace OpenADK.Library
 
          set
          {
-            string[] supported = Adk.TransportProtocols;
+            string[] supported = Runtime.TransportProtocols;
             for (int i = 0; i < supported.Length; i++)
             {
                if (supported[i].ToUpper().Equals(value.ToUpper()))
@@ -705,7 +710,7 @@ namespace OpenADK.Library
          get
          {
              String overrideZISVersion = GetProperty(PROP_PROVISIONING_ZISVERSION);
-             SifVersion calculatedVersion = Adk.SifVersion;
+             SifVersion calculatedVersion = Runtime.SifVersion;
              if (overrideZISVersion != null)
              {
                  try
@@ -714,8 +719,8 @@ namespace OpenADK.Library
                  }
                  catch (Exception iae)
                  {
-                     Adk.Log.Warn("Unable to parse property 'adk.provisioning.zisVersion'", iae);
-                     calculatedVersion = Adk.SifVersion;
+                     Runtime.Log.Warn("Unable to parse property 'adk.provisioning.zisVersion'", iae);
+                     calculatedVersion = Runtime.SifVersion;
                  }
              }
              
@@ -965,49 +970,25 @@ namespace OpenADK.Library
 
       /// <summary>  Constructor</summary>
       protected internal AgentProperties(Agent agent)
-         : base(agent) { }
+         : base((AdkProperties)null)
+      {
+         fAgent = agent ?? throw new ArgumentNullException(nameof(agent));
+         Defaults(agent);
+      }
 
       /// <summary>  Constructor</summary>
       /// <param name="inherit">The parent AgentProperties from which properties will be
       /// inherited when not explicitly set on this object
       /// </param>
       public AgentProperties(AgentProperties inherit)
-         : base(inherit) { }
+         : base(inherit)
+      {
+         fAgent = inherit?.fAgent;
+      }
 
-      /// <summary>  Assigns default property values. Called by the constructor to import
-      /// the value of all System properties beginning with the
-      /// prefix <c>adk.</c>
-      /// </summary>
+      /// <summary>Assigns default property values.</summary>
       public override void Defaults(Object owner)
       {
-         NameValueCollection sysprops = Properties.GetProperties();
-
-         //  Get all System properties that begin with "adk."
-         foreach (string k in sysprops.Keys)
-         {
-            if (k.StartsWith("adk.") && !k.StartsWith("adk.transport"))
-            {
-               string val = sysprops[k];
-
-               if ((Adk.Debug & AdkDebugFlags.Properties) != 0)
-               {
-                  if (owner == null)
-                  {
-                     Adk.Log.Debug("Using System property " + k + " = " + val);
-                  }
-                  else if (owner is ZoneImpl)
-                  {
-                     ((ZoneImpl)owner).Log.Debug
-                         ("Using System property " + k + " = " + val);
-                  }
-                  else if (owner is Agent)
-                  {
-                     Agent.Log.Debug("Using System property " + k + " = " + val);
-                  }
-               }
-               this.SetProperty(k, val);
-            }
-         }
       }
    }
 }

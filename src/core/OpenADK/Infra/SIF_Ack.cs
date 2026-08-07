@@ -207,24 +207,24 @@ public class SIF_Ack : SifMessagePayload
 		}
 		
 		
-		public override void  LogSend(log4net.ILog log)
+		public override void  LogSend(Microsoft.Extensions.Logging.ILogger log)
 		{
-			if ((Adk.Debug & AdkDebugFlags.Messaging ) != 0)
+			if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
 			{
 				LogCommon("Send ", log);
 			}
 		}
 		
 		
-		public override void  LogRecv(log4net.ILog log)
+		public override void  LogRecv(Microsoft.Extensions.Logging.ILogger log)
 		{
-			if ((Adk.Debug & AdkDebugFlags.Messaging ) != 0)
+			if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
 			{
 				LogCommon("Receive ", log);
 			}
 		}
 		
-		private void  LogCommon(string direction, log4net.ILog log)
+		private void  LogCommon(string direction, Microsoft.Extensions.Logging.ILogger log)
 		{
 			System.Text.StringBuilder b = new System.Text.StringBuilder(direction);
 			b.Append( ElementDef.Tag(SifVersion));
@@ -249,12 +249,12 @@ public class SIF_Ack : SifMessagePayload
 			b.Append(")");
 			log.Debug(b.ToString());
 			
-			if (err != null && (Adk.Debug & AdkDebugFlags.Messaging) != 0)
+			if (err != null && log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
 			{
 				log.Debug(err.ToString());
 			}
 			
-			if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed ) != 0)
+			if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
 			{
 				string id = MsgId;
 				log.Debug("  MsgId: " + ( id == null?"<none>":id));

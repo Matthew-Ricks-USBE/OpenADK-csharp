@@ -14,16 +14,16 @@ using OpenADK.Library.Infra;
 using OpenADK.Library.Tools.XPath;
 using OpenADK.Util;
 using OpenADK.Examples;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SIFQuery 
 {
 
  public class SIFQuery : Agent, IQueryResults {
-     private static readonly SIFQuery _agent = new SIFQuery();
      private static IDictionary<string, ComparisonOperators> supportedComparisons = new Dictionary<string, ComparisonOperators>();
 
-     public SIFQuery() : 
-         base("SIFQuery") 
+     public SIFQuery(IAdkRuntime runtime, IAdkComponentFactory components) :
+         base("SIFQuery", runtime, components)
      {
          
      }
@@ -48,7 +48,8 @@ namespace SIFQuery
      /// <param name="args"></param>
      [STAThread]
      public static void Main(string[] args) {
-        
+        SIFQuery agent = null;
+        ServiceProvider services = null;
         try {
             if( args.Length < 2 ) {
 	            Console.WriteLine("Usage: SIFQuery /zone zone /url url [/events] [options]");
@@ -59,21 +60,28 @@ namespace SIFQuery
             }
         	
             //	Pre-parse the command-line before initializing the ADK
-            Adk.Debug = AdkDebugFlags.Moderate;
+            AdkExamples.Debug = AdkDebugFlags.Moderate;
             AdkExamples.parseCL( null, args);
         	
             //  Initialize the ADK with the specified version, loading only the Student SDO package
             int sdoLibs;
             sdoLibs = (int)OpenADK.Library.us.SdoLibraryType.All;
-            Adk.Initialize(SifVersion.SIF23,SIFVariant.SIF_US,sdoLibs);
+            services = new ServiceCollection().AddOpenAdk(options =>
+            {
+                options.SifVersion = SifVersion.SIF23;
+                options.Variant = SIFVariant.SIF_US;
+                options.SdoLibraries = sdoLibs;
+                options.Debug = AdkExamples.Debug;
+            }).AddSingleton<SIFQuery>().BuildServiceProvider();
+            agent = services.GetRequiredService<SIFQuery>();
             // Call StartAgent. 
-            _agent.StartAgent(args);
+            agent.StartAgent(args);
         	
             // Turn down debugging
-            Adk.Debug = AdkDebugFlags.None;
+            agent.Runtime.Debug = AdkDebugFlags.None;
         	
             // Call runConsole() This method does not return until the agent shuts down
-            _agent.RunConsole();
+            agent.RunConsole();
         	
             //	Wait for Ctrl-C to be pressed
             Console.WriteLine( "Agent is running (Press Ctrl-C to stop)" );
@@ -82,10 +90,10 @@ namespace SIFQuery
         } catch(Exception e) {
             Console.WriteLine(e);
         } finally {
-            if( _agent != null && _agent.Initialized ){
+            if( agent != null && agent.Initialized ){
 	            //  Always shutdown the agent on exit
 	            try {
-		            _agent.Shutdown( AdkExamples.Unreg ?  ProvisioningFlags.Unprovide : ProvisioningFlags.None );
+                    agent.Shutdown( AdkExamples.Unreg ?  ProvisioningFlags.Unprovide : ProvisioningFlags.None );
 	            }
 	            catch( AdkException adkEx ){
 		            Console.WriteLine( adkEx );
@@ -93,6 +101,7 @@ namespace SIFQuery
             }
 						// set breakpoint here to prevent console from closing on errors
             Console.WriteLine("");
+            services?.Dispose();
         }
 
 	}
@@ -210,13 +219,13 @@ namespace SIFQuery
 	}
 	
 	private Query CreateQuery( String fromClause ){
-		IElementDef queryDef = Adk.Dtd.LookupElementDef( fromClause.Trim() );
+		IElementDef queryDef = Runtime.Dtd.LookupElementDef( fromClause.Trim() );
 		if( queryDef == null ){
 			Console.WriteLine( "ERROR: Unrecognized FROM statement: " + fromClause );
 			PrintSQLHelp();
 			return null;
 		} else{
-			return new Query( queryDef );
+			return Objects.CreateQuery( queryDef );
 		}
 	}
 	
@@ -229,7 +238,7 @@ namespace SIFQuery
 		foreach(string field in fields){
 			string val = field.Trim();
 			if( val.Length > 0 ){
-				IElementDef restriction = Adk.Dtd.LookupElementDefBySQP( q.ObjectType, val );
+				IElementDef restriction = Runtime.Dtd.LookupElementDefBySQP( q.ObjectType, val );
 				if( restriction == null ){
 					Console.WriteLine( "ERROR: Unrecognized SELECT field: " + val );
 					PrintSQLHelp();
@@ -292,7 +301,7 @@ namespace SIFQuery
                     }
 
                     string fieldExpr = fields[0].Trim();
-                    IElementDef def = Adk.Dtd.LookupElementDefBySQP(q.ObjectType, fieldExpr );
+                    IElementDef def = Runtime.Dtd.LookupElementDefBySQP(q.ObjectType, fieldExpr );
                     if (def == null) {
                         Console.WriteLine("ERROR: Unrecognized field in where clause: " + fieldExpr );
                         PrintSQLHelp();

@@ -28,7 +28,7 @@ public class Lesson : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Lesson
 	/// </summary>
-	public Lesson() : base( Adk.SifVersion, SchoolDTD.LESSON ){}
+	public Lesson() : base( SifVersion.LATEST, SchoolDTD.LESSON ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class Lesson : SifDataObject
 	///<param name="periodIndex">Index of period this lesson/meeting starts</param>
 	///<param name="type">Lesson/meeting type The value here determines whether a TeachingGroupID or an NTCode is required</param>
 	///
-	public Lesson( string refId, string ttDayId, int? periodIndex, LessonType type ) : base( Adk.SifVersion, SchoolDTD.LESSON )
+	public Lesson( string refId, string ttDayId, int? periodIndex, LessonType type ) : base( SifVersion.LATEST, SchoolDTD.LESSON )
 	{
 		this.RefId = refId;
 		this.TTDayId = ttDayId;
@@ -275,4 +275,3 @@ public class Lesson : SifDataObject
 	}
 
 }}
-

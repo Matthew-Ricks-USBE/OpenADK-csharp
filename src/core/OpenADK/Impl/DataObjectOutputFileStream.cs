@@ -255,7 +255,7 @@ namespace OpenADK.Library.Impl
                         }
                     }
 
-                    if ( (Adk.Debug & AdkDebugFlags.Message_Content) != 0 )
+                    if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Message_Content) != 0 )
                     {
                         buffer.Seek( 0, SeekOrigin.Begin );
                         StreamReader reader = new StreamReader( buffer, SifIOFormatter.ENCODING );
@@ -364,7 +364,7 @@ namespace OpenADK.Library.Impl
             try
             {
                 NewPacket();
-                SifWriter writer = new SifWriter( fCurrentOutputStream );
+                SifWriter writer = new SifWriter(fCurrentOutputStream, fZone.Agent.Runtime);
                 writer.SuppressNamespace( true );
                 writer.Write( error, fRenderAsVersion );
                 writer.Close();
@@ -472,7 +472,7 @@ namespace OpenADK.Library.Impl
                                             SifVersion version,
                                             IElementDef[] fieldRestrictions )
         {
-            SifWriter writer = new SifWriter( buffer );
+            SifWriter writer = new SifWriter(buffer, fZone.Agent.Runtime);
             writer.SuppressNamespace( true );
             if ( fQuery != null )
             {

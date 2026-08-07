@@ -28,14 +28,14 @@ public class Sif3AssessmentAdministration : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentAdministration
 	/// </summary>
-	public Sif3AssessmentAdministration() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTADMINISTRATION ){}
+	public Sif3AssessmentAdministration() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTADMINISTRATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">The GUID that uniquely identifies an instance of the object.</param>
 	///
-	public Sif3AssessmentAdministration( string refId ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTADMINISTRATION )
+	public Sif3AssessmentAdministration( string refId ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTADMINISTRATION )
 	{
 		this.RefId = refId;
 	}
@@ -230,4 +230,3 @@ public class Sif3AssessmentAdministration : SifDataObject
 	}
 
 }}
-

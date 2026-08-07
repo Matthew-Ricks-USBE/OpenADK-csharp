@@ -28,7 +28,7 @@ public class AssessmentItem : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentItem
 	/// </summary>
-	public AssessmentItem() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTITEM ){}
+	public AssessmentItem() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTITEM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class AssessmentItem : SifDataObject
 	///                 items.
 	///             </param>
 	///
-	public AssessmentItem( string refId, string assessmentFormRefId, ResponseType responseType, string itemLabel ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTITEM )
+	public AssessmentItem( string refId, string assessmentFormRefId, ResponseType responseType, string itemLabel ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTITEM )
 	{
 		this.RefId = refId;
 		this.AssessmentFormRefId = assessmentFormRefId;
@@ -366,4 +366,3 @@ public class AssessmentItem : SifDataObject
 	}
 
 }}
-

@@ -28,14 +28,14 @@ public class TeachingGroup : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TeachingGroup
 	/// </summary>
-	public TeachingGroup() : base( Adk.SifVersion, LearningDTD.TEACHINGGROUP ){}
+	public TeachingGroup() : base( SifVersion.LATEST, LearningDTD.TEACHINGGROUP ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">Unique local ID</param>
 	///
-	public TeachingGroup( string refId ) : base( Adk.SifVersion, LearningDTD.TEACHINGGROUP )
+	public TeachingGroup( string refId ) : base( SifVersion.LATEST, LearningDTD.TEACHINGGROUP )
 	{
 		this.RefId = refId;
 	}
@@ -171,4 +171,3 @@ public class TeachingGroup : SifDataObject
 	}
 
 }}
-

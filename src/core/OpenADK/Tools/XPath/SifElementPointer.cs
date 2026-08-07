@@ -94,10 +94,10 @@ namespace OpenADK.Library.Tools.XPath
         /// <returns>The ElementDef representing the requested name</returns>
         private IElementDef GetChildDef( string name )
         {
-            IElementDef subEleDef = Adk.Dtd.LookupElementDef( fElementDef, name );
+            IElementDef subEleDef = fElementDef.Dtd.LookupElementDef( fElementDef, name );
             if ( subEleDef == null )
             {
-                subEleDef = Adk.Dtd.LookupElementDef( name );
+                subEleDef = fElementDef.Dtd.LookupElementDef( name );
                 if ( subEleDef == null )
                     throw new ArgumentException( name
                                                  + " is not a recognized element of "
@@ -181,7 +181,7 @@ namespace OpenADK.Library.Tools.XPath
         {
             SifVersion version = Version;
             IElementDef subEleDef = GetChildDef( name );
-            SifFormatter formatter = Adk.Dtd.GetFormatter( version );
+            SifFormatter formatter = fElementDef.Dtd.GetFormatter( version );
             SifElement sifElement = (SifElement) fElement;
 
             // Check to see if this child has a render surrogate defined
@@ -233,7 +233,7 @@ namespace OpenADK.Library.Tools.XPath
 
             // Get all of the Element fields and children that match the
             // NodeTest into a list
-            SifFormatter formatter = Adk.Dtd.GetFormatter( version );
+            SifFormatter formatter = fElementDef.Dtd.GetFormatter( version );
             IList<Element> elements = formatter.GetContent( fSifElement, version );
             
             if( elements.Count == 0 )

@@ -28,7 +28,7 @@ namespace Library.Nunit.US.Common
             d.CountryArrivalDate = null;
             Assert.IsNull(d.CountryArrivalDate, "CountryArrivalDate was set to null");
 
-            sp = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, Adk.SifVersion);
+            sp = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, Runtime.SifVersion);
             d = sp.Demographics;
             Assert.IsNull(d.CountryArrivalDate, "After reparsing it should still be null");
         }

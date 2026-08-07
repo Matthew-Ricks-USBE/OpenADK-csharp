@@ -28,7 +28,7 @@ public class StudentPeriodAttendance : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentPeriodAttendance
 	/// </summary>
-	public StudentPeriodAttendance() : base( Adk.SifVersion, GradebookDTD.STUDENTPERIODATTENDANCE ){}
+	public StudentPeriodAttendance() : base( SifVersion.LATEST, GradebookDTD.STUDENTPERIODATTENDANCE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class StudentPeriodAttendance : SifDataObject
 	///<param name="attendanceCode">An AttendanceCode</param>
 	///<param name="attendanceStatus">Approved or Unapproved status of this attendance code.</param>
 	///
-	public StudentPeriodAttendance( string refId, string studentPersonalRefId, string schoolInfoRefId, DateTime? date, AttendanceCode attendanceCode, StudentPeriodAttendanceAttendanceStatusType attendanceStatus ) : base( Adk.SifVersion, GradebookDTD.STUDENTPERIODATTENDANCE )
+	public StudentPeriodAttendance( string refId, string studentPersonalRefId, string schoolInfoRefId, DateTime? date, AttendanceCode attendanceCode, StudentPeriodAttendanceAttendanceStatusType attendanceStatus ) : base( SifVersion.LATEST, GradebookDTD.STUDENTPERIODATTENDANCE )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -381,4 +381,3 @@ public class StudentPeriodAttendance : SifDataObject
 	}
 
 }}
-

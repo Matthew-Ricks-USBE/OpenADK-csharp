@@ -28,7 +28,7 @@ public class AssessmentResponseComponent : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentResponseComponent
 	/// </summary>
-	public AssessmentResponseComponent() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESPONSECOMPONENT ){}
+	public AssessmentResponseComponent() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESPONSECOMPONENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class AssessmentResponseComponent : SifDataObject
 	///<param name="name">The identifier used within the publishing application.</param>
 	///<param name="description">Longer text describing features of the component.</param>
 	///
-	public AssessmentResponseComponent( string refId, string name, string description ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESPONSECOMPONENT )
+	public AssessmentResponseComponent( string refId, string name, string description ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESPONSECOMPONENT )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -198,4 +198,3 @@ public class AssessmentResponseComponent : SifDataObject
 	}
 
 }}
-

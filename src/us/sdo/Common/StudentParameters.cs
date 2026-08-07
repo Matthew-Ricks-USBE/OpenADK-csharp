@@ -27,7 +27,7 @@ public class StudentParameters : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentParameters
 	/// </summary>
-	public StudentParameters() : base( Adk.SifVersion, CommonDTD.STUDENTPARAMETERS ){}
+	public StudentParameters() : base( SifVersion.LATEST, CommonDTD.STUDENTPARAMETERS ){}
 
 	/// <summary>
 	/// Gets or sets the value of the <c>&lt;StateProvinceId&gt;</c> element.
@@ -469,4 +469,3 @@ public class StudentParameters : SifDataObject
 	}
 
 }}
-

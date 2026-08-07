@@ -28,7 +28,7 @@ public class LearnerSchoolEnrolment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerSchoolEnrolment
 	/// </summary>
-	public LearnerSchoolEnrolment() : base( Adk.SifVersion, LearnerDTD.LEARNERSCHOOLENROLMENT ){}
+	public LearnerSchoolEnrolment() : base( SifVersion.LATEST, LearnerDTD.LEARNERSCHOOLENROLMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class LearnerSchoolEnrolment : SifDataObject
 	///<param name="entryDate">The date from when this enrolment is valid. CBDS: 100063</param>
 	///<param name="ncYearGroupActual">The year group in which the learner is taught for the majority of their time, regardless of their chronological age. CBDS: 100068</param>
 	///
-	public LearnerSchoolEnrolment( string refId, string learnerPersonalRefId, string schoolInfoRefId, LearnerEnrolmentStatus membershipType, DateTime? entryDate, NCYearGroup ncYearGroupActual ) : base( Adk.SifVersion, LearnerDTD.LEARNERSCHOOLENROLMENT )
+	public LearnerSchoolEnrolment( string refId, string learnerPersonalRefId, string schoolInfoRefId, LearnerEnrolmentStatus membershipType, DateTime? entryDate, NCYearGroup ncYearGroupActual ) : base( SifVersion.LATEST, LearnerDTD.LEARNERSCHOOLENROLMENT )
 	{
 		this.RefId = refId;
 		this.LearnerPersonalRefId = learnerPersonalRefId;
@@ -445,4 +445,3 @@ public class LearnerSchoolEnrolment : SifDataObject
 	}
 
 }}
-

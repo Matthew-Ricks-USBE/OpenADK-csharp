@@ -4,6 +4,7 @@
 //
 
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library
 {
@@ -19,6 +20,9 @@ namespace OpenADK.Library
     /// </version>
     public interface IDtd
     {
+        /// <summary>Logger associated with this schema instance.</summary>
+        ILogger Logger { get; }
+
         /// <summary>  Lookup an IElementDef object describing an element or attribute</summary>
         /// <param name="key">The name of the element in the form "parent_field", where
         /// <i>parent</i> is the name of the parent element and <i>field</i> is

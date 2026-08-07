@@ -4,9 +4,6 @@
 //
 
 using System;
-using System.Collections.Specialized;
-using OpenADK.Library.Impl;
-using OpenADK.Util;
 
 namespace OpenADK.Library
 {
@@ -55,31 +52,6 @@ namespace OpenADK.Library
         /// <summary>  Initialize the TransportProperties with default values</summary>
         public override void Defaults( Object owner )
         {
-            string key = "adk.transport." + Protocol;
-            int keyLen = key.Length;
-
-            NameValueCollection properties = Properties.GetProperties();
-            foreach ( string k in properties.Keys ) {
-                if ( k.StartsWith( key ) ) {
-                    string name = k.Substring( keyLen + 1 );
-                    string val = properties[k];
-
-                    if ( (Adk.Debug & AdkDebugFlags.Properties) != 0 ) {
-                        if ( owner == null ) {
-                            Adk.Log.Debug( "Using System property " + k + " = " + val );
-                        }
-                        else if ( owner is ZoneImpl ) {
-                            ((ZoneImpl) owner).Log.Debug
-                                ( "Using System property " + k + " = " + val );
-                        }
-                        else if ( owner is Agent ) {
-                            Agent.Log.Debug( "Using System property " + k + " = " + val );
-                        }
-                    }
-
-                    this.SetProperty( name, val );
-                }
-            }
         }
     }
 }

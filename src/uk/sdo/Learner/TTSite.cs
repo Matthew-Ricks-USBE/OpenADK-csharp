@@ -28,7 +28,7 @@ public class TTSite : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TTSite
 	/// </summary>
-	public TTSite() : base( Adk.SifVersion, LearnerDTD.TTSITE ){}
+	public TTSite() : base( SifVersion.LATEST, LearnerDTD.TTSITE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class TTSite : SifDataObject
 	///<param name="code">A Code</param>
 	///<param name="description">A Description</param>
 	///
-	public TTSite( string refId, string code, string description ) : base( Adk.SifVersion, LearnerDTD.TTSITE )
+	public TTSite( string refId, string code, string description ) : base( SifVersion.LATEST, LearnerDTD.TTSITE )
 	{
 		this.RefId = refId;
 		this.Code = code;
@@ -151,4 +151,3 @@ public class TTSite : SifDataObject
 	}
 
 }}
-

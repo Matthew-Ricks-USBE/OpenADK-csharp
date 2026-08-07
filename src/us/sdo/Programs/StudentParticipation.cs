@@ -28,7 +28,7 @@ public class StudentParticipation : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentParticipation
 	/// </summary>
-	public StudentParticipation() : base( Adk.SifVersion, ProgramsDTD.STUDENTPARTICIPATION ){}
+	public StudentParticipation() : base( SifVersion.LATEST, ProgramsDTD.STUDENTPARTICIPATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class StudentParticipation : SifDataObject
 	///<param name="studentPersonalRefId">The GUID of the student that this object is linked to.</param>
 	///<param name="type">A Type</param>
 	///
-	public StudentParticipation( string refId, string studentPersonalRefId, StudentParticipationType type ) : base( Adk.SifVersion, ProgramsDTD.STUDENTPARTICIPATION )
+	public StudentParticipation( string refId, string studentPersonalRefId, StudentParticipationType type ) : base( SifVersion.LATEST, ProgramsDTD.STUDENTPARTICIPATION )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -1261,4 +1261,3 @@ public class StudentParticipation : SifDataObject
 	}
 
 }}
-

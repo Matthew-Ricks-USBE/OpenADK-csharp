@@ -28,7 +28,7 @@ public class Cycle : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Cycle
 	/// </summary>
-	public Cycle() : base( Adk.SifVersion, LearningDTD.CYCLE ){}
+	public Cycle() : base( SifVersion.LATEST, LearningDTD.CYCLE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class Cycle : SifDataObject
 	///<param name="standardPeriodList">A StandardPeriodList</param>
 	///<param name="ttDayList">A TTDayList</param>
 	///
-	public Cycle( string refId, int? cycleDays, int? periodsPerDay, Period standardPeriodList, TTDay ttDayList ) : base( Adk.SifVersion, LearningDTD.CYCLE )
+	public Cycle( string refId, int? cycleDays, int? periodsPerDay, Period standardPeriodList, TTDay ttDayList ) : base( SifVersion.LATEST, LearningDTD.CYCLE )
 	{
 		this.RefId = refId;
 		this.CycleDays = cycleDays;
@@ -218,4 +218,3 @@ public class Cycle : SifDataObject
 	}
 
 }}
-

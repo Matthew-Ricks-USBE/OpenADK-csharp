@@ -29,7 +29,7 @@ public class Identity : SifDataObject
 	/// <summary>
 	/// Creates an instance of an Identity
 	/// </summary>
-	public Identity() : base( Adk.SifVersion, InfrastructureDTD.IDENTITY ){}
+	public Identity() : base( SifVersion.LATEST, InfrastructureDTD.IDENTITY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class Identity : SifDataObject
 	///<param name="sifRefId">A SIF_RefId</param>
 	///<param name="authenticationSource">The type of source system that produced this Identityobject.</param>
 	///
-	public Identity( string refId, SIF_RefId sifRefId, AuthenticationSource authenticationSource ) : base( Adk.SifVersion, InfrastructureDTD.IDENTITY )
+	public Identity( string refId, SIF_RefId sifRefId, AuthenticationSource authenticationSource ) : base( SifVersion.LATEST, InfrastructureDTD.IDENTITY )
 	{
 		this.RefId = refId;
 		this.SIF_RefId = sifRefId;
@@ -248,4 +248,3 @@ public class Identity : SifDataObject
 	}
 
 }}
-

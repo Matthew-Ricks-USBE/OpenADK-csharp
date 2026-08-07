@@ -173,7 +173,7 @@ namespace OpenADK.Library.Tools.Mapping
         {
             if (fTargetDef == null)
             {
-                fTargetDef = Adk.Dtd.LookupElementDefBySQP(parent, PathExpression);
+                fTargetDef = parent.Dtd.LookupElementDefBySQP(parent, PathExpression);
             }
             return fTargetDef;
         }

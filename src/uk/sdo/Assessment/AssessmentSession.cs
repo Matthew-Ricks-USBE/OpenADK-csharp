@@ -28,7 +28,7 @@ public class AssessmentSession : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentSession
 	/// </summary>
-	public AssessmentSession() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTSESSION ){}
+	public AssessmentSession() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTSESSION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class AssessmentSession : SifDataObject
 	///<param name="refId">The ID (GUID) of this session.</param>
 	///<param name="assessmentLearnerSetRefId">The ID (GUID) of the set of people the session refers to.</param>
 	///
-	public AssessmentSession( string refId, string assessmentLearnerSetRefId ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTSESSION )
+	public AssessmentSession( string refId, string assessmentLearnerSetRefId ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTSESSION )
 	{
 		this.RefId = refId;
 		this.AssessmentLearnerSetRefId = assessmentLearnerSetRefId;
@@ -244,4 +244,3 @@ public class AssessmentSession : SifDataObject
 	}
 
 }}
-

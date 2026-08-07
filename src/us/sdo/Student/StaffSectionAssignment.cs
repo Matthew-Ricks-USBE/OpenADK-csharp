@@ -28,7 +28,7 @@ public class StaffSectionAssignment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StaffSectionAssignment
 	/// </summary>
-	public StaffSectionAssignment() : base( Adk.SifVersion, StudentDTD.STAFFSECTIONASSIGNMENT ){}
+	public StaffSectionAssignment() : base( SifVersion.LATEST, StudentDTD.STAFFSECTIONASSIGNMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class StaffSectionAssignment : SifDataObject
 	///<param name="teacherOfRecord">Indicates if the staff is the Teacher of Record during this assignment.</param>
 	///<param name="roles">List of one or more Roles.</param>
 	///
-	public StaffSectionAssignment( string refId, string staffPersonalRefId, string sectionInfoRefId, TeacherOfRecord teacherOfRecord, Role roles ) : base( Adk.SifVersion, StudentDTD.STAFFSECTIONASSIGNMENT )
+	public StaffSectionAssignment( string refId, string staffPersonalRefId, string sectionInfoRefId, TeacherOfRecord teacherOfRecord, Role roles ) : base( SifVersion.LATEST, StudentDTD.STAFFSECTIONASSIGNMENT )
 	{
 		this.RefId = refId;
 		this.StaffPersonalRefId = staffPersonalRefId;
@@ -259,4 +259,3 @@ public class StaffSectionAssignment : SifDataObject
 	}
 
 }}
-

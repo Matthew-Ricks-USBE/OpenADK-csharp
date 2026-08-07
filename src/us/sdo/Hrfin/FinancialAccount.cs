@@ -28,7 +28,7 @@ public class FinancialAccount : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FinancialAccount
 	/// </summary>
-	public FinancialAccount() : base( Adk.SifVersion, HrfinDTD.FINANCIALACCOUNT ){}
+	public FinancialAccount() : base( SifVersion.LATEST, HrfinDTD.FINANCIALACCOUNT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class FinancialAccount : SifDataObject
 	///<param name="creationDate">Account creation date.</param>
 	///<param name="creationTime">Account creation time.</param>
 	///
-	public FinancialAccount( string refId, string accountNumber, string name, string financialClassRefId, DateTime? creationDate, DateTime? creationTime ) : base( Adk.SifVersion, HrfinDTD.FINANCIALACCOUNT )
+	public FinancialAccount( string refId, string accountNumber, string name, string financialClassRefId, DateTime? creationDate, DateTime? creationTime ) : base( SifVersion.LATEST, HrfinDTD.FINANCIALACCOUNT )
 	{
 		this.RefId = refId;
 		this.AccountNumber = accountNumber;
@@ -213,4 +213,3 @@ public class FinancialAccount : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class StudentSectionMarks : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentSectionMarks
 	/// </summary>
-	public StudentSectionMarks() : base( Adk.SifVersion, GradebookDTD.STUDENTSECTIONMARKS ){}
+	public StudentSectionMarks() : base( SifVersion.LATEST, GradebookDTD.STUDENTSECTIONMARKS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class StudentSectionMarks : SifDataObject
 	///<param name="termInfoRefId">The ID (GUID) that identifies the marking period that the following marks are recorded in.</param>
 	///<param name="schoolInfoRefId">The ID (GUID) that uniquely identifies the School that these Mark Values apply to.</param>
 	///
-	public StudentSectionMarks( string studentPersonalRefId, string sectionInfoRefId, string termInfoRefId, string schoolInfoRefId ) : base( Adk.SifVersion, GradebookDTD.STUDENTSECTIONMARKS )
+	public StudentSectionMarks( string studentPersonalRefId, string sectionInfoRefId, string termInfoRefId, string schoolInfoRefId ) : base( SifVersion.LATEST, GradebookDTD.STUDENTSECTIONMARKS )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.SectionInfoRefId = sectionInfoRefId;
@@ -187,4 +187,3 @@ public class StudentSectionMarks : SifDataObject
 	}
 
 }}
-

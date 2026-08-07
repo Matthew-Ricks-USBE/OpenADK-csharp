@@ -28,7 +28,7 @@ public class SchoolGroupType : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SchoolGroupType
 	/// </summary>
-	public SchoolGroupType() : base( Adk.SifVersion, SchoolDTD.SCHOOLGROUPTYPE ){}
+	public SchoolGroupType() : base( SifVersion.LATEST, SchoolDTD.SCHOOLGROUPTYPE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class SchoolGroupType : SifDataObject
 	///<param name="schoolYear">School year for which the information is applicable, expressed as the four-digit year in which the school year ends (e.g. 2007 for the 2006/07 school year). Where a group membership is valid across multiple years, the current year at the time of publication will be used. </param>
 	///<param name="groupType">The group type.  Teaching groups are used to teach subjects while other groups are organised for various other reasons.</param>
 	///
-	public SchoolGroupType( string refId, string schoolInfoRefId, int? schoolYear, GroupTypeCode groupType ) : base( Adk.SifVersion, SchoolDTD.SCHOOLGROUPTYPE )
+	public SchoolGroupType( string refId, string schoolInfoRefId, int? schoolYear, GroupTypeCode groupType ) : base( SifVersion.LATEST, SchoolDTD.SCHOOLGROUPTYPE )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -257,4 +257,3 @@ public class SchoolGroupType : SifDataObject
 	}
 
 }}
-

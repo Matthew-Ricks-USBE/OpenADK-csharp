@@ -17,7 +17,7 @@ namespace Library.Nunit.US.Instr
         [Test]
         public void WriteXml()
         {
-            if (Adk.SifVersion < SifVersion.SIF15r1)
+            if (Runtime.SifVersion < SifVersion.SIF15r1)
             {
                 return;
             }

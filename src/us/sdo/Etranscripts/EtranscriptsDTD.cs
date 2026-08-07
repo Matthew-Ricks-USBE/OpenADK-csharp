@@ -58,13 +58,13 @@ namespace OpenADK.Library.us.Etranscripts
 	/// ElementDef metadata is grouped into "SDO Libraries", which are organized along 
 	/// SIF Working Group boundaries. SDO Libraries are loaded into the <c>SifDdt</c> 
 	/// class when the Adk is initialized. All or part of the metadata is loaded into depending on the flags passed to the
-	/// <see cref="Adk.Initialize(SifVersion, SdoLibraryType)"/> method,
+	/// <see cref="IAdkRuntime.Initialize()"/> method,
 	/// metadata from one or more SDO Libraries may be loaded. For example, the following
 	/// call loads metadata for the <c>Student Information Working Group Objects</c>  
 	/// and <c>Transportation And Geographic Information Working Group Objects</c> 
 	/// (Common Elements and <c>Infrastructure Working Group Objects</c> metadata is always loaded
 	/// </para>
-	/// <code>Adk.Initialize( SiFVersion.LATEST, SdoLibraryType.Student | SdoLibraryType.Trans )</code>
+	/// <code>runtime.Initialize()</code>
 	/// <para>
 	/// If an given SDO Library is not loaded, all of the SIFDTD constants that belong
 	/// to that library will be <code>null</code> and cannot be referenced. For example,

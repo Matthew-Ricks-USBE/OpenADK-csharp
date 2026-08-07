@@ -93,7 +93,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
             SifElement se = null;
             try
             {
-                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion);
+                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion, Runtime.Dtd);
             }
             catch (AdkException adke)
             {
@@ -136,7 +136,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
             // 4) If validation failed, write the object out for tracing purposes
             if (!validated)
             {
-                SifWriter outWriter = new SifWriter(output);
+                SifWriter outWriter = new SifWriter(output, Runtime);
                 outWriter.Write(se, writeVersion );
                 outWriter.Flush();
                 output.WriteLine("Errors reading/writing " + fileName );
@@ -147,7 +147,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
             // 5) Read the object again into memory
             try
             {
-                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion);
+                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion, Runtime.Dtd);
             }
             catch (AdkException adke)
             {

@@ -28,7 +28,7 @@ public class StudentContactPersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentContactPersonal
 	/// </summary>
-	public StudentContactPersonal() : base( Adk.SifVersion, StudentDTD.STUDENTCONTACTPERSONAL ){}
+	public StudentContactPersonal() : base( SifVersion.LATEST, StudentDTD.STUDENTCONTACTPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class StudentContactPersonal : SifDataObject
 	///<param name="refId">The Id (GUID) that uniquely identifies the instance of the object. </param>
 	///<param name="personInfo">Common element containing person demographic information.</param>
 	///
-	public StudentContactPersonal( string refId, PersonInfo personInfo ) : base( Adk.SifVersion, StudentDTD.STUDENTCONTACTPERSONAL )
+	public StudentContactPersonal( string refId, PersonInfo personInfo ) : base( SifVersion.LATEST, StudentDTD.STUDENTCONTACTPERSONAL )
 	{
 		this.RefId = refId;
 		this.PersonInfo = personInfo;
@@ -218,4 +218,3 @@ public class StudentContactPersonal : SifDataObject
 	}
 
 }}
-

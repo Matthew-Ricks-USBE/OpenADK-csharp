@@ -28,7 +28,7 @@ public class FoodserviceTransaction : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceTransaction
 	/// </summary>
-	public FoodserviceTransaction() : base( Adk.SifVersion, FoodDTD.FOODSERVICETRANSACTION ){}
+	public FoodserviceTransaction() : base( SifVersion.LATEST, FoodDTD.FOODSERVICETRANSACTION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -42,7 +42,7 @@ public class FoodserviceTransaction : SifDataObject
 	///<param name="fsAmount">Amount.</param>
 	///<param name="voided">This flag tells us if the transaction is voided.</param>
 	///
-	public FoodserviceTransaction( string refId, string schoolInfoRefId, Program program, DateTime? transactionDate, DateTime? transactionTime, Customer customer, FSAmount fsAmount, YesNo voided ) : base( Adk.SifVersion, FoodDTD.FOODSERVICETRANSACTION )
+	public FoodserviceTransaction( string refId, string schoolInfoRefId, Program program, DateTime? transactionDate, DateTime? transactionTime, Customer customer, FSAmount fsAmount, YesNo voided ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICETRANSACTION )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -445,4 +445,3 @@ public class FoodserviceTransaction : SifDataObject
 	}
 
 }}
-

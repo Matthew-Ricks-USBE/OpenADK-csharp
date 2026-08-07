@@ -28,7 +28,7 @@ public class Purchasing : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Purchasing
 	/// </summary>
-	public Purchasing() : base( Adk.SifVersion, HrfinDTD.PURCHASING ){}
+	public Purchasing() : base( SifVersion.LATEST, HrfinDTD.PURCHASING ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class Purchasing : SifDataObject
 	///<param name="formNumber">Requisition or PO number.</param>
 	///<param name="purchasingItems">Contains information about the item being purchased</param>
 	///
-	public Purchasing( string refId, FormType formType, string formNumber, PurchasingItems purchasingItems ) : base( Adk.SifVersion, HrfinDTD.PURCHASING )
+	public Purchasing( string refId, FormType formType, string formNumber, PurchasingItems purchasingItems ) : base( SifVersion.LATEST, HrfinDTD.PURCHASING )
 	{
 		this.RefId = refId;
 		this.SetFormType( formType );
@@ -249,4 +249,3 @@ public class Purchasing : SifDataObject
 	}
 
 }}
-

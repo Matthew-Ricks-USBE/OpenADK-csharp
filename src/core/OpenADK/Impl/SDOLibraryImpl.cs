@@ -19,6 +19,9 @@ namespace OpenADK.Library.Impl
     /// </version>
     public abstract class SdoLibraryImpl
     {
+        /// <summary>The DTD instance into which this library is being loaded.</summary>
+        protected internal IDtd Dtd { get; internal set; }
+
         public abstract void Load();
 
         public abstract void AddElementMappings( IDictionary<String, IElementDef> dtdMap );

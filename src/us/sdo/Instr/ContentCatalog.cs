@@ -28,7 +28,7 @@ public class ContentCatalog : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ContentCatalog
 	/// </summary>
-	public ContentCatalog() : base( Adk.SifVersion, InstrDTD.CONTENTCATALOG ){}
+	public ContentCatalog() : base( SifVersion.LATEST, InstrDTD.CONTENTCATALOG ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class ContentCatalog : SifDataObject
 	///<param name="language">The default language used in this ContentCatalog object.</param>
 	///<param name="contentObject">The learning object.</param>
 	///
-	public ContentCatalog( LanguageCode language, ContentObject contentObject ) : base( Adk.SifVersion, InstrDTD.CONTENTCATALOG )
+	public ContentCatalog( LanguageCode language, ContentObject contentObject ) : base( SifVersion.LATEST, InstrDTD.CONTENTCATALOG )
 	{
 		this.SetLanguage( language );
 		this.ContentObject = contentObject;
@@ -561,4 +561,3 @@ public class ContentCatalog : SifDataObject
 	}
 
 }}
-

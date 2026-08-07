@@ -27,7 +27,7 @@ public class StaffParameters : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StaffParameters
 	/// </summary>
-	public StaffParameters() : base( Adk.SifVersion, CommonDTD.STAFFPARAMETERS ){}
+	public StaffParameters() : base( SifVersion.LATEST, CommonDTD.STAFFPARAMETERS ){}
 
 	/// <summary>
 	/// Gets or sets the value of the <c>&lt;StateProvinceId&gt;</c> element.
@@ -349,4 +349,3 @@ public class StaffParameters : SifDataObject
 	}
 
 }}
-

@@ -154,7 +154,6 @@ namespace OpenADK.Library.Tools.Cfg
                 
                     if (String.IsNullOrEmpty(attribute))
                     {
-                        if ((Adk.Debug & AdkDebugFlags.Properties) != 0) Agent.Log.Info("SIF Variant is not specified in the Agent configuration file; defaulting to SIF_US");
                     }
                     else
                     {
@@ -162,11 +161,9 @@ namespace OpenADK.Library.Tools.Cfg
                         try
                         {
                             sifVariant = (SIFVariant)Enum.Parse(typeof(SIFVariant), attribute);
-                            if ((Adk.Debug & AdkDebugFlags.Properties) != 0) Agent.Log.Info("SIF Variant in the Agent configuration file is " + sifVariant.ToString());
                         }
                         catch (ArgumentException)
                         {
-                            if ((Adk.Debug & AdkDebugFlags.Properties) != 0) Agent.Log.Info("SIF Variant in the Agent configuration file is not recognised; defaulting to SIF_US");
                         }
 
                     }
@@ -439,9 +436,9 @@ namespace OpenADK.Library.Tools.Cfg
                         String prev = agent.Properties.GetProperty( AgentProperties.PROP_MESSAGING_TRANSPORT );
                         if (prev == null)
                         {
-                            if ((Adk.Debug & AdkDebugFlags.Properties) != 0)
+                            if ((agent.Runtime.Debug & AdkDebugFlags.Properties) != 0)
                             {
-                                Agent.Log.Info("Configuration file selecting " + proto.ToUpperInvariant() + " as the default transport protocol");
+                                agent.GetLog().Info("Configuration file selecting " + proto.ToUpperInvariant() + " as the default transport protocol");
                             }
 
                             agent.Properties.TransportProtocol = proto;
@@ -458,8 +455,8 @@ namespace OpenADK.Library.Tools.Cfg
 
                         if ( tp.Contains( nam ) ) {
                             if ( overwrite ) {
-                                if ( (Adk.Debug & AdkDebugFlags.Properties) != 0 ) {
-                                    Agent.Log.Debug
+                                if ((agent.Runtime.Debug & AdkDebugFlags.Properties) != 0) {
+                                    agent.GetLog().Debug
                                         ( "Configuration file overwriting " + proto.ToUpper() +
                                           " transport property: " + nam + " = " + val );
                                 }
@@ -467,8 +464,8 @@ namespace OpenADK.Library.Tools.Cfg
                             }
                         }
                         else {
-                            if ( (Adk.Debug & AdkDebugFlags.Properties) != 0 ) {
-                                Agent.Log.Debug
+                            if ((agent.Runtime.Debug & AdkDebugFlags.Properties) != 0) {
+                                agent.GetLog().Debug
                                     ( "Setting " + proto.ToUpper() +
                                       " transport property from configuration file: " + nam + " = " +
                                       val );

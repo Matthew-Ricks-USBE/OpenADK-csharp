@@ -28,7 +28,7 @@ public class AggregateStatisticInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AggregateStatisticInfo
 	/// </summary>
-	public AggregateStatisticInfo() : base( Adk.SifVersion, DwDTD.AGGREGATESTATISTICINFO ){}
+	public AggregateStatisticInfo() : base( SifVersion.LATEST, DwDTD.AGGREGATESTATISTICINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class AggregateStatisticInfo : SifDataObject
 	///<param name="refId">Key</param>
 	///<param name="statisticName">Name of Aggregate Statistic</param>
 	///
-	public AggregateStatisticInfo( string refId, string statisticName ) : base( Adk.SifVersion, DwDTD.AGGREGATESTATISTICINFO )
+	public AggregateStatisticInfo( string refId, string statisticName ) : base( SifVersion.LATEST, DwDTD.AGGREGATESTATISTICINFO )
 	{
 		this.RefId = refId;
 		this.StatisticName = statisticName;
@@ -339,4 +339,3 @@ public class AggregateStatisticInfo : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class SessionInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SessionInfo
 	/// </summary>
-	public SessionInfo() : base( Adk.SifVersion, SchoolDTD.SESSIONINFO ){}
+	public SessionInfo() : base( SifVersion.LATEST, SchoolDTD.SESSIONINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -44,7 +44,7 @@ public class SessionInfo : SifDataObject
 	///<param name="periodId">Period Id within the Day Id</param>
 	///<param name="sessionDate">Date of Session</param>
 	///
-	public SessionInfo( string refId, string schoolInfoRefId, string timeTableCellRefId, int? schoolYear, string localId, string timeTableSubjectLocalId, string teachingGroupLocalId, string dayId, string periodId, DateTime? sessionDate ) : base( Adk.SifVersion, SchoolDTD.SESSIONINFO )
+	public SessionInfo( string refId, string schoolInfoRefId, string timeTableCellRefId, int? schoolYear, string localId, string timeTableSubjectLocalId, string teachingGroupLocalId, string dayId, string periodId, DateTime? sessionDate ) : base( SifVersion.LATEST, SchoolDTD.SESSIONINFO )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -417,4 +417,3 @@ public class SessionInfo : SifDataObject
 	}
 
 }}
-

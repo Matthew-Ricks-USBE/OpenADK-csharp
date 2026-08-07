@@ -30,14 +30,14 @@ public class StudentRecordExchange : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentRecordExchange
 	/// </summary>
-	public StudentRecordExchange() : base( Adk.SifVersion, EtranscriptsDTD.STUDENTRECORDEXCHANGE ){}
+	public StudentRecordExchange() : base( SifVersion.LATEST, EtranscriptsDTD.STUDENTRECORDEXCHANGE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">The GUID that uniquely identifies an instance of this object.</param>
 	///
-	public StudentRecordExchange( string refId ) : base( Adk.SifVersion, EtranscriptsDTD.STUDENTRECORDEXCHANGE )
+	public StudentRecordExchange( string refId ) : base( SifVersion.LATEST, EtranscriptsDTD.STUDENTRECORDEXCHANGE )
 	{
 		this.RefId = refId;
 	}
@@ -162,4 +162,3 @@ public class StudentRecordExchange : SifDataObject
 	}
 
 }}
-

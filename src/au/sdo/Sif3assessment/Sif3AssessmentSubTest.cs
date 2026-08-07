@@ -28,7 +28,7 @@ public class Sif3AssessmentSubTest : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentSubTest
 	/// </summary>
-	public Sif3AssessmentSubTest() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTSUBTEST ){}
+	public Sif3AssessmentSubTest() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTSUBTEST ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class Sif3AssessmentSubTest : SifDataObject
 	///<param name="refId">A RefId</param>
 	///<param name="subTestName">A SubTestName</param>
 	///
-	public Sif3AssessmentSubTest( string refId, string subTestName ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTSUBTEST )
+	public Sif3AssessmentSubTest( string refId, string subTestName ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTSUBTEST )
 	{
 		this.RefId = refId;
 		this.SubTestName = subTestName;
@@ -499,4 +499,3 @@ public class Sif3AssessmentSubTest : SifDataObject
 	}
 
 }}
-

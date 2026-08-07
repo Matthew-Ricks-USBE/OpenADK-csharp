@@ -116,7 +116,7 @@ namespace OpenADK.Library.Log
             //	If SIF 1.5 or later, encapsulate in a SIF_LogEntry and
             //	report it to the zone. Otherwise just write the message
             //	to the local zone log.
-            if ( Adk.SifVersion.CompareTo( SifVersion.SIF15r1 ) >= 0 ) {
+            if ( zone.Agent.Runtime.SifVersion.CompareTo( SifVersion.SIF15r1 ) >= 0 ) {
                 SIF_LogEntry le = new SIF_LogEntry();
                 le.SetLogLevel( LogLevel.INFO );
                 le.SIF_Desc = message;
@@ -174,7 +174,7 @@ namespace OpenADK.Library.Log
                 zone.Log.Debug( b.ToString() );
             }
 
-            if ( fReportEvents && Adk.SifVersion.CompareTo( SifVersion.SIF15r1 ) >= 0 ) {
+            if ( fReportEvents && zone.Agent.Runtime.SifVersion.CompareTo( SifVersion.SIF15r1 ) >= 0 ) {
                 try {
                     zone.ReportEvent( data, EventAction.Add );
                 }

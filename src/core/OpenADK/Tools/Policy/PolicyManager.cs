@@ -13,29 +13,6 @@ namespace OpenADK.Library.Tools.Policy
 {
     public abstract class PolicyManager
     {
-        private static Object getInstanceLock = new Object();
-        private static PolicyManager sInstance;
-
-        public static PolicyManager GetInstance(IZone zone)
-        {
-            lock (getInstanceLock) {
-                if (sInstance == null)
-                {
-                    sInstance = (PolicyManager)ObjectFactory.GetInstance().CreateInstance(ObjectFactory.ADKFactoryType.POLICY_MANAGER, zone.Agent);
-                }
-                return sInstance;
-            }
-        }
-        
-        /// <summary>
-        /// Unloads the singleton instance of the PolicyManager
-        /// </summary>
-        public static void UnloadInstance()
-        {
-            sInstance = null;
-        }
-
-
         /// <summary>
         /// Applies ADK policy to the outbound message
         /// </summary>

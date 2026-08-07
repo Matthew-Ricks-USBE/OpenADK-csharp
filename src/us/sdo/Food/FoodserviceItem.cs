@@ -28,7 +28,7 @@ public class FoodserviceItem : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceItem
 	/// </summary>
-	public FoodserviceItem() : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEM ){}
+	public FoodserviceItem() : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class FoodserviceItem : SifDataObject
 	///<param name="refId">GUID that identifies this item</param>
 	///<param name="localId">Item number as presented to user.</param>
 	///
-	public FoodserviceItem( string refId, string localId ) : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEM )
+	public FoodserviceItem( string refId, string localId ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEM )
 	{
 		this.RefId = refId;
 		this.LocalId = localId;
@@ -185,4 +185,3 @@ public class FoodserviceItem : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class ProfessionalDevelopmentActivities : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ProfessionalDevelopmentActivities
 	/// </summary>
-	public ProfessionalDevelopmentActivities() : base( Adk.SifVersion, ProfdevDTD.PROFESSIONALDEVELOPMENTACTIVITIES ){}
+	public ProfessionalDevelopmentActivities() : base( SifVersion.LATEST, ProfdevDTD.PROFESSIONALDEVELOPMENTACTIVITIES ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class ProfessionalDevelopmentActivities : SifDataObject
 	///<param name="description">The description of the course or activity</param>
 	///<param name="clockHours">The actual number of hours required for the course or activity</param>
 	///
-	public ProfessionalDevelopmentActivities( string refId, string activityProviderRefId, string localId, DateTime? startDate, DateTime? endDate, string description, decimal? clockHours ) : base( Adk.SifVersion, ProfdevDTD.PROFESSIONALDEVELOPMENTACTIVITIES )
+	public ProfessionalDevelopmentActivities( string refId, string activityProviderRefId, string localId, DateTime? startDate, DateTime? endDate, string description, decimal? clockHours ) : base( SifVersion.LATEST, ProfdevDTD.PROFESSIONALDEVELOPMENTACTIVITIES )
 	{
 		this.RefId = refId;
 		this.ActivityProviderRefId = activityProviderRefId;
@@ -342,4 +342,3 @@ public class ProfessionalDevelopmentActivities : SifDataObject
 	}
 
 }}
-

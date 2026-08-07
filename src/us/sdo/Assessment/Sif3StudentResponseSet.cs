@@ -28,7 +28,7 @@ public class Sif3StudentResponseSet : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3StudentResponseSet
 	/// </summary>
-	public Sif3StudentResponseSet() : base( Adk.SifVersion, AssessmentDTD.SIF3STUDENTRESPONSESET ){}
+	public Sif3StudentResponseSet() : base( SifVersion.LATEST, AssessmentDTD.SIF3STUDENTRESPONSESET ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class Sif3StudentResponseSet : SifDataObject
 	///<param name="assessmentAdministrationRefId">The administration associated with this score set.</param>
 	///<param name="studentPersonalRefId">The student associated with the response set.</param>
 	///
-	public Sif3StudentResponseSet( string refId, string assessmentAdministrationRefId, string studentPersonalRefId ) : base( Adk.SifVersion, AssessmentDTD.SIF3STUDENTRESPONSESET )
+	public Sif3StudentResponseSet( string refId, string assessmentAdministrationRefId, string studentPersonalRefId ) : base( SifVersion.LATEST, AssessmentDTD.SIF3STUDENTRESPONSESET )
 	{
 		this.RefId = refId;
 		this.AssessmentAdministrationRefId = assessmentAdministrationRefId;
@@ -164,4 +164,3 @@ public class Sif3StudentResponseSet : SifDataObject
 	}
 
 }}
-

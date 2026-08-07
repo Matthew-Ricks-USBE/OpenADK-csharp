@@ -33,7 +33,7 @@ namespace Library.Nunit.US
          Assert.IsNull(name.MiddleName, "Middle Name");
 
          // echo to the console so we can see what's going on
-         SifWriter writer = new SifWriter(Console.Out);
+         SifWriter writer = new SifWriter(Console.Out, Runtime);
          writer.Write(retval);
          writer.Flush();
       }

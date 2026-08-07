@@ -9,22 +9,23 @@ using OpenADK.Library.us;
 namespace Library.Nunit.US.Library.Impl.Surrogates
 {
     [TestFixture]
-    public class GradYearSurrogateTests
+    public class GradYearSurrogateTests : AdkTest
     {
-        protected SifVersion fOriginalVersion;
+        private SifVersion _testOriginalVersion;
 
         [SetUp]
-        public void SetUp()
+        public override void SetUp()
         {
-            fOriginalVersion = Adk.SifVersion;
-            Adk.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student);
-            Adk.SifVersion = SifVersion.SIF15r1;
+            base.SetUp();
+            _testOriginalVersion = Runtime.SifVersion;
+            Runtime.SifVersion = SifVersion.SIF15r1;
         }
 
         [TearDown]
-        public void TearDown()
+        public override void TearDown()
         {
-            Adk.SifVersion = fOriginalVersion;
+            Runtime.SifVersion = _testOriginalVersion;
+            base.TearDown();
         }
 
         [Test]
@@ -40,7 +41,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.IsNotNull(sp.OnTimeGraduationYear, "On Time Grad Year");
             Assert.AreEqual(1971, (int) sp.OnTimeGraduationYear, "On Time Grad Year");
 
-            sp = new StudentPersonal();
+            sp = Objects.Create<StudentPersonal>();
             sp.SetElementOrAttribute( "GradYear[@Type='Original']", "8877" );
             Assert.IsNotNull(sp.OnTimeGraduationYear, "On Time Grad Year");
             Assert.AreEqual(8877, (int) sp.OnTimeGraduationYear, "On Time Grad Year");
@@ -64,7 +65,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
             Assert.AreEqual( 2012, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
 
-            sp = new StudentPersonal();
+            sp = Objects.Create<StudentPersonal>();
             sp.SetElementOrAttribute( "GradYear[@Type='Projected']", "2089" );
             Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
             Assert.AreEqual( 2089, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
@@ -89,7 +90,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.IsNotNull( gd, "Actual Grad Year" );
             Assert.AreEqual( 2005, (int) gd.Year, "Actual Grad Year" );
 
-            sp = new StudentPersonal();
+            sp = Objects.Create<StudentPersonal>();
             sp.SetElementOrAttribute( "GradYear[@Type='Actual']", "2054" );
             gd = sp.GraduationDate;
             Assert.IsNotNull( gd, "Actual Grad Year" );
@@ -114,7 +115,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.IsNotNull( sp.OnTimeGraduationYear, "On Time Grad Year" );
             Assert.AreEqual( 1971, (int) sp.OnTimeGraduationYear, "On Time Grad Year" );
 
-            sp = new StudentSnapshot();
+            sp = Objects.Create<StudentSnapshot>();
             sp.SetElementOrAttribute( "GradYear[@Type='Original']", "8877" );
             Assert.IsNotNull( sp.OnTimeGraduationYear, "On Time Grad Year" );
             Assert.AreEqual( 8877, (int) sp.OnTimeGraduationYear, "On Time Grad Year" );
@@ -137,7 +138,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
             Assert.AreEqual( 2012, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
 
-            sp = new StudentSnapshot();
+            sp = Objects.Create<StudentSnapshot>();
             sp.SetElementOrAttribute( "GradYear[@Type='Projected']", "2089" );
             Assert.IsNotNull( sp.ProjectedGraduationYear, "Projected Grad Year" );
             Assert.AreEqual( 2089, (int) sp.ProjectedGraduationYear, "Projected Grad Year" );
@@ -161,7 +162,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.IsNotNull( gd, "Actual Grad Year" );
             Assert.AreEqual( 2005, (int) gd.Year, "Actual Grad Year" );
 
-            sp = new StudentSnapshot();
+            sp = Objects.Create<StudentSnapshot>();
             sp.SetElementOrAttribute( "GradYear[@Type='Actual']", "2054" );
             gd = sp.GraduationDate;
             Assert.IsNotNull( gd, "Actual Grad Year" );
@@ -176,7 +177,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
         private SifElement parseSIF15r1XML( String xml )
         {
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             return parser.Parse( xml, null, 0, SifVersion.SIF15r1 );
         }
     }

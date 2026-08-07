@@ -178,6 +178,7 @@ namespace OpenADK.Library.Impl
         private Hashtable fEvDispCache;
 
         private RequestCache fRequestCache;
+        private readonly IAdkRuntime fRuntime;
 
         /// <summary>
         /// Returns the RequestCache used to map Responses to the original Request
@@ -190,7 +191,8 @@ namespace OpenADK.Library.Impl
         /// <summary>  Constructs a MessageDispatcher for a zone</summary>
         public MessageDispatcher(ZoneImpl zone)
         {
-            fRequestCache = RequestCache.GetInstance(zone.Agent);
+            fRuntime = zone.Agent.Runtime;
+            fRequestCache = zone.Agent.Requests;
 
             fZone = zone;
             fQueue = zone.fQueue;
@@ -215,7 +217,7 @@ namespace OpenADK.Library.Impl
 
             try
             {
-                fParser = SifParser.NewInstance();
+                fParser = new SifParser(fRuntime);
             }
             catch (AdkException adke)
             {
@@ -286,7 +288,7 @@ namespace OpenADK.Library.Impl
                           "SIF_QueryObject is required", fZone);
                 }
 
-                objType = Adk.Dtd.LookupElementDef(qo.ObjectName);
+                objType = fRuntime.Dtd.LookupElementDef(qo.ObjectName);
                 if (objType == null)
                 {
                     throw new SifException
@@ -397,7 +399,7 @@ namespace OpenADK.Library.Impl
             try
             {
                 SifMessageType pload =
-                    (SifMessageType)Adk.Dtd.GetElementType(msg.ElementDef.Name);
+                    (SifMessageType)fRuntime.Dtd.GetElementType(msg.ElementDef.Name);
 
                 if (pload == SifMessageType.SIF_SystemControl)
                 {
@@ -562,7 +564,7 @@ namespace OpenADK.Library.Impl
         /// </summary>
         private int dispatchEvent(SIF_Event sifEvent)
         {
-            if ((Adk.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
+            if ((fRuntime.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
             {
                 fZone.Log.Debug("Dispatching SIF_Event (" + sifEvent.MsgId + ")...");
             }
@@ -571,7 +573,7 @@ namespace OpenADK.Library.Impl
             if (!fZone.Properties.ProcessEventsFromSelf &&
                  sifEvent.Header.SIF_SourceId.Equals(fZone.Agent.Id))
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
+                if ((fRuntime.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
                 {
                     fZone.Log.Debug
                         (
@@ -610,7 +612,7 @@ namespace OpenADK.Library.Impl
 
             SifMessageInfo msgInfo = new SifMessageInfo(sifEvent, fZone);
 
-            IElementDef typ = Adk.Dtd.LookupElementDef(eventObj.ObjectName);
+            IElementDef typ = fRuntime.Dtd.LookupElementDef(eventObj.ObjectName);
             if (typ == null)
             {
                 //  SIF Data Object type not supported
@@ -700,7 +702,7 @@ namespace OpenADK.Library.Impl
             Event adkEvent =
                 new Event(dataStr, eventObj.Action, eventObj.GetChildList()[0].ElementDef);
             adkEvent.Zone = fZone;
-            if ((Adk.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
+            if ((fRuntime.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
             {
                 fZone.Log.Debug
                     (
@@ -710,7 +712,7 @@ namespace OpenADK.Library.Impl
 
             if (fQueue == null)
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
+                if ((fRuntime.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
                 {
                     fZone.Log.Debug
                         ("Dispatching SIF_Event to Subscriber message handler via EvDisp");
@@ -734,7 +736,7 @@ namespace OpenADK.Library.Impl
             }
             else
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
+                if ((fRuntime.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
                 {
                     fZone.Log.Debug("Dispatching SIF_Event to Subscriber message handler");
                 }
@@ -768,7 +770,7 @@ namespace OpenADK.Library.Impl
             }
 
 
-            if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+            if ((fRuntime.Debug & AdkDebugFlags.Messaging) != 0)
             {
                 fZone.Log.Debug
                     ("SIF_Event (" + sifEvent.MsgId + ") dispatching returning SIF_Ack status " +
@@ -834,7 +836,7 @@ namespace OpenADK.Library.Impl
 #if PROFILED
 				if( objType != null ) 
 				{
-					ProfilerUtils.profileStart( com.OpenADK.sifprofiler.api.OIDs.ADK_SIFRESPONSE_REQUESTOR_MESSAGING.ToString(), Adk.Dtd.LookupElementDef(objType), rsp.MsgId );
+					ProfilerUtils.profileStart( com.OpenADK.sifprofiler.api.OIDs.ADK_SIFRESPONSE_REQUESTOR_MESSAGING.ToString(), fRuntime.Dtd.LookupElementDef(objType), rsp.MsgId );
 				}
 #endif
 
@@ -920,7 +922,7 @@ namespace OpenADK.Library.Impl
                 //  Decide where to send this response
                 IQueryResults target =
                     getQueryResultsTarget
-                        (rsp, null, Adk.Dtd.LookupElementDef(objectType), null, fZone);
+                        (rsp, null, fRuntime.Dtd.LookupElementDef(objectType), null, fZone);
                 if (target == null)
                 {
                     bool handled = false;
@@ -955,7 +957,7 @@ namespace OpenADK.Library.Impl
                 //  Dispatch the message...
                 //
 
-                IElementDef sifRequestObjectDef = Adk.Dtd.LookupElementDef(objectType);
+                IElementDef sifRequestObjectDef = fRuntime.Dtd.LookupElementDef(objectType);
                 DataObjectInputStreamImpl dataStr = DataObjectInputStreamImpl.newInstance();
                 dataStr.fObjType = sifRequestObjectDef;
 
@@ -1093,8 +1095,8 @@ namespace OpenADK.Library.Impl
                 //  SIF_Version specifies the version of SIF that will be used to render
                 //  the SIF_Responses
                 // TODO: Add support for multiple SIF_Request versions
-                renderAsVer = SifVersion.Parse(versions[0].Value);
-                if (!Adk.IsSIFVersionSupported(renderAsVer))
+                renderAsVer = SifVersion.Parse(versions[0].Value, fRuntime.SifVersion);
+                if (!fRuntime.IsSIFVersionSupported(renderAsVer))
                 {
                     rethrow = true;
                     throw new SifException
@@ -1181,7 +1183,7 @@ namespace OpenADK.Library.Impl
                 }
 
                 //  Lookup the ElementDef for the requested object type
-                typ = Adk.Dtd.LookupElementDef(qo.ObjectName);
+                typ = fRuntime.Dtd.LookupElementDef(qo.ObjectName);
                 if (typ == null)
                 {
                     throw new SifException
@@ -1316,7 +1318,7 @@ namespace OpenADK.Library.Impl
             try
             {
 
-                outStream = DataObjectOutputStreamImpl.NewInstance();
+                outStream = fZone.Agent.CreateDataObjectOutputStream();
 
                 outStream.Initialize
                     (
@@ -1420,7 +1422,7 @@ namespace OpenADK.Library.Impl
         private void sendErrorResponse(SIF_Request req, SifException se, SifVersion renderAsVer, int maxBufSize)
         {
 
-            DataObjectOutputStreamImpl outStream = DataObjectOutputStreamImpl.NewInstance();
+            DataObjectOutputStreamImpl outStream = fZone.Agent.CreateDataObjectOutputStream();
             outStream.Initialize(fZone, (IElementDef[])null, req.SourceId, req.MsgId, renderAsVer, maxBufSize);
 
             SIF_Error err = new SIF_Error(
@@ -1518,7 +1520,7 @@ namespace OpenADK.Library.Impl
 
             try
             {
-                PolicyManager policyMan = PolicyManager.GetInstance(fZone);
+                PolicyManager policyMan = fZone.Agent.PolicyManager;
                 if (policyMan != null)
                 {
                     policyMan.ApplyOutboundPolicy(msg, fZone);
@@ -1570,7 +1572,7 @@ namespace OpenADK.Library.Impl
                     }
                 }
 
-                if (!isPullMessage || (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0)
+                if (!isPullMessage || (fRuntime.Debug & AdkDebugFlags.Messaging_Pull) != 0)
                 {
                     msg.LogSend(fZone.Log);
                 }
@@ -1587,7 +1589,7 @@ namespace OpenADK.Library.Impl
                 //  Convert message to a stream
                 using (MessageStreamImpl memBuf = new MessageStreamImpl())
                 {
-                    w = new SifWriter(memBuf.GetInputStream());
+                    w = new SifWriter(memBuf.GetInputStream(), fRuntime);
                     w.Write(msg);
                     w.Flush();
 
@@ -1606,7 +1608,7 @@ namespace OpenADK.Library.Impl
                     }
 
                     //	Notify MessagingListeners...
-                    pload = (SifMessageType)Adk.Dtd.GetElementType(msg.ElementDef.Name);
+                    pload = (SifMessageType)fRuntime.Dtd.GetElementType(msg.ElementDef.Name);
                     if (pload != SifMessageType.SIF_Ack)
                     {
                         msgList = GetMessagingListeners(fZone);
@@ -1650,7 +1652,7 @@ namespace OpenADK.Library.Impl
                                 if (isPullMessage && (parseEx is AdkParsingException || parseEx is SifException || parseEx is System.Xml.XmlException))
                                 {
                                     String ackStr = ackStream.ToString();
-                                    if ((Adk.Debug & AdkDebugFlags.Message_Content ) != 0)
+                                    if ((fRuntime.Debug & AdkDebugFlags.Message_Content ) != 0)
                                     {
                                         fZone.Log.Info( ackStr );
                                     }
@@ -1667,7 +1669,7 @@ namespace OpenADK.Library.Impl
                         if (ack != null)
                         {
                             ack.message = msg;
-                            if (!isPullMessage || (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0)
+                            if (!isPullMessage || (fRuntime.Debug & AdkDebugFlags.Messaging_Pull) != 0)
                             {
                                 ack.LogRecv(fZone.Log);
                             }
@@ -1803,7 +1805,7 @@ namespace OpenADK.Library.Impl
 
             while (true)
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0)
+                if ((fRuntime.Debug & AdkDebugFlags.Messaging_Pull) != 0)
                 {
                     fZone.Log.Debug("Polling for next message...");
                 }
@@ -1862,7 +1864,7 @@ namespace OpenADK.Library.Impl
                 //
                 if (ack.HasStatusCode(SifStatusCodes.NO_MESSAGES_9))
                 {
-                    if ((Adk.Debug & AdkDebugFlags.Messaging_Pull ) != 0)
+                    if ((fRuntime.Debug & AdkDebugFlags.Messaging_Pull ) != 0)
                         fZone.Log.Debug( "No messages waiting in agent queue" );
 
                     return 0;
@@ -1872,14 +1874,14 @@ namespace OpenADK.Library.Impl
                 {
                     SifException se = new SifException(ack, fZone);
                     fZone.Log.Debug("Unable to pull the next message from the queue: " + se.ToString());
-                    AdkUtils._throw(se, fZone.Log);
+                    AdkUtils._throw(se, fZone.Log, fRuntime);
                 }
 
                 if (ack.HasStatusCode(SifStatusCodes.SUCCESS_0))
                 {
                     AdkException parseEx = null;
                     SifMessagePayload payload = getPullMessagePayload(ack);
-                    if ((Adk.Debug & ( AdkDebugFlags.Messaging | AdkDebugFlags.Messaging_Pull ) ) != 0)
+                    if ((fRuntime.Debug & ( AdkDebugFlags.Messaging | AdkDebugFlags.Messaging_Pull ) ) != 0)
                     {
                         fZone.Log.Debug("Pulled a " + payload.ElementDef.Tag(payload.SifVersion) + " message (SIF " + payload.SifVersion + ")");
                     }
@@ -1891,7 +1893,7 @@ namespace OpenADK.Library.Impl
                     if (msgList.Count > 0)
                     {
                         StringWriter tmp = new StringWriter();
-                        SifWriter sifwriter = new SifWriter(tmp);
+                        SifWriter sifwriter = new SifWriter(tmp, fRuntime);
                         sifwriter.Write(payload);
                         sifwriter.Flush();
                         tmp.Flush();
@@ -1906,7 +1908,7 @@ namespace OpenADK.Library.Impl
                             {
                                 SifMessageType pload =
                                     (SifMessageType)
-                                    Adk.Dtd.GetElementType(payload.ElementDef.Name);
+                                    fRuntime.Dtd.GetElementType(payload.ElementDef.Name);
                                 MessagingReturnCode code = listener.OnMessageReceived(pload, xml);
                                 switch (code)
                                 {
@@ -2029,7 +2031,7 @@ namespace OpenADK.Library.Impl
                     else
                     {
                         // Unknown condition
-                        AdkUtils._throw(new SifException(ack, fZone), fZone.Log );
+                        AdkUtils._throw(new SifException(ack, fZone), fZone.Log, fRuntime );
                     }
                 }
             }
@@ -2248,7 +2250,7 @@ namespace OpenADK.Library.Impl
                         //  Was it changed because of an exception? If so throw it
                         if (_state._exception != null)
                         {
-                            if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+                            if ((fDispatcher.fRuntime.Debug & AdkDebugFlags.Messaging) != 0)
                             {
                                 fDispatcher.fZone.Log.Debug
                                     (
@@ -2258,7 +2260,7 @@ namespace OpenADK.Library.Impl
                             {
                                 AdkUtils._throw
                                     ((AdkMessagingException)_state._exception,
-                                      fDispatcher.fZone.Log);
+                                      fDispatcher.fZone.Log, fDispatcher.fRuntime);
                             }
                             else
                             {
@@ -2272,12 +2274,12 @@ namespace OpenADK.Library.Impl
                                     adkme.Retry = ((AdkException)_state._exception).Retry;
                                 }
 
-                                AdkUtils._throw(adkme, fDispatcher.fZone.Log);
+                                AdkUtils._throw(adkme, fDispatcher.fZone.Log, fDispatcher.fRuntime);
                             }
                         }
 
                         //  Return the SIF_Ack code the caller is waiting for
-                        if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+                        if ((fDispatcher.fRuntime.Debug & AdkDebugFlags.Messaging) != 0)
                         {
                             fDispatcher.fZone.Log.Debug
                                 ("EvDisp received acknowledgement code " + _state._ack);
@@ -2288,14 +2290,14 @@ namespace OpenADK.Library.Impl
                 }
                 catch (ThreadInterruptedException ie)
                 {
-                    if ((Adk.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
+                    if ((fDispatcher.fRuntime.Debug & AdkDebugFlags.Messaging_Event_Dispatching) != 0)
                     {
                         fDispatcher.fZone.Log.Debug("EvDisp interrupted waiting for ack code");
                     }
 
                     AdkUtils._throw
                         (new AdkMessagingException(ie.ToString(), fDispatcher.fZone),
-                          fDispatcher.fZone.Log);
+                          fDispatcher.fZone.Log, fDispatcher.fRuntime);
                 }
 
                 return result;
@@ -2334,7 +2336,7 @@ namespace OpenADK.Library.Impl
             {
                 try
                 {
-                    if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+                    if ((fDispatcher.fRuntime.Debug & AdkDebugFlags.Messaging) != 0)
                     {
                         fDispatcher.fZone.Log.Debug("EvDisp received dispatch request");
                     }
@@ -2389,7 +2391,7 @@ namespace OpenADK.Library.Impl
 
         private void logAndThrowSIFException(String shortMessage, Exception exception)
         {
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 )
+            if ( (fRuntime.Debug & AdkDebugFlags.Exceptions) != 0 )
             {
                 fZone.Log.Error( shortMessage, exception );
             }
@@ -2401,7 +2403,7 @@ namespace OpenADK.Library.Impl
                 shortMessage,
                 exception.StackTrace,
                 fZone, exception );
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 )
+            if ( (fRuntime.Debug & AdkDebugFlags.Exceptions) != 0 )
             {
                 fZone.Log.Error( "Translated to a SIFException", exToThrow );
             }
@@ -2410,7 +2412,7 @@ namespace OpenADK.Library.Impl
 
         private void logAndRethrow(String shortMessage, AdkException exception)
         {
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 )
+            if ( (fRuntime.Debug & AdkDebugFlags.Exceptions) != 0 )
             {
                 fZone.Log.Error( shortMessage, exception );
             }
@@ -2419,7 +2421,7 @@ namespace OpenADK.Library.Impl
 
         private void logAndThrowRetry(String shortMessage, Exception exception)
         {
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 )
+            if ( (fRuntime.Debug & AdkDebugFlags.Exceptions) != 0 )
             {
                 fZone.Log.Error( shortMessage, exception );
             }
@@ -2429,7 +2431,7 @@ namespace OpenADK.Library.Impl
                 shortMessage,
                 exception.StackTrace,
                 fZone );
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 )
+            if ( (fRuntime.Debug & AdkDebugFlags.Exceptions) != 0 )
             {
                 fZone.Log.Error( "Translated to a SIFException that will force a retry", exToThrow );
             }

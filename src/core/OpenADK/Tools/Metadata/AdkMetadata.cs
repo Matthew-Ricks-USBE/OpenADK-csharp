@@ -16,21 +16,13 @@ namespace OpenADK.Library.Tools.Metadata
         public const byte MD_REPEATABLE = ElementDefImpl.FD_REPEATABLE;
 
 
-        private static AdkMetadata gSingleton = null;
+        private readonly DTDInternals fDtd;
 
-        private AdkMetadata() {}
-
-        public static AdkMetadata GetInstance()
+        public AdkMetadata(IAdkRuntime runtime)
         {
-            if ( !Adk.Initialized ) {
-                throw new InvalidOperationException( "ADK is not initialized" );
-            }
-
-            if ( gSingleton == null ) {
-                gSingleton = new AdkMetadata();
-            }
-
-            return gSingleton;
+            if (runtime == null) throw new ArgumentNullException(nameof(runtime));
+            if (!runtime.Initialized) runtime.Initialize();
+            fDtd = (DTDInternals)runtime.Dtd;
         }
 
 
@@ -47,7 +39,7 @@ namespace OpenADK.Library.Tools.Metadata
             IElementDef ed =
                 new ElementDefImpl
                     ( null, name, null, 0, "custom", ElementDefImpl.FD_OBJECT, earliestVersion, SifVersion.LATEST );
-            SifDtd.sElementDefs.Add( name, ed );
+            fDtd.AddElementDef(name, ed);
             return ed;
         }
 
@@ -92,7 +84,7 @@ namespace OpenADK.Library.Tools.Metadata
                 new ElementDefImpl
                     ( parent, name, null, sequence, "custom", ElementDefImpl.FD_ATTRIBUTE,
                       earliestVersion, SifVersion.LATEST );
-            SifDtd.sElementDefs.Add( parent.Name + "_" + name, ed );
+            fDtd.AddElementDef(parent.Name + "_" + name, ed);
             return ed;
         }
 
@@ -126,7 +118,7 @@ namespace OpenADK.Library.Tools.Metadata
                 new ElementDefImpl
                     ( parent, name, null, sequence, "custom",
                       (byte) (ElementDefImpl.FD_FIELD | flags), earliestVersion, SifVersion.LATEST );
-            SifDtd.sElementDefs.Add( parent.Name + "_" + name, ed );
+            fDtd.AddElementDef(parent.Name + "_" + name, ed);
             return ed;
         }
 
@@ -159,7 +151,7 @@ namespace OpenADK.Library.Tools.Metadata
             IElementDef ed =
                 new ElementDefImpl
                     ( parent, element.Name, null, sequence, element.Package, flags, earliestVersion, SifVersion.LATEST );
-            SifDtd.sElementDefs.Add( parent.Name + "_" + element.Name, ed );
+            fDtd.AddElementDef(parent.Name + "_" + element.Name, ed);
             return ed;
         }
     }

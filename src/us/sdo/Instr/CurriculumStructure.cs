@@ -28,7 +28,7 @@ public class CurriculumStructure : SifDataObject
 	/// <summary>
 	/// Creates an instance of a CurriculumStructure
 	/// </summary>
-	public CurriculumStructure() : base( Adk.SifVersion, InstrDTD.CURRICULUMSTRUCTURE ){}
+	public CurriculumStructure() : base( SifVersion.LATEST, InstrDTD.CURRICULUMSTRUCTURE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class CurriculumStructure : SifDataObject
 	///<param name="titles">Name of this type of curriculum object (e.g., "American Revolutionary War")</param>
 	///<param name="curriculumHierarchyLevel">Integer assigned to each hierarchical level within the CurriculumStructure tree. The top level is "1".</param>
 	///
-	public CurriculumStructure( string refId, LanguageCode language, Title titles, CurriculumHierarchyLevel curriculumHierarchyLevel ) : base( Adk.SifVersion, InstrDTD.CURRICULUMSTRUCTURE )
+	public CurriculumStructure( string refId, LanguageCode language, Title titles, CurriculumHierarchyLevel curriculumHierarchyLevel ) : base( SifVersion.LATEST, InstrDTD.CURRICULUMSTRUCTURE )
 	{
 		this.RefId = refId;
 		this.SetLanguage( language );
@@ -355,4 +355,3 @@ public class CurriculumStructure : SifDataObject
 	}
 
 }}
-

@@ -12,6 +12,12 @@ namespace OpenADK.Library
     /// </summary>
     public interface ITransportManager
     {
+        IProtocolHandler Activate(ZoneImpl zone);
+
+        void Activate(Agent agent);
+
+        TransportProperties GetDefaultTransportProperties(string protocol);
+
         /// <summary>
         /// Gets the Transport instance that has been instantiated for the specified protocol
         /// </summary>
@@ -19,5 +25,7 @@ namespace OpenADK.Library
         /// <returns>The transport object for the specified protocol</returns>
         /// <exception cref="AdkTransportException">If the protocol is not supported by the ADK</exception>
         ITransport GetTransport( string protocol );
+
+        void Shutdown();
     }
 }

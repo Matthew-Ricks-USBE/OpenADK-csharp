@@ -18,7 +18,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         public override void SetUp()
         {
             base.SetUp();
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             fCfg = new AgentConfig();
             fCfg.Read("..\\..\\OpenADK\\Tools\\Mapping\\Destiny2.0.cfg", false);
         }
@@ -68,7 +68,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                     + "		</SIF_ObjectData>"
                                     + "	  </SIF_Response>" + "	</SIF_Message>";
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SifMessagePayload smi = (SifMessagePayload) parser.Parse(
                                                             schoolInfoResp, null );
 

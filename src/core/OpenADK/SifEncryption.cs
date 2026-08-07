@@ -102,8 +102,6 @@ namespace OpenADK.Library
     {
         private PasswordAlgorithm fAlgorithm;
         private string fkeyName;
-        private static SifEncryption sCurrentInstance;
-        private bool fDisposed;
 
         private SifEncryption( PasswordAlgorithm algorithm,
                                string keyName )
@@ -128,49 +126,31 @@ namespace OpenADK.Library
             byte [] key
             )
         {
-            if ( sCurrentInstance != null ) {
-                if ( !sCurrentInstance.fDisposed &&
-                     sCurrentInstance.Algorithm.Value.Equals( algorithm.Value ) &&
-                     (sCurrentInstance.KeyName == keyName || sCurrentInstance.Key == null) ) {
-                    return sCurrentInstance;
-                }
-                else {
-                    sCurrentInstance.Dispose();
-                    sCurrentInstance = null;
-                }
-            }
-
             if (algorithm.ValueEquals("base64")){
-                sCurrentInstance = new SifClearTextEncryption( algorithm, keyName );
+                return new SifClearTextEncryption( algorithm, keyName );
             }
             else if ( algorithm.Value == PasswordAlgorithm.SHA1.Value ) {
-                sCurrentInstance = new SifHashEncryption( algorithm, keyName, SHA1.Create() );
+                return new SifHashEncryption( algorithm, keyName, SHA1.Create() );
             }
             else if ( algorithm.Value == PasswordAlgorithm.MD5.Value ) {
-                sCurrentInstance =
-                    new SifHashEncryption( algorithm, keyName, MD5.Create() );
+                return new SifHashEncryption( algorithm, keyName, MD5.Create() );
             }
             else if ( algorithm.Value == PasswordAlgorithm.DES.Value ) {
-                sCurrentInstance =
-                    new SifSymmetricEncryption
+                return new SifSymmetricEncryption
                         ( algorithm, keyName, DES.Create(), key );
             }
             else if ( algorithm.Value == PasswordAlgorithm.TRIPLEDES.Value ) {
-                sCurrentInstance =
-                    new SifSymmetricEncryption
+                return new SifSymmetricEncryption
                         ( algorithm, keyName, TripleDES.Create(), key );
             }
             else if ( algorithm.Value == PasswordAlgorithm.RC2.Value ) {
-                sCurrentInstance =
-                    new SifSymmetricEncryption
+                return new SifSymmetricEncryption
                         ( algorithm, keyName, RC2.Create(), key );
             }
             else {
                 throw new AdkNotSupportedException
                     ( string.Format( "Encryption algorithm {0} is not supported.", algorithm.Value ) );
             }
-
-            return sCurrentInstance;
         }
 
 
@@ -204,11 +184,6 @@ namespace OpenADK.Library
             Password password,
             IZone zone )
         {
-            if ( sCurrentInstance != null &&
-                 sCurrentInstance.Algorithm.Value == password.Algorithm &&
-                 (sCurrentInstance.KeyName == password.KeyName || sCurrentInstance.Key == null) ) {
-                return sCurrentInstance;
-            }
             byte [] key = zone.Properties.GetEncryptionKey( password.KeyName );
             return
                 GetInstance( PasswordAlgorithm.Wrap( password.Algorithm ), password.KeyName, key );
@@ -275,7 +250,6 @@ namespace OpenADK.Library
         /// </summary>
         public virtual void Dispose()
         {
-            fDisposed = true;
         }
 
 

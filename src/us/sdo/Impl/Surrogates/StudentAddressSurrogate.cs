@@ -25,7 +25,7 @@ namespace OpenADK.Library.Impl.Surrogates
         {
             if ( !(o is SifElement) )
             {
-                Adk.Log.Warn( "StudentAddressSurrogate got an unacceptable element of type " + o.GetType() + "/" +
+                fElementDef.Dtd.Logger.Warn( "StudentAddressSurrogate got an unacceptable element of type " + o.GetType() + "/" +
                               o.ElementDef.Name + "(" + o + ") in RenderRaw" );
                 return;
             }
@@ -39,7 +39,7 @@ namespace OpenADK.Library.Impl.Surrogates
                 writer.WriteAttributeString( "DayOfWeek", "NA" );
 
                 // Create a nested SIF writer to write the address element
-                SifWriter addressWriter = new SifWriter(writer);
+                SifWriter addressWriter = new SifWriter(writer, element.ElementDef.Dtd, version);
                 addressWriter.SuppressNamespace( true );
                 addressWriter.Write( address, version );
 
@@ -67,7 +67,7 @@ namespace OpenADK.Library.Impl.Surrogates
                     studentPersonal.AddressList = addressList;
                 }
 
-                StudentAddressPullParser parser = new StudentAddressPullParser();
+                StudentAddressPullParser parser = new StudentAddressPullParser(parent.ElementDef.Dtd);
                 StudentAddress studentAddress = (StudentAddress) parser.ParseOneElementFromStream( reader, version );
                 Address address = studentAddress.Address;
                 if ( address != null )

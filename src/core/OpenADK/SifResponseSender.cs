@@ -120,7 +120,7 @@ namespace OpenADK.Library
             IElementDef [] fieldRestrictions )
         {
             fZone = zone;
-            fOut = DataObjectOutputStreamImpl.NewInstance();
+            fOut = zone.Agent.CreateDataObjectOutputStream();
             fOut.Initialize
                 ( zone, fieldRestrictions, sifRequestSourceId, sifRequestMsgId, sifVersion,
                   maxBufferSize );
@@ -166,7 +166,7 @@ namespace OpenADK.Library
             Query query)
         {
             fZone = zone;
-            fOut = DataObjectOutputStreamImpl.NewInstance();
+            fOut = zone.Agent.CreateDataObjectOutputStream();
             fOut.Initialize
                 (zone, query, sifRequestSourceId, sifRequestMsgId, sifVersion,
                   maxBufferSize);

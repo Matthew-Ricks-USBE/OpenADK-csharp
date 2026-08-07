@@ -28,7 +28,7 @@ public class StudentAttendanceSummary : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentAttendanceSummary
 	/// </summary>
-	public StudentAttendanceSummary() : base( Adk.SifVersion, StudentDTD.STUDENTATTENDANCESUMMARY ){}
+	public StudentAttendanceSummary() : base( SifVersion.LATEST, StudentDTD.STUDENTATTENDANCESUMMARY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -56,7 +56,7 @@ public class StudentAttendanceSummary : SifDataObject
 	/// 
 	/// Note: No SIF_Query SIF_Condition support is required for this element.</param>
 	///
-	public StudentAttendanceSummary( string studentPersonalRefId, string schoolInfoRefId, int? schoolYear, DateTime? startDate, int? startDay, DateTime? endDate, int? endDay, YesNoUnknown resident, decimal? daysAttended, decimal? excusedAbsences, decimal? unexcusedAbsences, decimal? daysInMembership ) : base( Adk.SifVersion, StudentDTD.STUDENTATTENDANCESUMMARY )
+	public StudentAttendanceSummary( string studentPersonalRefId, string schoolInfoRefId, int? schoolYear, DateTime? startDate, int? startDay, DateTime? endDate, int? endDay, YesNoUnknown resident, decimal? daysAttended, decimal? excusedAbsences, decimal? unexcusedAbsences, decimal? daysInMembership ) : base( SifVersion.LATEST, StudentDTD.STUDENTATTENDANCESUMMARY )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -426,4 +426,3 @@ public class StudentAttendanceSummary : SifDataObject
 	}
 
 }}
-

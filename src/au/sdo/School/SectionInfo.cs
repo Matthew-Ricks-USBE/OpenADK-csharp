@@ -28,7 +28,7 @@ public class SectionInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SectionInfo
 	/// </summary>
-	public SectionInfo() : base( Adk.SifVersion, SchoolDTD.SECTIONINFO ){}
+	public SectionInfo() : base( SifVersion.LATEST, SchoolDTD.SECTIONINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class SectionInfo : SifDataObject
 	///<param name="schoolCourseInfoRefId">A SchoolCourseInfoRefId</param>
 	///<param name="localId">A LocalId</param>
 	///
-	public SectionInfo( string refId, string schoolCourseInfoRefId, string localId ) : base( Adk.SifVersion, SchoolDTD.SECTIONINFO )
+	public SectionInfo( string refId, string schoolCourseInfoRefId, string localId ) : base( SifVersion.LATEST, SchoolDTD.SECTIONINFO )
 	{
 		this.RefId = refId;
 		this.SchoolCourseInfoRefId = schoolCourseInfoRefId;
@@ -433,4 +433,3 @@ public class SectionInfo : SifDataObject
 	}
 
 }}
-

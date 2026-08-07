@@ -31,7 +31,7 @@ public class StudentSchoolEnrollment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentSchoolEnrollment
 	/// </summary>
-	public StudentSchoolEnrollment() : base( Adk.SifVersion, StudentDTD.STUDENTSCHOOLENROLLMENT ){}
+	public StudentSchoolEnrollment() : base( SifVersion.LATEST, StudentDTD.STUDENTSCHOOLENROLLMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -42,7 +42,7 @@ public class StudentSchoolEnrollment : SifDataObject
 	///<param name="membershipType">The type of this enrollment as it relates to the school identified in SchoolInfoRefId.</param>
 	///<param name="timeFrame">The timeframe of the enrollment based on the SIF_Date in the SIF_Header of the message. For events, it is determined as of the date the event is generated. For requests and responses, it is calculated based on the date of the request.</param>
 	///
-	public StudentSchoolEnrollment( string refId, string studentPersonalRefId, string schoolInfoRefId, MembershipType membershipType, TimeFrame timeFrame ) : base( Adk.SifVersion, StudentDTD.STUDENTSCHOOLENROLLMENT )
+	public StudentSchoolEnrollment( string refId, string studentPersonalRefId, string schoolInfoRefId, MembershipType membershipType, TimeFrame timeFrame ) : base( SifVersion.LATEST, StudentDTD.STUDENTSCHOOLENROLLMENT )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -907,4 +907,3 @@ public class StudentSchoolEnrollment : SifDataObject
 
 		#endregion // EXTRA METHODS
 }}
-

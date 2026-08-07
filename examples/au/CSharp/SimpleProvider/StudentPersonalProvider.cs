@@ -16,8 +16,11 @@ namespace Library.Examples.SimpleProvider
 {
     internal class StudentPersonalProvider : IPublisher
     {
-        public StudentPersonalProvider()
+        private readonly IAdkRuntime fRuntime;
+
+        public StudentPersonalProvider(IAdkRuntime runtime)
         {
+            fRuntime = runtime ?? throw new ArgumentNullException(nameof(runtime));
             try
             {
                 InitializeDB();
@@ -206,7 +209,7 @@ namespace Library.Examples.SimpleProvider
                         "19890102" ) );
         }
 
-        private static StudentPersonal CreateStudent(
+        private StudentPersonal CreateStudent(
             String id,
             String lastName,
             String firstName,
@@ -222,7 +225,7 @@ namespace Library.Examples.SimpleProvider
         {
             StudentPersonal student = new StudentPersonal();
             ;
-            student.RefId = Adk.MakeGuid();
+            student.RefId = fRuntime.MakeGuid();
             student.LocalId = id;
 
             PersonInfo stupersonal = new PersonInfo();

@@ -14,6 +14,7 @@ using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
 using OpenADK.Util;
 using OpenADK.Library.au;
+using Microsoft.Extensions.DependencyInjection;
 
 /// <summary>  The Mappings agent demonstrates how to respond to requests for LearnerPersonal
 /// by reading a list of students from a Microsoft Access database using JDBC,
@@ -56,8 +57,8 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
 
     /// <summary>  Constructor
     /// </summary>
-    public MappingsDemo()
-        : base( "MappingsDemo" )
+    public MappingsDemo(IAdkRuntime runtime, IAdkComponentFactory components)
+        : base( "MappingsDemo", runtime, components )
     {
         Name = "Library ADK Example";
     }
@@ -70,8 +71,6 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
     public virtual void startAgent( string[] args )
     {
         Console.WriteLine( "Initializing agent..." );
-        Adk.Initialize( SifVersion.LATEST, SIFVariant.SIF_AU, (int)SdoLibraryType.Student );
-
         //  Read the configuration file
         fCfg = new AgentConfig();
         Console.WriteLine( "Reading configuration file..." );
@@ -84,7 +83,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
         //  Inform the ADK of the version of SIF specified in the sifVersion=
         //  attribute of the <agent> element
         SifVersion version = fCfg.Version;
-        Adk.SifVersion = version;
+        Runtime.SifVersion = version;
 
         //  Now call the superclass initialize once the configuration file has been read
         base.Initialize();
@@ -138,7 +137,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
                 allZones[i].Connect( ProvisioningFlags.Register );
 
                 //  Request all students
-                Query q = new Query( StudentDTD.STUDENTPERSONAL );
+                Query q = Objects.CreateQuery( StudentDTD.STUDENTPERSONAL );
                 q.UserData = "Mappings Demo";
                 allZones[i].Query( q );
             }
@@ -157,7 +156,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
                                    IMessageInfo inf )
     {
         SifMessageInfo info = (SifMessageInfo) inf;
-        SifWriter debug = new SifWriter( Console.Out );
+        SifWriter debug = new SifWriter( Console.Out, Runtime );
 
         Console.WriteLine
             ( "Received a request for " + query.ObjectTag + " from agent \"" + info.SourceId +
@@ -221,7 +220,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
                     //  the LearnerPersonal object.
                     //
                     StudentPersonal sp = new StudentPersonal();
-                    sp.RefId = Adk.MakeGuid();
+                    sp.RefId = Runtime.MakeGuid();
                     mappings.Map( sp, dra );
 
                     //  Now write out the LearnerPersonal to the output stream and
@@ -330,7 +329,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
         //  three parameters passed to it.
         MappingsContext mappings = m.SelectInbound( StudentDTD.STUDENTPERSONAL, info );
         Hashtable data = new Hashtable();
-        StringMapAdaptor sma = new StringMapAdaptor( data, Adk.Dtd.GetFormatter( SifVersion.LATEST ) );
+        StringMapAdaptor sma = new StringMapAdaptor( data, Runtime.Dtd.GetFormatter( SifVersion.LATEST ) );
 
         int count = 0;
         while ( inStream.Available )
@@ -367,10 +366,14 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
         try
         {
             //  Pre-parse the command line before initializing the ADK
-            Adk.Debug = AdkDebugFlags.Moderate;
-
-            //  Start agent...
-            agent = new MappingsDemo();
+            using ServiceProvider services = new ServiceCollection().AddOpenAdk(options =>
+            {
+                options.SifVersion = SifVersion.LATEST;
+                options.Variant = SIFVariant.SIF_AU;
+                options.SdoLibraries = (int)SdoLibraryType.Student;
+                options.Debug = AdkDebugFlags.Moderate;
+            }).AddSingleton<MappingsDemo>().BuildServiceProvider();
+            agent = services.GetRequiredService<MappingsDemo>();
 
             agent.startAgent( args );
 

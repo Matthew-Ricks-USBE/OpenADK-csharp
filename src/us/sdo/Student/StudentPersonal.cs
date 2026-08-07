@@ -28,7 +28,7 @@ public class StudentPersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentPersonal
 	/// </summary>
-	public StudentPersonal() : base( Adk.SifVersion, StudentDTD.STUDENTPERSONAL ){}
+	public StudentPersonal() : base( SifVersion.LATEST, StudentDTD.STUDENTPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class StudentPersonal : SifDataObject
 	///<param name="refId">The GUID of the student.</param>
 	///<param name="name">Name of the student.  Note: Always use Type value of 04.</param>
 	///
-	public StudentPersonal( string refId, Name name ) : base( Adk.SifVersion, StudentDTD.STUDENTPERSONAL )
+	public StudentPersonal( string refId, Name name ) : base( SifVersion.LATEST, StudentDTD.STUDENTPERSONAL )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -1095,4 +1095,3 @@ public class StudentPersonal : SifDataObject
 
 		#endregion // EXTRA METHODS
 }}
-

@@ -14,7 +14,7 @@ using OpenADK.Library.Impl;
 using OpenADK.Library.Impl.Surrogates;
 using OpenADK.Library.Infra;
 using OpenADK.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library
 {
@@ -23,21 +23,28 @@ namespace OpenADK.Library
     /// </summary>
     public sealed class SifParser
     {
-        /// <summary>
-        /// The constructor is made private so that access can only be done using the 
-        /// factory method.
-        /// </summary>
-        private SifParser()
+        private readonly IDtd fDtd;
+        private readonly SifVersion fDefaultVersion;
+        private readonly ILogger fLog;
+
+        public SifParser(IAdkRuntime runtime)
         {
+            if (runtime == null)
+            {
+                throw new ArgumentNullException(nameof(runtime));
+            }
+
+            runtime.Initialize();
+            fDtd = runtime.Dtd;
+            fDefaultVersion = runtime.SifVersion;
+            fLog = runtime.Log;
         }
 
-        /// <summary>
-        /// Factory method for creating a new instance of a Sif Parser
-        /// </summary>
-        /// <returns></returns>
-        public static SifParser NewInstance()
+        public SifParser(IDtd dtd, SifVersion defaultVersion)
         {
-            return new SifParser();
+            fDtd = dtd ?? throw new ArgumentNullException(nameof(dtd));
+            fDefaultVersion = defaultVersion ?? throw new ArgumentNullException(nameof(defaultVersion));
+            fLog = dtd.Logger;
         }
 
         /// <summary>
@@ -295,13 +302,13 @@ namespace OpenADK.Library
                 reader.MoveToContent();
                 if ( reader.LocalName == "SIF_Message" )
                 {
-                    SifElement element = ReadSIFMessageElement( reader, Adk.Dtd, zone, flags, version );
+                    SifElement element = ReadSIFMessageElement( reader, fDtd, zone, flags, version );
                     return element.GetChildList()[0];
                 }
                 else
                 {
-                    version = ParseVersion( reader, Adk.Dtd, zone, flags, version );
-                    return ParseElementStream( reader, version, Adk.Dtd, zone, flags );
+                    version = ParseVersion( reader, fDtd, zone, flags, version );
+                    return ParseElementStream( reader, version, fDtd, zone, flags );
                 }
             } 
             catch( XmlException xmle )
@@ -337,7 +344,7 @@ namespace OpenADK.Library
 
             SIF_Message message = new SIF_Message();
             // Set the namespace from our working version
-            message.SetXmlns( version.Xmlns );
+            message.SetXmlns(dtd.GetNamespace(version));
             if ( version.CompareTo( SifVersion.SIF11 ) >= 0 )
             {
                 // If we are at SifVersion 1.1 or greater, set the version attribute
@@ -394,7 +401,7 @@ namespace OpenADK.Library
 
             if ( verAttr != null )
             {
-                version = SifVersion.Parse( verAttr );
+                version = SifVersion.Parse( verAttr, fDefaultVersion );
             }
             else if ( defaultVersion != null )
             {
@@ -406,12 +413,12 @@ namespace OpenADK.Library
                 version = SifVersion.ParseXmlns( namespc );
                 if ( version == null )
                 {
-                    version = Adk.SifVersion;
+                    version = fDefaultVersion;
                 }
             }
 
             // Do validation on the version
-            if ( !Adk.IsSIFVersionSupported( version ) )
+            if ( version == null || Array.BinarySearch(SifVersion.SupportedVersions, version) < 0 )
             {
                 throw new SifException(
                     SifErrorCategoryCode.Generic,
@@ -420,13 +427,13 @@ namespace OpenADK.Library
             }
             else if ( zone != null && zone.Properties.StrictVersioning )
             {
-                if ( version.CompareTo( Adk.SifVersion ) != 0 )
+                if ( version.CompareTo( fDefaultVersion ) != 0 )
                 {
                     throw new SifException(
                         SifErrorCategoryCode.Generic,
                         SifErrorCodes.GENERIC_VERSION_NOT_SUPPORTED_3,
                         "SIF " + version.ToString() + " message support disabled by this agent",
-                        string.Format( "This agent is running in strict SIF {0} mode", Adk.SifVersion.ToString() ), zone );
+                        string.Format( "This agent is running in strict SIF {0} mode", fDefaultVersion.ToString() ), zone );
                 }
             }
             return version;
@@ -444,7 +451,7 @@ namespace OpenADK.Library
             // The current SIFElement being parsed
             SifElement currentElement = null;
             // The actual tag name of the current element
-            SifFormatter formatter = Adk.Dtd.GetFormatter( version );
+            SifFormatter formatter = fDtd.GetFormatter( version );
             reader.MoveToContent();
             bool doneParsing = false;
             while ( !(reader.EOF || doneParsing) )
@@ -774,7 +781,7 @@ namespace OpenADK.Library
             }
             else if (element.ElementDef.EarliestVersion >= SifVersion.SIF20 && version < SifVersion.SIF20)
             {
-                Adk.Log.Warn("Field " + element.ElementDef.ClassName + "." + (reader.Prefix == null ? reader.LocalName : reader.Prefix + ":" + reader.LocalName ) + " does not exist in the sif 2.0 specification onwards.  It may or may not be valid in sif 1.5r1.  It will be ignored."  );
+                fLog.Warn("Field " + element.ElementDef.ClassName + "." + (reader.Prefix == null ? reader.LocalName : reader.Prefix + ":" + reader.LocalName ) + " does not exist in the sif 2.0 specification onwards.  It may or may not be valid in sif 1.5r1.  It will be ignored."  );
             }
             else
             {
@@ -978,23 +985,26 @@ namespace OpenADK.Library
             AdkTypeParseException pe,
             IZone zone)
         {
-            ILog log = Adk.Log;
-            if ( zone != null )
+            ILogger log = fLog;
+            if (zone != null)
             {
                 log = zone.Log;
-                if ( zone.Properties.StrictTypeParsing )
+                if (zone.Properties.StrictTypeParsing)
                 {
-                    throw new SifException( SifErrorCategoryCode.Xml, SifErrorCodes.XML_INVALID_VALUE_4, errorMessage,
-                                            zone, pe );
+                    throw new SifException(
+                        SifErrorCategoryCode.Xml,
+                        SifErrorCodes.XML_INVALID_VALUE_4,
+                        errorMessage,
+                        zone,
+                        pe);
                 }
             }
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) > 0 )
+
+            if (zone == null || (zone.Agent.Runtime.Debug & AdkDebugFlags.Exceptions) > 0)
             {
                 log.Warn( errorMessage, pe );
             }
         }
-
- 
     }
 }
 

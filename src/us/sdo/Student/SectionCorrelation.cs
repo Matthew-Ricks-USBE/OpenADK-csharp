@@ -28,14 +28,14 @@ public class SectionCorrelation : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SectionCorrelation
 	/// </summary>
-	public SectionCorrelation() : base( Adk.SifVersion, StudentDTD.SECTIONCORRELATION ){}
+	public SectionCorrelation() : base( SifVersion.LATEST, StudentDTD.SECTIONCORRELATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">The Id (GUID) that uniquely identifies this correlation.</param>
 	///
-	public SectionCorrelation( string refId ) : base( Adk.SifVersion, StudentDTD.SECTIONCORRELATION )
+	public SectionCorrelation( string refId ) : base( SifVersion.LATEST, StudentDTD.SECTIONCORRELATION )
 	{
 		this.RefId = refId;
 	}
@@ -171,4 +171,3 @@ public class SectionCorrelation : SifDataObject
 	}
 
 }}
-

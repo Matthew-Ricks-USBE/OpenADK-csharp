@@ -28,7 +28,7 @@ public class LearnerEntitlement : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerEntitlement
 	/// </summary>
-	public LearnerEntitlement() : base( Adk.SifVersion, LearnerDTD.LEARNERENTITLEMENT ){}
+	public LearnerEntitlement() : base( SifVersion.LATEST, LearnerDTD.LEARNERENTITLEMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class LearnerEntitlement : SifDataObject
 	///<param name="schoolInfoRefId">The ID (GUID) of the school to which this entitlement applies.</param>
 	///<param name="entitlementType">The type of this Entitlement</param>
 	///
-	public LearnerEntitlement( string refId, string learnerPersonalRefId, string schoolInfoRefId, string entitlementType ) : base( Adk.SifVersion, LearnerDTD.LEARNERENTITLEMENT )
+	public LearnerEntitlement( string refId, string learnerPersonalRefId, string schoolInfoRefId, string entitlementType ) : base( SifVersion.LATEST, LearnerDTD.LEARNERENTITLEMENT )
 	{
 		this.RefId = refId;
 		this.LearnerPersonalRefId = learnerPersonalRefId;
@@ -218,4 +218,3 @@ public class LearnerEntitlement : SifDataObject
 	}
 
 }}
-

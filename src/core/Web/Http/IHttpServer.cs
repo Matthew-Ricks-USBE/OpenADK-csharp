@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using OpenADK.Library;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Web.Http
 {

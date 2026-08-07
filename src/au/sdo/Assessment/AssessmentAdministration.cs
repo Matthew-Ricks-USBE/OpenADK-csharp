@@ -28,7 +28,7 @@ public class AssessmentAdministration : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentAdministration
 	/// </summary>
-	public AssessmentAdministration() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTADMINISTRATION ){}
+	public AssessmentAdministration() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTADMINISTRATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class AssessmentAdministration : SifDataObject
 	///<param name="assessmentFormRefId">The RefId of the assessment form used in the assessment administration.</param>
 	///<param name="administrationDateTime">Date and time the test is scheduled to be given.</param>
 	///
-	public AssessmentAdministration( string refId, string assessmentFormRefId, DateTime? administrationDateTime ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTADMINISTRATION )
+	public AssessmentAdministration( string refId, string assessmentFormRefId, DateTime? administrationDateTime ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTADMINISTRATION )
 	{
 		this.RefId = refId;
 		this.AssessmentFormRefId = assessmentFormRefId;
@@ -345,4 +345,3 @@ public class AssessmentAdministration : SifDataObject
 	}
 
 }}
-

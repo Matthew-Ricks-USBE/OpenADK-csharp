@@ -30,7 +30,7 @@ public class StudentRecordPackage : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentRecordPackage
 	/// </summary>
-	public StudentRecordPackage() : base( Adk.SifVersion, EtranscriptsDTD.STUDENTRECORDPACKAGE ){}
+	public StudentRecordPackage() : base( SifVersion.LATEST, EtranscriptsDTD.STUDENTRECORDPACKAGE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class StudentRecordPackage : SifDataObject
 	///<param name="sifRefId">The GUID of the customer doing the transaction. </param>
 	///<param name="sifRefObject">SIF customer type.</param>
 	///
-	public StudentRecordPackage( string sifRefId, string sifRefObject ) : base( Adk.SifVersion, EtranscriptsDTD.STUDENTRECORDPACKAGE )
+	public StudentRecordPackage( string sifRefId, string sifRefObject ) : base( SifVersion.LATEST, EtranscriptsDTD.STUDENTRECORDPACKAGE )
 	{
 		this.SIF_RefId = sifRefId;
 		this.SIF_RefObject = sifRefObject;
@@ -260,4 +260,3 @@ public class StudentRecordPackage : SifDataObject
 	}
 
 }}
-

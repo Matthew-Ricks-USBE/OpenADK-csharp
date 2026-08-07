@@ -28,7 +28,7 @@ public class LAInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LAInfo
 	/// </summary>
-	public LAInfo() : base( Adk.SifVersion, SchoolDTD.LAINFO ){}
+	public LAInfo() : base( SifVersion.LATEST, SchoolDTD.LAINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class LAInfo : SifDataObject
 	///<param name="laName">The LA's short name to be used for reporting purposes. Normally, the word "Council" should not be included. CBDS: L3</param>
 	///<param name="laFullName">The LA's full name. CBDS: L2</param>
 	///
-	public LAInfo( string refId, string laId, string laName, string laFullName ) : base( Adk.SifVersion, SchoolDTD.LAINFO )
+	public LAInfo( string refId, string laId, string laName, string laFullName ) : base( SifVersion.LATEST, SchoolDTD.LAINFO )
 	{
 		this.RefId = refId;
 		this.LAId = laId;
@@ -359,4 +359,3 @@ public class LAInfo : SifDataObject
 	}
 
 }}
-

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
 using OpenADK.Library.Infra;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library
 {
@@ -88,7 +88,7 @@ namespace OpenADK.Library
 
             set
             {
-                fXmlns = value.Xmlns;
+                fXmlns = ElementDef.Dtd.GetNamespace(value);
                 if (value.CompareTo(SifVersion.SIF11) >= 0)
                 {
                     fVersionAttr = value.ToString();
@@ -232,7 +232,7 @@ namespace OpenADK.Library
         public SifMessagePayload(IElementDef metadata)
             : base(metadata)
         {
-            SifVersion = Adk.SifVersion;
+            SifVersion = global::OpenADK.Library.SifVersion.LATEST;
         }
 
         /// <summary>  Constructor</summary>
@@ -449,13 +449,13 @@ namespace OpenADK.Library
         /// </summary>
         /// <param name="log">The logging framework Category instance representing the destination Zone
         /// </param>
-        public virtual void LogSend(ILog log)
+        public virtual void LogSend(ILogger log)
         {
-            if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+            if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
             {
                 log.Debug("Send " + ElementDef.Name);
             }
-            if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+            if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
             {
                 string id = MsgId;
                 log.Debug("  MsgId: " + (id == null ? "<none>" : id));
@@ -467,13 +467,13 @@ namespace OpenADK.Library
         /// </summary>
         /// <param name="log">The logging framework Category instance representing the source Zone
         /// </param>
-        public virtual void LogRecv(ILog log)
+        public virtual void LogRecv(ILogger log)
         {
-            if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+            if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
             {
                 log.Debug("Receive " + ElementDef.Name);
             }
-            if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+            if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
             {
                 string id = MsgId;
                 log.Debug("  MsgId: " + (id == null ? "<none>" : id));

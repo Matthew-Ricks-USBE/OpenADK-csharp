@@ -28,7 +28,7 @@ public class SchoolInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SchoolInfo
 	/// </summary>
-	public SchoolInfo() : base( Adk.SifVersion, SchoolDTD.SCHOOLINFO ){}
+	public SchoolInfo() : base( SifVersion.LATEST, SchoolDTD.SCHOOLINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class SchoolInfo : SifDataObject
 	///<param name="schoolName">Name of school/campus.</param>
 	///<param name="schoolSector">(Government, or Non-Government).</param>
 	///
-	public SchoolInfo( string refId, string schoolName, SchoolSectorCodeType schoolSector ) : base( Adk.SifVersion, SchoolDTD.SCHOOLINFO )
+	public SchoolInfo( string refId, string schoolName, SchoolSectorCodeType schoolSector ) : base( SifVersion.LATEST, SchoolDTD.SCHOOLINFO )
 	{
 		this.RefId = refId;
 		this.SchoolName = schoolName;
@@ -1189,4 +1189,3 @@ public class SchoolInfo : SifDataObject
 	}
 
 }}
-

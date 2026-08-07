@@ -28,7 +28,7 @@ public class FoodserviceItemSales : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceItemSales
 	/// </summary>
-	public FoodserviceItemSales() : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEMSALES ){}
+	public FoodserviceItemSales() : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEMSALES ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class FoodserviceItemSales : SifDataObject
 	///<param name="date">Date of sales</param>
 	///<param name="program">Refer to section 5.1.23 Program.</param>
 	///
-	public FoodserviceItemSales( string refId, string schoolInfoRefId, DateTime? date, Program program ) : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEMSALES )
+	public FoodserviceItemSales( string refId, string schoolInfoRefId, DateTime? date, Program program ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEMSALES )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -185,4 +185,3 @@ public class FoodserviceItemSales : SifDataObject
 	}
 
 }}
-

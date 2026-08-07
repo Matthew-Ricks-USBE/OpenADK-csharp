@@ -28,7 +28,7 @@ public class AttendanceCodeInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AttendanceCodeInfo
 	/// </summary>
-	public AttendanceCodeInfo() : base( Adk.SifVersion, StudentDTD.ATTENDANCECODEINFO ){}
+	public AttendanceCodeInfo() : base( SifVersion.LATEST, StudentDTD.ATTENDANCECODEINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class AttendanceCodeInfo : SifDataObject
 	///<param name="usedForDailyAttendance">Is this attendance code used for daily attendance?</param>
 	///<param name="usedForPeriodAttendance">Is this attendance code used for period attendance?</param>
 	///
-	public AttendanceCodeInfo( string refId, string schoolInfoRefId, string attendanceCode, AttendanceType attendanceType, AttendanceStatusType attendanceStatus, AUCodeSetsYesOrNoCategoryType usedForDailyAttendance, AUCodeSetsYesOrNoCategoryType usedForPeriodAttendance ) : base( Adk.SifVersion, StudentDTD.ATTENDANCECODEINFO )
+	public AttendanceCodeInfo( string refId, string schoolInfoRefId, string attendanceCode, AttendanceType attendanceType, AttendanceStatusType attendanceStatus, AUCodeSetsYesOrNoCategoryType usedForDailyAttendance, AUCodeSetsYesOrNoCategoryType usedForPeriodAttendance ) : base( SifVersion.LATEST, StudentDTD.ATTENDANCECODEINFO )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -307,4 +307,3 @@ public class AttendanceCodeInfo : SifDataObject
 	}
 
 }}
-

@@ -12,7 +12,7 @@ using OpenADK.Library.Infra;
 using OpenADK.Library.Log;
 using OpenADK.Library.Tools.Policy;
 using OpenADK.Util;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library.Impl
 {
@@ -41,7 +41,8 @@ namespace OpenADK.Library.Impl
 
 
         /// <summary>  logging framework logging category for this zone</summary>
-        private ILog fLog;
+        private ILogger fLog;
+        private Lazy<ServerLog> fServerLog;
 
         /// <summary>  The Agent that owns this zone</summary>
         protected Agent fAgent;
@@ -278,7 +279,7 @@ namespace OpenADK.Library.Impl
         }
 
         /// <summary>  Gets the root logging framework Category for this agent.</summary>
-        public virtual ILog Log
+        public virtual ILogger Log
         {
             get { return Agent.GetLog(this); }
         }
@@ -286,10 +287,8 @@ namespace OpenADK.Library.Impl
         /// <summary> 	Gets the ServerLog for a specific zone.</summary>
         /// <value> The ServerLog instance for the zone
         /// </value>
-        public virtual ServerLog ServerLog
-        {
-            get { return ServerLog.GetInstance(Adk.LOG_IDENTIFIER + ".Agent$" + ZoneId, this); }
-        }
+        public virtual ServerLog ServerLog =>
+            fServerLog?.Value ?? throw new InvalidOperationException("Zone has not been initialized.");
 
         public IProtocolHandler ProtocolHandler
         {
@@ -320,27 +319,31 @@ namespace OpenADK.Library.Impl
                                      Agent agent,
                                      AgentProperties props)
         {
+            if (agent == null)
+            {
+                throw new ArgumentException("Agent cannot be null");
+            }
+
+            fLog = agent.Runtime.LoggerFactory.CreateLogger(Agent.LOG_IDENTIFIER + "$" + (zoneId ?? "?"));
+            fAgent = agent;
+
             if (zoneId == null || zoneId.Trim().Length < 1)
             {
                 AdkUtils._throw
-                    (new ArgumentException("Zone name cannot be null or blank"), fLog);
+                    (new ArgumentException("Zone name cannot be null or blank"), fLog, fAgent.Runtime);
             }
-
-            fLog = LogManager.GetLogger(Agent.LOG_IDENTIFIER + "$" + zoneId);
 
             if (zoneUrl == null || zoneUrl.Trim().Length < 1)
             {
-                AdkUtils._throw(new ArgumentException("Zone URL cannot be null or blank"), fLog);
-            }
-            if (agent == null)
-            {
-                AdkUtils._throw(new ArgumentException("Agent cannot be null"), fLog);
+                AdkUtils._throw(new ArgumentException("Zone URL cannot be null or blank"), fLog, fAgent.Runtime);
             }
 
-            fAgent = agent;
             fZoneId = zoneId;
             // Call the Properties Accessor because 
             Properties = props;
+
+            fServerLog = new Lazy<ServerLog>(() =>
+                new ServerLog(AdkRuntime.LogIdentifier + ".Agent$" + ZoneId, this, fAgent.GetServerLog()));
 
             try
             {
@@ -361,7 +364,7 @@ namespace OpenADK.Library.Impl
                 return;
             }
 
-            if ((Adk.Debug & AdkDebugFlags.Lifecycle) != 0)
+            if ((fAgent.Runtime.Debug & AdkDebugFlags.Lifecycle) != 0)
             {
                 fLog.Info("Shutting down zone...");
             }
@@ -372,7 +375,7 @@ namespace OpenADK.Library.Impl
             {
                 try
                 {
-                    if ((Adk.Debug & AdkDebugFlags.Lifecycle) != 0)
+                    if ((fAgent.Runtime.Debug & AdkDebugFlags.Lifecycle) != 0)
                     {
                         fLog.Info("Shutting down Message Dispatcher");
                     }
@@ -390,7 +393,7 @@ namespace OpenADK.Library.Impl
             {
                 try
                 {
-                    if ((Adk.Debug & AdkDebugFlags.Lifecycle) != 0)
+                    if ((fAgent.Runtime.Debug & AdkDebugFlags.Lifecycle) != 0)
                     {
                         fLog.Info("Shutting down Protocol Handler");
                     }
@@ -404,7 +407,7 @@ namespace OpenADK.Library.Impl
 
             fProtocolHandler = null;
 
-            if ((Adk.Debug & AdkDebugFlags.Lifecycle) != 0)
+            if ((fAgent.Runtime.Debug & AdkDebugFlags.Lifecycle) != 0)
             {
                 fLog.Info("Zone shutdown complete");
             }
@@ -453,7 +456,7 @@ namespace OpenADK.Library.Impl
                     throw new InvalidOperationException( "Zone already connected" );
                 }
 
-                fPrimitives = Adk.Primitives;
+                fPrimitives = fAgent.Primitives;
 
                 fState = 0;
 
@@ -483,13 +486,13 @@ namespace OpenADK.Library.Impl
                 }
                 catch ( AdkException adke )
                 {
-                    AdkUtils._throw( adke, fLog );
+                    AdkUtils._throw( adke, fLog, fAgent.Runtime );
                 }
                 catch ( Exception ex )
                 {
                     AdkUtils._throw
                         ( new AdkException( "Failed to start transport protocol: " + ex, this ),
-                          fLog );
+                          fLog, fAgent.Runtime );
                 }
 
 
@@ -515,19 +518,19 @@ namespace OpenADK.Library.Impl
                         {
                             AdkUtils._throw(
                                 new AdkTransportException( "The transport protocol is not available for this zone", this ),
-                                Log );
+                                Log, fAgent.Runtime );
                         }
                     }
                 }
                 catch ( AdkException adke )
                 {
-                    AdkUtils._throw( adke, fLog );
+                    AdkUtils._throw( adke, fLog, fAgent.Runtime );
                 }
                 catch ( Exception ex )
                 {
                     AdkUtils._throw
                         ( new AdkException( "Failed to start transport protocol: " + ex, this ),
-                          fLog );
+                          fLog, fAgent.Runtime );
                 }
 
                 //
@@ -551,9 +554,9 @@ namespace OpenADK.Library.Impl
                         if ( !ack.HasStatusCode( 0 ) )
                         {
                             fState &= ~CONNECTED;
-                            AdkUtils._throw( new SifException( ack, this ), fLog );
+                            AdkUtils._throw( new SifException( ack, this ), fLog, fAgent.Runtime );
                         }
-                        else if ( (Adk.Debug & AdkDebugFlags.Provisioning) != 0 )
+                        else if ( (fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0 )
                         {
                             fLog.Info( "SIF_Register successful" );
                         }
@@ -842,12 +845,12 @@ namespace OpenADK.Library.Impl
                             }
                             else
                             {
-                                AdkUtils._throw(se, null);
+                                AdkUtils._throw(se, null, fAgent.Runtime);
                             }
                         }
                         else
                         {
-                            if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                            if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                             {
                                 Log.Info("SIF_Subscribe errors ignored for " + ArrayToStr(subTypes));
                             }
@@ -855,7 +858,7 @@ namespace OpenADK.Library.Impl
                     }
                     else
                     {
-                        if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                        if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                         {
                             Log.Info("SIF_Subscribe successful for " + ArrayToStr(subTypes));
                         }
@@ -875,12 +878,12 @@ namespace OpenADK.Library.Impl
                                 if (se.ErrorCategory == SifErrorCategoryCode.AccessAndPermissions)
                                     fProvWarnings.Add(se);
                                 else
-                                    AdkUtils._throw(se, null);
+                                    AdkUtils._throw(se, null, fAgent.Runtime);
                             }
-                            else if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                            else if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                                 Log.Info("SIF_Subscribe errors ignored for " + subSent[i]);
                         }
-                        else if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                        else if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                             Log.Info("SIF_Subscribe successful for " + subSent[i]);
                     }
                 }
@@ -902,12 +905,12 @@ namespace OpenADK.Library.Impl
                             if (se.ErrorCategory == SifErrorCategoryCode.AccessAndPermissions)
                                 fProvWarnings.Add(se);
                             else
-                                AdkUtils._throw(se, null);
+                                AdkUtils._throw(se, null, fAgent.Runtime);
                         }
-                        else if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                        else if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                             Log.Info("SIF_Provide errors ignored for " + ArrayToStr(pubTypes));
                     }
-                    else if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                    else if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                         Log.Info("SIF_Provide successful for " + ArrayToStr(pubTypes));
                 }
                 else
@@ -927,12 +930,12 @@ namespace OpenADK.Library.Impl
                                 if (se.ErrorCategory == SifErrorCategoryCode.AccessAndPermissions)
                                     fProvWarnings.Add(se);
                                 else
-                                    AdkUtils._throw(se, null);
+                                    AdkUtils._throw(se, null, fAgent.Runtime);
                             }
-                            else if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                            else if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                                 Log.Info("SIF_Provide errors ignored for " + pubTypes[i]);
                         }
-                        else if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                        else if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                             Log.Info("SIF_Provide successful for " + pubTypes[i]);
                     }
                 }
@@ -978,7 +981,7 @@ namespace OpenADK.Library.Impl
 
             if (Properties.ProvisioningMode != AgentProvisioningMode.Adk)
             {
-                if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                 {
                     Log.Info("Zone not sending provisioning messages because ADK-managed provisioning is not in effect");
                 }
@@ -1141,7 +1144,7 @@ namespace OpenADK.Library.Impl
                                             publishContexts.RemoveChild(InfraDTD.SIF_OBJECT_SIF_CONTEXTS,
                                                                          SifContext.DEFAULT.Name);
                                             // publishContexts.removeSIF_Context(SifContext.DEFAULT.Name);
-                                            if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                                            if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                                             {
                                                 Log.Info("Unable to provide " + po.ObjectName +
                                                           " in SIF Context " + SifContext.DEFAULT.Name +
@@ -1157,7 +1160,7 @@ namespace OpenADK.Library.Impl
                                                 publishContexts.RemoveChild(InfraDTD.SIF_CONTEXTS_SIF_CONTEXT,
                                                                              new string[] { context.Value });
                                                 //publishContexts.removeSIF_Context(context.Value);
-                                                if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                                                if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                                                 {
                                                     Log.Info("Unable to provide " + po.ObjectName +
                                                               " in SIF Context " + context.Value +
@@ -1209,11 +1212,11 @@ namespace OpenADK.Library.Impl
             if (ack.HasError())
             {
                 SifException se = new SifException(ack, this);
-                AdkUtils._throw(se, null);
+                AdkUtils._throw(se, null, fAgent.Runtime);
             }
             else
             {
-                if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                 {
                     Log.Info("SIF_Provision successful");
                 }
@@ -1290,7 +1293,7 @@ namespace OpenADK.Library.Impl
                 if (aclContexts == null)
                 {
                     desiredProvisionedObjects.RemoveChild(provisionedObject);
-                    if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                    if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                     {
                         Log.Info("Unable to " + actionString + " " + objectName +
                                   " because the agent does not have ACL permission to do so.");
@@ -1308,7 +1311,7 @@ namespace OpenADK.Library.Impl
                         if (aclContext == null)
                         {
                             contextsToRemove.Add(desiredContext);
-                            if ((Adk.Debug & AdkDebugFlags.Provisioning) != 0)
+                            if ((fAgent.Runtime.Debug & AdkDebugFlags.Provisioning) != 0)
                             {
                                 Log.Info("Continuing to " + actionString + " " + objectName +
                                           " in Context \"" + desiredContext.Value +
@@ -1436,7 +1439,7 @@ namespace OpenADK.Library.Impl
             SIF_Ack ack = SifSleep();
             if (ack.HasError())
             {
-                AdkUtils._throw(new SifException(ack, this), fLog);
+                AdkUtils._throw(new SifException(ack, this), fLog, fAgent.Runtime);
             }
         }
 
@@ -1458,7 +1461,7 @@ namespace OpenADK.Library.Impl
             SIF_Ack ack = SifWakeup();
             if (ack.HasError())
             {
-                AdkUtils._throw(new SifException(ack, this), fLog);
+                AdkUtils._throw(new SifException(ack, this), fLog, fAgent.Runtime);
             }
         }
 
@@ -1491,7 +1494,7 @@ namespace OpenADK.Library.Impl
                 SIF_Ack ack = SifPing();
                 if (ack.HasError())
                 {
-                    AdkUtils._throw(new SifException(ack, this), fLog);
+                    AdkUtils._throw(new SifException(ack, this), fLog, fAgent.Runtime);
                 }
                 return (ack.HasStatusCode(SifStatusCodes.SLEEPING_8));
             }
@@ -1545,7 +1548,7 @@ namespace OpenADK.Library.Impl
             SIF_Ack ack = fPrimitives.SifEvent(this, evnt, destinationId, sifMsgId);
             if (ack.HasError())
             {
-                AdkUtils._throw(new SifException(ack, this), fLog);
+                AdkUtils._throw(new SifException(ack, this), fLog, fAgent.Runtime);
             }
         }
 
@@ -1576,7 +1579,7 @@ namespace OpenADK.Library.Impl
                                                 string appCode,
                                                 SifDataObject[] objects)
         {
-            ServerLog.Log(LogLevel.INFO, desc, extDesc, appCode, null, objects);
+            ServerLog.Log(OpenADK.Library.Infra.LogLevel.INFO, desc, extDesc, appCode, null, objects);
         }
 
         /// <summary> 	Report a warning message to the zone in the form of a SIF_LogEntry object.
@@ -1602,7 +1605,7 @@ namespace OpenADK.Library.Impl
                                                    string appCode,
                                                    SifDataObject[] objects)
         {
-            ServerLog.Log(LogLevel.WARNING, desc, extDesc, appCode, category, code, null, objects);
+            ServerLog.Log(OpenADK.Library.Infra.LogLevel.WARNING, desc, extDesc, appCode, category, code, null, objects);
         }
 
         /// <summary> 	Report a warning message to the zone in the form of a SIF_LogEntry object.
@@ -1635,7 +1638,7 @@ namespace OpenADK.Library.Impl
                                                    string appCode,
                                                    SifDataObject[] objects)
         {
-            ServerLog.Log(LogLevel.WARNING, desc, extDesc, appCode, category, code, msgInfo, objects);
+            ServerLog.Log(OpenADK.Library.Infra.LogLevel.WARNING, desc, extDesc, appCode, category, code, msgInfo, objects);
         }
 
         /// <summary> 	Report an error message to the zone in the form of a SIF_LogEntry object.
@@ -1661,7 +1664,7 @@ namespace OpenADK.Library.Impl
                                                  string appCode,
                                                  SifDataObject[] objects)
         {
-            ServerLog.Log(LogLevel.ERROR, desc, extDesc, appCode, category, code, null, objects);
+            ServerLog.Log(OpenADK.Library.Infra.LogLevel.ERROR, desc, extDesc, appCode, category, code, null, objects);
         }
 
         /// <summary> 	Report an error message to the zone in the form of a SIF_LogEntry object.
@@ -1694,7 +1697,7 @@ namespace OpenADK.Library.Impl
                                                  string appCode,
                                                  SifDataObject[] objects)
         {
-            ServerLog.Log(LogLevel.ERROR, desc, extDesc, appCode, category, code, msgInfo, objects);
+            ServerLog.Log(OpenADK.Library.Infra.LogLevel.ERROR, desc, extDesc, appCode, category, code, msgInfo, objects);
         }
 
 
@@ -1981,7 +1984,7 @@ namespace OpenADK.Library.Impl
                     SIF_Ack ack = fPrimitives.SifRequest(this, query, destinationId, sifMsgId);
                     if (ack.HasError())
                     {
-                        AdkUtils._throw(new SifException(ack, this), fLog);
+                        AdkUtils._throw(new SifException(ack, this), fLog, fAgent.Runtime);
                     }
 
                     req = (SIF_Request)ack.message;
@@ -2120,7 +2123,7 @@ namespace OpenADK.Library.Impl
                         SIF_Ack ack = fPrimitives.SifRequest
                             (
                             this,
-                            new Query(InfraDTD.SIF_ZONESTATUS),
+                            fAgent.Objects.CreateQuery(InfraDTD.SIF_ZONESTATUS),
                             null,
                             null);
                         if (ack.HasError())
@@ -2142,7 +2145,7 @@ namespace OpenADK.Library.Impl
                         {
                             try
                             {
-                                if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+                                if ((fAgent.Runtime.Debug & AdkDebugFlags.Messaging) != 0)
                                 {
                                     fLog.Debug
                                         ("Waiting " + timeout + "ms for SIF_ZoneStatus reply...");
@@ -2150,7 +2153,7 @@ namespace OpenADK.Library.Impl
 
                                 bool received = Monitor.Wait(fZSLock, timeout);
 
-                                if ((Adk.Debug & AdkDebugFlags.Messaging) != 0)
+                                if ((fAgent.Runtime.Debug & AdkDebugFlags.Messaging) != 0)
                                 {
                                     if (received)
                                     {
@@ -2230,7 +2233,7 @@ namespace OpenADK.Library.Impl
                 SifVersion zisVersion = SifVersion.LATEST;
                 try
                 {
-                    zisVersion = SifVersion.Parse(fProps.ZisVersion);
+                zisVersion = SifVersion.Parse(fProps.ZisVersion, fAgent.Runtime.SifVersion);
                 }
                 catch (Exception iae)
                 {
@@ -2241,7 +2244,7 @@ namespace OpenADK.Library.Impl
                         "' into a SIFVersion instance. Using " +
                         SifVersion.LATEST, iae);
                 }
-                SifVersion adkVersion = Adk.SifVersion;
+                SifVersion adkVersion = fAgent.Runtime.SifVersion;
 
                 if (zisVersion.CompareTo(adkVersion) < 0)
                 {
@@ -2295,7 +2298,7 @@ namespace OpenADK.Library.Impl
 
             try
             {
-                if ((Adk.Debug & AdkDebugFlags.Message_Content) != 0)
+                if ((fAgent.Runtime.Debug & AdkDebugFlags.Message_Content) != 0)
                 {
                     fLog.Debug("Sending user message (" + xml.Length + " characters): ");
                     fLog.Debug(xml);
@@ -2306,7 +2309,7 @@ namespace OpenADK.Library.Impl
                 {
                     using (IMessageInputStream ackStream = fProtocolHandler.Send(stream))
                     {
-                        SifParser parser = SifParser.NewInstance();
+                        SifParser parser = new SifParser(fAgent.Runtime);
                         //  Parse the results into a SIF_Ack
                         ack =
                             (SIF_Ack)
@@ -2317,7 +2320,7 @@ namespace OpenADK.Library.Impl
                 if (ack != null)
                 {
                     ack.message = null;
-                    if ((Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0)
+                    if ((fAgent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0)
                     {
                         ack.LogRecv(fLog);
                     }
@@ -2464,4 +2467,5 @@ namespace OpenADK.Library.Impl
 
     }
 }
+
 

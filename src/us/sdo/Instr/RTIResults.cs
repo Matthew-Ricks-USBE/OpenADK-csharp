@@ -28,7 +28,7 @@ public class RTIResults : SifDataObject
 	/// <summary>
 	/// Creates an instance of a RTIResults
 	/// </summary>
-	public RTIResults() : base( Adk.SifVersion, InstrDTD.RTIRESULTS ){}
+	public RTIResults() : base( SifVersion.LATEST, InstrDTD.RTIRESULTS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class RTIResults : SifDataObject
 	///<param name="studentPlacementRefId">The Id (GUID) that references the StudentPlacement Object that contains information that describes a specific instructional, related or transitional service that has been prescribed or recommended in the program plan developed for a student who has been placed in an individualized special program.</param>
 	///<param name="responseToInterventionRefId">The Id (GUID) of the reference to the ResponseToIntervention that has been assigned for this individual learner.</param>
 	///
-	public RTIResults( string refId, string studentPersonalRefId, string studentPlacementRefId, string responseToInterventionRefId ) : base( Adk.SifVersion, InstrDTD.RTIRESULTS )
+	public RTIResults( string refId, string studentPersonalRefId, string studentPlacementRefId, string responseToInterventionRefId ) : base( SifVersion.LATEST, InstrDTD.RTIRESULTS )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -361,4 +361,3 @@ public class RTIResults : SifDataObject
 	}
 
 }}
-

@@ -5,20 +5,22 @@ using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
-using log4net;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
     [TestFixture]
-    public class MappingsSelectTests
+    public class MappingsSelectTests : AdkTest
     {
-        private static readonly ILog logger = LogManager.GetLogger( typeof ( MappingsSelectTests ) );
+        private ILogger logger;
 
         [SetUp]
-        public void setUp()
+        public override void SetUp()
         {
-            Adk.Initialize();
+            base.SetUp();
+            logger = Runtime.LoggerFactory.CreateLogger<MappingsSelectTests>();
         }
 
         private Mappings buildMappings1()
@@ -94,7 +96,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             }
 
             // This line gets a "Mappings.select can only be called..." exception
-            // mappings = mappings.select("anyzone", null, Adk.SifVersion());
+            // mappings = mappings.select("anyzone", null, Runtime.SifVersion());
             logger.Debug( "======= Selected (" + mappings.Id
                           + ") Mappings =========" );
             dumpMappings( mappings );
@@ -108,11 +110,11 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             }
         }
 
-        public static StudentPersonal makeStudentPersonal( String localId,
+        public StudentPersonal makeStudentPersonal( String localId,
                                                            NameType nameType, String firstName, String lastName )
         {
             StudentPersonal s = new StudentPersonal();
-            s.RefId = Adk.MakeGuid();
+            s.RefId = Runtime.MakeGuid();
             s.LocalId = localId;
             Name name = new Name( nameType, lastName, firstName );
             s.Name = name;

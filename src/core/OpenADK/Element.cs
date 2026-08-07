@@ -158,8 +158,7 @@ namespace OpenADK.Library
         {
             if ( def == null ) {
                 throw new ArgumentNullException
-                    ( "SIF " + Adk.SifVersion +
-                      " does not support this element or attribute, or the required Sdo library is not loaded (" +
+                    ( "The active schema does not support this element or attribute, or the required SDO library is not loaded (" +
                       GetType().ToString() + ")" );
             }
 

@@ -6,18 +6,19 @@ using OpenADK.Library;
 using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
     [TestFixture]
-    public class MappingsObjectTests
+    public class MappingsObjectTests : AdkTest
     {
         private AgentConfig fCfg;
 
         [SetUp]
         public virtual void setUp()
         {
-            Adk.Initialize();
+            Runtime.Initialize();
             fCfg = new AgentConfig();
             fCfg.Read( "..\\..\\OpenADK\\Tools\\Mapping\\SIF1.5.agent.cfg",
                        false );

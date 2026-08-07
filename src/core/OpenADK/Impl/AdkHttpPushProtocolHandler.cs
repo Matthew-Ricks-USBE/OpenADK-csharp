@@ -112,7 +112,7 @@ namespace OpenADK.Web.Http
                           adke.Message );
             }
             catch ( Exception thr ) {
-                if ( (Adk.Debug & AdkDebugFlags.Messaging) != 0 ) {
+                if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging) != 0 ) {
                     this.Zone.Log.Debug( "Uncaught exception dispatching push message: " + thr );
                 }
 
@@ -130,7 +130,7 @@ namespace OpenADK.Web.Http
 
         public void ProcessRequest( AdkHttpRequestContext context )
         {
-            if ( (Adk.Debug & AdkDebugFlags.Messaging) != 0 ) {
+            if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging) != 0 ) {
                 Zone.Log.Debug
                     ( "Received push message from " + context.Request.RemoteAddress + " (" +
                       context.Request.Url.Scheme + ")" );
@@ -156,7 +156,7 @@ namespace OpenADK.Web.Http
             StringBuilder requestXml = null;
 
             // If we need to convert the request stream to a string for either logging or messaging, do so
-            if ( (Adk.Debug & AdkDebugFlags.Message_Content) != 0 ) {
+            if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Message_Content) != 0 ) {
                 requestXml = ConvertRequestToString( requestStream );
                 Zone.Log.Debug
                     ( "Received " + context.Request.ContentLength + " bytes:\r\n" +
@@ -204,7 +204,7 @@ namespace OpenADK.Web.Http
                         foreach ( IMessagingListener listener in msgList ) {
                             try {
                                 SifMessageType pload =
-                                    Adk.Dtd.GetElementType( parsed.ElementDef.Name );
+                                    Zone.Agent.Runtime.Dtd.GetElementType( parsed.ElementDef.Name );
                                 MessagingReturnCode code =
                                     listener.OnMessageReceived( pload, requestXml );
                                 switch ( code ) {
@@ -287,7 +287,7 @@ namespace OpenADK.Web.Http
 
 				}
 
-                if ( (Adk.Debug & AdkDebugFlags.Messaging) != 0 ) {
+                if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging) != 0 ) {
                     Zone.Log.Warn
                         ( "Failed to parse push message from zone \"" + Zone + "\": " + parseEx );
                 }
@@ -307,7 +307,7 @@ namespace OpenADK.Web.Http
                     //  condition. The administrator would need to manually remove
                     //  the offending message from the agent's queue.
 
-                    if ( (Adk.Debug & AdkDebugFlags.Messaging) != 0 ) {
+                    if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging) != 0 ) {
                         Zone.Log.Debug
                             ( "Could not generate SIF_Ack for failed push message (returning HTTP/1.1 500)" );
                     }
@@ -374,7 +374,7 @@ namespace OpenADK.Web.Http
                 response.ContentType = SifIOFormatter.CONTENTTYPE;
                 // TODO: This code may need to change. The ADKHttpResponse should not automatically set the content length
                 // and other implementations will not do so.
-                SifWriter w = new SifWriter( response.GetResponseStream() );
+                SifWriter w = new SifWriter(response.GetResponseStream(), Zone.Agent.Runtime);
                 w.Write( ack );
                 w.Flush();
             }
@@ -396,7 +396,7 @@ namespace OpenADK.Web.Http
 
 
         /// <summary>  The internal  http/https server</summary>
-        protected internal static AdkHttpApplicationServer fServer = null;
+        private readonly AdkHttpApplicationServer fServer;
 
         #endregion
 

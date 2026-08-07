@@ -44,7 +44,7 @@ namespace Library.UnitTesting.Framework
         public static void runAssertions( SifDataObject originalObject, SifDataObject reparsedObject,
                                           List<IElementDef> expectedDifferences )
         {
-            runAssertions( originalObject, reparsedObject, expectedDifferences, Adk.SifVersion );
+            runAssertions( originalObject, reparsedObject, expectedDifferences, originalObject.EffectiveSIFVersion );
         }
 
         public static void runAssertions( SifDataObject originalObject, SifDataObject reparsedObject,
@@ -168,7 +168,7 @@ namespace Library.UnitTesting.Framework
                 Console.WriteLine( "Writing object : " + o.ElementDef.Name
                                    + " using SIFVersion: " + version.ToString() );
 
-                echo = new SifWriter( Console.Out );
+                echo = new SifWriter( Console.Out, o.ElementDef.Dtd, version );
                 echo.Write( o, version );
                 echo.Flush();
                 Console.Out.Flush();
@@ -179,7 +179,7 @@ namespace Library.UnitTesting.Framework
             Console.WriteLine( "Writing to file... test.xml" );
             using (Stream fos = new FileStream("test.xml", FileMode.Create))
             {
-                SifWriter writer = new SifWriter( new StreamWriter( fos, Encoding.UTF8 ) );
+                SifWriter writer = new SifWriter( new StreamWriter( fos, Encoding.UTF8 ), o.ElementDef.Dtd, version );
                 o.SetChanged( true );
                 writer.Write( o, version );
                 writer.Flush();
@@ -194,7 +194,7 @@ namespace Library.UnitTesting.Framework
 
             //  Parse the object from the file
             Console.WriteLine( "Parsing from file..." );
-            SifParser p = SifParser.NewInstance();
+            SifParser p = new SifParser(o.ElementDef.Dtd, version);
 
             FileStream fr = new FileStream( "test.xml", FileMode.Open );
 
@@ -236,7 +236,7 @@ namespace Library.UnitTesting.Framework
                 //   Write the object to System.out
                 Console.WriteLine( "Writing object : " + o.ElementDef.Name + " using SIFVersion: " + version.ToString() );
 
-                echo = new SifWriter( Console.Out );
+                echo = new SifWriter( Console.Out, o.ElementDef.Dtd, version );
                 echo.Write( o, version );
             }
 
@@ -245,7 +245,7 @@ namespace Library.UnitTesting.Framework
 
             using ( Stream fos = File.Open( "test.xml", FileMode.Create, FileAccess.Write ) )
             {
-                SifWriter writer = new SifWriter( fos );
+                SifWriter writer = new SifWriter( fos, o.ElementDef.Dtd, version );
                 writer.Write( o, version  );
                 writer.Flush();
                 writer.Close();
@@ -260,7 +260,7 @@ namespace Library.UnitTesting.Framework
 
             //  Parse the object from the file
             Console.WriteLine( "Parsing from file..." );
-            SifParser p = SifParser.NewInstance();
+            SifParser p = new SifParser(o.ElementDef.Dtd, version);
             using ( Stream fis = File.OpenRead( "test.xml" ) )
             {
                 returnVal = (T) p.Parse( fis, null );
@@ -294,11 +294,11 @@ namespace Library.UnitTesting.Framework
             }
         }
 
-        public static void RunSDOParsingTest( String fileName, SifVersion version, Boolean runAssertions )
+        public static void RunSDOParsingTest( String fileName, SifVersion version, Boolean runAssertions, IDtd dtd )
         {
             //  Parse the object from the file
             Console.WriteLine( "Parsing from file..." + fileName );
-            SifParser p = SifParser.NewInstance();
+            SifParser p = new SifParser(dtd, version);
             StreamReader reader = new StreamReader( fileName );
             SifDataObject sdo = (SifDataObject) p.Parse( reader, null );
             reader.Close();
@@ -308,10 +308,10 @@ namespace Library.UnitTesting.Framework
         }
 
 
-        public static SifElement ParseFile( String fileName, SifVersion parseVersion )
+        public static SifElement ParseFile( String fileName, SifVersion parseVersion, IDtd dtd )
         {
             SifElement se;
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(dtd, parseVersion);
             using ( StreamReader fileStream = new StreamReader( fileName ) )
             {
                 se = parser.Parse( fileStream, null, 0, parseVersion );

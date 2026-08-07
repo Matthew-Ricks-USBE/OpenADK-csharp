@@ -13,10 +13,11 @@ namespace Library.Nunit.US.Tools.Mapping
     [TestFixture]
     public class AdvancedMappingsTests : BaseMappingsTest
     {
-        public AdvancedMappingsTests()
+        protected override void ConfigureOptions(AdkOptions options)
         {
-            Adk.Debug = AdkDebugFlags.All;
-            Adk.Initialize(SifVersion.SIF20, SIFVariant.SIF_US, (int)SdoLibraryType.All);
+            base.ConfigureOptions(options);
+            options.SifVersion = SifVersion.SIF20;
+            options.Debug = AdkDebugFlags.All;
         }
 
         public static String flattenDate( IValueBuilder vb, String dateString_in )
@@ -43,8 +44,8 @@ namespace Library.Nunit.US.Tools.Mapping
             map.Add( "DOB", "19900904" );
             StringMapAdaptor sma = new StringMapAdaptor( map );
             TestValueBuilder tvb = new TestValueBuilder( sma );
-            DefaultValueBuilder.AddAlias( "flattenDate", GetType().AssemblyQualifiedName );
-            Adk.SifVersion = SifVersion.SIF20;
+            tvb.AddAlias( "flattenDate", GetType().AssemblyQualifiedName );
+            Runtime.SifVersion = SifVersion.SIF20;
             StudentPersonal sp = mapToStudentPersonal( sma, flattenDateFunctionCall, tvb );
             Assert.True(tvb.WasCalled, "flattenDate should have been called");
             Assert.IsNotNull(sp, "Student should not be null");

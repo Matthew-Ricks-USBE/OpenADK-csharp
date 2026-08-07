@@ -28,7 +28,7 @@ public class LEAInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LEAInfo
 	/// </summary>
-	public LEAInfo() : base( Adk.SifVersion, StudentDTD.LEAINFO ){}
+	public LEAInfo() : base( SifVersion.LATEST, StudentDTD.LEAINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class LEAInfo : SifDataObject
 	///<param name="refId">The GUID of the LEA whose information this is.</param>
 	///<param name="leaName">Name of LEA.</param>
 	///
-	public LEAInfo( string refId, string leaName ) : base( Adk.SifVersion, StudentDTD.LEAINFO )
+	public LEAInfo( string refId, string leaName ) : base( SifVersion.LATEST, StudentDTD.LEAINFO )
 	{
 		this.RefId = refId;
 		this.LEAName = leaName;
@@ -409,4 +409,3 @@ public class LEAInfo : SifDataObject
 	}
 
 }}
-

@@ -8,7 +8,8 @@ using System.Collections;
 using System.Net;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using log4net;
+using Microsoft.Extensions.Logging;
+using OpenADK.Library;
 
 namespace OpenADK.Web.Http
 {
@@ -17,21 +18,24 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpServer
     {
-        private ILog fLog;
+        private ILogger fLog;
         private string fServerName;
         private ArrayList fBindings = new ArrayList();
         private AdkHttpListener fListener;
         private bool fIsStarted = false;
 
-        protected AdkHttpServer()
+        protected AdkHttpServer(IAdkRuntime runtime)
         {
+            Runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
             Type type = this.GetType();
             fServerName = "OpenADK Library ADK(r); Version " +
                           type.Assembly.GetName().Version.ToString();
             // Default the log
-            fLog = LogManager.GetLogger(this.GetType());
+            fLog = runtime.LoggerFactory.CreateLogger(this.GetType());
             fListener = new AdkHttpListener(this);
         }
+
+        internal IAdkRuntime Runtime { get; }
 
         public virtual string Name
         {
@@ -205,7 +209,7 @@ namespace OpenADK.Web.Http
             }
         }
 
-        public ILog Log
+        public ILogger Log
         {
             get { return fLog; }
             set { fLog = value; }
@@ -214,7 +218,7 @@ namespace OpenADK.Web.Http
         public void Error(string message,
                            Exception ex)
         {
-            if (fLog != null && fLog.IsErrorEnabled)
+            if (fLog != null && fLog.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Error))
             {
                 fLog.Error(message, ex);
             }

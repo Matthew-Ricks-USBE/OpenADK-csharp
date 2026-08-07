@@ -28,7 +28,7 @@ public class CalendarSummary : SifDataObject
 	/// <summary>
 	/// Creates an instance of a CalendarSummary
 	/// </summary>
-	public CalendarSummary() : base( Adk.SifVersion, StudentDTD.CALENDARSUMMARY ){}
+	public CalendarSummary() : base( SifVersion.LATEST, StudentDTD.CALENDARSUMMARY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class CalendarSummary : SifDataObject
 	///<param name="localId">A LocalId</param>
 	///<param name="daysInSession">The total number of days that the school was or is anticipated to be in session during the school year.  Also included are days on which the education institution facility is closed and the student body as a whole is engaged in planned activities off-campus under the guidance and direction of staff members.</param>
 	///
-	public CalendarSummary( string refId, string schoolInfoRefId, int? schoolYear, string localId, int? daysInSession ) : base( Adk.SifVersion, StudentDTD.CALENDARSUMMARY )
+	public CalendarSummary( string refId, string schoolInfoRefId, int? schoolYear, string localId, int? daysInSession ) : base( SifVersion.LATEST, StudentDTD.CALENDARSUMMARY )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -369,4 +369,3 @@ public class CalendarSummary : SifDataObject
 	}
 
 }}
-

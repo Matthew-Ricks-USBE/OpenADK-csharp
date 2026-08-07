@@ -28,7 +28,7 @@ public class FinancialAccountAccountingPeriodLocationInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FinancialAccountAccountingPeriodLocationInfo
 	/// </summary>
-	public FinancialAccountAccountingPeriodLocationInfo() : base( Adk.SifVersion, HrfinDTD.FINANCIALACCOUNTACCOUNTINGPERIODLOCATIONINFO ){}
+	public FinancialAccountAccountingPeriodLocationInfo() : base( SifVersion.LATEST, HrfinDTD.FINANCIALACCOUNTACCOUNTINGPERIODLOCATIONINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class FinancialAccountAccountingPeriodLocationInfo : SifDataObject
 	///<param name="accountingPeriodRefId">Accounting period reference.</param>
 	///<param name="locationInfoRefId">LocationInfo reference.</param>
 	///
-	public FinancialAccountAccountingPeriodLocationInfo( string refId, string financialAccountRefId, string accountingPeriodRefId, string locationInfoRefId ) : base( Adk.SifVersion, HrfinDTD.FINANCIALACCOUNTACCOUNTINGPERIODLOCATIONINFO )
+	public FinancialAccountAccountingPeriodLocationInfo( string refId, string financialAccountRefId, string accountingPeriodRefId, string locationInfoRefId ) : base( SifVersion.LATEST, HrfinDTD.FINANCIALACCOUNTACCOUNTINGPERIODLOCATIONINFO )
 	{
 		this.RefId = refId;
 		this.FinancialAccountRefId = financialAccountRefId;
@@ -141,4 +141,3 @@ public class FinancialAccountAccountingPeriodLocationInfo : SifDataObject
 	}
 
 }}
-

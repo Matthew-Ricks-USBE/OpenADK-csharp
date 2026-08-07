@@ -28,7 +28,7 @@ public class CalendarDate : SifDataObject
 	/// <summary>
 	/// Creates an instance of a CalendarDate
 	/// </summary>
-	public CalendarDate() : base( Adk.SifVersion, StudentDTD.CALENDARDATE ){}
+	public CalendarDate() : base( SifVersion.LATEST, StudentDTD.CALENDARDATE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class CalendarDate : SifDataObject
 	///<param name="schoolYear">School year for which the information is applicable, expressed as the four-digit year in which the school year ends (e.g., "2007" for the 2006-07 school year).</param>
 	///<param name="calendarDateType">A CalendarDateType</param>
 	///
-	public CalendarDate( DateTime? date, string calendarSummaryRefId, string schoolInfoRefId, int? schoolYear, CalendarDateType calendarDateType ) : base( Adk.SifVersion, StudentDTD.CALENDARDATE )
+	public CalendarDate( DateTime? date, string calendarSummaryRefId, string schoolInfoRefId, int? schoolYear, CalendarDateType calendarDateType ) : base( SifVersion.LATEST, StudentDTD.CALENDARDATE )
 	{
 		this.Date = date;
 		this.CalendarSummaryRefId = calendarSummaryRefId;
@@ -302,4 +302,3 @@ public class CalendarDate : SifDataObject
 	}
 
 }}
-

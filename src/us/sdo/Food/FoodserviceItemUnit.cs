@@ -28,7 +28,7 @@ public class FoodserviceItemUnit : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceItemUnit
 	/// </summary>
-	public FoodserviceItemUnit() : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEMUNIT ){}
+	public FoodserviceItemUnit() : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEMUNIT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class FoodserviceItemUnit : SifDataObject
 	///<param name="measureDescriptionCode">Child Nutrition Database [CNDB] standard code describing unit.  The database is updated on a yearly basis by the USDA.</param>
 	///<param name="gramWeight">Gram weight of this item in terms of MeasureDescriptionCode</param>
 	///
-	public FoodserviceItemUnit( string refId, string foodserviceItemRefId, string description, string measureDescriptionCode, decimal? gramWeight ) : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEMUNIT )
+	public FoodserviceItemUnit( string refId, string foodserviceItemRefId, string description, string measureDescriptionCode, decimal? gramWeight ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEMUNIT )
 	{
 		this.RefId = refId;
 		this.FoodserviceItemRefId = foodserviceItemRefId;
@@ -164,4 +164,3 @@ public class FoodserviceItemUnit : SifDataObject
 	}
 
 }}
-

@@ -5,19 +5,13 @@ using OpenADK.Library.Infra;
 using OpenADK.Library.Tools.XPath;
 using NUnit.Framework;
 using OpenADK.Library.us;
+using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.Core.Tools.XPath
 {
     [TestFixture]
-    public class SifXPathContextTests
+    public class SifXPathContextTests : AdkTest
     {
-        [SetUp]
-        public void SetUp()
-        {
-            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.Infra);
-        }
-
-
         [Test]
         public void testGetValue()
         {

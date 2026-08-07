@@ -45,9 +45,9 @@ namespace Library.Nunit.US
             // For nested elements, you cannot reference a SifDtd constant. Instead, use
             // the lookupElementDefBySQL function to lookup an IElementDef constant
             // given a SIF Query Pattern (SQP)
-            IElementDef lname = Adk.Dtd.LookupElementDefBySQP(
+            IElementDef lname = Runtime.Dtd.LookupElementDefBySQP(
                 StudentDTD.STUDENTPERSONAL, "Name/LastName" );
-            IElementDef fname = Adk.Dtd.LookupElementDefBySQP(
+            IElementDef fname = Runtime.Dtd.LookupElementDefBySQP(
                 StudentDTD.STUDENTPERSONAL, "Name/FirstName" );
             grp1.AddCondition( lname, ComparisonOperators.EQ, "Jones" );
             grp1.AddCondition( fname, ComparisonOperators.EQ, "Bob" );
@@ -70,7 +70,7 @@ namespace Library.Nunit.US
             String sifQueryXML = query.ToXml( SifVersion.LATEST );
             Console.WriteLine( sifQueryXML );
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( "<SIF_Request>" + sifQueryXML + "</SIF_Request>", null );
 
             Query reparsedQuery = new Query( sifR.SIF_Query );
@@ -182,7 +182,7 @@ namespace Library.Nunit.US
                                          </SIF_QueryObject>
                                       </SIF_Query>";
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Query sifQuery = (SIF_Query)parser.Parse( queryStr );
             Query q = new Query( sifQuery );
             assertSectionInfoQueryXML( q );
@@ -226,12 +226,12 @@ namespace Library.Nunit.US
 
 
 
-        public static Query SaveToXMLAndReparse(Query query, SifVersion version)
+        public static Query SaveToXMLAndReparse(Query query, SifVersion version, IAdkRuntime runtime)
         {
             String sifQueryXML = query.ToXml(version);
             Console.WriteLine(sifQueryXML);
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(runtime);
             SIF_Request sifR = (SIF_Request)parser.Parse("<SIF_Request>" + sifQueryXML + "</SIF_Request>", null);
 
             Query newQuery = new Query(sifR.SIF_Query);
@@ -251,7 +251,7 @@ namespace Library.Nunit.US
             string xml;
             using ( StringWriter w = new StringWriter() )
             {
-                SifWriter writer = new SifWriter( w );
+                SifWriter writer = new SifWriter( w, Runtime );
                 writer.Write( q );
                 writer.Flush();
                 writer.Close();
@@ -314,7 +314,7 @@ namespace Library.Nunit.US
         [Test]
         public void testSimpleGTFilter()
         {
-            StudentPersonal sp = new StudentPersonal( Adk.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
+            StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.GT, "D" );
@@ -328,7 +328,7 @@ namespace Library.Nunit.US
         [Test]
         public void testConditionWithNullValue()
         {
-            StudentPersonal sp = new StudentPersonal( Adk.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
+            StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.GT, null );
@@ -338,7 +338,7 @@ namespace Library.Nunit.US
         [Test]
         public void testElementWithNullValue()
         {
-            StudentPersonal sp = new StudentPersonal( Adk.MakeGuid(), new Name( NameType.BIRTH, null, "Sally" ) );
+            StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, null, "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.GT, "E" );
@@ -356,7 +356,7 @@ namespace Library.Nunit.US
         [Test]
         public void testSimpleLTFilter()
         {
-            StudentPersonal sp = new StudentPersonal( Adk.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
+            StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.LT, "G" );
@@ -484,7 +484,7 @@ namespace Library.Nunit.US
                               "     </SIF_Query></SIF_Request>";
 
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( sifQuery, null, 0, SifVersion.LATEST );
             Query query = new Query( sifR.SIF_Query );
 
@@ -523,7 +523,7 @@ namespace Library.Nunit.US
                                      "  </SIF_Query>" +
                                      "</SIF_Request>";
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Request request = (SIF_Request) parser.Parse( filteredRequest, null, 0, SifVersion.LATEST );
             Query query = new Query( request.SIF_Query );
 
@@ -576,7 +576,7 @@ namespace Library.Nunit.US
                 "</SIF_Message>";
 
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Request request = (SIF_Request) parser.Parse( filteredRequest, null, 0, SifVersion.LATEST );
             Query query = new Query( request.SIF_Query );
 
@@ -589,7 +589,7 @@ namespace Library.Nunit.US
             Assert.AreEqual( 8, elements.Length );
 
             // Attempt reparsing and then re-asserting:
-            query = SaveToXMLAndReparse( query, SifVersion.LATEST );
+            query = SaveToXMLAndReparse( query, SifVersion.LATEST, Runtime );
             // Assert things about the query
             Assert.AreEqual(StudentDTD.SECTIONINFO, query.ObjectType);
             Assert.AreEqual("SectionInfo", query.ObjectTag);
@@ -734,7 +734,7 @@ namespace Library.Nunit.US
                             "LEA" );
             q.AddCondition( "RequestingAgencyId", ComparisonOperators.EQ, "0001" );
 
-            q = SaveToXMLAndReparse( q, SifVersion.LATEST );
+            q = SaveToXMLAndReparse( q, SifVersion.LATEST, Runtime );
 
             Condition c = q.HasCondition( ReportingDTD.REQUESTINGAGENCYID_TYPE );
             Assert.IsNotNull( c );
@@ -754,9 +754,9 @@ namespace Library.Nunit.US
         private Query testResolveBySQP( IElementDef objectDef, String sqp,
                                         SifVersion version, IElementDef resolvedNestedElement )
         {
-            Adk.SifVersion = version;
+            Runtime.SifVersion = version;
 
-            Query q = new Query( objectDef );
+            Query q = Objects.CreateQuery( objectDef );
             q.AddCondition( sqp, ComparisonOperators.EQ, "foo" );
             String sifQueryXML = q.ToXml();
             Console.WriteLine( sifQueryXML );
@@ -768,7 +768,7 @@ namespace Library.Nunit.US
             //searchFor = searchFor.Replace( "'", "&apos;" );
             Assert.IsTrue( sifQueryXML.Contains( searchFor ), "SQP in XML" );
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( "<SIF_Request>"
                                                            + sifQueryXML + "</SIF_Request>", null );
 
@@ -801,12 +801,12 @@ namespace Library.Nunit.US
         private Query testSQP( IElementDef objectDef, IElementDef def, String sqp,
                                SifVersion version )
         {
-            Adk.SifVersion = version;
-            IElementDef lookedUp = Adk.Dtd.LookupElementDefBySQP( objectDef, sqp );
+            Runtime.SifVersion = version;
+            IElementDef lookedUp = Runtime.Dtd.LookupElementDefBySQP( objectDef, sqp );
             Assert.AreEqual( def.Name, lookedUp.Name, "IElementDef" );
             testResolveBySQP( objectDef, sqp, version, def );
 
-            Query q = new Query( objectDef );
+            Query q = Objects.CreateQuery( objectDef );
             q.AddCondition( def, ComparisonOperators.EQ, "foo" );
 
             String sifQueryXML = q.ToXml();
@@ -815,7 +815,7 @@ namespace Library.Nunit.US
             String searchFor = "<SIF_Element>" + sqp + "</SIF_Element>";
             Assert.IsTrue( sifQueryXML.Contains( searchFor ), "SQP in XML" );
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( "<SIF_Request>"
                                                            + sifQueryXML + "</SIF_Request>", null );
 
@@ -836,7 +836,7 @@ namespace Library.Nunit.US
             q.AddCondition( "Demographics/Ethnicity", ComparisonOperators.EQ, "W" );
             Console.WriteLine( q.ToXml() );
 
-            q = SaveToXMLAndReparse( q, SifVersion.SIF15r1 );
+            q = SaveToXMLAndReparse( q, SifVersion.SIF15r1, Runtime );
 
             Condition c = q.HasCondition( "Demographics/Ethnicity" );
             Assert.IsNotNull( c, "Condition didn't resolve" );

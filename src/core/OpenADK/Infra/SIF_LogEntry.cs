@@ -27,7 +27,7 @@ public class SIF_LogEntry : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SIF_LogEntry
 	/// </summary>
-	public SIF_LogEntry() : base( Adk.SifVersion, InfraDTD.SIF_LOGENTRY ){}
+	public SIF_LogEntry() : base( SifVersion.LATEST, InfraDTD.SIF_LOGENTRY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class SIF_LogEntry : SifDataObject
 	///<param name="sifLogEntryHeader">This is a copy of the SIF_Event/SIF_Header in the message that added this SIF_LogEntry to the zone. This copy facilitates querying log entries with regard to source, time, destination, etc.</param>
 	///<param name="sifDesc">A textual description of the error.</param>
 	///
-	public SIF_LogEntry( LogSource source, LogLevel logLevel, SIF_LogEntryHeader sifLogEntryHeader, string sifDesc ) : base( Adk.SifVersion, InfraDTD.SIF_LOGENTRY )
+	public SIF_LogEntry( LogSource source, LogLevel logLevel, SIF_LogEntryHeader sifLogEntryHeader, string sifDesc ) : base( SifVersion.LATEST, InfraDTD.SIF_LOGENTRY )
 	{
 		this.SetSource( source );
 		this.SetLogLevel( logLevel );
@@ -327,4 +327,3 @@ public class SIF_LogEntry : SifDataObject
 	}
 
 }}
-

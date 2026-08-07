@@ -52,6 +52,9 @@ namespace OpenADK.Library.Impl
                 base( parent, name, tag, sequence, localPackage, sequence, earliestVersion, null )
         {
             fClassName = className;
+            if ( parent != null ) {
+                ((ElementDefImpl) parent).addChild( this );
+            }
         }
 
         /// <summary>  Constructs an ElementDefAlias with flag
@@ -93,6 +96,9 @@ namespace OpenADK.Library.Impl
                 base( parent, name, tag, sequence, localPackage, variant, flags, earliestVersion, latestVersion, null )
         {
             fClassName = className;
+            if ( parent != null ) {
+                ((ElementDefImpl) parent).addChild( this );
+            }
         }
 
         /// <summary>

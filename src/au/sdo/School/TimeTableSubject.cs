@@ -28,7 +28,7 @@ public class TimeTableSubject : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TimeTableSubject
 	/// </summary>
-	public TimeTableSubject() : base( Adk.SifVersion, SchoolDTD.TIMETABLESUBJECT ){}
+	public TimeTableSubject() : base( SifVersion.LATEST, SchoolDTD.TIMETABLESUBJECT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class TimeTableSubject : SifDataObject
 	///<param name="subjectLocalId">SubjectLocalID - Distinct piece of curriculum that is to be scheduled.</param>
 	///<param name="subjectLongName">A SubjectLongName</param>
 	///
-	public TimeTableSubject( string refId, string subjectLocalId, string subjectLongName ) : base( Adk.SifVersion, SchoolDTD.TIMETABLESUBJECT )
+	public TimeTableSubject( string refId, string subjectLocalId, string subjectLongName ) : base( SifVersion.LATEST, SchoolDTD.TIMETABLESUBJECT )
 	{
 		this.RefId = refId;
 		this.SubjectLocalId = subjectLocalId;
@@ -442,4 +442,3 @@ public class TimeTableSubject : SifDataObject
 	}
 
 }}
-

@@ -60,10 +60,6 @@ namespace OpenADK.Library.Log
             }
         }
 
-        /// <summary> 	Global registry of ServerLog instances keyed by ID</summary>
-        private static IDictionary<String, ServerLog> sInstances =
-            new Dictionary<String, ServerLog>();
-
         /// <summary> 	The parent ServerLog</summary>
         private ServerLog fParent;
 
@@ -77,22 +73,11 @@ namespace OpenADK.Library.Log
         private IList<IServerLogModule> fLoggers = new List<IServerLogModule>();
 
         /// <summary> 	Protected constructor; clients must call <c>getInstance</c></summary>
-        private ServerLog( string id,
-                           IZone zone )
+        public ServerLog(string id, IZone zone, ServerLog parent = null)
         {
-            fID = id;
+            fID = id ?? throw new ArgumentNullException(nameof(id));
             fZone = zone;
-
-            //	Determine the parent
-            if ( id.Equals( Adk.LOG_IDENTIFIER ) ) {
-                fParent = null;
-            }
-            else if ( id.Equals( Agent.LOG_IDENTIFIER ) ) {
-                fParent = GetInstance( Adk.LOG_IDENTIFIER, zone );
-            }
-            else {
-                fParent = GetInstance( Agent.LOG_IDENTIFIER, zone );
-            }
+            fParent = parent;
         }
 
         /// <summary>
@@ -117,23 +102,6 @@ namespace OpenADK.Library.Log
         /// <param name="zone">The zone that is currently in scope</param>
         /// <returns> A ServerLog instance 
         /// </returns>
-        public static ServerLog GetInstance( string id,
-                                             IZone zone )
-        {
-            if ( id == null ) {
-                throw new ArgumentException( "ID cannot be null" );
-            }
-
-            ServerLog log = null;
-
-            if ( !sInstances.TryGetValue( id, out log ) ) {
-                log = new ServerLog( id, zone );
-                sInstances[id] = log;
-            }
-
-            return log;
-        }
-
         /// <summary> 	Adda a ServerLogModule to the chain of loggers.
         /// 
         /// </summary>
@@ -390,7 +358,7 @@ namespace OpenADK.Library.Log
 
             string msg = null;
             SIF_LogEntry le = null;
-            if ( Adk.SifVersion.CompareTo( SifVersion.SIF15r1 ) >= 0 ) {
+            if (fZone.Agent.Runtime.SifVersion.CompareTo(SifVersion.SIF15r1) >= 0) {
                 //	Create a SIF_LogEntry
                 le = new SIF_LogEntry();
                 le.SetSource( LogSource.AGENT );

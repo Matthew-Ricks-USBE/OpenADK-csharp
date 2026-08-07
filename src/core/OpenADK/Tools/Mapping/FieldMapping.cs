@@ -211,7 +211,8 @@ namespace OpenADK.Library.Tools.Mapping
                 }
                 catch (FormatException iae)
                 {
-                    Adk.Log.Warn("Unable to parse datatype '" + dataType + "' for field " + name, iae);
+                    Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance
+                        .Warn("Unable to parse datatype '" + dataType + "' for field " + name, iae);
                 }
             }
 
@@ -617,7 +618,8 @@ namespace OpenADK.Library.Tools.Mapping
                 // TODO: Support all data types
                 try
                 {
-                    return SifTypeConverters.GetConverter(fDatatype).Parse(Adk.TextFormatter, fDefValue);
+                    return SifTypeConverters.GetConverter(fDatatype)
+                        .Parse(Impl.DTDInternals.SIF_1X_FORMATTER, fDefValue);
                 }
                 catch (AdkParsingException adkpe)
                 {

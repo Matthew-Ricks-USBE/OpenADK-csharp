@@ -68,7 +68,7 @@ namespace OpenADK.Library.Tools.Mapping
         /// Creates a new instance of a StringMapAdaptor which uses the ADK default TextFormatter
         /// </summary>
         /// <param name="dataMap">The IDictionary instance to use for getting and setting values</param>
-        public StringMapAdaptor(IDictionary dataMap) : this(dataMap, Adk.TextFormatter)
+        public StringMapAdaptor(IDictionary dataMap) : this(dataMap, Impl.DTDInternals.SIF_1X_FORMATTER)
         {
         }
 

@@ -28,7 +28,7 @@ public class LibraryPatronStatus : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LibraryPatronStatus
 	/// </summary>
-	public LibraryPatronStatus() : base( Adk.SifVersion, LibraryDTD.LIBRARYPATRONSTATUS ){}
+	public LibraryPatronStatus() : base( SifVersion.LATEST, LibraryDTD.LIBRARYPATRONSTATUS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -42,7 +42,7 @@ public class LibraryPatronStatus : SifDataObject
 	///<param name="numberOfFines">The total number of fines currently assessed to this patron.</param>
 	///<param name="fineAmount">The total monetary amount of the fines that this patron currently owes the library expressed as a positive number.</param>
 	///
-	public LibraryPatronStatus( string libraryType, string sifRefId, PatronType sifRefObject, ElectronicIdList electronicIdList, int? numberOfCheckouts, int? numberOfOverdues, int? numberOfFines, MonetaryAmount fineAmount ) : base( Adk.SifVersion, LibraryDTD.LIBRARYPATRONSTATUS )
+	public LibraryPatronStatus( string libraryType, string sifRefId, PatronType sifRefObject, ElectronicIdList electronicIdList, int? numberOfCheckouts, int? numberOfOverdues, int? numberOfFines, MonetaryAmount fineAmount ) : base( SifVersion.LATEST, LibraryDTD.LIBRARYPATRONSTATUS )
 	{
 		this.LibraryType = libraryType;
 		this.SIF_RefId = sifRefId;
@@ -415,4 +415,3 @@ public class LibraryPatronStatus : SifDataObject
 	}
 
 }}
-

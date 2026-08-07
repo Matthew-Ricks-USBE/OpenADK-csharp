@@ -212,10 +212,10 @@ public class SIF_Request : SifMessagePayload
    /// <param name="failureLog">The log to write failures to, if any of the SIFVersions fail
    /// to be parsed.</param>
    /// <returns><An array of SIFVersion elements. This will never be null/returns>
-    internal SifVersion[] parseRequestVersions( log4net.ILog failureLog )
+    internal SifVersion[] parseRequestVersions( Microsoft.Extensions.Logging.ILogger failureLog )
 	{
 		if( failureLog == null ){
-			failureLog = Adk.Log;
+			failureLog = ElementDef.Dtd.Logger;
 		}
 		System.Collections.Generic.List<SifVersion> versionList = new System.Collections.Generic.List<SifVersion>();
        	foreach( SifElement element in GetChildList( InfraDTD.SIF_REQUEST_SIF_VERSION ) ){

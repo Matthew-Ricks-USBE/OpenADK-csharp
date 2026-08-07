@@ -28,7 +28,7 @@ public class ProfessionalDevelopmentRegistration : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ProfessionalDevelopmentRegistration
 	/// </summary>
-	public ProfessionalDevelopmentRegistration() : base( Adk.SifVersion, ProfdevDTD.PROFESSIONALDEVELOPMENTREGISTRATION ){}
+	public ProfessionalDevelopmentRegistration() : base( SifVersion.LATEST, ProfdevDTD.PROFESSIONALDEVELOPMENTREGISTRATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class ProfessionalDevelopmentRegistration : SifDataObject
 	///<param name="employeePersonalRefId">Who this record affects.</param>
 	///<param name="registrationStatus">Tracks the status of the user in the professional development activity.</param>
 	///
-	public ProfessionalDevelopmentRegistration( string refId, string employeePersonalRefId, RegistrationStatus registrationStatus ) : base( Adk.SifVersion, ProfdevDTD.PROFESSIONALDEVELOPMENTREGISTRATION )
+	public ProfessionalDevelopmentRegistration( string refId, string employeePersonalRefId, RegistrationStatus registrationStatus ) : base( SifVersion.LATEST, ProfdevDTD.PROFESSIONALDEVELOPMENTREGISTRATION )
 	{
 		this.RefId = refId;
 		this.EmployeePersonalRefId = employeePersonalRefId;
@@ -251,4 +251,3 @@ public class ProfessionalDevelopmentRegistration : SifDataObject
 	}
 
 }}
-

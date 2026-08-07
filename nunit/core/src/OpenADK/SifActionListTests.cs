@@ -2,18 +2,13 @@ using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using NUnit.Framework;
 using OpenADK.Library.us;
+using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.Core
 {
     [TestFixture]
-    public class SifActionListTests
+    public class SifActionListTests : AdkTest
     {
-        [SetUp]
-        public void Setup()
-        {
-            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.None);
-        }
-
         [Test]
         public void testList010()
         {

@@ -28,7 +28,7 @@ public class FinancialTransaction : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FinancialTransaction
 	/// </summary>
-	public FinancialTransaction() : base( Adk.SifVersion, HrfinDTD.FINANCIALTRANSACTION ){}
+	public FinancialTransaction() : base( SifVersion.LATEST, HrfinDTD.FINANCIALTRANSACTION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class FinancialTransaction : SifDataObject
 	///<param name="transactionTime">Transaction time.</param>
 	///<param name="amounts">Dollar amount of the transaction.</param>
 	///
-	public FinancialTransaction( string refId, DateTime? transactionDate, DateTime? transactionTime, FTAmounts amounts ) : base( Adk.SifVersion, HrfinDTD.FINANCIALTRANSACTION )
+	public FinancialTransaction( string refId, DateTime? transactionDate, DateTime? transactionTime, FTAmounts amounts ) : base( SifVersion.LATEST, HrfinDTD.FINANCIALTRANSACTION )
 	{
 		this.RefId = refId;
 		this.TransactionDate = transactionDate;
@@ -207,4 +207,3 @@ public class FinancialTransaction : SifDataObject
 	}
 
 }}
-

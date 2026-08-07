@@ -28,7 +28,7 @@ public class SchoolInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SchoolInfo
 	/// </summary>
-	public SchoolInfo() : base( Adk.SifVersion, StudentDTD.SCHOOLINFO ){}
+	public SchoolInfo() : base( SifVersion.LATEST, StudentDTD.SCHOOLINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class SchoolInfo : SifDataObject
 	///<param name="refId">The GUID that identifies this school.</param>
 	///<param name="schoolName">Name of school.</param>
 	///
-	public SchoolInfo( string refId, string schoolName ) : base( Adk.SifVersion, StudentDTD.SCHOOLINFO )
+	public SchoolInfo( string refId, string schoolName ) : base( SifVersion.LATEST, StudentDTD.SCHOOLINFO )
 	{
 		this.RefId = refId;
 		this.SchoolName = schoolName;
@@ -709,4 +709,3 @@ public class SchoolInfo : SifDataObject
 	}
 
 }}
-

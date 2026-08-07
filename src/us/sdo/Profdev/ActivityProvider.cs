@@ -28,7 +28,7 @@ public class ActivityProvider : SifDataObject
 	/// <summary>
 	/// Creates an instance of an ActivityProvider
 	/// </summary>
-	public ActivityProvider() : base( Adk.SifVersion, ProfdevDTD.ACTIVITYPROVIDER ){}
+	public ActivityProvider() : base( SifVersion.LATEST, ProfdevDTD.ACTIVITYPROVIDER ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class ActivityProvider : SifDataObject
 	///<param name="localId">Local code used to represent this provider</param>
 	///<param name="name">Name of the provider</param>
 	///
-	public ActivityProvider( string refId, string localId, string name ) : base( Adk.SifVersion, ProfdevDTD.ACTIVITYPROVIDER )
+	public ActivityProvider( string refId, string localId, string name ) : base( SifVersion.LATEST, ProfdevDTD.ACTIVITYPROVIDER )
 	{
 		this.RefId = refId;
 		this.LocalId = localId;
@@ -193,4 +193,3 @@ public class ActivityProvider : SifDataObject
 	}
 
 }}
-

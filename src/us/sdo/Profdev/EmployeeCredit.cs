@@ -28,7 +28,7 @@ public class EmployeeCredit : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeeCredit
 	/// </summary>
-	public EmployeeCredit() : base( Adk.SifVersion, ProfdevDTD.EMPLOYEECREDIT ){}
+	public EmployeeCredit() : base( SifVersion.LATEST, ProfdevDTD.EMPLOYEECREDIT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class EmployeeCredit : SifDataObject
 	///<param name="endDate">Date in which the course or activity was completed and awarded credit.</param>
 	///<param name="earned">The number of units earned</param>
 	///
-	public EmployeeCredit( string refId, string employeePersonalRefId, string professionalDevelopmentActivitiesRefId, DateTime? endDate, Earned earned ) : base( Adk.SifVersion, ProfdevDTD.EMPLOYEECREDIT )
+	public EmployeeCredit( string refId, string employeePersonalRefId, string professionalDevelopmentActivitiesRefId, DateTime? endDate, Earned earned ) : base( SifVersion.LATEST, ProfdevDTD.EMPLOYEECREDIT )
 	{
 		this.RefId = refId;
 		this.EmployeePersonalRefId = employeePersonalRefId;
@@ -188,4 +188,3 @@ public class EmployeeCredit : SifDataObject
 	}
 
 }}
-

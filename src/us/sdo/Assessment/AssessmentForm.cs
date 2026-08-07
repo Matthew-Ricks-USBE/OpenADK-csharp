@@ -28,7 +28,7 @@ public class AssessmentForm : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentForm
 	/// </summary>
-	public AssessmentForm() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTFORM ){}
+	public AssessmentForm() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTFORM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class AssessmentForm : SifDataObject
 	///<param name="refId">The GUID that uniquely identifies an instance of the object.</param>
 	///<param name="assessmentRefId">The RefId of the assessment related to this form.</param>
 	///
-	public AssessmentForm( string refId, string assessmentRefId ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTFORM )
+	public AssessmentForm( string refId, string assessmentRefId ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTFORM )
 	{
 		this.RefId = refId;
 		this.AssessmentRefId = assessmentRefId;
@@ -269,4 +269,3 @@ public class AssessmentForm : SifDataObject
 	}
 
 }}
-

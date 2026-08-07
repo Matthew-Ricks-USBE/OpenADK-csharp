@@ -54,7 +54,7 @@ namespace OpenADK.Library.Impl
                         return;
                     }
 
-                    if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 ) {
+                    if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
                         this.Zone.Log.Debug
                             ( "Starting polling thread (HTTP/HTTPS), zone connected in Pull mode..." );
                     }
@@ -107,7 +107,7 @@ namespace OpenADK.Library.Impl
             fRunning = true;
             TimeSpan freq = this.Zone.Properties.PullFrequency;
             TimeSpan delay = this.Zone.Properties.PullDelayOnError;
-            if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+            if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                 this.Zone.Log.Debug
                     ( "Polling thread (HTTP/HTTPS) started with frequency " + freq.ToString() +
                       " seconds" );
@@ -116,14 +116,14 @@ namespace OpenADK.Library.Impl
             while ( fRunning ) {
                 try {
                     if ( this.Zone.IsShutdown ) {
-                        if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+                        if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                             this.Zone.Log.Debug
                                 ( "Polling thread (HTTP/HTTPS) will stop, zone has shut down" );
                         }
                         break;
                     }
                     else if ( !this.Zone.Connected ) {
-                        if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+                        if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                             this.Zone.Log.Debug
                                 ( "Polling thread (HTTP/HTTPS) will delay " + delay.Seconds +
                                   " seconds, zone is no longer connected" );
@@ -134,7 +134,7 @@ namespace OpenADK.Library.Impl
                         int i = this.Zone.Dispatcher.Pull();
                         if ( i == - 1 ) {
                             //  The zone is sleeping
-                            if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+                            if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                                 this.Zone.Log.Debug
                                     ( "Polling thread (HTTP/HTTPS) will delay " + delay.Seconds +
                                       " seconds, zone is sleeping" );
@@ -152,13 +152,13 @@ namespace OpenADK.Library.Impl
                     break;
                 }
                 catch ( ThreadInterruptedException ) {
-                    if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+                    if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                         this.Zone.Log.Debug( "Polling thread (HTTP/HTTPS) interrupted" );
                     }
                     break;
                 }
                 catch ( Exception adke ) {
-                    if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+                    if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                         this.Zone.Log.Debug
                             ( "Polling thread (HTTP/HTTPS) failed to retrieve message: " + adke );
                     }
@@ -172,7 +172,7 @@ namespace OpenADK.Library.Impl
                          ((AdkException) adke).HasSifError
                              ( SifErrorCategoryCode.Registration, SifErrorCodes.REG_PUSH_EXPECTED_9 )
                         ) {
-                        if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+                        if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                             this.Zone.Log.Debug
                                 ( "Polling thread (HTTP/HTTPS) will now stop because agent is registered in Push mode" );
                         }
@@ -192,7 +192,7 @@ namespace OpenADK.Library.Impl
 
             fRunning = false;
 
-            if ( (Adk.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
+            if ( (Zone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Pull) != 0 ) {
                 this.Zone.Log.Debug( "Polling thread (HTTP/HTTPS) has ended" );
             }
         }

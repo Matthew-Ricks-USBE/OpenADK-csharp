@@ -28,7 +28,7 @@ public class LearningStandardItem : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearningStandardItem
 	/// </summary>
-	public LearningStandardItem() : base( Adk.SifVersion, InstrDTD.LEARNINGSTANDARDITEM ){}
+	public LearningStandardItem() : base( SifVersion.LATEST, InstrDTD.LEARNINGSTANDARDITEM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class LearningStandardItem : SifDataObject
 	///<param name="gradeLevels">For a description of this element, see 5.1.12 GradeLevels.</param>
 	///<param name="learningStandardDocumentRefId">The RefId of the item's parent LearningStandardDocument.</param>
 	///
-	public LearningStandardItem( string refId, LanguageCode language, StandardHierarchyLevel standardHierarchyLevel, GradeLevels gradeLevels, string learningStandardDocumentRefId ) : base( Adk.SifVersion, InstrDTD.LEARNINGSTANDARDITEM )
+	public LearningStandardItem( string refId, LanguageCode language, StandardHierarchyLevel standardHierarchyLevel, GradeLevels gradeLevels, string learningStandardDocumentRefId ) : base( SifVersion.LATEST, InstrDTD.LEARNINGSTANDARDITEM )
 	{
 		this.RefId = refId;
 		this.SetLanguage( language );
@@ -575,4 +575,3 @@ public class LearningStandardItem : SifDataObject
 	}
 
 }}
-

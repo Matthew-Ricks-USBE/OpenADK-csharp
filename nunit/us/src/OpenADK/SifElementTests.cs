@@ -40,8 +40,8 @@ namespace Library.Nunit.US
       [Test]
       public void SharedChildren()
       {
-         Adk.SifVersion = SifVersion.LATEST;
-         StudentPersonal sp = new StudentPersonal(Adk.MakeGuid(), new Name(NameType.LEGAL, "hello", "world"));
+         Runtime.SifVersion = SifVersion.LATEST;
+         StudentPersonal sp = new StudentPersonal(Runtime.MakeGuid(), new Name(NameType.LEGAL, "hello", "world"));
          // Replace the existing demographics so there is no confusion
          Demographics d = new Demographics();
          sp.Demographics = d;

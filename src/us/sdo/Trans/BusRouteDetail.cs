@@ -28,7 +28,7 @@ public class BusRouteDetail : SifDataObject
 	/// <summary>
 	/// Creates an instance of a BusRouteDetail
 	/// </summary>
-	public BusRouteDetail() : base( Adk.SifVersion, TransDTD.BUSROUTEDETAIL ){}
+	public BusRouteDetail() : base( SifVersion.LATEST, TransDTD.BUSROUTEDETAIL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class BusRouteDetail : SifDataObject
 	///<param name="busStopInfoRefId">Describes a bus stop</param>
 	///<param name="arrivalTime">The time that the bus associated with this route will stop at this bus stop.</param>
 	///
-	public BusRouteDetail( string refId, string busRouteInfoRefId, string busStopInfoRefId, DateTime? arrivalTime ) : base( Adk.SifVersion, TransDTD.BUSROUTEDETAIL )
+	public BusRouteDetail( string refId, string busRouteInfoRefId, string busStopInfoRefId, DateTime? arrivalTime ) : base( SifVersion.LATEST, TransDTD.BUSROUTEDETAIL )
 	{
 		this.RefId = refId;
 		this.BusRouteInfoRefId = busRouteInfoRefId;
@@ -146,4 +146,3 @@ public class BusRouteDetail : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class SchoolGroup : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SchoolGroup
 	/// </summary>
-	public SchoolGroup() : base( Adk.SifVersion, SchoolDTD.SCHOOLGROUP ){}
+	public SchoolGroup() : base( SifVersion.LATEST, SchoolDTD.SCHOOLGROUP ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class SchoolGroup : SifDataObject
 	///<param name="localId">The locally-assigned (unique) identifier for this group. </param>
 	///<param name="groupName">The name associated with this group for display purposes.</param>
 	///
-	public SchoolGroup( string refId, string schoolGroupTypeRefId, int? schoolYear, string localId, string groupName ) : base( Adk.SifVersion, SchoolDTD.SCHOOLGROUP )
+	public SchoolGroup( string refId, string schoolGroupTypeRefId, int? schoolYear, string localId, string groupName ) : base( SifVersion.LATEST, SchoolDTD.SCHOOLGROUP )
 	{
 		this.RefId = refId;
 		this.SchoolGroupTypeRefId = schoolGroupTypeRefId;
@@ -232,4 +232,3 @@ public class SchoolGroup : SifDataObject
 	}
 
 }}
-

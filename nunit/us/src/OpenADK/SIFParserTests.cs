@@ -63,7 +63,7 @@ namespace Library.Nunit.US
             using (Stream aStream = GetResourceStream("GetNextMessageResponse.xml"))
             {
                 TextReader aReader = new StreamReader(aStream);
-                SifParser parser = SifParser.NewInstance();
+                SifParser parser = new SifParser(Runtime);
                 element = parser.Parse(aReader, null, SifParserFlags.ExpectInnerEnvelope, SifVersion.SIF11);
                 aReader.Close();
                 aStream.Close();
@@ -89,7 +89,7 @@ namespace Library.Nunit.US
             {
                 using Stream aStream = GetResourceStream("GetNextMessageResponse.xml");
                 using TextReader aReader = new StreamReader(aStream);
-                SifParser parser = SifParser.NewInstance();
+                SifParser parser = new SifParser(Runtime);
                 SifElement element = parser.Parse(aReader, null, SifParserFlags.None, SifVersion.SIF11);
             });
         }
@@ -103,7 +103,7 @@ namespace Library.Nunit.US
                                <Send1099 Code='XXX' />
                              </VendorInfo>";
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             VendorInfo vi = (VendorInfo) parser.Parse( vendorInfo15r1, null, SifParserFlags.None, SifVersion.SIF15r1 );
 
             Assert.IsNotNull( vi );
@@ -119,7 +119,7 @@ namespace Library.Nunit.US
                                <Send1099>xxx</Send1099>
                              </VendorInfo>";
 
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
             VendorInfo vi = (VendorInfo)parser.Parse(vendorInfo20r1, null, SifParserFlags.None, SifVersion.SIF20r1);
 
             Assert.IsNotNull(vi);
@@ -134,7 +134,7 @@ namespace Library.Nunit.US
             using (Stream aStream = GetResourceStream("ReportData.xml"))
             {
                 TextReader aReader = new StreamReader(aStream);
-                SifParser parser = SifParser.NewInstance();
+                SifParser parser = new SifParser(Runtime);
                 reportObject = (SIF_ReportObject) parser.Parse(aReader, null, SifParserFlags.None, SifVersion.SIF20r1);
                 aReader.Close();
                 aStream.Close();

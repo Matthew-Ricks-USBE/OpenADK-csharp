@@ -28,7 +28,7 @@ public class AttendanceCodeInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AttendanceCodeInfo
 	/// </summary>
-	public AttendanceCodeInfo() : base( Adk.SifVersion, StudentDTD.ATTENDANCECODEINFO ){}
+	public AttendanceCodeInfo() : base( SifVersion.LATEST, StudentDTD.ATTENDANCECODEINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class AttendanceCodeInfo : SifDataObject
 	///<param name="attendanceType">Type of attendance code.</param>
 	///<param name="attendanceStatus">Excused status of the attendance code.</param>
 	///
-	public AttendanceCodeInfo( string refId, string schoolInfoRefId, string attendanceCode, AttendanceType attendanceType, AttendanceStatus attendanceStatus ) : base( Adk.SifVersion, StudentDTD.ATTENDANCECODEINFO )
+	public AttendanceCodeInfo( string refId, string schoolInfoRefId, string attendanceCode, AttendanceType attendanceType, AttendanceStatus attendanceStatus ) : base( SifVersion.LATEST, StudentDTD.ATTENDANCECODEINFO )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -325,4 +325,3 @@ public class AttendanceCodeInfo : SifDataObject
 	}
 
 }}
-

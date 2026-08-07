@@ -28,7 +28,7 @@ public class ResourceUsage : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ResourceUsage
 	/// </summary>
-	public ResourceUsage() : base( Adk.SifVersion, SchoolDTD.RESOURCEUSAGE ){}
+	public ResourceUsage() : base( SifVersion.LATEST, SchoolDTD.RESOURCEUSAGE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class ResourceUsage : SifDataObject
 	///<param name="resourceReportColumnList">A ResourceReportColumnList</param>
 	///<param name="resourceReportLineList">A ResourceReportLineList</param>
 	///
-	public ResourceUsage( string refId, string schoolInfoRefId, ResourceUsageContentType resourceUsageContentType, ResourceReportColumn resourceReportColumnList, ResourceReportLine resourceReportLineList ) : base( Adk.SifVersion, SchoolDTD.RESOURCEUSAGE )
+	public ResourceUsage( string refId, string schoolInfoRefId, ResourceUsageContentType resourceUsageContentType, ResourceReportColumn resourceReportColumnList, ResourceReportLine resourceReportLineList ) : base( SifVersion.LATEST, SchoolDTD.RESOURCEUSAGE )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -213,4 +213,3 @@ public class ResourceUsage : SifDataObject
 	}
 
 }}
-

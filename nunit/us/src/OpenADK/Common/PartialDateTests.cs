@@ -162,7 +162,7 @@ namespace Library.Nunit.US.Common
         [Test]
         public void testPartialDate040()
         {
-            DateTime? c = Adk.Dtd.GetFormatter(SifVersion.SIF20).ToDate("1999-12-25");
+            DateTime? c = Runtime.Dtd.GetFormatter(SifVersion.SIF20).ToDate("1999-12-25");
             PartialDateType date = new PartialDateType(c);
             assertPartialDate(date, 1999, 12, 25, "1999-12-25");
         }

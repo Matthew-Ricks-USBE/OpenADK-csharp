@@ -93,9 +93,9 @@ namespace OpenADK.Library
         /// <seealso cref="Adk.TextFormatter"/>
     public override string TextValue
         {
-            get { return fValue.ToString( Adk.TextFormatter ); }
+            get { return fValue.ToString(Impl.DTDInternals.SIF_1X_FORMATTER); }
 
-            set { SetTextValue( value, Adk.TextFormatter ); }
+            set { SetTextValue(value, Impl.DTDInternals.SIF_1X_FORMATTER); }
         }
 
         /// <summary>

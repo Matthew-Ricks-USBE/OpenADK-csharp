@@ -28,7 +28,7 @@ public class GradingAssignment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a GradingAssignment
 	/// </summary>
-	public GradingAssignment() : base( Adk.SifVersion, GradebookDTD.GRADINGASSIGNMENT ){}
+	public GradingAssignment() : base( SifVersion.LATEST, GradebookDTD.GRADINGASSIGNMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class GradingAssignment : SifDataObject
 	///<param name="schoolInfoRefId">The ID (GUID) that uniquely identifies the School that these Mark Values apply to.</param>
 	///<param name="gradingCategoryRefId">The GUID for the GradingCategory that this assignment is part of.</param>
 	///
-	public GradingAssignment( string refId, string sectionInfoRefId, string termInfoRefId, string schoolInfoRefId, string gradingCategoryRefId ) : base( Adk.SifVersion, GradebookDTD.GRADINGASSIGNMENT )
+	public GradingAssignment( string refId, string sectionInfoRefId, string termInfoRefId, string schoolInfoRefId, string gradingCategoryRefId ) : base( SifVersion.LATEST, GradebookDTD.GRADINGASSIGNMENT )
 	{
 		this.RefId = refId;
 		this.SectionInfoRefId = sectionInfoRefId;
@@ -309,4 +309,3 @@ public class GradingAssignment : SifDataObject
 	}
 
 }}
-

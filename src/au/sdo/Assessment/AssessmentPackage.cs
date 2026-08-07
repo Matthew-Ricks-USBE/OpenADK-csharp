@@ -28,7 +28,7 @@ public class AssessmentPackage : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentPackage
 	/// </summary>
-	public AssessmentPackage() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTPACKAGE ){}
+	public AssessmentPackage() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTPACKAGE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class AssessmentPackage : SifDataObject
 	///         The GUID that uniquely identifies an object instance in a zone.
 	///       </param>
 	///
-	public AssessmentPackage( string refId ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTPACKAGE )
+	public AssessmentPackage( string refId ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTPACKAGE )
 	{
 		this.RefId = refId;
 	}
@@ -101,4 +101,3 @@ public class AssessmentPackage : SifDataObject
 	}
 
 }}
-

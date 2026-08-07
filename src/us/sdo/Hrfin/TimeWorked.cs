@@ -28,7 +28,7 @@ public class TimeWorked : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TimeWorked
 	/// </summary>
-	public TimeWorked() : base( Adk.SifVersion, HrfinDTD.TIMEWORKED ){}
+	public TimeWorked() : base( SifVersion.LATEST, HrfinDTD.TIMEWORKED ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class TimeWorked : SifDataObject
 	///<param name="locationInfoRefId">Site where employee actually worked.  References LocationInfo object.</param>
 	///<param name="payPeriod">Pay period hours were worked in.</param>
 	///
-	public TimeWorked( string refId, string employeePersonalRefId, string locationInfoRefId, string payPeriod ) : base( Adk.SifVersion, HrfinDTD.TIMEWORKED )
+	public TimeWorked( string refId, string employeePersonalRefId, string locationInfoRefId, string payPeriod ) : base( SifVersion.LATEST, HrfinDTD.TIMEWORKED )
 	{
 		this.RefId = refId;
 		this.EmployeePersonalRefId = employeePersonalRefId;
@@ -232,4 +232,3 @@ public class TimeWorked : SifDataObject
 	}
 
 }}
-

@@ -16,6 +16,13 @@ namespace OpenADK.Library.Impl.Surrogates
     /// </summary>
     internal class StudentAddressPullParser
     {
+        private readonly IDtd fDtd;
+
+        public StudentAddressPullParser(IDtd dtd)
+        {
+            fDtd = dtd ?? throw new ArgumentNullException(nameof(dtd));
+        }
+
         /// <summary>
         /// Parses one StudentAddress element from the XML reader stream.
         /// Manually walks through the StudentAddress element and extracts Address child elements.
@@ -62,7 +69,7 @@ namespace OpenADK.Library.Impl.Surrogates
                         string addressXml = reader.ReadOuterXml();
                         
                         // Parse the Address XML
-                        SifParser parser = SifParser.NewInstance();
+                        SifParser parser = new SifParser(fDtd, version);
                         Address address = (Address) parser.Parse( addressXml, null, SifParserFlags.None, version );
                         
                         if ( address != null )

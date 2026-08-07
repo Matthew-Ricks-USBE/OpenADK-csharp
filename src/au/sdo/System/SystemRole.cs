@@ -28,7 +28,7 @@ public class SystemRole : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SystemRole
 	/// </summary>
-	public SystemRole() : base( Adk.SifVersion, SystemDTD.SYSTEMROLE ){}
+	public SystemRole() : base( SifVersion.LATEST, SystemDTD.SYSTEMROLE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class SystemRole : SifDataObject
 	///<param name="refId">The ID (GUID) that uniquely identifies the SystemRole.</param>
 	///<param name="sifRefId">A SIF_RefId</param>
 	///
-	public SystemRole( string refId, SystenRoleSIF_RefId sifRefId ) : base( Adk.SifVersion, SystemDTD.SYSTEMROLE )
+	public SystemRole( string refId, SystenRoleSIF_RefId sifRefId ) : base( SifVersion.LATEST, SystemDTD.SYSTEMROLE )
 	{
 		this.RefId = refId;
 		this.SIF_RefId = sifRefId;
@@ -113,4 +113,3 @@ public class SystemRole : SifDataObject
 	}
 
 }}
-

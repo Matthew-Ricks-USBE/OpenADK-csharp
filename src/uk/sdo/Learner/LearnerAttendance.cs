@@ -28,7 +28,7 @@ public class LearnerAttendance : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerAttendance
 	/// </summary>
-	public LearnerAttendance() : base( Adk.SifVersion, LearnerDTD.LEARNERATTENDANCE ){}
+	public LearnerAttendance() : base( SifVersion.LATEST, LearnerDTD.LEARNERATTENDANCE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class LearnerAttendance : SifDataObject
 	///<param name="attendanceCode">The attendance mark/code.</param>
 	///<param name="inputSource">The source of the attendance record data.  Could be Workforce member, biometric device, or other.</param>
 	///
-	public LearnerAttendance( string refId, string learnerPersonalRefId, string schoolInfoRefId, DateTime? attendanceDate, AttendanceDomain attendanceDomain, AttendanceCodeType attendanceCode, AttendanceSourceType inputSource ) : base( Adk.SifVersion, LearnerDTD.LEARNERATTENDANCE )
+	public LearnerAttendance( string refId, string learnerPersonalRefId, string schoolInfoRefId, DateTime? attendanceDate, AttendanceDomain attendanceDomain, AttendanceCodeType attendanceCode, AttendanceSourceType inputSource ) : base( SifVersion.LATEST, LearnerDTD.LEARNERATTENDANCE )
 	{
 		this.RefId = refId;
 		this.LearnerPersonalRefId = learnerPersonalRefId;
@@ -455,4 +455,3 @@ public class LearnerAttendance : SifDataObject
 	}
 
 }}
-

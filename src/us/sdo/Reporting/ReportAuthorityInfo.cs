@@ -29,7 +29,7 @@ public class ReportAuthorityInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ReportAuthorityInfo
 	/// </summary>
-	public ReportAuthorityInfo() : base( Adk.SifVersion, ReportingDTD.REPORTAUTHORITYINFO ){}
+	public ReportAuthorityInfo() : base( SifVersion.LATEST, ReportingDTD.REPORTAUTHORITYINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class ReportAuthorityInfo : SifDataObject
 	///<param name="authorityId">The zone unique case-sensitive identifier for the authority. This will be the contents of the SIF_SourceId element in the header of requests for reports.</param>
 	///<param name="authorityLevel">Level of the authority.</param>
 	///
-	public ReportAuthorityInfo( string refId, string authorityName, string authorityId, AuthorityLevel authorityLevel ) : base( Adk.SifVersion, ReportingDTD.REPORTAUTHORITYINFO )
+	public ReportAuthorityInfo( string refId, string authorityName, string authorityId, AuthorityLevel authorityLevel ) : base( SifVersion.LATEST, ReportingDTD.REPORTAUTHORITYINFO )
 	{
 		this.RefId = refId;
 		this.AuthorityName = authorityName;
@@ -305,4 +305,3 @@ public class ReportAuthorityInfo : SifDataObject
 	}
 
 }}
-

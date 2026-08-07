@@ -28,7 +28,7 @@ public class ResponseToIntervention : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ResponseToIntervention
 	/// </summary>
-	public ResponseToIntervention() : base( Adk.SifVersion, InstrDTD.RESPONSETOINTERVENTION ){}
+	public ResponseToIntervention() : base( SifVersion.LATEST, InstrDTD.RESPONSETOINTERVENTION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class ResponseToIntervention : SifDataObject
 	///<param name="tier">The specific tier of intervention.</param>
 	///<param name="interventions">The list of interventions applied here.</param>
 	///
-	public ResponseToIntervention( string refId, string studentPersonalRefId, string schoolInfoRefId, string staffPersonalRefId, string studentPlacementRefId, decimal? tier, Intervention interventions ) : base( Adk.SifVersion, InstrDTD.RESPONSETOINTERVENTION )
+	public ResponseToIntervention( string refId, string studentPersonalRefId, string schoolInfoRefId, string staffPersonalRefId, string studentPlacementRefId, decimal? tier, Intervention interventions ) : base( SifVersion.LATEST, InstrDTD.RESPONSETOINTERVENTION )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -592,4 +592,3 @@ public class ResponseToIntervention : SifDataObject
 	}
 
 }}
-

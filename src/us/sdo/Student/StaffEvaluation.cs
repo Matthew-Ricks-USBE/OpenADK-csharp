@@ -28,7 +28,7 @@ public class StaffEvaluation : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StaffEvaluation
 	/// </summary>
-	public StaffEvaluation() : base( Adk.SifVersion, StudentDTD.STAFFEVALUATION ){}
+	public StaffEvaluation() : base( SifVersion.LATEST, StudentDTD.STAFFEVALUATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class StaffEvaluation : SifDataObject
 	///<param name="evaluationHolisticScore">The overall Score for the evaluation.</param>
 	///<param name="evaluationHolisticScale">This is the overall Scale that is being used for the evaluation.</param>
 	///
-	public StaffEvaluation( string staffPersonalRefId, string schoolInfoRefId, DateTime? evaluationDate, string evaluationSystem, string evaluationHolisticScore, string evaluationHolisticScale ) : base( Adk.SifVersion, StudentDTD.STAFFEVALUATION )
+	public StaffEvaluation( string staffPersonalRefId, string schoolInfoRefId, DateTime? evaluationDate, string evaluationSystem, string evaluationHolisticScore, string evaluationHolisticScale ) : base( SifVersion.LATEST, StudentDTD.STAFFEVALUATION )
 	{
 		this.StaffPersonalRefId = staffPersonalRefId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -399,4 +399,3 @@ public class StaffEvaluation : SifDataObject
 	}
 
 }}
-

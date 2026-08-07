@@ -28,7 +28,7 @@ public class Sif3StudentScoreSet : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3StudentScoreSet
 	/// </summary>
-	public Sif3StudentScoreSet() : base( Adk.SifVersion, AssessmentDTD.SIF3STUDENTSCORESET ){}
+	public Sif3StudentScoreSet() : base( SifVersion.LATEST, AssessmentDTD.SIF3STUDENTSCORESET ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class Sif3StudentScoreSet : SifDataObject
 	///<param name="studentPersonalRefId">The student associated with the response set.</param>
 	///<param name="scoresSif3">A ScoresSif3</param>
 	///
-	public Sif3StudentScoreSet( string refId, AssessmentReportingMethod scoreMetric, string assessmentAdministrationRefId, string studentPersonalRefId, ScoresSif3 scoresSif3 ) : base( Adk.SifVersion, AssessmentDTD.SIF3STUDENTSCORESET )
+	public Sif3StudentScoreSet( string refId, AssessmentReportingMethod scoreMetric, string assessmentAdministrationRefId, string studentPersonalRefId, ScoresSif3 scoresSif3 ) : base( SifVersion.LATEST, AssessmentDTD.SIF3STUDENTSCORESET )
 	{
 		this.RefId = refId;
 		this.SetScoreMetric( scoreMetric );
@@ -263,4 +263,3 @@ public class Sif3StudentScoreSet : SifDataObject
 	}
 
 }}
-

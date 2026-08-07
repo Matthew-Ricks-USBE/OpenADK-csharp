@@ -27,7 +27,7 @@ public class SIF_AgentACL : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SIF_AgentACL
 	/// </summary>
-	public SIF_AgentACL() : base( Adk.SifVersion, InfraDTD.SIF_AGENTACL ){}
+	public SIF_AgentACL() : base( SifVersion.LATEST, InfraDTD.SIF_AGENTACL ){}
 
 	///<summary>Sets the value of the <c>&lt;SIF_ProvideAccess&gt;</c> element.</summary>
 	/// <param name="SifObject">A SIF_Object</param>
@@ -296,4 +296,3 @@ public class SIF_AgentACL : SifDataObject
 	}
 
 }}
-

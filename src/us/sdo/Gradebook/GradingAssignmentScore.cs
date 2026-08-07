@@ -28,7 +28,7 @@ public class GradingAssignmentScore : SifDataObject
 	/// <summary>
 	/// Creates an instance of a GradingAssignmentScore
 	/// </summary>
-	public GradingAssignmentScore() : base( Adk.SifVersion, GradebookDTD.GRADINGASSIGNMENTSCORE ){}
+	public GradingAssignmentScore() : base( SifVersion.LATEST, GradebookDTD.GRADINGASSIGNMENTSCORE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class GradingAssignmentScore : SifDataObject
 	///<param name="schoolInfoRefId">The GUID that specifies the school this score was recorded at.</param>
 	///<param name="gradingAssignmentRefId">A GradingAssignmentRefId</param>
 	///
-	public GradingAssignmentScore( string studentPersonalRefId, string sectionInfoRefId, string schoolInfoRefId, string gradingAssignmentRefId ) : base( Adk.SifVersion, GradebookDTD.GRADINGASSIGNMENTSCORE )
+	public GradingAssignmentScore( string studentPersonalRefId, string sectionInfoRefId, string schoolInfoRefId, string gradingAssignmentRefId ) : base( SifVersion.LATEST, GradebookDTD.GRADINGASSIGNMENTSCORE )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.SectionInfoRefId = sectionInfoRefId;
@@ -222,4 +222,3 @@ public class GradingAssignmentScore : SifDataObject
 	}
 
 }}
-

@@ -25,7 +25,7 @@ namespace Library.Nunit.US.Impl
       //[SetUp]
       //public void setUp()
       //{
-      //    Adk.Initialize();
+      //    Runtime.Initialize();
 
       //    fAgent = new TestAgent();
       //    fAgent.Initialize();
@@ -251,7 +251,7 @@ namespace Library.Nunit.US.Impl
       [Test]
       public void testADKRetryQueryResults()
       {
-         TestState requestState = new TestState(Adk.MakeGuid());
+         TestState requestState = new TestState(Runtime.MakeGuid());
          IElementDef objType = StudentDTD.STUDENTCONTACT;
          ErrorMessageHandler handler =
              new ErrorMessageHandler(ErrorMessageHandler.HandlerBehavior.ThrowADKRetryException);
@@ -325,7 +325,7 @@ namespace Library.Nunit.US.Impl
       [Test]
       public void testSIFRetryQueryResults()
       {
-         TestState requestState = new TestState(Adk.MakeGuid());
+         TestState requestState = new TestState(Runtime.MakeGuid());
          IElementDef objType = StudentDTD.STUDENTCONTACT;
          ErrorMessageHandler handler =
              new ErrorMessageHandler(ErrorMessageHandler.HandlerBehavior.ThrowSIFRetryException);
@@ -441,7 +441,7 @@ namespace Library.Nunit.US.Impl
          request.Header.SIF_MsgId = MSG_GUID;
          request.Header.SIF_SourceId = "foo";
          request.SIF_MaxBufferSize = 32768;
-         request.AddSIF_Version(new SIF_Version(Adk.SifVersion.ToString()));
+         request.AddSIF_Version(new SIF_Version(Runtime.SifVersion.ToString()));
          SIF_Query q = new SIF_Query();
          SIF_QueryObject sqo = new SIF_QueryObject();
          sqo.ObjectName = objType.Name;
@@ -486,7 +486,7 @@ namespace Library.Nunit.US.Impl
          {
             Query q = new Query(objType);
             q.UserData = stateObject;
-            RequestCache.GetInstance(fAgent).StoreRequestInfo(req, q, fZone);
+            fAgent.Requests.StoreRequestInfo(req, q, fZone);
          }
 
          SIF_Response resp = new SIF_Response();
@@ -587,7 +587,7 @@ namespace Library.Nunit.US.Impl
       private void assertRequestCacheCleared(SIF_Response r)
       {
          // Now the RequestCache should no longer contain the specified object
-         IRequestInfo inf = RequestCache.GetInstance(fAgent).LookupRequestInfo(r.SIF_RequestMsgId, fZone);
+         IRequestInfo inf = fAgent.Requests.LookupRequestInfo(r.SIF_RequestMsgId, fZone);
          Assert.IsNull(inf, "RequestInfo should be removed from the cache");
       }
    }

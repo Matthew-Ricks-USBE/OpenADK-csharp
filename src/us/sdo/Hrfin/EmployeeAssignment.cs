@@ -28,7 +28,7 @@ public class EmployeeAssignment : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeeAssignment
 	/// </summary>
-	public EmployeeAssignment() : base( Adk.SifVersion, HrfinDTD.EMPLOYEEASSIGNMENT ){}
+	public EmployeeAssignment() : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEASSIGNMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class EmployeeAssignment : SifDataObject
 	///<param name="description">Short assignment description</param>
 	///<param name="primaryAssignment">Is this the staff member's primary assignment? There must be one and only one instance of the object with Yes in this value per school year.</param>
 	///
-	public EmployeeAssignment( string refId, string employeePersonalRefId, string description, YesNo primaryAssignment ) : base( Adk.SifVersion, HrfinDTD.EMPLOYEEASSIGNMENT )
+	public EmployeeAssignment( string refId, string employeePersonalRefId, string description, YesNo primaryAssignment ) : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEASSIGNMENT )
 	{
 		this.RefId = refId;
 		this.EmployeePersonalRefId = employeePersonalRefId;
@@ -377,4 +377,3 @@ public class EmployeeAssignment : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class AggregateCharacteristicInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AggregateCharacteristicInfo
 	/// </summary>
-	public AggregateCharacteristicInfo() : base( Adk.SifVersion, DwDTD.AGGREGATECHARACTERISTICINFO ){}
+	public AggregateCharacteristicInfo() : base( SifVersion.LATEST, DwDTD.AGGREGATECHARACTERISTICINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class AggregateCharacteristicInfo : SifDataObject
 	///<param name="refId">Key for aggregate characteristic information.</param>
 	///<param name="definition">Defines the aggregate characteristic information.</param>
 	///
-	public AggregateCharacteristicInfo( string refId, string definition ) : base( Adk.SifVersion, DwDTD.AGGREGATECHARACTERISTICINFO )
+	public AggregateCharacteristicInfo( string refId, string definition ) : base( SifVersion.LATEST, DwDTD.AGGREGATECHARACTERISTICINFO )
 	{
 		this.RefId = refId;
 		this.Definition = definition;
@@ -137,4 +137,3 @@ public class AggregateCharacteristicInfo : SifDataObject
 	}
 
 }}
-

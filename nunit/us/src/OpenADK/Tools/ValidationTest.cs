@@ -38,7 +38,7 @@ namespace Library.Nunit.US.Library.Tools
 
 		// 4) If validation failed, write the object out for tracing purposes
 		if ( !validated ) {
-			SifWriter outWriter = new SifWriter( fOutput );
+			SifWriter outWriter = new SifWriter( fOutput, Runtime );
 			outWriter.Write( se, fVersion );
 			outWriter.Flush();
 			fSchemaValidator.PrintProblems( fOutput );
@@ -68,7 +68,7 @@ namespace Library.Nunit.US.Library.Tools
             fileName = "..\\..\\" + fileName;
 
             SifElement se;
-            SifParser parser = SifParser.NewInstance();
+            SifParser parser = new SifParser(Runtime);
 
             using ( StreamReader reader = new StreamReader( fileName ) )
             {

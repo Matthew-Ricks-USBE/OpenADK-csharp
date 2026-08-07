@@ -28,7 +28,7 @@ public class SchoolPrograms : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SchoolPrograms
 	/// </summary>
-	public SchoolPrograms() : base( Adk.SifVersion, SchoolDTD.SCHOOLPROGRAMS ){}
+	public SchoolPrograms() : base( SifVersion.LATEST, SchoolDTD.SCHOOLPROGRAMS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class SchoolPrograms : SifDataObject
 	///<param name="refId">GUID that uniquely identifies this instance of the object.</param>
 	///<param name="schoolInfoRefId">GUID that identifies the school offering this program.</param>
 	///
-	public SchoolPrograms( string refId, string schoolInfoRefId ) : base( Adk.SifVersion, SchoolDTD.SCHOOLPROGRAMS )
+	public SchoolPrograms( string refId, string schoolInfoRefId ) : base( SifVersion.LATEST, SchoolDTD.SCHOOLPROGRAMS )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -141,4 +141,3 @@ public class SchoolPrograms : SifDataObject
 	}
 
 }}
-

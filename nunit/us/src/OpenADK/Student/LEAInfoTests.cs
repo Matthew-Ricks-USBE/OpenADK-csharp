@@ -8,33 +8,34 @@ using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 using System.Collections;
 using OpenADK.Library.us;
 
 namespace Library.Nunit.US.Library.Student
 {
     [TestFixture]
-    public class LEAInfoTests
+    public class LEAInfoTests : AdkTest
     {
         protected SifVersion fOriginalVersion;
 
         [SetUp]
         public void SetUp()
         {
-            Adk.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student);
-            fOriginalVersion = Adk.SifVersion;
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student);
+            fOriginalVersion = Runtime.SifVersion;
+            Runtime.SifVersion = SifVersion.SIF15r1;
         }
 
         [TearDown]
         public void TearDown()
         {
-            Adk.SifVersion = fOriginalVersion;
+            Runtime.SifVersion = fOriginalVersion;
         }
 
         [Test]
         public void testLeaInfoParseFrom15r1() {
-		    Adk.SifVersion = SifVersion.SIF15r1;
+		    Runtime.SifVersion = SifVersion.SIF15r1;
 		    String leaInfoXML = "	<LEAInfo RefId='1234' xmlns='http://www.sifinfo.org/infrastructure/1.x'>"
 				    + "    <LocalId>1234</LocalId>"
 				    + "    <StatePrId>4567</StatePrId>"
@@ -100,7 +101,7 @@ namespace Library.Nunit.US.Library.Student
                             + "</object></mappings></agent>";
 
 
-		    SifParser p = SifParser.NewInstance();
+		    SifParser p = new SifParser(Runtime);
 		    LEAInfo leaObject = (LEAInfo) p.Parse(leaInfoXML, null, 0, SifVersion.SIF15r1);
 
 		    PhoneNumber phone = leaObject.PhoneNumberList.ItemAt( 0 );

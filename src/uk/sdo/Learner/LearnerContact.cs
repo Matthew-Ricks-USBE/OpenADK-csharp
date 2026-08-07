@@ -28,7 +28,7 @@ public class LearnerContact : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerContact
 	/// </summary>
-	public LearnerContact() : base( Adk.SifVersion, LearnerDTD.LEARNERCONTACT ){}
+	public LearnerContact() : base( SifVersion.LATEST, LearnerDTD.LEARNERCONTACT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class LearnerContact : SifDataObject
 	///<param name="relationship">Defines the relationship of the contact to the learner. CBDS: 100166</param>
 	///<param name="contactFlags">Contains Yes/No characteristics of the contact person's role. Provide a Yes value for all that apply. Otherwise No is assumed.  At least one of the child elements of ContactFlags must have a Yes value.</param>
 	///
-	public LearnerContact( string learnerPersonalRefId, string contactPersonalRefId, Relationship relationship, ContactFlags contactFlags ) : base( Adk.SifVersion, LearnerDTD.LEARNERCONTACT )
+	public LearnerContact( string learnerPersonalRefId, string contactPersonalRefId, Relationship relationship, ContactFlags contactFlags ) : base( SifVersion.LATEST, LearnerDTD.LEARNERCONTACT )
 	{
 		this.LearnerPersonalRefId = learnerPersonalRefId;
 		this.ContactPersonalRefId = contactPersonalRefId;
@@ -237,4 +237,3 @@ public class LearnerContact : SifDataObject
 	}
 
 }}
-

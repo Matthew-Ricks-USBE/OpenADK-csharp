@@ -28,7 +28,7 @@ public class StudentActivityInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentActivityInfo
 	/// </summary>
-	public StudentActivityInfo() : base( Adk.SifVersion, StudentDTD.STUDENTACTIVITYINFO ){}
+	public StudentActivityInfo() : base( SifVersion.LATEST, StudentDTD.STUDENTACTIVITYINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class StudentActivityInfo : SifDataObject
 	///<param name="title">Name of the co-curricular or extra-curricular activity.</param>
 	///<param name="studentActivityType">A StudentActivityType</param>
 	///
-	public StudentActivityInfo( string refId, string title, StudentActivityType studentActivityType ) : base( Adk.SifVersion, StudentDTD.STUDENTACTIVITYINFO )
+	public StudentActivityInfo( string refId, string title, StudentActivityType studentActivityType ) : base( SifVersion.LATEST, StudentDTD.STUDENTACTIVITYINFO )
 	{
 		this.RefId = refId;
 		this.Title = title;
@@ -277,4 +277,3 @@ public class StudentActivityInfo : SifDataObject
 	}
 
 }}
-

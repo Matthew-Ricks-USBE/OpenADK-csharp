@@ -28,7 +28,7 @@ public class Person : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Person
 	/// </summary>
-	public Person() : base( Adk.SifVersion, InstrDTD.PERSON ){}
+	public Person() : base( SifVersion.LATEST, InstrDTD.PERSON ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class Person : SifDataObject
 	///<param name="exitDate">Effective end date of the association.</param>
 	///<param name="authoritativeSource">Body or organization creating this association.</param>
 	///
-	public Person( string refId, string personRefId, AssociatedRoleRefId associatedRoleRefId, DateTime? entryDate, DateTime? exitDate, string authoritativeSource ) : base( Adk.SifVersion, InstrDTD.PERSON )
+	public Person( string refId, string personRefId, AssociatedRoleRefId associatedRoleRefId, DateTime? entryDate, DateTime? exitDate, string authoritativeSource ) : base( SifVersion.LATEST, InstrDTD.PERSON )
 	{
 		this.RefId = refId;
 		this.PersonRefId = personRefId;
@@ -266,4 +266,3 @@ public class Person : SifDataObject
 	}
 
 }}
-

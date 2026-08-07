@@ -28,7 +28,7 @@ public class Activity : SifDataObject
 	/// <summary>
 	/// Creates an instance of an Activity
 	/// </summary>
-	public Activity() : base( Adk.SifVersion, InstrDTD.ACTIVITY ){}
+	public Activity() : base( SifVersion.LATEST, InstrDTD.ACTIVITY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class Activity : SifDataObject
 	///<param name="language">A Language</param>
 	///<param name="activityTime">Time structures for the activity.</param>
 	///
-	public Activity( string refId, LanguageCode language, ActivityTime activityTime ) : base( Adk.SifVersion, InstrDTD.ACTIVITY )
+	public Activity( string refId, LanguageCode language, ActivityTime activityTime ) : base( SifVersion.LATEST, InstrDTD.ACTIVITY )
 	{
 		this.RefId = refId;
 		this.SetLanguage( language );
@@ -598,4 +598,3 @@ public class Activity : SifDataObject
 	}
 
 }}
-

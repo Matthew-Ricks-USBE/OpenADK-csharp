@@ -5,7 +5,7 @@
 
 using System;
 using System.Collections.Generic;
-using log4net;
+using Microsoft.Extensions.Logging;
 using System.Runtime.CompilerServices;
 
 
@@ -22,7 +22,7 @@ namespace OpenADK.Library.Impl
     {
 
         /// <summary>  logging framework logging category for this topic</summary>
-        public ILog log;
+        public ILogger log;
 
         /// <summary>  The Subscriber registered with this topic.</summary>
         internal ISubscriber fSub;
@@ -54,16 +54,18 @@ namespace OpenADK.Library.Impl
         /// <summary>  The Zones joined with this topic</summary>
         internal List<IZone> fZones = new List<IZone>();
 
-
+        private readonly Agent fAgent;
 
         ///<summary>The options for QueryResults handling</summary>
         public QueryResultsOptions fQueryResultsOptions;
 
-        internal TopicImpl(IElementDef objType, SifContext context)
+        internal TopicImpl(Agent agent, IElementDef objType, SifContext context)
         {
+            if (agent == null) throw new ArgumentNullException(nameof(agent));
+            fAgent = agent;
             fObjType = objType;
             fContext = context;
-            log = LogManager.GetLogger(Agent.LOG_IDENTIFIER + ".Topic$" + objType.Name);
+            log = agent.Runtime.LoggerFactory.CreateLogger(Agent.LOG_IDENTIFIER + ".Topic$" + objType.Name);
         }
 
 
@@ -83,7 +85,7 @@ namespace OpenADK.Library.Impl
                     AdkUtils._throw
                         (new SystemException
                              ("Zone already joined with topic \"" + fObjType + "\""),
-                         ((ZoneImpl) zone).Log);
+                         ((ZoneImpl) zone).Log, fAgent.Runtime);
                 }
 
                 //  Check that topic has a Provider, Subscriber, or QueryResults object
@@ -94,7 +96,7 @@ namespace OpenADK.Library.Impl
                         new SystemException
                             (
                             "Agent has not registered a Subscriber, Publisher, or QueryResults object with this topic"),
-                        ((ZoneImpl) zone).Log);
+                        ((ZoneImpl) zone).Log, fAgent.Runtime);
                 }
 
                 fZones.Add(zone);
@@ -390,7 +392,7 @@ namespace OpenADK.Library.Impl
 
                 if (err != null)
                 {
-                    AdkUtils._throw(err, Agent.GetLog());
+                    AdkUtils._throw(err, log, fAgent.Runtime);
                 }
             
         }
@@ -436,20 +438,20 @@ namespace OpenADK.Library.Impl
             if (query == null)
             {
                 AdkUtils._throw
-                    (new ArgumentException("Query object cannot be null"), Agent.GetLog());
+                    (new ArgumentException("Query object cannot be null"), log, fAgent.Runtime);
             }
 
             // Validate that the query object type and SIF Context are valid for this Topic
             if (query.ObjectType != fObjType)
             {
                 AdkUtils._throw(new ArgumentException("Query object type: {" + query.ObjectTag +
-                        "} does not match Topic object type: " + fObjType + "}"), log);
+                        "} does not match Topic object type: " + fObjType + "}"), log, fAgent.Runtime);
             }
 
             if (!query.SifContext.Equals(fContext))
             {
                 AdkUtils._throw(new ArgumentException("Query SIF_Context: {" + query.SifContext +
-                        "} does not match Topic SIF_Context: " + fContext + "}"), log);
+                        "} does not match Topic SIF_Context: " + fContext + "}"), log, fAgent.Runtime);
             }
 
             _checkZones();
@@ -485,7 +487,7 @@ namespace OpenADK.Library.Impl
 
             if (err != null)
             {
-                AdkUtils._throw(err, Agent.GetLog());
+                AdkUtils._throw(err, log, fAgent.Runtime);
             }
 
         }

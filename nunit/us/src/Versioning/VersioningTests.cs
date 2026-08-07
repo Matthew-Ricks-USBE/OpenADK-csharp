@@ -326,7 +326,7 @@ namespace OpenADK.Library.Nunit.US.Validation
             SifElement se = null;
             try
             {
-                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion);
+                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion, Runtime.Dtd);
             }
             catch (AdkException adke)
             {
@@ -379,7 +379,7 @@ namespace OpenADK.Library.Nunit.US.Validation
             {
                 if (VERBOSE)
                 {
-                    SifWriter outWriter = new SifWriter(output);
+                    SifWriter outWriter = new SifWriter(output, Runtime);
                     outWriter.Write(se, writeVersion );
                     outWriter.Flush();
                 }
@@ -391,7 +391,7 @@ namespace OpenADK.Library.Nunit.US.Validation
             // 5) Read the object again into memory
             try
             {
-                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion);
+                se = AdkObjectParseHelper.ParseFile(fileName, parseVersion, Runtime.Dtd);
             }
             catch (AdkException adke)
             {

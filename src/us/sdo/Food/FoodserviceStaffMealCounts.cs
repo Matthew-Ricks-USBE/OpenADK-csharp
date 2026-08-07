@@ -28,7 +28,7 @@ public class FoodserviceStaffMealCounts : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceStaffMealCounts
 	/// </summary>
-	public FoodserviceStaffMealCounts() : base( Adk.SifVersion, FoodDTD.FOODSERVICESTAFFMEALCOUNTS ){}
+	public FoodserviceStaffMealCounts() : base( SifVersion.LATEST, FoodDTD.FOODSERVICESTAFFMEALCOUNTS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class FoodserviceStaffMealCounts : SifDataObject
 	///<param name="program">A Program</param>
 	///<param name="counts">A Counts</param>
 	///
-	public FoodserviceStaffMealCounts( string refId, string schoolInfoRefId, DateTime? date, Program program, Counts counts ) : base( Adk.SifVersion, FoodDTD.FOODSERVICESTAFFMEALCOUNTS )
+	public FoodserviceStaffMealCounts( string refId, string schoolInfoRefId, DateTime? date, Program program, Counts counts ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICESTAFFMEALCOUNTS )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -186,4 +186,3 @@ public class FoodserviceStaffMealCounts : SifDataObject
 	}
 
 }}
-

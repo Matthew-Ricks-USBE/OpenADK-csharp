@@ -28,7 +28,7 @@ public class Sif3AssessmentItem : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentItem
 	/// </summary>
-	public Sif3AssessmentItem() : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTITEM ){}
+	public Sif3AssessmentItem() : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTITEM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class Sif3AssessmentItem : SifDataObject
 	///<param name="refId">A RefId</param>
 	///<param name="responseType">A value that indicates the response type for the item.</param>
 	///
-	public Sif3AssessmentItem( string refId, ResponseType responseType ) : base( Adk.SifVersion, AssessmentDTD.SIF3ASSESSMENTITEM )
+	public Sif3AssessmentItem( string refId, ResponseType responseType ) : base( SifVersion.LATEST, AssessmentDTD.SIF3ASSESSMENTITEM )
 	{
 		this.RefId = refId;
 		this.SetResponseType( responseType );
@@ -643,4 +643,3 @@ public class Sif3AssessmentItem : SifDataObject
 	}
 
 }}
-

@@ -28,14 +28,14 @@ public class LearningResourcePackage : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearningResourcePackage
 	/// </summary>
-	public LearningResourcePackage() : base( Adk.SifVersion, InstrDTD.LEARNINGRESOURCEPACKAGE ){}
+	public LearningResourcePackage() : base( SifVersion.LATEST, InstrDTD.LEARNINGRESOURCEPACKAGE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">A wrapper for any external learning content to be transmitted across a SIF Zone.</param>
 	///
-	public LearningResourcePackage( string refId ) : base( Adk.SifVersion, InstrDTD.LEARNINGRESOURCEPACKAGE )
+	public LearningResourcePackage( string refId ) : base( SifVersion.LATEST, InstrDTD.LEARNINGRESOURCEPACKAGE )
 	{
 		this.RefId = refId;
 	}
@@ -214,4 +214,3 @@ public class LearningResourcePackage : SifDataObject
 	}
 
 }}
-

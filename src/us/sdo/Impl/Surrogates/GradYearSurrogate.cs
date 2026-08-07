@@ -93,17 +93,17 @@ namespace OpenADK.Library.Impl.Surrogates
                 int? year = intValue.Value;
                 if ( "Projected".Equals( type ) )
                 {
-                    childDef = Adk.Dtd.LookupElementDef( parent.ElementDef, "ProjectedGraduationYear" );
+                    childDef = parent.ElementDef.Dtd.LookupElementDef( parent.ElementDef, "ProjectedGraduationYear" );
                     parent.SetField( childDef, intValue );
                 }
                 else if ( "Original".Equals( type ) )
                 {
-                    childDef = Adk.Dtd.LookupElementDef( parent.ElementDef, "OnTimeGraduationYear" );
+                    childDef = parent.ElementDef.Dtd.LookupElementDef( parent.ElementDef, "OnTimeGraduationYear" );
                     parent.SetField( childDef, intValue );
                 }
                 else
                 {
-                    childDef = Adk.Dtd.LookupElementDef( parent.ElementDef, "GraduationDate" );
+                    childDef = parent.ElementDef.Dtd.LookupElementDef( parent.ElementDef, "GraduationDate" );
                     PartialDateType gd = new PartialDateType( year );
                     parent.AddChild( childDef, gd );
                 }
@@ -257,7 +257,7 @@ namespace OpenADK.Library.Impl.Surrogates
                         field = sp.GetField( "ProjectedGraduationYear" );
                         if ( field == null )
                         {
-                            IElementDef childDef = Adk.Dtd.LookupElementDef( sp.ElementDef, "ProjectedGraduationYear" );
+                            IElementDef childDef = sp.ElementDef.Dtd.LookupElementDef( sp.ElementDef, "ProjectedGraduationYear" );
                             field = sp.SetField( childDef, nullValue );
                         }
                     }
@@ -266,14 +266,14 @@ namespace OpenADK.Library.Impl.Surrogates
                         field = sp.GetField( "OnTimeGraduationYear" );
                         if ( field == null )
                         {
-                            IElementDef childDef = Adk.Dtd.LookupElementDef( sp.ElementDef, "OnTimeGraduationYear" );
+                            IElementDef childDef = sp.ElementDef.Dtd.LookupElementDef( sp.ElementDef, "OnTimeGraduationYear" );
                             field = sp.SetField( childDef, nullValue );
                         }
                     }
                     else
                     {
                         PartialDateType gd = new PartialDateType( (String) null );
-                        IElementDef childDef = Adk.Dtd.LookupElementDef( sp.ElementDef, "GraduationDate" );
+                        IElementDef childDef = sp.ElementDef.Dtd.LookupElementDef( sp.ElementDef, "GraduationDate" );
                         sp.AddChild( childDef, gd );
                         field = gd;
                     }

@@ -28,7 +28,7 @@ public class Sif3AssessmentForm : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentForm
 	/// </summary>
-	public Sif3AssessmentForm() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTFORM ){}
+	public Sif3AssessmentForm() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTFORM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class Sif3AssessmentForm : SifDataObject
 	///<param name="assessmentRefId">An AssessmentRefId</param>
 	///<param name="formName">A FormName</param>
 	///
-	public Sif3AssessmentForm( string refId, string assessmentRefId, string formName ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTFORM )
+	public Sif3AssessmentForm( string refId, string assessmentRefId, string formName ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTFORM )
 	{
 		this.RefId = refId;
 		this.AssessmentRefId = assessmentRefId;
@@ -570,4 +570,3 @@ public class Sif3AssessmentForm : SifDataObject
 	}
 
 }}
-

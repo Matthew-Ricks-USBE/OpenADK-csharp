@@ -28,7 +28,7 @@ public class TermInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TermInfo
 	/// </summary>
-	public TermInfo() : base( Adk.SifVersion, StudentDTD.TERMINFO ){}
+	public TermInfo() : base( SifVersion.LATEST, StudentDTD.TERMINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class TermInfo : SifDataObject
 	///<param name="startDate">Starting date of the term.</param>
 	///<param name="endDate">Ending date of the term (CCYYMMDD).</param>
 	///
-	public TermInfo( string refId, string schoolInfoRefId, int? schoolYear, DateTime? startDate, DateTime? endDate ) : base( Adk.SifVersion, StudentDTD.TERMINFO )
+	public TermInfo( string refId, string schoolInfoRefId, int? schoolYear, DateTime? startDate, DateTime? endDate ) : base( SifVersion.LATEST, StudentDTD.TERMINFO )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -392,4 +392,3 @@ public class TermInfo : SifDataObject
 	}
 
 }}
-

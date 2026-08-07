@@ -28,7 +28,7 @@ public class LearnerPersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerPersonal
 	/// </summary>
-	public LearnerPersonal() : base( Adk.SifVersion, LearnerDTD.LEARNERPERSONAL ){}
+	public LearnerPersonal() : base( SifVersion.LATEST, LearnerDTD.LEARNERPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class LearnerPersonal : SifDataObject
 	///<param name="personalInformation">Personal name, demographic, address, email, and phone information for this learner. CBDS: Mulitple</param>
 	///<param name="inCare">Information relating to whether the learner is "looked after" as defined by the Children Act 1989, which refers to children who are subject to care orders and those who are accommodated.</param>
 	///
-	public LearnerPersonal( string refId, PersonalInformation personalInformation, InCare inCare ) : base( Adk.SifVersion, LearnerDTD.LEARNERPERSONAL )
+	public LearnerPersonal( string refId, PersonalInformation personalInformation, InCare inCare ) : base( SifVersion.LATEST, LearnerDTD.LEARNERPERSONAL )
 	{
 		this.RefId = refId;
 		this.PersonalInformation = personalInformation;
@@ -761,4 +761,3 @@ public class LearnerPersonal : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class Sif3AssessmentRegistration : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentRegistration
 	/// </summary>
-	public Sif3AssessmentRegistration() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTREGISTRATION ){}
+	public Sif3AssessmentRegistration() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTREGISTRATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class Sif3AssessmentRegistration : SifDataObject
 	///<param name="assessmentRefId">An AssessmentRefId</param>
 	///<param name="creationDateTime">A CreationDateTime</param>
 	///
-	public Sif3AssessmentRegistration( string refId, string studentPersonalRefId, string assessmentRefId, DateTime? creationDateTime ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTREGISTRATION )
+	public Sif3AssessmentRegistration( string refId, string studentPersonalRefId, string assessmentRefId, DateTime? creationDateTime ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTREGISTRATION )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -634,4 +634,3 @@ public class Sif3AssessmentRegistration : SifDataObject
 	}
 
 }}
-

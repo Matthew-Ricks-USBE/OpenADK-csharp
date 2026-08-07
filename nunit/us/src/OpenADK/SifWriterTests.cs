@@ -41,7 +41,7 @@ namespace Library.Nunit.US
       [Test, Explicit]
       public void WriteSpeedTest()
       {
-         Adk.Debug = AdkDebugFlags.None;
+         Runtime.Debug = AdkDebugFlags.None;
 
          StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
          Address addr = sp.AddressLists[0][0];
@@ -51,12 +51,12 @@ namespace Library.Nunit.US
          addr.Street.Line3 = "Weyer's Way, MO 32254";
 
          // Dump the object once to the console
-         SifWriter writer = new SifWriter(Console.Out);
+         SifWriter writer = new SifWriter(Console.Out, Runtime);
          writer.Write(sp);
          writer.Flush();
 
          MemoryStream stream = new MemoryStream();
-         writer = new SifWriter(stream);
+         writer = new SifWriter(stream, Runtime);
 
          for (int a = 0; a < 50000; a++)
          {
@@ -70,7 +70,7 @@ namespace Library.Nunit.US
       [Test]
       public void FilterOutElementsFromDifferentVersion()
       {
-         Adk.SifVersion = SifVersion.SIF11;
+         Runtime.SifVersion = SifVersion.SIF11;
          StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
          sp.StateProvinceId = "55889";
          sp.LocalId = "987987987987987";
@@ -91,7 +91,7 @@ namespace Library.Nunit.US
       public void TestEncodingHighAsciiChars()
       {
          StudentPersonal sp = new StudentPersonal();
-         sp.RefId = Adk.MakeGuid();
+         sp.RefId = Runtime.MakeGuid();
          sp.StateProvinceId = "\u06DE55889";
          sp.LocalId = "987987987987987";
 
@@ -106,7 +106,7 @@ namespace Library.Nunit.US
        public void TestWriteXSINill()
        {
            StudentPersonal sp = new StudentPersonal();
-           sp.RefId = Adk.MakeGuid();
+           sp.RefId = Runtime.MakeGuid();
            sp.StateProvinceId = "\u06DE55889";
            sp.LocalId = "987987987987987";
            Name name = new Name(NameType.LEGAL, "Johnson", "Steve");
@@ -162,7 +162,7 @@ namespace Library.Nunit.US
            for (int a = 0; a < 3; a++)
            {
                StudentPersonal sp = new StudentPersonal();
-               sp.RefId = Adk.MakeGuid();
+               sp.RefId = Runtime.MakeGuid();
                sp.StateProvinceId = "\u06DE55889";
                sp.LocalId = "987987987987987";
                Name name = new Name( NameType.LEGAL, "Johnson", "Steve" );
@@ -217,7 +217,7 @@ namespace Library.Nunit.US
        public void TestWriteXSIType()
        {
            StudentPersonal sp = new StudentPersonal();
-           sp.RefId = Adk.MakeGuid();
+           sp.RefId = Runtime.MakeGuid();
            sp.StateProvinceId = "\u06DE55889";
            sp.LocalId = "987987987987987";
 
@@ -245,7 +245,7 @@ namespace Library.Nunit.US
            // SIF specification sample 1: plain text content
            // <SIF_ExtendedElement Name="ApplicationSubmissionStatus">4</SIF_ExtendedElement>
            StudentPersonal sp = new StudentPersonal();
-           sp.RefId = Adk.MakeGuid();
+           sp.RefId = Runtime.MakeGuid();
            sp.LocalId = "P00001";
            sp.Name = new Name(NameType.LEGAL, "Student", "Joe");
 
@@ -270,7 +270,7 @@ namespace Library.Nunit.US
            //   </Parent>
            // </SIF_ExtendedElement>
            StudentPersonal sp = new StudentPersonal();
-           sp.RefId = Adk.MakeGuid();
+           sp.RefId = Runtime.MakeGuid();
            sp.LocalId = "P00002";
            sp.Name = new Name(NameType.LEGAL, "Student", "Jane");
 
@@ -302,7 +302,7 @@ namespace Library.Nunit.US
            //   <xhtml:strong xmlns:xhtml="http://www.w3.org/1999/xhtml">Double</xhtml:strong>-check submission status.
            // </SIF_ExtendedElement>
            StudentPersonal sp = new StudentPersonal();
-           sp.RefId = Adk.MakeGuid();
+           sp.RefId = Runtime.MakeGuid();
            sp.LocalId = "P00003";
            sp.Name = new Name(NameType.LEGAL, "Student", "Bob");
 

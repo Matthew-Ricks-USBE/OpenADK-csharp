@@ -28,7 +28,7 @@ public class FinancialIncomeStatement : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FinancialIncomeStatement
 	/// </summary>
-	public FinancialIncomeStatement() : base( Adk.SifVersion, HrfinDTD.FINANCIALINCOMESTATEMENT ){}
+	public FinancialIncomeStatement() : base( SifVersion.LATEST, HrfinDTD.FINANCIALINCOMESTATEMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class FinancialIncomeStatement : SifDataObject
 	///<param name="period">Period of the income statement.</param>
 	///<param name="amounts">Amount in the account.</param>
 	///
-	public FinancialIncomeStatement( string refId, DateTime? generationDate, DateTime? generationTime, string locationInfoRefId, FISPeriod period, FISAmounts amounts ) : base( Adk.SifVersion, HrfinDTD.FINANCIALINCOMESTATEMENT )
+	public FinancialIncomeStatement( string refId, DateTime? generationDate, DateTime? generationTime, string locationInfoRefId, FISPeriod period, FISAmounts amounts ) : base( SifVersion.LATEST, HrfinDTD.FINANCIALINCOMESTATEMENT )
 	{
 		this.RefId = refId;
 		this.GenerationDate = generationDate;
@@ -270,4 +270,3 @@ public class FinancialIncomeStatement : SifDataObject
 	}
 
 }}
-

@@ -24,7 +24,7 @@ namespace Library.Nunit.US
            // Child elements that were SIFTime
            //	  Parse the object from the file
            Console.WriteLine("Parsing from file...");
-           SifParser p = SifParser.NewInstance();
+           SifParser p = new SifParser(Runtime);
            SIF_Response msg = null;
            using (Stream inStream = GetResourceStream("LibraryPatronStatus.xml"))
            {
@@ -42,7 +42,7 @@ namespace Library.Nunit.US
        {
            // This test attempts to parse SIF_LogEntry,
            Console.WriteLine("Parsing from file...");
-           SifParser p = SifParser.NewInstance();
+           SifParser p = new SifParser(Runtime);
            SIF_LogEntry logMsg = null;
            using (Stream inStream = GetResourceStream("SIF_LogEntry.xml"))
            {
@@ -59,7 +59,7 @@ namespace Library.Nunit.US
        {
            // This test attempts to parse SIF_LogEntry,
            Console.WriteLine("Parsing from file...");
-           SifParser p = SifParser.NewInstance();
+           SifParser p = new SifParser(Runtime);
            SIF_Ack logMsg = null;
            using (Stream inStream = GetResourceStream("SIF_LogEntry2.xml"))
            {
@@ -77,7 +77,7 @@ namespace Library.Nunit.US
 
             //  Parse the object from the file
            Console.WriteLine("Parsing from file...");
-           SifParser p = SifParser.NewInstance();
+           SifParser p = new SifParser(Runtime);
            SIF_Event sifEvent = null;
            using (Stream inStream = GetResourceStream( "SectionInfo_SchoolCourseInfoOverride.xml" ) )
            {
@@ -94,7 +94,7 @@ namespace Library.Nunit.US
        {
            //  Parse the object from the file
            Console.WriteLine("Parsing from file...");
-           SifParser p = SifParser.NewInstance();
+           SifParser p = new SifParser(Runtime);
            SifDataObject sifObject = null;
            using (Stream inStream = GetResourceStream( fileName ) )
            {
@@ -121,7 +121,7 @@ namespace Library.Nunit.US
        {
            //  Parse the object from the file
            Console.WriteLine("Parsing from file...");
-           SifParser p = SifParser.NewInstance();
+           SifParser p = new SifParser(Runtime);
            SectionInfo sectionInfo = null;
            using (Stream inStream = GetResourceStream("SectionInfo.xml"))
            {
@@ -159,7 +159,7 @@ namespace Library.Nunit.US
            // SIF 1.5 XML
            //  Parse the object from the file
            //Console.WriteLine("Parsing from file...");
-           //SifParser p = SifParser.NewInstance();
+           //SifParser p = new SifParser(Runtime);
            //LearningStandardDocument lsd = null;
            //using (Stream inStream = GetResourceStream("LearningStandardDocument.xml"))
            //{
@@ -180,7 +180,7 @@ namespace Library.Nunit.US
            using (Stream aStream = GetResourceStream("SchoolInfo.xml"))
            {
                TextReader aReader = new StreamReader(aStream, Encoding.UTF8);
-               SifParser parser = SifParser.NewInstance();
+               SifParser parser = new SifParser(Runtime);
                element = parser.Parse(aReader, null, SifParserFlags.None, SifVersion.SIF11);
                aReader.Close();
                aStream.Close();
@@ -196,7 +196,7 @@ namespace Library.Nunit.US
            using (Stream aStream = GetResourceStream("StudentPersonalResponse_AddForDelete.xml"))
            {
                TextReader aReader = new StreamReader(aStream);
-               SifParser parser = SifParser.NewInstance();
+               SifParser parser = new SifParser(Runtime);
                element = parser.Parse(aReader, null, SifParserFlags.None, SifVersion.SIF11);
                aReader.Close();
                aStream.Close();
@@ -211,7 +211,7 @@ namespace Library.Nunit.US
            SifElement element = null;
            using (Stream aStream = GetResourceStream("LibraryPatronStatus.xml"))
            {
-               SifParser parser = SifParser.NewInstance();
+               SifParser parser = new SifParser(Runtime);
                element = parser.Parse(aStream, null);
                aStream.Close();
            }
@@ -226,7 +226,7 @@ namespace Library.Nunit.US
            SifElement element = null;
            using (Stream aStream = GetResourceStream("SectionInfo_SchoolCourseInfoOverride.xml"))
            {
-               SifParser parser = SifParser.NewInstance();
+               SifParser parser = new SifParser(Runtime);
                element = parser.Parse(aStream, null);
                aStream.Close();
            }
@@ -239,9 +239,9 @@ namespace Library.Nunit.US
       [Test]
       public void TestParseComplexTypes()
       {
-         Adk.Initialize();
-         Adk.SifVersion = SifVersion.SIF15r1;
-         SifParser p = SifParser.NewInstance();
+         Runtime.Initialize();
+         Runtime.SifVersion = SifVersion.SIF15r1;
+         SifParser p = new SifParser(Runtime);
          Activity activity = new Activity();
          activity = (Activity)p.Parse(
                         "<Activity RefId='0E3915409C3611DABE9FE16E3CD135F2' xml:lang='en'><Title>Activity 0E3915409C3611DABE9FE16E3CD135F2</Title><ActivityTime><CreationDate>20041016</CreationDate></ActivityTime></Activity>"

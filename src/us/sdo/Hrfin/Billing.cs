@@ -28,7 +28,7 @@ public class Billing : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Billing
 	/// </summary>
-	public Billing() : base( Adk.SifVersion, HrfinDTD.BILLING ){}
+	public Billing() : base( SifVersion.LATEST, HrfinDTD.BILLING ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class Billing : SifDataObject
 	///<param name="transactionDescription">Description of the transaction.</param>
 	///<param name="billedAmount">Amount to be billed.</param>
 	///
-	public Billing( string refId, BilledEntity billedEntity, string entityId, DateTime? billingDate, string transactionDescription, MonetaryAmount billedAmount ) : base( Adk.SifVersion, HrfinDTD.BILLING )
+	public Billing( string refId, BilledEntity billedEntity, string entityId, DateTime? billingDate, string transactionDescription, MonetaryAmount billedAmount ) : base( SifVersion.LATEST, HrfinDTD.BILLING )
 	{
 		this.RefId = refId;
 		this.BilledEntity = billedEntity;
@@ -223,4 +223,3 @@ public class Billing : SifDataObject
 	}
 
 }}
-

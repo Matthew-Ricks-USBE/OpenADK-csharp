@@ -21,7 +21,6 @@
     <DebugType></DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="log4net" Version="3.3.1" />
     <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>

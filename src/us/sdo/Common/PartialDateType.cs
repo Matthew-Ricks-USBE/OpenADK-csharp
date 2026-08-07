@@ -270,7 +270,7 @@ public class PartialDateType : SifKeyedElement
                 fDate[ 1 ] = int.Parse( dateValue.Substring( 5, 2 ) );
                 break;
             default:
-                DateTime? c = Adk.Dtd.GetFormatter( SifVersion.SIF20 ).ToDate( dateValue );
+                DateTime? c = ElementDef.Dtd.GetFormatter( SifVersion.SIF20 ).ToDate( dateValue );
                 if( c.HasValue ) {
                     fDate[0] = c.Value.Year;
                     fDate[ 1 ] = c.Value.Month;

@@ -29,14 +29,14 @@ public class SIF_ReportObject : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SIF_ReportObject
 	/// </summary>
-	public SIF_ReportObject() : base( Adk.SifVersion, ReportingDTD.SIF_REPORTOBJECT ){}
+	public SIF_ReportObject() : base( SifVersion.LATEST, ReportingDTD.SIF_REPORTOBJECT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="refId">The ID (GUID) that uniquely identifies this instance of a report.</param>
 	///
-	public SIF_ReportObject( string refId ) : base( Adk.SifVersion, ReportingDTD.SIF_REPORTOBJECT )
+	public SIF_ReportObject( string refId ) : base( SifVersion.LATEST, ReportingDTD.SIF_REPORTOBJECT )
 	{
 		this.RefId = refId;
 	}
@@ -197,4 +197,3 @@ public class SIF_ReportObject : SifDataObject
 	}
 
 }}
-

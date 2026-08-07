@@ -7,7 +7,7 @@ using System;
 using System.Net;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Web.Http
 {
@@ -25,6 +25,7 @@ namespace OpenADK.Web.Http
         /// </summary>
         /// <param name="transport">The Http transport</param>
         public AdkHttpApplicationServer(HttpTransport transport)
+            : base(transport?.Runtime ?? throw new ArgumentNullException(nameof(transport)))
         {
             fTransport = transport;
         }

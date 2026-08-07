@@ -28,7 +28,7 @@ public class GradingCategory : SifDataObject
 	/// <summary>
 	/// Creates an instance of a GradingCategory
 	/// </summary>
-	public GradingCategory() : base( Adk.SifVersion, GradebookDTD.GRADINGCATEGORY ){}
+	public GradingCategory() : base( SifVersion.LATEST, GradebookDTD.GRADINGCATEGORY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class GradingCategory : SifDataObject
 	///<param name="termInfoRefId">The GUID for the TermInfo object that defines the marking period that the category was created in.</param>
 	///<param name="schoolInfoRefId">The ID (GUID) that uniquely identifies the School that these Mark Values apply to.</param>
 	///
-	public GradingCategory( string refId, string sectionInfoRefId, string termInfoRefId, string schoolInfoRefId ) : base( Adk.SifVersion, GradebookDTD.GRADINGCATEGORY )
+	public GradingCategory( string refId, string sectionInfoRefId, string termInfoRefId, string schoolInfoRefId ) : base( SifVersion.LATEST, GradebookDTD.GRADINGCATEGORY )
 	{
 		this.RefId = refId;
 		this.SectionInfoRefId = sectionInfoRefId;
@@ -162,4 +162,3 @@ public class GradingCategory : SifDataObject
 	}
 
 }}
-

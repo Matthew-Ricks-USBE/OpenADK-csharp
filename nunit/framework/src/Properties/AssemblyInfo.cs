@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly : AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly : AssemblyProduct("Library.UnitTesting")]
-[assembly: AssemblyCopyright("Copyright © 2011 Pearson Education, Inc., or associates.")]
+[assembly: AssemblyCopyright("Copyright Â© 2011 Pearson Education, Inc., or associates.")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
 

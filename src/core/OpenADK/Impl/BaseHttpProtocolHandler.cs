@@ -67,7 +67,7 @@ namespace OpenADK.Library.Impl
                 }
 
                 //  Prepare headers later used to send messages
-                fHttpUserAgent = fZone.Agent.Id + " (Adk/" + Adk.AdkVersion + ")";
+                fHttpUserAgent = fZone.Agent.Id + " (Adk/" + fZone.Agent.Runtime.AdkVersion + ")";
             }
             catch ( Exception thr ) {
                 throw new AdkException
@@ -138,10 +138,10 @@ namespace OpenADK.Library.Impl
             using HttpRequestMessage request = CreateRequestMessage( fZoneUrl, msg );
 
             try {
-                if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 ) {
+                if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
                     fZone.Log.Debug( "Sending message (" + msg.Length + " bytes)" );
                 }
-                if ( (Adk.Debug & AdkDebugFlags.Message_Content) != 0 ) {
+                if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Message_Content) != 0 ) {
                     fZone.Log.Debug( msg.Decode() );
                 }
 
@@ -151,7 +151,7 @@ namespace OpenADK.Library.Impl
                         client.Send( request, HttpCompletionOption.ResponseHeadersRead );
                     response.EnsureSuccessStatusCode();
 
-                        if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 ) {
+                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
                             fZone.Log.Debug
                                 ( "Expecting reply (" + response.Content.Headers.ContentLength +
                                   " bytes)" );
@@ -160,10 +160,10 @@ namespace OpenADK.Library.Impl
                         returnStream =
                             new MessageStreamImpl( response.Content.ReadAsStream() );
 
-                        if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 ) {
+                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
                             fZone.Log.Debug( "Received reply (" + returnStream.Length + " bytes)" );
                         }
-                        if ( (Adk.Debug & AdkDebugFlags.Message_Content) != 0 ) {
+                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Message_Content) != 0 ) {
                             fZone.Log.Debug( returnStream.Decode() );
                         }
                 }
@@ -265,7 +265,7 @@ namespace OpenADK.Library.Impl
                     return true;
                 }
                 // Log certificate rejection for debugging
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                if ((fZone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     fTransport.DebugTransport(
                         "Certificate validation failed with errors: " + errors.ToString(),
@@ -283,7 +283,7 @@ namespace OpenADK.Library.Impl
 
         protected SifParser CreateParser()
         {
-            return SifParser.NewInstance();
+            return new SifParser(fZone.Agent.Runtime);
         }
 
         #endregion

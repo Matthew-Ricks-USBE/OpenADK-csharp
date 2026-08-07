@@ -28,7 +28,7 @@ public class EmployeePersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EmployeePersonal
 	/// </summary>
-	public EmployeePersonal() : base( Adk.SifVersion, HrfinDTD.EMPLOYEEPERSONAL ){}
+	public EmployeePersonal() : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class EmployeePersonal : SifDataObject
 	///<param name="name">Name of employee.</param>
 	///<param name="ssn">Social security number of employee.</param>
 	///
-	public EmployeePersonal( string refId, Name name, string ssn ) : base( Adk.SifVersion, HrfinDTD.EMPLOYEEPERSONAL )
+	public EmployeePersonal( string refId, Name name, string ssn ) : base( SifVersion.LATEST, HrfinDTD.EMPLOYEEPERSONAL )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -289,4 +289,3 @@ public class EmployeePersonal : SifDataObject
 	}
 
 }}
-

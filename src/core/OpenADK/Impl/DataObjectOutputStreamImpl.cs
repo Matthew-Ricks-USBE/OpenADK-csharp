@@ -7,7 +7,6 @@ using System;
 using System.IO;
 using OpenADK.Library.Global;
 using OpenADK.Library.Infra;
-using OpenADK.Util;
 
 namespace OpenADK.Library.Impl
 {
@@ -37,30 +36,6 @@ namespace OpenADK.Library.Impl
         /// The SIF_Request destination ID
         /// </summary>
         protected internal String fDestId;
-
-        /// <summary>  Construct a new DataObjectOutputStream</summary>
-        /// <returns> A new DataObjectOutputStream object, which will always be a
-        /// an instanceof DataObjectOutputStreamImpl as defined by the
-        /// <c>adkglobal.factory.DataObjectOutputStream</c> system property.
-        /// 
-        /// </returns>
-        public static DataObjectOutputStreamImpl NewInstance()
-        {
-            String cls = Properties.GetProperty( "adkglobal.factory.DataObjectOutputStream" );
-            if ( cls == null ) {
-                return new DataObjectOutputFileStream();
-            }
-            else {
-                try {
-                    return (DataObjectOutputStreamImpl) ClassFactory.CreateInstance( cls );
-                }
-                catch ( Exception thr ) {
-                    throw new AdkException
-                        ( "Adk could not create an instance of the class " + cls + ": " + thr, null,
-                          thr );
-                }
-            }
-        }
 
         /// <summary>  Initialize the output stream. This method must be called after creating
         /// a new instance of this class and before writing any SIFDataObjects to
@@ -179,7 +154,7 @@ namespace OpenADK.Library.Impl
                 hdr.SIF_DestinationId = fDestId;
 
                 using ( MemoryStream buffer = new MemoryStream() ) {
-                    SifWriter writer = new SifWriter( buffer );
+                    SifWriter writer = new SifWriter(buffer, zone.Agent.Runtime);
                     writer.Write( rsp );
                     writer.Flush();
                     size = buffer.Length + 10;

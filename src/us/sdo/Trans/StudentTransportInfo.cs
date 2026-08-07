@@ -34,7 +34,7 @@ public class StudentTransportInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentTransportInfo
 	/// </summary>
-	public StudentTransportInfo() : base( Adk.SifVersion, TransDTD.STUDENTTRANSPORTINFO ){}
+	public StudentTransportInfo() : base( SifVersion.LATEST, TransDTD.STUDENTTRANSPORTINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -45,7 +45,7 @@ public class StudentTransportInfo : SifDataObject
 	///<param name="dayOfWeek">This attribute indicates the day(s) of the week to which this object refers.</param>
 	///<param name="schoolInfoRefId">GUID referring to the school that the student attends on these day(s) of the week.</param>
 	///
-	public StudentTransportInfo( string refId, string studentPersonalRefId, StudentTransportInfoType type, string dayOfWeek, string schoolInfoRefId ) : base( Adk.SifVersion, TransDTD.STUDENTTRANSPORTINFO )
+	public StudentTransportInfo( string refId, string studentPersonalRefId, StudentTransportInfoType type, string dayOfWeek, string schoolInfoRefId ) : base( SifVersion.LATEST, TransDTD.STUDENTTRANSPORTINFO )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -584,4 +584,3 @@ public class StudentTransportInfo : SifDataObject
 	}
 
 }}
-

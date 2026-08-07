@@ -105,8 +105,8 @@ namespace OpenADK.Library.Impl
         {
             if (e.ElementDef.Parent != null && e.ElementDef.Parent != parentDef)
             {
-                String containerTag = e.ElementDef.Parent.Tag(Adk.SifVersion);
-                IElementDef container = Adk.Dtd.LookupElementDef(parentDef, containerTag);
+                String containerTag = e.ElementDef.Parent.Tag(fVersion);
+                IElementDef container = e.ElementDef.Dtd.LookupElementDef(parentDef, containerTag);
                 if (container != null) return container.GetSequence(fVersion);
             }
             return e.ElementDef.GetSequence(fVersion);

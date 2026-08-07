@@ -32,7 +32,6 @@
     <OutputPath>bin\Eval\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="log4net" Version="3.3.1" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

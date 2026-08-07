@@ -28,7 +28,7 @@ public class LearnerExclusion : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerExclusion
 	/// </summary>
-	public LearnerExclusion() : base( Adk.SifVersion, LearnerDTD.LEARNEREXCLUSION ){}
+	public LearnerExclusion() : base( SifVersion.LATEST, LearnerDTD.LEARNEREXCLUSION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class LearnerExclusion : SifDataObject
 	///<param name="startDate">Date exclusion takes effect irrespective of any review or appeal. Normally this will not be the same as Date of Leaving (exitDate) and it should be noted that the learner will remain on the schools's roll for a period after this start date. CBDS: 100089, 100090</param>
 	///<param name="startSession">Session to begin exclusion, starting with 1 for the first session of the day. In most cases there are two sessions per day but this is not always the case.  Validation: Number between 1 and 10. CBDS: 100091</param>
 	///
-	public LearnerExclusion( string refId, string learnerPersonalRefId, ExclusionCategory category, ExclusionReason reason, DateTime? startDate, int? startSession ) : base( Adk.SifVersion, LearnerDTD.LEARNEREXCLUSION )
+	public LearnerExclusion( string refId, string learnerPersonalRefId, ExclusionCategory category, ExclusionReason reason, DateTime? startDate, int? startSession ) : base( SifVersion.LATEST, LearnerDTD.LEARNEREXCLUSION )
 	{
 		this.RefId = refId;
 		this.LearnerPersonalRefId = learnerPersonalRefId;
@@ -432,4 +432,3 @@ public class LearnerExclusion : SifDataObject
 	}
 
 }}
-

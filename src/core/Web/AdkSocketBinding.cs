@@ -9,7 +9,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using OpenADK.Library;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Web
 {
@@ -40,7 +40,7 @@ namespace OpenADK.Web
         private Boolean fDisposed;
 
    
-        private ILog fLog;
+        private ILogger fLog;
 
         /// <summary> Constructor </summary>
         public AdkSocketBinding( IAcceptSocket socket )
@@ -56,7 +56,7 @@ namespace OpenADK.Web
 
         /// <summary> Constructor </summary>
         public AdkSocketBinding( IAcceptSocket socket,
-                                 ILog log )
+                                 ILogger log )
             : this( socket )
         {
             fLog = log;
@@ -177,7 +177,7 @@ namespace OpenADK.Web
         public void Debug( string message,
                            object[] mergeValues )
         {
-            if ( fLog != null && fLog.IsDebugEnabled )
+            if ( fLog != null && fLog.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug) )
             {
                 fLog.Debug( string.Format( message, mergeValues ) );
             }
@@ -187,7 +187,7 @@ namespace OpenADK.Web
                            object[] mergeValues,
                            Exception ex )
         {
-            if ( fLog != null && fLog.IsErrorEnabled )
+            if ( fLog != null && fLog.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Error) )
             {
                 fLog.Error( string.Format( message, mergeValues ), ex );
             }

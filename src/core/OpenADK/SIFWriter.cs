@@ -35,6 +35,8 @@ namespace OpenADK.Library
     /// </version>
     public class SifWriter
     {
+        private readonly IDtd fDtd;
+        private readonly Microsoft.Extensions.Logging.ILogger fLog;
         private XmlWriter fWriter;
         private XmlWriterSettings fSettings;
 
@@ -57,8 +59,10 @@ namespace OpenADK.Library
         private bool fRootAttributesWritten;
 
 
-        private SifWriter()
+        private SifWriter(IDtd dtd, SifVersion version, Microsoft.Extensions.Logging.ILogger log)
         {
+            fDtd = dtd ?? throw new ArgumentNullException(nameof(dtd));
+            fLog = log ?? dtd.Logger;
             fSettings = new XmlWriterSettings();
 
             fSettings.OmitXmlDeclaration = true;
@@ -68,20 +72,20 @@ namespace OpenADK.Library
             fSettings.Indent = true;
             fSettings.IndentChars = "  ";
             fSettings.Encoding = SifIOFormatter.ENCODING;
-            SetSifVersion( Adk.SifVersion );
+            SetSifVersion(version ?? throw new ArgumentNullException(nameof(version)));
         }
 
         private void SetSifVersion( SifVersion version )
         {
             fVersion = version;
-            fFormatter = Adk.Dtd.GetFormatter( version );
+            fFormatter = fDtd.GetFormatter( version );
         }
 
         /// <summary>  Constructor</summary>
         /// <param name="outStream">The OutputStream to Write to
         /// </param>
-        public SifWriter( Stream outStream )
-            : this()
+        public SifWriter(Stream outStream, IAdkRuntime runtime)
+            : this(runtime?.Dtd, runtime?.SifVersion, runtime?.Log)
         {
             fWriter = XmlWriter.Create( outStream, fSettings );
         }
@@ -90,15 +94,34 @@ namespace OpenADK.Library
         /// Creates an instance of a SifWriter using a TextWriter
         /// </summary>
         /// <param name="writer">The writer to write to. The writer needs to be using the proper encoding for the purpose in which it is used</param>
-        public SifWriter( TextWriter writer )
-            : this()
+        public SifWriter(TextWriter writer, IAdkRuntime runtime)
+            : this(runtime?.Dtd, runtime?.SifVersion, runtime?.Log)
         {
             fWriter = XmlWriter.Create( writer, fSettings );
         }
 
 
 
-        public SifWriter(XmlWriter writer) : this()
+        public SifWriter(XmlWriter writer, IAdkRuntime runtime)
+            : this(runtime?.Dtd, runtime?.SifVersion, runtime?.Log)
+        {
+            fWriter = XmlWriter.Create(writer, fSettings);
+        }
+
+        public SifWriter(XmlWriter writer, IDtd dtd, SifVersion version)
+            : this(dtd, version, null)
+        {
+            fWriter = writer ?? throw new ArgumentNullException(nameof(writer));
+        }
+
+        public SifWriter(Stream outStream, IDtd dtd, SifVersion version)
+            : this(dtd, version, null)
+        {
+            fWriter = XmlWriter.Create(outStream, fSettings);
+        }
+
+        public SifWriter(TextWriter writer, IDtd dtd, SifVersion version)
+            : this(dtd, version, null)
         {
             fWriter = XmlWriter.Create(writer, fSettings);
         }
@@ -541,7 +564,7 @@ namespace OpenADK.Library
                 Element cur = o;
                 while ( parent != null )
                 {
-                    IElementDef tst = Adk.Dtd.LookupElementDef( parent.ElementDef, cur.ElementDef.Name );
+                    IElementDef tst = fDtd.LookupElementDef( parent.ElementDef, cur.ElementDef.Name );
                     if ( tst != null && fFilter.ContainsKey( tst.Name ) )
                     {
                         return true;
@@ -621,7 +644,7 @@ namespace OpenADK.Library
                     }
                 } catch( Exception ex )
                 {
-                    Adk.Log.Error( "Unable to suppress namespace support on XmlWellFormedWriter: " + ex.Message, ex );
+                    fLog.Error( "Unable to suppress namespace support on XmlWellFormedWriter: " + ex.Message, ex );
                 }
             }
         }

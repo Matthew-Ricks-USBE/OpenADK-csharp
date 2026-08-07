@@ -38,8 +38,8 @@
     <Reference Update="System.Xml">
       <Name>System.XML</Name>
     </Reference>
-    <PackageReference Include="log4net" Version="3.3.1" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.0" />
     <PackageReference Include="MessagePack" Version="3.1.7" />
   </ItemGroup>
 </Project>

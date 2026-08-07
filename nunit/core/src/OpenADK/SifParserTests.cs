@@ -4,19 +4,13 @@ using System.Text;
 using OpenADK.Library;
 using NUnit.Framework;
 using OpenADK.Library.us;
+using Library.UnitTesting.Framework;
 
 namespace Library.NUnit.Core.Library
 {
     [TestFixture]
-    public class SifParserTests
+    public class SifParserTests : AdkTest
     {
-
-        [SetUp]
-        public void setUp()
-        {
-            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.Infra);
-        }
-
 
         /**
 	 * Asserts that the SIFParser returns an object using the same SifVersion
@@ -34,7 +28,7 @@ namespace Library.NUnit.Core.Library
 			"	</SIF_Query>"																+
 			"</SIF_Request>";
 
-		SifParser parser = SifParser.NewInstance();
+		SifParser parser = new SifParser(Runtime);
 		SifElement element = parser.Parse( test, null );
 		// Since the version was not passed in, the latest supported
 		// SIF 2.x Version should be returned
@@ -81,7 +75,7 @@ namespace Library.NUnit.Core.Library
 			"	</SIF_Query>"																+
 			"</SIF_Request>";
 
-		SifParser parser = SifParser.NewInstance();
+		SifParser parser = new SifParser(Runtime);
 		SifElement element = parser.Parse( test, null );
 		// Since the version was not passed in, the latest supported
 		// SIF 2.x Version should be returned
@@ -127,10 +121,10 @@ namespace Library.NUnit.Core.Library
 			"	</SIF_Query>"																+
 			"</SIF_Request>";
 
-		SifParser parser = SifParser.NewInstance();
+		SifParser parser = new SifParser(Runtime);
 		SifElement element = parser.Parse( test, null );
 		// Since the version was not passed in, the ADK SIF Version should be returned
-		Assert.AreEqual( Adk.SifVersion, element.SifVersion );
+		Assert.AreEqual( Runtime.SifVersion, element.SifVersion );
 
 
 	}

@@ -28,7 +28,7 @@ public class FoodserviceTransactionDetails : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceTransactionDetails
 	/// </summary>
-	public FoodserviceTransactionDetails() : base( Adk.SifVersion, FoodDTD.FOODSERVICETRANSACTIONDETAILS ){}
+	public FoodserviceTransactionDetails() : base( SifVersion.LATEST, FoodDTD.FOODSERVICETRANSACTIONDETAILS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class FoodserviceTransactionDetails : SifDataObject
 	///<param name="foodserviceTransactionRefId">GUID that identifies food service transaction</param>
 	///<param name="amounts">Amount. This amount refers to the funds being directed inwards/ outwards from the customer's account. That is: these amounts reflect the changes to the account balances.</param>
 	///
-	public FoodserviceTransactionDetails( string refId, string foodserviceTransactionRefId, FSAmounts amounts ) : base( Adk.SifVersion, FoodDTD.FOODSERVICETRANSACTIONDETAILS )
+	public FoodserviceTransactionDetails( string refId, string foodserviceTransactionRefId, FSAmounts amounts ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICETRANSACTIONDETAILS )
 	{
 		this.RefId = refId;
 		this.FoodserviceTransactionRefId = foodserviceTransactionRefId;
@@ -144,4 +144,3 @@ public class FoodserviceTransactionDetails : SifDataObject
 	}
 
 }}
-

@@ -29,7 +29,7 @@ public class ReportManifest : SifDataObject
 	/// <summary>
 	/// Creates an instance of a ReportManifest
 	/// </summary>
-	public ReportManifest() : base( Adk.SifVersion, ReportingDTD.REPORTMANIFEST ){}
+	public ReportManifest() : base( SifVersion.LATEST, ReportingDTD.REPORTMANIFEST ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -45,7 +45,7 @@ public class ReportManifest : SifDataObject
 	/// URL, this element's value is the location of the external definition.  A Type value of SIF_Query
 	/// indicates that the SIF_QueryGroup element contains the definition.</param>
 	///
-	public ReportManifest( string refId, string sifVersion, int? sifMaxBufferSize, string reportName, ReportDefinitionSource reportDefinitionSource ) : base( Adk.SifVersion, ReportingDTD.REPORTMANIFEST )
+	public ReportManifest( string refId, string sifVersion, int? sifMaxBufferSize, string reportName, ReportDefinitionSource reportDefinitionSource ) : base( SifVersion.LATEST, ReportingDTD.REPORTMANIFEST )
 	{
 		this.RefId = refId;
 		this.SIF_Version = sifVersion;
@@ -395,4 +395,3 @@ public class ReportManifest : SifDataObject
 	}
 
 }}
-

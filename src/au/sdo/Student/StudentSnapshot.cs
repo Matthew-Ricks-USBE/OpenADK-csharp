@@ -28,7 +28,7 @@ public class StudentSnapshot : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentSnapshot
 	/// </summary>
-	public StudentSnapshot() : base( Adk.SifVersion, StudentDTD.STUDENTSNAPSHOT ){}
+	public StudentSnapshot() : base( SifVersion.LATEST, StudentDTD.STUDENTSNAPSHOT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class StudentSnapshot : SifDataObject
 	///<param name="localId">A LocalId</param>
 	///<param name="homeEnrollment">An HomeEnrollment</param>
 	///
-	public StudentSnapshot( DateTime? snapDate, string studentPersonalRefId, int? schoolYear, Name name, string localId, HomeEnrollment homeEnrollment ) : base( Adk.SifVersion, StudentDTD.STUDENTSNAPSHOT )
+	public StudentSnapshot( DateTime? snapDate, string studentPersonalRefId, int? schoolYear, Name name, string localId, HomeEnrollment homeEnrollment ) : base( SifVersion.LATEST, StudentDTD.STUDENTSNAPSHOT )
 	{
 		this.SnapDate = snapDate;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -419,4 +419,3 @@ public class StudentSnapshot : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class LearningResource : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearningResource
 	/// </summary>
-	public LearningResource() : base( Adk.SifVersion, LearningDTD.LEARNINGRESOURCE ){}
+	public LearningResource() : base( SifVersion.LATEST, LearningDTD.LEARNINGRESOURCE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class LearningResource : SifDataObject
 	///<param name="name">A Name</param>
 	///<param name="components">A Components</param>
 	///
-	public LearningResource( string refId, string language, string name, Component components ) : base( Adk.SifVersion, LearningDTD.LEARNINGRESOURCE )
+	public LearningResource( string refId, string language, string name, Component components ) : base( SifVersion.LATEST, LearningDTD.LEARNINGRESOURCE )
 	{
 		this.RefId = refId;
 		this.Language = language;
@@ -515,4 +515,3 @@ public class LearningResource : SifDataObject
 	}
 
 }}
-

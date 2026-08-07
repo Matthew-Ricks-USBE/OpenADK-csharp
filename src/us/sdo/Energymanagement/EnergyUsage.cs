@@ -28,14 +28,14 @@ public class EnergyUsage : SifDataObject
 	/// <summary>
 	/// Creates an instance of an EnergyUsage
 	/// </summary>
-	public EnergyUsage() : base( Adk.SifVersion, EnergymanagementDTD.ENERGYUSAGE ){}
+	public EnergyUsage() : base( SifVersion.LATEST, EnergymanagementDTD.ENERGYUSAGE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
 	/// </summary>
 	///<param name="usageLocationInfo">Complex element containing the location of where measurements apply to.</param>
 	///
-	public EnergyUsage( UsageLocationInfo usageLocationInfo ) : base( Adk.SifVersion, EnergymanagementDTD.ENERGYUSAGE )
+	public EnergyUsage( UsageLocationInfo usageLocationInfo ) : base( SifVersion.LATEST, EnergymanagementDTD.ENERGYUSAGE )
 	{
 		this.UsageLocationInfo = usageLocationInfo;
 	}
@@ -133,4 +133,3 @@ public class EnergyUsage : SifDataObject
 	}
 
 }}
-

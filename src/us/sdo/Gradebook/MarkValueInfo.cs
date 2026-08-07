@@ -28,7 +28,7 @@ public class MarkValueInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a MarkValueInfo
 	/// </summary>
-	public MarkValueInfo() : base( Adk.SifVersion, GradebookDTD.MARKVALUEINFO ){}
+	public MarkValueInfo() : base( SifVersion.LATEST, GradebookDTD.MARKVALUEINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class MarkValueInfo : SifDataObject
 	///<param name="refId">The ID (GUID) that uniquely identifies this MarkValueInfo entity.</param>
 	///<param name="schoolInfoRefId">The ID (GUID) that uniquely identifies the School that these Mark Values apply to.</param>
 	///
-	public MarkValueInfo( string refId, string schoolInfoRefId ) : base( Adk.SifVersion, GradebookDTD.MARKVALUEINFO )
+	public MarkValueInfo( string refId, string schoolInfoRefId ) : base( SifVersion.LATEST, GradebookDTD.MARKVALUEINFO )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -250,4 +250,3 @@ public class MarkValueInfo : SifDataObject
 	}
 
 }}
-

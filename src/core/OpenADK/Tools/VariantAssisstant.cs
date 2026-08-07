@@ -6,17 +6,27 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using OpenADK.Library.Impl;
 using OpenADK.Util;
 
 namespace OpenADK.Library.Tools
 {
     public class VariantAssisstant
     {
+        private readonly IDtd fDtd;
+        private readonly ISifObjectFactory fObjects;
+
+        public VariantAssisstant(IDtd dtd, ISifObjectFactory objects)
+        {
+            fDtd = dtd ?? throw new ArgumentNullException(nameof(dtd));
+            fObjects = objects ?? throw new ArgumentNullException(nameof(objects));
+        }
+
         public static readonly string README = "THIS CLASS HAS NOT BEEN TESTED.  USE AT YOUR OWN RISK.";
 
-        public static Type GetSifElementType(string library, string sdoName)
+        public Type GetSifElementType(string library, string sdoName)
         {
-            string sdoAssembly = Adk.Dtd.SDOAssembly;
+            string sdoAssembly = fDtd.SDOAssembly;
 
             string variantString = sdoAssembly.Substring(sdoAssembly.Length - 2).ToLower();
 
@@ -28,13 +38,13 @@ namespace OpenADK.Library.Tools
         }
 
 
-        public static Type GetSifElementType(string sdoName)
+        public Type GetSifElementType(string sdoName)
         {
-            string sdoAssembly = Adk.Dtd.SDOAssembly;
+            string sdoAssembly = fDtd.SDOAssembly;
 
             string variantString = sdoAssembly.Substring(sdoAssembly.Length - 2).ToLower();
 
-            foreach (string library in ((ISifDtd)Adk.Dtd).LoadedLibraryNames)
+            foreach (string library in ((ISifDtd)fDtd).LoadedLibraryNames)
             {
                 string className = "OpenADK.Library." + variantString + "." + library + "." + sdoName + ", " + sdoAssembly;
 
@@ -49,29 +59,29 @@ namespace OpenADK.Library.Tools
 
 
 
-        public static SifElement GetSifElement(string sdoName)
+        public SifElement GetSifElement(string sdoName)
         {
-            string sdoAssembly = Adk.Dtd.SDOAssembly;
+            string sdoAssembly = fDtd.SDOAssembly;
 
             string variantString = sdoAssembly.Substring(sdoAssembly.Length - 2).ToLower();
 
-            foreach (string library in ((ISifDtd)Adk.Dtd).LoadedLibraryNames)
+            foreach (string library in ((ISifDtd)fDtd).LoadedLibraryNames)
             {
                 string className = "OpenADK.Library." + variantString + "." + library + "." + sdoName + ", " + sdoAssembly;
 
                 Type type = Type.GetType(className);
 
                 if (type != null)
-                    return (SifElement)Activator.CreateInstance(type, false);
+                    return fObjects.Create(type);
             }
 
             return null;
         }
 
 
-        public static SifElement GetSifElement(string library, string sdoName)
+        public SifElement GetSifElement(string library, string sdoName)
         {
-            string sdoAssembly = Adk.Dtd.SDOAssembly;
+            string sdoAssembly = fDtd.SDOAssembly;
 
             string variantString = sdoAssembly.Substring(sdoAssembly.Length - 2).ToLower();
 
@@ -80,7 +90,7 @@ namespace OpenADK.Library.Tools
             Type type = Type.GetType(className);
 
             if (type != null)
-                return (SifElement)Activator.CreateInstance(type, false);
+                return fObjects.Create(type);
             else
                 return null;
         }

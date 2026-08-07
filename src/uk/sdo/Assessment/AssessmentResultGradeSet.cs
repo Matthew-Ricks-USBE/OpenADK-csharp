@@ -28,7 +28,7 @@ public class AssessmentResultGradeSet : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentResultGradeSet
 	/// </summary>
-	public AssessmentResultGradeSet() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESULTGRADESET ){}
+	public AssessmentResultGradeSet() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESULTGRADESET ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class AssessmentResultGradeSet : SifDataObject
 	///<param name="name">The descriptive identifier for the grade set.</param>
 	///<param name="gradeSets">A GradeSets</param>
 	///
-	public AssessmentResultGradeSet( string refId, string name, GradeSet gradeSets ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESULTGRADESET )
+	public AssessmentResultGradeSet( string refId, string name, GradeSet gradeSets ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESULTGRADESET )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -198,4 +198,3 @@ public class AssessmentResultGradeSet : SifDataObject
 	}
 
 }}
-

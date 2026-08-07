@@ -1,22 +1,17 @@
 using System;
 using OpenADK.Library;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 
 namespace OpenADK.Utils
 {
     [TestFixture]
-    public class UUIDTests
+    public class UUIDTests : AdkTest
     {
-        public void setUp()
-        {
-            Adk.Initialize();
-        }
-
-
         [Test]
         public void testAssertSIFGUIDFormat()
         {
-            String refId = Adk.MakeGuid();
+            String refId = Runtime.MakeGuid();
             Console.WriteLine(refId);
             assertRefId(refId);
         }

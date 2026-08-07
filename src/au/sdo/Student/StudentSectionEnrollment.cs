@@ -28,7 +28,7 @@ public class StudentSectionEnrollment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentSectionEnrollment
 	/// </summary>
-	public StudentSectionEnrollment() : base( Adk.SifVersion, StudentDTD.STUDENTSECTIONENROLLMENT ){}
+	public StudentSectionEnrollment() : base( SifVersion.LATEST, StudentDTD.STUDENTSECTIONENROLLMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class StudentSectionEnrollment : SifDataObject
 	///<param name="studentPersonalRefId">A StudentPersonalRefId</param>
 	///<param name="sectionInfoRefId">A SectionInfoRefId</param>
 	///
-	public StudentSectionEnrollment( string refId, string studentPersonalRefId, string sectionInfoRefId ) : base( Adk.SifVersion, StudentDTD.STUDENTSECTIONENROLLMENT )
+	public StudentSectionEnrollment( string refId, string studentPersonalRefId, string sectionInfoRefId ) : base( SifVersion.LATEST, StudentDTD.STUDENTSECTIONENROLLMENT )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -175,4 +175,3 @@ public class StudentSectionEnrollment : SifDataObject
 	}
 
 }}
-

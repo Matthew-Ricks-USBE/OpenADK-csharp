@@ -34,9 +34,15 @@ public class AdkExamples
     /// </summary>
     public static SifVersion Version;
 
+    public static AdkDebugFlags Debug { get; set; } = AdkDebugFlags.None;
+
+    public static string LogFilePath { get; private set; }
+
     /// <summary>  Parsed command-line arguments
     /// </summary>
     public static string[] args = null;
+
+    private static readonly NameValueCollection sPropertyOverrides = new NameValueCollection();
 
     /// <summary>  Parse the command-line. This method may be called repeatedly, usually
     /// once from the sample agent's <c>main</code> function prior to
@@ -130,37 +136,37 @@ public class AdkExamples
                     {
                         try
                         {
-                            Adk.Debug = AdkDebugFlags.None;
+                            Debug = AdkDebugFlags.None;
                             int k = Int32.Parse(args[++i]);
                             if (k == 1)
                             {
-                                Adk.Debug = AdkDebugFlags.Minimal;
+                                Debug = AdkDebugFlags.Minimal;
                             }
                             else if (k == 2)
                             {
-                                Adk.Debug = AdkDebugFlags.Moderate;
+                                Debug = AdkDebugFlags.Moderate;
                             }
                             else if (k == 3)
                             {
-                                Adk.Debug = AdkDebugFlags.Detailed;
+                                Debug = AdkDebugFlags.Detailed;
                             }
                             else if (k == 4)
                             {
-                                Adk.Debug = AdkDebugFlags.Very_Detailed;
+                                Debug = AdkDebugFlags.Very_Detailed;
                             }
                             else if (k == 5)
                             {
-                                Adk.Debug = AdkDebugFlags.All;
+                                Debug = AdkDebugFlags.All;
                             }
                         }
                         catch (Exception)
                         {
-                            Adk.Debug = AdkDebugFlags.All;
+                            Debug = AdkDebugFlags.All;
                         }
                     }
                     else
                     {
-                        Adk.Debug = AdkDebugFlags.All;
+                        Debug = AdkDebugFlags.All;
                     }
                 }
                 else if (args[i].StartsWith("/D"))
@@ -168,7 +174,7 @@ public class AdkExamples
                     string prop = args[i].Substring(2);
                     if (i != args.Length - 1)
                     {
-                        Properties.SetProperty(prop, args[++i]);
+                        sPropertyOverrides[prop] = args[++i];
                     }
                     else
                     {
@@ -179,7 +185,7 @@ public class AdkExamples
                 {
                     try
                     {
-                        Adk.SetLogFile(args[++i]);
+                        LogFilePath = args[++i];
                     }
                     catch (IOException ioe)
                     {
@@ -215,6 +221,10 @@ public class AdkExamples
 
         //  Parse all other options...
         AgentProperties props = agent.Properties;
+            foreach (string key in sPropertyOverrides.AllKeys)
+            {
+                props.SetProperty(key, sPropertyOverrides[key]);
+            }
         NameValueCollection misc = new NameValueCollection();
 
         int port = -1;

@@ -28,7 +28,7 @@ public class FoodservicePurchaseTransaction : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodservicePurchaseTransaction
 	/// </summary>
-	public FoodservicePurchaseTransaction() : base( Adk.SifVersion, FoodDTD.FOODSERVICEPURCHASETRANSACTION ){}
+	public FoodservicePurchaseTransaction() : base( SifVersion.LATEST, FoodDTD.FOODSERVICEPURCHASETRANSACTION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class FoodservicePurchaseTransaction : SifDataObject
 	///<param name="foodserviceTransactionRefId">GUID that identifies food service transaction in which this purchase was made</param>
 	///<param name="purchaseQuantities">A PurchaseQuantities</param>
 	///
-	public FoodservicePurchaseTransaction( string refId, string foodserviceTransactionRefId, PurchaseQuantities purchaseQuantities ) : base( Adk.SifVersion, FoodDTD.FOODSERVICEPURCHASETRANSACTION )
+	public FoodservicePurchaseTransaction( string refId, string foodserviceTransactionRefId, PurchaseQuantities purchaseQuantities ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICEPURCHASETRANSACTION )
 	{
 		this.RefId = refId;
 		this.FoodserviceTransactionRefId = foodserviceTransactionRefId;
@@ -122,4 +122,3 @@ public class FoodservicePurchaseTransaction : SifDataObject
 	}
 
 }}
-

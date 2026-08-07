@@ -28,7 +28,7 @@ public class Sif3AssessmentSection : SifDataObject
 	/// <summary>
 	/// Creates an instance of a Sif3AssessmentSection
 	/// </summary>
-	public Sif3AssessmentSection() : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTSECTION ){}
+	public Sif3AssessmentSection() : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTSECTION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class Sif3AssessmentSection : SifDataObject
 	///<param name="refId">A RefId</param>
 	///<param name="sectionItemSequenceType">A SectionItemSequenceType</param>
 	///
-	public Sif3AssessmentSection( string refId, SectionItemSequenceType sectionItemSequenceType ) : base( Adk.SifVersion, Sif3assessmentDTD.SIF3ASSESSMENTSECTION )
+	public Sif3AssessmentSection( string refId, SectionItemSequenceType sectionItemSequenceType ) : base( SifVersion.LATEST, Sif3assessmentDTD.SIF3ASSESSMENTSECTION )
 	{
 		this.RefId = refId;
 		this.SetSectionItemSequenceType( sectionItemSequenceType );
@@ -406,4 +406,3 @@ public class Sif3AssessmentSection : SifDataObject
 	}
 
 }}
-

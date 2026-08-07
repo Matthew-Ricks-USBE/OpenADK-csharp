@@ -12,7 +12,7 @@ using System.IO;
 namespace Library.Nunit.US.Impl
 {
     [TestFixture]
-    public class RequestCacheFileTests
+    public class RequestCacheFileTests : AdkTest
     {
         private String[] fMsgIds;
         private RequestCache fRC;
@@ -21,9 +21,7 @@ namespace Library.Nunit.US.Impl
         [SetUp]
         public void setUp()
         {
-            Adk.Initialize();
-
-            fAgent = new TestAgent();
+            fAgent = CreateTestAgent();
             fAgent.Initialize();
         }
 
@@ -71,7 +69,8 @@ namespace Library.Nunit.US.Impl
         [Test]
         public void testSimpleCase()
         {
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC?.Close();
+            fRC = Components.CreateRequestCache(fAgent);
             storeAssertedRequests(fRC);
             assertStoredRequests(fRC, true);
         }
@@ -84,16 +83,17 @@ namespace Library.Nunit.US.Impl
         [Test]
         public void testPersistence()
         {
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC?.Close();
+            fRC = Components.CreateRequestCache(fAgent);
             storeAssertedRequests(fRC);
             fRC.Close();
 
             // Create a new instance. This one should retrieve its settings from the persistence mechanism
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             assertStoredRequests(fRC, true);
 
             fRC.Close();
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             Assert.AreEqual(0, fRC.ActiveRequestCount, "Should have zero pending requests");
         }
 
@@ -108,7 +108,7 @@ namespace Library.Nunit.US.Impl
        public void testPersistenceWithBadState()
        {
            //create new cache for agent
-           fRC = RequestCache.GetInstance(fAgent);
+           fRC = Components.CreateRequestCache(fAgent);
 
            //create new queryobject
            SIF_QueryObject obj = new SIF_QueryObject("");
@@ -122,9 +122,9 @@ namespace Library.Nunit.US.Impl
 
            Query q = new Query(StudentDTD.STUDENTPERSONAL);
 
-           String testStateItem = Adk.MakeGuid();
-           String requestMsgId = Adk.MakeGuid();
-           String testObjectType = Adk.MakeGuid();
+           String testStateItem = Runtime.MakeGuid();
+           String requestMsgId = Runtime.MakeGuid();
+           String testObjectType = Runtime.MakeGuid();
 
            // Use string user data (allowed type)
            q.UserData = testStateItem;
@@ -133,7 +133,7 @@ namespace Library.Nunit.US.Impl
            fRC.Close();
 
            // Create a new instance. This one should retrieve its settings from the persistence mechanism
-           fRC = RequestCache.GetInstance(fAgent);
+           fRC = Components.CreateRequestCache(fAgent);
 
            IRequestInfo ri = fRC.GetRequestInfo(requestMsgId, null);
 
@@ -164,7 +164,7 @@ namespace Library.Nunit.US.Impl
         [Test]
         public void testPersistenceWithRemoval()
         {
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             SIF_QueryObject obj = new SIF_QueryObject("");
             SIF_Query query = new SIF_Query(obj);
             SIF_Request request = new SIF_Request();
@@ -172,7 +172,7 @@ namespace Library.Nunit.US.Impl
             request.SIF_Query = query;
 
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
-            String testStateItem = Adk.MakeGuid();
+            String testStateItem = Runtime.MakeGuid();
             // Use string user data instead of TestState (allowed type)
             q.UserData = testStateItem;
 
@@ -180,10 +180,10 @@ namespace Library.Nunit.US.Impl
             // Add 10 entries to the cache, interspersed with other entries that are removed
             for (int i = 0; i < 10; i++)
             {
-                String phantom1 = Adk.MakeGuid();
-                String phantom2 = Adk.MakeGuid();
+                String phantom1 = Runtime.MakeGuid();
+                String phantom2 = Runtime.MakeGuid();
                 storeRequest(fRC, request, q, phantom1, "foo");
-                fMsgIds[i] = Adk.MakeGuid();
+                fMsgIds[i] = Runtime.MakeGuid();
                 storeRequest(fRC, request, q, fMsgIds[i], "Object_" + i);
                 storeRequest(fRC, request, q, phantom2, "bar");
 
@@ -201,7 +201,7 @@ namespace Library.Nunit.US.Impl
             fRC.Close();
 
             // Create a new instance. This one should retrieve its settings from the persistence mechanism
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             Assert.AreEqual(5, fRC.ActiveRequestCount, "After Re-Openeing Should have five objects");
             for (int i = 1; i < 10; i += 2)
             {
@@ -241,7 +241,7 @@ namespace Library.Nunit.US.Impl
             fi.IsReadOnly = true;
             try
             {
-                Assert.Throws<AdkException>(() => RequestCache.GetInstance(fAgent));
+                Assert.Throws<AdkException>(() => Components.CreateRequestCache(fAgent));
             }
             finally
             {
@@ -273,12 +273,12 @@ namespace Library.Nunit.US.Impl
             //raf.writeChars("!@#$!@#$");
             // raf.close();
 
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             storeAssertedRequests(fRC);
             fRC.Close();
 
             // Create a new instance. This one should retrieve its settings from the persistence mechanism
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             assertStoredRequests(fRC, true);
         }
 
@@ -302,7 +302,7 @@ namespace Library.Nunit.US.Impl
             // Now open up an instance of the request cache and verify that the contents are there
 
 
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             SIF_QueryObject obj = new SIF_QueryObject("");
             SIF_Query query = new SIF_Query(obj);
             SIF_Request request = new SIF_Request();
@@ -315,10 +315,10 @@ namespace Library.Nunit.US.Impl
             for (int i = 0; i < 10; i++)
             {
                 // Use string user data instead of TestState (allowed type)
-                String stateData = Adk.MakeGuid();
+                String stateData = Runtime.MakeGuid();
                 q = new Query(StudentDTD.STUDENTPERSONAL);
                 q.UserData = stateData;
-                fMsgIds[i] = Adk.MakeGuid();
+                fMsgIds[i] = Runtime.MakeGuid();
                 storeRequest(fRC, request, q, fMsgIds[i], "Object_" + i.ToString());
             }
 
@@ -368,13 +368,13 @@ namespace Library.Nunit.US.Impl
             {
                 q = new Query(StudentDTD.STUDENTPERSONAL);
                 // Use string user data instead of TestState (allowed type)
-                String stateData = "TestState_" + Adk.MakeGuid();
+                String stateData = "TestState_" + Runtime.MakeGuid();
                 q.UserData = stateData;
 
-                String phantom1 = Adk.MakeGuid();
-                String phantom2 = Adk.MakeGuid();
+                String phantom1 = Runtime.MakeGuid();
+                String phantom2 = Runtime.MakeGuid();
                 storeRequest(cache, request, q, phantom1, "foo");
-                fMsgIds[i] = Adk.MakeGuid();
+                fMsgIds[i] = Runtime.MakeGuid();
 
                 storeRequest(cache, request, q, fMsgIds[i], "Object_" + i.ToString());
                 storeRequest(cache, request, q, phantom2, "bar");
@@ -446,7 +446,7 @@ namespace Library.Nunit.US.Impl
         public void testSerializationWithStringUserData()
         {
             // Test that string user data (System.* type) is properly serialized/deserialized
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
 
             SIF_QueryObject obj = new SIF_QueryObject("");
             SIF_Query query = new SIF_Query(obj);
@@ -454,16 +454,16 @@ namespace Library.Nunit.US.Impl
             request.SIF_Query = query;
 
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
-            string testData = "TestUserDataString_" + Adk.MakeGuid();
+            string testData = "TestUserDataString_" + Runtime.MakeGuid();
             q.UserData = testData;
 
-            String msgId = Adk.MakeGuid();
+            String msgId = Runtime.MakeGuid();
             storeRequest(fRC, request, q, msgId, "StudentPersonal");
 
             fRC.Close();
 
             // Re-open and verify the string data was preserved
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
             Assert.IsNotNull(ri, "RequestInfo should not be null");
@@ -474,7 +474,7 @@ namespace Library.Nunit.US.Impl
         public void testSerializationWithGuidUserData()
         {
             // Test that Guid data (System.* type) is properly serialized/deserialized
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
 
             SIF_QueryObject obj = new SIF_QueryObject("");
             SIF_Query query = new SIF_Query(obj);
@@ -485,13 +485,13 @@ namespace Library.Nunit.US.Impl
             var testData = Guid.NewGuid();
             q.UserData = testData;
 
-            String msgId = Adk.MakeGuid();
+            String msgId = Runtime.MakeGuid();
             storeRequest(fRC, request, q, msgId, "StudentPersonal");
 
             fRC.Close();
 
             // Re-open and verify the string data was preserved
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
             Assert.IsNotNull(ri, "RequestInfo should not be null");
@@ -502,7 +502,7 @@ namespace Library.Nunit.US.Impl
         public void testSerializationWithDictionaryUserData()
         {
             // Test that System.Collections types are properly serialized/deserialized
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
 
             SIF_QueryObject obj = new SIF_QueryObject("");
             SIF_Query query = new SIF_Query(obj);
@@ -518,13 +518,13 @@ namespace Library.Nunit.US.Impl
             };
             q.UserData = testDict;
 
-            String msgId = Adk.MakeGuid();
+            String msgId = Runtime.MakeGuid();
             storeRequest(fRC, request, q, msgId, "StudentPersonal");
 
             fRC.Close();
 
             // Re-open and verify the dictionary data was preserved
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
             Assert.IsNotNull(ri, "RequestInfo should not be null");
@@ -563,14 +563,14 @@ namespace Library.Nunit.US.Impl
             {
                 TestContext.Out.WriteLine("Testing type: " + item.GetType().Name);
                 q.UserData = item;
-                String msgId = Adk.MakeGuid();
+                String msgId = Runtime.MakeGuid();
 
-                fRC = RequestCache.GetInstance(fAgent);
+                fRC = Components.CreateRequestCache(fAgent);
                 storeRequest(fRC, request, q, msgId, "StudentPersonal");
                 fRC.Close();
 
                 // Re-open and verify the dictionary data was preserved
-                fRC = RequestCache.GetInstance(fAgent);
+                fRC = Components.CreateRequestCache(fAgent);
                 IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
                 fRC.Close();
 
@@ -583,7 +583,7 @@ namespace Library.Nunit.US.Impl
         public void testSerializationWithSifElementUserData()
         {
             // Test that string user data (System.* type) is properly serialized/deserialized
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
 
             SIF_QueryObject obj = new SIF_QueryObject("");
             SIF_Query query = new SIF_Query(obj);
@@ -596,13 +596,13 @@ namespace Library.Nunit.US.Impl
             var name = new Name(NameType.LEGAL, "Nahorniak", "Mike");
             q.UserData = name;
 
-            String msgId = Adk.MakeGuid();
+            String msgId = Runtime.MakeGuid();
             storeRequest(fRC, request, q, msgId, "StudentPersonal");
 
             fRC.Close();
 
             // Re-open and verify the string data was preserved
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
             Assert.IsNotNull(ri, "RequestInfo should not be null");
@@ -616,13 +616,13 @@ namespace Library.Nunit.US.Impl
             var studentPersonal = new StudentPersonal();
             q.UserData = studentPersonal;
 
-            msgId = Adk.MakeGuid();
+            msgId = Runtime.MakeGuid();
             storeRequest(fRC, request, q, msgId, "StudentPersonal");
 
             fRC.Close();
 
             // Re-open and verify the string data was preserved
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             ri = fRC.GetRequestInfo(msgId, null);
 
             Assert.IsNotNull(ri, "RequestInfo should not be null");
@@ -636,13 +636,13 @@ namespace Library.Nunit.US.Impl
                 "Could not serialize the SIF_Err object");
             q.UserData = error;
 
-            msgId = Adk.MakeGuid();
+            msgId = Runtime.MakeGuid();
             storeRequest(fRC, request, q, msgId, "StudentPersonal");
 
             fRC.Close();
 
             // Re-open and verify the string data was preserved
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
             ri = fRC.GetRequestInfo(msgId, null);
 
             Assert.IsNotNull(ri, "RequestInfo should not be null");
@@ -657,7 +657,7 @@ namespace Library.Nunit.US.Impl
         public void testBinaryFormatEfficiency()
         {
             // Test that MessagePack binary format is used (not JSON)
-            fRC = RequestCache.GetInstance(fAgent);
+            fRC = Components.CreateRequestCache(fAgent);
 
             SIF_QueryObject obj = new SIF_QueryObject("");
             SIF_Query query = new SIF_Query(obj);
@@ -673,7 +673,7 @@ namespace Library.Nunit.US.Impl
             };
             q.UserData = testData;
 
-            String msgId = Adk.MakeGuid();
+            String msgId = Runtime.MakeGuid();
             storeRequest(fRC, request, q, msgId, "StudentPersonal");
 
             // Get the file size - should be relatively compact with binary format

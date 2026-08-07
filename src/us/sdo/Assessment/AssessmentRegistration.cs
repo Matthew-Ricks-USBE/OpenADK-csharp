@@ -28,7 +28,7 @@ public class AssessmentRegistration : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentRegistration
 	/// </summary>
-	public AssessmentRegistration() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTREGISTRATION ){}
+	public AssessmentRegistration() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTREGISTRATION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class AssessmentRegistration : SifDataObject
 	///<param name="studentPersonalRefId">The student associated with the registration.</param>
 	///<param name="assessmentAdministrationRefId">The assessment administration associated with the registration.</param>
 	///
-	public AssessmentRegistration( string refId, string studentPersonalRefId, string assessmentAdministrationRefId ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTREGISTRATION )
+	public AssessmentRegistration( string refId, string studentPersonalRefId, string assessmentAdministrationRefId ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTREGISTRATION )
 	{
 		this.RefId = refId;
 		this.StudentPersonalRefId = studentPersonalRefId;
@@ -353,4 +353,3 @@ public class AssessmentRegistration : SifDataObject
 	}
 
 }}
-

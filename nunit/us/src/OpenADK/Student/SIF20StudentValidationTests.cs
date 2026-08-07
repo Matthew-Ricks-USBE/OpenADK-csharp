@@ -29,13 +29,13 @@ namespace Library.Nunit.US.Library.Student
     [Test]
 	public void testStudentSchoolEnrollment020() {
 
-        StudentSchoolEnrollment sse = new StudentSchoolEnrollment(Adk.MakeGuid(), Adk.MakeGuid(), Adk.MakeGuid(), MembershipType.HOME, TimeFrame.CURRENT);
+        StudentSchoolEnrollment sse = new StudentSchoolEnrollment(Runtime.MakeGuid(), Runtime.MakeGuid(), Runtime.MakeGuid(), MembershipType.HOME, TimeFrame.CURRENT);
 		sse.SchoolYear = 2008;
 		sse.SifVersion = SifVersion.SIF20r1;
 	    DateTime entryDate = DateTime.Now;
 		sse.EntryDate = entryDate;
 		sse.computeTimeFrame( DateTime.Now );
-		sse.Homeroom = new Homeroom( "RoomInfo", Adk.MakeGuid() );
+		sse.Homeroom = new Homeroom( "RoomInfo", Runtime.MakeGuid() );
 		sse.SetGradeLevel( GradeLevelCode.KG );
 		testSchemaElement( sse );
 

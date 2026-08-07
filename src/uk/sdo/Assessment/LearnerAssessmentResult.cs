@@ -28,7 +28,7 @@ public class LearnerAssessmentResult : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerAssessmentResult
 	/// </summary>
-	public LearnerAssessmentResult() : base( Adk.SifVersion, AssessmentDTD.LEARNERASSESSMENTRESULT ){}
+	public LearnerAssessmentResult() : base( SifVersion.LATEST, AssessmentDTD.LEARNERASSESSMENTRESULT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class LearnerAssessmentResult : SifDataObject
 	///<param name="result">A grade title, a comment, or a mark (dependent on ComponentType of associated aspect). Marks and grades should be valid in the grade set or mark set on the date the assessment was achieved.</param>
 	///<param name="resultStatus">Indicates whether the result is estimated, an interim result, provisional, actual result or a target.</param>
 	///
-	public LearnerAssessmentResult( string refId, string assessmentComponentRefId, string learnerPersonalRefId, string schoolInfoRefId, DateTime? achievementDate, string result, AssessmentResultStatusType resultStatus ) : base( Adk.SifVersion, AssessmentDTD.LEARNERASSESSMENTRESULT )
+	public LearnerAssessmentResult( string refId, string assessmentComponentRefId, string learnerPersonalRefId, string schoolInfoRefId, DateTime? achievementDate, string result, AssessmentResultStatusType resultStatus ) : base( SifVersion.LATEST, AssessmentDTD.LEARNERASSESSMENTRESULT )
 	{
 		this.RefId = refId;
 		this.AssessmentComponentRefId = assessmentComponentRefId;
@@ -304,4 +304,3 @@ public class LearnerAssessmentResult : SifDataObject
 	}
 
 }}
-

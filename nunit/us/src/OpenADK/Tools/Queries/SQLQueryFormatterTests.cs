@@ -6,6 +6,7 @@ using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Queries;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Tools.Queries
 {
@@ -13,12 +14,12 @@ namespace Library.Nunit.US.Tools.Queries
     /// Summary description for SQLQueryFormatterTests.
     /// </summary>
     [TestFixture]
-    public class SQLQueryFormatterTests
+    public class SQLQueryFormatterTests : AdkTest
     {
         [SetUp]
         public void Setup()
         {
-            Adk.Initialize();
+            Runtime.Initialize();
         }
 
         [Test]
@@ -79,7 +80,7 @@ namespace Library.Nunit.US.Tools.Queries
             q.AddCondition("Demographics/RaceList/Race/Code", ComparisonOperators.EQ, "1002");
 
             // Convert the query to XML and back
-            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST);
+            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST, Runtime);
 
             IDictionary fields = new Hashtable();
             fields["Demographics/RaceList/Race/Code"] =
@@ -100,7 +101,7 @@ namespace Library.Nunit.US.Tools.Queries
             q.AddCondition("Name/FirstName", ComparisonOperators.GT, "Sally");
 
             // Convert the query to XML and back
-            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST);
+            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST, Runtime);
 
             IDictionary fields = new Hashtable();
             fields["Name/FirstName"] =
@@ -119,7 +120,7 @@ namespace Library.Nunit.US.Tools.Queries
             q.AddCondition("Name/FirstName", ComparisonOperators.LT, "Sally");
 
             // Convert the query to XML and back
-            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST);
+            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST, Runtime);
 
             IDictionary fields = new Hashtable();
             fields["Name/FirstName"] =
@@ -138,7 +139,7 @@ namespace Library.Nunit.US.Tools.Queries
             q.AddCondition("Name/FirstName", ComparisonOperators.NE, "Sally");
 
             // Convert the query to XML and back
-            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST);
+            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST, Runtime);
 
             IDictionary fields = new Hashtable();
             fields["Name/FirstName"] =
@@ -157,7 +158,7 @@ namespace Library.Nunit.US.Tools.Queries
             q.AddCondition("Name/FirstName", ComparisonOperators.GE, "Sally");
 
             // Convert the query to XML and back
-            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST);
+            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST, Runtime);
 
             IDictionary fields = new Hashtable();
             fields["Name/FirstName"] =
@@ -176,7 +177,7 @@ namespace Library.Nunit.US.Tools.Queries
             q.AddCondition("Name/FirstName", ComparisonOperators.LE, "Sally");
 
             // Convert the query to XML and back
-            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST);
+            Query reparsed = QueryTests.SaveToXMLAndReparse(q, SifVersion.LATEST, Runtime);
 
             IDictionary fields = new Hashtable();
             fields["Name/FirstName"] =

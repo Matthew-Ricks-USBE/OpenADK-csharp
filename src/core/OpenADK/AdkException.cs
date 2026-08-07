@@ -10,7 +10,7 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Text;
 using OpenADK.Library.Impl;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library
 {
@@ -369,7 +369,7 @@ namespace OpenADK.Library
         /// any exception that is not associated with a zone, the supplied default
         /// Category will be used. Otherwise the Category of the zone is used.
         /// </summary>
-        public virtual void Log( ILog def )
+        public virtual void Log( ILogger def )
         {
             Log( def, 0 );
         }
@@ -379,10 +379,10 @@ namespace OpenADK.Library
         /// </summary>
         /// <param name="def">The log to write to</param>
         /// <param name="indent">The amoung of indentation to apply</param>
-        public virtual void Log( ILog def,
+        public virtual void Log( ILogger def,
                                  int indent )
         {
-            ILog target = fZone == null ? def : ((ZoneImpl) fZone).Log;
+            ILogger target = fZone == null ? def : ((ZoneImpl) fZone).Log;
             if( target == null )
             {
                 return;

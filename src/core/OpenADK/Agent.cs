@@ -5,13 +5,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Log;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library
 {
@@ -31,7 +31,7 @@ namespace OpenADK.Library
         /// <summary>
         /// The Identifier that is used to identify the ADK itself for logging operations ("ADK")
         /// </summary>
-        public const string LOG_IDENTIFIER = Adk.LOG_IDENTIFIER + ".Agent";
+        public const string LOG_IDENTIFIER = AdkRuntime.LogIdentifier + ".Agent";
 
 
         /// <summary>  The root log Category. Subcategories exist for each zone, where the
@@ -40,14 +40,27 @@ namespace OpenADK.Library
         /// specific zone. Your agent may also use this Category to post log
         /// events.
         /// </summary>
-        protected internal static ILog Log;
+        protected internal ILogger Log { get; }
 
         /// <summary>  The root ServerLog instance. Subcategories exist for each zone, where 
         /// the subcategory name is "ADK.Agent$<i>zoneId</i>". The Agent uses the
         /// root ServerLog instance only to establish the agent-global chain of 
         /// loggers; no actual logging is performed outside the context of a zone.
         /// </summary>
-        protected internal static ServerLog serverLog;
+        protected internal ServerLog serverLog;
+
+        private readonly IAdkComponentFactory fComponents;
+        private RequestCache fRequestCache;
+        private bool fRequestCacheInitialized;
+        private object fRequestCacheLock = new object();
+
+        private Tools.Policy.PolicyManager fPolicyManager;
+        private bool fPolicyManagerInitialized;
+        private object fPolicyManagerLock = new object();
+
+        private ISIFPrimitives fPrimitives;
+        private bool fPrimitivesInitialized;
+        private object fPrimitivesLock = new object();
 
         /// <summary>  The agent's SourceId</summary>
         protected internal string fSourceId;
@@ -114,7 +127,7 @@ namespace OpenADK.Library
         /// <summary>
         /// The TransportManager instances that manages all open transports for this agent 
         /// </summary>
-        private readonly TransportManagerImpl fTransportManager;
+        private readonly ITransportManager fTransportManager;
 
 
         /// <summary>  Gets the IZoneFactory for this agent. The IZoneFactory is used to create
@@ -358,33 +371,52 @@ namespace OpenADK.Library
         }
 
 
-        static Agent()
-        {
-            Log = LogManager.GetLogger( LOG_IDENTIFIER );
-            serverLog = ServerLog.GetInstance( LOG_IDENTIFIER, null );
-        }
-
         /// <summary>Constructor</summary>
         /// <param name="agentId">The string name that uniquely identifies this agent in SIF Zones.
         /// This string is used as the <c>SourceId</c> in all SIF message
         /// headers created by the agent.
         /// </param>
-        public Agent( string agentId )
+        public Agent(
+            string agentId,
+            IAdkRuntime runtime,
+            IAdkComponentFactory components)
         {
+            Runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
+            fComponents = components ?? throw new ArgumentNullException(nameof(components));
+            Log = runtime.Log;
+            serverLog = new ServerLog(LOG_IDENTIFIER, null, runtime.ServerLog);
+
             if ( agentId == null || agentId.Trim().Length == 0 )
             {
                 AdkUtils._throw
-                    ( new ArgumentException( "Agent ID cannot be null or a blank string" ), Log );
+                    ( new ArgumentException( "Agent ID cannot be null or a blank string" ), Log, Runtime );
             }
 
             fSourceId = agentId;
 
-            ObjectFactory factory = ObjectFactory.GetInstance();
-            fZoneFactory = (IZoneFactory) factory.CreateInstance( ObjectFactory.ADKFactoryType.ZONE, this );
-            fTopicFactory = (ITopicFactory) factory.CreateInstance( ObjectFactory.ADKFactoryType.TOPIC, this );
-
-            fTransportManager = new TransportManagerImpl();
+            fZoneFactory = fComponents.CreateZoneFactory(this);
+            fTopicFactory = fComponents.CreateTopicFactory(this);
+            fTransportManager = fComponents.CreateTransportManager(this);
         }
+
+        /// <summary>The runtime and schema configuration owned by this agent.</summary>
+        public IAdkRuntime Runtime { get; }
+
+        /// <summary>Creates SIF objects using this agent's configured version.</summary>
+        public ISifObjectFactory Objects => Runtime.Objects;
+
+        /// <summary>Gets the request cache owned by this agent.</summary>
+        public RequestCache Requests =>
+            LazyInitializer.EnsureInitialized(ref fRequestCache, ref fRequestCacheInitialized, ref fRequestCacheLock, () => fComponents.CreateRequestCache(this));
+
+        internal Tools.Policy.PolicyManager PolicyManager =>
+            LazyInitializer.EnsureInitialized(ref fPolicyManager, ref fPolicyManagerInitialized, ref fPolicyManagerLock, () => fComponents.CreatePolicyManager(this));
+
+        internal ISIFPrimitives Primitives =>
+            LazyInitializer.EnsureInitialized(ref fPrimitives, ref fPrimitivesInitialized, ref fPrimitivesLock, () => fComponents.CreateSifPrimitives(this));
+
+        internal DataObjectOutputStreamImpl CreateDataObjectOutputStream() =>
+            fComponents.CreateDataObjectOutputStream(this);
 
       
         /// <summary>  Gets the default properties for a transport protocol.</summary>
@@ -427,14 +459,18 @@ namespace OpenADK.Library
         {
             lock ( this )
             {
+                if (!Runtime.Initialized)
+                {
+                    Runtime.Initialize();
+                }
                 if ( fInit )
                 {
-                    AdkUtils._throw( new AdkException( "Agent is already initialized", null ), Log );
+                    AdkUtils._throw( new AdkException( "Agent is already initialized", null ), Log, Runtime );
                 }
                 if ( fShutdownInProgress )
                 {
                     AdkUtils._throw
-                        ( new AdkException( "Agent is in the process of shutting down", null ), Log );
+                        ( new AdkException( "Agent is in the process of shutting down", null ), Log, Runtime );
                 }
 
 #if EVAL
@@ -449,7 +485,7 @@ namespace OpenADK.Library
                 }
 #endif
 
-                if ( (Adk.Debug & AdkDebugFlags.Lifecycle) != 0 )
+                if ( (Runtime.Debug & AdkDebugFlags.Lifecycle) != 0 )
                 {
                     Log.Info( "Initializing agent..." );
                 }
@@ -475,7 +511,7 @@ namespace OpenADK.Library
                 fShutdownInProgress = false;
                 fInit = true;
 
-                if ( (Adk.Debug & AdkDebugFlags.Lifecycle) != 0 )
+                if ( (Runtime.Debug & AdkDebugFlags.Lifecycle) != 0 )
                 {
                     Log.Info( "Agent initialized" );
                 }
@@ -488,7 +524,7 @@ namespace OpenADK.Library
             DirectoryInfo dir = new DirectoryInfo( path );
             if ( !dir.Exists )
             {
-                if ( (Adk.Debug & AdkDebugFlags.Lifecycle) != 0 )
+                if ( (Runtime.Debug & AdkDebugFlags.Lifecycle) != 0 )
                 {
                     Log.Debug
                         ( string.Format( "Creating {0} directory: {1}", logName, dir.FullName ) );
@@ -502,7 +538,7 @@ namespace OpenADK.Library
                     ( new AdkException
                           ( string.Format
                                 ( "The {0} directory is not a directory: {1}", logName, path ), null ),
-                      Log );
+                      Log, Runtime );
             }
         }
 
@@ -566,7 +602,7 @@ namespace OpenADK.Library
             }
 
             fShutdownInProgress = true;
-            if ( (Adk.Debug & AdkDebugFlags.Lifecycle) != 0 )
+            if ( (Runtime.Debug & AdkDebugFlags.Lifecycle) != 0 )
             {
                 Log.Info( "Shutting down agent..." );
             }
@@ -606,7 +642,7 @@ namespace OpenADK.Library
                 if ( fTransportManager != null )
                 {
                     //  Shutdown transports
-                    if ( (Adk.Debug & AdkDebugFlags.Lifecycle) != 0 )
+                    if ( (Runtime.Debug & AdkDebugFlags.Lifecycle) != 0 )
                     {
                         Log.Info( "Shutting down Transports..." );
                     }
@@ -616,7 +652,7 @@ namespace OpenADK.Library
                 //  Close RequestCache
                 try
                 {
-                    RequestCache rc = RequestCache.GetInstance( this );
+                    RequestCache rc = fRequestCache;
                     if ( rc != null )
                     {
                         rc.Close();
@@ -627,7 +663,7 @@ namespace OpenADK.Library
                     // Do nothing
                 }
 
-                if ( (Adk.Debug & AdkDebugFlags.Lifecycle) != 0 )
+                if ( (Runtime.Debug & AdkDebugFlags.Lifecycle) != 0 )
                 {
                     Log.Debug( "Agent shutdown complete" );
                 }
@@ -688,7 +724,7 @@ namespace OpenADK.Library
 
                 if ( err != null )
                 {
-                    AdkUtils._throw( err, Log );
+                    AdkUtils._throw( err, Log, Runtime );
                 }
             }
         }
@@ -739,7 +775,7 @@ namespace OpenADK.Library
 
                 if ( err != null )
                 {
-                    AdkUtils._throw( err, Log );
+                    AdkUtils._throw( err, Log, Runtime );
                 }
             }
         }
@@ -795,7 +831,7 @@ namespace OpenADK.Library
             if ( publisher == null )
             {
                 AdkUtils._throw
-                    ( new ArgumentException( "IPublisher object cannot be null" ), GetLog() );
+                    ( new ArgumentException( "IPublisher object cannot be null" ), GetLog(), Runtime );
             }
 
             if ( objectType == null )
@@ -862,7 +898,7 @@ namespace OpenADK.Library
             if ( subscriber == null )
             {
                 AdkUtils._throw
-                    ( new ArgumentException( "ISubscriber object cannot be null" ), GetLog() );
+                    ( new ArgumentException( "ISubscriber object cannot be null" ), GetLog(), Runtime );
             }
 
             if ( objectType == null )
@@ -921,7 +957,7 @@ namespace OpenADK.Library
             if ( queryResults == null )
             {
                 AdkUtils._throw
-                    ( new ArgumentException( "IQueryResults object cannot be null" ), GetLog() );
+                    ( new ArgumentException( "IQueryResults object cannot be null" ), GetLog(), Runtime );
             }
 
             if ( objectType == null )
@@ -1093,16 +1129,16 @@ namespace OpenADK.Library
         }
 
         /// <summary>  Gets the root logging Category for this agent.</summary>
-        public static ILog GetLog()
+        public ILogger GetLog()
         {
             return Log;
         }
 
         /// <summary>  Gets the logging framework Category for a specific zone.</summary>
-        public static ILog GetLog( IZone zone )
+        public ILogger GetLog( IZone zone )
         {
-            ILog zlog = LogManager.GetLogger( Adk.LOG_IDENTIFIER + ".Agent$" + zone.ZoneId );
-            return zlog == null ? Log : zlog;
+            if (zone == null) return Log;
+            return Runtime.LoggerFactory.CreateLogger(AdkRuntime.LogIdentifier + ".Agent$" + zone.ZoneId);
         }
 
         /// <summary> 	Gets the agent-global ServerLog instance.
@@ -1133,7 +1169,7 @@ namespace OpenADK.Library
         /// 
         /// @since Adk 1.5
         /// </returns>
-        public static ServerLog GetServerLog()
+        public ServerLog GetServerLog()
         {
             return serverLog;
         }
@@ -1150,7 +1186,7 @@ namespace OpenADK.Library
         /// </param>
         /// <returns> The ServerLog instance for the zone
         /// </returns>
-        public static ServerLog GetServerLog( IZone zone )
+        public ServerLog GetServerLog( IZone zone )
         {
             return zone.ServerLog;
         }
@@ -1168,7 +1204,7 @@ namespace OpenADK.Library
             if ( !fInit )
             {
                 Console.Out.WriteLine( new StackTrace( true ).ToString() );
-                AdkUtils._throw( new LifecycleException( "Agent not initialized" ), Log );
+                AdkUtils._throw( new LifecycleException( "Agent not initialized" ), Log, Runtime );
             }
         }
 

@@ -42,7 +42,7 @@ namespace SifWorks.Examples.Chameleon
                     }
                 }
                 catch ( Exception ex ) {
-                    Adk.Log.Error( "Error clearing the log files", ex );
+                    fAgent.Runtime.Log.Error( "Error clearing the log files", ex );
                 }
             }
         }
@@ -61,7 +61,7 @@ namespace SifWorks.Examples.Chameleon
         {
             SifMessageInfo smi = (SifMessageInfo) info;
             if ( error != null ) {
-                Adk.Log.Warn( "Received Error Response: " + error.SIF_Desc );
+                fAgent.Runtime.Log.Warn( "Received Error Response: " + error.SIF_Desc );
             }
             else {
                 string debug =
@@ -100,7 +100,7 @@ namespace SifWorks.Examples.Chameleon
             zone.ServerLog.Log
                 ( LogLevel.INFO, debug, null, "1003", LogEntryCodes.CATEGORY_SUCCESS,
                   LogEntryCodes.CODE_SUCCESS, smi, null );
-            Adk.Log.Info( debug );
+            fAgent.Runtime.Log.Info( debug );
             Log
                 ( fDir + Path.DirectorySeparatorChar + zone.ZoneId + Path.DirectorySeparatorChar +
                   "Events\\" + evnt.ObjectType.Name + "\\" + evnt.ObjectType.Name +
@@ -122,10 +122,10 @@ namespace SifWorks.Examples.Chameleon
                     using ( TextWriter twriter = new StreamWriter( outStream, Encoding.UTF8 ) ) {
                         twriter.WriteLine( "<SIF_ObjectData>" );
                         twriter.Flush();
-                        SifWriter writer = new SifWriter( twriter );
+                        SifWriter writer = new SifWriter( twriter, fAgent.Runtime );
                         SifWriter consoleWriter = null;
                         if ( logToConsole ) {
-                            consoleWriter = new SifWriter( Console.Out );
+                            consoleWriter = new SifWriter( Console.Out, fAgent.Runtime );
                         }
 
                         SifDataObject o;
@@ -155,7 +155,7 @@ namespace SifWorks.Examples.Chameleon
                 }
             }
             catch ( Exception ex ) {
-                Adk.Log.Error( ex.Message, ex );
+                fAgent.Runtime.Log.Error( ex.Message, ex );
             }
         }
 
@@ -183,14 +183,14 @@ namespace SifWorks.Examples.Chameleon
             }
             catch ( Exception ex ) {
                 Console.WriteLine( ex.Message );
-                Adk.Log.Warn( ex.Message, ex );
+                fAgent.Runtime.Log.Warn( ex.Message, ex );
             }
         }
 
         public void OnQueryPending( IMessageInfo info,
                                     IZone zone )
         {
-            Adk.Log.Info
+            fAgent.Runtime.Log.Info
                 ( string.Format
                       ( "Requested {0} from zone: {1}",
                         ((SifMessageInfo) info).SIFRequestObjectType.Name, zone.ZoneId ) );
@@ -235,7 +235,7 @@ namespace SifWorks.Examples.Chameleon
                     }
                 }
                 catch ( Exception ex ) {
-                    Adk.Log.Warn( ex.Message, ex );
+                    fAgent.Runtime.Log.Warn( ex.Message, ex );
                 }
             }
         }

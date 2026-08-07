@@ -28,7 +28,7 @@ public class TTSubject : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TTSubject
 	/// </summary>
-	public TTSubject() : base( Adk.SifVersion, LearnerDTD.TTSUBJECT ){}
+	public TTSubject() : base( SifVersion.LATEST, LearnerDTD.TTSUBJECT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class TTSubject : SifDataObject
 	///<param name="code">A Code</param>
 	///<param name="description">A Description</param>
 	///
-	public TTSubject( string refId, string code, string description ) : base( Adk.SifVersion, LearnerDTD.TTSUBJECT )
+	public TTSubject( string refId, string code, string description ) : base( SifVersion.LATEST, LearnerDTD.TTSUBJECT )
 	{
 		this.RefId = refId;
 		this.Code = code;
@@ -115,4 +115,3 @@ public class TTSubject : SifDataObject
 	}
 
 }}
-

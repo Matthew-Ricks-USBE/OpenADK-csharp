@@ -2,6 +2,7 @@ using OpenADK.Library;
 using OpenADK.Library.Impl;
 using NUnit.Framework;
 using OpenADK.Library.us;
+using Microsoft.Extensions.DependencyInjection;
 //import com.OpenADK.Library.ADK;
 //import com.OpenADK.Library.impl.TransportPlugin;
 
@@ -12,19 +13,31 @@ namespace Library.UnitTesting.Framework
         protected Agent fAgent;
         protected TestZoneImpl fZone;
         protected SifVersion fOriginalVersion;
+        protected ServiceProvider fServices;
+        protected IAdkRuntime Runtime { get; private set; }
 
         protected const string TEST_URL = "http://localhost:7003?%20%34%"; 
 
         [SetUp]
         public virtual void Setup()
         {
-            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.All );
-            fOriginalVersion = Adk.SifVersion;
+            fServices = new ServiceCollection()
+                .AddOpenAdk(options =>
+                {
+                    options.SifVersion = SifVersion.LATEST;
+                    options.Variant = SIFVariant.SIF_US;
+                    options.SdoLibraries = (int)SdoLibraryType.All;
+                })
+                .BuildServiceProvider();
+            Runtime = fServices.GetRequiredService<IAdkRuntime>();
+            Runtime.Initialize();
+            fOriginalVersion = Runtime.SifVersion;
             //uses transportplugin interface , and factory method Createthat
             //returns new instance of class we're looking for 
             TransportPlugin tp = new InMemoryTransportPlugin();
-            Adk.Install( tp );
-            fAgent = new TestAgent();
+            Runtime.Install( tp );
+            fAgent = new TestAgent(Runtime,
+                fServices.GetRequiredService<IAdkComponentFactory>());
             fAgent.Initialize();
             fAgent.Properties.TransportProtocol = tp.Protocol;
 
@@ -36,7 +49,8 @@ namespace Library.UnitTesting.Framework
         [TearDown]
         public virtual void TearDown()
         {
-            Adk.SifVersion = fOriginalVersion;
+            fAgent?.Shutdown();
+            fServices?.Dispose();
         }
 
 

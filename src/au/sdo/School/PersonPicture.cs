@@ -28,7 +28,7 @@ public class PersonPicture : SifDataObject
 	/// <summary>
 	/// Creates an instance of a PersonPicture
 	/// </summary>
-	public PersonPicture() : base( Adk.SifVersion, SchoolDTD.PERSONPICTURE ){}
+	public PersonPicture() : base( SifVersion.LATEST, SchoolDTD.PERSONPICTURE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class PersonPicture : SifDataObject
 	///<param name="schoolYear">A SchoolYear</param>
 	///<param name="pictureSource">A PictureSource</param>
 	///
-	public PersonPicture( string refId, ParentObjectRefId parentObjectRefId, int? schoolYear, PictureSource pictureSource ) : base( Adk.SifVersion, SchoolDTD.PERSONPICTURE )
+	public PersonPicture( string refId, ParentObjectRefId parentObjectRefId, int? schoolYear, PictureSource pictureSource ) : base( SifVersion.LATEST, SchoolDTD.PERSONPICTURE )
 	{
 		this.RefId = refId;
 		this.ParentObjectRefId = parentObjectRefId;
@@ -211,4 +211,3 @@ public class PersonPicture : SifDataObject
 	}
 
 }}
-

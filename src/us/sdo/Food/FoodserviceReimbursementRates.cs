@@ -28,7 +28,7 @@ public class FoodserviceReimbursementRates : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceReimbursementRates
 	/// </summary>
-	public FoodserviceReimbursementRates() : base( Adk.SifVersion, FoodDTD.FOODSERVICEREIMBURSEMENTRATES ){}
+	public FoodserviceReimbursementRates() : base( SifVersion.LATEST, FoodDTD.FOODSERVICEREIMBURSEMENTRATES ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class FoodserviceReimbursementRates : SifDataObject
 	///<param name="program">Refer to 5.1.23 Program.</param>
 	///<param name="agencies">Reimbursing agency</param>
 	///
-	public FoodserviceReimbursementRates( string refId, string schoolInfoRefId, DateTime? startDate, DateTime? endDate, Program program, Agencies agencies ) : base( Adk.SifVersion, FoodDTD.FOODSERVICEREIMBURSEMENTRATES )
+	public FoodserviceReimbursementRates( string refId, string schoolInfoRefId, DateTime? startDate, DateTime? endDate, Program program, Agencies agencies ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICEREIMBURSEMENTRATES )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -211,4 +211,3 @@ public class FoodserviceReimbursementRates : SifDataObject
 	}
 
 }}
-

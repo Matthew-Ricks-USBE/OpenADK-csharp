@@ -28,7 +28,7 @@ public class StudentSpecialEducationSummary : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentSpecialEducationSummary
 	/// </summary>
-	public StudentSpecialEducationSummary() : base( Adk.SifVersion, ProgramsDTD.STUDENTSPECIALEDUCATIONSUMMARY ){}
+	public StudentSpecialEducationSummary() : base( SifVersion.LATEST, ProgramsDTD.STUDENTSPECIALEDUCATIONSUMMARY ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class StudentSpecialEducationSummary : SifDataObject
 	///<param name="summaryDate">The date the data summary was taken. Some elements are provided/calculated as of the SummaryDate, and some are provided as of the date the object is requested (i.e., some can be historical and some will represent the last information available/last known value).</param>
 	///<param name="schoolYear">School year for which the information is applicable.</param>
 	///
-	public StudentSpecialEducationSummary( string studentPersonalRefId, DateTime? summaryDate, int? schoolYear ) : base( Adk.SifVersion, ProgramsDTD.STUDENTSPECIALEDUCATIONSUMMARY )
+	public StudentSpecialEducationSummary( string studentPersonalRefId, DateTime? summaryDate, int? schoolYear ) : base( SifVersion.LATEST, ProgramsDTD.STUDENTSPECIALEDUCATIONSUMMARY )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.SummaryDate = summaryDate;
@@ -289,4 +289,3 @@ public class StudentSpecialEducationSummary : SifDataObject
 	}
 
 }}
-

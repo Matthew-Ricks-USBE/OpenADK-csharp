@@ -9,6 +9,7 @@ using OpenADK.Library;
 using OpenADK.Util;
 using Library.Examples.SimpleSubscriber;
 using OpenADK.Library.au;
+using Microsoft.Extensions.DependencyInjection;
 /**
  *  A simple agent the demonstrates basic SIFAgent connectivity 
  *  for a subscriber agentusing the ADK
@@ -18,7 +19,8 @@ using OpenADK.Library.au;
 
 public class SimpleSubscriber : Agent
 {
-    protected SimpleSubscriber() : base( "SimpleSubscriber" )
+    public SimpleSubscriber(IAdkRuntime runtime, IAdkComponentFactory components)
+        : base( "SimpleSubscriber", runtime, components )
     {
     }
 
@@ -30,6 +32,7 @@ public class SimpleSubscriber : Agent
     public static void Main( string[] args )
     {
         SimpleSubscriber agent = null;
+        ServiceProvider services = null;
         try
         {
             if ( args.Length < 2 )
@@ -43,14 +46,18 @@ public class SimpleSubscriber : Agent
             Console.ForegroundColor = ConsoleColor.Yellow;
 
             //	Pre-parse the command-line before initializing the ADK
-            Adk.Debug = AdkDebugFlags.None;
             AdkExamples.parseCL( null, args );
 
             //  Initialize the ADK with the specified version, loading only the learner SDO package
-            Adk.Initialize( AdkExamples.Version, SIFVariant.SIF_AU, (int)SdoLibraryType.Student );
-
-            //  Start the agent...
-            agent = new SimpleSubscriber();
+            services = new ServiceCollection().AddOpenAdk(options =>
+            {
+                options.SifVersion = AdkExamples.Version ?? SifVersion.LATEST;
+                options.Variant = SIFVariant.SIF_AU;
+                options.SdoLibraries = (int)SdoLibraryType.Student;
+                options.Debug = AdkExamples.Debug;
+            }).AddSingleton<SimpleSubscriber>().BuildServiceProvider();
+            agent = services.GetRequiredService<SimpleSubscriber>();
+            if (!String.IsNullOrEmpty(AdkExamples.LogFilePath)) agent.Runtime.SetLogFile(AdkExamples.LogFilePath);
 
             // Call StartAgent. This method does not return until the agent shuts down
             agent.startAgent( args );
@@ -78,6 +85,7 @@ public class SimpleSubscriber : Agent
                     Console.WriteLine( adkEx );
                 }
             }
+            services?.Dispose();
         }
     }
 

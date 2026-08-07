@@ -1,6 +1,8 @@
 using OpenADK.Library;
+using OpenADK.Library.Impl;
 using NUnit.Framework;
 using OpenADK.Library.us;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Library.UnitTesting.Framework
 {
@@ -10,18 +12,39 @@ namespace Library.UnitTesting.Framework
     public class AdkTest
     {
         protected SifVersion fOriginalVersion;
+        protected ServiceProvider Services { get; private set; }
+        protected IAdkRuntime Runtime { get; private set; }
+        protected IAdkComponentFactory Components { get; private set; }
+        protected ISifObjectFactory Objects => Runtime?.Objects;
 
         [SetUp]
         public virtual void SetUp()
         {
-            Adk.Initialize(SifVersion.LATEST, SIFVariant.SIF_US, (int)SdoLibraryType.All);
-            fOriginalVersion = Adk.SifVersion;
+            Services = new ServiceCollection()
+                .AddOpenAdk(ConfigureOptions)
+                .BuildServiceProvider();
+            Runtime = Services.GetRequiredService<IAdkRuntime>();
+            Runtime.Initialize();
+            Components = Services.GetRequiredService<IAdkComponentFactory>();
+            fOriginalVersion = Runtime.SifVersion;
         }
 
         [TearDown]
         public virtual void TearDown()
         {
-            Adk.SifVersion = fOriginalVersion;
+            Services?.Dispose();
+        }
+
+        protected virtual void ConfigureOptions(AdkOptions options)
+        {
+            options.SifVersion = SifVersion.LATEST;
+            options.Variant = SIFVariant.SIF_US;
+            options.SdoLibraries = (int)SdoLibraryType.All;
+        }
+
+        protected TestAgent CreateTestAgent()
+        {
+            return new TestAgent(Runtime, Components);
         }
     }
 }

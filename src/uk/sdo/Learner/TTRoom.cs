@@ -28,7 +28,7 @@ public class TTRoom : SifDataObject
 	/// <summary>
 	/// Creates an instance of a TTRoom
 	/// </summary>
-	public TTRoom() : base( Adk.SifVersion, LearnerDTD.TTROOM ){}
+	public TTRoom() : base( SifVersion.LATEST, LearnerDTD.TTROOM ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class TTRoom : SifDataObject
 	///<param name="code">A Code</param>
 	///<param name="description">A Description</param>
 	///
-	public TTRoom( string refId, string code, string description ) : base( Adk.SifVersion, LearnerDTD.TTROOM )
+	public TTRoom( string refId, string code, string description ) : base( SifVersion.LATEST, LearnerDTD.TTROOM )
 	{
 		this.RefId = refId;
 		this.Code = code;
@@ -136,4 +136,3 @@ public class TTRoom : SifDataObject
 	}
 
 }}
-

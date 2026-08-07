@@ -28,7 +28,7 @@ public class StaffPersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StaffPersonal
 	/// </summary>
-	public StaffPersonal() : base( Adk.SifVersion, StudentDTD.STAFFPERSONAL ){}
+	public StaffPersonal() : base( SifVersion.LATEST, StudentDTD.STAFFPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class StaffPersonal : SifDataObject
 	///<param name="refId">The GUID of the staff member.</param>
 	///<param name="name">Name of the staff member.  Note: Always use Type value of 04.</param>
 	///
-	public StaffPersonal( string refId, Name name ) : base( Adk.SifVersion, StudentDTD.STAFFPERSONAL )
+	public StaffPersonal( string refId, Name name ) : base( SifVersion.LATEST, StudentDTD.STAFFPERSONAL )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -390,4 +390,3 @@ public class StaffPersonal : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class FoodserviceMenuPlan : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceMenuPlan
 	/// </summary>
-	public FoodserviceMenuPlan() : base( Adk.SifVersion, FoodDTD.FOODSERVICEMENUPLAN ){}
+	public FoodserviceMenuPlan() : base( SifVersion.LATEST, FoodDTD.FOODSERVICEMENUPLAN ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class FoodserviceMenuPlan : SifDataObject
 	///<param name="program">A Program</param>
 	///<param name="projectedParticipation">Feeding figure projected</param>
 	///
-	public FoodserviceMenuPlan( string refId, string schoolInfoRefId, GradeLevels gradeLevels, DateTime? menuPlanDate, Program program, string projectedParticipation ) : base( Adk.SifVersion, FoodDTD.FOODSERVICEMENUPLAN )
+	public FoodserviceMenuPlan( string refId, string schoolInfoRefId, GradeLevels gradeLevels, DateTime? menuPlanDate, Program program, string projectedParticipation ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICEMENUPLAN )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -255,4 +255,3 @@ public class FoodserviceMenuPlan : SifDataObject
 	}
 
 }}
-

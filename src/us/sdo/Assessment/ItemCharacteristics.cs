@@ -31,7 +31,7 @@ public class ItemCharacteristics : SifDataObject
 	/// <summary>
 	/// Creates an instance of an ItemCharacteristics
 	/// </summary>
-	public ItemCharacteristics() : base( Adk.SifVersion, AssessmentDTD.ITEMCHARACTERISTICS ){}
+	public ItemCharacteristics() : base( SifVersion.LATEST, AssessmentDTD.ITEMCHARACTERISTICS ){}
 
 	/// <summary>
 	/// Gets the metadata fields that make up the key of this object
@@ -285,4 +285,3 @@ public class ItemCharacteristics : SifDataObject
 	}
 
 }}
-

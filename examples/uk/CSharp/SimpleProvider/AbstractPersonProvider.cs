@@ -11,8 +11,11 @@ using OpenADK.Library.uk.Common;
 
 public abstract class AbstractPersonProvider : IPublisher
 {
-    public AbstractPersonProvider()
+    protected readonly IAdkRuntime Runtime;
+
+    protected AbstractPersonProvider(IAdkRuntime runtime)
     {
+        Runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
         try
         {
             initializeDB();
@@ -119,7 +122,7 @@ public abstract class AbstractPersonProvider : IPublisher
                 Thread.Sleep(EVENT_INTERVAL);
 
                 SifDataObject changedObject = fData[random.Next(fData.Count)];
-                SifDataObject eventObject = Adk.Dtd.CreateSIFDataObject(getElementDef());
+                SifDataObject eventObject = Runtime.Dtd.CreateSIFDataObject(getElementDef());
                 eventObject.SetElementOrAttribute
                     ("@PersonRefId",
                      changedObject.GetElementOrAttribute("@PersonRefId").
@@ -213,7 +216,7 @@ public abstract class AbstractPersonProvider : IPublisher
 
     {
         SifDataObject person = createPersonObject(id);
-        person.SetElementOrAttribute("@RefId", Adk.MakeGuid());
+        person.SetElementOrAttribute("@RefId", Runtime.MakeGuid());
 
         Name name = new Name(NameType.CURRENT_LEGAL, firstName, lastName);
         PersonalInformation personal = new PersonalInformation(name);

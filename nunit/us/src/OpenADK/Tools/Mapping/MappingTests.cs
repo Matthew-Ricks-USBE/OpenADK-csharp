@@ -36,7 +36,7 @@ namespace Library.Nunit.US.Tools.Mapping
         public override void SetUp()
         {
             base.SetUp();
-            Adk.SifVersion = fVersion;
+            Runtime.SifVersion = fVersion;
             fCfg = new AgentConfig();
             fCfg.Read( fFileName, false );
         }
@@ -63,8 +63,8 @@ namespace Library.Nunit.US.Tools.Mapping
 
             StringMapAdaptor adaptor = new StringMapAdaptor( map );
 
-            mappings.MapOutbound( adaptor, sp );
-            SifWriter writer = new SifWriter( Console.Out );
+            mappings.MapOutbound( adaptor, sp , fVersion );
+            SifWriter writer = new SifWriter( Console.Out, Runtime );
             writer.Write( sp );
             writer.Flush();
 
@@ -76,7 +76,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, remap the student back into application fields
             IDictionary restoredData = new Hashtable();
             adaptor.Dictionary = restoredData;
-            mappings.MapInbound( sp, adaptor );
+            mappings.MapInbound( sp, adaptor , fVersion );
 
             Assert.AreEqual("Jerry", restoredData["MIDDLE_NAME"], "Middle Name should be Jerry");
 
@@ -84,7 +84,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, remap the student back into application fields
             restoredData = new Hashtable();
             adaptor.Dictionary = restoredData;
-            mappings.MapInbound( sp, adaptor );
+            mappings.MapInbound( sp, adaptor , fVersion );
 
             Object lastName = restoredData["LAST_NAME"];
             Console.WriteLine( sp.ToXml() );
@@ -136,7 +136,7 @@ namespace Library.Nunit.US.Tools.Mapping
             IDictionary restoredData = new Hashtable();
 
             StringMapAdaptor adaptor = new StringMapAdaptor( restoredData );
-            mappings.MapInbound( sp, adaptor );
+            mappings.MapInbound( sp, adaptor , fVersion );
 
             // The value "abcdefg" does not have a match in the value set
             // It should be passed back through
@@ -153,7 +153,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, remap the student back into application fields
             restoredData = new Hashtable();
             adaptor.Dictionary = restoredData;
-            mappings.MapInbound( sp, adaptor );
+            mappings.MapInbound( sp, adaptor , fVersion );
 
             // The value "9999" does not have a match in the value set
             // we want it to take on the default value, which is "111111"
@@ -203,8 +203,8 @@ namespace Library.Nunit.US.Tools.Mapping
             Mappings mappings = fCfg.Mappings.GetMappings( "Default" );
             IFieldAdaptor adaptor = createStudentContactFields();
 
-            mappings.MapOutbound( adaptor, sc );
-            SifWriter writer = new SifWriter( Console.Out );
+            mappings.MapOutbound( adaptor, sc , fVersion );
+            SifWriter writer = new SifWriter( Console.Out, Runtime );
             writer.Write( sc );
             writer.Flush();
 
@@ -221,9 +221,9 @@ namespace Library.Nunit.US.Tools.Mapping
         private void MapOutbound( StudentPersonal sp, Mappings mappings, IDictionary map )
         {
             StringMapAdaptor adaptor = new StringMapAdaptor( map );
-            mappings.MapOutbound( adaptor, sp );
+            mappings.MapOutbound( adaptor, sp , fVersion );
 
-            SifWriter writer = new SifWriter( Console.Out );
+            SifWriter writer = new SifWriter( Console.Out, Runtime );
             writer.Write( sp );
             writer.Flush();
             writer.Close();
@@ -343,9 +343,9 @@ namespace Library.Nunit.US.Tools.Mapping
             IDictionary map = buildIDictionaryForStudentPersonalTest();
 
             StringMapAdaptor adaptor = new StringMapAdaptor( map );
-            mappings.MapOutbound( adaptor, sp );
+            mappings.MapOutbound( adaptor, sp , fVersion );
 
-            SifWriter writer = new SifWriter( Console.Out );
+            SifWriter writer = new SifWriter( Console.Out, Runtime );
             writer.Write( sp );
             writer.Flush();
 
@@ -355,7 +355,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, map the student personal back to a hashmap and assert it
             IDictionary restoredData = new Hashtable();
             adaptor.Dictionary = restoredData;
-            mappings.MapInbound( sp, adaptor );
+            mappings.MapInbound( sp, adaptor , fVersion );
             assertMapsAreEqual( map, restoredData, "ALT_PHONE_TYPE" );
         }
 
@@ -376,7 +376,7 @@ namespace Library.Nunit.US.Tools.Mapping
             Mappings mappings = fCfg.Mappings.GetMappings( "Default" );
             IDictionary map = buildIDictionaryForStudentPlacementTest();
             StringMapAdaptor sma = new StringMapAdaptor( map );
-            mappings.MapOutbound( sma, sp );
+            mappings.MapOutbound( sma, sp , fVersion );
 
             sp = (StudentPlacement) AdkObjectParseHelper.WriteParseAndReturn( sp, fVersion );
 
@@ -386,7 +386,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, map the StudentPlacement back to a hashmap and assert it
             IDictionary restoredData = new Hashtable();
             sma = new StringMapAdaptor( restoredData );
-            mappings.MapInbound( sp, sma );
+            mappings.MapInbound( sp, sma , fVersion );
             assertMapsAreEqual( map, restoredData );
         }
 
@@ -409,7 +409,7 @@ namespace Library.Nunit.US.Tools.Mapping
             map.Add( "Balance", "10.55" );
 
             StringMapAdaptor sma = new StringMapAdaptor( map );
-            mappings.MapOutbound( sma, sm );
+            mappings.MapOutbound( sma, sm , fVersion );
 
             sm = (StudentMeal) AdkObjectParseHelper.WriteParseAndReturn( sm, fVersion );
 
@@ -424,7 +424,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, map the object back to a hashmap and assert it
             IDictionary restoredData = new Hashtable();
             sma = new StringMapAdaptor( restoredData );
-            mappings.MapInbound( sm, sma );
+            mappings.MapInbound( sm, sma , fVersion );
             assertMapsAreEqual( map, restoredData );
         }
 
@@ -447,7 +447,7 @@ namespace Library.Nunit.US.Tools.Mapping
             map.Add( "STAFF_REFID", "123456789ABCDEF" );
 
             StringMapAdaptor sma = new StringMapAdaptor( map );
-            mappings.MapOutbound( sma, si );
+            mappings.MapOutbound( sma, si , fVersion );
 
             si = (SectionInfo) AdkObjectParseHelper.WriteParseAndReturn( si, fVersion );
 
@@ -466,7 +466,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, map the object back to a hashmap and assert it
             IDictionary restoredData = new Hashtable();
             sma = new StringMapAdaptor( restoredData );
-            mappings.MapInbound( si, sma );
+            mappings.MapInbound( si, sma , fVersion );
             assertMapsAreEqual( map, restoredData );
         }
 
@@ -525,9 +525,9 @@ namespace Library.Nunit.US.Tools.Mapping
             Mappings mappings = fCfg.Mappings.GetMappings( "Default" );
             IDictionary map = buildIDictionaryForStudentPersonalTest();
             StringMapAdaptor sma = new StringMapAdaptor( map );
-            mappings.MapOutbound( sma, sp );
+            mappings.MapOutbound( sma, sp , fVersion );
 
-            SifWriter writer = new SifWriter( Console.Out );
+            SifWriter writer = new SifWriter( Console.Out, Runtime );
             writer.Write( sp );
             writer.Flush();
 
@@ -537,7 +537,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, map the student personal back to a hashmap and assert it
             IDictionary restoredData = new HybridDictionary();
             StringMapAdaptor restorer = new StringMapAdaptor( restoredData );
-            mappings.MapInbound( sp, restorer );
+            mappings.MapInbound( sp, restorer , fVersion );
             assertDictionariesAreEqual( restoredData, map );
         }
 
@@ -548,9 +548,9 @@ namespace Library.Nunit.US.Tools.Mapping
             Mappings mappings = fCfg.Mappings.GetMappings( "Default" );
             IDictionary map = buildIDictionaryForStudentPlacementTest();
             StringMapAdaptor sma = new StringMapAdaptor( map );
-            mappings.MapOutbound( sma, sp );
+            mappings.MapOutbound( sma, sp , fVersion );
 
-            SifWriter writer = new SifWriter( Console.Out );
+            SifWriter writer = new SifWriter( Console.Out, Runtime );
             writer.Write( sp );
             writer.Flush();
 
@@ -560,7 +560,7 @@ namespace Library.Nunit.US.Tools.Mapping
             // Now, map the student personal back to a hashmap and assert it
             IDictionary restoredData = new HybridDictionary();
             StringMapAdaptor restorer = new StringMapAdaptor( restoredData );
-            mappings.MapInbound( sp, restorer );
+            mappings.MapInbound( sp, restorer , fVersion );
             assertDictionariesAreEqual( map, restoredData );
         }
 

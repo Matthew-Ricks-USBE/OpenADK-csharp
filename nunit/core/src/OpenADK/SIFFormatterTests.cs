@@ -6,11 +6,12 @@ using OpenADK.Library;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
 using NUnit.Framework;
+using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.Core
 {
     [TestFixture]
-    public class SifFormatterTests
+    public class SifFormatterTests : AdkTest
     {
         	/**
 	 * The SIF 1.x formatter supports things like empty strings and spaces
@@ -298,11 +299,6 @@ namespace Library.Nunit.Core
         [Test]
         public void TestStableSortInGetContent()
         {
-            if( !Adk.Initialized )
-            {
-                Adk.Initialize();
-            }
-
             SIF_Register sr = new SIF_Register();
 
             sr.SIF_Icon = "test.ico";
@@ -323,7 +319,7 @@ namespace Library.Nunit.Core
             sr.SIF_Name = "AgentName";
             sr.SIF_Mode = "Push";
 
-            IList<Element> elements = Adk.Dtd.GetFormatter( SifVersion.SIF11 ).GetContent( sr, SifVersion.SIF11 );
+            IList<Element> elements = Runtime.Dtd.GetFormatter( SifVersion.SIF11 ).GetContent( sr, SifVersion.SIF11 );
 
             // We should have gotten back a list of elements like this:
             // SIF_Name
@@ -340,7 +336,7 @@ namespace Library.Nunit.Core
             Assert.AreEqual("Push", elements[6].TextValue);
             // NOTE: SIF_Icon is not present in SIF 1.1
             
-            elements = Adk.Dtd.GetFormatter(SifVersion.SIF21).GetContent(sr, SifVersion.SIF21);
+            elements = Runtime.Dtd.GetFormatter(SifVersion.SIF21).GetContent(sr, SifVersion.SIF21);
 
 
             Assert.AreEqual("AgentName", elements[0].TextValue);

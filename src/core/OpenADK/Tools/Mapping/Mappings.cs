@@ -1304,7 +1304,7 @@ namespace OpenADK.Library.Tools.Mapping
         public void MapInbound(SifDataObject dataObject,
                                IFieldAdaptor results)
         {
-            MapInbound(dataObject, results, Adk.SifVersion);
+            MapInbound(dataObject, results, dataObject.EffectiveSIFVersion);
         }
 
         /// <summary>  Produce a table of field values from a SIF Data Object.
@@ -1526,7 +1526,7 @@ namespace OpenADK.Library.Tools.Mapping
                                 SifDataObject data,
                                 IValueBuilder valueBuilder)
         {
-            MapOutbound(adaptor, data, valueBuilder, Adk.SifVersion);
+            MapOutbound(adaptor, data, valueBuilder, data.EffectiveSIFVersion);
         }
 
 
@@ -1629,7 +1629,7 @@ namespace OpenADK.Library.Tools.Mapping
 		}
 #endif
 
-            SifFormatter textFormatter = Adk.TextFormatter;
+            SifFormatter textFormatter = dataObject.ElementDef.Dtd.GetFormatter(version);
             FieldMapping lastRule = null;
             try
             {

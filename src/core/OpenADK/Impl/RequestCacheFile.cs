@@ -13,6 +13,7 @@ using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library.Impl
 {
@@ -26,7 +27,9 @@ namespace OpenADK.Library.Impl
     /// </version>
     internal class RequestCacheFile : RequestCache
     {
-        private static readonly AdkSerializerOptions s_messagePackOptions = new();
+        private IAdkRuntime fRuntime;
+        private ILogger fLog;
+        private AdkSerializerOptions fMessagePackOptions;
 
         private Hashtable fCache = new Hashtable();
         private FileStream fFile;
@@ -47,6 +50,9 @@ namespace OpenADK.Library.Impl
         /// </remarks>
         protected internal override void Initialize(Agent agent)
         {
+            fRuntime = agent.Runtime;
+            fLog = agent.GetLog();
+            fMessagePackOptions = new AdkSerializerOptions(fRuntime);
             Initialize(agent, false);
         }
 
@@ -60,9 +66,9 @@ namespace OpenADK.Library.Impl
             FileInfo currentCacheFile = new FileInfo(fileName);
             if (!currentCacheFile.Exists)
             {
-                if ((Adk.Debug & AdkDebugFlags.Lifecycle) != 0)
+                if ((fRuntime.Debug & AdkDebugFlags.Lifecycle) != 0)
                 {
-                    Agent.Log.Debug("Creating SIF_Request ID cache: " + fileName);
+                    fLog.Debug("Creating SIF_Request ID cache: " + fileName);
                 }
             }
 
@@ -77,9 +83,9 @@ namespace OpenADK.Library.Impl
             }
 
             //  Read the file contents into memory
-            if ((Adk.Debug & AdkDebugFlags.Lifecycle) != 0)
+            if ((fRuntime.Debug & AdkDebugFlags.Lifecycle) != 0)
             {
-                Agent.Log.Debug("Reading SIF_Request ID cache: " + fileName);
+                fLog.Debug("Reading SIF_Request ID cache: " + fileName);
             }
 
             // At startup, we pack the file by writing all of the active entries into
@@ -103,7 +109,7 @@ namespace OpenADK.Library.Impl
                     }
                     catch (Exception ex)
                     {
-                        Agent.Log.Warn
+                        fLog.Warn
                             (
                             "Error parsing property 'adkglobal.requestCache.age', default of 90 days will be used: " +
                             ex.Message, ex);
@@ -144,9 +150,9 @@ namespace OpenADK.Library.Impl
                         ("Error opening or creating SIF_Request ID cache: " + fnfe, null, fnfe);
                 }
 
-                if ((Adk.Debug & AdkDebugFlags.Lifecycle) != 0)
+                if ((fRuntime.Debug & AdkDebugFlags.Lifecycle) != 0)
                 {
-                    Agent.Log.Debug
+                    fLog.Debug
                         ("Read " + fCache.Count + " pending SIF_Request IDs from cache");
                 }
             }
@@ -161,7 +167,7 @@ namespace OpenADK.Library.Impl
                     }
                     catch (Exception ex)
                     {
-                        Agent.Log.WarnFormat("Exception thrown while closing FileStream: {0}", ex);
+                        fLog.WarnFormat("Exception thrown while closing FileStream: {0}", ex);
                     }
 
                 }
@@ -173,7 +179,7 @@ namespace OpenADK.Library.Impl
                     }
                     catch (Exception ex)
                     {
-                        Agent.Log.WarnFormat("Exception thrown while closing file: {0}", ex);
+                        fLog.WarnFormat("Exception thrown while closing file: {0}", ex);
                     }
 
                 }
@@ -199,7 +205,7 @@ namespace OpenADK.Library.Impl
                 }
                 else
                 {
-                    Agent.Log.Warn
+                    fLog.Warn
                         ("Could not read SIF_Request ID cache (will start with fresh cache): " +
                           ioe);
 
@@ -329,7 +335,7 @@ namespace OpenADK.Library.Impl
             {
                 byte[] serializedObject = new byte[objectLength];
                 outStream.ReadExactly(serializedObject, 0, objectLength);
-                return MessagePackSerializer.Typeless.Deserialize(serializedObject, s_messagePackOptions);
+                return MessagePackSerializer.Typeless.Deserialize(serializedObject, fMessagePackOptions);
             }
             return null;
         }
@@ -365,12 +371,12 @@ namespace OpenADK.Library.Impl
                 try
                 {
                     //serialize and write object to fs
-                    byte[] messagePackBytes = MessagePackSerializer.Typeless.Serialize(serializedObject, s_messagePackOptions);
+                    byte[] messagePackBytes = MessagePackSerializer.Typeless.Serialize(serializedObject, fMessagePackOptions);
                     outStream.Write(messagePackBytes, 0, messagePackBytes.Length);
                 }
                 catch (Exception ex)
                 {
-                    Agent.Log.Error
+                    fLog.Error
                         ("Exception occurred while Writing RequestInfo State object to RequestCacheFile: " +
                          ex.Message, ex);
                     outStream.Seek(startPosition, SeekOrigin.Begin);
@@ -434,7 +440,7 @@ namespace OpenADK.Library.Impl
                     }
                     catch (Exception ex)
                     {
-                        Agent.Log.Warn
+                        fLog.Warn
                             ("Error Deserializing Request Cache Info: " + ex.Message, ex);
                         return new RequestCacheFileEntry(false);
                     }
@@ -448,7 +454,7 @@ namespace OpenADK.Library.Impl
                     }
                     catch (Exception ex)
                     {
-                        Agent.Log.Warn
+                        fLog.Warn
                         ("Error Deserializing Request Cache State Info: " + ex.Message, ex);
 
                     }
@@ -544,17 +550,25 @@ namespace OpenADK.Library.Impl
             ///     </item>
             /// </list>
             /// </summary>
-            internal AdkSerializerOptions() : base(Standard
+            internal AdkSerializerOptions(IAdkRuntime runtime) : base(Standard
                 .WithSecurity(MessagePackSecurity.UntrustedData)
                 .WithResolver(CompositeResolver.Create(
                     AdkResolver.Instance,
-                    TypelessContractlessStandardResolver.Instance))) { }
+                    TypelessContractlessStandardResolver.Instance)))
+            {
+                Runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
+            }
+
+            internal IAdkRuntime Runtime { get; }
 
             /// <summary>
             /// Clone constructor.
             /// </summary>
             /// <param name="options">Options to clone.</param>
-            protected AdkSerializerOptions(AdkSerializerOptions options) : base(options) { }
+            protected AdkSerializerOptions(AdkSerializerOptions options) : base(options)
+            {
+                Runtime = options.Runtime;
+            }
 
             /// <inheritdoc />
             public override Type LoadType(string typeName)
@@ -619,7 +633,7 @@ namespace OpenADK.Library.Impl
                 element.SetChanged(true);
 
                 using var ms = new MemoryStream();
-                var sifWriter = new SifWriter(ms);
+                var sifWriter = new SifWriter(ms, ((AdkSerializerOptions)options).Runtime);
                 sifWriter.Write(element);
                 sifWriter.Flush();
                 string xmlContent = System.Text.Encoding.UTF8.GetString(ms.ToArray());
@@ -648,7 +662,7 @@ namespace OpenADK.Library.Impl
                 if (wrapper?.XmlContent == null)
                     return null;
 
-                var element = SifParser.NewInstance().Parse(wrapper.XmlContent);
+                var element = new SifParser(((AdkSerializerOptions)options).Runtime).Parse(wrapper.XmlContent);
 
                 // SifParser returns null for empty XML elements (no fields/children).
                 // Fall back to creating a new instance via the stored type name.

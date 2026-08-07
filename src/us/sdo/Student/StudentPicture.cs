@@ -28,7 +28,7 @@ public class StudentPicture : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentPicture
 	/// </summary>
-	public StudentPicture() : base( Adk.SifVersion, StudentDTD.STUDENTPICTURE ){}
+	public StudentPicture() : base( SifVersion.LATEST, StudentDTD.STUDENTPICTURE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -40,7 +40,7 @@ public class StudentPicture : SifDataObject
 	///         ends (e.g. 2007 for the 2006-07 school year).
 	///       </param>
 	///
-	public StudentPicture( string studentPersonalRefId, PictureSource pictureSource, int? schoolYear ) : base( Adk.SifVersion, StudentDTD.STUDENTPICTURE )
+	public StudentPicture( string studentPersonalRefId, PictureSource pictureSource, int? schoolYear ) : base( SifVersion.LATEST, StudentDTD.STUDENTPICTURE )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.PictureSource = pictureSource;
@@ -178,4 +178,3 @@ public class StudentPicture : SifDataObject
 	}
 
 }}
-

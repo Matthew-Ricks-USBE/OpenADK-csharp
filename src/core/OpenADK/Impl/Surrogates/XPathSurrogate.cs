@@ -44,7 +44,7 @@ namespace OpenADK.Library.Impl.Surrogates
                 IElementDef valueDef = null;
                 if ( o is SifElement )
                 {
-                    valueDef = Adk.Dtd.LookupElementDefBySQP( o.ElementDef, fValueXpath );
+                    valueDef = fElementDef.Dtd.LookupElementDefBySQP( o.ElementDef, fValueXpath );
                 }
                 if ( valueDef == null )
                 {
@@ -234,7 +234,7 @@ namespace OpenADK.Library.Impl.Surrogates
                 {
                     foreach ( var kvp in elementAttributes )
                     {
-                        IElementDef attrDef = Adk.Dtd.LookupElementDef( fElementDef, kvp.Key );
+                        IElementDef attrDef = fElementDef.Dtd.LookupElementDef( fElementDef, kvp.Key );
                         if ( attrDef != null )
                         {
                             TypeConverter attrConverter = attrDef.TypeConverter ?? SifTypeConverters.STRING;
@@ -255,7 +255,7 @@ namespace OpenADK.Library.Impl.Surrogates
                     {
                         fieldName = fValueXpath.Substring( 1 );
                     }
-                    fieldDef = Adk.Dtd.LookupElementDef( fElementDef, fieldName );
+                    fieldDef = fElementDef.Dtd.LookupElementDef( fElementDef, fieldName );
                 }
             }
 
@@ -330,7 +330,7 @@ namespace OpenADK.Library.Impl.Surrogates
                 {
                     fieldName = fValueXpath.Substring( 1 );
                 }
-                fieldDef = Adk.Dtd.LookupElementDef( fElementDef, fieldName );
+                fieldDef = fElementDef.Dtd.LookupElementDef( fElementDef, fieldName );
             }
 
 
@@ -395,7 +395,7 @@ namespace OpenADK.Library.Impl.Surrogates
                 IElementDef valueDef = null;
                 if ( startOfPath is SifElement )
                 {
-                    valueDef = Adk.Dtd.LookupElementDefBySQP( startOfPath.ElementDef, fValueXpath );
+                    valueDef = fElementDef.Dtd.LookupElementDefBySQP( startOfPath.ElementDef, fValueXpath );
                 }
                 if ( valueDef == null )
                 {

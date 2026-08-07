@@ -62,7 +62,7 @@ namespace OpenADK.Library
                 }
 
  //               return SifDtd.XMLNS_BASE + "/" + fVersion.Major + ".x";
-                return Adk.Dtd.BaseNamespace + "/" + fVersion.Major + ".x";
+                return "http://www.sifinfo.org/infrastructure/" + fVersion.Major + ".x";
             }
         }
 
@@ -101,6 +101,20 @@ namespace OpenADK.Library
         //// WARNING: MAKE SURE TO UPDATE THE GETINSTANCE METHOD WHEN ADDING NEW VERSIONS ////
         /// <summary>Identifies the latest SIF Specification supported by the Library Adk </summary>
         public static readonly SifVersion LATEST = SIF26;
+
+        public static SifVersion[] SupportedVersions { get; } =
+        [
+            SIF11,
+            SIF15r1,
+            SIF20,
+            SIF20r1,
+            SIF21,
+            SIF22,
+            SIF23,
+            SIF24,
+            SIF25,
+            SIF26,
+        ];
 
         /// <summary>
         /// Returns the earliest SIFVersion supported by the ADK for the major version
@@ -238,6 +252,23 @@ namespace OpenADK.Library
         /// <exception cref="ArgumentException">is thrown if the version string is invalid</exception>
         public static SifVersion Parse(string versionStr)
         {
+            return Parse(versionStr, LATEST);
+        }
+
+        /// <summary>
+        /// Parse a <c>SifVersion</c> from a string, resolving the "2.*" wildcard to the
+        /// agent's configured version rather than the absolute latest.
+        /// </summary>
+        /// <param name="versionStr">A version string in the format "1.0r1", or a wildcard such as "2.*"</param>
+        /// <param name="agentVersion">
+        /// The SIF version the agent is configured for. Used only when
+        /// <paramref name="versionStr"/> is a wildcard (e.g. "2.*"). The returned version is
+        /// <paramref name="agentVersion"/> clamped to a floor of <see cref="SIF20r1"/>.
+        /// </param>
+        /// <returns>A SifVersion instance encapsulating the version string</returns>
+        /// <exception cref="ArgumentException">is thrown if the version string is invalid</exception>
+        public static SifVersion Parse(string versionStr, SifVersion agentVersion)
+        {
             if (versionStr == null)
             {
                 throw new ArgumentNullException("Version to parse cannot be null", "versionStr");
@@ -260,22 +291,20 @@ namespace OpenADK.Library
                         // NOTE: This may change to getLatest(major). However, the Test harness does not
                         // support that at the moment.
 
-                        // For now, return 1.5r1 for 1.*, 2.0r1 or higher (based on ADK.getSIFVersion) for 2.*
+                        // For now, return 1.5r1 for 1.*, 2.0r1 or higher (based on agentVersion) for 2.*
                         if (major == 1)
                         {
                             return SifVersion.SIF15r1;
                         }
                         else if (major == 2)
                         {
-
-                            if (Adk.SifVersion.CompareTo(SifVersion.SIF20r1) > 0)
-                            {
-                                return Adk.SifVersion;
-                            }
-                            else
-                            {
-                                return SifVersion.SIF20r1;
-                            }
+                            // Return the agent's configured version so the agent negotiates and
+                            // renders messages at its own version, not at the absolute latest.
+                            // Floor at SIF20r1 in case the agent is configured for a 1.x version.
+                            SifVersion floor = SifVersion.SIF20r1;
+                            return (agentVersion != null && agentVersion.CompareTo(floor) >= 0)
+                                ? agentVersion
+                                : floor;
                         }
                         else
                         {

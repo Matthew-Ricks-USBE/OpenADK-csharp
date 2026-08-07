@@ -28,7 +28,7 @@ public class WorkforcePersonal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a WorkforcePersonal
 	/// </summary>
-	public WorkforcePersonal() : base( Adk.SifVersion, WorkforceDTD.WORKFORCEPERSONAL ){}
+	public WorkforcePersonal() : base( SifVersion.LATEST, WorkforceDTD.WORKFORCEPERSONAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class WorkforcePersonal : SifDataObject
 	///<param name="localId">The locally-assigned identifier for this workforce member.</param>
 	///<param name="personalInformation">Personal name, demographic, address, email, and phone information for this person. CBDS: Mulitple</param>
 	///
-	public WorkforcePersonal( string refId, string localId, PersonalInformation personalInformation ) : base( Adk.SifVersion, WorkforceDTD.WORKFORCEPERSONAL )
+	public WorkforcePersonal( string refId, string localId, PersonalInformation personalInformation ) : base( SifVersion.LATEST, WorkforceDTD.WORKFORCEPERSONAL )
 	{
 		this.RefId = refId;
 		this.LocalId = localId;
@@ -267,4 +267,3 @@ public class WorkforcePersonal : SifDataObject
 	}
 
 }}
-

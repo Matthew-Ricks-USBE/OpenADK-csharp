@@ -30,6 +30,9 @@ namespace OpenADK.Library
     /// </version>
     public interface IElementDef
     {
+        /// <summary>The schema instance that owns this metadata definition.</summary>
+        IDtd Dtd { get; }
+
         /// <summary>  Constructs a path to this IElementDef object, comprised of the names of
         /// its ancestry delimited by an underscore. The path can be used to lookup
         /// an IElementDef object via the <see cref="SifDtd.LookupElementDef"/> method.

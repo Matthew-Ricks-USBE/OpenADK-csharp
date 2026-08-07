@@ -24,7 +24,9 @@ namespace OpenADK.Library.Impl
     public class ElementDefImpl : IElementDef
     {
         // Cached array of supported SIF versions for faster lookups
-        private static SifVersion[] sSifVersions = Adk.SupportedSIFVersions;
+        private static readonly SifVersion[] sSifVersions = SifVersion.SupportedVersions;
+
+        public IDtd Dtd { get; internal set; }
 
 
         /// <summary>  Flag indicating this is a field that should be rendered as an attribute
@@ -360,7 +362,7 @@ namespace OpenADK.Library.Impl
                 if ( fVariant != null )
                 {
                     sbuf.Append(", ");
-                    sbuf.Append(Adk.Dtd.SDOAssembly);
+                    sbuf.Append(Dtd.SDOAssembly);
                     
                 }
                 return sbuf.ToString();
@@ -873,7 +875,7 @@ namespace OpenADK.Library.Impl
                         //Is it a locale-specific surrogate?
                         if (surrogateClass == null)
                         {
-                            surrogateClass = Type.GetType("OpenADK.Library.Impl.Surrogates." + surrogateClassName + ", " + Adk.Dtd.SDOAssembly);
+                            surrogateClass = Type.GetType("OpenADK.Library.Impl.Surrogates." + surrogateClassName + ", " + fDef.Dtd.SDOAssembly);
                         }
 
                         if (surrogateClass == null)

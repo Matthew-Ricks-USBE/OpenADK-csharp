@@ -28,7 +28,7 @@ public class VendorInfo : SifDataObject
 	/// <summary>
 	/// Creates an instance of a VendorInfo
 	/// </summary>
-	public VendorInfo() : base( Adk.SifVersion, HrfinDTD.VENDORINFO ){}
+	public VendorInfo() : base( SifVersion.LATEST, HrfinDTD.VENDORINFO ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -36,7 +36,7 @@ public class VendorInfo : SifDataObject
 	///<param name="refId">Vendor ID.</param>
 	///<param name="name">Name of the vendor.</param>
 	///
-	public VendorInfo( string refId, string name ) : base( Adk.SifVersion, HrfinDTD.VENDORINFO )
+	public VendorInfo( string refId, string name ) : base( SifVersion.LATEST, HrfinDTD.VENDORINFO )
 	{
 		this.RefId = refId;
 		this.Name = name;
@@ -469,4 +469,3 @@ public class VendorInfo : SifDataObject
 	}
 
 }}
-

@@ -28,7 +28,7 @@ public class LearnerBehaviourIncident : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerBehaviourIncident
 	/// </summary>
-	public LearnerBehaviourIncident() : base( Adk.SifVersion, LearnerDTD.LEARNERBEHAVIOURINCIDENT ){}
+	public LearnerBehaviourIncident() : base( SifVersion.LATEST, LearnerDTD.LEARNERBEHAVIOURINCIDENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class LearnerBehaviourIncident : SifDataObject
 	///<param name="incident">An Incident</param>
 	///<param name="participants">A Participants</param>
 	///
-	public LearnerBehaviourIncident( string refId, string schoolInfoRefId, BehaviourType behaviourType, Incident incident, Participants participants ) : base( Adk.SifVersion, LearnerDTD.LEARNERBEHAVIOURINCIDENT )
+	public LearnerBehaviourIncident( string refId, string schoolInfoRefId, BehaviourType behaviourType, Incident incident, Participants participants ) : base( SifVersion.LATEST, LearnerDTD.LEARNERBEHAVIOURINCIDENT )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -219,4 +219,3 @@ public class LearnerBehaviourIncident : SifDataObject
 	}
 
 }}
-

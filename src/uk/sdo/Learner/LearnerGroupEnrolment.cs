@@ -28,7 +28,7 @@ public class LearnerGroupEnrolment : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerGroupEnrolment
 	/// </summary>
-	public LearnerGroupEnrolment() : base( Adk.SifVersion, LearnerDTD.LEARNERGROUPENROLMENT ){}
+	public LearnerGroupEnrolment() : base( SifVersion.LATEST, LearnerDTD.LEARNERGROUPENROLMENT ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class LearnerGroupEnrolment : SifDataObject
 	///<param name="schoolGroupRefId">The ID (GUID) of the group in which this learner is enroled. </param>
 	///<param name="schoolYear">School year for which the information is applicable, expressed as the four-digit year in which the school year ends (e.g. 2007 for the 2006/07 school year). Where a group membership is valid across multiple years, the current year at the time of publication will be used. </param>
 	///
-	public LearnerGroupEnrolment( string refId, string learnerPersonalRefId, string schoolGroupRefId, int? schoolYear ) : base( Adk.SifVersion, LearnerDTD.LEARNERGROUPENROLMENT )
+	public LearnerGroupEnrolment( string refId, string learnerPersonalRefId, string schoolGroupRefId, int? schoolYear ) : base( SifVersion.LATEST, LearnerDTD.LEARNERGROUPENROLMENT )
 	{
 		this.RefId = refId;
 		this.LearnerPersonalRefId = learnerPersonalRefId;
@@ -183,4 +183,3 @@ public class LearnerGroupEnrolment : SifDataObject
 	}
 
 }}
-

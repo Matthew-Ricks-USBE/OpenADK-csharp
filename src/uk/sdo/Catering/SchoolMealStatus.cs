@@ -28,7 +28,7 @@ public class SchoolMealStatus : SifDataObject
 	/// <summary>
 	/// Creates an instance of a SchoolMealStatus
 	/// </summary>
-	public SchoolMealStatus() : base( Adk.SifVersion, CateringDTD.SCHOOLMEALSTATUS ){}
+	public SchoolMealStatus() : base( SifVersion.LATEST, CateringDTD.SCHOOLMEALSTATUS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class SchoolMealStatus : SifDataObject
 	///<param name="schoolMealStatusDateSession">AM or PM</param>
 	///<param name="schoolMealStatusTier">A SchoolMealStatusTier</param>
 	///
-	public SchoolMealStatus( string refId, string schoolInfoRefId, DateTime? schoolMealStatusDate, SchoolMealStatusDateSession schoolMealStatusDateSession, SchoolMealStatusTier schoolMealStatusTier ) : base( Adk.SifVersion, CateringDTD.SCHOOLMEALSTATUS )
+	public SchoolMealStatus( string refId, string schoolInfoRefId, DateTime? schoolMealStatusDate, SchoolMealStatusDateSession schoolMealStatusDateSession, SchoolMealStatusTier schoolMealStatusTier ) : base( SifVersion.LATEST, CateringDTD.SCHOOLMEALSTATUS )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -195,4 +195,3 @@ public class SchoolMealStatus : SifDataObject
 	}
 
 }}
-

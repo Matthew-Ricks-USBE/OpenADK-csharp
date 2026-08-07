@@ -15,8 +15,11 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpFileServer : AdkHttpServer
     {
-        public AdkHttpFileServer(string physicalPath,
-                                  string defaultFileName)
+        public AdkHttpFileServer(
+            string physicalPath,
+            string defaultFileName,
+            OpenADK.Library.IAdkRuntime runtime)
+            : base(runtime)
         {
             this.Listener.AddHandlerContext
                 ("", "/", new AdkHttpDirectoryServer(physicalPath, "/", defaultFileName), false);

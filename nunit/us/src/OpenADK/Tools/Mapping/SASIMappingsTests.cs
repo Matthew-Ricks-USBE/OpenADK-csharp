@@ -21,7 +21,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         public override void SetUp()
         {
             base.SetUp();
-            Adk.SifVersion = fVersion;
+            Runtime.SifVersion = fVersion;
             fCfg = new AgentConfig();
             fCfg.Read("..\\..\\OpenADK\\Tools\\Mapping\\SASI2.0.cfg", false);
         }
@@ -83,7 +83,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         {
             StringMapAdaptor sma = createStudentSnapshotFields();
             StudentSnapshot ss = new StudentSnapshot();
-            ss.StudentPersonalRefId = Adk.MakeGuid();
+            ss.StudentPersonalRefId = Runtime.MakeGuid();
             ss.SnapDate = DateTime.Now;
 
             Mappings m = fCfg.Mappings.GetMappings( "Default" ).Select( null,
@@ -113,7 +113,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSnapshot15r1_Adk20r1()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             StringMapAdaptor sma = createStudentSnapshotFields();
             StudentSnapshot ss = new StudentSnapshot();
             Mappings m = fCfg.Mappings.GetMappings( "Default" ).Select( null,
@@ -130,7 +130,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSnapshot15r1_EmptyGradYear()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             StringMapAdaptor sma = createStudentSnapshotFields();
 
             // SASI Expects that an empty string in a grad year
@@ -151,7 +151,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSnapshot20_EmptyGradYear()
         {
-            Adk.SifVersion = SifVersion.LATEST;
+            Runtime.SifVersion = SifVersion.LATEST;
             StringMapAdaptor sma = createStudentSnapshotFields();
 
             // SASI Expects that an empty string in a grad year
@@ -172,7 +172,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSnapshot15r1_BlankGradYear()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             StringMapAdaptor sma = createStudentSnapshotFields();
 
             // SASI Expects that a single space character in a grad year
@@ -193,7 +193,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSnapshot20_BlankGradYear()
         {
-            Adk.SifVersion = SifVersion.LATEST;
+            Runtime.SifVersion = SifVersion.LATEST;
             StringMapAdaptor sma = createStudentSnapshotFields();
 
             // SASI Expects that a single space character in a grad year
@@ -214,7 +214,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSnapshot15r1_NullLastName()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             StringMapAdaptor sma = createStudentSnapshotFields();
 
             // SASI Expects that a null string will result in
@@ -234,7 +234,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSnapshot20_NullLastName()
         {
-            Adk.SifVersion = SifVersion.LATEST;
+            Runtime.SifVersion = SifVersion.LATEST;
             StringMapAdaptor sma = createStudentSnapshotFields();
 
             // SASI Expects that a null string will result in
@@ -579,7 +579,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentSchoolEnrollmentGradeLevelMapping()
         {
-            Adk.SifVersion = SifVersion.SIF15r1;
+            Runtime.SifVersion = SifVersion.SIF15r1;
             IDictionary values = new Hashtable();
             values.Add( "GRADE", "00" );
             StringMapAdaptor sma = new StringMapAdaptor( values );
@@ -587,7 +587,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Mappings m = fCfg.Mappings.GetMappings( "Default" ).Select( null,
                                                                         null, null );
             m.MapOutbound( sma, sse, SifVersion.SIF15r1 );
-            sse.SetHomeroom( "RoomInfo", Adk.MakeGuid() );
+            sse.SetHomeroom( "RoomInfo", Runtime.MakeGuid() );
             Console.WriteLine( sse.ToXml() );
 
             // This specific case tests what should happen when the grade level is
@@ -599,7 +599,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         [Test]
         public void testStudentContactSIF20()
         {
-            Adk.SifVersion = SifVersion.SIF20r1;
+            Runtime.SifVersion = SifVersion.SIF20r1;
             StringMapAdaptor sma = createStudentContactFields();
             StudentContact sc = new StudentContact();
             sc.Type = "E4";

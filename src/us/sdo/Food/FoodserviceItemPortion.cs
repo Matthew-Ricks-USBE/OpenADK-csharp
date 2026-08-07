@@ -28,7 +28,7 @@ public class FoodserviceItemPortion : SifDataObject
 	/// <summary>
 	/// Creates an instance of a FoodserviceItemPortion
 	/// </summary>
-	public FoodserviceItemPortion() : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEMPORTION ){}
+	public FoodserviceItemPortion() : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEMPORTION ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class FoodserviceItemPortion : SifDataObject
 	///<param name="itemPortionQuantity">Quantity of item portion (number of units)</param>
 	///<param name="itemPortionType">Type of item unit</param>
 	///
-	public FoodserviceItemPortion( string refId, string foodserviceItemUnitRefId, decimal? itemPortionQuantity, ItemPortionTypeValue itemPortionType ) : base( Adk.SifVersion, FoodDTD.FOODSERVICEITEMPORTION )
+	public FoodserviceItemPortion( string refId, string foodserviceItemUnitRefId, decimal? itemPortionQuantity, ItemPortionTypeValue itemPortionType ) : base( SifVersion.LATEST, FoodDTD.FOODSERVICEITEMPORTION )
 	{
 		this.RefId = refId;
 		this.FoodserviceItemUnitRefId = foodserviceItemUnitRefId;
@@ -176,4 +176,3 @@ public class FoodserviceItemPortion : SifDataObject
 	}
 
 }}
-

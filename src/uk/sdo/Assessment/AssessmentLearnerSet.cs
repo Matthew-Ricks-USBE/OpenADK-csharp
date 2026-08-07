@@ -28,7 +28,7 @@ public class AssessmentLearnerSet : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentLearnerSet
 	/// </summary>
-	public AssessmentLearnerSet() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTLEARNERSET ){}
+	public AssessmentLearnerSet() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTLEARNERSET ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -37,7 +37,7 @@ public class AssessmentLearnerSet : SifDataObject
 	///<param name="assessmentResultComponentGroupRefId">The assessment result component group (test or assessment) associated with the set of listed learners.</param>
 	///<param name="creationDateTime">Date/time assignment is created.</param>
 	///
-	public AssessmentLearnerSet( string refId, string assessmentResultComponentGroupRefId, DateTime? creationDateTime ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTLEARNERSET )
+	public AssessmentLearnerSet( string refId, string assessmentResultComponentGroupRefId, DateTime? creationDateTime ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTLEARNERSET )
 	{
 		this.RefId = refId;
 		this.AssessmentResultComponentGroupRefId = assessmentResultComponentGroupRefId;
@@ -219,4 +219,3 @@ public class AssessmentLearnerSet : SifDataObject
 	}
 
 }}
-

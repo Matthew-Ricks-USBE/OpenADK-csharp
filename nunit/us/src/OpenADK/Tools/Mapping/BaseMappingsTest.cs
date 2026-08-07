@@ -38,11 +38,11 @@ namespace Library.Nunit.US.Tools.Mapping
 
             if ( vb != null )
             {
-                defMap.MapOutbound( adaptor, sdo, vb );
+                defMap.MapOutbound( adaptor, sdo, vb, Runtime.SifVersion );
             }
             else
             {
-                defMap.MapOutbound( adaptor, sdo );
+                defMap.MapOutbound( adaptor, sdo, Runtime.SifVersion );
             }
 
             Console.WriteLine( sdo.ToXml() );
@@ -56,7 +56,7 @@ namespace Library.Nunit.US.Tools.Mapping
             Mappings defMap = root.GetMappings( "Default" );
 
             Dictionary<String, String> result = new Dictionary<string, string>();
-            defMap.MapInbound( sp, new StringMapAdaptor( result ) );
+            defMap.MapInbound( sp, new StringMapAdaptor( result ), Runtime.SifVersion );
 
             return result;
         }
@@ -64,14 +64,16 @@ namespace Library.Nunit.US.Tools.Mapping
         protected StudentPersonal doOutboundMappingSelect( IFieldAdaptor adaptor, String cfg, String zoneId,
                                                            String sourceId, SifVersion version )
         {
+            version ??= Runtime.SifVersion;
             AgentConfig config = createConfig( cfg );
 
             Mappings root = config.Mappings;
             Mappings defMap = root.GetMappings( "Default" );
             Mappings selectedMap = defMap.Select( zoneId, sourceId, version );
 
-            StudentPersonal sp = new StudentPersonal();
-            selectedMap.MapOutbound( adaptor, sp );
+            StudentPersonal sp = Objects.Create<StudentPersonal>();
+            sp.SifVersion = version;
+            selectedMap.MapOutbound( adaptor, sp, version );
 
             Console.WriteLine( sp.ToXml() );
             return sp;

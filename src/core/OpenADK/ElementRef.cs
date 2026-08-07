@@ -33,7 +33,7 @@ namespace OpenADK.Library
         /// <param name="version"></param>
         public ElementRef(IElementDef root, String xPath, SifVersion version)
         {
-            fField = Adk.Dtd.LookupElementDefBySQP(root, xPath);
+            fField = root.Dtd.LookupElementDefBySQP(root, xPath);
             fXPath = xPath;
         }
 

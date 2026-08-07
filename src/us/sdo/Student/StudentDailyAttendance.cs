@@ -28,7 +28,7 @@ public class StudentDailyAttendance : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StudentDailyAttendance
 	/// </summary>
-	public StudentDailyAttendance() : base( Adk.SifVersion, StudentDTD.STUDENTDAILYATTENDANCE ){}
+	public StudentDailyAttendance() : base( SifVersion.LATEST, StudentDTD.STUDENTDAILYATTENDANCE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -43,7 +43,7 @@ public class StudentDailyAttendance : SifDataObject
 	///<param name="dailyAttendanceCode">Locally-defined attendance code information</param>
 	///<param name="attendanceCodeInfoRefId">The ID (GUID) of the locally-defined daily attendance code information.</param>
 	///
-	public StudentDailyAttendance( string studentPersonalRefId, string schoolInfoRefId, DateTime? date, int? schoolYear, AttendanceCode dailyAttendanceCode, string attendanceCodeInfoRefId ) : base( Adk.SifVersion, StudentDTD.STUDENTDAILYATTENDANCE )
+	public StudentDailyAttendance( string studentPersonalRefId, string schoolInfoRefId, DateTime? date, int? schoolYear, AttendanceCode dailyAttendanceCode, string attendanceCodeInfoRefId ) : base( SifVersion.LATEST, StudentDTD.STUDENTDAILYATTENDANCE )
 	{
 		this.StudentPersonalRefId = studentPersonalRefId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -275,4 +275,3 @@ public class StudentDailyAttendance : SifDataObject
 	}
 
 }}
-

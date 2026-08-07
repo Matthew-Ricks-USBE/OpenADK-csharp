@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
 using OpenADK.Library.Log;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library
 {
@@ -133,7 +133,7 @@ namespace OpenADK.Library
         object UserData { get; set; }
 
         /// <summary>  Gets the root logging framework Category for this agent.</summary>
-        ILog Log { get; }
+        ILogger Log { get; }
 
         /// <summary> 	Gets the ServerLog for this zone.</summary>
         /// <value> The ServerLog instance for the zone

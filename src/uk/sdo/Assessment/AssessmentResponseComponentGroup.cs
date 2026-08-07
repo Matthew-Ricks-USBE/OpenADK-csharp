@@ -28,7 +28,7 @@ public class AssessmentResponseComponentGroup : SifDataObject
 	/// <summary>
 	/// Creates an instance of an AssessmentResponseComponentGroup
 	/// </summary>
-	public AssessmentResponseComponentGroup() : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESPONSECOMPONENTGROUP ){}
+	public AssessmentResponseComponentGroup() : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESPONSECOMPONENTGROUP ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class AssessmentResponseComponentGroup : SifDataObject
 	///<param name="name">Name of the assessment/test/taken.</param>
 	///<param name="componentList">A ComponentList</param>
 	///
-	public AssessmentResponseComponentGroup( string refId, string assessmentSessionRefId, string name, AssessmentResponseComponentList componentList ) : base( Adk.SifVersion, AssessmentDTD.ASSESSMENTRESPONSECOMPONENTGROUP )
+	public AssessmentResponseComponentGroup( string refId, string assessmentSessionRefId, string name, AssessmentResponseComponentList componentList ) : base( SifVersion.LATEST, AssessmentDTD.ASSESSMENTRESPONSECOMPONENTGROUP )
 	{
 		this.RefId = refId;
 		this.AssessmentSessionRefId = assessmentSessionRefId;
@@ -200,4 +200,3 @@ public class AssessmentResponseComponentGroup : SifDataObject
 	}
 
 }}
-

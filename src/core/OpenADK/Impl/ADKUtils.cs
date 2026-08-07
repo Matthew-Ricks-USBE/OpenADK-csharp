@@ -5,8 +5,9 @@
 
 using System;
 using System.Text;
+using OpenADK.Library;
 using OpenADK.Library.Infra;
-using log4net;
+using Microsoft.Extensions.Logging;
 
 namespace OpenADK.Library.Impl
 {
@@ -22,7 +23,7 @@ namespace OpenADK.Library.Impl
 //		/// <summary>  Throws an AdkMessagingException, optionally logging its message first</summary>
 //		public static void  _throw(AdkMessagingException thr, Category log)
 //		{
-//			if ((Adk.Debug & AdkDebugFlags.Exceptions) != 0)
+//			if (log != null)
 //				thr.log(log);
 //			throw thr;
 //		}
@@ -30,14 +31,15 @@ namespace OpenADK.Library.Impl
 //		/// <summary>  Throws an AdkTransportException, optionally logging its message first</summary>
 //		public static void  _throw(AdkTransportException thr, Category log)
 //		{
-//			if ((Adk.Debug & AdkDebugFlags.Exceptions) != 0)
+//			if (log != null)
 //				thr.log(log);
 //			throw thr;
 //		}
 
         /// <summary>  Throws a SifException, optionally logging its message first</summary>
         public static void _throw( SifException thr,
-                                   ILog log )
+                                   ILogger log,
+                                   IAdkRuntime runtime = null )
         {
             SifException exc = thr;
 
@@ -60,7 +62,7 @@ namespace OpenADK.Library.Impl
                 exc = new SifException( b.ToString(), thr.Ack, thr.Zone );
             }
 
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 ) {
+            if (log != null && (runtime == null || (runtime.Debug & AdkDebugFlags.Exceptions) != 0)) {
                 exc.Log( log );
             }
 
@@ -70,16 +72,17 @@ namespace OpenADK.Library.Impl
 //		/// <summary>  Throws an AdkQueueException, optionally logging its message first</summary>
 //		public static void  _throw(AdkQueueException thr, Category log)
 //		{
-//			if ((Adk.Debug & AdkDebugFlags.Exceptions) != 0)
+//			if (log != null)
 //				thr.log(log);
 //			throw thr;
 //		}
 
         /// <summary>  Throws an AdkException, optionally logging its message first</summary>
         public static void _throw( AdkException thr,
-                                   ILog log )
+                                   ILogger log,
+                                   IAdkRuntime runtime = null )
         {
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 ) {
+            if (log != null && (runtime == null || (runtime.Debug & AdkDebugFlags.Exceptions) != 0)) {
                 thr.Log( log );
             }
             throw thr;
@@ -87,9 +90,10 @@ namespace OpenADK.Library.Impl
 
         /// <summary>  Throws an exception, optionally logging its message first</summary>
         public static void _throw( SystemException thr,
-                                   ILog log )
+                                   ILogger log,
+                                   IAdkRuntime runtime = null )
         {
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 ) {
+            if (log != null && (runtime == null || (runtime.Debug & AdkDebugFlags.Exceptions) != 0)) {
                 log.Error( thr.Message, thr );
             }
             throw thr;
@@ -97,9 +101,10 @@ namespace OpenADK.Library.Impl
 
         /// <summary>  Throws an exception, optionally logging its message first</summary>
         public static void _throw( Exception thr,
-                                   ILog log )
+                                   ILogger log,
+                                   IAdkRuntime runtime = null )
         {
-            if ( (Adk.Debug & AdkDebugFlags.Exceptions) != 0 ) {
+            if (log != null && (runtime == null || (runtime.Debug & AdkDebugFlags.Exceptions) != 0)) {
                 log.Error( thr.Message, thr );
             }
             throw thr;
@@ -108,7 +113,7 @@ namespace OpenADK.Library.Impl
 //		/// <summary>  Throws an Error, optionally logging its message first</summary>
 //		public static void  _throw(System.ApplicationException thr, Category log)
 //		{
-//			if ((Adk.Debug & AdkDebugFlags.Exceptions) != 0)
+//			if (log != null)
 //			{
 //				
 //				log.Debug(thr.ToString());

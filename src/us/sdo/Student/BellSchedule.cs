@@ -28,7 +28,7 @@ public class BellSchedule : SifDataObject
 	/// <summary>
 	/// Creates an instance of a BellSchedule
 	/// </summary>
-	public BellSchedule() : base( Adk.SifVersion, StudentDTD.BELLSCHEDULE ){}
+	public BellSchedule() : base( SifVersion.LATEST, StudentDTD.BELLSCHEDULE ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -41,7 +41,7 @@ public class BellSchedule : SifDataObject
 	///<param name="timetablePeriodList">The timetable periods for this school year bell schedule. This essentially provides a list of the time period identifiers that are used in the BellPeriod definitions below with some addition properties for each. The identifiers defined here may be referenced by other objects / elements like MeetingTime.</param>
 	///<param name="bellPeriodList">The bell periods for this school year bell schedule.</param>
 	///
-	public BellSchedule( string refId, string schoolInfoRefId, int? schoolYear, string bellScheduleName, TimetableDay timetableDayList, TimetablePeriod timetablePeriodList, BellPeriod bellPeriodList ) : base( Adk.SifVersion, StudentDTD.BELLSCHEDULE )
+	public BellSchedule( string refId, string schoolInfoRefId, int? schoolYear, string bellScheduleName, TimetableDay timetableDayList, TimetablePeriod timetablePeriodList, BellPeriod bellPeriodList ) : base( SifVersion.LATEST, StudentDTD.BELLSCHEDULE )
 	{
 		this.RefId = refId;
 		this.SchoolInfoRefId = schoolInfoRefId;
@@ -264,4 +264,3 @@ public class BellSchedule : SifDataObject
 	}
 
 }}
-

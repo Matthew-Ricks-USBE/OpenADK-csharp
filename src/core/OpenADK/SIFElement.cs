@@ -180,7 +180,7 @@ namespace OpenADK.Library
                 }
 
                 TypeConverter converter = getTextTypeConverter();
-                SifSimpleType typedValue = converter.Parse(Adk.TextFormatter, value);
+                SifSimpleType typedValue = converter.Parse(Impl.DTDInternals.SIF_1X_FORMATTER, value);
                 SetField(typedValue.CreateField(this, ElementDef));
             }
         }
@@ -243,7 +243,7 @@ namespace OpenADK.Library
 
                 if (v == null)
                 {
-                    v = Adk.SifVersion;
+                    v = global::OpenADK.Library.SifVersion.LATEST;
                 }
 
                 return v;
@@ -420,7 +420,7 @@ namespace OpenADK.Library
         {
             IElementDef candidateDef = candidate.ElementDef;
             IElementDef parentDef = candidateDef.Parent;
-            SifVersion adkVersion = Adk.SifVersion;
+            SifVersion adkVersion = EffectiveSIFVersion;
             if (ElementDef != parentDef &&
                 candidateDef.IsSupported(adkVersion)
                 )
@@ -445,7 +445,7 @@ namespace OpenADK.Library
 
                 String path = ElementDef.Tag(adkVersion) + "_" +
                               candidate.ElementDef.Tag(adkVersion);
-                IElementDef implDef = Adk.Dtd.LookupElementDef(path);
+                IElementDef implDef = ElementDef.Dtd.LookupElementDef(path);
                 if (implDef == null && ElementDef is OpenADK.Library.Impl.ElementDefAlias)
                 {
                     // For alias element defs (e.g. CONTACTS_CONTACT with ClassName="LRContact"),
@@ -454,7 +454,7 @@ namespace OpenADK.Library
                     // context-specific def with the correct sequence number.
                     String altPath = ElementDef.Name + "_" +
                                      candidate.ElementDef.Tag(adkVersion);
-                    implDef = Adk.Dtd.LookupElementDef(altPath);
+                    implDef = ElementDef.Dtd.LookupElementDef(altPath);
                 }
                 if (implDef != null)
                 {
@@ -1092,7 +1092,7 @@ namespace OpenADK.Library
         /// </returns>
         public IList<Element> GetContent(SifVersion version)
         {
-            return Adk.Dtd.GetFormatter(version).GetContent(this, version);
+            return ElementDef.Dtd.GetFormatter(version).GetContent(this, version);
         }
 
         /// <summary>  Sets this element and each of its children to the specified empty
@@ -1406,11 +1406,6 @@ namespace OpenADK.Library
         /// <param name="id"></param>
         protected void AssertElementDef( IElementDef id )
         {
-            if (!Adk.Initialized)
-            {
-                throw new ApplicationException("The Adk is not initialized");
-            }
-
             if (id == null)
             {
                 throw new ArgumentException("IElementDef cannot be null");

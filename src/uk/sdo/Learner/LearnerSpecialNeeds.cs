@@ -28,7 +28,7 @@ public class LearnerSpecialNeeds : SifDataObject
 	/// <summary>
 	/// Creates an instance of a LearnerSpecialNeeds
 	/// </summary>
-	public LearnerSpecialNeeds() : base( Adk.SifVersion, LearnerDTD.LEARNERSPECIALNEEDS ){}
+	public LearnerSpecialNeeds() : base( SifVersion.LATEST, LearnerDTD.LEARNERSPECIALNEEDS ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -39,7 +39,7 @@ public class LearnerSpecialNeeds : SifDataObject
 	///<param name="provision">A provision (stage) accommodated for this learner within this school.</param>
 	///<param name="startDate">Date when learner was placed on the current SEN stage. Date may be in the future.</param>
 	///
-	public LearnerSpecialNeeds( string refId, string learnerPersonalRefId, string schoolInfoRefId, SENProvision provision, DateTime? startDate ) : base( Adk.SifVersion, LearnerDTD.LEARNERSPECIALNEEDS )
+	public LearnerSpecialNeeds( string refId, string learnerPersonalRefId, string schoolInfoRefId, SENProvision provision, DateTime? startDate ) : base( SifVersion.LATEST, LearnerDTD.LEARNERSPECIALNEEDS )
 	{
 		this.RefId = refId;
 		this.LearnerPersonalRefId = learnerPersonalRefId;
@@ -692,4 +692,3 @@ public class LearnerSpecialNeeds : SifDataObject
 	}
 
 }}
-

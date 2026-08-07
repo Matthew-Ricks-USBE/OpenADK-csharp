@@ -28,7 +28,7 @@ public class StaffMeal : SifDataObject
 	/// <summary>
 	/// Creates an instance of a StaffMeal
 	/// </summary>
-	public StaffMeal() : base( Adk.SifVersion, FoodDTD.STAFFMEAL ){}
+	public StaffMeal() : base( SifVersion.LATEST, FoodDTD.STAFFMEAL ){}
 
 	/// <summary>
 	/// Constructor that accepts values for all mandatory fields
@@ -38,7 +38,7 @@ public class StaffMeal : SifDataObject
 	///<param name="lastBreakfastDate">Last breakfast served date</param>
 	///<param name="lastLunchDate">Last lunch served date</param>
 	///
-	public StaffMeal( string staffPersonalRefId, EarnedStatus earnedStatus, DateTime? lastBreakfastDate, DateTime? lastLunchDate ) : base( Adk.SifVersion, FoodDTD.STAFFMEAL )
+	public StaffMeal( string staffPersonalRefId, EarnedStatus earnedStatus, DateTime? lastBreakfastDate, DateTime? lastLunchDate ) : base( SifVersion.LATEST, FoodDTD.STAFFMEAL )
 	{
 		this.StaffPersonalRefId = staffPersonalRefId;
 		this.EarnedStatus = earnedStatus;
@@ -184,4 +184,3 @@ public class StaffMeal : SifDataObject
 	}
 
 }}
-

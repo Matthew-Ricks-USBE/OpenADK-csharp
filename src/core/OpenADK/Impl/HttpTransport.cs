@@ -18,7 +18,8 @@ using OpenADK.Library.Infra;
 using OpenADK.Util;
 using OpenADK.Web;
 using OpenADK.Web.Http;
-using log4net;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace OpenADK.Library.Impl
 {
@@ -70,6 +71,10 @@ namespace OpenADK.Library.Impl
     /// </version>
     public class HttpTransport : TransportImpl
     {
+        private IAdkRuntime fRuntime;
+
+        internal IAdkRuntime Runtime => fRuntime ??
+            throw new InvalidOperationException("The transport has not been activated for an agent.");
         private const string OID_SERVER_AUTHENTICATION = "1.3.6.1.5.5.7.3.1";
         private const string OID_CLIENT_AUTHENTICATION = "1.3.6.1.5.5.7.3.2";
 
@@ -228,7 +233,7 @@ namespace OpenADK.Library.Impl
         /// specific zone. Your agent may also use this Category to post log
         /// events.
         /// </summary>
-        private ILog log = null;
+        private ILogger log = NullLogger.Instance;
 
         /// <summary>  Constructs an HttpTransport for HTTP or HTTPS</summary>
         /// <param name="props">Transport properties (usually an instance of HttpProperties
@@ -251,7 +256,6 @@ namespace OpenADK.Library.Impl
         private void Construct( HttpProperties props )
         {
             fProps = props;
-            log = LogManager.GetLogger( Adk.LOG_IDENTIFIER + ".Agent.transport$" + fProps.Protocol );
         }
 
         /// <summary>  Clone this HttpTransport.
@@ -291,6 +295,8 @@ namespace OpenADK.Library.Impl
         /// <param name="agent">The Agent</param>
         public override void Activate( Agent agent )
         {
+            fRuntime = agent.Runtime;
+            log = fRuntime.LoggerFactory.CreateLogger(AdkRuntime.LogIdentifier + ".Agent.transport$" + fProps.Protocol);
             ActivateServer( agent, agent.Properties, false );
         }
 
@@ -313,7 +319,7 @@ namespace OpenADK.Library.Impl
             if ( (sServer == null || !sServer.IsStarted)
                  && (webAppEnabled || isPushModeZone) )
             {
-                if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 && log.IsInfoEnabled )
+                if ( (Runtime.Debug & AdkDebugFlags.Transport) != 0 && log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Information) )
                 {
                     log.Info( "Activating " + fProps.Protocol.ToUpperInvariant() + " transport..." );
                 }
@@ -343,6 +349,7 @@ namespace OpenADK.Library.Impl
         [MethodImpl( MethodImplOptions.Synchronized )]
         public override void Activate( IZone zone )
         {
+            fRuntime = zone.Agent.Runtime;
             bool isPushMode = zone.Properties.MessagingMode == AgentMessagingMode.Push;
             if ( ActivateServer( zone.Agent, zone.Properties, isPushMode ) && isPushMode )
             {
@@ -415,7 +422,7 @@ namespace OpenADK.Library.Impl
                 catch ( Exception le )
                 {
                     AdkUtils._throw(
-                        new AdkTransportException( "Error starting SocketListener: " + le.Message, zone, le ), log );
+                        new AdkTransportException( "Error starting SocketListener: " + le.Message, zone, le ), log, Runtime );
                 }
             }
         }
@@ -436,7 +443,7 @@ namespace OpenADK.Library.Impl
             AdkSocketBinding listener = sServer.GetListener( port );
             if ( listener == null )
             {
-                if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 )
+                if ( (Runtime.Debug & AdkDebugFlags.Transport) != 0 )
                 {
                     if ( hostAddress != null )
                     {
@@ -456,7 +463,7 @@ namespace OpenADK.Library.Impl
             }
             else
             {
-                if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 )
+                if ( (Runtime.Debug & AdkDebugFlags.Transport) != 0 )
                 {
                     if ( hostAddress != null )
                     {
@@ -507,7 +514,7 @@ namespace OpenADK.Library.Impl
                 //				listener.setLowResourcePersistTimeMs(lowResourcesPersistTimeMs);
                 //			}
 
-                if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 && log.IsDebugEnabled )
+                if ( (Runtime.Debug & AdkDebugFlags.Transport) != 0 && log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug) )
                 {
                     log.Debug( "Set HttpListener.maxThreads to " + maxRequestThreads );
                     //				if (minRequestThreads > 0) {
@@ -546,7 +553,7 @@ namespace OpenADK.Library.Impl
             AdkSocketBinding listener = sServer.GetListener(port);
             if (listener == null)
             {
-                if ((Adk.Debug & AdkDebugFlags.Transport) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Transport) != 0)
                 {
                     if (hostAddress != null)
                     {
@@ -608,7 +615,7 @@ namespace OpenADK.Library.Impl
             }
             else
             {
-                if ((Adk.Debug & AdkDebugFlags.Transport) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Transport) != 0)
                 {
                     if (hostAddress != null)
                     {
@@ -632,7 +639,7 @@ namespace OpenADK.Library.Impl
         {
             if (certificate == null)
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     log.Warn("Client Certificate is missing and fails SIF Level 1 Authentication");
                 }
@@ -642,7 +649,7 @@ namespace OpenADK.Library.Impl
             X509Certificate2 cert2 = certificate as X509Certificate2 ?? new X509Certificate2(certificate);
             if (cert2.NotBefore > DateTime.UtcNow || cert2.NotAfter < DateTime.UtcNow)
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     log.Warn("Client Certificate is invalid and fails SIF Level 1 Authentication");
                 }
@@ -666,7 +673,7 @@ namespace OpenADK.Library.Impl
 
             if (chain == null)
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     log.Warn("Client Certificate is not trusted and fails SIF Level 2 Authentication: No chain provided");
                 }
@@ -675,7 +682,7 @@ namespace OpenADK.Library.Impl
 
             if (sslPolicyErrors != SslPolicyErrors.None)
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     log.Warn
                         ("Client Certificate is not trusted and fails SIF Level 2 Authentication: " +
@@ -709,7 +716,7 @@ namespace OpenADK.Library.Impl
                 
                 if (commonName == null)
                 {
-                    if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                    if ((Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                     {
                         log.Warn
                             ("Client Certificate fails SIF Level 3 Authentication: common name attribute not found.");
@@ -727,7 +734,7 @@ namespace OpenADK.Library.Impl
                 // that is not accessible through the standard SslStream validation callback.
                 // For now, we perform Level 1 and Level 2 validation.
                 
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     log.Debug
                         ("Client Certificate verification completed for Level 3: Common Name=" + commonName);
@@ -737,7 +744,7 @@ namespace OpenADK.Library.Impl
             }
             catch (Exception ex)
             {
-                if ((Adk.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
+                if ((Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     log.Warn
                         ("Client Certificate fails SIF Level 3 Authentication: " + ex.Message, ex);
@@ -1026,7 +1033,7 @@ namespace OpenADK.Library.Impl
         public void DebugTransport( string message,
                                     params object[] args )
         {
-            if ( (Adk.Debug & AdkDebugFlags.Transport) != 0 && log.IsDebugEnabled )
+            if ( (Runtime.Debug & AdkDebugFlags.Transport) != 0 && log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug) )
             {
                 log.Debug( string.Format( message, args ) );
             }
@@ -1043,7 +1050,7 @@ namespace OpenADK.Library.Impl
 
         #region Private Fields
 
-        private static IHttpServer sServer;
+        private IHttpServer sServer;
 
         #endregion
 
