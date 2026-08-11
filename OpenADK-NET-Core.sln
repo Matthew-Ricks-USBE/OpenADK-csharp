@@ -5,9 +5,13 @@ VisualStudioVersion = 18.4.11626.88
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-NET-Core", "src\core\OpenADK-NET-Core.csproj", "{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-Nunit-Core", "nunit\core\src\OpenADK-Nunit-Core.csproj", "{96E593B8-5673-4F26-BAD8-746174CE802A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-Nunit-Core", "test\core\src\OpenADK-Nunit-Core.csproj", "{96E593B8-5673-4F26-BAD8-746174CE802A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.UnitTesting", "nunit\framework\src\OpenADK.UnitTesting.csproj", "{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.UnitTesting", "test\framework\src\OpenADK.UnitTesting.csproj", "{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{E0A76456-297F-4E2B-BBEE-3C2F36E4C04D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2D6E1348-6681-4BF6-B195-F99E1F9EC993}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +34,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D} = {E0A76456-297F-4E2B-BBEE-3C2F36E4C04D}
+		{96E593B8-5673-4F26-BAD8-746174CE802A} = {2D6E1348-6681-4BF6-B195-F99E1F9EC993}
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9} = {2D6E1348-6681-4BF6-B195-F99E1F9EC993}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0B419CC-7B2D-4ADD-9AAE-50423AEE3A21}
