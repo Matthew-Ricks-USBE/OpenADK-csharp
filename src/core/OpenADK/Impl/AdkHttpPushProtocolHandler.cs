@@ -76,11 +76,13 @@ namespace OpenADK.Web.Http
             if ( fServer != null ) {
                 fServer.RemoveHandlerContext( this.BuildContextPath() );
             }
+            base.Shutdown();
         }
 
         public override void Close( IZone zone )
         {
             fServer.RemoveHandlerContext( this.BuildContextPath() );
+            base.Close( zone );
         }
 
         #endregion

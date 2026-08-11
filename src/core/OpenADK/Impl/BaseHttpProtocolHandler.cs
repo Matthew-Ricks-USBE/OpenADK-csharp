@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using OpenADK.Library.Infra;
 using OpenADK.Util;
 
@@ -28,8 +29,9 @@ namespace OpenADK.Library.Impl
         private ZoneImpl fZone;
         protected readonly HttpTransport fTransport;
 
-        private X509Certificate2 fClientAuthCertificate;
-        private bool fSSLInitialized;
+        private IHttpClientFactory _clientFactory;
+        private HttpClient _secureClient;
+        private readonly ReaderWriterLockSlim _secureClientLock = new ReaderWriterLockSlim();
 
 
         protected BaseHttpProtocolHandler(HttpTransport transport)
@@ -54,7 +56,6 @@ namespace OpenADK.Library.Impl
         {
             fZone = zone;
 
-
             fKeepAliveOnSend = ((HttpProperties) fTransport.Properties).KeepAliveOnSend;
 
             try {
@@ -74,23 +75,36 @@ namespace OpenADK.Library.Impl
                     ( "HttpProtocolHandler could not parse URL \"" + fZone.ZoneUrl + "\": " + thr,
                       fZone );
             }
+
+            _clientFactory = fZone.Agent.Runtime.HttpClientFactory;
+
+            if ( fTransport.Secure )
+            {
+                _secureClient = BuildSecureClient();
+            }
         }
 
 
-        public abstract void Close( IZone zone );
+        public virtual void Close( IZone zone )
+        {
+            DisposeSecureClient();
+        }
+
+        public virtual void Shutdown()
+        {
+            DisposeSecureClient();
+        }
 
         public abstract void Start();
 
-        public abstract void Shutdown();
-
         /// <summary>  Sends a SIF infrastructure message and returns the response.</summary>
         /// <remarks>
-        /// The message content should consist of a complete <SIF_Message> element.
+        /// The message content should consist of a complete &lt;SIF_Message&gt; element.
         /// This method sends whatever content is passed to it without any checking
         /// or validation of any kind.
         /// </remarks>
         /// <param name="msg">The message content</param>
-        /// <returns> The response from the ZIS (expected to be a <SIF_Ack> message)
+        /// <returns> The response from the ZIS (expected to be a &lt;SIF_Ack&gt; message)
         /// </returns>
         /// <exception cref="AdkMessagingException"> is thrown if there is an error sending
         /// the message to the Zone Integration Server
@@ -136,6 +150,7 @@ namespace OpenADK.Library.Impl
         {
             MessageStreamImpl returnStream;
             using HttpRequestMessage request = CreateRequestMessage( fZoneUrl, msg );
+            TimeSpan requestTimeout = ((HttpProperties)fTransport.Properties).RequestTimeout;
 
             try {
                 if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
@@ -146,26 +161,9 @@ namespace OpenADK.Library.Impl
                 }
 
                 try {
-                    using HttpClient client = CreateHttpClient();
-                    using HttpResponseMessage response =
-                        client.Send( request, HttpCompletionOption.ResponseHeadersRead );
-                    response.EnsureSuccessStatusCode();
-
-                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
-                            fZone.Log.Debug
-                                ( "Expecting reply (" + response.Content.Headers.ContentLength +
-                                  " bytes)" );
-                        }
-
-                        returnStream =
-                            new MessageStreamImpl( response.Content.ReadAsStream() );
-
-                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
-                            fZone.Log.Debug( "Received reply (" + returnStream.Length + " bytes)" );
-                        }
-                        if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Message_Content) != 0 ) {
-                            fZone.Log.Debug( returnStream.Decode() );
-                        }
+                    returnStream = fTransport.Secure
+                        ? SendSecure( request, requestTimeout )
+                        : SendPlain( request, requestTimeout );
                 }
                 catch ( Exception thr ) {
                     throw new AdkTransportException
@@ -180,6 +178,60 @@ namespace OpenADK.Library.Impl
             catch ( Exception thr ) {
                 throw new AdkMessagingException
                     ( "HttpProtocolHandler: Error receiving response to sent message: " + thr, fZone );
+            }
+
+            return returnStream;
+        }
+
+        private MessageStreamImpl SendPlain( HttpRequestMessage request, TimeSpan timeout )
+        {
+            HttpClient client = _clientFactory.CreateClient( AdkServiceCollectionExtensions.SifHttpClientName );
+            return ExecuteSend( client, request, timeout );
+        }
+
+        /// <summary>
+        /// Sends using the long-lived secure client, holding a read lock for the entire duration
+        /// of the send so that <see cref="DisposeSecureClient"/> cannot dispose the client
+        /// while a send is in progress.
+        /// </summary>
+        private MessageStreamImpl SendSecure( HttpRequestMessage request, TimeSpan timeout )
+        {
+            _secureClientLock.EnterReadLock();
+            try
+            {
+                if ( _secureClient == null )
+                {
+                    throw new AdkException(
+                        "HTTPS client is not available; Open() must be called before Send(), or Close()/Shutdown() has already been called.",
+                        fZone);
+                }
+                return ExecuteSend( _secureClient, request, timeout );
+            }
+            finally
+            {
+                _secureClientLock.ExitReadLock();
+            }
+        }
+
+        private MessageStreamImpl ExecuteSend( HttpClient client, HttpRequestMessage request, TimeSpan timeout )
+        {
+            using CancellationTokenSource cts = new CancellationTokenSource( timeout );
+            using HttpResponseMessage response =
+                client.Send( request, HttpCompletionOption.ResponseHeadersRead, cts.Token );
+            response.EnsureSuccessStatusCode();
+
+            if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
+                fZone.Log.Debug
+                    ( "Expecting reply (" + response.Content.Headers.ContentLength + " bytes)" );
+            }
+
+            MessageStreamImpl returnStream = new MessageStreamImpl( response.Content.ReadAsStream() );
+
+            if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Transport) != 0 ) {
+                fZone.Log.Debug( "Received reply (" + returnStream.Length + " bytes)" );
+            }
+            if ( (fZone.Agent.Runtime.Debug & AdkDebugFlags.Message_Content) != 0 ) {
+                fZone.Log.Debug( returnStream.Decode() );
             }
 
             return returnStream;
@@ -221,50 +273,31 @@ namespace OpenADK.Library.Impl
             }
         }
 
-        protected HttpClient CreateHttpClient()
+        protected SifParser CreateParser()
+        {
+            return new SifParser(fZone.Agent.Runtime);
+        }
+
+        #endregion
+
+        #region Private helpers
+
+        /// <summary>
+        /// Builds a long-lived <see cref="HttpClient"/> for HTTPS connections, configured with
+        /// the client certificate (if any) and server-certificate validation callback.
+        /// Called once from <see cref="Open"/> — no lazy-init race.
+        /// </summary>
+        private HttpClient BuildSecureClient()
         {
             HttpClientHandler handler = new HttpClientHandler();
             handler.ClientCertificateOptions = ClientCertificateOption.Manual;
 
-            if ( fTransport.Secure ) {
-                ApplySSLAttributes( handler );
-            }
-
-            return new HttpClient( handler, true );
-        }
-
-
-        /// <summary>
-        /// Retrieves a certificate to use for client authentication, if available and 
-        /// adds it to the client certificate collection of the request handler.
-        /// </summary>
-        /// <param name="handler"></param>
-        protected void ApplySSLAttributes(HttpClientHandler handler)
-        {
-            if (!fSSLInitialized)
-            {
-                fSSLInitialized = true;
-                X509Certificate2 cert = fTransport.GetClientAuthenticationCertificate();
-
-                if (cert == null)
-                {
-                    fTransport.DebugTransport
-                        ("No certificate found for client authentication", new object[0]);
-                }
-                else
-                {
-                    fClientAuthCertificate = cert;
-                }
-            }
-
             handler.ServerCertificateCustomValidationCallback = (request, certificate, chain, errors) =>
             {
-                // Accept valid certificates or certificates with no errors
                 if (errors == System.Net.Security.SslPolicyErrors.None)
                 {
                     return true;
                 }
-                // Log certificate rejection for debugging
                 if ((fZone.Agent.Runtime.Debug & AdkDebugFlags.Messaging_Detailed) != 0)
                 {
                     fTransport.DebugTransport(
@@ -274,16 +307,33 @@ namespace OpenADK.Library.Impl
                 return false;
             };
 
-            if (fClientAuthCertificate != null)
+            X509Certificate2 cert = fTransport.GetClientAuthenticationCertificate();
+            if (cert == null)
             {
-                handler.ClientCertificates.Add(fClientAuthCertificate);
+                fTransport.DebugTransport("No certificate found for client authentication", new object[0]);
             }
+            else
+            {
+                handler.ClientCertificates.Add(cert);
+            }
+
+            HttpClient client = new HttpClient(handler, disposeHandler: true);
+            client.Timeout = System.Threading.Timeout.InfiniteTimeSpan; // timeout governed per-request via CancellationTokenSource
+            return client;
         }
 
-
-        protected SifParser CreateParser()
+        private void DisposeSecureClient()
         {
-            return new SifParser(fZone.Agent.Runtime);
+            _secureClientLock.EnterWriteLock();
+            try
+            {
+                _secureClient?.Dispose();
+                _secureClient = null;
+            }
+            finally
+            {
+                _secureClientLock.ExitWriteLock();
+            }
         }
 
         #endregion

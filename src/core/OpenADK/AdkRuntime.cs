@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Log;
 using Microsoft.Extensions.Logging;
@@ -26,13 +27,15 @@ namespace OpenADK.Library
         private readonly ILogger _log;
         private readonly ServerLog _serverLog;
         private readonly SifObjectFactory _objects;
+        private readonly IHttpClientFactory _httpClientFactory;
         private IDtd _dtd;
         private SifVersion _sifVersion;
 
-        public AdkRuntime(AdkOptions options, ILoggerFactory loggerFactory)
+        public AdkRuntime(AdkOptions options, ILoggerFactory loggerFactory, IHttpClientFactory httpClientFactory)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
             _loggerFactory = loggerFactory ?? throw new ArgumentNullException(nameof(loggerFactory));
+            _httpClientFactory = httpClientFactory ?? throw new ArgumentNullException(nameof(httpClientFactory));
             _log = _loggerFactory.CreateLogger(LogIdentifier);
             _serverLog = new Library.Log.ServerLog(LogIdentifier, null);
             _objects = new SifObjectFactory(this);
@@ -86,6 +89,8 @@ namespace OpenADK.Library
         public Version AdkVersion => typeof(AdkRuntime).Assembly.GetName().Version;
 
         public ISifObjectFactory Objects => _objects;
+
+        public IHttpClientFactory HttpClientFactory => _httpClientFactory;
 
         public string[] TransportProtocols
         {

@@ -81,6 +81,7 @@ namespace OpenADK.Library.Impl
             }
             
             fRunning = false;
+            base.Shutdown();
         }
 
 
@@ -95,6 +96,7 @@ namespace OpenADK.Library.Impl
                     fThread = null;
                 }
             }
+            base.Close( zone );
         }
 
         #endregion

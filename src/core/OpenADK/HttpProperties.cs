@@ -184,6 +184,16 @@ namespace OpenADK.Library
        }
 
        /// <summary>
+      /// Gets or sets the timeout for outbound HTTP requests to the ZIS.
+      /// Defaults to 100 seconds, matching the <see cref="System.Net.Http.HttpClient"/> default.
+      /// </summary>
+      public virtual TimeSpan RequestTimeout
+      {
+          get { return TimeSpan.FromMilliseconds(GetProperty("requestTimeoutMs", 100_000)); }
+          set { SetProperty("requestTimeoutMs", (int)value.TotalMilliseconds); }
+      }
+
+      /// <summary>
       /// Constructs an empty HttpProperties object
       /// </summary>
       public HttpProperties() { }

@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Log;
 using Microsoft.Extensions.Logging;
@@ -30,6 +31,8 @@ namespace OpenADK.Library
         Version AdkVersion { get; }
 
         string[] TransportProtocols { get; }
+
+        IHttpClientFactory HttpClientFactory { get; }
 
         void Initialize();
 

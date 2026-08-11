@@ -11,6 +11,9 @@ namespace OpenADK.Library
     /// <summary>Dependency-injection registrations for OpenADK.</summary>
     public static class AdkServiceCollectionExtensions
     {
+        /// <summary>Named <see cref="System.Net.Http.HttpClient"/> used by the SIF HTTP transport.</summary>
+        internal const string SifHttpClientName = "sif";
+
         public static IServiceCollection AddOpenAdk(
             this IServiceCollection services,
             Action<AdkOptions> configure = null)
@@ -21,6 +24,7 @@ namespace OpenADK.Library
             configure?.Invoke(options);
 
             services.AddLogging();
+            services.AddHttpClient(SifHttpClientName);
             services.TryAddSingleton(options);
             services.TryAddSingleton<IAdkRuntime, AdkRuntime>();
             services.TryAddSingleton<IAdkComponentFactory, AdkComponentFactory>();
