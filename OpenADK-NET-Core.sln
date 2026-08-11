@@ -1,0 +1,58 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11626.88
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-NET-Core", "src\core\OpenADK-NET-Core.csproj", "{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-Nunit-Core", "nunit\core\src\OpenADK-Nunit-Core.csproj", "{96E593B8-5673-4F26-BAD8-746174CE802A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.UnitTesting", "nunit\framework\src\OpenADK.UnitTesting.csproj", "{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Eval|Any CPU = Eval|Any CPU
+		Internal|Any CPU = Internal|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseDocs|Any CPU = ReleaseDocs|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Eval|Any CPU.ActiveCfg = Eval|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Eval|Any CPU.Build.0 = Eval|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Internal|Any CPU.ActiveCfg = Internal|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Internal|Any CPU.Build.0 = Internal|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.ReleaseDocs|Any CPU.ActiveCfg = ReleaseDocs|Any CPU
+		{99BBF567-55A8-4322-AB2B-4A2F43A7D99D}.ReleaseDocs|Any CPU.Build.0 = ReleaseDocs|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Eval|Any CPU.ActiveCfg = Eval|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Eval|Any CPU.Build.0 = Eval|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Internal|Any CPU.ActiveCfg = Internal|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Internal|Any CPU.Build.0 = Internal|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.ReleaseDocs|Any CPU.ActiveCfg = ReleaseDocs|Any CPU
+		{96E593B8-5673-4F26-BAD8-746174CE802A}.ReleaseDocs|Any CPU.Build.0 = ReleaseDocs|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Eval|Any CPU.ActiveCfg = Eval|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Eval|Any CPU.Build.0 = Eval|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Internal|Any CPU.ActiveCfg = Internal|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Internal|Any CPU.Build.0 = Internal|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.ReleaseDocs|Any CPU.ActiveCfg = ReleaseDocs|Any CPU
+		{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}.ReleaseDocs|Any CPU.Build.0 = ReleaseDocs|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0B419CC-7B2D-4ADD-9AAE-50423AEE3A21}
+	EndGlobalSection
+EndGlobal
