@@ -497,17 +497,28 @@ namespace OpenADK.Library
                                 {
                                     // Parse arbitrary XML child content into a DOM and store on the element.
                                     // XMLData uses ReadSubtree (single root XML child, no trailing text).
-                                    // SIF_ExtendedElement uses ReadOuterXml so the reader is positioned at the
-                                    // next sibling after the XML element, allowing trailing text (mixed content)
-                                    // to be captured by the XmlNodeType.Text case below.
-                                    XmlDocument doc = new XmlDocument();
+                                    // SIF_ExtendedElement collects ALL child nodes (elements and text, in any
+                                    // order) into an XmlDocumentFragment to correctly support mixed content.
                                     if (currentElement is SIF_ExtendedElement see)
                                     {
-                                        doc.LoadXml( reader.ReadOuterXml() );
-                                        see.Xml = doc;
+                                        // Initialise the fragment on first use so multiple element children
+                                        // are accumulated into the same fragment.
+                                        if (see.XmlFragment == null)
+                                        {
+                                            XmlDocument fragDoc = new XmlDocument();
+                                            see.XmlFragment = fragDoc.CreateDocumentFragment();
+                                        }
+                                        // ReadOuterXml advances the reader past the current element, leaving it
+                                        // positioned at the next sibling so the outer loop can pick up trailing
+                                        // text nodes or further element children.
+                                        XmlDocument childDoc = new XmlDocument();
+                                        childDoc.LoadXml(reader.ReadOuterXml());
+                                        XmlNode imported = see.XmlFragment.OwnerDocument.ImportNode(childDoc.DocumentElement, true);
+                                        see.XmlFragment.AppendChild(imported);
                                     }
                                     else
                                     {
+                                        XmlDocument doc = new XmlDocument();
                                         XmlReader nestedReader = reader.ReadSubtree();
                                         doc.Load( nestedReader );
                                         ((XMLData)currentElement).Xml = doc;
@@ -599,7 +610,19 @@ namespace OpenADK.Library
                         }
                         break;
                     case XmlNodeType.Text:
-                        if ( currentElement.ElementDef.HasSimpleContent )
+                        if (currentElement is SIF_ExtendedElement seeText)
+                        {
+                            // Accumulate text nodes into the fragment (handles leading text,
+                            // text between elements, and trailing text in mixed content).
+                            if (seeText.XmlFragment == null)
+                            {
+                                XmlDocument fragDoc = new XmlDocument();
+                                seeText.XmlFragment = fragDoc.CreateDocumentFragment();
+                            }
+                            seeText.XmlFragment.AppendChild(
+                                seeText.XmlFragment.OwnerDocument.CreateTextNode(reader.Value));
+                        }
+                        else if ( currentElement.ElementDef.HasSimpleContent )
                         {
                             SetFieldValueFromElement( currentElement.ElementDef, currentElement, reader, version,
                                                       formatter, zone );

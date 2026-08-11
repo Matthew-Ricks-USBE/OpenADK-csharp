@@ -256,8 +256,10 @@ namespace Library.Nunit.US
 
            see = copy.GetSIFExtendedElement("ApplicationSubmissionStatus");
            Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.AreEqual("4", see.Value, "Plain text value should round-trip unchanged");
-           Assert.IsNull(see.Xml, "Xml property should be null for plain-text content");
+           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be set for plain-text content");
+           Assert.AreEqual(1, see.XmlFragment.ChildNodes.Count, "Plain text should produce one child node");
+           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType, "Child should be a text node");
+           Assert.AreEqual("4", see.XmlFragment.ChildNodes[0].Value, "Plain text value should round-trip unchanged");
        }
 
        [Test]
@@ -280,24 +282,27 @@ namespace Library.Nunit.US
            doc.LoadXml("<Parent xmlns=\"http://myapplication.com\">" +
                        "<Child n=\"1\">one</Child><Child n=\"2\"/><Child n=\"3\">three</Child>" +
                        "</Parent>");
-           see.Xml = doc;
+           XmlDocumentFragment frag = doc.CreateDocumentFragment();
+           frag.AppendChild(doc.DocumentElement);
+           see.XmlFragment = frag;
            sp.SIFExtendedElementsContainer.Add(see);
 
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("DynamicXml");
            Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.Xml, "Xml property should be non-null after round-trip");
-           Assert.AreEqual("Parent", see.Xml.DocumentElement.LocalName, "Root XML element name should be preserved");
-           Assert.AreEqual("http://myapplication.com", see.Xml.DocumentElement.NamespaceURI, "Namespace should be preserved");
-           Assert.AreEqual(3, see.Xml.DocumentElement.ChildNodes.Count, "Child element count should be preserved");
-           Assert.AreEqual("one", see.Xml.DocumentElement.ChildNodes[0].InnerText, "First child text should be preserved");
+           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null after round-trip");
+           Assert.AreEqual(1, see.XmlFragment.ChildNodes.Count, "XML-only content should produce one child node");
+           XmlElement root = (XmlElement) see.XmlFragment.ChildNodes[0];
+           Assert.AreEqual("Parent", root.LocalName, "Root XML element name should be preserved");
+           Assert.AreEqual("http://myapplication.com", root.NamespaceURI, "Namespace should be preserved");
+           Assert.AreEqual(3, root.ChildNodes.Count, "Child element count should be preserved");
+           Assert.AreEqual("one", root.ChildNodes[0].InnerText, "First child text should be preserved");
        }
 
        [Test]
-       public void TestSIFExtendedElementMixedContent()
+       public void TestSIFExtendedElementMixedContent_XmlThenText()
        {
-           // SIF specification sample 3: mixed XML element + trailing text
            // <SIF_ExtendedElement Name="Note">
            //   <xhtml:strong xmlns:xhtml="http://www.w3.org/1999/xhtml">Double</xhtml:strong>-check submission status.
            // </SIF_ExtendedElement>
@@ -309,19 +314,118 @@ namespace Library.Nunit.US
            SIF_ExtendedElement see = new SIF_ExtendedElement();
            see.Name = "Note";
            XmlDocument doc = new XmlDocument();
-           doc.LoadXml("<xhtml:strong xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">Double</xhtml:strong>");
-           see.Xml = doc;
-           see.Value = "-check submission status.";
+           XmlDocumentFragment frag = doc.CreateDocumentFragment();
+           frag.AppendChild(doc.CreateElement("xhtml", "strong", "http://www.w3.org/1999/xhtml")).InnerText = "Double";
+           frag.AppendChild(doc.CreateTextNode("-check submission status."));
+           see.XmlFragment = frag;
            sp.SIFExtendedElementsContainer.Add(see);
 
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("Note");
            Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.Xml, "Xml property should be non-null for mixed content");
-           Assert.AreEqual("strong", see.Xml.DocumentElement.LocalName, "XML element local name should be preserved");
-           Assert.AreEqual("Double", see.Xml.DocumentElement.InnerText, "XML element text content should be preserved");
-           Assert.AreEqual("-check submission status.", see.Value, "Trailing text should be preserved");
+           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null for mixed content");
+           Assert.AreEqual(2, see.XmlFragment.ChildNodes.Count, "Mixed content should have 2 child nodes");
+           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[0].NodeType, "First child should be an element");
+           Assert.AreEqual("strong", see.XmlFragment.ChildNodes[0].LocalName, "Element local name should be preserved");
+           Assert.AreEqual("Double", see.XmlFragment.ChildNodes[0].InnerText, "Element inner text should be preserved");
+           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be a text node");
+           Assert.AreEqual("-check submission status.", see.XmlFragment.ChildNodes[1].Value, "Trailing text should be preserved");
+       }
+
+       [Test]
+       public void TestSIFExtendedElementMixedContent_TextThenXml()
+       {
+           // <SIF_ExtendedElement Name="Greeting">Hello <em>world</em></SIF_ExtendedElement>
+           StudentPersonal sp = new StudentPersonal();
+           sp.RefId = Runtime.MakeGuid();
+           sp.LocalId = "P00004";
+           sp.Name = new Name(NameType.LEGAL, "Student", "Ann");
+
+           SIF_ExtendedElement see = new SIF_ExtendedElement();
+           see.Name = "Greeting";
+           XmlDocument doc = new XmlDocument();
+           XmlDocumentFragment frag = doc.CreateDocumentFragment();
+           frag.AppendChild(doc.CreateTextNode("Hello "));
+           frag.AppendChild(doc.CreateElement("em")).InnerText = "world";
+           see.XmlFragment = frag;
+           sp.SIFExtendedElementsContainer.Add(see);
+
+           StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
+
+           see = copy.GetSIFExtendedElement("Greeting");
+           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
+           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null");
+           Assert.AreEqual(2, see.XmlFragment.ChildNodes.Count, "Should have 2 child nodes");
+           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType, "First child should be a text node");
+           Assert.AreEqual("Hello ", see.XmlFragment.ChildNodes[0].Value, "Leading text should be preserved");
+           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be an element");
+           Assert.AreEqual("em", see.XmlFragment.ChildNodes[1].LocalName, "Element local name should be preserved");
+           Assert.AreEqual("world", see.XmlFragment.ChildNodes[1].InnerText, "Element inner text should be preserved");
+       }
+
+       [Test]
+       public void TestSIFExtendedElementMixedContent_TextBetweenXml()
+       {
+           // <SIF_ExtendedElement Name="Rich">Start <b>bold</b> end</SIF_ExtendedElement>
+           StudentPersonal sp = new StudentPersonal();
+           sp.RefId = Runtime.MakeGuid();
+           sp.LocalId = "P00005";
+           sp.Name = new Name(NameType.LEGAL, "Student", "Carl");
+
+           SIF_ExtendedElement see = new SIF_ExtendedElement();
+           see.Name = "Rich";
+           XmlDocument doc = new XmlDocument();
+           XmlDocumentFragment frag = doc.CreateDocumentFragment();
+           frag.AppendChild(doc.CreateTextNode("Start "));
+           frag.AppendChild(doc.CreateElement("b")).InnerText = "bold";
+           frag.AppendChild(doc.CreateTextNode(" end"));
+           see.XmlFragment = frag;
+           sp.SIFExtendedElementsContainer.Add(see);
+
+           StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
+
+           see = copy.GetSIFExtendedElement("Rich");
+           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
+           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null");
+           Assert.AreEqual(3, see.XmlFragment.ChildNodes.Count, "Should have 3 child nodes");
+           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType, "First child should be text");
+           Assert.AreEqual("Start ", see.XmlFragment.ChildNodes[0].Value, "Leading text should be preserved");
+           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be element");
+           Assert.AreEqual("b", see.XmlFragment.ChildNodes[1].LocalName, "Element local name should be preserved");
+           Assert.AreEqual("bold", see.XmlFragment.ChildNodes[1].InnerText, "Element content should be preserved");
+           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[2].NodeType, "Third child should be text");
+           Assert.AreEqual(" end", see.XmlFragment.ChildNodes[2].Value, "Trailing text should be preserved");
+       }
+
+       [Test]
+       public void TestSIFExtendedElementMixedContent_MultipleElements()
+       {
+           // <SIF_ExtendedElement Name="Multi"><a/><b/></SIF_ExtendedElement>
+           StudentPersonal sp = new StudentPersonal();
+           sp.RefId = Runtime.MakeGuid();
+           sp.LocalId = "P00006";
+           sp.Name = new Name(NameType.LEGAL, "Student", "Dana");
+
+           SIF_ExtendedElement see = new SIF_ExtendedElement();
+           see.Name = "Multi";
+           XmlDocument doc = new XmlDocument();
+           XmlDocumentFragment frag = doc.CreateDocumentFragment();
+           frag.AppendChild(doc.CreateElement("a"));
+           frag.AppendChild(doc.CreateElement("b"));
+           see.XmlFragment = frag;
+           sp.SIFExtendedElementsContainer.Add(see);
+
+           StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
+
+           see = copy.GetSIFExtendedElement("Multi");
+           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
+           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null");
+           Assert.AreEqual(2, see.XmlFragment.ChildNodes.Count, "Should have 2 element children");
+           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[0].NodeType, "First child should be an element");
+           Assert.AreEqual("a", see.XmlFragment.ChildNodes[0].LocalName, "First element name should be preserved");
+           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be an element");
+           Assert.AreEqual("b", see.XmlFragment.ChildNodes[1].LocalName, "Second element name should be preserved");
        }
 
    }

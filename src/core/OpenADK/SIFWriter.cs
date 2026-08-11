@@ -320,17 +320,16 @@ namespace OpenADK.Library
                 }
             }
 
-            // SIF_ExtendedElement with arbitrary XML child content: write start tag + attributes,
-            // then the XML document element, then any trailing text (mixed content), then close.
-            if (element is SIF_ExtendedElement see && see.Xml != null)
+            // SIF_ExtendedElement with XmlFragment content: write start tag + attributes,
+            // then each child node of the fragment (text, element, or mixed), then close.
+            if (element is SIF_ExtendedElement see && see.XmlFragment != null)
             {
                 fWriter.WriteStartElement(def.Tag(fVersion));
                 if (!fRootAttributesWritten)
                     writeRootAttributes(false);
                 WriteAttributes(element);
-                see.Xml.DocumentElement.WriteTo(fWriter);
-                if (see.Value != null)
-                    fWriter.WriteString(see.Value);
+                foreach (System.Xml.XmlNode child in see.XmlFragment.ChildNodes)
+                    child.WriteTo(fWriter);
                 fWriter.WriteEndElement();
                 return;
             }
