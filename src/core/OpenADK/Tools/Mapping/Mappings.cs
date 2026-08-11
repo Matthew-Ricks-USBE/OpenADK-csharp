@@ -1690,51 +1690,72 @@ namespace OpenADK.Library.Tools.Mapping
                             }
 
                             SifSimpleType mappedValue;
-                            mappedValue = adaptor.GetSifValue(fieldName, typeConverter, fm);
-
-                            // Perform a valueset translation, if applicable
-                            if (mappedValue != null &&
-                                mappedValue is SifString &&
-                                fm.ValueSetID != null)
+                            String valueExpression = rule.ValueExpression;
+                            if (valueExpression != null)
                             {
-                                String textValue = mappedValue.ToString();
-                                //	Perform automatic ValueSet translation
-                                ValueSet vs = GetValueSet(fm.ValueSetID, true);
-                                if (vs != null)
-                                {
-                                    // TT 199. Perform a more detailed valueset translation. 
-                                    // If there is a default value for this field, use it if there is
-                                    // no match found in the value set
-                                    textValue = vs.Translate(textValue, fm.DefaultValue);
-                                }
-                                mappedValue = new SifString(textValue);
-                            }
+                                // Probe whether the adaptor has a usable value without doing a
+                                // version-specific type conversion. Using STRING avoids a formatter
+                                // mismatch (the adaptor may use the SIF 1.x formatter while
+                                // textFormatter is SIF 2.x) that would throw for valid date strings.
+                                SifSimpleType probe = adaptor.GetSifValue(
+                                    fieldName, SifTypeConverters.STRING, fm);
 
-                            bool usedDefault = false;
-                            if (mappedValue == null || mappedValue.RawValue == null)
-                            {
-                                // If the FieldMapping has a Default value, use that, unless
-                                // it is explicitly suppressed
-                                if (fm.NullBehavior != MappingBehavior.IfNullSuppress && fm.HasDefaultValue)
+                                if (probe == null || probe.RawValue == null)
                                 {
-                                    mappedValue = fm.GetDefaultValue(typeConverter, textFormatter);
-                                    usedDefault = true;
+                                    // No usable value in the adaptor; apply the same null/default/
+                                    // suppress logic as the non-expression path.
+                                    if (fm.NullBehavior != MappingBehavior.IfNullSuppress
+                                        && fm.HasDefaultValue)
+                                    {
+                                        mappedValue = fm.GetDefaultValue(typeConverter, textFormatter);
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
                                 else
                                 {
-                                    continue;
-                                }
-                            }
-
-
-                            if (!usedDefault)
-                            {
-                                String valueExpression = rule.ValueExpression;
-                                if (valueExpression != null)
-                                {
-                                    // This XPath rule has a value assignment expression at the end of it
+                                    // Field has a usable value; evaluate the expression with the
+                                    // version-appropriate formatter.
                                     String value = valueBuilder.Evaluate(valueExpression);
                                     mappedValue = typeConverter.Parse(textFormatter, value);
+                                }
+                            }
+                            else
+                            {
+                                mappedValue = adaptor.GetSifValue(fieldName, typeConverter, fm);
+
+                                // Perform a valueset translation, if applicable
+                                if (mappedValue != null &&
+                                    mappedValue is SifString &&
+                                    fm.ValueSetID != null)
+                                {
+                                    String textValue = mappedValue.ToString();
+                                    //	Perform automatic ValueSet translation
+                                    ValueSet vs = GetValueSet(fm.ValueSetID, true);
+                                    if (vs != null)
+                                    {
+                                        // TT 199. Perform a more detailed valueset translation. 
+                                        // If there is a default value for this field, use it if there is
+                                        // no match found in the value set
+                                        textValue = vs.Translate(textValue, fm.DefaultValue);
+                                    }
+                                    mappedValue = new SifString(textValue);
+                                }
+
+                                if (mappedValue == null || mappedValue.RawValue == null)
+                                {
+                                    // If the FieldMapping has a Default value, use that, unless
+                                    // it is explicitly suppressed
+                                    if (fm.NullBehavior != MappingBehavior.IfNullSuppress && fm.HasDefaultValue)
+                                    {
+                                        mappedValue = fm.GetDefaultValue(typeConverter, textFormatter);
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
                             }
 

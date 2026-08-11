@@ -25,6 +25,7 @@ namespace Library.Nunit.US.Tools.Mapping
         protected StudentPersonal mapToStudentPersonal( IFieldAdaptor adaptor, String cfg, IValueBuilder vb )
         {
             StudentPersonal sp = new StudentPersonal();
+            sp.SifVersion = Runtime.SifVersion;
             doOutboundMapping( adaptor, sp, cfg, vb );
             return sp;
         }

@@ -23,7 +23,7 @@ namespace Library.Nunit.US.Tools.Mapping
         public static String flattenDate( IValueBuilder vb, String dateString_in )
         {
             ((TestValueBuilder) vb).WasCalled = true;
-            return dateString_in.Replace( "-", "" ).Trim();
+            return dateString_in;
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = new Dictionary<String, String>();
             map.Add( "StudentPers_guid", "1234" );
-            map.Add( "DOB", "19900904" );
+            map.Add( "DOB", "1990-09-04" );
             StringMapAdaptor sma = new StringMapAdaptor( map );
             TestValueBuilder tvb = new TestValueBuilder( sma );
             tvb.AddAlias( "flattenDate", GetType().AssemblyQualifiedName );
@@ -64,7 +64,7 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = new Dictionary<String, String>();
             map.Add( "StudentPers_guid", "1234" );
-            map.Add( "DOB", "19900904" );
+            map.Add( "DOB", "1990-09-04" );
             StringMapAdaptor sma = new StringMapAdaptor( map );
             StudentPersonal sp = mapToStudentPersonal( sma, flattenDateFunctionCall, null );
             Assert.IsNotNull(sp, "Student should not be null");
