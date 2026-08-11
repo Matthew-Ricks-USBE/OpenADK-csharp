@@ -16,7 +16,6 @@ OpenADK-csharp/
 │   └── us/               # United States locale data models
 ├── examples/             # Sample agent projects
 ├── test/                 # Unit tests
-├── metadata/             # SIF data model metadata / XML definitions
 ├── docs/                 # Reference documentation (see docs/README.md)
 ├── OpenADK-NET-Core.sln  # Core-only solution
 ├── OpenADK-NET-AU.sln    # Australia locale solution
