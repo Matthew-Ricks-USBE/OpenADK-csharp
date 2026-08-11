@@ -1,22 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>OpenADK.Library.au</RootNamespace>
     <AssemblyName>OpenADK.SDO-AU</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Configurations>Debug;Eval;Internal;Release;ReleaseDocs</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DocumentationFile>bin\OpenADK.SDO-AU.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DocumentationFile>bin\SifWorks.Sdo-AU.XML</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseDocs|AnyCPU' ">
-    <OutputPath>bin\ReleaseDocs\</OutputPath>
     <Optimize>true</Optimize>
-    <DocumentationFile>bin\SifWorks.Sdo-AU.xml</DocumentationFile>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\core\OpenADK-NET-Core.csproj" />

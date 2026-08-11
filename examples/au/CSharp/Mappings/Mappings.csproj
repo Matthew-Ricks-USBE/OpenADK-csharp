@@ -3,22 +3,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Configurations>Debug;Eval;Internal;Release;ReleaseDocs</Configurations>
+    <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
-    <WarningLevel>1</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
-    <Optimize>false</Optimize>
-    <WarningLevel>1</WarningLevel>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <Optimize>true</Optimize>
     <DebugType>none</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Eval|AnyCPU' ">
-    <OutputPath>bin\Eval\</OutputPath>
-    <WarningLevel>1</WarningLevel>
-    <DebugType></DebugType>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Data.OleDb" Version="8.0.0" />
@@ -37,5 +26,4 @@
     <ProjectReference Include="..\..\..\..\src\au\OpenADK-AU-SDO.csproj" />
     <ProjectReference Include="..\..\..\..\src\core\OpenADK-NET-Core.csproj" />
   </ItemGroup>
-  <PropertyGroup />
 </Project>
