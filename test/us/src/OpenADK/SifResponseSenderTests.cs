@@ -7,12 +7,12 @@ using OpenADK.Library.Infra;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Global;
 using OpenADK.Library.Tools.XPath;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Library
 {
-    [TestFixture]
+    
     public class SifResponseSenderTests : InMemoryProtocolTest
     {
         /**
@@ -20,7 +20,7 @@ namespace Library.Nunit.US.Library
 	 * are actually sent
 	 * @throws Exception
 	 */
-        [Test]
+        [Fact]
         public void testSifResponseSender()
         {
             MessageDispatcher testDispatcher = new MessageDispatcher( Zone );
@@ -45,15 +45,15 @@ namespace Library.Nunit.US.Library
             // Retrieve the SIF_Response message off the protocol handler and asssert the results
             SIF_Response response = (SIF_Response) testProto.readMsg();
 
-            Assert.AreEqual( SifRequestMsgId, response.SIF_RequestMsgId );
-            Assert.AreEqual( 1, response.SIF_PacketNumber.Value );
-            Assert.AreEqual( "No", response.SIF_MorePackets );
+            Assert.Equal( SifRequestMsgId, response.SIF_RequestMsgId );
+            Assert.Equal( 1, response.SIF_PacketNumber.Value );
+            Assert.Equal( "No", response.SIF_MorePackets );
 
             SIF_Header header = response.SIF_Header;
-            Assert.AreEqual( sourceId, header.SIF_DestinationId );
+            Assert.Equal( sourceId, header.SIF_DestinationId );
 
             SifElement responseObject = response.SIF_ObjectData.GetChildList()[0];
-            Assert.IsNotNull( responseObject );
+            Assert.NotNull( responseObject );
         }
 
 
@@ -62,7 +62,7 @@ namespace Library.Nunit.US.Library
 	 * are actually sent
 	 * @throws Exception
 	 */
-        [Test]
+        [Fact]
         public void testSifResponseSenderMultiplePackets()
         {
             MessageDispatcher testDispatcher = new MessageDispatcher( Zone );
@@ -95,22 +95,22 @@ namespace Library.Nunit.US.Library
                 // Retrieve the SIF_Response message off the protocol handler and asssert the results
                 SIF_Response response = (SIF_Response) testProto.readMsg();
 
-                Assert.AreEqual( SifRequestMsgId, response.SIF_RequestMsgId );
-                Assert.AreEqual( x + 1, response.SIF_PacketNumber.Value );
+                Assert.Equal( SifRequestMsgId, response.SIF_RequestMsgId );
+                Assert.Equal( x + 1, response.SIF_PacketNumber.Value );
                 if ( x == 4 )
                 {
-                    Assert.AreEqual( "No", response.SIF_MorePackets );
+                    Assert.Equal( "No", response.SIF_MorePackets );
                 }
                 else
                 {
-                    Assert.AreEqual( "Yes", response.SIF_MorePackets );
+                    Assert.Equal( "Yes", response.SIF_MorePackets );
                 }
 
                 SIF_Header header = response.SIF_Header;
-                Assert.AreEqual( sourceId, header.SIF_DestinationId );
+                Assert.Equal( sourceId, header.SIF_DestinationId );
 
                 SifElement responseObject = response.SIF_ObjectData.GetChildList()[0];
-                Assert.IsNotNull( responseObject );
+                Assert.NotNull( responseObject );
             }
         }
 
@@ -119,7 +119,7 @@ namespace Library.Nunit.US.Library
 	 * Tests basic support for SifResponseSender when an error packet is set
 	 * @throws Exception
 	 */
-        [Test]
+        [Fact]
         public void testSifResponseSenderError()
         {
             MessageDispatcher testDispatcher = new MessageDispatcher( Zone );
@@ -147,33 +147,33 @@ namespace Library.Nunit.US.Library
             // Retrieve the SIF_Response message off the protocol handler and asssert the results
             SIF_Response response = (SIF_Response) testProto.readMsg();
 
-            Assert.AreEqual( SifRequestMsgId, response.SIF_RequestMsgId );
-            Assert.AreEqual( 1, response.SIF_PacketNumber.Value );
-            Assert.AreEqual( "Yes", response.SIF_MorePackets );
+            Assert.Equal( SifRequestMsgId, response.SIF_RequestMsgId );
+            Assert.Equal( 1, response.SIF_PacketNumber.Value );
+            Assert.Equal( "Yes", response.SIF_MorePackets );
 
             SIF_Header header = response.SIF_Header;
-            Assert.AreEqual( sourceId, header.SIF_DestinationId );
+            Assert.Equal( sourceId, header.SIF_DestinationId );
 
             SifElement responseObject = response.SIF_ObjectData.GetChildList()[0];
-            Assert.IsNotNull( responseObject );
+            Assert.NotNull( responseObject );
 
             // now test the error packet
             response = (SIF_Response) testProto.readMsg();
 
-            Assert.AreEqual( SifRequestMsgId, response.SIF_RequestMsgId );
-            Assert.AreEqual( 2, response.SIF_PacketNumber.Value );
-            Assert.AreEqual( "No", response.SIF_MorePackets );
+            Assert.Equal( SifRequestMsgId, response.SIF_RequestMsgId );
+            Assert.Equal( 2, response.SIF_PacketNumber.Value );
+            Assert.Equal( "No", response.SIF_MorePackets );
 
             header = response.SIF_Header;
-            Assert.AreEqual( sourceId, header.SIF_DestinationId );
+            Assert.Equal( sourceId, header.SIF_DestinationId );
 
-            Assert.IsNull( response.SIF_ObjectData );
+            Assert.Null( response.SIF_ObjectData );
             SIF_Error respError = response.SIF_Error;
-            Assert.IsNotNull( respError );
-            Assert.AreEqual( 12, respError.SIF_Category.Value );
-            Assert.AreEqual( 1, respError.SIF_Code.Value );
-            Assert.AreEqual( "ERROR", respError.SIF_Desc );
-            Assert.AreEqual( "EXT_ERROR", respError.SIF_ExtendedDesc );
+            Assert.NotNull( respError );
+            Assert.Equal( 12, respError.SIF_Category.Value );
+            Assert.Equal( 1, respError.SIF_Code.Value );
+            Assert.Equal( "ERROR", respError.SIF_Desc );
+            Assert.Equal( "EXT_ERROR", respError.SIF_ExtendedDesc );
         }
 
         /**
@@ -181,7 +181,7 @@ namespace Library.Nunit.US.Library
 	 * are actually sent
 	 * @throws Exception
 	 */
-        [Test]
+        [Fact]
         public void testSetPacketNumberAndMorePackets()
         {
 
@@ -208,31 +208,31 @@ namespace Library.Nunit.US.Library
             srs.SIF_MorePackets = morePacketsValue;
 
             // Assert the values of the properties set before writing
-            Assert.AreEqual(packetNumber, srs.SIF_PacketNumber);
-            Assert.AreEqual(morePacketsValue, srs.SIF_MorePackets);
+            Assert.Equal(packetNumber, srs.SIF_PacketNumber);
+            Assert.Equal(morePacketsValue, srs.SIF_MorePackets);
 
             srs.Write(new Authentication(Runtime.MakeGuid(), Runtime.MakeGuid(), AuthSifRefIdType.EMPLOYEEPERSONAL));
             srs.Close();
 
             // Assert the values of the properties set after writing
-            Assert.AreEqual(packetNumber, srs.SIF_PacketNumber);
-            Assert.AreEqual(morePacketsValue, srs.SIF_MorePackets);
+            Assert.Equal(packetNumber, srs.SIF_PacketNumber);
+            Assert.Equal(morePacketsValue, srs.SIF_MorePackets);
 
             // Retrieve the SIF_Response message off the protocol handler and asssert the results
             SIF_Response response = (SIF_Response)testProto.readMsg();
 
-            Assert.AreEqual(SifRequestMsgId, response.SIF_RequestMsgId);
-            Assert.AreEqual(packetNumber, response.SIF_PacketNumber.Value);
-            Assert.AreEqual(morePacketsValue.ToString(), response.SIF_MorePackets);
+            Assert.Equal(SifRequestMsgId, response.SIF_RequestMsgId);
+            Assert.Equal(packetNumber, response.SIF_PacketNumber.Value);
+            Assert.Equal(morePacketsValue.ToString(), response.SIF_MorePackets);
 
             SIF_Header header = response.SIF_Header;
-            Assert.AreEqual(sourceId, header.SIF_DestinationId);
+            Assert.Equal(sourceId, header.SIF_DestinationId);
 
             SifElement responseObject = response.SIF_ObjectData.GetChildList()[0];
-            Assert.IsNotNull(responseObject);
+            Assert.NotNull(responseObject);
         }
 
-        [Test]
+        [Fact]
         public void testSifResponseSender010()
         {
             string queryStr =
@@ -315,15 +315,15 @@ namespace Library.Nunit.US.Library
             // Retrieve the SIF_Response message off the protocol handler and asssert the results
             SIF_Response response = (SIF_Response)testProto.readMsg();
 
-            Assert.AreEqual(SifRequestMsgId, response.SIF_RequestMsgId);
-            Assert.AreEqual(1, response.SIF_PacketNumber.Value);
-            Assert.AreEqual("No", response.SIF_MorePackets);
+            Assert.Equal(SifRequestMsgId, response.SIF_RequestMsgId);
+            Assert.Equal(1, response.SIF_PacketNumber.Value);
+            Assert.Equal("No", response.SIF_MorePackets);
 
             SIF_Header header = response.SIF_Header;
-            Assert.AreEqual(sourceId, header.SIF_DestinationId);
+            Assert.Equal(sourceId, header.SIF_DestinationId);
 
             SifDataObject responseObject = (SifDataObject)response.SIF_ObjectData.GetChildList()[0];
-            Assert.IsNotNull(responseObject);
+            Assert.NotNull(responseObject);
 
             Console.Out.WriteLine( responseObject.ToXml() );
 
@@ -332,13 +332,13 @@ namespace Library.Nunit.US.Library
             foreach( ElementRef reference in query.FieldRestrictionRefs )
             {
                 Element found = context.GetElementOrAttribute( reference.XPath );
-                Assert.IsNotNull( found, reference.XPath );
+                Assert.NotNull( found);
             }
 
     
             Element sectionInfoList =
                 responseObject.GetElementOrAttribute( "ScheduleInfoList/ScheduleInfo/SectionInfoList" );
-            Assert.IsNull( sectionInfoList );
+            Assert.Null( sectionInfoList );
 
 
 

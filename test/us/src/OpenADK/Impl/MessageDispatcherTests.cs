@@ -6,7 +6,7 @@ using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
 using OpenADK.Library.us.Student;
 using OpenADK.Util;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Impl
@@ -14,7 +14,7 @@ namespace Library.Nunit.US.Impl
    /// <summary>
    /// Summary description for MessageDispatcherTests.
    /// </summary>
-   [TestFixture]
+   
    public class MessageDispatcherTests : InMemoryProtocolTest
    {
       //private Agent fAgent;
@@ -22,7 +22,7 @@ namespace Library.Nunit.US.Impl
 
       private static String MSG_GUID = "MESSAGE_DISPATCH_TESTS";
 
-      //[SetUp]
+      //
       //public void setUp()
       //{
       //    Runtime.Initialize();
@@ -32,7 +32,7 @@ namespace Library.Nunit.US.Impl
       //    fZone = new TestZoneImpl("test", "http://127.0.0.1/test", fAgent, null); //:7080
       //}
 
-      [Test]
+      [Fact]
       public void testNormalEvent()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -47,7 +47,7 @@ namespace Library.Nunit.US.Impl
          assertNormalHandling(handler, evnt, fZone);
       }
 
-      [Test]
+      [Fact]
       public void testEventThrowsNullPointerException()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -65,7 +65,7 @@ namespace Library.Nunit.US.Impl
          AssertExceptionHandling(handler, evnt, fZone, typeof(NullReferenceException));
       }
 
-      [Test]
+      [Fact]
       public void testEventThrowsException()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -82,7 +82,7 @@ namespace Library.Nunit.US.Impl
          AssertExceptionHandling(handler, evnt, fZone, typeof(AdkException));
       }
 
-      [Test]
+      [Fact]
       public void testSIFRetryEvent()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -94,7 +94,7 @@ namespace Library.Nunit.US.Impl
          AssertRetryHandling(handler, evnt, fZone);
       }
 
-      [Test]
+      [Fact]
       public void testUndeliverableRetryEvent()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -248,7 +248,7 @@ namespace Library.Nunit.US.Impl
  */
 
 
-      [Test]
+      [Fact]
       public void testADKRetryQueryResults()
       {
          TestState requestState = new TestState(Runtime.MakeGuid());
@@ -269,7 +269,7 @@ namespace Library.Nunit.US.Impl
          assertRequestCacheCleared(r);
       }
 
-      [Test]
+      [Fact]
       public void testQueryResultsNoCache()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -282,7 +282,7 @@ namespace Library.Nunit.US.Impl
          assertRequestCacheCleared(r);
       }
 
-      [Test]
+      [Fact]
       public void testADKRetryQueryResultsNoCache()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -302,7 +302,7 @@ namespace Library.Nunit.US.Impl
          assertRequestCacheCleared(r);
       }
 
-      [Test]
+      [Fact]
       public void testSIFRetryQueryResultsNoCache()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -322,7 +322,7 @@ namespace Library.Nunit.US.Impl
       }
 
 
-      [Test]
+      [Fact]
       public void testSIFRetryQueryResults()
       {
          TestState requestState = new TestState(Runtime.MakeGuid());
@@ -343,7 +343,7 @@ namespace Library.Nunit.US.Impl
       }
 
 
-      [Test]
+      [Fact]
       public void testADKRetryEvent()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -360,7 +360,7 @@ namespace Library.Nunit.US.Impl
       }
 
 
-            [Test]
+            [Fact]
       public void testADKRetryPublish()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -371,7 +371,7 @@ namespace Library.Nunit.US.Impl
          AssertRetryHandling(handler, createSIF_Request(objType), fZone);
       }
 
-      [Test]
+      [Fact]
       public void testSIFRetryPublish()
       {
          IElementDef objType = StudentDTD.STUDENTCONTACT;
@@ -384,7 +384,7 @@ namespace Library.Nunit.US.Impl
 
       // TODO: Implement
       /*
-    [Test]
+    [Fact]
     public void testReportPublishSIFExceptionAfterReportInfo() 
     {
     ElementDef objType = SifDtd.SIF_REPORTOBJECT;
@@ -513,8 +513,8 @@ namespace Library.Nunit.US.Impl
       {
          MessageDispatcher testDispatcher = new MessageDispatcher(zone);
          int result = testDispatcher.dispatch(payload);
-         Assert.IsTrue(handler.wasCalled(), "Handler was not called");
-         Assert.AreEqual(1, result, "Result code should always be 1 because this version does not support SMB");
+         Assert.True(handler.wasCalled());
+         Assert.Equal(1, result);
       }
 
       private void AssertExceptionHandling(ErrorMessageHandler handler, SifMessagePayload payload, ZoneImpl zone,
@@ -528,11 +528,10 @@ namespace Library.Nunit.US.Impl
          catch (Exception ex)
          {
             exc = ex;
-            Assert.IsTrue(handler.wasCalled(), "Handler was not called");
+            Assert.True(handler.wasCalled());
 
             AdkMessagingException adkme = ex as AdkMessagingException;
-            Assert.IsNotNull(adkme,
-                             "Expected an ADKMessagingException, but was " + ex.GetType().Name + ":" + ex.ToString());
+            Assert.NotNull(adkme);
 
              Exception source = adkme;
              Exception innerEx = null;
@@ -541,16 +540,16 @@ namespace Library.Nunit.US.Impl
                  innerEx = source.InnerException;
                  source = innerEx;
              }
-            Assert.IsNotNull(innerEx, "AdkMessaginException was thrown but inner exception was not set");
+            Assert.NotNull(innerEx);
 
             if (innerEx.GetType() != expectedExceptionType)
             {
-               Assert.Fail("Exception thrown was not a " + expectedExceptionType.Name + ", but was " +
+               throw new Xunit.Sdk.XunitException("Exception thrown was not a " + expectedExceptionType.Name + ", but was " +
                            innerEx.GetType().Name + ":" + innerEx.ToString());
             }
          }
 
-         Assert.IsNotNull(exc, "An exception was not thrown by the handler");
+         Assert.NotNull(exc);
          AssertThreadIsOK();
       }
 
@@ -562,7 +561,7 @@ namespace Library.Nunit.US.Impl
          }
          catch (Exception ex)
          {
-            Assert.Fail("Tried to sleep the thread, but an Exception was thrown: " + ex.GetType().Name + " : " +
+            throw new Xunit.Sdk.XunitException("Tried to sleep the thread, but an Exception was thrown: " + ex.GetType().Name + " : " +
                         ex.ToString());
          }
       }
@@ -576,11 +575,10 @@ namespace Library.Nunit.US.Impl
          }
          catch (SifException ex)
          {
-            Assert.IsTrue(handler.wasCalled(), "Handler was not called");
-            Assert.AreEqual(SifErrorCategoryCode.Transport, ex.ErrorCategory,
-                            "SIF Error category should be 10: " + ex.Message);
+            Assert.True(handler.wasCalled());
+            Assert.Equal(SifErrorCategoryCode.Transport, ex.ErrorCategory);
          }
-         Assert.IsTrue(handler.wasCalled(), "Handler was not called");
+         Assert.True(handler.wasCalled());
          AssertThreadIsOK();
       }
 
@@ -588,7 +586,7 @@ namespace Library.Nunit.US.Impl
       {
          // Now the RequestCache should no longer contain the specified object
          IRequestInfo inf = fAgent.Requests.LookupRequestInfo(r.SIF_RequestMsgId, fZone);
-         Assert.IsNull(inf, "RequestInfo should be removed from the cache");
+         Assert.Null(inf);
       }
    }
 }

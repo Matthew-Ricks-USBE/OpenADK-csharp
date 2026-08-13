@@ -1,23 +1,23 @@
-using System;
+﻿using System;
 using OpenADK.Library;
 using OpenADK.Library.Infra;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.NUnit.Core.Library
 {
-    [TestFixture]
+    
     public class SIFPrimitivesTests : InMemoryProtocolTest, ISubscriber
     {
-        [TearDown]
-        public override void TearDown()
+        
+        public override void Dispose()
         {
-            base.TearDown();
+            base.Dispose();
             // Clean up any properties that have been set and reset the ADK version
             Agent.Properties.Clear();
         }
 
-        [Test]
+        [Fact]
         public void testRegisterSIF20()
         {
             Runtime.SifVersion = (SifVersion.SIF20);
@@ -38,19 +38,19 @@ namespace Library.NUnit.Core.Library
 
             SIF_Register sr = (SIF_Register) handler.readMsg();
 
-            Assert.AreEqual( Agent.Id, sr.SourceId, "SourceID" );
-            Assert.AreEqual( "acmeAgent", sr.SIF_Name, "Name" );
-            Assert.AreEqual( "acmeVendor", sr.SIF_NodeVendor, "Agent Vendor" );
-            Assert.AreEqual( "2.6.5.8", sr.SIF_NodeVersion, "Agent Version" );
+            Assert.Equal( Agent.Id, sr.SourceId);
+            Assert.Equal( "acmeAgent", sr.SIF_Name);
+            Assert.Equal( "acmeVendor", sr.SIF_NodeVendor);
+            Assert.Equal( "2.6.5.8", sr.SIF_NodeVersion);
             SIF_Application appInfo = sr.SIF_Application;
-            Assert.IsNotNull( appInfo );
-            Assert.AreEqual( "acmeApp", appInfo.SIF_Product, "App Name" );
-            Assert.AreEqual( "acme<>AppVendor", appInfo.SIF_Vendor, "App Vendor" );
-            Assert.AreEqual( "10.2", appInfo.SIF_Version, "App Version" );
-            Assert.AreEqual( iconURL, sr.SIF_Icon, "Icon" );
+            Assert.NotNull( appInfo );
+            Assert.Equal( "acmeApp", appInfo.SIF_Product);
+            Assert.Equal( "acme<>AppVendor", appInfo.SIF_Vendor);
+            Assert.Equal( "10.2", appInfo.SIF_Version);
+            Assert.Equal( iconURL, sr.SIF_Icon);
         }
 
-        [Test]
+        [Fact]
         public void testRegisterOverrideZISVersion()
         {
             Runtime.SifVersion = (SifVersion.SIF20);
@@ -62,14 +62,14 @@ namespace Library.NUnit.Core.Library
 
             SIF_Register sr = (SIF_Register)handler.readMsg();
             SIF_Version[] versions = sr.GetSIF_Versions();
-            Assert.IsNotNull( versions );
-            Assert.AreEqual( 2, versions.Length );
-            Assert.AreEqual( "1.1", versions[0].Value );
-            Assert.AreEqual("2.5", versions[1].Value);
+            Assert.NotNull( versions );
+            Assert.Equal( 2, versions.Length );
+            Assert.Equal( "1.1", versions[0].Value );
+            Assert.Equal("2.5", versions[1].Value);
         }
 
 
-        [Test]
+        [Fact]
         public void testRegisterSIF15r1()
         {
             Runtime.SifVersion = (SifVersion.SIF15r1);
@@ -90,31 +90,31 @@ namespace Library.NUnit.Core.Library
 
             SIF_Register sr = (SIF_Register) handler.readMsg();
 
-            Assert.AreEqual( Agent.Id, sr.SourceId, "SourceID" );
-            Assert.AreEqual( "acmeAgent", sr.SIF_Name, "Name" );
-            Assert.IsNull( sr.SIF_NodeVendor, "Agent Vendor" );
-            Assert.IsNull( sr.SIF_NodeVersion, "Agent Version" );
+            Assert.Equal( Agent.Id, sr.SourceId);
+            Assert.Equal( "acmeAgent", sr.SIF_Name);
+            Assert.Null( sr.SIF_NodeVendor);
+            Assert.Null( sr.SIF_NodeVersion);
             SIF_Application appInfo = sr.SIF_Application;
-            Assert.IsNull( appInfo );
-            Assert.IsNull( sr.SIF_Icon, "Icon" );
+            Assert.Null( appInfo );
+            Assert.Null( sr.SIF_Icon);
 
 
             // Assert the versions in the message. If the ADK is initialized to
             // SIF 1.5r1, it should not be sending any versions that start with a
             // "2"
             SifVersion messageVersion = sr.SifVersion;
-            Assert.AreEqual( SifVersion.SIF15r1, messageVersion, "Should be version 1.5r1" );
+            Assert.Equal( SifVersion.SIF15r1, messageVersion);
             foreach ( SIF_Version version in sr.GetSIF_Versions() )
             {
                 String versionString = version.TextValue;
-                Assert.IsTrue( versionString.StartsWith( "1" ), "Should start with 1 but was " + versionString );
+                Assert.True( versionString.StartsWith( "1" ));
             }
         }
 
         /**
 	 * 
 	 */
-        [Test]
+        [Fact]
         public void testSIFPingDifferentVersions()
         {
             Runtime.SifVersion = (SifVersion.LATEST);
@@ -124,8 +124,8 @@ namespace Library.NUnit.Core.Library
             Zone.SifPing();
             SIF_SystemControl ssc = (SIF_SystemControl) handler.readMsg();
 
-            Assert.AreEqual( SifVersion.LATEST, ssc.SifVersion, "SifVersion" );
-            Assert.AreEqual( SifVersion.LATEST.Xmlns, ssc.GetXmlns(), "SifVersion->Xmlns" );
+            Assert.Equal( SifVersion.LATEST, ssc.SifVersion);
+            Assert.Equal( SifVersion.LATEST.Xmlns, ssc.GetXmlns());
 
             foreach ( SifVersion version in Runtime.SupportedSIFVersions )
             {
@@ -143,7 +143,7 @@ namespace Library.NUnit.Core.Library
         /**
 	 * 
 	 */
-        [Test]
+        [Fact]
         public void testSynchronousGetZoneStatus()
         {
             Runtime.SifVersion = (SifVersion.LATEST);
@@ -157,17 +157,17 @@ namespace Library.NUnit.Core.Library
 
             SIF_SystemControl ssc = (SIF_SystemControl) handler.readMsg();
 
-            Assert.AreEqual( SifVersion.SIF15r1, ssc.SifVersion, "SifVersion" );
-            Assert.AreEqual( SifVersion.SIF15r1.Xmlns, ssc.GetXmlns(), "SifVersion->Xmlns" );
+            Assert.Equal( SifVersion.SIF15r1, ssc.SifVersion);
+            Assert.Equal( SifVersion.SIF15r1.Xmlns, ssc.GetXmlns());
             SifElement element = ssc.SIF_SystemControlData.GetChildList()[0];
-            Assert.IsNotNull( element, "SIF_SystemControlData\\Child" );
-            Assert.IsTrue( element is SIF_GetZoneStatus, "is instanceof SIF_GetZoneStatus" );
+            Assert.NotNull( element);
+            Assert.True( element is SIF_GetZoneStatus);
         }
 
         /**
 	 * 
 	 */
-        [Test]
+        [Fact]
         public void testAsynchronousGetZoneStatus()
         {
             Runtime.SifVersion = (SifVersion.LATEST);
@@ -185,13 +185,13 @@ namespace Library.NUnit.Core.Library
             }
             catch ( SifException sifEx )
             {
-                Assert.AreEqual( SifErrorCategoryCode.Xml, sifEx.ErrorCategory );
+                Assert.Equal( SifErrorCategoryCode.Xml, sifEx.ErrorCategory );
             }
 
             SIF_Request sr = (SIF_Request) handler.readMsg();
 
-            Assert.AreEqual( SifVersion.SIF15r1, sr.SifVersion, "SifVersion" );
-            Assert.AreEqual( SifVersion.SIF15r1.Xmlns, sr.GetXmlns(), "SifVersion->Xmlns" );
+            Assert.Equal( SifVersion.SIF15r1, sr.SifVersion);
+            Assert.Equal( SifVersion.SIF15r1.Xmlns, sr.GetXmlns());
         }
 
 
@@ -202,8 +202,8 @@ namespace Library.NUnit.Core.Library
             Zone.SifPing();
             ssc = (SIF_SystemControl) handler.readMsg();
 
-            Assert.AreEqual( testVersion, ssc.SifVersion, "SifVersion" );
-            Assert.AreEqual( testVersion.Xmlns, ssc.GetXmlns(), "SifVersion->Xmlns" );
+            Assert.Equal( testVersion, ssc.SifVersion);
+            Assert.Equal( testVersion.Xmlns, ssc.GetXmlns());
         }
 
 
@@ -213,7 +213,7 @@ namespace Library.NUnit.Core.Library
 	 * in the SIF_Register message being sent in 1.5r1
 	 * @throws Exception
 	 */
-        [Test]
+        [Fact]
         public void testSIFRegisterZISVersion15r1()
         {
             Runtime.SifVersion = (SifVersion.LATEST);
@@ -237,34 +237,34 @@ namespace Library.NUnit.Core.Library
 
             SIF_Register sr = (SIF_Register) handler.readMsg();
 
-            Assert.AreEqual( SifVersion.SIF15r1, sr.SifVersion, "SifVersion" );
-            Assert.AreEqual( SifVersion.SIF15r1.Xmlns, sr.GetXmlns(), "SifVersion->Xmlns" );
+            Assert.Equal( SifVersion.SIF15r1, sr.SifVersion);
+            Assert.Equal( SifVersion.SIF15r1.Xmlns, sr.GetXmlns());
 
-            Assert.AreEqual( Agent.Id, sr.SourceId, "SourceID" );
-            Assert.AreEqual( "acmeAgent", sr.SIF_Name, "Name" );
-            Assert.IsNull( sr.SIF_NodeVendor, "Agent Vendor" );
-            Assert.IsNull( sr.SIF_NodeVersion, "Agent Version" );
+            Assert.Equal( Agent.Id, sr.SourceId);
+            Assert.Equal( "acmeAgent", sr.SIF_Name);
+            Assert.Null( sr.SIF_NodeVendor);
+            Assert.Null( sr.SIF_NodeVersion);
             SIF_Application appInfo = sr.SIF_Application;
-            Assert.IsNull( appInfo );
-            Assert.IsNull( sr.SIF_Icon, "Icon" );
+            Assert.Null( appInfo );
+            Assert.Null( sr.SIF_Icon);
 
 
             // Assert the versions in the message. If the ADK is initialized to
             // SIF 1.5r1, it should not be sending any versions that start with a
             // "2"
             SifVersion messageVersion = sr.SifVersion;
-            Assert.AreEqual( SifVersion.SIF15r1, messageVersion, "Should be version 1.5r1" );
+            Assert.Equal( SifVersion.SIF15r1, messageVersion);
             foreach ( SIF_Version version in sr.GetSIF_Versions() )
             {
                 String versionString = version.TextValue;
-                Assert.IsTrue( versionString.StartsWith( "1" ), "Should start with 1 but was " + versionString );
+                Assert.True( versionString.StartsWith( "1" ));
             }
         }
 
         /**
 	 * 
 	 */
-        [Test]
+        [Fact]
         public void testProvisioningSIF20()
         {
             String[] expectedMessages =
@@ -277,7 +277,7 @@ namespace Library.NUnit.Core.Library
         /**
 	 * 
 	 */
-        [Test]
+        [Fact]
         public void testProvisioningSIF15r1()
         {
             String[] expectedMessages = new String[] {"SIF_Register", "SIF_SystemControl", "SIF_Subscribe"};
@@ -289,7 +289,7 @@ namespace Library.NUnit.Core.Library
         /**
 	 * 
 	 */
-        [Test]
+        [Fact]
         public void testProvisioningZIS15r1()
         {
             String[] expectedMessages = new String[] {"SIF_Register", "SIF_SystemControl", "SIF_Subscribe"};
@@ -308,11 +308,11 @@ namespace Library.NUnit.Core.Library
             for ( int a = 0; a < expectedMessages.Length; a++ )
             {
                 SifMessagePayload smp = (SifMessagePayload) handler.readMsg();
-                Assert.AreEqual( expectedMessages[a], smp.Tag, "Should be a " + expectedMessages[a] );
-                Assert.AreEqual( version, smp.SifVersion, "Version should be " + version );
+                Assert.Equal( expectedMessages[a], smp.Tag);
+                Assert.Equal( version, smp.SifVersion);
             }
 
-            Assert.IsNull( handler.readMsg(), " Should have no more messages " );
+            Assert.Null( handler.readMsg());
         }
 
         #region ISubscriber Members

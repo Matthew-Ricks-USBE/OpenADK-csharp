@@ -6,7 +6,7 @@ using OpenADK.Library;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Tools.Mapping
@@ -119,7 +119,7 @@ namespace Library.Nunit.US.Tools.Mapping
                         continue;
                     }
                 }
-                Assert.AreEqual(entry.Value, resultingValue, (String)entry.Key);
+                Assert.True(Equals(entry.Value, resultingValue), (string)entry.Key);
             }
         }
     }

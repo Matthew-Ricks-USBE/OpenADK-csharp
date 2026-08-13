@@ -3,7 +3,7 @@ using System.IO;
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 using OpenADK.Library.Infra;
 using OpenADK.Library.us.Reporting;
@@ -12,7 +12,7 @@ namespace Library.Nunit.US
    /// <summary>
    /// Summary description for SifElementTests.
    /// </summary>
-   [TestFixture]
+   
    public class SifElementTests : AdkTest
    {
       /// <summary>
@@ -20,7 +20,7 @@ namespace Library.Nunit.US
       /// For example, calling ReportingPeriod.setBeginReportDate() with a null value will still cause 
       /// the <BeginReportDate> element to be written out.
       /// </summary>
-      [Test]
+      [Fact]
       public void TestSIFDate()
       {
 
@@ -30,14 +30,14 @@ namespace Library.Nunit.US
          period.BeginSubmitDate = new DateTime?();
          period.EndSubmitDate = new DateTime?();
          period.DueDate = new DateTime?();
-         Assert.IsNull(period.BeginReportDate, "BeginReportDate contains an empty date element");
-         Assert.IsNull(period.EndReportDate, "EndReportDate contains an empty date element");
-         Assert.IsNull(period.BeginSubmitDate, "BeginSubmitDate contains an empty date element");
-         Assert.IsNull(period.EndSubmitDate, "EndSubmitDate contains an empty date element");
+         Assert.Null(period.BeginReportDate);
+         Assert.Null(period.EndReportDate);
+         Assert.Null(period.BeginSubmitDate);
+         Assert.Null(period.EndSubmitDate);
 
       }//end TestSIFDate
 
-      [Test]
+      [Fact]
       public void SharedChildren()
       {
          Runtime.SifVersion = SifVersion.LATEST;
@@ -58,18 +58,18 @@ namespace Library.Nunit.US
          d.SetCountryOfBirth(CountryCode.Wrap("AA")); // Should overwrite the existing one
 
          //Remove the existing CountryOfCitizenship, add three more, and remove the middle one
-         Assert.IsTrue(countries.Remove(CountryCode.Wrap("UK")));
+         Assert.True(countries.Remove(CountryCode.Wrap("UK")));
          countries.AddCountryOfCitizenship(CountryCode.Wrap("BB1"));
          countries.AddCountryOfCitizenship(CountryCode.Wrap("BB2"));
          countries.AddCountryOfCitizenship(CountryCode.Wrap("BB3"));
-         Assert.IsTrue(countries.Remove(CountryCode.Wrap("BB2")));
+         Assert.True(countries.Remove(CountryCode.Wrap("BB2")));
 
          // Remove the existing CountryOfResidency, add three more, and remove the first one
-         Assert.IsTrue(residencies.Remove(CountryCode.Wrap("AU")));
+         Assert.True(residencies.Remove(CountryCode.Wrap("AU")));
          residencies.AddCountryOfResidency(CountryCode.Wrap("CC1"));
          residencies.AddCountryOfResidency(CountryCode.Wrap("CC2"));
          residencies.AddCountryOfResidency(CountryCode.Wrap("CC3"));
-         Assert.IsTrue(residencies.Remove(CountryCode.Wrap("CC1")));
+         Assert.True(residencies.Remove(CountryCode.Wrap("CC1")));
 
          StudentPersonal sp2 = AdkObjectParseHelper.runParsingTest(sp, SifVersion.LATEST);
 
@@ -81,25 +81,25 @@ namespace Library.Nunit.US
          // For now, these tests look for the elements in reverse order
 
          Demographics d2 = sp2.Demographics;
-         Assert.AreEqual("AA", d2.CountryOfBirth.ToString(), "Country of Birth");
+         Assert.True("AA" == d2.CountryOfBirth.ToString(), "Country of Birth");
          Country[] citizenships = d2.CountriesOfCitizenship.ToArray();
 
-         Assert.AreEqual(2, citizenships.Length, "Should be two CountryOfCitizenships");
-         Assert.AreEqual("BB1", citizenships[0].TextValue, "First CountryOfCitizenship");
-         Assert.AreEqual("BB3", citizenships[1].TextValue, "Second CountryOfCitizenship");
+         Assert.True(2 == citizenships.Length, "Should be two CountryOfCitizenships");
+         Assert.True("BB1" == citizenships[0].TextValue, "First CountryOfCitizenship");
+         Assert.True("BB3" == citizenships[1].TextValue, "Second CountryOfCitizenship");
 
          // assert
          Country[] resid = d2.CountriesOfResidency.ToArray();
-         Assert.AreEqual(2, resid.Length, "Should be two CountryOfResidencys");
-         Assert.AreEqual("CC2", resid[0].TextValue, "First CountryOfResidencys");
-         Assert.AreEqual("CC3", resid[1].TextValue, "Second CountryOfResidencys");
+         Assert.True(2 == resid.Length, "Should be two CountryOfResidencys");
+         Assert.True("CC2" == resid[0].TextValue, "First CountryOfResidencys");
+         Assert.True("CC3" == resid[1].TextValue, "Second CountryOfResidencys");
       }
 
       /**
   * Asserts that the new setArray() method is there and works as expected
   */
 
-      [Test]
+      [Fact]
       public void testSetChildren()
       {
          StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
@@ -110,19 +110,19 @@ namespace Library.Nunit.US
          sp.EmailList.SetChildren(CommonDTD.EMAIL, new Email[] { email1, email2 });
 
          EmailList studentEmails = sp.EmailList;
-         Assert.AreEqual(2, studentEmails.ChildCount, "Should be two emails");
+         Assert.True(2 == studentEmails.ChildCount, "Should be two emails");
 
          studentEmails.SetChildren(CommonDTD.EMAIL, new Email[0]);
          studentEmails = sp.EmailList;
-         Assert.AreEqual(0, studentEmails.ChildCount, "Should be zero emails after setting empty array");
+         Assert.True(0 == studentEmails.ChildCount, "Should be zero emails after setting empty array");
 
          studentEmails.SetChildren(CommonDTD.EMAIL, new Email[] { email1, email2 });
          studentEmails = sp.EmailList;
-         Assert.AreEqual(2, studentEmails.ChildCount, "Should be two emails");
+         Assert.True(2 == studentEmails.ChildCount, "Should be two emails");
 
          studentEmails.SetChildren(CommonDTD.EMAIL, null);
          studentEmails = sp.EmailList;
-         Assert.AreEqual(0, studentEmails.ChildCount, "Should be zero emails after setting null");
+         Assert.True(0 == studentEmails.ChildCount, "Should be zero emails after setting null");
       }
 
 
@@ -130,7 +130,7 @@ namespace Library.Nunit.US
      * Asserts that ADKGen adds a method that takes an array of objects for repeatable elements
      */
 
-      [Test]
+      [Fact]
       public void testSetEmails()
       {
          StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
@@ -143,14 +143,14 @@ namespace Library.Nunit.US
 
 
          EmailList studentEmails = sp.EmailList;
-         Assert.AreEqual(2, studentEmails.Count, "Should be two emails");
+         Assert.True(2 == studentEmails.Count, "Should be two emails");
 
          studentEmails.Clear();
-         Assert.AreEqual(0, studentEmails.Count, "Should be zero emails after clearing");
+         Assert.True(0 == studentEmails.Count, "Should be zero emails after clearing");
 
          sp.EmailList = new EmailList();
          studentEmails = sp.EmailList;
-         Assert.AreEqual(0, studentEmails.Count, "Should be zero emails after setting empty list");
+         Assert.True(0 == studentEmails.Count, "Should be zero emails after setting empty list");
       }
 
 
@@ -158,7 +158,7 @@ namespace Library.Nunit.US
      *  Asserts that an object can have the same child object set to it more than once
      */
 
-      [Test]
+      [Fact]
       public void testAddChildTwice()
       {
          StudentPersonal sp1 = new StudentPersonal();
@@ -175,7 +175,7 @@ namespace Library.Nunit.US
          eList.AddChild(email1);
 
          Email[] studentEmails = sp1.EmailList.ToArray();
-         Assert.AreEqual(1, studentEmails.Length, "Should be one email");
+         Assert.True(1 == studentEmails.Length, "Should be one email");
 
          StudentPersonal sp2 = ObjectCreator.CreateStudentPersonal();
          Email email2 = new Email(EmailType.ALT1, "email2@mail.com");
@@ -193,7 +193,7 @@ namespace Library.Nunit.US
             exceptionThrown = true;
          }
 
-         Assert.IsTrue(exceptionThrown, "IllegalStateException should have been thrown in addChild(SIFElement)");
+         Assert.True(exceptionThrown, "IllegalStateException should have been thrown in addChild(SIFElement)");
 
          exceptionThrown = false;
          try
@@ -205,17 +205,17 @@ namespace Library.Nunit.US
             exceptionThrown = true;
          }
 
-         Assert.IsTrue(exceptionThrown,
+         Assert.True(exceptionThrown,
                        "IllegalStateException should have been thrown in addChild( ElementDef, SIFElement)");
       }
 
-      [Test]
+      [Fact]
       public void testIDProperty()
       {
          SifElement element = new StudentPersonal();
          element.XmlId = "Foo";
 
-         Assert.AreEqual("Foo", element.XmlId);
+         Assert.Equal("Foo", element.XmlId);
       }
    }
 }

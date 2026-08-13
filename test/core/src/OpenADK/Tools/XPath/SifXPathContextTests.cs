@@ -1,18 +1,18 @@
-using System;
+﻿using System;
 using System.Xml.XPath;
 using OpenADK.Library;
 using OpenADK.Library.Infra;
 using OpenADK.Library.Tools.XPath;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library.us;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.Core.Tools.XPath
 {
-    [TestFixture]
+    
     public class SifXPathContextTests : AdkTest
     {
-        [Test]
+        [Fact]
         public void testGetValue()
         {
             SIF_ZoneStatus zoneStatus = createZoneStatus();
@@ -20,10 +20,10 @@ namespace Library.Nunit.Core.Tools.XPath
             object value =
                 context.GetValue(
                     "SIF_Providers/SIF_Provider[SIF_ObjectList/SIF_Object[@ObjectName='SchoolInfo']]/@SourceId");
-            Assert.AreEqual("AcmeAgent", value.ToString(), "Value");
+            Assert.Equal("AcmeAgent", value.ToString());
         }
 
-        [Test]
+        [Fact]
         public void testGetValueSubstring()
         {
             SIF_ZoneStatus zoneStatus = createZoneStatus();
@@ -33,10 +33,10 @@ namespace Library.Nunit.Core.Tools.XPath
             Object value =
                 context.GetValue(
                     "substring(SIF_Providers/SIF_Provider[SIF_ObjectList/SIF_Object[@ObjectName='SchoolInfo']]/@SourceId, 5)");
-            Assert.AreEqual("Agent", value, "Value");
+            Assert.Equal("Agent", value);
         }
 
-        [Test]
+        [Fact]
         public void testIterate()
         {
             SIF_ZoneStatus zoneStatus = createZoneStatus();
@@ -49,10 +49,10 @@ namespace Library.Nunit.Core.Tools.XPath
                 Console.WriteLine(o.UnderlyingObject);
                 a++;
             }
-            Assert.AreEqual(5, a, "Should have iterated 5 objects");
+            Assert.Equal(5, a);
         }
 
-        [Test]
+        [Fact]
         public void testSelectSingleNode()
         {
             SIF_ZoneStatus zoneStatus = createZoneStatus();
@@ -61,25 +61,25 @@ namespace Library.Nunit.Core.Tools.XPath
             XPathNodeIterator iterator =
                 context.Select("SIF_Providers/SIF_Provider[SIF_ObjectList/SIF_Object[@ObjectName='StudentPersonal']]");
 
-            Assert.AreEqual(1, iterator.Count);
-            Assert.IsTrue(iterator.MoveNext());
+            Assert.Equal(1, iterator.Count);
+            Assert.True(iterator.MoveNext());
 
             Element node = (Element) iterator.Current.UnderlyingObject;
-            Assert.IsNotNull(node);
+            Assert.NotNull(node);
         }
 
-        [Test]
+        [Fact]
         public void testSelectNodes()
         {
             SIF_ZoneStatus zoneStatus = createZoneStatus();
             SifXPathContext context = SifXPathContext.NewSIFContext(zoneStatus, SifVersion.SIF20);
             // Select all of the objects that are provided in this zone
             XPathNodeIterator iterator = context.Select("//SIF_Provider/*/SIF_Object");
-            Assert.AreEqual(5, iterator.Count, "Should be 5 objects selected");
+            Assert.Equal(5, iterator.Count);
         }
 
 
-        [Test]
+        [Fact]
         public void testCustomFunction()
         {
             SIF_ZoneStatus zoneStatus = createZoneStatus();
@@ -87,7 +87,7 @@ namespace Library.Nunit.Core.Tools.XPath
             object value =
                 context.GetValue(
                     "adk:toLowerCase(SIF_Providers/SIF_Provider[SIF_ObjectList/SIF_Object[@ObjectName='SchoolInfo']]/@SourceId)");
-            Assert.AreEqual("acmeagent", value, "Value");
+            Assert.Equal("acmeagent", value);
         }
 
 

@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using OpenADK.Library.Global;
 using OpenADK.Library.us.Common;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.Core
 {
     /// <summary>
     /// Summary description for EnumTests.
     /// </summary>
-    [TestFixture]
+    
     public class SifEnumTests
     {
         /**
@@ -21,31 +21,31 @@ namespace Library.Nunit.Core
 
             AddressType testEnum = AddressType.Wrap(assertedValue);
             // objects should be reflexively equal to themselves
-            Assert.IsTrue(testEnum.Equals(testEnum), "Reflexive comparison should pass");
+            Assert.True(testEnum.Equals(testEnum));
 
             // test with null comparison
-            Assert.IsFalse(testEnum.Equals(null), "Null comparison should fail");
+            Assert.False(testEnum.Equals(null));
 
             AddressType testEnum2 = AddressType.Wrap(assertedValue);
-            Assert.IsTrue(testEnum.Equals(testEnum2));
-            Assert.IsTrue(testEnum2.Equals(testEnum));
+            Assert.True(testEnum.Equals(testEnum2));
+            Assert.True(testEnum2.Equals(testEnum));
 
             // Test with a different enum value
             AddressType testEnum3 = AddressType.MAILING;
-            Assert.IsFalse(testEnum3.Equals(testEnum));
-            Assert.IsFalse(testEnum.Equals(testEnum3));
+            Assert.False(testEnum3.Equals(testEnum));
+            Assert.False(testEnum.Equals(testEnum3));
 
             // Test with a different enum type, but same value
             EmailType differentEnum = EmailType.Wrap(assertedValue);
-            Assert.IsFalse(differentEnum.Equals(testEnum));
-            Assert.IsFalse(testEnum.Equals(differentEnum));
+            Assert.False(differentEnum.Equals(testEnum));
+            Assert.False(testEnum.Equals(differentEnum));
 
             // Test with two null values
             AddressType nullEnum = AddressType.Wrap(null);
             AddressType nullEnum2 = AddressType.Wrap(null);
-            Assert.IsTrue(nullEnum.Equals(nullEnum2), "Two Enums with null values should match");
-            Assert.IsFalse(nullEnum.Equals(testEnum));
-            Assert.IsFalse(testEnum.Equals(null));
+            Assert.True(nullEnum.Equals(nullEnum2));
+            Assert.False(nullEnum.Equals(testEnum));
+            Assert.False(testEnum.Equals(null));
         }
 
         /**
@@ -58,7 +58,7 @@ namespace Library.Nunit.Core
 
             AddressType testEnum = AddressType.Wrap(assertedValue);
             AddressType testEnum2 = AddressType.Wrap(assertedValue);
-            Assert.AreEqual(testEnum.GetHashCode(), testEnum2.GetHashCode(), "hashcodes should match");
+            Assert.Equal(testEnum.GetHashCode(), testEnum2.GetHashCode());
         }
     }
 }

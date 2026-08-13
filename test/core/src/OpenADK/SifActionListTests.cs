@@ -1,15 +1,15 @@
-using OpenADK.Library;
+﻿using OpenADK.Library;
 using OpenADK.Library.us.Common;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library.us;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.Core
 {
-    [TestFixture]
+    
     public class SifActionListTests : AdkTest
     {
-        [Test]
+        [Fact]
         public void testList010()
         {
             EmailList el = new EmailList();
@@ -20,23 +20,23 @@ namespace Library.Nunit.Core
             Email email2 = new Email(EmailType.Wrap("bar"), "email2@OpenADK.com");
 
             el.Add(email1);
-            Assert.AreEqual(1, el.ChildCount, "Should have 1 email");
+            Assert.Equal(1, el.ChildCount);
 
             el.Add(email2);
-            Assert.AreEqual(2, el.ChildCount, "Should have 2 emails");
+            Assert.Equal(2, el.ChildCount);
 
             Email[] children = el.ToArray();
-            Assert.AreEqual(2, children.Length, "Should have 2 array elements");
+            Assert.Equal(2, children.Length);
 
 
-            Assert.IsTrue( el.Remove( EmailType.Wrap("foo") ), "Should have removed the email") ;
-            Assert.AreEqual(1, el.ChildCount, "Should have 1 email");
+            Assert.True( el.Remove( EmailType.Wrap("foo") ), "Should have removed the email") ;
+            Assert.Equal(1, el.ChildCount);
 
             el.RemoveChild(CommonDTD.EMAILLIST_EMAIL, email2.Key);
-            Assert.AreEqual(0, el.ChildCount, "Should have 0 emails");
+            Assert.Equal(0, el.ChildCount);
         }
 
-        [Test]
+        [Fact]
         public void testList020()
         {
             EmailList el = new EmailList();
@@ -49,31 +49,31 @@ namespace Library.Nunit.Core
             
 
             el.Add(email1);
-            Assert.AreEqual(1, el.ChildCount, "Should have 1 email");
+            Assert.Equal(1, el.ChildCount);
 
             el.Add(email2);
-            Assert.AreEqual(2, el.ChildCount, "Should have 2 emails");
+            Assert.Equal(2, el.ChildCount);
 
 
             Email email3 = new Email();
             email3.Type = "Alternate1";
             el.Add(email3);
-            Assert.AreEqual(3, el.ChildCount, "Should have 3 emails");
+            Assert.Equal(3, el.ChildCount);
 
 
 
             Email primary = el[EmailType.PRIMARY];
-            Assert.IsNotNull( primary );
+            Assert.NotNull( primary );
 
             primary = el["Primary"];
-            Assert.IsNotNull(primary);
+            Assert.NotNull(primary);
 
 
             Email secondary = el[EmailType.ALT1];
-            Assert.IsNotNull(secondary);
+            Assert.NotNull(secondary);
 
             secondary = el["Alternate1"];
-            Assert.IsNotNull(secondary);
+            Assert.NotNull(secondary);
 
         }
     }

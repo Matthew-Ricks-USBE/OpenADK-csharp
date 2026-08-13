@@ -1,15 +1,15 @@
-using OpenADK.Library;
-using NUnit.Framework;
+﻿using OpenADK.Library;
+using Xunit;
 
 namespace Library.Nunit.Core
 {
     /// <summary>
     /// Summary description for DefaultValueBuilderTests.
     /// </summary>
-    [TestFixture]
+    
     public class DefaultValueBuilderTests
     {
-        [Test]
+        [Fact]
         public void ParseResultsSimple()
         {
             string starter = "@random() @strip(\"(801) 323-1131\")";
@@ -17,13 +17,13 @@ namespace Library.Nunit.Core
 
             DefaultValueBuilder.ParseResults results = DefaultValueBuilder.ParseResults.parse(starter, pos);
 
-            Assert.AreEqual(34, results.Position, "Position");
-            Assert.AreEqual("strip", results.MethodName, "MethodName");
-            Assert.AreEqual(1, results.Parameters.TokenCount, "Token Count");
-            Assert.AreEqual("(801) 323-1131", results.Parameters.GetToken(0), "Parameter");
+            Assert.Equal(34, results.Position);
+            Assert.Equal("strip", results.MethodName);
+            Assert.Equal(1, results.Parameters.TokenCount);
+            Assert.Equal("(801) 323-1131", results.Parameters.GetToken(0));
         }
 
-        [Test]
+        [Fact]
         public void parseSyncMacro()
         {
             string starter = "@syncmatchname(first,middle,last)";
@@ -31,11 +31,11 @@ namespace Library.Nunit.Core
 
             DefaultValueBuilder.ParseResults results = DefaultValueBuilder.ParseResults.parse(starter, pos);
 
-            Assert.AreEqual("syncmatchname", results.MethodName, "MethodName");
-            Assert.AreEqual(3, results.Parameters.TokenCount, "Token Count");
-            Assert.AreEqual("first", results.Parameters.GetToken(0), "Parameter");
-            Assert.AreEqual("middle", results.Parameters.GetToken(1), "Parameter");
-            Assert.AreEqual("last", results.Parameters.GetToken(2), "Parameter");
+            Assert.Equal("syncmatchname", results.MethodName);
+            Assert.Equal(3, results.Parameters.TokenCount);
+            Assert.Equal("first", results.Parameters.GetToken(0));
+            Assert.Equal("middle", results.Parameters.GetToken(1));
+            Assert.Equal("last", results.Parameters.GetToken(2));
         }
     }
 }

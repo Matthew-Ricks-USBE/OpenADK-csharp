@@ -2,17 +2,17 @@ using System;
 using System.Collections;
 using System.IO;
 using OpenADK.Util;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.US.Impl
 {
     /// <summary>
     /// Summary description for DirectorySearcherTests.
     /// </summary>
-    [TestFixture]
+    
     public class DirectorySearcherTests
     {
-        [Test]
+        [Fact]
         public void EnumerateAllFiles()
         {
             DirectoryInfo di = new DirectoryInfo(AppDomain.CurrentDomain.BaseDirectory);
@@ -24,7 +24,7 @@ namespace Library.Nunit.US.Impl
                 4);
         }
 
-        [Test]
+        [Fact]
         public void EnumerateOnlyTestDll()
         {
             AssertFileListing(
@@ -33,7 +33,7 @@ namespace Library.Nunit.US.Impl
                 1);
         }
 
-        [Test]
+        [Fact]
         public void EnumerateNoFiles()
         {
             AssertFileListing(
@@ -45,10 +45,10 @@ namespace Library.Nunit.US.Impl
         private void AssertFileListing(DirectoryInfo info, IFileNameFilter filter, int expectedItems)
         {
             IEnumerator enumerator = DirectorySearcher.GetFileEnumerator(info, filter);
-            Assert.AreEqual(expectedItems, CountItemsInEnumeration(enumerator), "Wrong number of files returned");
+            Assert.Equal(expectedItems, CountItemsInEnumeration(enumerator));
 
             FileInfo[] infos = DirectorySearcher.GetFiles(info, filter);
-            Assert.AreEqual(expectedItems, infos.Length, "Wrong number of files returned");
+            Assert.Equal(expectedItems, infos.Length);
         }
 
         private int CountItemsInEnumeration(IEnumerator enumerator)

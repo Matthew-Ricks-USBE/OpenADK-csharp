@@ -4,14 +4,14 @@ using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.XPath;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.US.Library.Student
 {
-    [TestFixture]
+    
     public class SchoolCourseInfoTests : UsAdkTest
     {
-        [Test]
+        [Fact]
         public void testCourseCodeSIF15r1()
         {
             Runtime.SifVersion = SifVersion.SIF15r1;
@@ -23,11 +23,11 @@ namespace Library.Nunit.US.Library.Student
             Element value = (Element) spc.GetValue( "CourseCredits[@Code='0585']" );
 
             SifSimpleType elementValue = value.SifValue;
-            Assert.IsNotNull(elementValue,  "Value by XPath");
-            Assert.AreEqual(2, elementValue.RawValue, "Value By XPath");
+            Assert.NotNull(elementValue);
+            Assert.Equal("2", elementValue.RawValue?.ToString());
         }
 
-        [Test]
+        [Fact]
         public void testSubjectAreaSIF15r1()
         {
             Runtime.SifVersion = SifVersion.SIF15r1;
@@ -56,7 +56,7 @@ namespace Library.Nunit.US.Library.Student
             Assert.True( found > -1 );
         }
 
-        [Test]
+        [Fact]
         public void testCourseCodeSIF20()
         {
             Runtime.SifVersion = SifVersion.SIF20;
@@ -66,11 +66,11 @@ namespace Library.Nunit.US.Library.Student
 
             SifXPathContext spc = SifXPathContext.NewSIFContext( sci, Runtime.SifVersion );
             Element value = (Element) spc.GetValue( "CourseCredits[@Type='0585']" );
-            Assert.IsNotNull(value, "Value by XPath");
+            Assert.NotNull(value);
 
             SifSimpleType elementValue = value.SifValue;
-            Assert.IsNotNull( elementValue, "Value by XPath" );
-            Assert.AreEqual( 2, elementValue.RawValue, "Value By XPath" );
+            Assert.NotNull( elementValue);
+            Assert.Equal("2", elementValue.RawValue?.ToString());
         }
     }
 }

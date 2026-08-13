@@ -3,7 +3,7 @@ using System.Xml;
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Instr;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Instr
@@ -11,10 +11,10 @@ namespace Library.Nunit.US.Instr
     /// <summary>
     /// Summary description for TestLearningStandardDocument.
     /// </summary>
-    [TestFixture]
+    
     public class TestLearningStandardDocument : AdkTest
     {
-        [Test]
+        [Fact]
         public void WriteXml()
         {
             if (Runtime.SifVersion < SifVersion.SIF15r1)
@@ -55,10 +55,10 @@ namespace Library.Nunit.US.Instr
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(xml);
             XmlAttribute langAttr = xmlDoc.DocumentElement.Attributes["lang", "http://www.w3.org/XML/1998/namespace"];
-            Assert.AreEqual("http://www.w3.org/XML/1998/namespace", langAttr.NamespaceURI);
+            Assert.Equal("http://www.w3.org/XML/1998/namespace", langAttr.NamespaceURI);
 
             LearningStandardDocument lsDoc2 = (LearningStandardDocument) AdkObjectParseHelper.runParsingTest(doc, SifVersion.LATEST );
-            Assert.AreEqual("en-us", lsDoc2.Language, "xml:lang");
+            Assert.Equal("en-us", lsDoc2.Language);
         }
     }
 }

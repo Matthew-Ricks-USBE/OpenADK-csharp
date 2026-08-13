@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+using Xunit;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System;
 // General Information about an assembly is controlled through the following 
@@ -35,4 +36,4 @@ using System;
 
 // The global Adk can cause cross-test contamination.
 // This gives the tests a chance to set up and clean up their unique prerequisites.
-[assembly : NUnit.Framework.NonParallelizable]
+[assembly: CollectionBehavior(DisableTestParallelization = true)]

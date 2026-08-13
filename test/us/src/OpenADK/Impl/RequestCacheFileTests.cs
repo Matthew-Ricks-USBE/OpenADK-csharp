@@ -1,5 +1,5 @@
 using Library.UnitTesting.Framework;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
@@ -11,22 +11,20 @@ using System.IO;
 
 namespace Library.Nunit.US.Impl
 {
-    [TestFixture]
-    public class RequestCacheFileTests : AdkTest
+    
+    public class RequestCacheFileTests : AdkTest, IDisposable
     {
         private String[] fMsgIds;
         private RequestCache fRC;
         private Agent fAgent;
 
-        [SetUp]
-        public void setUp()
+        public RequestCacheFileTests()
         {
             fAgent = CreateTestAgent();
             fAgent.Initialize();
         }
 
-        [TearDown]
-        public void tearDown()
+        public void Dispose()
         {
             if (fRC != null)
             {
@@ -38,13 +36,11 @@ namespace Library.Nunit.US.Impl
                            "requests.adk";
             try
             {
-                // Add a small delay to allow file handle to be fully released
                 System.Threading.Thread.Sleep(100);
                 File.Delete(fname);
             }
             catch (IOException)
             {
-                // If file is still locked, try again after another delay
                 try
                 {
                     System.Threading.Thread.Sleep(200);
@@ -52,12 +48,9 @@ namespace Library.Nunit.US.Impl
                 }
                 catch (IOException ex)
                 {
-                    // If it still fails, log it but don't fail the test teardown
                     System.Console.WriteLine("Warning: Unable to delete cache file: " + ex.Message);
                 }
             }
-            //File f = new File(fname);
-            //f.delete();
         }
 
 
@@ -66,7 +59,7 @@ namespace Library.Nunit.US.Impl
        * @throws Exception
        */
 
-        [Test]
+        [Fact]
         public void testSimpleCase()
         {
             fRC?.Close();
@@ -80,7 +73,7 @@ namespace Library.Nunit.US.Impl
        * @throws Exception
        */
 
-        [Test]
+        [Fact]
         public void testPersistence()
         {
             fRC?.Close();
@@ -94,7 +87,7 @@ namespace Library.Nunit.US.Impl
 
             fRC.Close();
             fRC = Components.CreateRequestCache(fAgent);
-            Assert.AreEqual(0, fRC.ActiveRequestCount, "Should have zero pending requests");
+            Assert.True(0 == fRC.ActiveRequestCount, "Should have zero pending requests");
         }
 
 
@@ -104,7 +97,7 @@ namespace Library.Nunit.US.Impl
        * @throws Exception
        */
 
-       [Test]
+       [Fact]
        public void testPersistenceWithBadState()
        {
            //create new cache for agent
@@ -138,12 +131,12 @@ namespace Library.Nunit.US.Impl
            IRequestInfo ri = fRC.GetRequestInfo(requestMsgId, null);
 
            // RequestInfo should still be available even if UserData isn't
-           Assert.IsNotNull(ri, "RequestInfo was null");
-           Assert.AreEqual(requestMsgId, ri.MessageId, "MessageId");
-           Assert.AreEqual(testObjectType, ri.ObjectType, "ObjectType");
+           Assert.NotNull(ri);
+           Assert.True(requestMsgId == ri.MessageId, "MessageId");
+           Assert.True(testObjectType == ri.ObjectType, "ObjectType");
        }
 
-        [Test]
+        [Fact]
         public void testInstanceMultipleInvocations()
         {
             for (int i = 0; i < 3; i++)
@@ -152,7 +145,7 @@ namespace Library.Nunit.US.Impl
             }
         }
 
-        [Test]
+        [Fact]
         public void testPersistenceMultipleInvocations()
         {
             for (int i = 0; i < 3; i++)
@@ -161,7 +154,7 @@ namespace Library.Nunit.US.Impl
             }
         }
 
-        [Test]
+        [Fact]
         public void testPersistenceWithRemoval()
         {
             fRC = Components.CreateRequestCache(fAgent);
@@ -197,18 +190,18 @@ namespace Library.Nunit.US.Impl
                 fRC.GetRequestInfo(fMsgIds[i], null);
             }
 
-            Assert.AreEqual(5, fRC.ActiveRequestCount, "Before closing Should have five objects");
+            Assert.True(5 == fRC.ActiveRequestCount, "Before closing Should have five objects");
             fRC.Close();
 
             // Create a new instance. This one should retrieve its settings from the persistence mechanism
             fRC = Components.CreateRequestCache(fAgent);
-            Assert.AreEqual(5, fRC.ActiveRequestCount, "After Re-Openeing Should have five objects");
+            Assert.True(5 == fRC.ActiveRequestCount, "After Re-Openeing Should have five objects");
             for (int i = 1; i < 10; i += 2)
             {
                 IRequestInfo cachedInfo = fRC.GetRequestInfo(fMsgIds[i], null);
-                Assert.IsNotNull(cachedInfo, "No cachedID returned for " + i);
+                Assert.NotNull(cachedInfo);
             }
-            Assert.AreEqual(0, fRC.ActiveRequestCount, "Should have zero objects");
+            Assert.True(0 == fRC.ActiveRequestCount, "Should have zero objects");
         }
 
 
@@ -218,7 +211,7 @@ namespace Library.Nunit.US.Impl
        * @throws Exception
        */
 
-        [Test]
+        [Fact]
         public void testWithReadOnlyFile()
         {
             // Make the existing cache file readonly
@@ -257,7 +250,7 @@ namespace Library.Nunit.US.Impl
        * @throws Exception
        */
 
-        [Test]
+        [Fact]
         public void testWithCorruptFile()
         {
             // Delete the existing cache file, if it exists
@@ -282,7 +275,7 @@ namespace Library.Nunit.US.Impl
             assertStoredRequests(fRC, true);
         }
 
-        [Test]
+        [Fact]
         public void testWithLegacyFile()
         {
             //assertStoredRequests(fRC, true);
@@ -323,25 +316,25 @@ namespace Library.Nunit.US.Impl
             }
 
 
-            Assert.AreEqual(10, fRC.ActiveRequestCount, "Active request count");
+            Assert.True(10 == fRC.ActiveRequestCount, "Active request count");
 
 
             // Lookup each setting, 
             for (int i = 0; i < 10; i++)
             {
                 IRequestInfo reqInfo = fRC.LookupRequestInfo(fMsgIds[i], null);
-                Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
+                Assert.True("Object_" + i.ToString() == reqInfo.ObjectType, "Initial lookup");
             }
 
             // Lookup each setting, 
             for (int i = 0; i < 10; i++)
             {
                 IRequestInfo reqInfo = fRC.GetRequestInfo(fMsgIds[i], null);
-                Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
+                Assert.True("Object_" + i.ToString() == reqInfo.ObjectType, "Initial lookup");
             }
 
             // all messages should now be removed from the queue
-            Assert.AreEqual(0, fRC.ActiveRequestCount, "Cache should be empty");
+            Assert.True(0 == fRC.ActiveRequestCount, "Cache should be empty");
 
             // Now run one of our other tests
             testPersistence();
@@ -409,17 +402,17 @@ namespace Library.Nunit.US.Impl
 
         private void assertStoredRequests(RequestCache cache, Boolean testRemoval)
         {
-            Assert.AreEqual(fMsgIds.Length, cache.ActiveRequestCount, "Active request count");
+            Assert.True(fMsgIds.Length == cache.ActiveRequestCount, "Active request count");
 
             // Lookup each setting, 
             for (int i = 0; i < fMsgIds.Length; i++)
             {
                 IRequestInfo reqInfo = cache.LookupRequestInfo(fMsgIds[i], null);
-                Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
+                Assert.True("Object_" + i.ToString() == reqInfo.ObjectType, "Initial lookup");
                 // Verify user data is a string if present (not required to persist)
                 if (reqInfo.UserData != null)
                 {
-                    Assert.IsInstanceOf<string>(reqInfo.UserData, "User Data should be a string for " + i);
+                    Assert.IsAssignableFrom<string>(reqInfo.UserData);
                 }
             }
 
@@ -429,20 +422,20 @@ namespace Library.Nunit.US.Impl
                 for (int i = 0; i < fMsgIds.Length; i++)
                 {
                     IRequestInfo reqInfo = cache.GetRequestInfo(fMsgIds[i], null);
-                    Assert.AreEqual("Object_" + i.ToString(), reqInfo.ObjectType, "Initial lookup");
+                    Assert.True("Object_" + i.ToString() == reqInfo.ObjectType, "Initial lookup");
                     // Verify user data is a string if present (not required to persist)
                     if (reqInfo.UserData != null)
                     {
-                        Assert.IsInstanceOf<string>(reqInfo.UserData, "User Data should be a string for " + i);
+                        Assert.IsAssignableFrom<string>(reqInfo.UserData);
                     }
                 }
 
                 // all messages should now be removed from the queue
-                Assert.AreEqual(0, cache.ActiveRequestCount, "Cache should be empty");
+                Assert.True(0 == cache.ActiveRequestCount, "Cache should be empty");
             }
         }
 
-        [Test]
+        [Fact]
         public void testSerializationWithStringUserData()
         {
             // Test that string user data (System.* type) is properly serialized/deserialized
@@ -466,11 +459,11 @@ namespace Library.Nunit.US.Impl
             fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
-            Assert.IsNotNull(ri, "RequestInfo should not be null");
-            Assert.AreEqual(testData, (string)ri.UserData, "UserData should match original string");
+            Assert.NotNull(ri);
+            Assert.True(testData == (string)ri.UserData, "UserData should match original string");
         }
 
-        [Test]
+        [Fact]
         public void testSerializationWithGuidUserData()
         {
             // Test that Guid data (System.* type) is properly serialized/deserialized
@@ -494,11 +487,11 @@ namespace Library.Nunit.US.Impl
             fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
-            Assert.IsNotNull(ri, "RequestInfo should not be null");
-            Assert.AreEqual(testData, (Guid)ri.UserData, "UserData should match original Guid");
+            Assert.NotNull(ri);
+            Assert.True(testData == (Guid)ri.UserData, "UserData should match original Guid");
         }
 
-        [Test]
+        [Fact]
         public void testSerializationWithDictionaryUserData()
         {
             // Test that System.Collections types are properly serialized/deserialized
@@ -527,17 +520,17 @@ namespace Library.Nunit.US.Impl
             fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
-            Assert.IsNotNull(ri, "RequestInfo should not be null");
-            Assert.IsNotNull(ri.UserData, "UserData should not be null");
+            Assert.NotNull(ri);
+            Assert.NotNull(ri.UserData);
             // Note: Deserialized dictionary type may vary depending on MessagePack implementation
-            Assert.IsTrue(ri.UserData is System.Collections.IDictionary, "UserData should be a dictionary type");
+            Assert.True(ri.UserData is System.Collections.IDictionary, "UserData should be a dictionary type");
         }
 
         /// <summary>
         /// Tests whether any of the Adk's classes which inherit from SifSimpleType cannot be 
         /// serialized. By default they all should be.
         /// </summary>
-        [Test]
+        [Fact]
         public void testSerializationWithSifSimpleTypesUserData()
         {
             IList<SifSimpleType> originalList =
@@ -561,7 +554,7 @@ namespace Library.Nunit.US.Impl
 
             foreach (var item in originalList)
             {
-                TestContext.Out.WriteLine("Testing type: " + item.GetType().Name);
+                Console.WriteLine("Testing type: " + item.GetType().Name);
                 q.UserData = item;
                 String msgId = Runtime.MakeGuid();
 
@@ -574,12 +567,12 @@ namespace Library.Nunit.US.Impl
                 IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
                 fRC.Close();
 
-                Assert.IsNotNull(ri, "RequestInfo should not be null");
-                Assert.IsNotNull(ri.UserData, "UserData should not be null");
+                Assert.NotNull(ri);
+                Assert.NotNull(ri.UserData);
             }
         }
 
-        [Test]
+        [Fact]
         public void testSerializationWithSifElementUserData()
         {
             // Test that string user data (System.* type) is properly serialized/deserialized
@@ -605,11 +598,11 @@ namespace Library.Nunit.US.Impl
             fRC = Components.CreateRequestCache(fAgent);
             IRequestInfo ri = fRC.GetRequestInfo(msgId, null);
 
-            Assert.IsNotNull(ri, "RequestInfo should not be null");
-            Assert.IsInstanceOf<Name>(ri.UserData, $"UserData should be a {nameof(Name)}");
+            Assert.NotNull(ri);
+            Assert.IsAssignableFrom<Name>(ri.UserData);
             var deserializedName = (Name)ri.UserData;
-            Assert.AreEqual(name.LastName, deserializedName.LastName, "Name.LastName should round-trip correctly");
-            Assert.AreEqual(name.FirstName, deserializedName.FirstName, "Name.FirstName should round-trip correctly");
+            Assert.True(name.LastName == deserializedName.LastName, "Name.LastName should round-trip correctly");
+            Assert.True(name.FirstName == deserializedName.FirstName, "Name.FirstName should round-trip correctly");
             #endregion
 
             #region StudentPersonal
@@ -625,8 +618,8 @@ namespace Library.Nunit.US.Impl
             fRC = Components.CreateRequestCache(fAgent);
             ri = fRC.GetRequestInfo(msgId, null);
 
-            Assert.IsNotNull(ri, "RequestInfo should not be null");
-            Assert.IsInstanceOf<StudentPersonal>(ri.UserData, $"UserData should be a {nameof(StudentPersonal)}");
+            Assert.NotNull(ri);
+            Assert.IsAssignableFrom<StudentPersonal>(ri.UserData);
             #endregion
 
             #region SIF_Error
@@ -645,15 +638,15 @@ namespace Library.Nunit.US.Impl
             fRC = Components.CreateRequestCache(fAgent);
             ri = fRC.GetRequestInfo(msgId, null);
 
-            Assert.IsNotNull(ri, "RequestInfo should not be null");
-            Assert.IsInstanceOf<SIF_Error>(ri.UserData, $"UserData should be a {nameof(SIF_Error)}");
+            Assert.NotNull(ri);
+            Assert.IsAssignableFrom<SIF_Error>(ri.UserData);
             var deserializedError = (SIF_Error)ri.UserData;
-            Assert.AreEqual(error.SIF_Category, deserializedError.SIF_Category, "SIF_Error.SIF_Category should round-trip correctly");
-            Assert.AreEqual(error.SIF_Code, deserializedError.SIF_Code, "SIF_Error.SIF_Code should round-trip correctly");
+            Assert.True(error.SIF_Category == deserializedError.SIF_Category, "SIF_Error.SIF_Category should round-trip correctly");
+            Assert.True(error.SIF_Code == deserializedError.SIF_Code, "SIF_Error.SIF_Code should round-trip correctly");
             #endregion
         }
 
-        [Test]
+        [Fact]
         public void testBinaryFormatEfficiency()
         {
             // Test that MessagePack binary format is used (not JSON)
@@ -682,11 +675,11 @@ namespace Library.Nunit.US.Impl
             
             fRC.Close();
 
-            Assert.IsTrue(fi.Exists, "Cache file should exist");
-            Assert.Greater(fi.Length, 0, "Cache file should have content");
+            Assert.True(fi.Exists, "Cache file should exist");
+            Assert.True(fi.Length > 0, "Cache file should have content");
             // Binary format should be significantly smaller than JSON equivalent
             // For this test, we just verify the file was created with content
-            Assert.Pass("Binary cache file created with size: " + fi.Length + " bytes");
+            // Assert.Pass: Binary cache file created with size: {fi.Length} bytes
         }
     } //end class
 } //end namespace

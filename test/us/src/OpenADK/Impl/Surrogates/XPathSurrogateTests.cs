@@ -4,24 +4,24 @@ using System.Text;
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 using OpenADK.Library.us;
 
 namespace Library.Nunit.US.Library.Impl.Surrogates
 {
-    [TestFixture]
+    
     public class XPathSurrogateTests : AdkTest
     {
 		protected SifVersion fOriginalVersion;
 
-        [SetUp]
+        
 		public void SetUp() {
 			Runtime.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
 			fOriginalVersion = Runtime.SifVersion;
         }
 
-		[TearDown]
+		
 		public void TearDown() {
 			Runtime.SifVersion = fOriginalVersion;
         }
@@ -31,7 +31,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 		 * in the StudentSchoolEnrollment class return the proper and expected values.
 		 * @throws Exception
 		 */
-        [Test]
+        [Fact]
         public void testSSE_Get_XPathSurrogate_SIF15r1() {
 
 		Runtime.SifVersion=SifVersion.SIF15r1;
@@ -57,28 +57,28 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
 		StudentSchoolEnrollment sse = (StudentSchoolEnrollment) parseSIF15r1XML(sXML);
 		sse = (StudentSchoolEnrollment)AdkObjectParseHelper.WriteParseAndReturn( sse, SifVersion.SIF15r1 );
-		Assert.IsNotNull( sse );
+		Assert.NotNull( sse );
 
 		// Check getting Homeroom and Residency status using APIs
-		Assert.IsNotNull(sse.Homeroom,  "Homeroom");
-		Assert.AreEqual("D7510D3E34B3591A8C3D00AA001A1651", sse.Homeroom.Value, "Homeroom");
+		Assert.NotNull(sse.Homeroom);
+		Assert.Equal("D7510D3E34B3591A8C3D00AA001A1651", sse.Homeroom.Value);
 
 
 		ResidencyStatus rs = sse.ResidencyStatus;
-		Assert.IsNotNull(rs, "ResidencyStatus");
-		Assert.AreEqual( "1653", rs.Code, "ResidencyStatus" );
+		Assert.NotNull(rs);
+		Assert.Equal( "1653", rs.Code);
 
 		//	Check getting Homeroom and Residency status using SIF 1.5 xpaths
 		// Homeroom
 		Element value = sse.GetElementOrAttribute( "Homeroom/@RoomInfoRefId" );
-		Assert.IsNotNull( value, "Homeroom" );
-		Assert.AreEqual( "D7510D3E34B3591A8C3D00AA001A1651", value.TextValue, "Homeroom" );
+		Assert.NotNull( value);
+		Assert.Equal( "D7510D3E34B3591A8C3D00AA001A1651", value.TextValue);
 
 
 		// ResidencyStatus
 		value = sse.GetElementOrAttribute( "ResidencyStatus" );
-		Assert.IsNotNull( value, "ResidencyStatus" );
-		Assert.AreEqual( "1653", value.TextValue, "ResidencyStatus" );
+		Assert.NotNull( value);
+		Assert.Equal( "1653", value.TextValue);
 
 
 	}

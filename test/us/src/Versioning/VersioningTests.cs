@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Schema;
 using OpenADK.Library;
-using NUnit.Framework;
+using Xunit;
 using Library.Nunit.US;
 using Library.Nunit.US.Library.Tools;
 using Library.UnitTesting.Framework;
@@ -11,7 +11,7 @@ using Library.UnitTesting.Framework.Validation;
 
 namespace OpenADK.Library.Nunit.US.Validation
 {
-    [TestFixture]
+    
     public class VersioningTests : AdkTest
     {
         private const bool VERBOSE = true;
@@ -20,7 +20,7 @@ namespace OpenADK.Library.Nunit.US.Validation
          * Reads all supported SIF US 1.5r1 objects - Writes them IN SIF US 1.1 - Validates
          * them with the SIF US 1.1 Schema - Parses them back into Adk Objects
          */
-        [Test, Explicit("Serious differences in early versions.")] // Can't even find SIF US 1.1 specification (PDF).
+        [Fact(Skip = "Serious differences in early versions.")] // Can't even find SIF US 1.1 specification (PDF).
         public void ReadSIF15r1WriteSIF11()
         {
             RunVersioningTests(SifVersion.SIF15r1, SifVersion.SIF11, false);
@@ -31,7 +31,7 @@ namespace OpenADK.Library.Nunit.US.Validation
          * Reads all supported SIF US 1.5r1 objects - Writes them IN SIF US 1.5r1 - Validates
          * them with the SIF US 1.5r1 Schema - Parses them back into Adk Objects
          */
-        [Test]
+        [Fact]
         public void ReadSIF15r1WriteSIF15r1()
         {
             RunVersioningTests(SifVersion.SIF15r1, SifVersion.SIF15r1, false);
@@ -41,7 +41,7 @@ namespace OpenADK.Library.Nunit.US.Validation
          * Reads all supported SIF US 1.5r1 objects - Writes them IN SIF US 2.0 - Validates
          * them with the SIF US 2.0 Schema - Parses them back into Adk Objects
          */
-        [Test, Explicit("Serious differences in early versions.")] // Can't even find SIF US 1.1 specification (PDF).
+        [Fact(Skip = "Serious differences in early versions.")] // Can't even find SIF US 1.1 specification (PDF).
         public void ReadSIF15r1WriteSIF20()
         {
             RunVersioningTests(SifVersion.SIF15r1, SifVersion.SIF20, true);
@@ -51,14 +51,14 @@ namespace OpenADK.Library.Nunit.US.Validation
          * Reads all supported SIF US 2.0r1 objects - Writes them IN SIF US 1.1 - Validates
          * them with the SIF US 1.1 Schema - Parses them back into Adk Objects
          */
-        [Test]
+        [Fact]
         public void ReadSIF20r1WriteSIF11()
         {
             RunVersioningTests(SifVersion.SIF20r1, SifVersion.SIF11, true);
         }
 
         
-        [Test, Explicit("Serious differences in early versions.")] // Can't even find SIF US 1.1 specification (PDF).
+        [Fact(Skip = "Serious differences in early versions.")] // Can't even find SIF US 1.1 specification (PDF).
         public void ReadSIF20r1WriteSIF15r1()
         {
             RunVersioningTests(SifVersion.SIF20r1, SifVersion.SIF15r1, true);
@@ -66,196 +66,196 @@ namespace OpenADK.Library.Nunit.US.Validation
 
 
                
-        [Test]
+        [Fact]
         public void ReadSIF20r1Write20r1()
         {
             RunVersioningTests(SifVersion.SIF20r1, SifVersion.SIF20r1, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF21Write21()
         {
             RunVersioningTests(SifVersion.SIF21, SifVersion.SIF21, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF21Write20r1()
         {
             RunVersioningTests(SifVersion.SIF21, SifVersion.SIF20r1, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF22Write22()
         {
             RunVersioningTests(SifVersion.SIF22, SifVersion.SIF22, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF22Write21()
         {
             RunVersioningTests(SifVersion.SIF22, SifVersion.SIF21, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF22Write20r1()
         {
             RunVersioningTests(SifVersion.SIF22, SifVersion.SIF20r1, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF23Write23()
         {
             RunVersioningTests(SifVersion.SIF23, SifVersion.SIF23, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF23Write22()
         {
             RunVersioningTests(SifVersion.SIF23, SifVersion.SIF22, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF23Write21()
         {
             RunVersioningTests(SifVersion.SIF23, SifVersion.SIF21, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF23Write20r1()
         {
             RunVersioningTests(SifVersion.SIF23, SifVersion.SIF20r1, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF24Write24()
         {
             RunVersioningTests(SifVersion.SIF24, SifVersion.SIF24, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF24Write23()
         {
             RunVersioningTests(SifVersion.SIF24, SifVersion.SIF23, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF24Write22()
         {
             RunVersioningTests(SifVersion.SIF24, SifVersion.SIF22, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF24Write21()
         {
             RunVersioningTests(SifVersion.SIF24, SifVersion.SIF21, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF24Write20r1()
         {
             RunVersioningTests(SifVersion.SIF24, SifVersion.SIF20r1, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF25Write25()
         {
             RunVersioningTests(SifVersion.SIF25, SifVersion.SIF25, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF25Write24()
         {
             RunVersioningTests(SifVersion.SIF25, SifVersion.SIF24, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF25Write23()
         {
             RunVersioningTests(SifVersion.SIF25, SifVersion.SIF23, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF25Write22()
         {
             RunVersioningTests(SifVersion.SIF25, SifVersion.SIF22, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF25Write21()
         {
             RunVersioningTests(SifVersion.SIF25, SifVersion.SIF21, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF25Write20r1()
         {
             RunVersioningTests(SifVersion.SIF25, SifVersion.SIF20r1, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF26Write26()
         {
             RunVersioningTests(SifVersion.SIF26, SifVersion.SIF26, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF26Write25()
         {
             RunVersioningTests(SifVersion.SIF26, SifVersion.SIF25, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF26Write24()
         {
             RunVersioningTests(SifVersion.SIF26, SifVersion.SIF24, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF26Write23()
         {
             RunVersioningTests(SifVersion.SIF26, SifVersion.SIF23, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF26Write22()
         {
             RunVersioningTests(SifVersion.SIF26, SifVersion.SIF22, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF26Write21()
         {
             RunVersioningTests(SifVersion.SIF26, SifVersion.SIF21, false);
         }
 
         
-        [Test]
+        [Fact]
         public void ReadSIF26Write20r1()
         {
             RunVersioningTests(SifVersion.SIF26, SifVersion.SIF20r1, false);
@@ -280,7 +280,7 @@ namespace OpenADK.Library.Nunit.US.Validation
 
             int errorCount = RunDirectoryTest(dataVersion, schemaVersion, dataDir, Console.Out, sv);
 
-            Assert.AreEqual(0, errorCount, "Tests Failed. See System.out for details");
+            Assert.Equal(0, errorCount);
 
         }
 

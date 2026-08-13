@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenADK.Library;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library.us;
 using Library.UnitTesting.Framework;
 
 namespace Library.NUnit.Core.Library
 {
-    [TestFixture]
+    
     public class SifParserTests : AdkTest
     {
 
@@ -18,7 +18,7 @@ namespace Library.NUnit.Core.Library
 	 * should try to guess the version
 	 * @throws Exception
 	 */
-	    [Test]
+	    [Fact]
         public void testReturningCorrectSifVersionSIF2x()
 	{
 		String test =
@@ -32,11 +32,11 @@ namespace Library.NUnit.Core.Library
 		SifElement element = parser.Parse( test, null );
 		// Since the version was not passed in, the latest supported
 		// SIF 2.x Version should be returned
-		Assert.AreEqual( SifVersion.GetLatest( 2 ), element.SifVersion );
+		Assert.Equal( SifVersion.GetLatest( 2 ), element.SifVersion );
 
 		element = parser.Parse( test, null, 0, SifVersion.SIF21 );
 		// Since the version was passed in, 2.1 should be returned
-		Assert.AreEqual( SifVersion.SIF21, element.SifVersion );
+		Assert.Equal( SifVersion.SIF21, element.SifVersion );
 
 		test =
 			"<SIF_Message Version=\"2.1\" xmlns=\"http://www.sifinfo.org/infrastructure/2.x\">" +
@@ -49,12 +49,12 @@ namespace Library.NUnit.Core.Library
 
 		element = parser.Parse( test, null );
 		// The version attribute is specified, use it.
-		Assert.AreEqual( SifVersion.SIF21, element.SifVersion );
+		Assert.Equal( SifVersion.SIF21, element.SifVersion );
 
 		element = parser.Parse( test, null, 0, SifVersion.SIF22 );
 		// The version attribute is specified and should override the
 		// version passed in
-		Assert.AreEqual( SifVersion.SIF21, element.SifVersion );
+		Assert.Equal( SifVersion.SIF21, element.SifVersion );
 
 	}
 
@@ -65,7 +65,7 @@ namespace Library.NUnit.Core.Library
 	 * should try to guess the version
 	 * @throws Exception
 	 */
-	    [Test]
+	    [Fact]
         public void testReturningCorrectSifVersionSIF1x()
 	{
 		String test =
@@ -79,11 +79,11 @@ namespace Library.NUnit.Core.Library
 		SifElement element = parser.Parse( test, null );
 		// Since the version was not passed in, the latest supported
 		// SIF 2.x Version should be returned
-		Assert.AreEqual( SifVersion.GetLatest( 1 ), element.SifVersion );
+		Assert.Equal( SifVersion.GetLatest( 1 ), element.SifVersion );
 
 		element = parser.Parse( test, null, 0, SifVersion.SIF11 );
 		// Since the version was passed in, 1.1 should be returned
-		Assert.AreEqual( SifVersion.SIF11, element.SifVersion );
+		Assert.Equal( SifVersion.SIF11, element.SifVersion );
 
 		test =
             "<SIF_Message Version=\"1.1\" xmlns=\"http://www.sifinfo.org/infrastructure/1.x\">" +
@@ -96,12 +96,12 @@ namespace Library.NUnit.Core.Library
 
 		element = parser.Parse( test, null );
 		// The version attribute is specified, use it.
-		Assert.AreEqual( SifVersion.SIF11, element.SifVersion );
+		Assert.Equal( SifVersion.SIF11, element.SifVersion );
 
 		element = parser.Parse( test, null, 0, SifVersion.SIF15r1 );
 		// The version attribute is specified and should override the
 		// version passed in
-		Assert.AreEqual( SifVersion.SIF11, element.SifVersion );
+		Assert.Equal( SifVersion.SIF11, element.SifVersion );
 
 	}
 
@@ -111,7 +111,7 @@ namespace Library.NUnit.Core.Library
 	 * or version attribute
 	 * @throws Exception
 	 */
-        [Test]
+        [Fact]
         public void testReturningCorrectSifVersionDefault()
 	{
 		String test =
@@ -124,7 +124,7 @@ namespace Library.NUnit.Core.Library
 		SifParser parser = new SifParser(Runtime);
 		SifElement element = parser.Parse( test, null );
 		// Since the version was not passed in, the ADK SIF Version should be returned
-		Assert.AreEqual( Runtime.SifVersion, element.SifVersion );
+		Assert.Equal( Runtime.SifVersion, element.SifVersion );
 
 
 	}

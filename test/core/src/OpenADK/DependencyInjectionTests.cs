@@ -1,17 +1,17 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
 
 namespace OpenADK.Library.Nunit.Core
 {
-    [TestFixture]
+    
     public class DependencyInjectionTests
     {
-        [Test]
+        [Fact]
         public void ProvidersOwnIndependentRuntimes()
         {
             using ServiceProvider first = BuildProvider(SifVersion.SIF20);
@@ -22,15 +22,15 @@ namespace OpenADK.Library.Nunit.Core
             firstRuntime.Initialize();
             secondRuntime.Initialize();
 
-            Assert.That(firstRuntime, Is.Not.SameAs(secondRuntime));
-            Assert.That(firstRuntime.SifVersion, Is.EqualTo(SifVersion.SIF20));
-            Assert.That(secondRuntime.SifVersion, Is.EqualTo(SifVersion.SIF26));
+            Assert.NotSame(secondRuntime, firstRuntime);
+            Assert.Equal(SifVersion.SIF20, firstRuntime.SifVersion);
+            Assert.Equal(SifVersion.SIF26, secondRuntime.SifVersion);
 
             firstRuntime.SifVersion = SifVersion.SIF15r1;
-            Assert.That(secondRuntime.SifVersion, Is.EqualTo(SifVersion.SIF26));
+            Assert.Equal(SifVersion.SIF26, secondRuntime.SifVersion);
         }
 
-        [Test]
+        [Fact]
         public void ObjectFactoryAppliesRuntimeVersion()
         {
             using ServiceProvider services = BuildProvider(SifVersion.SIF20r1);
@@ -39,11 +39,11 @@ namespace OpenADK.Library.Nunit.Core
             SIF_Request request = objects.Create<SIF_Request>();
             Query query = objects.CreateQuery(InfraDTD.SIF_ZONESTATUS);
 
-            Assert.That(request.SifVersion, Is.EqualTo(SifVersion.SIF20r1));
-            Assert.That(query.EffectiveVersion, Is.EqualTo(SifVersion.SIF20r1));
+            Assert.Equal(SifVersion.SIF20r1, request.SifVersion);
+            Assert.Equal(SifVersion.SIF20r1, query.EffectiveVersion);
         }
 
-        [Test]
+        [Fact]
         public void AgentUsesConfiguredComponentFactoryDelegate()
         {
             StubRequestCache cache = new StubRequestCache();
@@ -60,11 +60,11 @@ namespace OpenADK.Library.Nunit.Core
                 services.GetRequiredService<IAdkRuntime>(),
                 services.GetRequiredService<IAdkComponentFactory>());
 
-            Assert.That(agent.Requests, Is.SameAs(cache));
-            Assert.That(cache.WasInitialized, Is.True);
+            Assert.Same(cache, agent.Requests);
+            Assert.True(cache.WasInitialized);
         }
 
-        [Test]
+        [Fact]
         public void RuntimeUsesRegisteredLoggerFactory()
         {
             RecordingLoggerProvider logs = new RecordingLoggerProvider();
@@ -76,7 +76,7 @@ namespace OpenADK.Library.Nunit.Core
             IAdkRuntime runtime = services.GetRequiredService<IAdkRuntime>();
             runtime.Log.LogInformation("DI logging works");
 
-            Assert.That(logs.Messages, Does.Contain("DI logging works"));
+            Assert.Contains("DI logging works", logs.Messages);
         }
 
         private static ServiceProvider BuildProvider(SifVersion version)

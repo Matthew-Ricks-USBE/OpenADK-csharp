@@ -3,15 +3,15 @@ using OpenADK.Library;
 using OpenADK.Library.Impl.Surrogates;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.XPath;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Library.Impl.Surrogates
 {
-    [TestFixture]
+    
     public class FauxAttributeTests : AdkTest
     {
-        [Test]
+        [Fact]
         public void testFauxAttribute010()
         {
 
@@ -20,12 +20,12 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
 
 
             // Assert base functionality
-            Assert.AreEqual( "Type", fa.Name );
-            Assert.AreEqual("Projected", fa.Value);
-            Assert.AreEqual(sep, fa.Parent );
+            Assert.Equal( "Type", fa.Name );
+            Assert.Equal("Projected", fa.Value);
+            Assert.Equal(sep, fa.Parent );
 
             // Assert XPath functionality
-            Assert.AreEqual( XPathNodeType.Attribute, fa.NodeType );
+            Assert.Equal( XPathNodeType.Attribute, fa.NodeType );
 
 
         }

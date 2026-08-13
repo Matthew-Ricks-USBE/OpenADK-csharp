@@ -4,11 +4,11 @@ using OpenADK.Library;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
-    [TestFixture]
+    
     public class MappingsSpeedTests : UsAdkTest
     {
         private AgentConfig fCfg;
@@ -27,7 +27,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 	 * @throws AdkException
 	 */
 
-        [Test]
+        [Fact]
         public void testInBoundMapping50000()
         {
             fCfg = new AgentConfig();
@@ -76,7 +76,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 	 * after changing SifXPathContext to test for repeatability of elements
 	 */
 
-        [Test]
+        [Fact]
         public void testOutBoundMapping50000()
         {
             fCfg = new AgentConfig();
@@ -124,7 +124,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 	 * the caching of the target ElementDef in XPathRule
 	 */
 
-        [Test]
+        [Fact]
         public void testOutBoundMappingContext50000()
         {
             fCfg = new AgentConfig();
@@ -177,7 +177,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 	 * @throws AdkException
 	 */
 
-        [Test]
+        [Fact]
         public void testInBoundMappingContext50000()
         {
             fCfg = new AgentConfig();

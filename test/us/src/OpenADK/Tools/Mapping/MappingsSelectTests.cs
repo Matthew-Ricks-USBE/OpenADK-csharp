@@ -6,20 +6,19 @@ using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
 using Microsoft.Extensions.Logging;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
-    [TestFixture]
+    
     public class MappingsSelectTests : AdkTest
     {
         private ILogger logger;
 
-        [SetUp]
-        public override void SetUp()
+        
+        public MappingsSelectTests()
         {
-            base.SetUp();
             logger = Runtime.LoggerFactory.CreateLogger<MappingsSelectTests>();
         }
 
@@ -64,7 +63,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             return root;
         }
 
-        [Test]
+        [Fact]
         public void testMap2()
         {
             StudentPersonal studentPersonal = makeStudentPersonal( "34",

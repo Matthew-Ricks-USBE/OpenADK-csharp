@@ -1,12 +1,12 @@
 using System.Collections;
 using OpenADK.Library;
 using OpenADK.Library.us.Programs;
-using NUnit.Framework;
+using Xunit;
 using Library.Nunit.US.Tools.Mapping;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
-    [TestFixture]
+    
     public class SIF20MappingTests : MappingTests
     {
         public SIF20MappingTests() :
@@ -18,9 +18,9 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
         protected override void assertStudentPlacement( StudentPlacement sp )
         {
-            Assert.AreEqual("0000000000000000", sp.RefId, "RefID");
-            Assert.AreEqual( "0000000000000000", sp.StudentPersonalRefId, "StudentPersonalRefid" );
-            Assert.AreEqual( "ZZZ99987", sp.Service.Code, "Service/@Code" );
+            Assert.Equal("0000000000000000", sp.RefId);
+            Assert.Equal( "0000000000000000", sp.StudentPersonalRefId);
+            Assert.Equal( "ZZZ99987", sp.Service.Code);
         }
 
 

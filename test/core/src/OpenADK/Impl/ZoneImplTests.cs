@@ -1,15 +1,15 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Xunit;
 using System.Net;
 
 namespace Library.NUnit.Core.Library.Impl
 {
-    [TestFixture]
+    
     public class ZoneImplTests
     {
-//        [Test]
+//        [Fact]
 //        public void TestURI()
 //        {
 //            String rawUrl =
@@ -17,7 +17,7 @@ namespace Library.NUnit.Core.Library.Impl
 //
 //            Uri u = new Uri( rawUrl );
 //
-//           // Assert.AreEqual( rawUrl, u.AbsoluteUri );
+//           // Assert.Equal( rawUrl, u.AbsoluteUri );
 //
 //
 //            WebRequest request = WebRequest.Create( u );

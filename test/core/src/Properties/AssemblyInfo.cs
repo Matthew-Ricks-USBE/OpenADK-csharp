@@ -1,3 +1,4 @@
+﻿using Xunit;
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -35,4 +36,4 @@ using System.Runtime.InteropServices;
 
 // The global Adk can cause cross-test contamination.
 // This gives the tests a chance to set up and clean up their unique prerequisites.
-[assembly: NUnit.Framework.NonParallelizable]
+[assembly: CollectionBehavior(DisableTestParallelization = true)]

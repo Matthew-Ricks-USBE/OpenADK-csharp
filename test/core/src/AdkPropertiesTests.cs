@@ -1,28 +1,28 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library;
 
 namespace Library.NUnit.Core
 {
-    [TestFixture]
+    
     public class AdkPropertiesTests
     {
-        [Test]
+        [Fact]
         public void TestReturnDefaultValue()
         {
             AdkProperties props = new AdkProperties( null );
             props["TEST1"] = "Value1";
 
-            Assert.AreEqual( "Value1", props["TEST1"] );
-            Assert.AreEqual("Value1", props.GetProperty( "TEST1" ));
-            Assert.AreEqual("Value1", props.GetProperty( "TEST1", "foo" ));
-            Assert.AreEqual("foo", props.GetProperty( "bar", "foo" ));
+            Assert.Equal( "Value1", props["TEST1"] );
+            Assert.Equal("Value1", props.GetProperty( "TEST1" ));
+            Assert.Equal("Value1", props.GetProperty( "TEST1", "foo" ));
+            Assert.Equal("foo", props.GetProperty( "bar", "foo" ));
 
         }
 
-        [Test]
+        [Fact]
         public void TestReturnDefaultValueWithInheritance()
         {
             AdkProperties parent = new AdkProperties(null);
@@ -31,14 +31,14 @@ namespace Library.NUnit.Core
             AdkProperties props = new AdkProperties( parent );
             props["TEST2"] = "Value2";
 
-            Assert.AreEqual("Value1", props["TEST1"]);
-            Assert.AreEqual("Value2", props["TEST2"]);
-            Assert.AreEqual("Value1", props.GetProperty("TEST1"));
-            Assert.AreEqual("Value1", props.GetProperty("TEST1", "foo"));
-            Assert.AreEqual("foo", props.GetProperty("bar", "foo"));
+            Assert.Equal("Value1", props["TEST1"]);
+            Assert.Equal("Value2", props["TEST2"]);
+            Assert.Equal("Value1", props.GetProperty("TEST1"));
+            Assert.Equal("Value1", props.GetProperty("TEST1", "foo"));
+            Assert.Equal("foo", props.GetProperty("bar", "foo"));
 
             props["TEST1"] = "scooter";
-            Assert.AreEqual("scooter", props["TEST1"]);
+            Assert.Equal("scooter", props["TEST1"]);
 
         }
 

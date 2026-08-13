@@ -5,12 +5,12 @@ using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library.us;
 
 namespace Library.Nunit.US.Tools.Mapping
 {
-    [TestFixture]
+    
     public class AdvancedMappingsTests : BaseMappingsTest
     {
         protected override void ConfigureOptions(AdkOptions options)
@@ -26,7 +26,7 @@ namespace Library.Nunit.US.Tools.Mapping
             return dateString_in;
         }
 
-        [Test]
+        [Fact]
         public void TestCustomFunctionOutbound()
         {
             String flattenDateFunctionCall = "<agent id=\"Repro\" sifVersion=\"2.0\">"
@@ -47,12 +47,12 @@ namespace Library.Nunit.US.Tools.Mapping
             tvb.AddAlias( "flattenDate", GetType().AssemblyQualifiedName );
             Runtime.SifVersion = SifVersion.SIF20;
             StudentPersonal sp = mapToStudentPersonal( sma, flattenDateFunctionCall, tvb );
-            Assert.True(tvb.WasCalled, "flattenDate should have been called");
-            Assert.IsNotNull(sp, "Student should not be null");
-            Assert.IsNotNull( sp.Demographics.BirthDate, "BirthDate should not be null" );
+            Assert.True(tvb.WasCalled);
+            Assert.NotNull(sp);
+            Assert.NotNull( sp.Demographics.BirthDate);
         }
 
-        [Test]
+        [Fact]
         public void TestVariableOutbound()
         {
             String flattenDateFunctionCall = "<agent id=\"Repro\" sifVersion=\"2.0\">"
@@ -67,11 +67,11 @@ namespace Library.Nunit.US.Tools.Mapping
             map.Add( "DOB", "1990-09-04" );
             StringMapAdaptor sma = new StringMapAdaptor( map );
             StudentPersonal sp = mapToStudentPersonal( sma, flattenDateFunctionCall, null );
-            Assert.IsNotNull(sp, "Student should not be null");
-            Assert.IsNotNull( sp.Demographics.BirthDate, "BirthDate should not be null" );
+            Assert.NotNull(sp);
+            Assert.NotNull( sp.Demographics.BirthDate);
         }
 
-        [Test]
+        [Fact]
         public void TestCustomFunctionInbound()
         {
             //		String customMappings = 
@@ -90,11 +90,11 @@ namespace Library.Nunit.US.Tools.Mapping
             //		IDictionary map = doInboundMapping( customMappings, sp );
             //		assertTrue("ProperCase should have been called", tvb.getWasCalled());
             //		
-            //		Assert.IsNotNull(sp, "Student should not be null");
-            //		Assert.IsNotNull( sp.Demographics.BirthDate, "BirthDate should not be null");
+            //		Assert.NotNull(sp);
+            //		Assert.NotNull( sp.Demographics.BirthDate);
         }
 
-        [Test]
+        [Fact]
         public void TestADKFunctionInbound()
         {
             String customMappings =
@@ -113,9 +113,9 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assert.AreEqual("ahmad", map["FIRSTNAME"], "First Name");
-            Assert.AreEqual("O'TOOLE", map["LASTNAME"], "Last Name");
-            Assert.AreEqual("Ahmad O'Toole", map["FULLNAME"], "Full Name");
+            Assert.Equal("ahmad", map["FIRSTNAME"]);
+            Assert.Equal("O'TOOLE", map["LASTNAME"]);
+            Assert.Equal("Ahmad O'Toole", map["FULLNAME"]);
         }
 
 
@@ -124,7 +124,7 @@ namespace Library.Nunit.US.Tools.Mapping
   * @
   */
 
-        [Explicit]
+        [Fact(Skip = "Explicit")]
         public void TestVariableMapping()
         {
             String customMappings =
@@ -141,13 +141,13 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assert.AreEqual("998", map["STUDENT_NUM"], "STUDENT_NUM");
-            Assert.AreEqual("998", map["HOMEROOM"], "HOMEROOM");
+            Assert.Equal("998", map["STUDENT_NUM"]);
+            Assert.Equal("998", map["HOMEROOM"]);
 
             Console.WriteLine( "HomeRoom = " + map["HOMEROOM"] );
         }
 
-        [Test]
+        [Fact]
         public void TestConcatenateFieldsInbound()
         {
             String customMappings =
@@ -166,12 +166,12 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assert.AreEqual("Jimmy", map["FIRSTNAME"], "First Name");
-            Assert.AreEqual("Johnson", map["LASTNAME"], "Last Name");
-            Assert.AreEqual("Jimmy Johnson", map["FULLNAME"], "Full Name");
+            Assert.Equal("Jimmy", map["FIRSTNAME"]);
+            Assert.Equal("Johnson", map["LASTNAME"]);
+            Assert.Equal("Jimmy Johnson", map["FULLNAME"]);
         }
 
-        [Test]
+        [Fact]
         public void TestConcatenateFieldsInbound020()
         {
             String customMappings =
@@ -195,10 +195,10 @@ namespace Library.Nunit.US.Tools.Mapping
 
             String csz = (String) map["CITY_STATE_ZIP"];
             Console.WriteLine( "City State Zip=" + csz );
-            Assert.AreEqual("Chicago, IL  50001", map["CITY_STATE_ZIP"], "City State Zip");
+            Assert.Equal("Chicago, IL  50001", csz);
         }
 
-        [Test]
+        [Fact]
         public void TestCustomVariablesInbound()
         {
             String customMappings =
@@ -217,12 +217,12 @@ namespace Library.Nunit.US.Tools.Mapping
 
             IDictionary map = doInboundMapping( customMappings, sp );
 
-            Assert.AreEqual("Jimmy", map["FIRSTNAME"], "First Name");
-            Assert.AreEqual("Johnson", map["LASTNAME"], "Last Name");
-            Assert.AreEqual("Jimmy Johnson", map["FULLNAME"], "Full Name");
+            Assert.Equal("Jimmy", map["FIRSTNAME"]);
+            Assert.Equal("Johnson", map["LASTNAME"]);
+            Assert.Equal("Jimmy Johnson", map["FULLNAME"]);
         }
 
-        [Test]
+        [Fact]
         public void TestConcatenateFields()
         {
             String configFileText = "<agent id=\"Repro\" sifVersion=\"2.0\">"
@@ -247,15 +247,15 @@ namespace Library.Nunit.US.Tools.Mapping
             TestValueBuilder tvb = new TestValueBuilder( sma );
             StudentPersonal sp = mapToStudentPersonal( sma, configFileText, tvb );
 
-            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.NotNull(sp);
 
             SimpleField fullName = (SimpleField) sp
                                                      .GetElementOrAttribute( "Name/FullName" );
-            Assert.IsNotNull(fullName, "FullName");
-            Assert.AreEqual("Finale, Prima Mediccio", fullName.Value, "FullName");
+            Assert.NotNull(fullName);
+            Assert.Equal("Finale, Prima Mediccio", fullName.TextValue);
         }
 
-        [Test]
+        [Fact]
         public void TestStringConcat()
         {
             String configFileText = "<agent id=\"Repro\" sifVersion=\"2.0\">"
@@ -276,15 +276,15 @@ namespace Library.Nunit.US.Tools.Mapping
             TestValueBuilder tvb = new TestValueBuilder( sma );
             StudentPersonal sp = mapToStudentPersonal( sma, configFileText, tvb );
 
-            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.NotNull(sp);
 
             SimpleField fullName = (SimpleField) sp
                                                      .GetElementOrAttribute( "Name/FullName" );
-            Assert.IsNotNull(fullName, "FullName");
-            Assert.AreEqual("NAME:Finale, Prima Mediccio", fullName.Value, "FullName");
+            Assert.NotNull(fullName);
+            Assert.Equal("NAME:Finale, Prima Mediccio", fullName.TextValue);
         }
 
-        [Explicit]
+        [Fact(Skip = "Explicit")]
         public void TestInheritRules()
         {
             String configFileText1_ = "<agent id=\"mcmTest.MappingsTest\" sifVersion=\"2.0\">\n"
@@ -326,16 +326,16 @@ namespace Library.Nunit.US.Tools.Mapping
             StringMapAdaptor sma = new StringMapAdaptor( psValueMap );
             StudentPersonal sp = doOutboundMappingSelect( sma, configFileText1_, "Zone A", null, null );
 
-            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.NotNull(sp);
 
             SifElement address = (SifElement) sp
                                                   .GetElementOrAttribute(
                                                   "AddressList[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='01']" );
-            Assert.IsNotNull(address, "Student Address should have mapped");
+            Assert.NotNull(address);
 
             SifElement name = (SifElement) sp
                                                .GetElementOrAttribute( "Name[@Type='06']" );
-            Assert.IsNotNull(name, "Name should have mapped to '06'" );
+            Assert.NotNull(name);
         }
 
 
@@ -344,7 +344,7 @@ namespace Library.Nunit.US.Tools.Mapping
   * @
   */
 
-        [Test]
+        [Fact]
         public void TestDoubleOutboundMapping()
         {
             String mapping = "<agent id=\"Repro\" sifVersion=\"2.0\">"
@@ -359,14 +359,15 @@ namespace Library.Nunit.US.Tools.Mapping
             map.Add( "PHONE", "715-555-5555" );
             StringMapAdaptor sma = new StringMapAdaptor( map );
             StudentPersonal sp = mapToStudentPersonal( sma, mapping, null );
-            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.NotNull(sp);
             PhoneNumberList phoneList = sp.PhoneNumberList;
-            Assert.AreEqual(1, phoneList.ChildCount, "One Phone");
+            Assert.Equal(1, phoneList.ChildCount);
 
             PhoneNumber phone = (PhoneNumber) phoneList.GetChildList()[0];
-            Assert.IsNotNull( phone, "Phone should not be null" );
-            Assert.AreEqual( "1234", phone.Type, "Phone type" );
-            Assert.AreEqual( "715-555-5555", phone.Number, "PhoneNumber" );
+            Assert.NotNull( phone);
+            Assert.Equal( "1234", phone.Type);
+            Assert.Equal( "715-555-5555", phone.Number);
         }
     }
 }
+

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using OpenADK.Library;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Library.Student
 {
-    [TestFixture]
+    
     public class StaffAssignmentTests
     {
         	public void testReadWriteStaffAssignmentSIF1x() {
@@ -17,16 +17,16 @@ namespace Library.Nunit.US.Library.Student
 
 		sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
 				SifVersion.SIF15r1);
-		Assert.IsNull(sa.PrimaryAssignment, "Primary Assignment");
+		Assert.Null(sa.PrimaryAssignment);
 	}
 
-    [Test]
+    [Fact]
 	public void testReadWriteStaffAssignmentSIF2x() {
 		StaffAssignment sa = ObjectCreator.CreateStaffAssignment();
 		sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
 				SifVersion.SIF20r1);
 
-		Assert.AreEqual("Yes", sa.PrimaryAssignment, "Primary Assignment");
+		Assert.Equal("Yes", sa.PrimaryAssignment);
 
 	}
     }

@@ -5,7 +5,7 @@ using OpenADK.Library.us.Hrfin;
 using OpenADK.Library.Infra;
 using OpenADK.Library.us.Reporting;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.Nunit.US;
 
 namespace Library.Nunit.US
@@ -13,7 +13,7 @@ namespace Library.Nunit.US
     /// <summary>
     /// Summary description for SIFParserTests.
     /// </summary>
-    [TestFixture]
+    
     public class SIFParserTests : UsAdkTest
     {
       
@@ -28,7 +28,7 @@ namespace Library.Nunit.US
     /// The first time this test was run, the total time averaged 3.3 seconds
     /// After turning WhitespaceHandling to None in the SIFParser, the time went down to 3.2 seconds
     /// </remarks>
-		[Test]
+		[Fact]
 		public void PerfTestParsing5000Times()
 		{
 			// Do one warmup parse . . .
@@ -49,14 +49,14 @@ namespace Library.Nunit.US
 				aStream.Close();
 			}
 
-			Assert.IsNotNull( element, "SIFElement was not parsed" );
+			Assert.NotNull( element);
 		}
 
 #endif
 
         #endregion
 
-        [Test]
+        [Fact]
         public void EmbeddedSIFMessage()
         {
             SifElement element = null;
@@ -69,18 +69,18 @@ namespace Library.Nunit.US
                 aStream.Close();
             }
 
-            Assert.IsNotNull(element, "SIFElement was not parsed");
+            Assert.NotNull(element);
             SIF_Ack ack = (SIF_Ack) element;
             SifElement messageElement = ack.SIF_Status.SIF_Data.GetChild("SIF_Message");
             SIF_Event aEvent = (SIF_Event) messageElement.GetChild("SIF_Event");
             SIF_EventObject eventObject = aEvent.SIF_ObjectData.SIF_EventObject;
 
-            Assert.AreEqual("SchoolCourseInfo", eventObject.ObjectName, "Wrong object name");
-            Assert.AreEqual("Change", eventObject.Action, "Wrong Action");
-            Assert.IsTrue(eventObject.GetChildList()[0] is SchoolCourseInfo, "Wrong object type");
+            Assert.Equal("SchoolCourseInfo", eventObject.ObjectName);
+            Assert.Equal("Change", eventObject.Action);
+            Assert.True(eventObject.GetChildList()[0] is SchoolCourseInfo);
         }
 
-        [Test]
+        [Fact]
         public void UnexpectedEmbeddedSIFMessage()
         {
             // this test should throw an exception because we are not passing "ExpectInnerEnvelope" in the 
@@ -94,7 +94,7 @@ namespace Library.Nunit.US
             });
         }
 
-        [Test]
+        [Fact]
         public void TestLooseXmlTypeParsing100()
         {
             string vendorInfo15r1 =
@@ -106,11 +106,11 @@ namespace Library.Nunit.US
             SifParser parser = new SifParser(Runtime);
             VendorInfo vi = (VendorInfo) parser.Parse( vendorInfo15r1, null, SifParserFlags.None, SifVersion.SIF15r1 );
 
-            Assert.IsNotNull( vi );
-            Assert.IsFalse( vi.Send1099.HasValue );
+            Assert.NotNull( vi );
+            Assert.False( vi.Send1099.HasValue );
         }
 
-        [Test]
+        [Fact]
         public void TestLooseXmlTypeParsing101()
         {
             string vendorInfo20r1 =
@@ -122,12 +122,12 @@ namespace Library.Nunit.US
             SifParser parser = new SifParser(Runtime);
             VendorInfo vi = (VendorInfo)parser.Parse(vendorInfo20r1, null, SifParserFlags.None, SifVersion.SIF20r1);
 
-            Assert.IsNotNull(vi);
-            Assert.IsFalse(vi.Send1099.HasValue);
+            Assert.NotNull(vi);
+            Assert.False(vi.Send1099.HasValue);
         }
 
 
-        [Test]
+        [Fact]
         public void TestParseReportData()
         {
             SIF_ReportObject reportObject = null;
@@ -140,11 +140,11 @@ namespace Library.Nunit.US
                 aStream.Close();
             }
 
-            Assert.IsNotNull( reportObject );
-            Assert.AreEqual( 1, reportObject.ChildCount );
+            Assert.NotNull( reportObject );
+            Assert.Equal( 1, reportObject.ChildCount );
 
             SifElement reportData = reportObject.GetChildList()[0];
-            Assert.AreEqual(2060, reportData.ChildCount);
+            Assert.Equal(2060, reportData.ChildCount);
 
 
         }

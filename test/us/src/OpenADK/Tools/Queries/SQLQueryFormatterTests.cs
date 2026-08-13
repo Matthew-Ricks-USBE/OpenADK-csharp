@@ -5,7 +5,7 @@ using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Queries;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Tools.Queries
@@ -13,16 +13,16 @@ namespace Library.Nunit.US.Tools.Queries
     /// <summary>
     /// Summary description for SQLQueryFormatterTests.
     /// </summary>
-    [TestFixture]
+    
     public class SQLQueryFormatterTests : AdkTest
     {
-        [SetUp]
+        
         public void Setup()
         {
             Runtime.Initialize();
         }
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter010()
         {
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -34,10 +34,10 @@ namespace Library.Nunit.US.Tools.Queries
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(q, fields);
 
-            Assert.AreEqual("( vchFirstName = 'Johnny' )", sql, "Query format");
+            Assert.Equal("( vchFirstName = 'Johnny' )", sql);
         }
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter020()
         {
            Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -56,11 +56,11 @@ namespace Library.Nunit.US.Tools.Queries
                 return;
             }
 
-            Assert.Fail("QueryFormatterException should have been thrown");
+            throw new Xunit.Sdk.XunitException("QueryFormatterException should have been thrown");
         }
 
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter030()
         {
            Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -70,10 +70,10 @@ namespace Library.Nunit.US.Tools.Queries
 
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(q, fields, false);
-            Assert.AreEqual("( 1=1 )", sql, "Query format");
+            Assert.Equal("( 1=1 )", sql);
         }
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter050()
         {
            Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -90,11 +90,11 @@ namespace Library.Nunit.US.Tools.Queries
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(reparsed, fields);
 
-            Assert.AreEqual( "( Users.vchFirstName = 'W' )", sql, "Query format");
+            Assert.Equal( "( Users.vchFirstName = 'W' )", sql);
         }
 
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter060()
         {
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -110,10 +110,10 @@ namespace Library.Nunit.US.Tools.Queries
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(reparsed, fields);
 
-            Assert.AreEqual("( Users.FName > 'Sally' )", sql, "Query format");
+            Assert.Equal("( Users.FName > 'Sally' )", sql);
         }
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter070()
         {
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -129,10 +129,10 @@ namespace Library.Nunit.US.Tools.Queries
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(reparsed, fields);
 
-            Assert.AreEqual("( Users.FName < 'Sally' )", sql, "Query format");
+            Assert.Equal("( Users.FName < 'Sally' )", sql);
         }
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter080()
         {
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -148,10 +148,10 @@ namespace Library.Nunit.US.Tools.Queries
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(reparsed, fields);
 
-            Assert.AreEqual("( Users.FName != 'Sally' )", sql, "Query format");
+            Assert.Equal("( Users.FName != 'Sally' )", sql);
         }
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter090()
         {
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -167,10 +167,10 @@ namespace Library.Nunit.US.Tools.Queries
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(reparsed, fields);
 
-            Assert.AreEqual("( Users.FName >= 'Sally' )", sql, "Query format");
+            Assert.Equal("( Users.FName >= 'Sally' )", sql);
         }
 
-        [Test]
+        [Fact]
         public void testSQLQueryFormatter100()
         {
             Query q = new Query(StudentDTD.STUDENTPERSONAL);
@@ -186,7 +186,7 @@ namespace Library.Nunit.US.Tools.Queries
             SQLQueryFormatter formatter = new SQLQueryFormatter();
             String sql = formatter.Format(reparsed, fields);
 
-            Assert.AreEqual("( Users.FName <= 'Sally' )", sql, "Query format");
+            Assert.Equal("( Users.FName <= 'Sally' )", sql);
         }
 
 

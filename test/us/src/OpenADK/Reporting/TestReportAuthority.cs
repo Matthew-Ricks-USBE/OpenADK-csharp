@@ -1,7 +1,7 @@
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Reporting;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Reporting
@@ -9,10 +9,10 @@ namespace Library.Nunit.US.Reporting
     /// <summary>
     /// Summary description for TestReportAuthority.
     /// </summary>
-    [TestFixture]
+    
     public class TestReportAuthority : AdkTest
     {
-        [Test]
+        [Fact]
         public void SDOParse()
         {
             ReportAuthorityInfo info = new ReportAuthorityInfo();

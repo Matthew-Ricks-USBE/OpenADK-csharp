@@ -2,7 +2,7 @@ using System;
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Common
@@ -10,27 +10,27 @@ namespace Library.Nunit.US.Common
     /// <summary>
     /// Summary description for DemographicsTests.
     /// </summary>
-    [TestFixture]
+    
     public class DemographicsTests : AdkTest
     {
         /**
 	 * Tests that accessors that accept a SIFDate can also accept a null value
 	 */
 
-        [Test]
+        [Fact]
         public void testSettingNullCountryArrivalDate()
         {
             StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
             Demographics d = sp.Demographics;
             d.CountryArrivalDate = new DateTime(1997, 5, 1);
 
-            Assert.AreEqual(new DateTime(1997, 5, 1), d.CountryArrivalDate);
+            Assert.Equal(new DateTime(1997, 5, 1), d.CountryArrivalDate);
             d.CountryArrivalDate = null;
-            Assert.IsNull(d.CountryArrivalDate, "CountryArrivalDate was set to null");
+            Assert.Null(d.CountryArrivalDate);
 
             sp = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, Runtime.SifVersion);
             d = sp.Demographics;
-            Assert.IsNull(d.CountryArrivalDate, "After reparsing it should still be null");
+            Assert.Null(d.CountryArrivalDate);
         }
 
         /**
@@ -38,7 +38,7 @@ namespace Library.Nunit.US.Common
 		 * also take the object. e.g. setStatePr( StatePr )
 		 */
 
-        [Test]
+        [Fact]
         public void testSettingStatePrAndCountry()
         {
             StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
@@ -48,8 +48,8 @@ namespace Library.Nunit.US.Common
             d.SetStateOfBirth(StatePrCode.AR);
 
 
-            Assert.AreEqual(CountryCode.US.Value, d.CountryOfBirth);
-            Assert.AreEqual(StatePrCode.AR.Value, d.StateOfBirth);
+            Assert.Equal(CountryCode.US.Value, d.CountryOfBirth);
+            Assert.Equal(StatePrCode.AR.Value, d.StateOfBirth);
         }
     }
 }

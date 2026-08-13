@@ -1,51 +1,51 @@
-using System;
+﻿using System;
 using OpenADK.Library.Tools.XPath.Compiler;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.Core.Tools.XPath
 {
-    [TestFixture]
+    
     public class XPathParserTests
     {
-        [Test]
+        [Fact]
         public void TestXPath010()
         {
             AdkXPathStep[] steps = XPathParser.Parse("Foo");
 
-            Assert.AreEqual(1, steps.Length);
-            Assert.AreEqual("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
+            Assert.Equal(1, steps.Length);
+            Assert.Equal("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
 
             steps = XPathParser.Parse("/Foo");
-            Assert.AreEqual(1, steps.Length);
-            Assert.AreEqual("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
+            Assert.Equal(1, steps.Length);
+            Assert.Equal("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
 
             Console.WriteLine(steps[0]);
         }
 
-        [Test]
+        [Fact]
         public void TestXPath020()
         {
             AdkXPathStep[] steps = XPathParser.Parse("Foo/Bar/Win");
 
-            Assert.AreEqual(3, steps.Length);
-            Assert.AreEqual("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
-            Assert.AreEqual("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
-            Assert.AreEqual("Win", ((AdkNodeNameTest) steps[2].NodeTest).NodeName);
+            Assert.Equal(3, steps.Length);
+            Assert.Equal("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
+            Assert.Equal("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
+            Assert.Equal("Win", ((AdkNodeNameTest) steps[2].NodeTest).NodeName);
 
             steps = XPathParser.Parse("/Foo/Bar/Win");
-            Assert.AreEqual(3, steps.Length);
-            Assert.AreEqual("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
-            Assert.AreEqual("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
-            Assert.AreEqual("Win", ((AdkNodeNameTest) steps[2].NodeTest).NodeName);
+            Assert.Equal(3, steps.Length);
+            Assert.Equal("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
+            Assert.Equal("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
+            Assert.Equal("Win", ((AdkNodeNameTest) steps[2].NodeTest).NodeName);
         }
 
-        [Test]
+        [Fact]
         public void TestXPath030()
         {
             String path = "Foo[@Win='2']/Bar[Type=5]/Win[Zone=\"yada\"]";
             AdkXPathStep[] steps = XPathParser.Parse(path);
 
-            Assert.AreEqual(3, steps.Length);
+            Assert.Equal(3, steps.Length);
             AssertStep(steps[0], "Foo", "Win", "2");
             AssertStep(steps[1], "Bar", "Type", 5);
             AssertStep(steps[2], "Win", "Zone", "yada");
@@ -54,47 +54,47 @@ namespace Library.Nunit.Core.Tools.XPath
 
 
             steps = XPathParser.Parse("/" + path);
-            Assert.AreEqual(3, steps.Length);
+            Assert.Equal(3, steps.Length);
             AssertStep(steps[0], "Foo", "Win", "2");
             AssertStep(steps[1], "Bar", "Type", 5);
             AssertStep(steps[2], "Win", "Zone", "yada");
         }
 
 
-        [Test]
+        [Fact]
         public void TestXPath040()
         {
             String path = "Foo[@Win='2']/Bar";
             AdkXPathStep[] steps = XPathParser.Parse(path);
 
-            Assert.AreEqual(2, steps.Length);
+            Assert.Equal(2, steps.Length);
             AssertStep(steps[0], "Foo", "Win", "2");
-            Assert.AreEqual("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
+            Assert.Equal("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
 
 
             steps = XPathParser.Parse("/" + path);
-            Assert.AreEqual(2, steps.Length);
+            Assert.Equal(2, steps.Length);
             AssertStep(steps[0], "Foo", "Win", "2");
-            Assert.AreEqual("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
+            Assert.Equal("Bar", ((AdkNodeNameTest) steps[1].NodeTest).NodeName);
         }
 
         private void AssertStep(AdkXPathStep step, String name, String singePredicateName, object singlePredicateValue)
         {
-            Assert.AreEqual(name, ((AdkNodeNameTest) step.NodeTest).NodeName);
-            Assert.IsNotNull(step.Predicates);
-            Assert.AreEqual(1, step.Predicates.Length);
-            Assert.IsInstanceOf<AdkEqualOperation>(step.Predicates[0]);
+            Assert.Equal(name, ((AdkNodeNameTest) step.NodeTest).NodeName);
+            Assert.NotNull(step.Predicates);
+            Assert.Equal(1, step.Predicates.Length);
+            Assert.IsType<AdkEqualOperation>(step.Predicates[0]);
 
             AdkExpression[] components = ((AdkEqualOperation) step.Predicates[0]).Arguments;
-            Assert.AreEqual(2, components.Length);
-            Assert.IsInstanceOf<AdkLocPath>(components[0]);
+            Assert.Equal(2, components.Length);
+            Assert.IsType<AdkLocPath>(components[0]);
             AdkLocPath lp = (AdkLocPath) components[0];
 
             AdkNodeNameTest attrName = (AdkNodeNameTest) lp.Steps[0].NodeTest;
-            Assert.AreEqual(singePredicateName, attrName.NodeName);
+            Assert.Equal(singePredicateName, attrName.NodeName);
 
             object value = components[1].ComputeValue(null);
-            Assert.AreEqual(singlePredicateValue, value);
+            Assert.Equal(singlePredicateValue?.ToString(), value?.ToString());
         }
     }
 }

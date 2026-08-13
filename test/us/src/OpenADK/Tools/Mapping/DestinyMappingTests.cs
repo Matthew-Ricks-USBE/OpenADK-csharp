@@ -5,25 +5,24 @@ using OpenADK.Library;
 using OpenADK.Library.Infra;
 using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
-    [TestFixture]
+    
     public class DestinyMappingTests : UsAdkTest
     {
         private AgentConfig fCfg;
 
-        [SetUp]
-        public override void SetUp()
+        
+        public DestinyMappingTests()
         {
-            base.SetUp();
             Runtime.SifVersion = SifVersion.SIF15r1;
             fCfg = new AgentConfig();
             fCfg.Read("..\\..\\OpenADK\\Tools\\Mapping\\Destiny2.0.cfg", false);
         }
 
-        [Test]
+        [Fact]
         public void testSchoolInfo010()
         {
             String schoolInfoResp = "	<SIF_Message  xmlns=\"http://www.sifinfo.org/infrastructure/1.x\" Version=\"1.5r1\">"
@@ -73,8 +72,8 @@ namespace Library.Nunit.US.Library.Tools.Mapping
                                                             schoolInfoResp, null );
 
             // Verify that it is parsing the correct version
-            Assert.AreEqual(SifVersion.SIF15r1, smi.SifVersion, "Version");
-            Assert.AreEqual("1.5r1", smi.VersionAttribute, "Version attribute");
+            Assert.Equal(SifVersion.SIF15r1, smi.SifVersion);
+            Assert.Equal("1.5r1", smi.VersionAttribute);
 
             SifDataObject sdo = (SifDataObject) ((SIF_Response) smi)
                                                     .SIF_ObjectData.GetChildList()[0];
@@ -85,8 +84,8 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             Mappings m = fCfg.Mappings.GetMappings( "Default" ).Select( "asdf","SASIxp", smi.SifVersion );
 
             m.MapInbound( sdo, sma, smi.SifVersion );
-            Assert.True(fields.Count > 0, "Elements Mapped");
-            Assert.AreEqual( "888-9877", fields["FAX"], "Phone Number" );
+            Assert.True(fields.Count > 0);
+            Assert.Equal( "888-9877", fields["FAX"]);
         }
     }
 }

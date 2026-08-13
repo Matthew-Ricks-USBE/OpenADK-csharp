@@ -1,16 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.Core
 {
-    [TestFixture]
+    
     public class SifFormatterTests : AdkTest
     {
         	/**
@@ -18,23 +18,23 @@ namespace Library.Nunit.Core
 	 * as null values. This is primarily for backwards support for SASI
 	 * @throws ADKParsingException
 	 */
-        [Test]
+        [Fact]
         public void testSIF1xEmtpyStringSupport()
         {
             SifFormatter SIF1x = new Sif1xFormatter();
 
 
-            Assert.IsNull( SIF1x.ToBool( "" ), "Should be null" );
-            Assert.IsNull( SIF1x.ToBool( "  " ), "Should be null" );
-            Assert.IsNull( SIF1x.ToDecimal( "" ), "Should be null" );
-            Assert.IsNull( SIF1x.ToDecimal( "  " ), "Should be null" );
-            Assert.IsNull( SIF1x.ToInt( "" ), "Should be null" );
-            Assert.IsNull( SIF1x.ToInt( "  " ), "Should be null" );
-            Assert.IsNull( SIF1x.ToDateTime( "" ), "Should be null" );
-            Assert.IsNull( SIF1x.ToDateTime( "  " ), "Should be null" );
+            Assert.Null( SIF1x.ToBool( "" ));
+            Assert.Null( SIF1x.ToBool( "  " ));
+            Assert.Null( SIF1x.ToDecimal( "" ));
+            Assert.Null( SIF1x.ToDecimal( "  " ));
+            Assert.Null( SIF1x.ToInt( "" ));
+            Assert.Null( SIF1x.ToInt( "  " ));
+            Assert.Null( SIF1x.ToDateTime( "" ));
+            Assert.Null( SIF1x.ToDateTime( "  " ));
         }
 
-        [Test]
+        [Fact]
         public void testParsing()
         {
             SifFormatter SIF1x = new Sif1xFormatter();
@@ -44,22 +44,22 @@ namespace Library.Nunit.Core
             Boolean? BooleanNull = null;
             int? intNull = null;
             assertBooleanParsing(SIF1x, "Yes", BooleanValue);
-            Assert.AreEqual("", SIF1x.ToString(BooleanNull), "Null Bool Value"); //( (Boolean)null ));
+            Assert.Equal("", SIF1x.ToString(BooleanNull)); //( (Boolean)null ));
             assertBooleanParsing(SIF2x, "true", BooleanValue);
-            Assert.IsNull(SIF2x.ToString(BooleanNull), "Null Bool Value");
+            Assert.Null(SIF2x.ToString(BooleanNull));
 
             bool? testValue = SIF2x.ToBool( "1");
-            Assert.IsTrue(testValue.Value, "Boolean Value" );
+            Assert.True(testValue.Value);
 
             testValue = SIF2x.ToBool("0");
-            Assert.IsFalse(testValue.Value, "Boolean Value" );
+            Assert.False(testValue.Value);
 
             float floatValue =99.34f;
 
             assertFloatParsing(SIF1x, "99.34", floatValue);
-            Assert.IsNull( SIF1x.ToString((float?)null));
+            Assert.Null( SIF1x.ToString((float?)null));
             assertFloatParsing(SIF2x, "99.34", floatValue);
-            Assert.IsNull( SIF2x.ToString((float?)null));
+            Assert.Null( SIF2x.ToString((float?)null));
 
             floatValue = 321651.09934f;
             assertFloatParsing(SIF1x, "321651.1", floatValue);
@@ -71,35 +71,35 @@ namespace Library.Nunit.Core
             assertFloatParsing(SIF1x, "-INF", float.NegativeInfinity );
 
             float? nan = SIF1x.ToFloat( "NaN" );
-            Assert.IsTrue( float.IsNaN( nan.Value ) );
+            Assert.True( float.IsNaN( nan.Value ) );
             
             assertFloatParsing(SIF2x, "INF", float.PositiveInfinity );
             assertFloatParsing(SIF2x, "-INF", float.NegativeInfinity );
             
             nan = SIF2x.ToFloat("NaN");
-            Assert.IsTrue(float.IsNaN(nan.Value));
+            Assert.True(float.IsNaN(nan.Value));
             
 
             int intValue = 9998877; // new int(9998877);
 
             assertintParsing(SIF1x, "9998877", intValue);
-            Assert.AreEqual("", SIF1x.ToString(intNull), "Null int Value");
+            Assert.Equal("", SIF1x.ToString(intNull));
             assertintParsing(SIF2x, "9998877", intValue);
-            Assert.IsNull(SIF2x.ToString(intNull), "Null int Value");
+            Assert.Null(SIF2x.ToString(intNull));
             DateTime? sampleDate = new DateTime(1999, 10, 01);
             AssertDateParsing(SIF1x, "19991001", sampleDate);
-            Assert.AreEqual("", SIF1x.ToDateString(null), "Null Value");
+            Assert.Equal("", SIF1x.ToDateString(null));
             AssertDateParsing(SIF2x, "1999-10-01" /* + tzOffset */, sampleDate);
-            Assert.IsNull(SIF2x.ToDateString(null), "Null Date Value");
+            Assert.Null(SIF2x.ToDateString(null));
         }
 
-        [Test]
+        [Fact]
         public void testThrowsFormatException1x()
         {
             assertThrowsFormatException(new Sif1xFormatter());
         }
 
-        [Test]
+        [Fact]
         public void testThrowsFormatException2x()
         {
             assertThrowsFormatException(new Sif2xFormatter());
@@ -107,16 +107,16 @@ namespace Library.Nunit.Core
 
         private void assertThrowsFormatException(SifFormatter formatter)
         {
-            Assert.Throws<FormatException>(() => formatter.ToBool("asdf"), "ToBool() should throw FormatException");
-            Assert.Throws<FormatException>(() => formatter.ToInt("asdf"), "ToInt() should throw FormatException");
-            Assert.Throws<FormatException>(() => formatter.ToDecimal("asdf"), "ToDecimal() should throw FormatException");
-            Assert.Throws<FormatException>(() => formatter.ToDate("asdf"), "ToDate() should throw FormatException");
-            Assert.Throws<FormatException>(() => formatter.ToTime("asdf"), "ToTime() should throw FormatException");
+            Assert.Throws<FormatException>(() => { formatter.ToBool("asdf"); });
+            Assert.Throws<FormatException>(() => { formatter.ToInt("asdf"); });
+            Assert.Throws<FormatException>(() => { formatter.ToDecimal("asdf"); });
+            Assert.Throws<FormatException>(() => { formatter.ToDate("asdf"); });
+            Assert.Throws<FormatException>(() => { formatter.ToTime("asdf"); });
 
             // DateTime and Duration are not supported by the SIF1xFormatter
             if (formatter is Sif1xFormatter) return;
-            Assert.Throws<FormatException>(() => formatter.ToDateTime("asdf"), "ToDateTime() should throw FormatException");
-            Assert.Throws<FormatException>(() => formatter.ToTimeSpan("asdf"), "ToTimeSpan() should throw FormatException");
+            Assert.Throws<FormatException>(() => { formatter.ToDateTime("asdf"); });
+            Assert.Throws<FormatException>(() => { formatter.ToTimeSpan("asdf"); });
         }
 
         private void AssertDateParsing(SifFormatter formatter, String stringValue, DateTime? value)
@@ -124,11 +124,11 @@ namespace Library.Nunit.Core
             Console.WriteLine("Testing Date parse of '" + stringValue + "' using " + formatter.ToString());
             //Calendar testValue = formatter.ToDate(stringValue);
             DateTime? testValue = formatter.ToDate(stringValue);
-            Assert.AreEqual(value.Value, testValue.Value, "Date Value");
-            Assert.AreEqual(stringValue, (String) formatter.ToDateString(testValue), "String Value");
+            Assert.Equal(value.Value, testValue.Value);
+            Assert.Equal(stringValue, (String) formatter.ToDateString(testValue));
 
             testValue = (DateTime?) formatter.ToDate(null);
-            Assert.IsNull(testValue, "Date value should be null");
+            Assert.Null(testValue);
         }
 
         private void AssertDateParsing(SifFormatter formatter, String stringValue, Calendar value)
@@ -136,19 +136,21 @@ namespace Library.Nunit.Core
             Console.WriteLine("Testing Date parse of '" + stringValue + "' using " + formatter.ToString());
             //Calendar testValue = formatter.ToDate(stringValue);
             DateTime testValue = (DateTime) formatter.ToDate(stringValue);
-            Assert.AreEqual(value, testValue, "Date Value");
-            Assert.AreEqual(stringValue, (String) formatter.ToDateString(testValue), "String Value");
+            Assert.Equal(value.GetYear(testValue), testValue.Year);
+            Assert.Equal(value.GetMonth(testValue), testValue.Month);
+            Assert.Equal(value.GetDayOfMonth(testValue), testValue.Day);
+            Assert.Equal(stringValue, (String) formatter.ToDateString(testValue));
 
             testValue = (DateTime) formatter.ToDate(null);
-            Assert.IsNull(testValue, "Date value should be null");
+            Assert.Null(testValue);
         }
 
-        [Test]
+        [Fact]
         public void testSIF2xDateTimeParsing()
         {
             SifFormatter formatter = new Sif2xFormatter();
             String testValue = formatter.ToDateTimeString(null);
-            Assert.IsNull(testValue, "Date value should be null" );
+            Assert.Null(testValue);
 
             DateTime assertedDate = new DateTime(1999, 9, 1, 22, 2, 4 );
             TimeSpan utcOffset = TimeZoneInfo.Local.GetUtcOffset(assertedDate);
@@ -209,12 +211,12 @@ namespace Library.Nunit.Core
         }
 
 
-        [Test]
+        [Fact]
         public void testSIF2xTimeParsing()
         {
             SifFormatter formatter = new Sif2xFormatter();
             String testValue = formatter.ToTimeString(null);
-            Assert.IsNull(testValue, "Date value should be null" );
+            Assert.Null(testValue);
 
 
             DateTime now = DateTime.Now;
@@ -259,36 +261,36 @@ namespace Library.Nunit.Core
 
         private void AssertDateTime(String text, DateTime? expectedValue, DateTime? testValue)
         {
-            Assert.AreEqual(expectedValue.Value, testValue.Value, text);
+            Assert.Equal(expectedValue.Value, testValue.Value);
         }
 
         private void assertTimes(String text, DateTime? expectedValue, DateTime? testValue)
         {
-            Assert.AreEqual(expectedValue.Value.Hour, testValue.Value.Hour, text + " HOUR: ");
-            Assert.AreEqual(expectedValue.Value.Minute, testValue.Value.Minute, text + " MINUTE: ");
-            Assert.AreEqual(expectedValue.Value.Second, testValue.Value.Second, text + " SECOND: ");
+            Assert.Equal(expectedValue.Value.Hour, testValue.Value.Hour);
+            Assert.Equal(expectedValue.Value.Minute, testValue.Value.Minute);
+            Assert.Equal(expectedValue.Value.Second, testValue.Value.Second);
         }
 
         private void assertBooleanParsing(SifFormatter formatter, String stringValue, Boolean value)
         {
             Console.WriteLine("Testing Boolean parse of '" + stringValue + "' using " + formatter.ToString());
             Boolean? testValue = formatter.ToBool(stringValue);
-            Assert.AreEqual(value, testValue, "Boolean Value");
-            Assert.AreEqual(stringValue, formatter.ToString(value), "String Value");
+            Assert.Equal(value, testValue);
+            Assert.Equal(stringValue, formatter.ToString(value));
 
             testValue = formatter.ToBool(null);
-            Assert.IsNull(testValue, "Boolean value should be null");
+            Assert.Null(testValue);
         }
 
         private void assertintParsing(SifFormatter formatter, String stringValue, int value)
         {
             Console.WriteLine("Testing int parse of '" + stringValue + "' using " + formatter.ToString());
             int? testValue = formatter.ToInt(stringValue);
-            Assert.AreEqual(value, testValue, "int Value");
-            Assert.AreEqual(stringValue, formatter.ToString(value), "String Value");
+            Assert.Equal(value, testValue);
+            Assert.Equal(stringValue, formatter.ToString(value));
 
             testValue = formatter.ToInt(null);
-            Assert.IsNull(testValue, "int value should be null");
+            Assert.Null(testValue);
         } 
 
         /// <summary>
@@ -296,7 +298,7 @@ namespace Library.Nunit.Core
         /// A stable sort is one in which the order of the elements remain the same if they compare 
         /// equally. There is a problem if the default .NET Sort algorithm is used, which is not stable.
         /// </summary>
-        [Test]
+        [Fact]
         public void TestStableSortInGetContent()
         {
             SIF_Register sr = new SIF_Register();
@@ -327,26 +329,26 @@ namespace Library.Nunit.Core
             // SIF_Mode
             // SIF_Icon (only if the version is 2.0 or greater)
             
-            Assert.AreEqual( "AgentName", elements[0].TextValue );
+            Assert.Equal( "AgentName", elements[0].TextValue );
             // Assert that the SIF_Version elements returned are still in the order they went in
             for (int a = 0; a < 5; a++)
             {
-                Assert.AreEqual( list[a], elements[a+1].TextValue );
+                Assert.Equal( list[a], elements[a+1].TextValue );
             }
-            Assert.AreEqual("Push", elements[6].TextValue);
+            Assert.Equal("Push", elements[6].TextValue);
             // NOTE: SIF_Icon is not present in SIF 1.1
             
             elements = Runtime.Dtd.GetFormatter(SifVersion.SIF21).GetContent(sr, SifVersion.SIF21);
 
 
-            Assert.AreEqual("AgentName", elements[0].TextValue);
+            Assert.Equal("AgentName", elements[0].TextValue);
             // Assert that the SIF_Version elements returned are still in the order they went in
             for (int a = 0; a < 5; a++)
             {
-                Assert.AreEqual(list[a], elements[a + 1].TextValue);
+                Assert.Equal(list[a], elements[a + 1].TextValue);
             }
-            Assert.AreEqual("Push", elements[6].TextValue);
-            Assert.AreEqual("test.ico", elements[7].TextValue);
+            Assert.Equal("Push", elements[6].TextValue);
+            Assert.Equal("test.ico", elements[7].TextValue);
         }
 
 
@@ -354,11 +356,11 @@ namespace Library.Nunit.Core
         {
             Console.WriteLine( "Testing Float parse of '" + stringValue + "' using " + formatter.ToString() );
             float? testValue = formatter.ToFloat( stringValue );
-            Assert.AreEqual( value, testValue );
-            Assert.AreEqual( stringValue, formatter.ToString( value ), "String Value" );
+            Assert.Equal( value, testValue );
+            Assert.Equal( stringValue, formatter.ToString( value ));
 
             testValue = formatter.ToFloat( null );
-            Assert.IsFalse( testValue.HasValue, "Float value should be null" );
+            Assert.False( testValue.HasValue);
         }
     } 
 } 

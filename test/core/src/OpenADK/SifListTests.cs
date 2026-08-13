@@ -1,15 +1,15 @@
-using OpenADK.Library;
+﻿using OpenADK.Library;
 using OpenADK.Library.us.Common;
-using NUnit.Framework;
+using Xunit;
 using OpenADK.Library.us;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.Core
 {
-    [TestFixture]
+    
     public class SifListTests : AdkTest
     {
-        [Test]
+        [Fact]
         public void testList010()
         {
             EmailList el = new EmailList();
@@ -20,26 +20,26 @@ namespace Library.Nunit.Core
             Email email2 = new Email(EmailType.Wrap("foo"), "email2@OpenADK.com");
 
             el.Add(email1);
-            Assert.AreEqual(1, el.ChildCount, "Should have 1 email");
+            Assert.Equal(1, el.ChildCount);
 
             el.Add(email2);
-            Assert.AreEqual(2, el.ChildCount, "Should have 2 emails");
+            Assert.Equal(2, el.ChildCount);
 
             Email[] children = el.ToArray();
-            Assert.AreEqual(2, children.Length, "Should have 2 array elements");
+            Assert.Equal(2, children.Length);
 
             el.RemoveChild(email2);
-            Assert.AreEqual(1, el.ChildCount, "Should have 1 email");
+            Assert.Equal(1, el.ChildCount);
 
             el.RemoveChild(email1);
-            Assert.AreEqual(0, el.ChildCount, "Should have 0 emails");
+            Assert.Equal(0, el.ChildCount);
 
             children = el.ToArray();
-            Assert.AreEqual(0, children.Length, "Should have 0 array elements");
+            Assert.Equal(0, children.Length);
         }
 
 
-        [Test]
+        [Fact]
         public void testList020()
         {
             EmailList el = new EmailList();
@@ -53,16 +53,16 @@ namespace Library.Nunit.Core
             el.Add(email1);
             el.Add(email2);
 
-            Assert.IsNotNull(email1.Parent, "Parent should not be null");
-            Assert.IsNotNull(email2.Parent, "Parent should not be null");
+            Assert.NotNull(email1.Parent);
+            Assert.NotNull(email2.Parent);
 
             el.Clear();
-            Assert.AreEqual(0, el.ChildCount, "Should have 0 emails");
-            Assert.IsNull(email1.Parent, "Parent should be null");
-            Assert.IsNull(email2.Parent, "Parent should be null");
+            Assert.Equal(0, el.ChildCount);
+            Assert.Null(email1.Parent);
+            Assert.Null(email2.Parent);
         }
 
-        [Test]
+        [Fact]
         public void testList030()
         {
             EmailList el = new EmailList();
@@ -79,12 +79,12 @@ namespace Library.Nunit.Core
             int count = 0;
             foreach (Email e in el)
             {
-                Assert.IsNotNull(e, "Email should not be null");
-                Assert.AreEqual(18, e.TextValue.Length, "Should have email address");
+                Assert.NotNull(e);
+                Assert.Equal(18, e.TextValue.Length);
                 count++;
             }
 
-            Assert.AreEqual(2, count, "Should have iterated 2 emails");
+            Assert.Equal(2, count);
         }
     }
 }

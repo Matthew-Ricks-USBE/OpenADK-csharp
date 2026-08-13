@@ -4,15 +4,15 @@ using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 using Library.Nunit.US.Tools.Mapping;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
-    [TestFixture]
+    
     public class AttributeMappingTests : BaseMappingsTest
     {
-        [Test]
+        [Fact]
         public void testCountryCodeStudentPersonal()
         {
             Runtime.SifVersion = SifVersion.SIF15r1;
@@ -40,14 +40,14 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             doOutboundMapping( sma, sp, customMappings, null );
 
             StudentAddressList sal = sp.AddressList;
-            Assert.IsNotNull(sal, "StudentAddressList is null");
-            Assert.AreEqual(2, sal.ChildCount, "StudentAddressList does not contain two address list types");
+            Assert.NotNull(sal);
+            Assert.Equal(2, sal.ChildCount);
 
             assertCountry( (Address) sp.GetElementOrAttribute( "StudentAddress/Address[@Type='P']" ), "US" );
             assertCountry( (Address) sp.GetElementOrAttribute( "StudentAddress/Address[@Type='M']" ), "UK" );
         }
 
-        [Test]
+        [Fact]
         public void testCountryCodeLEAInfo()
         {
             Runtime.SifVersion = SifVersion.SIF15r1;
@@ -74,18 +74,18 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             LEAInfo obj = new LEAInfo();
             doOutboundMapping( sma, obj, customMappings, null );
 
-            Assert.IsNull( obj.AddressList, "Address should be null" );
+            Assert.Null( obj.AddressList);
 
             ContactInfo ci = (ContactInfo) obj
                                                .GetElementOrAttribute( "LEAContact/ContactInfo" );
             PhoneNumber phone = ci.PhoneNumberList.ItemAt( 0 );
-            Assert.IsNotNull( phone, "Phone was not set" );
-            Assert.AreEqual("NA", phone.Format, "Format");
-            Assert.AreEqual("TE", phone.Type, "Type");
-            Assert.AreEqual("801.550.2796", phone.Number, "Format");
+            Assert.NotNull( phone);
+            Assert.Equal("NA", phone.Format);
+            Assert.Equal("TE", phone.Type);
+            Assert.Equal("801.550.2796", phone.Number);
         }
 
-        [Test]
+        [Fact]
         public void testCountryCodeSchoolInfo()
         {
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
@@ -108,7 +108,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             assertAddressWithCountry( obj.AddressList, "US" );
         }
 
-        [Test]
+        [Fact]
         public void testCountryCodeStaffPersonal()
         {
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
@@ -131,7 +131,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             assertAddressWithCountry( obj.AddressList, "US" );
         }
 
-        [Test]
+        [Fact]
         public void testCountryCodeStudentContact()
         {
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
@@ -151,24 +151,24 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             StudentContact obj = new StudentContact();
             doOutboundMapping( sma, obj, customMappings, null );
 
-            Assert.IsNull( obj.AddressList, "AddressList should be null" );
+            Assert.Null( obj.AddressList);
         }
 
         private void assertAddressWithCountry( AddressList list,
                                                String expectedCountryCode )
         {
-            Assert.IsNotNull(list, "AddressList is null");
-            Assert.AreEqual(1, list.Count, "Not one address in list");
+            Assert.NotNull(list);
+            Assert.Equal(1, list.Count);
             assertCountry( list.ItemAt( 0 ), expectedCountryCode );
         }
 
         private void assertCountry( Address address, String expectedCountryCode )
         {
-            Assert.IsNotNull( address, "Address is null" );
-            Assert.AreEqual( expectedCountryCode, address.Country, "Country Code" );
+            Assert.NotNull( address);
+            Assert.Equal( expectedCountryCode, address.Country);
         }
 
-        [Test]
+        [Fact]
         public void testLEAInfoPhones()
         {
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
@@ -190,20 +190,20 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             doOutboundMapping( sma, obj, customMappings, null );
 
             PhoneNumberList pnl = obj.PhoneNumberList;
-            Assert.IsNotNull( pnl, "LeaInfo/PhoneNumberList is Null" );
+            Assert.NotNull( pnl);
             PhoneNumber phone = obj.PhoneNumberList.ItemAt( 0 );
-            Assert.AreEqual( "NA", phone.Format, "Format" );
-            Assert.AreEqual( "TE", phone.Type, "Type" );
-            Assert.AreEqual( "912-555-6658", phone.Number, "Number" );
+            Assert.Equal( "NA", phone.Format);
+            Assert.Equal( "TE", phone.Type);
+            Assert.Equal( "912-555-6658", phone.Number);
 
             LEAContact contact = obj.LEAContactList.ItemAt( 0 );
             phone = contact.ContactInfo.PhoneNumberList.ItemAt( 0 );
-            Assert.AreEqual("NA", phone.Format, "Contact Format");
-            Assert.AreEqual("TE", phone.Type, "Contact Type");
-            Assert.AreEqual("912-888-6658", phone.Number, "Contact Number");
+            Assert.Equal("NA", phone.Format);
+            Assert.Equal("TE", phone.Type);
+            Assert.Equal("912-888-6658", phone.Number);
         }
 
-        [Test]
+        [Fact]
         public void testOtherIdsWithValues()
         {
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
@@ -229,21 +229,21 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             doOutboundMapping( sma, obj, customMappings, null );
 
             OtherIdList list = obj.OtherIdList;
-            Assert.IsNotNull( list, "OtherIdList is null" );
+            Assert.NotNull( list);
             OtherId oId = list[ "06" ];
-            Assert.IsNotNull( oId, "PERMNUM" );
-            Assert.AreEqual( "123456", oId.Value, "PERMNUM" );
+            Assert.NotNull( oId);
+            Assert.Equal( "123456", oId.Value);
 
             oId = list[ "SY"];
-            Assert.IsNotNull( oId, "SOCSECNUM" );
-            Assert.AreEqual( "111-555-9987", oId.Value, "SOCSECNUM" );
+            Assert.NotNull( oId);
+            Assert.Equal( "111-555-9987", oId.Value);
 
             oId = list[ "ZZ" ];
-            Assert.IsNotNull( oId, "SCHOOLNUM" );
-            Assert.AreEqual( "SCHOOL:2", oId.Value, "SCHOOLNUM" );
+            Assert.NotNull( oId);
+            Assert.Equal( "SCHOOL:2", oId.Value);
         }
 
-        [Test]
+        [Fact]
         public void testOtherIdsNullValues()
         {
             String customMappings = "<agent id='Repro' sifVersion='2.0'>"
@@ -273,18 +273,18 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             doOutboundMapping( sma, obj, customMappings, null );
 
             OtherIdList list = obj.OtherIdList;
-            Assert.IsNotNull( list, "OtherIdList is null" );
+            Assert.NotNull( list);
             OtherId oId = list[ "06" ];
-            Assert.IsNotNull( oId, "PERMNUM" );
-            Assert.AreEqual( "123456", oId.Value, "PERMNUM" );
+            Assert.NotNull( oId);
+            Assert.Equal( "123456", oId.Value);
 
             // The SOCSECNUM was NULL, so it should not produce an element
             oId = list["SY"];
-            Assert.IsNull( oId, "SOCSECNUM" );
+            Assert.Null( oId);
 
             oId = list[ "ZZ" ];
-            Assert.IsNotNull( oId, "SCHOOLNUM" );
-            Assert.AreEqual( "SCHOOL:2", oId.Value, "SCHOOLNUM" );
+            Assert.NotNull( oId);
+            Assert.Equal( "SCHOOL:2", oId.Value);
         }
     }
 }

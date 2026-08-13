@@ -1,14 +1,14 @@
-using System;
+﻿using System;
 using OpenADK.Library;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace OpenADK.Utils
 {
-    [TestFixture]
+    
     public class UUIDTests : AdkTest
     {
-        [Test]
+        [Fact]
         public void testAssertSIFGUIDFormat()
         {
             String refId = Runtime.MakeGuid();
@@ -16,22 +16,22 @@ namespace OpenADK.Utils
             assertRefId(refId);
         }
 
-        [Test]
+        [Fact]
         public void testConvertUUIDToRefId()
         {
             String str = "f81d4fae-7dec-11d0-a765-00a0c91e6bf6";
             Guid guid = new Guid(str);
             String adkGuid = SifFormatter.GuidToSifRefID(guid);
             assertRefId(adkGuid);
-            Assert.AreEqual("F81D4FAE7DEC11D0A76500A0C91E6BF6", adkGuid, "match");
+            Assert.Equal("F81D4FAE7DEC11D0A76500A0C91E6BF6", adkGuid);
         }
 
-        [Test]
+        [Fact]
         public void testConvertRefIdtoUUID()
         {
             String adkGuid = "F81D4FAE7DEC11D0A76500A0C91E6BF6";
             Guid? guid = SifFormatter.SifRefIDToGuid(adkGuid);
-            Assert.AreEqual(new Guid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6"), guid.Value, "match");
+            Assert.Equal(new Guid("f81d4fae-7dec-11d0-a765-00a0c91e6bf6"), guid.Value);
         }
 
         /// <summary>
@@ -40,13 +40,13 @@ namespace OpenADK.Utils
         /// <param name="refId"></param>
         private void assertRefId(String refId)
         {
-            Assert.AreEqual(32, refId.Length, "Length");
+            Assert.Equal(32, refId.Length);
 
             int pos = refId.IndexOf("-");
-            Assert.AreEqual(-1, pos, "Dashes");
+            Assert.Equal(-1, pos);
 
             // Assert case
-            Assert.AreEqual(refId, refId.ToUpperInvariant(), "Case Compare");
+            Assert.Equal(refId, refId.ToUpperInvariant());
         }
     }
 }

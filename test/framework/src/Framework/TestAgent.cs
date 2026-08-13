@@ -1,7 +1,7 @@
-using OpenADK.Library;
+﻿using OpenADK.Library;
 using System;
 using System.IO;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.UnitTesting.Framework
 {
@@ -16,7 +16,7 @@ namespace Library.UnitTesting.Framework
       public TestAgent(IAdkRuntime runtime, IAdkComponentFactory components)
          : base("TestAgent", runtime, components)
       {
-         fHomeDir = Path.Combine(TestContext.CurrentContext.WorkDirectory, "agent-work",
+         fHomeDir = Path.Combine(Environment.CurrentDirectory, "agent-work",
             Guid.NewGuid().ToString("N"));
          fZoneFactory = new TestZoneFactory(this);
       }

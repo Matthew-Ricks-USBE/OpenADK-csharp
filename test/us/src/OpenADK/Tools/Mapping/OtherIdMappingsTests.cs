@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.US.Tools.Mapping
 {
-    [TestFixture]
+    
     public class OtherIdMappingsTests : BaseMappingsTest
     {
-        [Test]
+        [Fact]
         public void TestOtherIdMappings()
         {
             String otherIdMapping = "<agent id=\"Repro\" sifVersion=\"2.0\">"
@@ -31,7 +31,7 @@ namespace Library.Nunit.US.Tools.Mapping
             sourceMap.Add( "FIELD2", "5678" );
             StringMapAdaptor sma = new StringMapAdaptor( sourceMap );
             StudentPersonal sp = mapToStudentPersonal( sma, otherIdMapping, null );
-            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.NotNull(sp);
 
             IDictionary destinationMap = doInboundMapping( otherIdMapping, sp );
             assertMapsAreEqual( sourceMap, destinationMap );

@@ -5,12 +5,12 @@ using OpenADK.Library;
 using OpenADK.Library.us.Programs;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 using Library.Nunit.US.Tools.Mapping;
 
 namespace Library.Nunit.US.Library.Tools.Mapping
 {
-    [TestFixture]
+    
     public class SIF15MappingTests : MappingTests
     {
         public SIF15MappingTests()
@@ -19,7 +19,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         {
         }
 
-        [Test]
+        [Fact]
         public void testInheritRules()
         {
             String configFileText1_ = "<agent id=\"mcmTest.MappingsTest\" sifVersion=\"2.0\">\n"
@@ -62,26 +62,26 @@ namespace Library.Nunit.US.Library.Tools.Mapping
             StudentPersonal sp = doOutboundMappingSelect( sma, configFileText1_,
                                                           "Zone A", null, null );
 
-            Assert.IsNotNull(sp, "Student should not be null");
+            Assert.NotNull(sp);
 
             SifElement address = (SifElement) sp
                                                   .GetElementOrAttribute(
                                                   "StudentAddress[@PickupOrDropoff='NA',@DayOfWeek='NA']/Address[@Type='01']" );
-            Assert.IsNotNull(address, "Student Address should have mapped");
+            Assert.NotNull(address);
 
             SifElement name = (SifElement) sp
                                                .GetElementOrAttribute( "Name[@Type='06']" );
-            Assert.IsNotNull(name, "Name should have mapped to '06'");
+            Assert.NotNull(name);
         }
 
 
         protected override void assertStudentPlacement( StudentPlacement sp )
         {
-            Assert.AreEqual( "0000000000000000", sp.RefId, "RefID" );
-            Assert.AreEqual( "0000000000000000", sp.StudentPersonalRefId, "StudentPersonalRefid" );
-            Assert.AreEqual( "Local", sp.Service.CodeType, "Code Type" );
-            Assert.AreEqual( "Related Service", sp.Service.Type, "Type" );
-            Assert.AreEqual( "ZZZ99987", sp.Service.TextValue, "Service" );
+            Assert.Equal( "0000000000000000", sp.RefId);
+            Assert.Equal( "0000000000000000", sp.StudentPersonalRefId);
+            Assert.Equal( "Local", sp.Service.CodeType);
+            Assert.Equal( "Related Service", sp.Service.Type);
+            Assert.Equal( "ZZZ99987", sp.Service.TextValue);
         }
 
 

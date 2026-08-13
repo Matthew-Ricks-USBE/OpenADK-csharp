@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 using OpenADK.Library;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 using Library.UnitTesting.Framework.Validation;
 
@@ -42,7 +42,7 @@ namespace Library.Nunit.US.Library.Tools
 			outWriter.Write( se, fVersion );
 			outWriter.Flush();
 			fSchemaValidator.PrintProblems( fOutput );
-			Assert.Fail("Errors validating...");
+			throw new Xunit.Sdk.XunitException("Errors validating...");
 		}
 		
 

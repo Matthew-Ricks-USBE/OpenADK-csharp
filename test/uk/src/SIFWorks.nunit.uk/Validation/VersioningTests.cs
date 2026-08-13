@@ -1,21 +1,21 @@
 using System;
 using System.IO;
 using System.Text;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 using Library.UnitTesting.Framework.Validation;
 using System.Xml;
 
 namespace OpenADK.Library.Nunit.UK.Validation
 {
-    [TestFixture]
+    
     public class VersioningTests : UkAdkTest
     {
         /*
          * Reads all supported SIF UK 1.0 objects - Writes them IN SIF UK 1.0 - Validates
          * them with the SIF UK 1.0 Schema - Parses them back into ADK Objects
          */
-        [Test]
+        [Fact]
         public void ReadSIFUK10Write10()
         {
             RunVersioningTests(SifVersion.SIF20r1, SifVersion.SIF20r1, false);
@@ -25,7 +25,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
          * Reads all supported SIF UK 1.1 objects - Writes them IN SIF UK 1.1 - Validates
          * them with the SIF UK 1.1 Schema - Parses them back into ADK Objects
          */
-        [Test]
+        [Fact]
         public void ReadSIFUK11Write11()
         {
             RunVersioningTests(SifVersion.SIF21, SifVersion.SIF21, false);
@@ -35,7 +35,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
          * Reads all supported SIF UK 1.1 objects - Writes them IN SIF UK 1.0 - Validates
          * them with the SIF UK 1.0 Schema - Parses them back into ADK Objects
          */
-        [Test]
+        [Fact]
         public void ReadSIFUK11Write10()
         {
             RunVersioningTests(SifVersion.SIF21, SifVersion.SIF20r1, false);
@@ -55,7 +55,7 @@ namespace OpenADK.Library.Nunit.UK.Validation
 
             int errorCount = RunDirectoryTest(dataVersion, testVersion, dataDir, Console.Out, sv);
 
-            Assert.AreEqual(0, errorCount, "Tests Failed. See System.out for details");
+            Assert.Equal(0, errorCount);
 
         }
 

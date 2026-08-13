@@ -7,7 +7,7 @@ using OpenADK.Library.Infra;
 using OpenADK.Library.us.Infrastructure;
 using OpenADK.Library.us.Reporting;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US
@@ -15,10 +15,10 @@ namespace Library.Nunit.US
     /// <summary>
     /// Summary description for QueryTests.
     /// </summary>
-    [TestFixture]
+    
     public class QueryTests : AdkTest
     {
-        [Test]
+        [Fact]
         public void AddFieldRestriction()
         {
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
@@ -26,13 +26,12 @@ namespace Library.Nunit.US
             q.AddFieldRestriction( StudentDTD.STUDENTPERSONAL_ADDRESSLIST );
 
             IElementDef[] restrictions = q.FieldRestrictions;
-            Assert.AreEqual( 2, restrictions.Length, "Should have two field restrictions" );
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL_NAME, restrictions[0], "Should be StudentPersonal_Name" );
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL_ADDRESSLIST, restrictions[1],
-                             "Should be StudentPersonal_StudentAddress" );
+            Assert.Equal( 2, restrictions.Length);
+            Assert.Equal( StudentDTD.STUDENTPERSONAL_NAME, restrictions[0]);
+            Assert.Equal( StudentDTD.STUDENTPERSONAL_ADDRESSLIST, restrictions[1]);
         }
 
-        [Test]
+        [Fact]
         public void TestToXml()
         {
             // From the javadoc example ...
@@ -75,63 +74,58 @@ namespace Library.Nunit.US
 
             Query reparsedQuery = new Query( sifR.SIF_Query );
 
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL, reparsedQuery.ObjectType,
-                             "Object Type should be StudentPersonal" );
-            Assert.AreEqual( 1, reparsedQuery.FieldRestrictions.Length, "Should have one field restriction" );
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL_NAME, reparsedQuery.FieldRestrictions[0],
-                             "Should be for StudentPersonal/Name" );
+            Assert.Equal( StudentDTD.STUDENTPERSONAL, reparsedQuery.ObjectType);
+            Assert.Equal( 1, reparsedQuery.FieldRestrictions.Length);
+            Assert.Equal( StudentDTD.STUDENTPERSONAL_NAME, reparsedQuery.FieldRestrictions[0]);
 
 
             ConditionGroup newRoot = reparsedQuery.RootConditionGroup;
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL, reparsedQuery.ObjectType, "Should be StudentPersonal" );
-            Assert.AreEqual( GroupOperator.And, newRoot.Operator, "Root should be an AND conditon" );
+            Assert.Equal( StudentDTD.STUDENTPERSONAL, reparsedQuery.ObjectType);
+            Assert.Equal( GroupOperator.And, newRoot.Operator);
 
 
             ConditionGroup[] groups = reparsedQuery.RootConditionGroup.Groups;
-            Assert.AreEqual( 2, groups.Length, "Should have two groups" );
-            Assert.AreEqual( GroupOperator.And, groups[0].Operator, "First group should be AND" );
-            Assert.AreEqual( GroupOperator.Or, groups[1].Operator, "Second group should be OR" );
+            Assert.Equal( 2, groups.Length);
+            Assert.Equal( GroupOperator.And, groups[0].Operator);
+            Assert.Equal( GroupOperator.Or, groups[1].Operator);
 
             // Assert the first group conditions
             Condition[] newGrp1Conditions = groups[0].Conditions;
-            Assert.AreEqual( 2, newGrp1Conditions.Length, "First group should have two conditions" );
+            Assert.Equal( 2, newGrp1Conditions.Length);
 
             // Assert the first condition
-            Assert.AreEqual( ComparisonOperators.EQ, newGrp1Conditions[1].Operators, "First Condition EQ" );
-            Assert.AreEqual( lname, newGrp1Conditions[0].Field, "First Condition Field" );
-            Assert.AreEqual( "Jones", newGrp1Conditions[0].Value, "First Condition Value" );
+            Assert.Equal( ComparisonOperators.EQ, newGrp1Conditions[1].Operators);
+            Assert.Equal( lname, newGrp1Conditions[0].Field);
+            Assert.Equal( "Jones", newGrp1Conditions[0].Value);
 
             // Assert the second condition
-            Assert.AreEqual( ComparisonOperators.EQ, newGrp1Conditions[0].Operators, "Second Condition EQ" );
-            Assert.AreEqual( fname, newGrp1Conditions[1].Field, "First Condition Field" );
-            Assert.AreEqual( "Bob", newGrp1Conditions[1].Value, "First Condition Value" );
+            Assert.Equal( ComparisonOperators.EQ, newGrp1Conditions[0].Operators);
+            Assert.Equal( fname, newGrp1Conditions[1].Field);
+            Assert.Equal( "Bob", newGrp1Conditions[1].Value);
 
             // Assert the second group conditions
             Condition[] newGrp2Conditions = groups[1].Conditions;
-            Assert.AreEqual( 3, newGrp2Conditions.Length, "Second group should have three conditions" );
+            Assert.Equal( 3, newGrp2Conditions.Length);
 
             // Assert the first condition
-            Assert.AreEqual( ComparisonOperators.EQ, newGrp2Conditions[0].Operators, "First Condition EQ" );
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL_ONTIMEGRADUATIONYEAR, newGrp2Conditions[0].Field,
-                             "First Condition Field" );
-            Assert.AreEqual( "2004", newGrp2Conditions[0].Value, "First Condition Value" );
+            Assert.Equal( ComparisonOperators.EQ, newGrp2Conditions[0].Operators);
+            Assert.Equal( StudentDTD.STUDENTPERSONAL_ONTIMEGRADUATIONYEAR, newGrp2Conditions[0].Field);
+            Assert.Equal( "2004", newGrp2Conditions[0].Value);
 
             // Assert the second condition
-            Assert.AreEqual( ComparisonOperators.EQ, newGrp2Conditions[1].Operators, "Second Condition EQ" );
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL_ONTIMEGRADUATIONYEAR, newGrp2Conditions[1].Field,
-                             "Second Condition Field" );
-            Assert.AreEqual( "2005", newGrp2Conditions[1].Value, "Second Condition Value" );
+            Assert.Equal( ComparisonOperators.EQ, newGrp2Conditions[1].Operators);
+            Assert.Equal( StudentDTD.STUDENTPERSONAL_ONTIMEGRADUATIONYEAR, newGrp2Conditions[1].Field);
+            Assert.Equal( "2005", newGrp2Conditions[1].Value);
 
             // Assert the third condition
-            Assert.AreEqual( ComparisonOperators.EQ, newGrp2Conditions[2].Operators, "Third Condition EQ" );
-            Assert.AreEqual( StudentDTD.STUDENTPERSONAL_ONTIMEGRADUATIONYEAR, newGrp2Conditions[2].Field,
-                             "Third Condition Field" );
-            Assert.AreEqual( "2006", newGrp2Conditions[2].Value, "Third Condition Value" );
+            Assert.Equal( ComparisonOperators.EQ, newGrp2Conditions[2].Operators);
+            Assert.Equal( StudentDTD.STUDENTPERSONAL_ONTIMEGRADUATIONYEAR, newGrp2Conditions[2].Field);
+            Assert.Equal( "2006", newGrp2Conditions[2].Value);
         }
 
 
 
-        [Test]
+        [Fact]
         public void TestToXml010()
         {
             Query q = new Query(StudentDTD.SECTIONINFO);
@@ -148,7 +142,7 @@ namespace Library.Nunit.US
 
         }
 
-        [Test]
+        [Fact]
         public void TestToXml020()
         {
             Query q = new Query(StudentDTD.SECTIONINFO);
@@ -166,7 +160,7 @@ namespace Library.Nunit.US
 
         }
 
-        [Test]
+        [Fact]
         public void TestToXml030()
         {
             string queryStr =    @"<SIF_Query>
@@ -197,29 +191,29 @@ namespace Library.Nunit.US
             String sif20Xml = q.ToXml( SifVersion.SIF21 );
             Console.WriteLine( "SIF2.0 SectionInfo Query \r\n {0}", sif20Xml );
             
-            Assert.IsTrue( sif15Xml.IndexOf( "<SIF_QueryObject ObjectName=\"SectionInfo\">" ) > 0 );
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_QueryObject ObjectName=\"SectionInfo\">") > 0);
+            Assert.True( sif15Xml.IndexOf( "<SIF_QueryObject ObjectName=\"SectionInfo\">" ) > 0 );
+            Assert.True(sif20Xml.IndexOf("<SIF_QueryObject ObjectName=\"SectionInfo\">") > 0);
 
-            Assert.IsTrue(sif15Xml.IndexOf("<SIF_Element>@RefId</SIF_Element>") > 0);
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_Element>@RefId</SIF_Element>") > 0);
+            Assert.True(sif15Xml.IndexOf("<SIF_Element>@RefId</SIF_Element>") > 0);
+            Assert.True(sif20Xml.IndexOf("<SIF_Element>@RefId</SIF_Element>") > 0);
 
-            Assert.IsTrue(sif15Xml.IndexOf("<SIF_Element>@SchoolCourseInfoRefId</SIF_Element>") > 0);
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_Element>@SchoolCourseInfoRefId</SIF_Element>") > 0);
+            Assert.True(sif15Xml.IndexOf("<SIF_Element>@SchoolCourseInfoRefId</SIF_Element>") > 0);
+            Assert.True(sif20Xml.IndexOf("<SIF_Element>@SchoolCourseInfoRefId</SIF_Element>") > 0);
 
-            Assert.IsTrue(sif15Xml.IndexOf("<SIF_Element>@SchoolYear</SIF_Element>") == -1 );
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_Element>@SchoolYear</SIF_Element>") > 0);
+            Assert.True(sif15Xml.IndexOf("<SIF_Element>@SchoolYear</SIF_Element>") == -1 );
+            Assert.True(sif20Xml.IndexOf("<SIF_Element>@SchoolYear</SIF_Element>") > 0);
 
-            Assert.IsTrue(sif15Xml.IndexOf("<SIF_Element>ScheduleInfo/@TermInfoRefId</SIF_Element>") > 0);
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_Element>ScheduleInfoList/ScheduleInfo/@TermInfoRefId</SIF_Element>") > 0);
+            Assert.True(sif15Xml.IndexOf("<SIF_Element>ScheduleInfo/@TermInfoRefId</SIF_Element>") > 0);
+            Assert.True(sif20Xml.IndexOf("<SIF_Element>ScheduleInfoList/ScheduleInfo/@TermInfoRefId</SIF_Element>") > 0);
 
-            Assert.IsTrue(sif15Xml.IndexOf("<SIF_Element>Description</SIF_Element>") == -1 );
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_Element>Description</SIF_Element>") > 0);
+            Assert.True(sif15Xml.IndexOf("<SIF_Element>Description</SIF_Element>") == -1 );
+            Assert.True(sif20Xml.IndexOf("<SIF_Element>Description</SIF_Element>") > 0);
 
-            Assert.IsTrue(sif15Xml.IndexOf("<SIF_Element>LanguageOfInstruction</SIF_Element>") > 0);
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_Element>LanguageOfInstruction</SIF_Element>") > 0);
+            Assert.True(sif15Xml.IndexOf("<SIF_Element>LanguageOfInstruction</SIF_Element>") > 0);
+            Assert.True(sif20Xml.IndexOf("<SIF_Element>LanguageOfInstruction</SIF_Element>") > 0);
 
-            Assert.IsTrue(sif15Xml.IndexOf("<SIF_Element>LanguageOfInstruction/Code</SIF_Element>") == -1 );
-            Assert.IsTrue(sif20Xml.IndexOf("<SIF_Element>LanguageOfInstruction/Code</SIF_Element>") > 0);
+            Assert.True(sif15Xml.IndexOf("<SIF_Element>LanguageOfInstruction/Code</SIF_Element>") == -1 );
+            Assert.True(sif20Xml.IndexOf("<SIF_Element>LanguageOfInstruction/Code</SIF_Element>") > 0);
 
 
         }
@@ -239,7 +233,7 @@ namespace Library.Nunit.US
         }
 
 
-        [Test]
+        [Fact]
         public void CustomSIFElementEncoding()
         {
             SIF_Query q = new SIF_Query();
@@ -261,7 +255,7 @@ namespace Library.Nunit.US
             Console.WriteLine( xml );
             // Mainly, just check to make sure that the single quotes didn't get encoded
             int index = xml.IndexOf( "&quot;" );
-            Assert.AreEqual( -1, index, "Single quotes should not be encoded" );
+            Assert.Equal( -1, index);
         }
 
 
@@ -278,7 +272,7 @@ namespace Library.Nunit.US
             return auth;
         }
 
-        [Test]
+        [Fact]
         public void TestQueryCompare()
         {
             Query query = new Query(StudentDTD.STUDENTSCHOOLENROLLMENT, GroupOperator.Or);
@@ -287,106 +281,106 @@ namespace Library.Nunit.US
 
             StudentSchoolEnrollment studentSchoolEnrollment = new StudentSchoolEnrollment();
             studentSchoolEnrollment.TimeFrame = TimeFrame.HISTORICAL.Value;
-            Assert.IsFalse(query.Evaluate(studentSchoolEnrollment));
+            Assert.False(query.Evaluate(studentSchoolEnrollment));
         }
 
-        [Test]
+        [Fact]
         public void testSimpleFilter()
         {
             Authentication auth = BuildAuthentication();
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
 
-            Assert.IsFalse( q.Evaluate( auth ) );
+            Assert.False( q.Evaluate( auth ) );
 
             q = new Query( InfrastructureDTD.AUTHENTICATION );
-            Assert.IsTrue( q.Evaluate( auth ) );
+            Assert.True( q.Evaluate( auth ) );
         }
 
-        [Test]
+        [Fact]
         public void testSimpleRefidFilter()
         {
             Authentication auth = BuildAuthentication();
             Query q = new Query( InfrastructureDTD.AUTHENTICATION );
             q.AddCondition( InfrastructureDTD.AUTHENTICATION_REFID, ComparisonOperators.EQ, REFID_GUID );
-            Assert.IsTrue( q.Evaluate( auth ) );
+            Assert.True( q.Evaluate( auth ) );
         }
 
-        [Test]
+        [Fact]
         public void testSimpleGTFilter()
         {
             StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.GT, "D" );
-            Assert.IsTrue( q.Evaluate( sp ) );
+            Assert.True( q.Evaluate( sp ) );
 
             q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.GT, "E" );
-            Assert.IsFalse( q.Evaluate( sp ) );
+            Assert.False( q.Evaluate( sp ) );
         }
 
-        [Test]
+        [Fact]
         public void testConditionWithNullValue()
         {
             StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.GT, null );
-            Assert.IsFalse( q.Evaluate( sp ) );
+            Assert.False( q.Evaluate( sp ) );
         }
 
-        [Test]
+        [Fact]
         public void testElementWithNullValue()
         {
             StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, null, "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.GT, "E" );
-            Assert.IsFalse( q.Evaluate( sp ) );
+            Assert.False( q.Evaluate( sp ) );
 
             q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.EQ, "E" );
-            Assert.IsFalse( q.Evaluate( sp ) );
+            Assert.False( q.Evaluate( sp ) );
 
             q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.NE, "E" );
-            Assert.IsTrue( q.Evaluate( sp ) );
+            Assert.True( q.Evaluate( sp ) );
         }
 
-        [Test]
+        [Fact]
         public void testSimpleLTFilter()
         {
             StudentPersonal sp = new StudentPersonal( Runtime.MakeGuid(), new Name( NameType.BIRTH, "E", "Sally" ) );
 
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.LT, "G" );
-            Assert.IsTrue( q.Evaluate( sp ) );
+            Assert.True( q.Evaluate( sp ) );
 
             q = new Query( StudentDTD.STUDENTPERSONAL );
             q.AddCondition( CommonDTD.NAME_LASTNAME, ComparisonOperators.LT, "E" );
-            Assert.IsFalse( q.Evaluate( sp ) );
+            Assert.False( q.Evaluate( sp ) );
         }
 
-        [Test]
+        [Fact]
         public void testSimpleRefidFilterFail()
         {
             Authentication auth = BuildAuthentication();
             Query q = new Query( InfrastructureDTD.AUTHENTICATION );
             q.AddCondition( InfrastructureDTD.AUTHENTICATION_REFID, ComparisonOperators.EQ, "FAIL" );
-            Assert.IsFalse( q.Evaluate( auth ) );
+            Assert.False( q.Evaluate( auth ) );
         }
 
-        [Test]
+        [Fact]
         public void testSimpleOrFilter()
         {
             Authentication auth = BuildAuthentication();
             Query q = new Query( InfrastructureDTD.AUTHENTICATION, GroupOperator.Or );
             q.AddCondition( InfrastructureDTD.AUTHENTICATIONINFO_DISTINGUISHEDNAME, ComparisonOperators.EQ, "foo" );
             q.AddCondition( InfrastructureDTD.AUTHENTICATION_REFID, ComparisonOperators.EQ, REFID_GUID );
-            Assert.IsTrue( q.Evaluate( auth ) );
+            Assert.True( q.Evaluate( auth ) );
         }
 
-        [Test]
+        [Fact]
         public void testComplexOrWithGTFilter()
         {
             ConditionGroup fail = new ConditionGroup( GroupOperator.None );
@@ -405,12 +399,12 @@ namespace Library.Nunit.US
             Query q = new Query( InfrastructureDTD.AUTHENTICATION, root );
 
             Authentication auth = BuildAuthentication();
-            Assert.IsTrue( q.Evaluate( auth ) );
+            Assert.True( q.Evaluate( auth ) );
         }
 
 
 
-        [Test]
+        [Fact]
         public void testCreateWithSIF_Query()
         {
             SIF_Query q = new SIF_Query( new SIF_QueryObject(
@@ -427,17 +421,17 @@ namespace Library.Nunit.US
 
             Query query = new Query( q );
 
-            Assert.IsTrue( query.HasConditions );
+            Assert.True( query.HasConditions );
             ConditionGroup[] conditions = query.Conditions;
-            Assert.AreEqual( 1, conditions.Length, "One Condition Group" );
-            Assert.AreEqual( GroupOperator.None, conditions[0].Operator, "None" );
+            Assert.Equal( 1, conditions.Length);
+            Assert.Equal( GroupOperator.None, conditions[0].Operator);
             Condition condition = conditions[0].Conditions[0];
-            Assert.AreEqual( "2001", condition.Value, "RequestingAgencyId" );
-            Assert.AreEqual( ComparisonOperators.EQ, condition.Operators, "RequestingAgencyId" );
-            Assert.AreEqual( ReportingDTD.STUDENTLOCATOR_REQUESTINGAGENCYID, condition.Field, "RequestingAgencyId" );
+            Assert.Equal( "2001", condition.Value);
+            Assert.Equal( ComparisonOperators.EQ, condition.Operators);
+            Assert.Equal( ReportingDTD.STUDENTLOCATOR_REQUESTINGAGENCYID, condition.Field);
         }
 
-        [Test]
+        [Fact]
         public void testComplexAndQuery()
         {
             String sifQuery = "<SIF_Request><SIF_Query>" +
@@ -495,10 +489,10 @@ namespace Library.Nunit.US
 
             SifDataObject sdo = (SifDataObject) parser.Parse( sse, null, 0, SifVersion.SIF20r1 );
 
-            Assert.IsTrue( query.Evaluate( sdo ) );
+            Assert.True( query.Evaluate( sdo ) );
         }
 
-        [Test]
+        [Fact]
         public void testParseFieldRestrictions()
         {
             String filteredRequest = "<SIF_Request>" +
@@ -528,25 +522,25 @@ namespace Library.Nunit.US
             Query query = new Query( request.SIF_Query );
 
             // Assert things about the query
-            Assert.AreEqual( StudentDTD.STUDENTSNAPSHOT, query.ObjectType );
-            Assert.AreEqual( "StudentSnapshot", query.ObjectTag );
+            Assert.Equal( StudentDTD.STUDENTSNAPSHOT, query.ObjectType );
+            Assert.Equal( "StudentSnapshot", query.ObjectTag );
             IElementDef[] elements = query.FieldRestrictions;
 
-            Assert.IsNotNull( elements );
-            Assert.AreEqual( 7, elements.Length );
+            Assert.NotNull( elements );
+            Assert.Equal( 7, elements.Length );
 
-            Assert.AreEqual( StudentDTD.STUDENTSNAPSHOT_SCHOOLYEAR, elements[0] );
-            Assert.AreEqual( StudentDTD.STUDENTSNAPSHOT_SNAPDATE, elements[1] );
-            Assert.AreEqual( StudentDTD.STUDENTSNAPSHOT_STUDENTPERSONALREFID, elements[2] );
-            Assert.AreEqual( CommonDTD.GRADELEVEL_CODE, elements[3] );
-            Assert.AreEqual( StudentDTD.HOMEENROLLMENT_STATUS, elements[4] );
-            Assert.AreEqual( StudentDTD.STUDENTSNAPSHOT_LOCALID, elements[5] );
-            Assert.AreEqual( StudentDTD.STUDENTSNAPSHOT_ADDRESS, elements[6] );
+            Assert.Equal( StudentDTD.STUDENTSNAPSHOT_SCHOOLYEAR, elements[0] );
+            Assert.Equal( StudentDTD.STUDENTSNAPSHOT_SNAPDATE, elements[1] );
+            Assert.Equal( StudentDTD.STUDENTSNAPSHOT_STUDENTPERSONALREFID, elements[2] );
+            Assert.Equal( CommonDTD.GRADELEVEL_CODE, elements[3] );
+            Assert.Equal( StudentDTD.HOMEENROLLMENT_STATUS, elements[4] );
+            Assert.Equal( StudentDTD.STUDENTSNAPSHOT_LOCALID, elements[5] );
+            Assert.Equal( StudentDTD.STUDENTSNAPSHOT_ADDRESS, elements[6] );
         }
 
 
 
-        [Test]
+        [Fact]
         public void testParseFieldRestrictions020()
         {
             String filteredRequest =
@@ -581,27 +575,27 @@ namespace Library.Nunit.US
             Query query = new Query( request.SIF_Query );
 
             // Assert things about the query
-            Assert.AreEqual(StudentDTD.SECTIONINFO, query.ObjectType);
-            Assert.AreEqual( "SectionInfo", query.ObjectTag );
+            Assert.Equal(StudentDTD.SECTIONINFO, query.ObjectType);
+            Assert.Equal( "SectionInfo", query.ObjectTag );
             IElementDef[] elements = query.FieldRestrictions;
 
-            Assert.IsNotNull( elements );
-            Assert.AreEqual( 8, elements.Length );
+            Assert.NotNull( elements );
+            Assert.Equal( 8, elements.Length );
 
             // Attempt reparsing and then re-asserting:
             query = SaveToXMLAndReparse( query, SifVersion.LATEST, Runtime );
             // Assert things about the query
-            Assert.AreEqual(StudentDTD.SECTIONINFO, query.ObjectType);
-            Assert.AreEqual("SectionInfo", query.ObjectTag);
+            Assert.Equal(StudentDTD.SECTIONINFO, query.ObjectType);
+            Assert.Equal("SectionInfo", query.ObjectTag);
             elements = query.FieldRestrictions;
 
-            Assert.IsNotNull(elements);
-            Assert.AreEqual(8, elements.Length);
+            Assert.NotNull(elements);
+            Assert.Equal(8, elements.Length);
 
         }
 
 
-        [Test]
+        [Fact]
         public void testSQP1x010()
         {
             // Test using all 1.x versions of SIF
@@ -611,7 +605,7 @@ namespace Library.Nunit.US
                      "Name/FirstName", SifVersion.SIF15r1 );
         }
 
-        [Test]
+        [Fact]
         public void testSQP2x010()
         {
             // Test using all 2.x versions of SIF
@@ -621,7 +615,7 @@ namespace Library.Nunit.US
                      "Name/FirstName", SifVersion.SIF15r1 );
         }
 
-        [Test]
+        [Fact]
         public void testSQP1x020()
         {
             // Test using all 1.x versions of SIF
@@ -629,20 +623,18 @@ namespace Library.Nunit.US
                                         "Demographics/Ethnicity", SifVersion.SIF11,
                                         CommonDTD.RACELIST_RACE );
             Condition cond = q.HasCondition( CommonDTD.RACELIST_RACE );
-            Assert.IsNotNull( cond, "Unable to look up by element def" );
-            Assert.AreEqual( "Demographics/RaceList/Race", cond
-                                                               .GetXPath( q, SifVersion.SIF20 ), "Translate XPath" );
+            Assert.NotNull( cond);
+            Assert.True("Demographics/RaceList/Race" == cond .GetXPath( q, SifVersion.SIF20 ), "Translate XPath");
 
             q = testResolveBySQP( StudentDTD.STUDENTPERSONAL,
                                   "Demographics/Ethnicity", SifVersion.SIF15r1,
                                   CommonDTD.RACELIST_RACE );
             cond = q.HasCondition( CommonDTD.RACELIST_RACE );
-            Assert.IsNotNull( cond, "Unable to look up by element def" );
-            Assert.AreEqual( "Demographics/RaceList/Race", cond
-                                                               .GetXPath( q, SifVersion.SIF20 ), "Translate XPath" );
+            Assert.NotNull( cond);
+            Assert.True("Demographics/RaceList/Race" == cond .GetXPath( q, SifVersion.SIF20 ), "Translate XPath");
         }
 
-        [Test]
+        [Fact]
         public void testSQP2x020()
         {
             // Test using all 2.xversions of SIF
@@ -650,23 +642,21 @@ namespace Library.Nunit.US
                                         "Demographics/RaceList/Race", SifVersion.SIF20,
                                         CommonDTD.RACELIST_RACE );
             Condition cond = q.HasCondition( CommonDTD.RACELIST_RACE );
-            Assert.IsNotNull( cond, "Unable to look up by element def" );
-            Assert.AreEqual( "Demographics/Ethnicity", cond
-                                                           .GetXPath( q, SifVersion.SIF15r1 ), "Translate XPath" );
+            Assert.NotNull( cond);
+            Assert.True("Demographics/Ethnicity" == cond .GetXPath( q, SifVersion.SIF15r1 ), "Translate XPath");
 
             q = testResolveBySQP( StudentDTD.STUDENTPERSONAL,
                                   "Demographics/RaceList/Race", SifVersion.SIF20r1,
                                   CommonDTD.RACELIST_RACE );
             cond = q.HasCondition( CommonDTD.RACELIST_RACE );
-            Assert.IsNotNull( cond, "Unable to look up by element def" );
-            Assert.AreEqual( "Demographics/Ethnicity", cond
-                                                           .GetXPath( q, SifVersion.SIF15r1 ), "Translate XPath" );
+            Assert.NotNull( cond);
+            Assert.True("Demographics/Ethnicity" == cond .GetXPath( q, SifVersion.SIF15r1 ), "Translate XPath");
 
             // testSQP( StudentDTD.STUDENTPERSONAL, "Demographics/RaceList/Race",
             // SifVersion.SIF21 );
         }
 
-        [Test]
+        [Fact]
         public void testSQP1x030()
         {
             // Test using all 1.x versions of SIF
@@ -678,7 +668,7 @@ namespace Library.Nunit.US
                               SifVersion.SIF15r1, GlobalDTD.SIF_EXTENDEDELEMENT );
         }
 
-        [Test]
+        [Fact]
         public void testSQP2x030()
         {
             // Test using all 2.xversions of SIF
@@ -692,7 +682,7 @@ namespace Library.Nunit.US
             // SifVersion.SIF21 );
         }
 
-        [Test]
+        [Fact]
         public void testSQP040()
         {
             Query q = new Query( StudentDTD.STUDENTSCHOOLENROLLMENT );
@@ -701,15 +691,15 @@ namespace Library.Nunit.US
 
             Condition c = q
                 .HasCondition( StudentDTD.STUDENTSCHOOLENROLLMENT_SCHOOLYEAR );
-            Assert.IsNotNull( c );
+            Assert.NotNull( c );
             String xPath = c.GetXPath( q, SifVersion.SIF15r1 );
-            Assert.AreEqual( "SchoolYear", xPath, "SIF 1.5 XPath" );
+            Assert.Equal( "SchoolYear", xPath);
 
             xPath = c.GetXPath( q, SifVersion.SIF20 );
-            Assert.AreEqual( "@SchoolYear", xPath, "SIF 2.0 XPath" );
+            Assert.Equal( "@SchoolYear", xPath);
         }
 
-        [Test]
+        [Fact]
         public void testSQP050()
         {
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
@@ -717,15 +707,15 @@ namespace Library.Nunit.US
                             ComparisonOperators.EQ, "SCHOOL:997" );
 
             Condition c = q.HasCondition( CommonDTD.OTHERID );
-            Assert.IsNotNull( c );
+            Assert.NotNull( c );
             String xPath = c.GetXPath( q, SifVersion.SIF15r1 );
-            Assert.AreEqual( xPath, "OtherId[@Type='ZZ']", "SIF 1.5 XPath" );
+            Assert.Equal( xPath, "OtherId[@Type='ZZ']");
 
             xPath = c.GetXPath( q, SifVersion.SIF20 );
-            Assert.AreEqual( "OtherIdList/OtherId[@Type='ZZ']", xPath, "SIF 2.0 XPath" );
+            Assert.Equal( "OtherIdList/OtherId[@Type='ZZ']", xPath);
         }
 
-        [Test]
+        [Fact]
         public void testSQP060()
         {
             // TT 217 Presumptive Query Syntax support
@@ -737,14 +727,14 @@ namespace Library.Nunit.US
             q = SaveToXMLAndReparse( q, SifVersion.LATEST, Runtime );
 
             Condition c = q.HasCondition( ReportingDTD.REQUESTINGAGENCYID_TYPE );
-            Assert.IsNotNull( c );
+            Assert.NotNull( c );
             String xPath = c.GetXPath( q, SifVersion.LATEST );
-            Assert.AreEqual( "RequestingAgencyId/@Type", xPath, "RequestingAgencyID/@Type XPath" );
+            Assert.Equal( "RequestingAgencyId/@Type", xPath);
 
             c = q.HasCondition( ReportingDTD.REQUESTINGAGENCYID );
-            Assert.IsNotNull( c );
+            Assert.NotNull( c );
             xPath = c.GetXPath( q, SifVersion.LATEST );
-            Assert.AreEqual( "RequestingAgencyId", xPath, "RequestingAgencyIDe XPath" );
+            Assert.Equal( "RequestingAgencyId", xPath);
         }
 
 
@@ -766,7 +756,7 @@ namespace Library.Nunit.US
             // element content, so the following line is different than
             // the java test
             //searchFor = searchFor.Replace( "'", "&apos;" );
-            Assert.IsTrue( sifQueryXML.Contains( searchFor ), "SQP in XML" );
+            Assert.True( sifQueryXML.Contains( searchFor ));
 
             SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( "<SIF_Request>"
@@ -775,10 +765,9 @@ namespace Library.Nunit.US
             Query newQuery = new Query( sifR.SIF_Query );
 
             Condition cond = newQuery.HasCondition( sqp );
-            Assert.IsNotNull( cond, "hasCondition" );
-            Assert.AreEqual( sqp, cond.GetXPath(), "SQP" );
-            Assert.AreEqual( sqp, cond.GetXPath( newQuery,
-                                                 version ), "Version-Specific SQP" );
+            Assert.NotNull( cond);
+            Assert.Equal( sqp, cond.GetXPath());
+            Assert.True(sqp == cond.GetXPath( newQuery, version ), "Version-Specific SQP");
 
             return newQuery;
         }
@@ -803,7 +792,7 @@ namespace Library.Nunit.US
         {
             Runtime.SifVersion = version;
             IElementDef lookedUp = Runtime.Dtd.LookupElementDefBySQP( objectDef, sqp );
-            Assert.AreEqual( def.Name, lookedUp.Name, "IElementDef" );
+            Assert.Equal( def.Name, lookedUp.Name);
             testResolveBySQP( objectDef, sqp, version, def );
 
             Query q = Objects.CreateQuery( objectDef );
@@ -813,7 +802,7 @@ namespace Library.Nunit.US
             Console.WriteLine( sifQueryXML );
 
             String searchFor = "<SIF_Element>" + sqp + "</SIF_Element>";
-            Assert.IsTrue( sifQueryXML.Contains( searchFor ), "SQP in XML" );
+            Assert.True( sifQueryXML.Contains( searchFor ));
 
             SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( "<SIF_Request>"
@@ -822,14 +811,14 @@ namespace Library.Nunit.US
             Query newQuery = new Query( sifR.SIF_Query );
 
             Condition cond = newQuery.HasCondition( sqp );
-            Assert.IsNotNull( cond, "hasCondition" );
-            Assert.AreEqual( sqp, cond.GetXPath(), "SQP" );
-            Assert.AreEqual( def, cond.Field, "IElementDef" );
+            Assert.NotNull( cond);
+            Assert.Equal( sqp, cond.GetXPath());
+            Assert.Equal( def, cond.Field);
 
             return newQuery;
         }
 
-        [Test]
+        [Fact]
         public void testQuery010()
         {
             Query q = new Query( StudentDTD.STUDENTPERSONAL );
@@ -839,7 +828,7 @@ namespace Library.Nunit.US
             q = SaveToXMLAndReparse( q, SifVersion.SIF15r1, Runtime );
 
             Condition c = q.HasCondition( "Demographics/Ethnicity" );
-            Assert.IsNotNull( c, "Condition didn't resolve" );
+            Assert.NotNull( c);
         }
     }
 }

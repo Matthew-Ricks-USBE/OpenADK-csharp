@@ -1,10 +1,10 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Xml;
 using OpenADK.Library;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework.Validation;
 
 namespace Library.UnitTesting.Framework
@@ -26,7 +26,7 @@ namespace Library.UnitTesting.Framework
         {
             T o2 = (T)WriteParseAndReturn( o, version );
 
-            Assert.IsNotNull( o2, "Object is null after parsing" );
+            Assert.NotNull(o2);
             if ( doAssertions )
             {
                 runAssertions( o, o2, expectedDifferences );
@@ -289,8 +289,7 @@ namespace Library.UnitTesting.Framework
             catch ( Exception e )
             {
                 Console.WriteLine( e );
-                Assert.Fail( "Could not parse xml file. Exception: " + e.Message );
-                return false;
+                throw new Exception("Could not parse xml file. Exception: " + e.Message, e);
             }
         }
 
@@ -303,7 +302,7 @@ namespace Library.UnitTesting.Framework
             SifDataObject sdo = (SifDataObject) p.Parse( reader, null );
             reader.Close();
 
-            Assert.IsNull( sdo );
+            Assert.Null(sdo);
             runParsingTest<SifDataObject>( sdo, version );
         }
 

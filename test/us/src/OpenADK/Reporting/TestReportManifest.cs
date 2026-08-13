@@ -2,7 +2,7 @@ using System;
 using OpenADK.Library;
 using OpenADK.Library.Infra;
 using OpenADK.Library.us.Reporting;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Reporting
@@ -10,10 +10,10 @@ namespace Library.Nunit.US.Reporting
     /// <summary>
     /// Summary description for TestReportManifest.
     /// </summary>
-    [TestFixture]
+    
     public class TestReportManifest : AdkTest
     {
-        [Test]
+        [Fact]
         public void SDOParse()
         {
             ReportManifest rm = new ReportManifest();

@@ -4,7 +4,7 @@ using System.Text;
 using OpenADK.Library;
 using OpenADK.Library.Infra;
 using OpenADK.Library.us.Infrastructure;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US
@@ -12,7 +12,7 @@ namespace Library.Nunit.US
     /// <summary>
     /// Summary description for SifEncryptionTests.
     /// </summary>
-    [TestFixture]
+    
     public class SifEncryptionTests : AdkTest
     {
         private byte[] f64BitKey;
@@ -20,10 +20,9 @@ namespace Library.Nunit.US
         private byte[] f192BitKey;
         private const string DEFAULT_ENCRYPTED_STRING = "�s�cr�t";
 
-        [SetUp]
-        public override void SetUp()
+        
+        public SifEncryptionTests()
         {
-            base.SetUp();
 
             f64BitKey = Convert.FromBase64String("dW7SKzwdn0Q=");
             f128BitKey = Convert.FromBase64String("TcdilmUZ6qvbmegl2it2pA==");
@@ -80,20 +79,19 @@ namespace Library.Nunit.US
         /// <summary>
         /// Tests the SifEncryption Class using clear text encryption
         /// </summary>
-        [Test]
+        [Fact]
         public void TestClearTextEncryption()
         {
             SifEncryption encr = SifEncryption.GetInstance(PasswordAlgorithm.BASE64, "Base64", null);
-            Assert.AreEqual(string.Empty, encr.KeyName, "Encrytor should have an empty keyName");
+            Assert.Equal(string.Empty, encr.KeyName);
             AuthenticationInfo info = AssertEncryption(encr, DEFAULT_ENCRYPTED_STRING);
-            Assert.AreEqual(string.Empty, info.PasswordList.ItemAt(0).KeyName,
-                            "Password/@KeyName should have an empty value");
+            Assert.Equal(string.Empty, info.PasswordList.ItemAt(0).KeyName);
         }
 
         /// <summary>
         /// Tests the SifEncryption Class using DES encryption
         /// </summary>
-        [Test]
+        [Fact]
         public void TestDESEncryption()
         {
             SifEncryption encr = SifEncryption.GetInstance(PasswordAlgorithm.DES, "SECRET_64_BIT_KEY", f64BitKey);
@@ -103,7 +101,7 @@ namespace Library.Nunit.US
         /// <summary>
         /// Tests the SifEncryption Class usingTripleDES encryption
         /// </summary>
-        [Test]
+        [Fact]
         public void TestTripleDESEncryption()
         {
             SifEncryption encr =
@@ -114,7 +112,7 @@ namespace Library.Nunit.US
         /// <summary>
         /// Tests the SifEncryption Class using RC2 encryption
         /// </summary>
-        [Test]
+        [Fact]
         public void TestRC2Encryption()
         {
             SifEncryption encr = SifEncryption.GetInstance(PasswordAlgorithm.RC2, "SECRET_128_BIT_KEY", f128BitKey);
@@ -124,33 +122,31 @@ namespace Library.Nunit.US
         /// <summary>
         /// Tests the SifEncryption Class using MD5 Hash
         /// </summary>
-        [Test]
+        [Fact]
         public void TestMD5Hash()
         {
             SifEncryption encr = SifEncryption.GetInstance(PasswordAlgorithm.MD5, "MD5", null);
-            Assert.AreEqual(string.Empty, encr.KeyName, "Encrytor should have an empty keyName");
+            Assert.Equal(string.Empty, encr.KeyName);
             AuthenticationInfo info = AssertEncryption(encr, DEFAULT_ENCRYPTED_STRING);
-            Assert.AreEqual(string.Empty, info.PasswordList.ItemAt(0).KeyName,
-                            "Password/@KeyName should have an empty value");
+            Assert.Equal(string.Empty, info.PasswordList.ItemAt(0).KeyName);
         }
 
         /// <summary>
         /// Tests the SifEncryption Class using SHA1 Hash
         /// </summary>
-        [Test]
+        [Fact]
         public void TestSHA1Hash()
         {
             SifEncryption encr = SifEncryption.GetInstance(PasswordAlgorithm.SHA1, "SHA1", null);
-            Assert.AreEqual(string.Empty, encr.KeyName, "Encrytor should have an empty keyName");
+            Assert.Equal(string.Empty, encr.KeyName);
             AuthenticationInfo info = AssertEncryption(encr, DEFAULT_ENCRYPTED_STRING);
-            Assert.AreEqual(string.Empty, info.PasswordList.ItemAt(0).KeyName,
-                            "Password/@KeyName should have an empty value");
+            Assert.Equal(string.Empty, info.PasswordList.ItemAt(0).KeyName);
         }
 
         /// <summary>
         /// Tests the SifEncryption Class using clear text encryption
         /// </summary>
-        //[Test, Explicit]
+        //[Fact(Skip = "Explicit")]
         //public void TestRSAEncryption()
         //{
         //    // This test is not currently run with the full suite of tests because support for RSA encryption is
@@ -190,8 +186,7 @@ namespace Library.Nunit.US
             if (encryptor.IsHash)
             {
                 // Assert that the decrypted value is the same as the AuthenticationInfoPassword's text value
-                Assert.AreEqual(returnValue.PasswordList.ItemAt(0).TextValue, decryptedValue,
-                                "Hashed implementation of ReadPassword() should return the Base64 value");
+                Assert.Equal(returnValue.PasswordList.ItemAt(0).TextValue, decryptedValue);
                 // Assert that the hash is correct
                 HashAlgorithm hasher = null;
                 if (returnValue.PasswordList.ItemAt(0).Algorithm == PasswordAlgorithm.SHA1.Value)
@@ -207,11 +202,11 @@ namespace Library.Nunit.US
                 string textHash = Convert.ToBase64String(hashed);
                 ((IDisposable) hasher).Dispose();
 
-                Assert.AreEqual(textHash, decryptedValue, "Hash values do not match");
+                Assert.Equal(textHash, decryptedValue);
             }
             else
             {
-                Assert.AreEqual(passwordText, decryptedValue, "Decypted value differs from original value.");
+                Assert.Equal(passwordText, decryptedValue);
             }
 
             return returnValue;

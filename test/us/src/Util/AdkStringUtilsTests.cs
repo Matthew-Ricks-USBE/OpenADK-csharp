@@ -1,35 +1,35 @@
 using System;
-using NUnit.Framework;
+using Xunit;
 
 namespace OpenADK.Util
 {
     /// <summary>
     /// Summary description for AdkStringUtilsTests.
     /// </summary>
-    [TestFixture]
+    
     public class AdkStringUtilsTests
     {
-        [Test]
+        [Fact]
         public void EncodeXML()
         {
             String xml = null;
-            Assert.IsNull(AdkStringUtils.EncodeXml(xml), "String should be null");
+            Assert.Null(AdkStringUtils.EncodeXml(xml));
 
             xml = "<Hello>";
-            Assert.AreEqual("&lt;Hello&gt;", AdkStringUtils.EncodeXml(xml));
+            Assert.Equal("&lt;Hello&gt;", AdkStringUtils.EncodeXml(xml));
         }
 
-        [Test]
+        [Fact]
         public void UnencodeXML()
         {
             String xml = null;
-            Assert.IsNull(AdkStringUtils.UnencodeXml(xml), "String should be null");
+            Assert.Null(AdkStringUtils.UnencodeXml(xml));
 
             xml = "&lt;Hello&gt;";
-            Assert.AreEqual("<Hello>", AdkStringUtils.UnencodeXml(xml));
+            Assert.Equal("<Hello>", AdkStringUtils.UnencodeXml(xml));
         }
 
-        [Test]
+        [Fact]
         public void ReplaceFirstTests()
         {
             AssertReplaceFirst("Select??", "?", " Hello", "Select Hello?");
@@ -44,7 +44,7 @@ namespace OpenADK.Util
         private void AssertReplaceFirst(string source, string search, string replace, string expectedResult)
         {
             string result = AdkStringUtils.ReplaceFirst(source, search, replace);
-            Assert.AreEqual(expectedResult, result, "String Replace Failed");
+            Assert.Equal(expectedResult, result);
         }
     }
 }

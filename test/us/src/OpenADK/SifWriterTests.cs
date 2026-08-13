@@ -5,7 +5,7 @@ using OpenADK.Library;
 using OpenADK.Library.Global;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 using OpenADK.Library.Infra;
 
@@ -15,7 +15,7 @@ namespace Library.Nunit.US
    /// <summary>
    /// Summary description for SifWriterTests.
    /// </summary>
-   [TestFixture]
+   
    public class SifWriterTests : AdkTest
    {
       /// <summary>
@@ -38,7 +38,7 @@ namespace Library.Nunit.US
       /// Ran in 17.935 - 17.938 seconds  on 11/18/2004 after XML escaping was added to SIFWriter
       /// Ran in 15.053 - 15.127 seconds  on 11/18/2004 after XML escaping was added to SIFWriter with escaping turned off
       /// </remarks>
-      [Test, Explicit]
+      [Fact(Skip = "Explicit")]
       public void WriteSpeedTest()
       {
          Runtime.Debug = AdkDebugFlags.None;
@@ -67,7 +67,7 @@ namespace Library.Nunit.US
 
          Console.WriteLine("Test Complete. Please See timings for details");
       }
-      [Test]
+      [Fact]
       public void FilterOutElementsFromDifferentVersion()
       {
          Runtime.SifVersion = SifVersion.SIF11;
@@ -77,17 +77,17 @@ namespace Library.Nunit.US
 
          StudentPersonal sp11 = (StudentPersonal)AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.SIF11);
 
-          Assert.IsNull(sp11.LocalId, "LocalID");
-          Assert.IsNull(sp11.StateProvinceId, "StatePRID");
+          Assert.Null(sp11.LocalId);
+          Assert.Null(sp11.StateProvinceId);
 
          StudentPersonal sp15 = (StudentPersonal)AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.SIF15r1);
 
-         Assert.IsNotNull(sp15.LocalId, "LocalID");
-         Assert.IsNotNull(sp15.StateProvinceId, "StatePRID");
+         Assert.NotNull(sp15.LocalId);
+         Assert.NotNull(sp15.StateProvinceId);
       }
 
 
-      [Test]
+      [Fact]
       public void TestEncodingHighAsciiChars()
       {
          StudentPersonal sp = new StudentPersonal();
@@ -97,12 +97,12 @@ namespace Library.Nunit.US
 
          StudentPersonal copy = (StudentPersonal)AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST);
 
-         Assert.AreEqual("\u06DE55889", copy.StateProvinceId, "LocalID, Encoded");
+         Assert.Equal("\u06DE55889", copy.StateProvinceId);
       }
 
 
 
-       [Test]
+       [Fact]
        public void TestWriteXSINill()
        {
            StudentPersonal sp = new StudentPersonal();
@@ -127,34 +127,34 @@ namespace Library.Nunit.US
            Console.WriteLine(copy.ToXml());
 
            name = copy.Name;
-           Assert.IsNull(name.Type);
-           Assert.IsNull(name.MiddleName);
-           Assert.IsNotNull(name.FirstName);
-           Assert.IsNotNull(name.LastName);
+           Assert.Null(name.Type);
+           Assert.Null(name.MiddleName);
+           Assert.NotNull(name.FirstName);
+           Assert.NotNull(name.LastName);
 
            // Attributes cannot be represented using xs nil
            SimpleField field = name.GetField(CommonDTD.NAME_TYPE);
-           Assert.IsNull(field);
+           Assert.Null(field);
 
 
            field = name.GetField(CommonDTD.NAME_MIDDLENAME);
-           Assert.IsNotNull(field);
-           Assert.IsNull(field.Value);
+           Assert.NotNull(field);
+           Assert.Null(field.Value);
 
            see = copy.GetSIFExtendedElement("FOO");
            field = see.GetField(GlobalDTD.SIF_EXTENDEDELEMENT);
-           Assert.IsNotNull(field);
-           Assert.IsNull(field.Value);
+           Assert.NotNull(field);
+           Assert.Null(field.Value);
 
            field = copy.GetField(StudentDTD.STUDENTPERSONAL_LOCALID);
-           Assert.IsNotNull(field);
-           Assert.IsNull(field.Value);
+           Assert.NotNull(field);
+           Assert.Null(field.Value);
 
            
 
        }
 
-       [Test]
+       [Fact]
        public void TestWriteXSINillMultiple()
        {
            SIF_Data data = new SIF_Data();
@@ -187,33 +187,33 @@ namespace Library.Nunit.US
            {
                StudentPersonal copy = (StudentPersonal) child;
                Name name = copy.Name;
-               Assert.IsNull( name.Type );
-               Assert.IsNull( name.MiddleName );
-               Assert.IsNotNull( name.FirstName );
-               Assert.IsNotNull( name.LastName );
+               Assert.Null( name.Type );
+               Assert.Null( name.MiddleName );
+               Assert.NotNull( name.FirstName );
+               Assert.NotNull( name.LastName );
 
                // Attributes cannot be represented using xs nil
                SimpleField field = name.GetField( CommonDTD.NAME_TYPE );
-               Assert.IsNull( field );
+               Assert.Null( field );
 
 
                field = name.GetField( CommonDTD.NAME_MIDDLENAME );
-               Assert.IsNotNull( field );
-               Assert.IsNull( field.Value );
+               Assert.NotNull( field );
+               Assert.Null( field.Value );
 
                SIF_ExtendedElement see = copy.GetSIFExtendedElement( "FOO" );
                field = see.GetField( GlobalDTD.SIF_EXTENDEDELEMENT );
-               Assert.IsNotNull( field );
-               Assert.IsNull( field.Value );
+               Assert.NotNull( field );
+               Assert.Null( field.Value );
 
                field = copy.GetField( StudentDTD.STUDENTPERSONAL_LOCALID );
-               Assert.IsNotNull( field );
-               Assert.IsNull( field.Value );
+               Assert.NotNull( field );
+               Assert.Null( field.Value );
            }
        }
 
 
-       [Test]
+       [Fact]
        public void TestWriteXSIType()
        {
            StudentPersonal sp = new StudentPersonal();
@@ -233,13 +233,13 @@ namespace Library.Nunit.US
 
            see = copy.SIFExtendedElements[0];
 
-           Assert.IsNotNull( see );
-           Assert.AreEqual( "Integer", see.XsiType );
+           Assert.NotNull( see );
+           Assert.Equal( "Integer", see.XsiType );
 
 
        }
 
-       [Test]
+       [Fact]
        public void TestSIFExtendedElementPlainText()
        {
            // SIF specification sample 1: plain text content
@@ -255,14 +255,14 @@ namespace Library.Nunit.US
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("ApplicationSubmissionStatus");
-           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be set for plain-text content");
-           Assert.AreEqual(1, see.XmlFragment.ChildNodes.Count, "Plain text should produce one child node");
-           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType, "Child should be a text node");
-           Assert.AreEqual("4", see.XmlFragment.ChildNodes[0].Value, "Plain text value should round-trip unchanged");
+           Assert.NotNull(see);
+           Assert.NotNull(see.XmlFragment);
+           Assert.Equal(1, see.XmlFragment.ChildNodes.Count);
+           Assert.Equal(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType);
+           Assert.Equal("4", see.XmlFragment.ChildNodes[0].Value);
        }
 
-       [Test]
+       [Fact]
        public void TestSIFExtendedElementXmlContent()
        {
            // SIF specification sample 2: arbitrary XML element as content
@@ -290,17 +290,17 @@ namespace Library.Nunit.US
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("DynamicXml");
-           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null after round-trip");
-           Assert.AreEqual(1, see.XmlFragment.ChildNodes.Count, "XML-only content should produce one child node");
+           Assert.NotNull(see);
+           Assert.NotNull(see.XmlFragment);
+           Assert.Equal(1, see.XmlFragment.ChildNodes.Count);
            XmlElement root = (XmlElement) see.XmlFragment.ChildNodes[0];
-           Assert.AreEqual("Parent", root.LocalName, "Root XML element name should be preserved");
-           Assert.AreEqual("http://myapplication.com", root.NamespaceURI, "Namespace should be preserved");
-           Assert.AreEqual(3, root.ChildNodes.Count, "Child element count should be preserved");
-           Assert.AreEqual("one", root.ChildNodes[0].InnerText, "First child text should be preserved");
+           Assert.Equal("Parent", root.LocalName);
+           Assert.Equal("http://myapplication.com", root.NamespaceURI);
+           Assert.Equal(3, root.ChildNodes.Count);
+           Assert.Equal("one", root.ChildNodes[0].InnerText);
        }
 
-       [Test]
+       [Fact]
        public void TestSIFExtendedElementMixedContent_XmlThenText()
        {
            // <SIF_ExtendedElement Name="Note">
@@ -323,17 +323,17 @@ namespace Library.Nunit.US
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("Note");
-           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null for mixed content");
-           Assert.AreEqual(2, see.XmlFragment.ChildNodes.Count, "Mixed content should have 2 child nodes");
-           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[0].NodeType, "First child should be an element");
-           Assert.AreEqual("strong", see.XmlFragment.ChildNodes[0].LocalName, "Element local name should be preserved");
-           Assert.AreEqual("Double", see.XmlFragment.ChildNodes[0].InnerText, "Element inner text should be preserved");
-           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be a text node");
-           Assert.AreEqual("-check submission status.", see.XmlFragment.ChildNodes[1].Value, "Trailing text should be preserved");
+           Assert.NotNull(see);
+           Assert.NotNull(see.XmlFragment);
+           Assert.Equal(2, see.XmlFragment.ChildNodes.Count);
+           Assert.Equal(XmlNodeType.Element, see.XmlFragment.ChildNodes[0].NodeType);
+           Assert.Equal("strong", see.XmlFragment.ChildNodes[0].LocalName);
+           Assert.Equal("Double", see.XmlFragment.ChildNodes[0].InnerText);
+           Assert.Equal(XmlNodeType.Text, see.XmlFragment.ChildNodes[1].NodeType);
+           Assert.Equal("-check submission status.", see.XmlFragment.ChildNodes[1].Value);
        }
 
-       [Test]
+       [Fact]
        public void TestSIFExtendedElementMixedContent_TextThenXml()
        {
            // <SIF_ExtendedElement Name="Greeting">Hello <em>world</em></SIF_ExtendedElement>
@@ -354,17 +354,17 @@ namespace Library.Nunit.US
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("Greeting");
-           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null");
-           Assert.AreEqual(2, see.XmlFragment.ChildNodes.Count, "Should have 2 child nodes");
-           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType, "First child should be a text node");
-           Assert.AreEqual("Hello ", see.XmlFragment.ChildNodes[0].Value, "Leading text should be preserved");
-           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be an element");
-           Assert.AreEqual("em", see.XmlFragment.ChildNodes[1].LocalName, "Element local name should be preserved");
-           Assert.AreEqual("world", see.XmlFragment.ChildNodes[1].InnerText, "Element inner text should be preserved");
+           Assert.NotNull(see);
+           Assert.NotNull(see.XmlFragment);
+           Assert.Equal(2, see.XmlFragment.ChildNodes.Count);
+           Assert.Equal(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType);
+           Assert.Equal("Hello ", see.XmlFragment.ChildNodes[0].Value);
+           Assert.Equal(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType);
+           Assert.Equal("em", see.XmlFragment.ChildNodes[1].LocalName);
+           Assert.Equal("world", see.XmlFragment.ChildNodes[1].InnerText);
        }
 
-       [Test]
+       [Fact]
        public void TestSIFExtendedElementMixedContent_TextBetweenXml()
        {
            // <SIF_ExtendedElement Name="Rich">Start <b>bold</b> end</SIF_ExtendedElement>
@@ -386,19 +386,19 @@ namespace Library.Nunit.US
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("Rich");
-           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null");
-           Assert.AreEqual(3, see.XmlFragment.ChildNodes.Count, "Should have 3 child nodes");
-           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType, "First child should be text");
-           Assert.AreEqual("Start ", see.XmlFragment.ChildNodes[0].Value, "Leading text should be preserved");
-           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be element");
-           Assert.AreEqual("b", see.XmlFragment.ChildNodes[1].LocalName, "Element local name should be preserved");
-           Assert.AreEqual("bold", see.XmlFragment.ChildNodes[1].InnerText, "Element content should be preserved");
-           Assert.AreEqual(XmlNodeType.Text, see.XmlFragment.ChildNodes[2].NodeType, "Third child should be text");
-           Assert.AreEqual(" end", see.XmlFragment.ChildNodes[2].Value, "Trailing text should be preserved");
+           Assert.NotNull(see);
+           Assert.NotNull(see.XmlFragment);
+           Assert.Equal(3, see.XmlFragment.ChildNodes.Count);
+           Assert.Equal(XmlNodeType.Text, see.XmlFragment.ChildNodes[0].NodeType);
+           Assert.Equal("Start ", see.XmlFragment.ChildNodes[0].Value);
+           Assert.Equal(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType);
+           Assert.Equal("b", see.XmlFragment.ChildNodes[1].LocalName);
+           Assert.Equal("bold", see.XmlFragment.ChildNodes[1].InnerText);
+           Assert.Equal(XmlNodeType.Text, see.XmlFragment.ChildNodes[2].NodeType);
+           Assert.Equal(" end", see.XmlFragment.ChildNodes[2].Value);
        }
 
-       [Test]
+       [Fact]
        public void TestSIFExtendedElementMixedContent_MultipleElements()
        {
            // <SIF_ExtendedElement Name="Multi"><a/><b/></SIF_ExtendedElement>
@@ -419,13 +419,13 @@ namespace Library.Nunit.US
            StudentPersonal copy = (StudentPersonal) AdkObjectParseHelper.WriteParseAndReturn(sp, SifVersion.LATEST, null, true);
 
            see = copy.GetSIFExtendedElement("Multi");
-           Assert.IsNotNull(see, "SIF_ExtendedElement not found after round-trip");
-           Assert.IsNotNull(see.XmlFragment, "XmlFragment should be non-null");
-           Assert.AreEqual(2, see.XmlFragment.ChildNodes.Count, "Should have 2 element children");
-           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[0].NodeType, "First child should be an element");
-           Assert.AreEqual("a", see.XmlFragment.ChildNodes[0].LocalName, "First element name should be preserved");
-           Assert.AreEqual(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType, "Second child should be an element");
-           Assert.AreEqual("b", see.XmlFragment.ChildNodes[1].LocalName, "Second element name should be preserved");
+           Assert.NotNull(see);
+           Assert.NotNull(see.XmlFragment);
+           Assert.Equal(2, see.XmlFragment.ChildNodes.Count);
+           Assert.Equal(XmlNodeType.Element, see.XmlFragment.ChildNodes[0].NodeType);
+           Assert.Equal("a", see.XmlFragment.ChildNodes[0].LocalName);
+           Assert.Equal(XmlNodeType.Element, see.XmlFragment.ChildNodes[1].NodeType);
+           Assert.Equal("b", see.XmlFragment.ChildNodes[1].LocalName);
        }
 
    }

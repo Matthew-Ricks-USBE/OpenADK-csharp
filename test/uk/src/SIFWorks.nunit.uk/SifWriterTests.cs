@@ -6,14 +6,14 @@ using OpenADK.Library.uk.Common;
 using OpenADK.Library.Infra;
 using OpenADK.Library.uk.Learner;
 using OpenADK.Library.uk.School;
-using NUnit.Framework;
+using Xunit;
 
 namespace OpenADK.Library.Nunit.UK
 {
-    [TestFixture]
+    
     public class SifWriterTests : UkAdkTest
     {
-        [Test]
+        [Fact]
         public void TestxsiNill_SIFMessagePayload()
         {
             LearnerPersonal lp = new LearnerPersonal();
@@ -58,25 +58,25 @@ namespace OpenADK.Library.Nunit.UK
 
 
             SimpleField upn = lp.GetField( LearnerDTD.LEARNERPERSONAL_UPN );
-            Assert.IsNotNull( upn );
+            Assert.NotNull( upn );
 
             SifString rawValue = (SifString)upn.SifValue;
-            Assert.IsNotNull( rawValue );
-            Assert.IsNull( rawValue.Value );
-            Assert.IsNull( upn.Value );
+            Assert.NotNull( rawValue );
+            Assert.Null( rawValue.Value );
+            Assert.Null( upn.Value );
 
             AlertMsgList alertMsgs = lp.AlertMsgList;
-            Assert.IsNotNull( alertMsgs );
-            Assert.IsTrue( alertMsgs.Count == 1 );
+            Assert.NotNull( alertMsgs );
+            Assert.True( alertMsgs.Count == 1 );
             msg = (AlertMsg)alertMsgs.GetChildList()[0];
 
-            Assert.IsNull( msg.Value );
+            Assert.Null( msg.Value );
             SifSimpleType msgValue = msg.SifValue;
-            Assert.IsNotNull( msgValue );
-            Assert.IsNull( msgValue.RawValue );
+            Assert.NotNull( msgValue );
+            Assert.Null( msgValue.RawValue );
         }
 
-        [Test]
+        [Fact]
         public void TestxsiNill_SDOObjectXML()
         {
             LearnerPersonal lp = new LearnerPersonal();
@@ -113,25 +113,25 @@ namespace OpenADK.Library.Nunit.UK
 
 
             SimpleField upn = lp.GetField(LearnerDTD.LEARNERPERSONAL_UPN);
-            Assert.IsNotNull(upn);
+            Assert.NotNull(upn);
 
             SifString rawValue = (SifString)upn.SifValue;
-            Assert.IsNotNull(rawValue);
-            Assert.IsNull(rawValue.Value);
-            Assert.IsNull(upn.Value);
+            Assert.NotNull(rawValue);
+            Assert.Null(rawValue.Value);
+            Assert.Null(upn.Value);
 
             AlertMsgList alertMsgs = lp.AlertMsgList;
-            Assert.IsNotNull(alertMsgs);
-            Assert.IsTrue(alertMsgs.Count == 1);
+            Assert.NotNull(alertMsgs);
+            Assert.True(alertMsgs.Count == 1);
             msg = (AlertMsg)alertMsgs.GetChildList()[0];
 
-            Assert.IsNull(msg.Value);
+            Assert.Null(msg.Value);
             SifSimpleType msgValue = msg.SifValue;
-            Assert.IsNotNull(msgValue);
-            Assert.IsNull(msgValue.RawValue);
+            Assert.NotNull(msgValue);
+            Assert.Null(msgValue.RawValue);
         }
 
-        [Test]
+        [Fact]
         public void TestXsiNill_AllChildrenNil()
         {
             SchoolInfo si = new SchoolInfo();
@@ -168,28 +168,28 @@ namespace OpenADK.Library.Nunit.UK
 
 
             AddressList al = si.AddressList;
-            Assert.IsNotNull( al );
+            Assert.NotNull( al );
 
             addr = al.ItemAt( 0 ); 
-            Assert.IsNotNull( addr );
+            Assert.NotNull( addr );
 
             gl = addr.GridLocation;
-            Assert.IsNotNull( gl );
+            Assert.NotNull( gl );
 
-            Assert.IsNull( gl.PropertyEasting );
-            Assert.IsNull(gl.PropertyNorthing );
+            Assert.Null( gl.PropertyEasting );
+            Assert.Null(gl.PropertyNorthing );
 
             SimpleField sf = gl.GetField( CommonDTD.GRIDLOCATION_PROPERTYEASTING );
-            Assert.IsNotNull( sf );
-            Assert.IsNull( sf.Value );
+            Assert.NotNull( sf );
+            Assert.Null( sf.Value );
 
             sf = gl.GetField(CommonDTD.GRIDLOCATION_PROPERTYNORTHING );
-            Assert.IsNotNull(sf);
-            Assert.IsNull(sf.Value);
+            Assert.NotNull(sf);
+            Assert.Null(sf.Value);
 
         }
 
-        [Test]
+        [Fact]
         public void TestXsiNill_AllChildrenNilMultiple()
         {
 
@@ -235,24 +235,24 @@ namespace OpenADK.Library.Nunit.UK
             foreach ( SchoolInfo si in data.GetChildList() )
             {
                 AddressList al = si.AddressList;
-                Assert.IsNotNull(al);
+                Assert.NotNull(al);
 
                 Address addr = al.ItemAt(0);
-                Assert.IsNotNull(addr);
+                Assert.NotNull(addr);
 
                 GridLocation gl = addr.GridLocation;
-                Assert.IsNotNull(gl);
+                Assert.NotNull(gl);
 
-                Assert.IsNull(gl.PropertyEasting);
-                Assert.IsNull(gl.PropertyNorthing);
+                Assert.Null(gl.PropertyEasting);
+                Assert.Null(gl.PropertyNorthing);
 
                 SimpleField sf = gl.GetField(CommonDTD.GRIDLOCATION_PROPERTYEASTING);
-                Assert.IsNotNull(sf);
-                Assert.IsNull(sf.Value);
+                Assert.NotNull(sf);
+                Assert.Null(sf.Value);
 
                 sf = gl.GetField(CommonDTD.GRIDLOCATION_PROPERTYNORTHING);
-                Assert.IsNotNull(sf);
-                Assert.IsNull(sf.Value);
+                Assert.NotNull(sf);
+                Assert.Null(sf.Value);
             }
 
             

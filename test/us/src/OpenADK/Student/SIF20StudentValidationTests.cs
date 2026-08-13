@@ -4,13 +4,13 @@ using System.Text;
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.Nunit.US.Library.Tools;
 
 namespace Library.Nunit.US.Library.Student
 {
-    [TestFixture]
-    class SIF20StudentValidationTests : ValidationTest
+    
+    public class SIF20StudentValidationTests : ValidationTest
     {
         public SIF20StudentValidationTests()
             : base(SifVersion.SIF20r1 )
@@ -18,7 +18,7 @@ namespace Library.Nunit.US.Library.Student
 		
 	}
 
-    [Test]
+    [Fact]
 	public void testStudentSchoolEnrollment010() {
 
 		SifElement se = readElementFromFile( "data/SIF20r1/StudentSchoolEnrollment/SIF20StudentSchoolEnrollment.xml", SifVersion.SIF20r1 );
@@ -26,7 +26,7 @@ namespace Library.Nunit.US.Library.Student
 
 	}
 
-    [Test]
+    [Fact]
 	public void testStudentSchoolEnrollment020() {
 
         StudentSchoolEnrollment sse = new StudentSchoolEnrollment(Runtime.MakeGuid(), Runtime.MakeGuid(), Runtime.MakeGuid(), MembershipType.HOME, TimeFrame.CURRENT);
@@ -41,7 +41,7 @@ namespace Library.Nunit.US.Library.Student
 
 	}
 
-    [Test]
+    [Fact]
 	public void testStudentPersonal010() {
 
 		SifElement se = readElementFromFile( "data/SIF20/StudentPersonal/SIF20StudentPersonal.xml", SifVersion.SIF20r1 );

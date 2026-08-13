@@ -7,19 +7,19 @@ using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 using System.Collections;
 using OpenADK.Library.us;
 
 namespace Library.Nunit.US.Library.Student
 {
-    [TestFixture]
+    
     public class LEAInfoTests : AdkTest
     {
         protected SifVersion fOriginalVersion;
 
-        [SetUp]
+        
         public void SetUp()
         {
             Runtime.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student);
@@ -27,13 +27,13 @@ namespace Library.Nunit.US.Library.Student
             Runtime.SifVersion = SifVersion.SIF15r1;
         }
 
-        [TearDown]
+        
         public void TearDown()
         {
             Runtime.SifVersion = fOriginalVersion;
         }
 
-        [Test]
+        [Fact]
         public void testLeaInfoParseFrom15r1() {
 		    Runtime.SifVersion = SifVersion.SIF15r1;
 		    String leaInfoXML = "	<LEAInfo RefId='1234' xmlns='http://www.sifinfo.org/infrastructure/1.x'>"
@@ -105,14 +105,14 @@ namespace Library.Nunit.US.Library.Student
 		    LEAInfo leaObject = (LEAInfo) p.Parse(leaInfoXML, null, 0, SifVersion.SIF15r1);
 
 		    PhoneNumber phone = leaObject.PhoneNumberList.ItemAt( 0 );
-		    Assert.AreEqual("NA", phone.Format, "Format");
-		    Assert.AreEqual("TE", phone.Type, "Type");
-		    Assert.AreEqual("814.455.4658", phone.Number, "District Phone");
+		    Assert.Equal("NA", phone.Format);
+		    Assert.Equal("TE", phone.Type);
+		    Assert.Equal("814.455.4658", phone.Number);
 
                 phone = leaObject.LEAContactList.ItemAt( 0 ).ContactInfo.PhoneNumberList.ItemAt( 0 );
-		    Assert.AreEqual("NA", phone.Format, "Format");
-		    Assert.AreEqual("TE", phone.Type, "Type");
-		    Assert.AreEqual("", phone.Number, "Contact Phone");
+		    Assert.Equal("NA", phone.Format);
+		    Assert.Equal("TE", phone.Type);
+		    Assert.Equal("", phone.Number);
 
 		    AgentConfig cfg = createConfig(agentCFG);
 		    Mappings m = cfg.Mappings.GetMappings("Default").Select(null, null, null);
@@ -121,8 +121,8 @@ namespace Library.Nunit.US.Library.Student
 
 		    Console.WriteLine( leaObject.SifVersion );
 
-		    Assert.AreEqual("814.455.4658", target["DISTRICT_PHONE"], "District Phone");
-		    Assert.AreEqual("", target["CONTACT_PHONE"], "Contact Phone");
+		    Assert.Equal("814.455.4658", target["DISTRICT_PHONE"]);
+		    Assert.Equal("", target["CONTACT_PHONE"]);
 
 	    }
 

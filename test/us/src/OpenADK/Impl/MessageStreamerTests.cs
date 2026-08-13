@@ -4,7 +4,7 @@ using System.Text;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
-using NUnit.Framework;
+using Xunit;
 using Library.Nunit.US;
 
 namespace Library.Nunit.US.Impl
@@ -12,10 +12,10 @@ namespace Library.Nunit.US.Impl
     /// <summary>
     /// Summary description for MessageStreamerTests.
     /// </summary>
-    [TestFixture]
+    
     public class MessageStreamerTests : UsAdkTest
     {
-        [Test]
+        [Fact]
         public void SinglePayloadTest()
         {
             using (Stream studentStream = GetResourceStream("StudentPersonal.xml"))
@@ -26,7 +26,7 @@ namespace Library.Nunit.US.Impl
             }
         }
 
-        [Test]
+        [Fact]
         public void MultiplePayloadTest()
         {
             Stream studentStream = GetResourceStream("StudentPersonal.xml");
@@ -36,7 +36,7 @@ namespace Library.Nunit.US.Impl
         }
 
 
-        [Test]
+        [Fact]
         public void SinglePayloadError()
         {
             Stream errorStream = GetResourceStream("SIF_Error.xml");
@@ -45,7 +45,7 @@ namespace Library.Nunit.US.Impl
         }
 
 
-        [Test]
+        [Fact]
         public void SinglePayloadNormal()
         {
             Stream errorStream = GetResourceStream("StudentPersonal.xml");
@@ -54,7 +54,7 @@ namespace Library.Nunit.US.Impl
         }
 
 
-        [Test]
+        [Fact]
         public void EmptyPayload()
         {
             Stream emptyStream = GetResourceStream("EmptyResponse.pkt");
@@ -133,7 +133,7 @@ namespace Library.Nunit.US.Impl
             Console.WriteLine("RawLength:{0}, Text Length:{1}", ms.Length, data.Length);
             Console.WriteLine(data);
 
-            Assert.AreEqual(length, ms.Length, "Length property and final length are not the same.");
+            Assert.Equal(length, ms.Length);
 
 
             // Try parsing the final stream to see if it is a valid message
@@ -142,7 +142,7 @@ namespace Library.Nunit.US.Impl
             StreamReader reader = new StreamReader(ms);
             SifElement o = parser.Parse(reader, null, SifParserFlags.None, version);
 
-            Assert.IsNotNull(o);
+            Assert.NotNull(o);
         }
     }
 }

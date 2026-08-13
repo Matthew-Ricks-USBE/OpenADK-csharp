@@ -3,7 +3,7 @@ using OpenADK.Library;
 using OpenADK.Library.Global;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 using System.Collections;
 
@@ -12,10 +12,10 @@ namespace Library.Nunit.US
    /// <summary>
    /// Summary description for SifDataObjectTests.
    /// </summary>
-   [TestFixture]
+   
    public class SifDataObjectTests : AdkTest
    {
-      [Test]
+      [Fact]
       public void CreateElementOrAttribute()
       {
          String firstName = "Rosemary";
@@ -28,9 +28,9 @@ namespace Library.Nunit.US
          retval.SetElementOrAttribute("Name[@Type='04']/LastName", lastName);
 
          Name name = retval.Name;
-         Assert.AreEqual(firstName, name.FirstName, "First Name");
-         Assert.AreEqual(lastName, name.LastName, "Last Name");
-         Assert.IsNull(name.MiddleName, "Middle Name");
+         Assert.True(firstName == name.FirstName, "First Name");
+         Assert.True(lastName == name.LastName, "Last Name");
+         Assert.Null(name.MiddleName);
 
          // echo to the console so we can see what's going on
          SifWriter writer = new SifWriter(Console.Out, Runtime);
@@ -43,7 +43,7 @@ namespace Library.Nunit.US
   * SIFDataObject 
   */
 
-      [Test]
+      [Fact]
       public void testSetSIF_ExtendedElementsContainer()
       {
          StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
@@ -57,7 +57,7 @@ namespace Library.Nunit.US
          sp.SIFExtendedElementsContainer = elements;
 
          SIF_ExtendedElement[] elementArray = sp.SIFExtendedElementsContainer.ToArray();
-         Assert.AreEqual(3, elementArray.Length, "Should have three items in it.");
+         Assert.True(3 == elementArray.Length, "Should have three items in it.");
 
          // Try to find all three elements to make sure that they are all there
          bool found1 = false, found2 = false, found3 = false;
@@ -82,9 +82,9 @@ namespace Library.Nunit.US
                found3 = key.Equals("urn:foo2") && test.TextValue.Equals("bar3");
             }
          }
-         Assert.IsTrue(found1, "Element1 was not found");
-         Assert.IsTrue(found2, "Element2 was not found");
-         Assert.IsTrue(found3, "Element3 was not found");
+         Assert.True(found1, "Element1 was not found");
+         Assert.True(found2, "Element2 was not found");
+         Assert.True(found3, "Element3 was not found");
       }
 
 
@@ -94,7 +94,7 @@ namespace Library.Nunit.US
      * SIFDataObject 
      */
 
-      [Test]
+      [Fact]
       public void testSetttingSIF_ExtendedElements()
       {
          StudentPersonal sp = ObjectCreator.CreateStudentPersonal();
@@ -105,7 +105,7 @@ namespace Library.Nunit.US
          sp.AddSIFExtendedElement("urn:foo2", "bar3");
 
          SIF_ExtendedElement[] elementArray = sp.SIFExtendedElementsContainer.ToArray();
-         Assert.AreEqual(2, elementArray.Length, "Should have two items in it.");
+         Assert.True(2 == elementArray.Length, "Should have two items in it.");
 
          // Try to find both elements to make sure that they are there
          bool found2 = false, found3 = false;
@@ -126,24 +126,24 @@ namespace Library.Nunit.US
                found3 = key.Equals("urn:foo2") && test.TextValue.Equals("bar3");
             }
          }
-         Assert.IsTrue(found2, "Element2 was not found");
-         Assert.IsTrue(found3, "Element3 was not found");
+         Assert.True(found2, "Element2 was not found");
+         Assert.True(found3, "Element3 was not found");
       }
       //Asserts that SetChildren Completely replaces extendedElements list
-      [Test]
+      [Fact]
       public void testExtendedElements()
       {
          StudentPersonal sp = new StudentPersonal();
          SIF_ExtendedElements container = sp.SIFExtendedElementsContainer;
          container.SetChildren(new SIF_ExtendedElement[] { new SIF_ExtendedElement("key1", "value1") });
          container.SetChildren(new SIF_ExtendedElement[] { new SIF_ExtendedElement("key1", "value1") });
-         Assert.AreEqual(1, sp.SIFExtendedElements.Length, "Result should be 1");
+         Assert.True(1 == sp.SIFExtendedElements.Length, "Result should be 1");
 
       }
 
       //Asserts that null passed to SetChildren clears the extendedElements list
      
-      [Test]
+      [Fact]
       public void testNullExtendedElements()
       {
          StudentPersonal sp = new StudentPersonal();
@@ -153,7 +153,7 @@ namespace Library.Nunit.US
          container.AddChild(new SIF_ExtendedElement("key2", "value1"));
          container.SetChildren(new SIF_ExtendedElement[] { null });
         
-         Assert.AreEqual(0, sp.SIFExtendedElements.Length, "Result should be 0");
+         Assert.True(0 == sp.SIFExtendedElements.Length, "Result should be 0");
 
       }
    }

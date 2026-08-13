@@ -3,7 +3,7 @@ using System.Threading;
 using OpenADK.Library;
 using OpenADK.Library.Infra;
 using OpenADK.Library.us.Reporting;
-using NUnit.Framework;
+using Xunit;
 
 namespace Library.Nunit.US.Impl
 {
@@ -59,10 +59,10 @@ namespace Library.Nunit.US.Impl
             // TODO: should we test error handling in the onQueryPending handler?
             //doBehavior( zone );
 
-            Assert.IsNotNull(fPendingRequestInfo, "RequestInfo should not be null in onQueryPending()");
+            Assert.NotNull(fPendingRequestInfo);
             if (RequestStateObject != null)
             {
-                Assert.AreEqual(RequestStateObject, fPendingRequestInfo.UserData, "Custom State in onQueryPending()");
+                Assert.Equal(RequestStateObject, fPendingRequestInfo.UserData);
             }
         }
 
@@ -72,10 +72,10 @@ namespace Library.Nunit.US.Impl
             fResultsRequestInfo = smi.SIFRequestInfo;
             doBehavior(zone);
 
-            Assert.IsNotNull(fResultsRequestInfo, "RequestInfo should not be null in onQueryResults()");
+            Assert.NotNull(fResultsRequestInfo);
             if (RequestStateObject != null)
             {
-                Assert.AreEqual(RequestStateObject, fResultsRequestInfo.UserData, "Custom State in onQueryResults()");
+                Assert.Equal(RequestStateObject, fResultsRequestInfo.UserData);
             }
         }
 

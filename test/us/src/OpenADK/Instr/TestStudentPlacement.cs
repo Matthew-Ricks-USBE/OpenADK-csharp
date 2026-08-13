@@ -2,7 +2,7 @@ using System;
 using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Programs;
-using NUnit.Framework;
+using Xunit;
 using Library.UnitTesting.Framework;
 
 namespace Library.Nunit.US.Instr
@@ -10,10 +10,10 @@ namespace Library.Nunit.US.Instr
     /// <summary>
     /// Summary description for TestStudentPlacement.
     /// </summary>
-    [TestFixture]
+    
     public class TestStudentPlacement : AdkTest
     {
-        [Test]
+        [Fact]
         public void SDOParse()
         {
             DateTime today = DateTime.Now;
