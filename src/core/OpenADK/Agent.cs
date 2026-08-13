@@ -40,7 +40,7 @@ namespace OpenADK.Library
         /// specific zone. Your agent may also use this Category to post log
         /// events.
         /// </summary>
-        protected internal ILogger Log { get; }
+        public ILogger Log { get; }
 
         /// <summary>  The root ServerLog instance. Subcategories exist for each zone, where 
         /// the subcategory name is "ADK.Agent$<i>zoneId</i>". The Agent uses the
