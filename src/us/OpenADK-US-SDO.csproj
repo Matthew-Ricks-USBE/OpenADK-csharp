@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
@@ -6,6 +6,14 @@
     <AssemblyName>OpenADK.SDO-US</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>UtahPublicEd.OpenADK.SDO-US</PackageId>
+    <Version>$(PackageVersion)</Version>
+    <Authors>Access4Learning;Utah State Board of Education</Authors>
+    <Description>United States (US) SIF Data Object (SDO) library.</Description>
+    <RepositoryUrl>https://dev.azure.com/UtahPublicEd/USIMS/_git/student-openadk-csharp-service</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DocumentationFile>bin\Release\SifWorks.Sdo-US.xml</DocumentationFile>

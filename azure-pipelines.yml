@@ -1,0 +1,210 @@
+# azure-pipelines.yml
+
+trigger:
+  branches:
+    include:
+      - main
+
+schedules:
+  - cron: '0 0 1 * *'
+    displayName: Monthly build (1st of month, midnight UTC)
+    branches:
+      include:
+        - main
+    always: true
+
+variables:
+  - name: buildConfiguration
+    value: Release
+  # versionSuffix is set at compile time based on the triggering branch.
+  # main builds get no suffix; all other branches get -beta.
+  - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+    - name: versionSuffix
+      value: ''
+  - ${{ else }}:
+    - name: versionSuffix
+      value: '-beta'
+  # Override PackageVersion at queue time or in a variable group to set a specific NuGet version.
+  - name: PackageVersion
+    value: 2.0.$(Build.BuildId)$(versionSuffix)
+  - name: outputPackagesDir
+    value: $(Build.ArtifactStagingDirectory)/packages
+  # SonarQube connection settings — update these when enabling the SonarQube steps below.
+  - name: sonar.projectKey
+    value: USIMS_student-openadk-csharp-service_064104d8-2738-4c1b-82b1-ee5cc5c4c651
+  - name: sonar.hostUrl
+    value: https://sonarqube-usbe.msappproxy.net
+
+pool:
+  vmImage: windows-latest
+
+steps:
+
+  # ---------------------------------------------------------------------------
+  # Restore local .NET tools (includes dotnet-sonarscanner for the disabled
+  # SonarQube steps below).
+  # ---------------------------------------------------------------------------
+  - task: UseDotNet@2
+    displayName: Use .NET SDK
+    inputs:
+      useGlobalJson: false
+      version: '10.x'
+      
+  - task: DotNetCoreCLI@2
+    displayName: Restore Custom Tools
+    inputs:
+      command: custom
+      custom: 'tool'
+      arguments: 'restore'
+
+  # ---------------------------------------------------------------------------
+  # SonarQube — BEGIN
+  # Wraps the build and test steps so SonarQube collects coverage and analysis.
+  # ---------------------------------------------------------------------------
+  - pwsh: >
+      dotnet tool run dotnet-sonarscanner begin
+      /k:"$(sonar.projectKey)"
+      /d:sonar.token="$(SONAR_TOKEN)"
+      /d:sonar.host.url="$(sonar.hostUrl)"
+      /d:sonar.links.scm=$(Build.Repository.Uri)
+      /d:sonar.scanner.skipJreProvisioning=true
+      /d:sonar.cs.opencover.reportsPaths="$(Agent.TempDirectory)/TestResults/**/coverage.opencover.xml"
+      /d:sonar.qualitygate.wait=true
+    displayName: 'SonarQube: begin analysis'
+    enabled: false
+
+  - task: DotNetCoreCLI@2
+    displayName: Prepare for SonarQube Analysis
+    inputs:
+      command: custom
+      custom: 'sonarscanner'
+      arguments: >-
+        begin
+        /k:"$(sonar.projectKey)"
+        /d:sonar.token="$(SONAR_TOKEN)"
+        /d:sonar.host.url="$(sonar.hostUrl)"
+        /d:sonar.links.ci=$(System.TeamFoundationCollectionUri)$(System.TeamProject)/_build?buildId=$(Build.BuildId)
+        /d:sonar.links.scm=$(Build.Repository.Uri)
+        /d:sonar.scanner.skipJreProvisioning=true
+        /d:sonar.cs.opencover.reportsPaths="$(Agent.TempDirectory)/TestResults/**/coverage.opencover.xml"
+        /d:sonar.qualitygate.wait=true
+
+  # ---------------------------------------------------------------------------
+  # Restore & Build — all four solutions
+  # ---------------------------------------------------------------------------
+  - script: |
+      dotnet restore OpenADK-NET-Core.sln
+      dotnet restore OpenADK-NET-US.sln
+      dotnet restore OpenADK-NET-AU.sln
+      dotnet restore OpenADK-NET-UK.sln
+    displayName: Restore all solutions
+
+  - script: |
+      dotnet build OpenADK-NET-Core.sln --no-restore -c $(buildConfiguration)
+      dotnet build OpenADK-NET-US.sln   --no-restore -c $(buildConfiguration)
+      dotnet build OpenADK-NET-AU.sln   --no-restore -c $(buildConfiguration)
+      dotnet build OpenADK-NET-UK.sln   --no-restore -c $(buildConfiguration)
+    displayName: Build all solutions
+
+  # ---------------------------------------------------------------------------
+  # Test — all four solutions
+  # AU has no test projects; dotnet test will exit cleanly with no tests found.
+  # Coverlet data collector generates coverage.opencover.xml in each results dir.
+  # ---------------------------------------------------------------------------
+  - pwsh: |
+      dotnet test OpenADK-NET-Core.sln `
+        --no-build -c $(buildConfiguration) `
+        --results-directory "$(Agent.TempDirectory)/TestResults/Core" `
+        --collect "XPlat Code Coverage" `
+        -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+
+      dotnet test OpenADK-NET-US.sln `
+        --no-build -c $(buildConfiguration) `
+        --results-directory "$(Agent.TempDirectory)/TestResults/US" `
+        --collect "XPlat Code Coverage" `
+        -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+
+      dotnet test OpenADK-NET-AU.sln `
+        --no-build -c $(buildConfiguration) `
+        --results-directory "$(Agent.TempDirectory)/TestResults/AU" `
+        --collect "XPlat Code Coverage" `
+        -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+
+      dotnet test OpenADK-NET-UK.sln `
+        --no-build -c $(buildConfiguration) `
+        --results-directory "$(Agent.TempDirectory)/TestResults/UK" `
+        --collect "XPlat Code Coverage" `
+        -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover
+    displayName: Run all tests
+
+  - task: PublishTestResults@2
+    displayName: Publish Test Results
+    condition: always()
+    inputs:
+      testResultsFormat: VSTest
+      testResultsFiles: '$(Agent.TempDirectory)/TestResults/**/*.trx'
+      mergeTestResults: true
+      testRunTitle: OpenADK Test Run
+
+  - task: PublishCodeCoverageResults@2
+    displayName: Publish Code Coverage
+    inputs:
+      summaryFileLocation: '$(Agent.TempDirectory)/**/coverage.cobertura.xml'
+      codecoverageTool: 'Cobertura'
+
+  # ---------------------------------------------------------------------------
+  # SonarQube — END
+  # Must run after all tests so coverage data is included in the analysis.
+  # ---------------------------------------------------------------------------
+  - task: DotNetCoreCLI@2
+    displayName: Perform SonarQube Analysis
+    inputs:
+      command: custom
+      custom: 'sonarscanner'
+      arguments: >-
+        end
+        -d:sonar.token=$(SONAR_TOKEN)
+
+  # ---------------------------------------------------------------------------
+  # Pack — produce NuGet packages for the four src/ library projects
+  # ---------------------------------------------------------------------------
+  - pwsh: |
+      New-Item -ItemType Directory -Force -Path "$(outputPackagesDir)" | Out-Null
+
+      dotnet pack src/core/OpenADK-NET-Core.csproj `
+        --no-build -c $(buildConfiguration) `
+        /p:PackageVersion=$(PackageVersion) `
+        --output "$(outputPackagesDir)"
+
+      dotnet pack src/us/OpenADK-US-SDO.csproj `
+        --no-build -c $(buildConfiguration) `
+        /p:PackageVersion=$(PackageVersion) `
+        --output "$(outputPackagesDir)"
+
+      dotnet pack src/au/OpenADK-AU-SDO.csproj `
+        --no-build -c $(buildConfiguration) `
+        /p:PackageVersion=$(PackageVersion) `
+        --output "$(outputPackagesDir)"
+
+      dotnet pack src/uk/OpenADK-UK-SDO.csproj `
+        --no-build -c $(buildConfiguration) `
+        /p:PackageVersion=$(PackageVersion) `
+        --output "$(outputPackagesDir)"
+    displayName: Pack NuGet packages
+
+  # ---------------------------------------------------------------------------
+  # Publish — push packages to the "Platform" Azure Artifacts feed
+  # ---------------------------------------------------------------------------
+  - task: NuGetAuthenticate@1
+    displayName: Authenticate with Azure Artifacts
+
+  - task: DotNetCoreCLI@2
+    displayName: Push packages to Platform feed
+    inputs:
+      command: custom
+      custom: 'nuget'
+      arguments: >-
+        push
+        "$(outputPackagesDir)/*.nupkg" `
+        --source "Platform" `
+        --skip-duplicate

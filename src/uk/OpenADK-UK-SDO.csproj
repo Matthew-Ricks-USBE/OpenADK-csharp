@@ -3,9 +3,17 @@
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>OpenADK.Library.uk</RootNamespace>
-    <AssemblyName>OpenADK.Sdo-UK</AssemblyName>
+    <AssemblyName>OpenADK.SDO-UK</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>UtahPublicEd.OpenADK.SDO-UK</PackageId>
+    <Version>$(PackageVersion)</Version>
+    <Authors>Access4Learning;Utah State Board of Education</Authors>
+    <Description>United Kingdom (UK) SIF Data Object (SDO) library.</Description>
+    <RepositoryUrl>https://dev.azure.com/UtahPublicEd/USIMS/_git/student-openadk-csharp-service</RepositoryUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DocumentationFile>bin\Release\OpenADK.Sdo-UK.xml</DocumentationFile>

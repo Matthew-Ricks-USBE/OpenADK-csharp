@@ -7,6 +7,14 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <PackageId>UtahPublicEd.OpenADK.Core</PackageId>
+    <Version>$(PackageVersion)</Version>
+    <Authors>Access4Learning;Utah State Board of Education</Authors>
+    <Description>OpenADK core library.</Description>
+    <RepositoryUrl>https://dev.azure.com/UtahPublicEd/USIMS/_git/student-openadk-csharp-service</RepositoryUrl>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DocumentationFile>bin\Release\SifWorks.Adk.xml</DocumentationFile>
     <Optimize>true</Optimize>

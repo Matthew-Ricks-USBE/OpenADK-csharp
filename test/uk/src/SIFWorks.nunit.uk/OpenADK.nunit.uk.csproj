@@ -13,13 +13,10 @@
     <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
-
     <PackageReference Include="xunit.v3" Version="3.0.1" />
-
     <PackageReference Include="xunit.runner.visualstudio" Version="3.1.5" />
-
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.6.0" />
-
+    <PackageReference Include="coverlet.collector" Version="6.0.4" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="data\SIF*\*.xml">
