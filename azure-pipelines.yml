@@ -1,9 +1,7 @@
 # azure-pipelines.yml
 
 trigger:
-  branches:
-    include:
-      - main
+  - main
 
 schedules:
   - cron: '0 0 1 * *'
