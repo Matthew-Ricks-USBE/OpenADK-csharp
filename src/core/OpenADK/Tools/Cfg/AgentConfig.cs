@@ -42,6 +42,7 @@ namespace OpenADK.Library.Tools.Cfg
     /// <li>
     /// The agent's transports are configured according to the properties
     /// of the <c>&lt;transport&gt;</c> elements
+    /// </li>
     /// <li>
     /// A zone is created for each <c>&lt;zone&gt;</c> element
     /// </li>
@@ -340,7 +341,7 @@ namespace OpenADK.Library.Tools.Cfg
 
         /// <summary>  Applies the settings in the configuration to the Agent. This method
         /// should be called at most once during agent startup, usually from
-        /// <coce>Agent.initialize</c>
+        /// <c>Agent.initialize</c>
         /// 
         /// <ul>
         /// <li>
@@ -349,7 +350,7 @@ namespace OpenADK.Library.Tools.Cfg
         /// </li>
         /// <li>
         /// A Zone instance is created for each <c>&lt;zone&gt;</c>
-        /// element. Any <c>&lt;property&gt</c> elements defined for
+        /// element. Any <c>&lt;property&gt;</c> elements defined for
         /// the zone are set in the zone's AgentProperties object. An array
         /// of all zones created is returned. The caller can then join those
         /// zones to topics.

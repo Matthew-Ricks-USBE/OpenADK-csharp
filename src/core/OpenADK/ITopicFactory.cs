@@ -68,7 +68,7 @@ namespace OpenADK.Library
       /// 
       /// Returns an array of Topics
       ///</summary>
-      ///<param name="context"><A SIFContext to return all topics for/param>
+      ///<param name="context">A SIFContext to return all topics for</param>
       ICollection<ITopic> GetAllTopics(SifContext context);
 
       ///<summary>

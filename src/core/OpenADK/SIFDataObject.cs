@@ -29,10 +29,10 @@ namespace OpenADK.Library
     /// object, create a Name object and attach it to the StudentPersonal with the
     /// setName method:
     /// 
-    /// <c>&nbsp;&nbsp;&nbsp;&nbsp;// Build a StudentPersonal object<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;StudentPersonal sp = new StudentPersonal();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setRefId( Adk.makeGUID() );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setName( new Name( "Davis", "Alan" ) );</br>
+    /// <c>&#160;&#160;&#160;&#160;// Build a StudentPersonal object<br/>
+    /// &#160;&#160;&#160;&#160;StudentPersonal sp = new StudentPersonal();<br/>
+    /// &#160;&#160;&#160;&#160;sp.setRefId( Adk.makeGUID() );<br/>
+    /// &#160;&#160;&#160;&#160;sp.setName( new Name( "Davis", "Alan" ) );<br/>
     /// </c>
     /// 
     /// The second approach to getting and setting element/attribute values is to
@@ -43,11 +43,11 @@ namespace OpenADK.Library
     /// involved in dynamically mapping application fields to SIF elements and
     /// attributes).
     /// 
-    /// <c>&nbsp;&nbsp;&nbsp;&nbsp;// Build a StudentPersonal object<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;StudentPersonal sp = new StudentPersonal();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setRefId( Adk.makeGUID() );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setElementOrAttribute( "Name[@Type='02']/LastName", "Davis", null );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setElementOrAttribute( "Name[@Type='02']/FirstName", "Brian", null );<br/>
+    /// <c>&#160;&#160;&#160;&#160;// Build a StudentPersonal object<br/>
+    /// &#160;&#160;&#160;&#160;StudentPersonal sp = new StudentPersonal();<br/>
+    /// &#160;&#160;&#160;&#160;sp.setRefId( Adk.makeGUID() );<br/>
+    /// &#160;&#160;&#160;&#160;sp.setElementOrAttribute( "Name[@Type='02']/LastName", "Davis", null );<br/>
+    /// &#160;&#160;&#160;&#160;sp.setElementOrAttribute( "Name[@Type='02']/FirstName", "Brian", null );<br/>
     /// </c>
     /// 
     /// XPath-like query strings can include substitution tokens and can even call
@@ -56,15 +56,15 @@ namespace OpenADK.Library
     /// method of the "MyFunctions" class is called to capitalize the last name:
     /// 
     /// 
-    /// <c>&nbsp;&nbsp;&nbsp;&nbsp;// Prepare a table with field values<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;HashMap values = new HashMap();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;values.put( "LASTNAME", "Davis" );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;values.put( "FIRSTNAME", "Brian" );<br/><br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;// Build a StudentPersonal object<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;StudentPersonal sp = new StudentPersonal();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setRefId( Adk.makeGUID() );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setElementOrAttribute( "Name[@Type='02']/LastName=@MyFunctions.capitalize( $(LASTNAME) )", null, values );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;sp.setElementOrAttribute( "Name[@Type='02']/FirstName=$(FIRSTNAME)", null, values );<br/>
+    /// <c>&#160;&#160;&#160;&#160;// Prepare a table with field values<br/>
+    /// &#160;&#160;&#160;&#160;HashMap values = new HashMap();<br/>
+    /// &#160;&#160;&#160;&#160;values.put( "LASTNAME", "Davis" );<br/>
+    /// &#160;&#160;&#160;&#160;values.put( "FIRSTNAME", "Brian" );<br/><br/>
+    /// &#160;&#160;&#160;&#160;// Build a StudentPersonal object<br/>
+    /// &#160;&#160;&#160;&#160;StudentPersonal sp = new StudentPersonal();<br/>
+    /// &#160;&#160;&#160;&#160;sp.setRefId( Adk.makeGUID() );<br/>
+    /// &#160;&#160;&#160;&#160;sp.setElementOrAttribute( "Name[@Type='02']/LastName=@MyFunctions.capitalize( $(LASTNAME) )", null, values );<br/>
+    /// &#160;&#160;&#160;&#160;sp.setElementOrAttribute( "Name[@Type='02']/FirstName=$(FIRSTNAME)", null, values );<br/>
     /// </c>
     /// 
     /// <b>Object Type</b>
@@ -76,10 +76,10 @@ namespace OpenADK.Library
     /// 
     /// 
     /// <c>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;// Lookup a Topic instance<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDataObject data = new SifDataObject( Adk.Dtd().STUDENTPERSONAL );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;TopicFactory factory = myAgent.getTopicFactory();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;Topic t = factory.getInstance( data.getObjectType() );<br/>
+    /// &#160;&#160;&#160;&#160;// Lookup a Topic instance<br/>
+    /// &#160;&#160;&#160;&#160;SifDataObject data = new SifDataObject( Adk.Dtd().STUDENTPERSONAL );<br/>
+    /// &#160;&#160;&#160;&#160;TopicFactory factory = myAgent.getTopicFactory();<br/>
+    /// &#160;&#160;&#160;&#160;Topic t = factory.getInstance( data.getObjectType() );<br/>
     /// </c>
     /// 
     /// 
@@ -340,6 +340,7 @@ namespace OpenADK.Library
         }
 
         /// <summary>Gets an element or attribute value identified by an XPath-like query string.</summary>
+        /// <remarks>
         ///   NOTE: This method makes calls to SIFXPathContext. If multiple calls to
         ///  <c>GetElementOrAttribute</c> are being done, it is much more efficient to create
         ///  a new <c>SifXPathContext</c> by calling <c>SifXPathContext.NewInstance(sdo)</c> and then
@@ -366,10 +367,10 @@ namespace OpenADK.Library
         }
 
 
-        //* Sets the SIF_ExtendedElements container for this object.<P>
+        //* Sets the SIF_ExtendedElements container for this object.
         //* Normally, agents can just call {@link #addSIFExtendedElement(String, String)},
         //* which automatically creates a SIF_ExtendedElements container, if necessary and 
-        //* allows for easy addition of SIF_ExtendedElements.<p>
+        //* allows for easy addition of SIF_ExtendedElements.
         //* This method is provided as a convenience to agents that need more control or
         //* wish to set or completely replace the existing SIF_ExtendedElements container. 
 
@@ -461,7 +462,7 @@ namespace OpenADK.Library
         }
 
         /**
-          * 	Gets all SIF_ExtendedElements/SIF_ExtendedElement children of this object.<p>
+          * 	Gets all SIF_ExtendedElements/SIF_ExtendedElement children of this object.
           * 	@return An array of SIF_ExtendedElement instances. If no SIF_ExtendedElements 
           * 		child element was found, an empty array is returned
           * 

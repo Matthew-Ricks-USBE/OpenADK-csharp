@@ -15,7 +15,7 @@ using OpenADK.Library.Global;
 namespace OpenADK.Library.Infra{
 
 /// <summary>
-	///       This element holds the sub-message being sent by the <SIF_SystemControl>
+	///       This element holds the sub-message being sent by the &lt;SIF_SystemControl&gt;
 	///       message. This class is used internally by the ADK. To send a ping, sleep, or wakeup
 	///       request to the Zone Integration Server, agents should call the sifPing,
 	///       sleep, and wakeup methods of the Zone and Agent classes. SIF_GetMessage is

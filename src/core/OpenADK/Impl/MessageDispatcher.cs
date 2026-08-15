@@ -128,7 +128,7 @@ namespace OpenADK.Library.Impl
     /// agent goes down or not, the events it has generated are guaranteed to make
     /// their way to the ZIS eventually. SIF_Request and SIF_Response messages are
     /// not handled in this way; rather, they are sent synchronously in the same
-    /// way as SIF_Events are sent when the ALQ is disabled.</p>
+    /// way as SIF_Events are sent when the ALQ is disabled.
     /// 
     /// 
     /// When the ALQ is disabled, SIF_Event, SIF_Request, and SIF_Response messages
@@ -137,9 +137,9 @@ namespace OpenADK.Library.Impl
     /// the call stack to the agent code that originally initiated the message (e.g.
     /// to a Topic.publishEvent call). An agent can either retry the operation by
     /// calling the same method a second time, or can abandon the transaction
-    /// altogether.</p>
+    /// altogether.
     /// 
-    /// <b>Push vs. Pull Mode</b></p>
+    /// <b>Push vs. Pull Mode</b>
     /// 
     /// Push and Pull mode have no effect on MessageDispatcher, its interfaces, or
     /// its logic. When Push mode is active for a zone, the PH will receive incoming

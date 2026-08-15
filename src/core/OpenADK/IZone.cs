@@ -36,7 +36,7 @@ namespace OpenADK.Library
     /// are stored in the local queue before being processed. A given
     /// message exists in the local queue or in the server queue but never
     /// in both. The Agent Local Queue provides for enhanced reliability
-    /// and supports disconnected communications with the server.<br><br>
+    /// and supports disconnected communications with the server.<br/><br/>
     /// </li>
     /// <li>
     /// Each zone maintains its own set of properties. By default, a zone
@@ -44,7 +44,7 @@ namespace OpenADK.Library
     /// on a per-zone basis, call the <c>Zone.getProperties</c> method
     /// to obtain the zone's AgentProperties object, then call its accessor
     /// methods. Properties must be set prior to calling <c>connect</c>.
-    /// <br><br>
+    /// <br/><br/>
     /// </li>
     /// </ul>
     /// 
@@ -73,7 +73,6 @@ namespace OpenADK.Library
     public interface IZone : IProvisioner
     {
         /// <summary>Assigns a new properties object to this zone.</summary>
-        /// </summary>
         /// <value>A new properties object to replace the existing object
         /// </value>
         /// <remarks>
@@ -437,6 +436,7 @@ namespace OpenADK.Library
         /// If the underlying messaging protocol offers a mechanism to clear
         /// the agent's queue, it is invoked. (SIF 1.0 does not have such a
         /// mechanism.)
+        /// </li>
         /// <li>
         /// Otherwise, all incoming messages received by the agent having a
         /// timestamp earlier than or equal to the time this method is called

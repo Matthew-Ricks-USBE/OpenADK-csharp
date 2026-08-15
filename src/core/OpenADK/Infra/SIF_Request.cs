@@ -211,7 +211,7 @@ public class SIF_Request : SifMessagePayload
    /// </summary>
    /// <param name="failureLog">The log to write failures to, if any of the SIFVersions fail
    /// to be parsed.</param>
-   /// <returns><An array of SIFVersion elements. This will never be null/returns>
+   /// <returns>An array of SIFVersion elements. This will never be null</returns>
     internal SifVersion[] parseRequestVersions( Microsoft.Extensions.Logging.ILogger failureLog )
 	{
 		if( failureLog == null ){

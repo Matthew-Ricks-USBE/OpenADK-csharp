@@ -113,7 +113,6 @@ namespace OpenADK.Library.Log
         /// <seealso cref="ClearLoggers">
         /// </seealso>
         /// @since Adk 1.5
-        /// </seealso>
         public virtual void AddLogger( IServerLogModule logger )
         {
             lock ( fLoggers ) {

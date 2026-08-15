@@ -62,7 +62,7 @@ namespace OpenADK.Library.Tools.Mapping
         /// </summary>
         /// <value>The value of the Type attribute that must be present for
         /// this rule to evaluate true (e.g. "ZZ", "06", etc.)
-        /// <value>
+        /// </value>
         public virtual string Type
         {
             get { return fType; }

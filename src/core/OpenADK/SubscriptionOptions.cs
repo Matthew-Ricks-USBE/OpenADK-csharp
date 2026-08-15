@@ -51,7 +51,7 @@ namespace OpenADK.Library
 
       ///<summary>
       ///If ADK managed provisioining is in effect, this flag controls whether
-      /// a SIF_Subscribe message is sent when connecting to the ZIS in legacy mode.<p>
+      /// a SIF_Subscribe message is sent when connecting to the ZIS in legacy mode.
       /// 
       /// The default value of this property is  <code>True</code>
       /// 

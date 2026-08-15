@@ -38,7 +38,7 @@ namespace OpenADK.Library
 
         /// <summary>
         /// Creates the SIF_Protocol object that will be included with a SIF_Register
-        /// message sent to the zone associated with this Transport.</Summary>
+        /// message sent to the zone associated with this Transport.</summary>
         /// <remarks>
         /// The base class implementation creates an empty SIF_Protocol with zero
         /// or more SIF_Property elements according to the parameters that have been

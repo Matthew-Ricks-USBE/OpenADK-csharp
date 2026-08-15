@@ -184,7 +184,7 @@ namespace OpenADK.Library.Tools.Queries
 
         /// <summary>
         ///   Adds an SQLField to use for rendering an SQL Where clause using
-        /// the <see cref="SQLQueryFormatter#Query"/> method.
+        /// the <see cref="SQLQueryFormatter.Query"/> method.
         /// </summary>
         /// <param name="def"> The ElementDef that is represented by the field</param>
         /// <param name="field">The SQL representation of the field</param>

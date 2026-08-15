@@ -42,7 +42,7 @@ namespace OpenADK.Library.Tools.Mapping
     {
         /// <summary>Gets or Sets the SIF Version filter.</summary>
         /// <value> A SIF Version string prefixed by a comparision 
-        /// operator "=", "&lt;" or "&gt";. For example, specify "=1.5"
+        /// operator "=", "&lt;" or "&gt;". For example, specify "=1.5"
         /// to match SIF 1.5; ">1.1" to match all versions of SIF equal
         /// to or greater than 1.1, etc. If no comparision operator 
         /// is specified Equal To ("=") is assumed.

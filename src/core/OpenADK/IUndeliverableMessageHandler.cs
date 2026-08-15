@@ -36,12 +36,12 @@ namespace OpenADK.Library
     /// 
     /// <code>
     /// &lt;SIF_Ack&gt;<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&lt;SIF_Error&gt;<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SIF_Category&gt;0&lt;/SIF_Category&gt;<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SIF_Code&gt;0&lt;/SIF_Code&gt;<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SIF_Desc&gt;The agent does not support this object type&lt;/SIF_Desc&gt;<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;SIF_ExtendedDesc&gt;BusInfo&lt;/SIF_ExtendedDesc&gt;<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&lt;/SIF_Error&gt;<br/>
+    /// &#160;&#160;&#160;&#160;&lt;SIF_Error&gt;<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;SIF_Category&gt;0&lt;/SIF_Category&gt;<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;SIF_Code&gt;0&lt;/SIF_Code&gt;<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;SIF_Desc&gt;The agent does not support this object type&lt;/SIF_Desc&gt;<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&lt;SIF_ExtendedDesc&gt;BusInfo&lt;/SIF_ExtendedDesc&gt;<br/>
+    /// &#160;&#160;&#160;&#160;&lt;/SIF_Error&gt;<br/>
     /// &lt;/SIF_Ack&gt;<br/>
     /// </code>
     /// <br/><br/>

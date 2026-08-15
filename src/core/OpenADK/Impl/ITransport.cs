@@ -38,9 +38,9 @@ namespace OpenADK.Library.Impl
     /// one of the global Transport instances. For example,
     /// 
     /// <c>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;// Change the default transport to HTTPS<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;AgentProperties props = myAgent.getProperties();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;props.setTransport( myAgent.getTransport("https") );<br/>
+    /// &#160;&#160;&#160;&#160;// Change the default transport to HTTPS<br/>
+    /// &#160;&#160;&#160;&#160;AgentProperties props = myAgent.getProperties();<br/>
+    /// &#160;&#160;&#160;&#160;props.setTransport( myAgent.getTransport("https") );<br/>
     /// </c>
     /// 
     /// 
@@ -50,9 +50,9 @@ namespace OpenADK.Library.Impl
     /// method of the HttpTransport class:
     /// 
     /// <c>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;// Change the port of the default HttpTransport object<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;HttpTransport http = myAgent.getTransport("http");<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;http.setPort(8090);<br/>
+    /// &#160;&#160;&#160;&#160;// Change the port of the default HttpTransport object<br/>
+    /// &#160;&#160;&#160;&#160;HttpTransport http = myAgent.getTransport("http");<br/>
+    /// &#160;&#160;&#160;&#160;http.setPort(8090);<br/>
     /// </c>
     /// 
     /// 
@@ -69,16 +69,16 @@ namespace OpenADK.Library.Impl
     /// to the appropriate type.
     /// 
     /// <c>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;// Create a new HttpsTransport for this zone<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;HttpsTransport https = new HttpsTransport(myAgent.defaultHttpsTransport());<br/>
+    /// &#160;&#160;&#160;&#160;// Create a new HttpsTransport for this zone<br/>
+    /// &#160;&#160;&#160;&#160;HttpsTransport https = new HttpsTransport(myAgent.defaultHttpsTransport());<br/>
     /// <br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;// Override default settings as necessary<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;https.setPort(10348);<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;https.setKeyStore("zone_1_keystore.jks");<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;https.setKeyStorePassword("changeit");<br/>
+    /// &#160;&#160;&#160;&#160;// Override default settings as necessary<br/>
+    /// &#160;&#160;&#160;&#160;https.setPort(10348);<br/>
+    /// &#160;&#160;&#160;&#160;https.setKeyStore("zone_1_keystore.jks");<br/>
+    /// &#160;&#160;&#160;&#160;https.setKeyStorePassword("changeit");<br/>
     /// <br/>
     /// // Assign the new HttpsTransport object to the zone properties<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;zone1.getProperties().setTransport(https);<br/>
+    /// &#160;&#160;&#160;&#160;zone1.getProperties().setTransport(https);<br/>
     /// </c>
     /// 
     /// 

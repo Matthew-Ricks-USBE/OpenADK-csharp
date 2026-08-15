@@ -22,7 +22,7 @@ namespace OpenADK.Library.Tools.Mapping
     ///  that release. Values mapped to and from the Map used in this class will match
     ///  the textual representation of those values in the 1.x version of the ADK. For example,
     ///  a SIF date field that is mapped to this class will map to and from the SIF 1.5 format 
-    ///  for dates, which was yyyyMMdd.<p>
+    ///  for dates, which was yyyyMMdd.
     /// </para>
     /// <para>
     ///  The Data-to-Text formatting is controlled by the {@link com.OpenADK.Library.ADK#getTextFormatter()}
@@ -38,7 +38,7 @@ namespace OpenADK.Library.Tools.Mapping
     ///  the Map, the key of each entry should be the local
     ///  application-defined field name and the value should be the string
     ///  value of that field. Any field added to the Map before calling
-    ///  this method will not be subject to mapping rules, unless the <see cref="ObjectMapAdaptor#OverwriteValues"/>  
+    ///  this method will not be subject to mapping rules, unless the <see cref="ObjectMapAdaptor.OverwriteValues"/>  
     /// property is set to <code>True</code>.
     /// </item>
     /// <item>
@@ -53,13 +53,13 @@ namespace OpenADK.Library.Tools.Mapping
     /// If a rule evaluates successfully, the corresponding element or
     /// attribute value will be inserted into the HashMap. A rule will
     /// not be evaluated if the associated field already exists in the
-    /// Map, unless the <see cref="ObjectMapAdaptor#OverwriteValues"/>  
+    /// Map, unless the <see cref="ObjectMapAdaptor.OverwriteValues"/>  
     /// property is set to <code>True</code>.
     /// </item>
     /// </list>
     /// </para>
     /// </remarks>
-    /// <seealso cref="Adk#TextFormatter"/>
+    /// <seealso cref="Adk.TextFormatter"/>
     public class StringMapAdaptor : ObjectMapAdaptor
     {
         private SifFormatter fDataFormatter;

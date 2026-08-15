@@ -131,8 +131,7 @@ namespace OpenADK.Library
       /// <param name="data">An IDataObjectInputStream that returns SifDataObjects, all of
       /// which must be of the same class type
       /// </param>
-      /// <param name="action">One of the EventAction enum values</c>
-      /// </param>
+      /// <param name="action">One of the EventAction enum values</param>
       /// <param name="objectType">An ElementDef constant from the <see cref="OpenADK.Library.SifDtd"/> class that
       /// identifies the type of SIF Data Object contained in the event
       /// </param>

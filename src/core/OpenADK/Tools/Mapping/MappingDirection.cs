@@ -23,7 +23,7 @@ namespace OpenADK.Library.Tools.Mapping
         /// method, it will automatically lookup the ValueSet by ID and call 
         /// its <c>translate</c> function on the value produced from
         /// the mapping.</summary>
-        /// <seealso cre
+        /// <seealso cref="Outbound"/>
         Outbound = 1,
 
         /// <summary> 	Direction flag passed to the <c>map</c> method to indicate the 

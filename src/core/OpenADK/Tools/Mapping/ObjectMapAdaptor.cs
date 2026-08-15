@@ -17,9 +17,9 @@ namespace OpenADK.Library.Tools.Mapping
      *  supplied SIFDataObject, where each entry in the map is keyed by the
      *  local application-defined name of a field and the value is the native
      *  Java datatype of the corresponding element or attribute of the
-     *  SIFDataObject, such as a Calender, String, Integer, Boolean, etc.<p>
+     *  SIFDataObject, such as a Calender, String, Integer, Boolean, etc.
      *   
-     *    To use this class,<p>
+     *    To use this class,
      *
      *  <ol>
      *      <li>
@@ -182,6 +182,7 @@ namespace OpenADK.Library.Tools.Mapping
         ///  This setting influences inbound mapping operations. If set to <c>True</c>,
         ///  data coming from SIF can overwrite existing values in the Map. The
         ///  default value is <c>False</c>
+        /// </summary>
         public bool OverwriteValues
         {
             get { return fOverwriteValues; }

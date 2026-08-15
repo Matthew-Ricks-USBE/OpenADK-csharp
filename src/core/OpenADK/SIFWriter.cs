@@ -24,9 +24,10 @@ namespace OpenADK.Library
     /// 
     /// 
     /// <c>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;StudentPersonal sp = ...<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SifWriter out = new SifWriter( System.out );<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;out.write( sp );<br/>
+    /// &#160;&#160;&#160;&#160;&#160;StudentPersonal sp = ...<br/>
+    /// &#160;&#160;&#160;&#160;&#160;SifWriter out = new SifWriter( System.out );<br/>
+    /// &#160;&#160;&#160;&#160;&#160;out.write( sp );<br/>
+    /// </c>
     /// 
     /// </summary>
     /// <author>  Eric Petersen

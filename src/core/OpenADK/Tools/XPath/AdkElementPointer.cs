@@ -17,7 +17,7 @@ namespace OpenADK.Library.Tools.XPath
         /// <param name="parentPointer">The parent of this element</param>
         /// <param name="element">The element being wrapped</param>
         /// <param name="version">The SifVersion in use</param>
-        /// within its parent list</param>
+        /// <param name="index">The ordinal position within its parent list</param>
         protected AdkElementPointer( INodePointer parentPointer, Element element, SifVersion version )
             : base( parentPointer )
         {

@@ -79,8 +79,8 @@ namespace OpenADK.Library
     /// // Query for a single student by RefId<br/>
     /// Query query = new Query( SifDtd.STUDENTPERSONAL );<br/>
     /// query.addCondition(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;"4A37969803F0D00322AF0EB969038483" );<br/>
+    /// &#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
+    /// &#160;&#160;&#160;&#160;"4A37969803F0D00322AF0EB969038483" );<br/>
     /// </c>
     /// </blockquote>
     /// 
@@ -96,14 +96,14 @@ namespace OpenADK.Library
     /// Query query = new Query( SifDtd.STUDENTPERSONAL, Condition.OR );<br/>
     /// <br/>
     /// query.addCondition(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;"4A37969803F0D00322AF0EB969038483" );<br/>
+    /// &#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
+    /// &#160;&#160;&#160;&#160;"4A37969803F0D00322AF0EB969038483" );<br/>
     /// query.addCondition(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;"5A37969803F0D00322AF0EB969038484" );<br/>
+    /// &#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
+    /// &#160;&#160;&#160;&#160;"5A37969803F0D00322AF0EB969038484" );<br/>
     /// query.addCondition(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;"6A37969803F0D00322AF0EB969038485" );<br/>
+    /// &#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
+    /// &#160;&#160;&#160;&#160;"6A37969803F0D00322AF0EB969038485" );<br/>
     /// </c>
     /// </blockquote>
     /// 
@@ -128,9 +128,9 @@ namespace OpenADK.Library
     /// // the lookupElementDefBySQL function to lookup an ElementDef constant<br/>
     /// // given a SIF Query Pattern (SQP)<br/>
     /// ElementDef lname = Adk.Dtd().lookupElementDefBySQP(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL, "Name/LastName" );</br>
+    /// &#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL, "Name/LastName" );<br/>
     /// ElementDef fname = Adk.Dtd().lookupElementDefBySQP(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL, "Name/FirstName" );</br>
+    /// &#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL, "Name/FirstName" );<br/>
     /// grp1.addCondition( lname, Condition.EQ, "Jones" );<br/>
     /// grp1.addCondition( fname, Condition.EQ, "Bob" );<br/>
     /// <br/>
@@ -149,7 +149,6 @@ namespace OpenADK.Library
     /// </blockquote>
     /// 
     /// <b>Field Restrictions</b>
-    /// If only a subset of elements and attributes are requested, use the
     /// <c>setFieldRestrictions</c> method to indicate which elements and
     /// attributes should be returned to your agent by the responder. For example,
     /// to request the &lt;StudentPersonal&gt; object with RefId "4A37969803F0D00322AF0EB969038483"
@@ -163,15 +162,15 @@ namespace OpenADK.Library
     /// Query query = new Query( SifDtd.STUDENTPERSONAL );<br/>
     /// <br/>
     /// query.addCondition(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;"4A37969803F0D00322AF0EB969038483" );<br/>
+    /// &#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_REFID, Condition.EQ,<br/>
+    /// &#160;&#160;&#160;&#160;"4A37969803F0D00322AF0EB969038483" );<br/>
     /// 
     /// query.setFieldRestrictions(<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;new ElementDef[] {<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_REFID,<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_NAME,<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SifDtd.STUDENTPERSONAL_PHONENUMBER<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;}
+    /// &#160;&#160;&#160;&#160;new ElementDef[] {<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_REFID,<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_NAME,<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SifDtd.STUDENTPERSONAL_PHONENUMBER<br/>
+    /// &#160;&#160;&#160;&#160;}
     /// );
     /// </c>
     /// </blockquote>

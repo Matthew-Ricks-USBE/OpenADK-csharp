@@ -15,7 +15,6 @@ namespace OpenADK.Library.Tools.XPath
         /// <param name="parentPointer">The parent of this pointer</param>
         /// <param name="element">The element being wrapped</param>
         /// <param name="version">The SifVersion to use for resolving XPaths</param>
-        /// set of fields</param>
         internal SimpleFieldPointer(
             INodePointer parentPointer,
             Element element,

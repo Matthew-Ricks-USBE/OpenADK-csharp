@@ -9,13 +9,13 @@ namespace OpenADK.Library
 {
     /// <summary>DataObjectInputStream is supplied to message handlers to allow agents to
     /// stream an arbitrarily large set of SIFDataObjects from SIF_Response 
-    /// and SIF_Event messages.<</summary>
+    /// and SIF_Event messages.</summary>
     /// <remarks>
     /// To use DataObjectInputStream, construct a while loop that calls 
-    /// <see cref="#Available"/> to determine if more objects are available from the 
-    /// stream. Within the loop, call <see cref="#ReadDataObject"/> to obtain the next 
+    /// <see cref="Available"/> to determine if more objects are available from the 
+    /// stream. Within the loop, call <see cref="ReadDataObject"/> to obtain the next 
     /// SifDataObject instance from the stream. Note all SifDataObjects in the stream 
-    /// are of the same type. To determine the type, use the <see cref="#ObjectType"/>
+    /// are of the same type. To determine the type, use the <see cref="ObjectType"/>
     /// property to retrieve an ElementDef constant from the <see cref="OpenADK.Library.SifDtd"/> class
     /// </remarks>
     /// <example>For Example

@@ -359,6 +359,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             protected StringBuilder fBuffer;
 
             ///
+            /// <summary>
             /// The ordinal position of the end of this fragment within the StringBuilder
             /// </summary>
             protected int fEndChar = 0;

@@ -124,9 +124,6 @@ namespace OpenADK.Library
         ///	associated with the topic.
         /// </summary>
         /// <param name="subscriber">An object that implements the <code>Subscriber</code> interface</param>
-        /// agent as a subscriber of the object type. The ADK will send a
-        /// SIF_Subscribe message to each zone joined with the topic.
-        /// </param>
         void SetSubscriber(ISubscriber subscriber);
 
         /// <summary>
@@ -308,12 +305,6 @@ namespace OpenADK.Library
         /// If the underlying messaging protocol offers a mechanism to clear
         /// the agent's queue, it is invoked. (SIF 1.0 does not have such a
         /// mechanism.)
-        /// <li>
-        /// Otherwise, all incoming messages received by the agent having a
-        /// timestamp earlier than or equal to the time this method is called
-        /// are discarded. This behavior persists until the agent is
-        /// terminated or until a message is received having a later
-        /// timestamp.
         /// </li>
         /// </ul>
         /// 

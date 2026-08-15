@@ -1101,6 +1101,7 @@ namespace OpenADK.Library
         /// If the underlying messaging protocol offers a mechanism to clear
         /// the agent's queue, it is invoked. (SIF 1.0 does not have such a
         /// mechanism.)
+        /// </li>
         /// <li>
         /// Otherwise, all incoming messages received by the agent having a
         /// timestamp earlier than or equal to the time this method is called

@@ -35,21 +35,20 @@ namespace OpenADK.Library
     /// 
     /// 
     /// <c>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;public void onEvent( Event event, Zone zone, MessageInfo info )<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;{<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SifMessageInfo inf = (SifMessageInfo)info;<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String sourceId = inf.getSourceId();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String msgId = inf.getMsgId();<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SifVersion version = inf.getSIFVersion();<br/><br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Display some information about this SIF_Event...<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println( "SIF_Event message with ID " + msgId + <br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" received from agent " + sourceId + <br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" in zone " + zone.getZoneId() + "."<br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" This is a SIF " + version.toString() + " message." );<br/>
+    /// &#160;&#160;&#160;&#160;public void onEvent( Event event, Zone zone, MessageInfo info )<br/>
+    /// &#160;&#160;&#160;&#160;{<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SifMessageInfo inf = (SifMessageInfo)info;<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;String sourceId = inf.getSourceId();<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;String msgId = inf.getMsgId();<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;SifVersion version = inf.getSIFVersion();<br/><br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;// Display some information about this SIF_Event...<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;System.out.println( "SIF_Event message with ID " + msgId + <br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" received from agent " + sourceId + <br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" in zone " + zone.getZoneId() + "."<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;" This is a SIF " + version.toString() + " message." );<br/>
     /// <br/>
-    /// &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br/>
+    /// &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;...<br/>
     /// </c>
-    /// </p>
     /// 
     /// </summary>
     /// <author>  Eric Petersen

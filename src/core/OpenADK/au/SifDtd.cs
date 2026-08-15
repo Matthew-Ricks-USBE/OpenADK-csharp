@@ -155,6 +155,7 @@ public sealed partial class SifDtd : OpenADK.Library.SifDtd
 
     /// <summary>
     /// Determines if the specified SDO library is loaded
+    /// </summary>
     /// <param name="library">The library identifier (e.g. SdoLibraryType.Reporting)</param>
     /// <returns></returns>
     public bool IsLibraryLoaded(SdoLibraryType library)

@@ -17,9 +17,9 @@ namespace OpenADK.Library.Impl
     /// Provides a matrix of provisioning options for an agent, zone, or topic, divided by context. Any provisioning
     ///that is done is either done in the default context or in a specific context. This class
     ///enables all the provisioning registrations to be handled easily by the Zone, Agent, or Topic classes.
-
+    ///
     ///To register a generic handler for any object type, the key that is used is SIFDTD.SIF_MESSAGE
-
+    ///
     ///</summary>
 
     public class ProvisioningMatrix : IProvisioner
@@ -266,7 +266,7 @@ namespace OpenADK.Library.Impl
         }
 
         ///<summary>Looks up the ContextMatrix for the specified SifContext</summary>
-        ///<param name="context"
+        ///<param name="context">The SifContext to look up</param>
         private ContextMatrix GetOrCreateContextMatrix(SifContext context)
         {
             ContextMatrix handler = LookupContextMatrix(context);

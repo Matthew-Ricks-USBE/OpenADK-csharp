@@ -995,7 +995,7 @@ namespace OpenADK.Library
 
 
         /**
-         *  Sets a field's value, after evaluating the raw data type<p>
+         *  Sets a field's value, after evaluating the raw data type
          *  This method is a convenience method that can be used by property set methods. 
          *  @param id The field definition object
          *  @param wrapped The SIFSimpleType value to assign to the field

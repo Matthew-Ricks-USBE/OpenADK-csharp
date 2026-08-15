@@ -134,13 +134,13 @@ public class SIF_EventObject : SifElement
 
 // BEGIN EXTRA METHODS (C:/GitHub/rafidzal/OpenADK-java/adk-generator/../adk-generator/datadef/core/sif20/SIF_EventObject.txt.cs)
 
-    /// <summary>Attach a SifMessagePayload to this EventObject.<p></summary>
+    /// <summary>Attach a SifMessagePayload to this EventObject.</summary>
     public virtual void Attach( SifDataObject payload )
     {
         AddChild( payload );
     }
 
-    /// <summary>Detach a SifMessagePayload from this EventObject.<p></summary>
+    /// <summary>Detach a SifMessagePayload from this EventObject.</summary>
     public virtual void Detach( SifDataObject payload )
     {
         RemoveChild( payload );

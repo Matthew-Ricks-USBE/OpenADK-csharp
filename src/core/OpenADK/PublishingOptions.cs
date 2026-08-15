@@ -20,10 +20,10 @@ namespace OpenADK.Library
         private Boolean fSendSIFProvide;
 
         ///<summary>
-        /// Flag the indicates whether or not this publisher supports SIF_ExtendedQueries<p>
+        /// Flag the indicates whether or not this publisher supports SIF_ExtendedQueries
         /// 
         /// If <code>false</code>, the ADK will automatically send an error packet response
-        /// back for any SIF_ExtendedQueries received.<p>
+        /// back for any SIF_ExtendedQueries received.
         ///  
         /// If <code>true</code>, the ADK will notify the zone of SIF_ExtendedQuery support during
         /// agent provisioning.

@@ -30,7 +30,7 @@ namespace OpenADK.Library
       /// Flag the indicates whether or not this QueryResults instance supports SIF_ExtendedQueryResults 
       /// 
       /// If <code>false</code>, the ADK will automatically send an error packet response
-      /// back for any SIF_ExtendedQueryResults received.<p>
+      /// back for any SIF_ExtendedQueryResults received.
       ///  
       /// If <code>true</code>, the ADK will notify the zone of SIF_ExtendedQuery support during
       /// agent provisioning.

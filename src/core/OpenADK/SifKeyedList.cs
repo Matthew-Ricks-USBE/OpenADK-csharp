@@ -68,7 +68,7 @@ namespace OpenADK.Library
         }
 
         /**
-	 *  Gets the child object with the matching element name and key<p>
+	 *  Gets the child object with the matching element name and key
 	 *  @param name The version-independent element name. Note the element name
 	 *      is not necessarily the same as the element tag, which is version
 	 *      dependent.
@@ -91,7 +91,7 @@ namespace OpenADK.Library
 	}
 
         /**
-         *  Gets a child object identified by its ElementDef and composite key<p>
+         *  Gets a child object identified by its ElementDef and composite key
          *  @param id A ElementDef defined by the SIFDTD class to uniquely identify this field
          *  @param compKey The key values in sequential order
          */

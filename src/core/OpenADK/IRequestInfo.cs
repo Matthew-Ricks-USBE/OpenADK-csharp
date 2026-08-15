@@ -12,7 +12,7 @@ namespace OpenADK.Library
     /// </summary>
     public interface IRequestInfo
     {
-        /// The Object Type of the Request. e.g. "StudentPersonal"
+        /// <summary>The Object Type of the Request. e.g. "StudentPersonal"
         /// </summary>
         string ObjectType { get; }
 

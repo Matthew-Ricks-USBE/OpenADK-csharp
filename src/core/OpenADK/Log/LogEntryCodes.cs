@@ -7,7 +7,7 @@ using System;
 
 namespace OpenADK.Library.Log
 {
-    /// <summary> 	SIF_LogEntry error category and code constants as defined by the SIF 1.5 Specification.<p></summary>
+    /// <summary> 	SIF_LogEntry error category and code constants as defined by the SIF 1.5 Specification.</summary>
     public class LogEntryCodes
     {
         //	Categories

@@ -584,7 +584,7 @@ namespace OpenADK.Library.Tools.XPath
         /// </summary>
         /// <param name="s">A String representing an XPath expression.</param>
         /// <returns>An XPathNodeIterator pointing to the selected node set. </returns>
-        /// <seealso cref="System.Xml.XPath.XPathNavigator#Select(string)"/>
+        /// <seealso cref="System.Xml.XPath.XPathNavigator.Select(string)"/>
         public XPathNodeIterator Select( string s )
         {
             return fDefaultNavigator.Select( s );

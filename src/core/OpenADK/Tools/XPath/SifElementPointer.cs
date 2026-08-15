@@ -31,7 +31,7 @@ namespace OpenADK.Library.Tools.XPath
 
 
         /// <summary>
-        /// The set of values that can be returned from the <code>getChildAddDirective<code>
+        /// The set of values that can be returned from the <code>getChildAddDirective</code>
         /// method
         /// </summary>
         public enum AddChildDirective
