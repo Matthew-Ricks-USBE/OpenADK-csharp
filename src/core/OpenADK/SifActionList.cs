@@ -9,6 +9,8 @@ using System.Security.Permissions;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
+    /// <summary/>
     [Serializable]
     public class SifActionList<TValue> : SifKeyedList<TValue>
         where TValue : SifKeyedElement

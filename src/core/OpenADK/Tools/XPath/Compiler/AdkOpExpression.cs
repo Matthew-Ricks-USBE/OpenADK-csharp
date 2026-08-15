@@ -5,21 +5,26 @@
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public abstract class AdkOpExpression : AdkExpression
     {
+        /// <summary/>
         protected AdkExpression[] fArgs;
 
 
+        /// <summary/>
         protected AdkOpExpression( params AdkExpression[] args )
         {
             fArgs = args;
         }
 
+        /// <summary/>
         public AdkExpression[] Arguments
         {
             get { return fArgs; }
         }
 
+        /// <summary/>
         protected override bool ComputeContextDependent()
         {
             if ( fArgs != null )

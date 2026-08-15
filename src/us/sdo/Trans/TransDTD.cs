@@ -42,10 +42,7 @@ namespace OpenADK.Library.us.Trans
 	/// <item><term><c>SIFDTD.STUDENTPERSONAL</c></term><description>Identifies the StudentPersonal data object</description></item>
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
-	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
-	/// method is an IElementDef:
-	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
+	/// Many of the Adk's public interfaces require an ElementDef constant to be passed as a parameter.
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
 	/// <code>
 	/// Query query = new Query( SifDtd.STUDENTPERSONAL );
@@ -427,7 +424,8 @@ namespace OpenADK.Library.us.Trans
 	// Field elements of TRANSSTUDENTS (1 fields)
 	/** Defines the &lt;Student&gt; element as a child of &lt;TransStudents&gt; */
 	public static IElementDef TRANSSTUDENTS_STUDENT = null;
-
+		
+	/// <inheritdoc />
 	public override void Load()
 	{
 		//  Objects defined by this SDO Library...
@@ -683,6 +681,7 @@ namespace OpenADK.Library.us.Trans
 	}
 
 	#region Update SifDtd
+	/// <inheritdoc />
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "TransferPoint" ] = TRANSFERPOINT;

@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 
 namespace OpenADK.Library.Tools.Policy
 {
+    /// <summary/>
     public abstract class PolicyManager
     {
         /// <summary>

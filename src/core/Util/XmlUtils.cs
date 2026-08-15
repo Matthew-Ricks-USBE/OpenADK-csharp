@@ -9,6 +9,7 @@ using System.Xml;
 
 namespace OpenADK.Util
 {
+    /// <summary/>
     public class XmlUtils
     {
         /// <summary>
@@ -51,6 +52,7 @@ namespace OpenADK.Util
             return (XmlElement []) v.ToArray( typeof ( XmlElement ) );
         }
 
+        /// <summary/>
         public static XmlElement GetElementByAttribute( XmlElement parent,
                                                         string elementName,
                                                         string attributeName,
@@ -97,7 +99,7 @@ namespace OpenADK.Util
         /// </param>
         /// <param name="property">The name of the property
         /// </param>
-        /// <param name="value">The property value
+        /// <param name="val">The property value
         /// </param>
         public static void SetProperty( XmlElement parentNode,
                                         string property,
@@ -167,11 +169,13 @@ namespace OpenADK.Util
         /// </summary>
         public class FilteredElementList : IEnumerable
         {
+            /// <summary/>
             public FilteredElementList( XmlNodeList list )
             {
                 fNodeList = list;
             }
 
+            /// <summary/>
             public IEnumerator GetEnumerator()
             {
                 return new FilteredEnumerator( fNodeList.GetEnumerator() );
@@ -233,11 +237,13 @@ namespace OpenADK.Util
         /// </remarks>
         public sealed class XmlElementEnumerator : IEnumerable
         {
+            /// <summary/>
             public XmlElementEnumerator( XmlElement parentNode )
             {
                 fParent = parentNode;
             }
 
+            /// <summary/>
             public XmlElementEnumerator( XmlNodeList parentList )
             {
                 fParent = parentList;

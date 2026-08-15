@@ -319,7 +319,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
         {
             Mappings test = m.GetMappings( "Test" );
             Assert.NotNull(test);
-            Assert.Equal(1, test.GetObjectMappings().Length);
+            Assert.Single(test.GetObjectMappings());
 
             // TODO: Test the version and sourceId filters more carefully
             /*

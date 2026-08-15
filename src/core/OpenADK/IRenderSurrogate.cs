@@ -7,8 +7,10 @@ using System;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
     public interface IRenderSurrogateToDelete
     {
+        /// <summary/>
         void Render( SifWriter writer,
                      SifElement element,
                      SifFormatter formatter );

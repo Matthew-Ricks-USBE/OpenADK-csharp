@@ -26,6 +26,7 @@ namespace OpenADK.Web.Http
         private bool fIsGet = false;
 
 
+        /// <summary/>
         public AdkHttpRequest( AdkHttpConnection connection )
         {
             fConnection = connection;
@@ -71,6 +72,7 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         public void Receive( AdkSocketConnection connection )
         {
             if ( fContentLength == -1 ) {
@@ -125,52 +127,62 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         public bool ReceiveComplete
         {
             get { return fIsGet || fRequestStream.Length >= this.ContentLength; }
         }
 
 
+        /// <summary/>
         public string Path
         {
             get { return fPath; }
         }
 
+        /// <summary/>
         public string Protocol
         {
             get { return fProtocol; }
         }
 
+        /// <summary/>
         public string Method
         {
             get { return fMethod; }
         }
 
+        /// <summary/>
         public NameValueCollection Headers
         {
             get { return fHeaders; }
         }
 
+        /// <summary/>
         public string HostName
         {
             get { return fHeaders["Host"]; }
         }
 
+        /// <summary/>
         public string ConnectionHeader
         {
             get { return fHeaders["Connection"]; }
         }
 
+        /// <summary/>
         public string RemoteAddress
         {
             get { return fConnection.ClientEndPoint.Address.ToString(); }
         }
 
+        /// <summary/>
         public string ContentType
         {
             get { return fHeaders["Content-Type"]; }
         }
 
+        /// <summary/>
         public long ContentLength
         {
             get
@@ -246,6 +258,7 @@ namespace OpenADK.Web.Http
             return fRequestStream;
         }
 
+        /// <summary/>
         public Uri Url
         {
             get { return fUri; }

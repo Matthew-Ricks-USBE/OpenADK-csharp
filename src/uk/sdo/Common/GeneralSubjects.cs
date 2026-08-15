@@ -85,7 +85,7 @@ namespace OpenADK.Library.uk.Common
 	/// <summary>Arabic ("ARA")</summary>
 	public static readonly GeneralSubjects ARABIC = new GeneralSubjects("ARA");
 
-	/// <summary>Key Skills (Only if <KeyStage>= 4) ("KSK")</summary>
+	/// <summary>Key Skills (Only if &lt;KeyStage&gt;= 4) ("KSK")</summary>
 	public static readonly GeneralSubjects KEY_SKILLS = new GeneralSubjects("KSK");
 
 	/// <summary>Manufacturing ("MNF")</summary>

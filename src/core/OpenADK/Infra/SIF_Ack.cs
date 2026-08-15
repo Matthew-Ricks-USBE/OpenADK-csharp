@@ -207,6 +207,7 @@ public class SIF_Ack : SifMessagePayload
 		}
 		
 		
+		/// <summary/>
 		public override void  LogSend(Microsoft.Extensions.Logging.ILogger log)
 		{
 			if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))
@@ -216,6 +217,7 @@ public class SIF_Ack : SifMessagePayload
 		}
 		
 		
+		/// <summary/>
 		public override void  LogRecv(Microsoft.Extensions.Logging.ILogger log)
 		{
 			if (log.IsEnabled(Microsoft.Extensions.Logging.LogLevel.Debug))

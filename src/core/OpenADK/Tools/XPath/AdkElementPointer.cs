@@ -5,9 +5,12 @@
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public abstract class AdkElementPointer : AbstractNodePointer
     {
+        /// <summary/>
         protected IElementDef fElementDef;
+        /// <summary/>
         protected Element fElement;
         private SifVersion fVersion;
 
@@ -17,7 +20,6 @@ namespace OpenADK.Library.Tools.XPath
         /// <param name="parentPointer">The parent of this element</param>
         /// <param name="element">The element being wrapped</param>
         /// <param name="version">The SifVersion in use</param>
-        /// <param name="index">The ordinal position within its parent list</param>
         protected AdkElementPointer( INodePointer parentPointer, Element element, SifVersion version )
             : base( parentPointer )
         {
@@ -26,6 +28,7 @@ namespace OpenADK.Library.Tools.XPath
             fElementDef = element.ElementDef;
         }
 
+        /// <summary/>
         public override string Name
         {
             get { return fElementDef.Tag( fVersion ); }
@@ -48,6 +51,7 @@ namespace OpenADK.Library.Tools.XPath
         }
 
 
+        /// <summary/>
         public Element Element
         {
             get { return fElement; }
@@ -62,6 +66,7 @@ namespace OpenADK.Library.Tools.XPath
         }
 
 
+        /// <summary/>
         protected SifSimpleType GetSIFSimpleTypeValue( IElementDef def, object rawValue )
         {
             if ( rawValue is SifSimpleType )
@@ -72,9 +77,11 @@ namespace OpenADK.Library.Tools.XPath
             return sst;
         }
 
+        /// <summary/>
         public bool IsLegacyVersion
         {
             get { return fVersion.Major < 2; }
         }
     }
 }
+

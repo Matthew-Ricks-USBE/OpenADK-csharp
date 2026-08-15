@@ -15,6 +15,7 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpFileServer : AdkHttpServer
     {
+        /// <summary/>
         public AdkHttpFileServer(
             string physicalPath,
             string defaultFileName,
@@ -25,6 +26,7 @@ namespace OpenADK.Web.Http
                 ("", "/", new AdkHttpDirectoryServer(physicalPath, "/", defaultFileName), false);
         }
 
+        /// <summary/>
         public void AddContext(string physicalPath,
                                 string virtualPath,
                                 string defaultFileName)
@@ -54,6 +56,7 @@ namespace OpenADK.Web.Http
             Console.WriteLine("ERROR: {0}:{1}", ex.Message, ex.StackTrace);
         }
 
+        /// <summary/>
         public override void AddListener(AdkSocketBinding binding)
         {
             base.AddListener(binding);
@@ -62,6 +65,7 @@ namespace OpenADK.Web.Http
             binding.SocketError += new AdkSocketErrorHandler(Error);
         }
 
+        /// <summary/>
         public void AddHttpBinding(IPAddress address,
                                     int port)
         {
@@ -71,6 +75,7 @@ namespace OpenADK.Web.Http
             this.AddListener(listener);
         }
 
+        /// <summary/>
         public void AddHttpsBinding(IPAddress address,
                                      int port,
                                      X509Certificate2 certificate,
@@ -82,11 +87,13 @@ namespace OpenADK.Web.Http
             this.AddListener(listener);
         }
 
+        /// <summary/>
         public void Start()
         {
             base.StartServer();
         }
 
+        /// <summary/>
         public void Stop()
         {
             base.StopServer(false);

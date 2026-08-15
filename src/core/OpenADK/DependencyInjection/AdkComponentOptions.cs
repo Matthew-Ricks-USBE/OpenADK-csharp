@@ -10,20 +10,28 @@ namespace OpenADK.Library
     /// </summary>
     public sealed class AdkComponentOptions
     {
+        /// <summary/>
         public Func<Agent, IZoneFactory> ZoneFactory { get; set; }
 
+        /// <summary/>
         public Func<Agent, ITopicFactory> TopicFactory { get; set; }
 
+        /// <summary/>
         public Func<Agent, ITransportManager> TransportManager { get; set; }
 
+        /// <summary/>
         public Func<Agent, RequestCache> RequestCache { get; set; }
 
+        /// <summary/>
         public Func<Agent, PolicyFactory> PolicyFactory { get; set; }
 
+        /// <summary/>
         public Func<Agent, PolicyManager> PolicyManager { get; set; }
 
+        /// <summary/>
         public Func<Agent, ISIFPrimitives> SifPrimitives { get; set; }
 
+        /// <summary/>
         public Func<Agent, DataObjectOutputStreamImpl> DataObjectOutputStream { get; set; }
     }
 }

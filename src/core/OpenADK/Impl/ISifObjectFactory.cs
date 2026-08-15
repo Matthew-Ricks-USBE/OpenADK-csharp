@@ -5,8 +5,10 @@ namespace OpenADK.Library.Impl
     /// <summary>Creates SIF objects configured for an agent's runtime.</summary>
     public interface ISifObjectFactory
     {
+        /// <summary/>
         T Create<T>() where T : SifElement, new();
 
+        /// <summary/>
         SifElement Create(Type objectType);
 
         /// <summary>Creates a query using the runtime's configured SIF version.</summary>

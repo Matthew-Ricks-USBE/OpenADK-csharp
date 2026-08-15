@@ -346,6 +346,7 @@ namespace OpenADK.Library.Tools.XPath
             get { return fCursor.Current.IsEmptyElement; }
         }
 
+        /// <summary/>
         public override XPathExpression Compile( string xpath )
         {
             XPathExpression compiled = base.Compile( xpath );
@@ -377,6 +378,7 @@ namespace OpenADK.Library.Tools.XPath
             }
         }
 
+        /// <summary/>
         public override object TypedValue
         {
             get
@@ -389,11 +391,13 @@ namespace OpenADK.Library.Tools.XPath
             }
         }
 
+        /// <summary/>
         public INodePointer UnderlyingPointer
         {
             get { return fCursor.Current; }
         }
 
+        /// <summary/>
         public override object UnderlyingObject
         {
             get { return fCursor.Current.Node; }

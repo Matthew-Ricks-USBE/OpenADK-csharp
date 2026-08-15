@@ -140,6 +140,7 @@ namespace OpenADK.Library
         /// </value>
         ServerLog ServerLog { get; }
 
+        /// <summary/>
         IProtocolHandler ProtocolHandler { get; }
 
         /// <summary>Connects the agent with this zone.</summary>
@@ -387,6 +388,7 @@ namespace OpenADK.Library
                       string destinationId,
                       AdkQueryOptions queryOptions );
 
+        /// <summary/>
         SIF_ZoneStatus GetZoneStatus();
 
         /// <summary>  Gets the SIF_ZoneStatus object from the ZIS managing this zone. The

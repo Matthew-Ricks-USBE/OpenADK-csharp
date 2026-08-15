@@ -9,13 +9,17 @@ using System.Text;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
+    /// <summary/>
     [Serializable]
     public class SifLong : AdkDataType<long?>
     {
+        /// <summary/>
         public SifLong(long? value)
             : base(value) { }
 
 
+        /// <summary/>
         protected override SifTypeConverter<long?> GetTypeConverter()
         {
             return SifTypeConverters.LONG;

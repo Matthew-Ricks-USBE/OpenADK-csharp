@@ -69,7 +69,7 @@ namespace OpenADK.Library
         /// </summary>
         /// <remarks>
         /// To change the default formatter used for rendering text values, call
-        /// <see cref="Adk.TextFormatter"/>
+        /// <c>TextFormatter</c>
         /// </remarks>
         /// <returns></returns>
         public override String ToString()
@@ -91,7 +91,7 @@ namespace OpenADK.Library
 
 
         /// <summary>
-        /// Overriden to test value equality. The underlying <see cref="SifEnum.Value"/> property is compared to 
+        /// Overriden to test value equality. The underlying <c>Value</c> property is compared to 
         /// determine if it is equal.
         /// </summary>
         /// <param name="obj">The SifEnum to compare against</param>
@@ -122,7 +122,7 @@ namespace OpenADK.Library
         }
 
         /// <summary>
-        /// Overriden to test value equality. The underlying <see cref="SifEnum.Value"/> property is compared to 
+        /// Overriden to test value equality. The underlying <c>Value</c> property is compared to 
         /// determine if it is equal.
         /// </summary>
         /// <param name="obj1">The first SifEnum to compare</param>
@@ -144,7 +144,7 @@ namespace OpenADK.Library
         }
 
         /// <summary>
-        /// Overriden to test value equality. The underlying <see cref="SifEnum.Value"/> property is compared to 
+        /// Overriden to test value equality. The underlying <c>Value</c> property is compared to 
         /// determine if it is not equal.
         /// </summary>
         /// <param name="obj1">The first SifEnum to compare</param>
@@ -157,6 +157,9 @@ namespace OpenADK.Library
         }
 
 
+        /// <summary/>
         public abstract override int GetHashCode();
     }
 }
+
+

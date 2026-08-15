@@ -27,6 +27,7 @@ namespace OpenADK.Library
         private readonly SifVersion fDefaultVersion;
         private readonly ILogger fLog;
 
+        /// <summary/>
         public SifParser(IAdkRuntime runtime)
         {
             if (runtime == null)
@@ -40,6 +41,7 @@ namespace OpenADK.Library
             fLog = runtime.Log;
         }
 
+        /// <summary/>
         public SifParser(IDtd dtd, SifVersion defaultVersion)
         {
             fDtd = dtd ?? throw new ArgumentNullException(nameof(dtd));

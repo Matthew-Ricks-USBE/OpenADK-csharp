@@ -8,6 +8,7 @@ using OpenADK.Library.Impl;
 
 namespace OpenADK.Library.Tools.Metadata
 {
+    /// <summary/>
     public class AdkMetadata
     {
         /// <summary>
@@ -18,6 +19,7 @@ namespace OpenADK.Library.Tools.Metadata
 
         private readonly DTDInternals fDtd;
 
+        /// <summary/>
         public AdkMetadata(IAdkRuntime runtime)
         {
             if (runtime == null) throw new ArgumentNullException(nameof(runtime));

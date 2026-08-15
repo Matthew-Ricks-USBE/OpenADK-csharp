@@ -236,6 +236,7 @@ namespace OpenADK.Library.Impl
         /// <param name="req">The SIF_Request message (if a SIF_Request is being sent).
         /// Either rsp or req must be specified, but not both.
         /// </param>
+        /// <param name="objType">The type of data object being requested.</param>
         /// <param name="query">Only applicable when <i>req</i> is non-null: The Query
         /// associated with the SIF_Request
         /// </param>

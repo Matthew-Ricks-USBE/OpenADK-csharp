@@ -5,6 +5,7 @@
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public interface INodePointer : IPointer
     {
         /// <summary>

@@ -19,7 +19,7 @@ namespace OpenADK.Library
    /// <para>Reporting SIF Events</para>
    /// <para>
    /// To report a SIF_Event to a zone, construct an Event instance and call the
-   /// <see cref="OpenADK.Library.IZone.ReportEvent"/> method. Supply an array
+   /// <c>IZone.ReportEvent</c> method. Supply an array
    ///	of SifDataObject instances and an action code to the Event constructor. You may
    ///	also call alternative forms of the <c>reportEvent</c> method that accept 
    ///	SIFDataObjects and an action code as parameters. Note Events cannot be reported 
@@ -175,7 +175,7 @@ namespace OpenADK.Library
       /// </param>
       /// <param name="action">Describes how the data has changed.</param>
       /// <remarks>
-      /// <seealso cref="OpenADK.Library.IZone.ReportEvent"/>
+      /// <seealso cref="IZone.ReportEvent(Event)"/>
       /// </remarks>
       public Event(SifDataObject[] data,
                     EventAction action)
@@ -211,7 +211,7 @@ namespace OpenADK.Library
       /// must be "Add", "Change", or "Delete"
       /// </param>
       /// <remarks>
-      /// <seealso cref="OpenADK.Library.IZone.ReportEvent"/>
+      /// <seealso cref="IZone.ReportEvent(Event)"/>
       /// </remarks>
       public Event(SifDataObject[] data,
                     string action)
@@ -240,7 +240,7 @@ namespace OpenADK.Library
       /// Gets/Sets the SIF Contexts that this event applies to. If the context has not been set,
       /// it defaults to the SIF Default context
       ///return An array of SIF contexts to which this event applies
-      /// <see cref="SiFContext.DEFAULT"></see>
+      /// <c>SifContext.DEFAULT</c>
       ///</summary>
       public SifContext[] Contexts
       {
@@ -289,3 +289,4 @@ namespace OpenADK.Library
 }
 
 // Synchronized with Event.java Branch Library-ADK-1.5.0 Version 3
+

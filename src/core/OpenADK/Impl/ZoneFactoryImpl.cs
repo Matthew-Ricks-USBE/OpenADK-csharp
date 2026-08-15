@@ -38,6 +38,7 @@ namespace OpenADK.Library.Impl
          fAgent = agent;
       }
 
+      /// <summary/>
       public virtual IZone GetInstance(string zoneId,
                                         string zoneUrl)
       {
@@ -47,6 +48,7 @@ namespace OpenADK.Library.Impl
          }
       }
 
+      /// <summary/>
       public virtual IZone GetInstance(string zoneId,
                                         string zoneUrl,
                                         AgentProperties props)
@@ -102,6 +104,7 @@ namespace OpenADK.Library.Impl
          return (IZone)fZones[zoneId];
       }
 
+      /// <summary/>
       public virtual IZone[] GetAllZones()
       {
          lock (this)

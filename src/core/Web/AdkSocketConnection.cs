@@ -105,6 +105,7 @@ namespace OpenADK.Web
         }
 
 
+        /// <summary/>
         public AdkSocketBinding Binding
         {
             get { return fSocketServer; }
@@ -198,6 +199,7 @@ namespace OpenADK.Web
         }
 
 
+        /// <summary/>
         public void Dispose()
         {
             if ( !fDisposed ) {
@@ -213,6 +215,7 @@ namespace OpenADK.Web
 
         #region Public Properties
 
+        /// <summary/>
         public Stream GetOutputDataStream()
         {
             return fStream;
@@ -224,6 +227,7 @@ namespace OpenADK.Web
             get { return fWrappedSocket; }
         }
 
+        /// <summary/>
         public bool Connected
         {
             get { return fWrappedSocket != null && fWrappedSocket.Connected; }

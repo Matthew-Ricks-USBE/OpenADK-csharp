@@ -24,27 +24,27 @@ namespace Library.Nunit.US.Student
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF15r1);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assert.Equal(0, sp.GetChildList( CommonDTD.EMAIL).Count);
+		Assert.Empty(sp.GetChildList( CommonDTD.EMAIL));
 		Assert.NotNull(sp.EmailList);
         Assert.True(sp.EmailList.ChildCount > 0);
 
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF20);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assert.Equal(0, sp.GetChildList(CommonDTD.EMAIL).Count);
+		Assert.Empty(sp.GetChildList(CommonDTD.EMAIL));
         Assert.NotNull(sp.EmailList);
         Assert.True(sp.EmailList.ChildCount > 0);
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF11);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assert.Equal(0, sp.GetChildList(CommonDTD.EMAIL).Count);
+		Assert.Empty(sp.GetChildList(CommonDTD.EMAIL));
         Assert.NotNull(sp.EmailList);
         Assert.True(sp.EmailList.ChildCount > 0);
 
 		sp = AdkObjectParseHelper.runParsingTest(sp, SifVersion.SIF22);
 
 		// Test to ensure that Email is not a child of StudentPersonal
-		Assert.Equal(0, sp.GetChildList(CommonDTD.EMAIL).Count);
+		Assert.Empty(sp.GetChildList(CommonDTD.EMAIL));
         Assert.NotNull(sp.EmailList);
         Assert.True(sp.EmailList.ChildCount > 0);
 
@@ -52,3 +52,5 @@ namespace Library.Nunit.US.Student
 
     }
 }
+
+

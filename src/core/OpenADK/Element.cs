@@ -38,6 +38,7 @@ namespace OpenADK.Library
         /// The current version of this object
         /// </summary>
         private const int CURRENT_SERIALIZE_VERSION = 2;
+        /// <summary/>
 
 
         [Flags]
@@ -358,6 +359,7 @@ namespace OpenADK.Library
 
         #region ICloneable Members
 
+        /// <summary/>
         public abstract object Clone();
 
         #endregion

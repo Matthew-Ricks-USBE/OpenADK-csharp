@@ -5,6 +5,7 @@
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public abstract class AdkNodeTest
     {
     }

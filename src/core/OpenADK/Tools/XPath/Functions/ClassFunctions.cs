@@ -19,6 +19,7 @@ namespace OpenADK.Library.Tools.XPath.Functions
         private Type fType;
         private object fInstance;
 
+        /// <summary/>
         public ClassFunctions( Type type, object instance )
         {
             fType = type;

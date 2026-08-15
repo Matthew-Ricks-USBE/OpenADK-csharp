@@ -137,11 +137,13 @@ namespace OpenADK.Library
             }
         }
 
+        /// <summary/>
         public virtual SIF_Ack Ack
         {
             get { return fAck; }
         }
 
+        /// <summary/>
         public override string Message
         {
             get

@@ -12,7 +12,9 @@ namespace OpenADK.Web
     /// </summary>
     public enum AdkPortBindingType
     {
+        /// <summary/>
         Normal = 1,
+        /// <summary/>
         SSL = 2
     }
 }

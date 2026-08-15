@@ -9,13 +9,17 @@ using System.Text;
 
 namespace OpenADK.Library
 {
+   /// <summary/>
+   /// <summary/>
    [Serializable]
     public class SifDuration : AdkDataType<TimeSpan?>
     {
+        /// <summary/>
         public SifDuration( TimeSpan? value )
             : base( value ) { }
 
 
+        /// <summary/>
         protected override SifTypeConverter<TimeSpan?> GetTypeConverter()
         {
             return SifTypeConverters.DURATION;

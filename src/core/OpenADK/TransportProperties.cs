@@ -19,6 +19,7 @@ namespace OpenADK.Library
     {
         private bool fEnabled = true;
 
+        /// <summary/>
         public bool Enabled
         {
             get { return fEnabled; }

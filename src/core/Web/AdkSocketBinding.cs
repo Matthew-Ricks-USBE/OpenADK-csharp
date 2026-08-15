@@ -109,10 +109,12 @@ namespace OpenADK.Web
         }
 
 
+        /// <summary/>
         protected virtual void OnMaxConnectionsReached( IConnectedSocket connectedSocket )
         {
         }
 
+        /// <summary/>
         protected virtual void OnError( Exception ex )
         {
             Error( ex.Message, null, ex );
@@ -174,6 +176,7 @@ namespace OpenADK.Web
             }
         }
 
+        /// <summary/>
         public void Debug( string message,
                            object[] mergeValues )
         {
@@ -183,6 +186,7 @@ namespace OpenADK.Web
             }
         }
 
+        /// <summary/>
         public void Error( string message,
                            object[] mergeValues,
                            Exception ex )
@@ -226,6 +230,7 @@ namespace OpenADK.Web
             }
         }
 
+        /// <summary/>
         public IPAddress HostAddress
         {
             get { return fIPAddress; }
@@ -238,11 +243,13 @@ namespace OpenADK.Web
             }
         }
 
+        /// <summary/>
         public bool IsStarted
         {
             get { return fIsRunning; }
         }
 
+        /// <summary/>
         public int ConnectionCount
         {
             get { return fSocketConnections.Count; }
@@ -275,12 +282,16 @@ namespace OpenADK.Web
             }
         }
 
+        /// <summary/>
         public event AdkSocketMessageHandler SocketAccepted;
 
+        /// <summary/>
         public event AdkSocketMessageHandler DataReceived;
 
+        /// <summary/>
         public event AdkSocketMessageHandler SocketClosed;
 
+        /// <summary/>
         public event AdkSocketErrorHandler SocketError;
 
         #endregion

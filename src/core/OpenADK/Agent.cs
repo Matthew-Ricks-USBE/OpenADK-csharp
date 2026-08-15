@@ -262,6 +262,7 @@ namespace OpenADK.Library
         }
 
 
+        /// <summary/>
         public string WorkDir
         {
             get
@@ -376,6 +377,8 @@ namespace OpenADK.Library
         /// This string is used as the <c>SourceId</c> in all SIF message
         /// headers created by the agent.
         /// </param>
+        /// <param name="runtime">The <see cref="IAdkRuntime"/> instance.</param>
+        /// <param name="components">The <see cref="IAdkComponentFactory"/> instance.</param>
         public Agent(
             string agentId,
             IAdkRuntime runtime,

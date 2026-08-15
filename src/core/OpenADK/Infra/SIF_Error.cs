@@ -140,6 +140,7 @@ public class SIF_Error : SifElement
 
 // BEGIN EXTRA METHODS (C:/GitHub/rafidzal/OpenADK-java/adk-generator/../adk-generator/datadef/core/sif20/SIF_Error.txt.cs)
 
+    /// <summary/>
     public SIF_Error(SifErrorCategoryCode category, int sifCode, string sifDesc, string sifExtDesc)
             : this((int)category, sifCode, sifDesc)
         {
@@ -147,6 +148,7 @@ public class SIF_Error : SifElement
         }
 
 
+        /// <summary/>
         public override string ToString()
         {
             System.Text.StringBuilder buf = new System.Text.StringBuilder();

@@ -5,20 +5,24 @@
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public abstract class AdkXPath : AdkExpression
     {
         private AdkXPathStep[] fSteps;
 
+        /// <summary/>
         protected AdkXPath( params AdkXPathStep[] steps )
         {
             fSteps = steps;
         }
 
+        /// <summary/>
         public AdkXPathStep[] Steps
         {
             get { return fSteps; }
         }
 
+        /// <summary/>
         protected override bool ComputeContextDependent()
         {
             if ( fSteps != null )

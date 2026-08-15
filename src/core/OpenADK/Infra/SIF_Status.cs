@@ -138,6 +138,7 @@ public class SIF_Status : SifKeyedElement
 
 // BEGIN EXTRA METHODS (C:/GitHub/rafidzal/OpenADK-java/adk-generator/../adk-generator/datadef/core/sif20/SIF_Status.txt.cs)
 
+		/// <summary/>
 		public override string ToString()
 		{
 			System.Text.StringBuilder sb = new System.Text.StringBuilder();

@@ -10,12 +10,14 @@ using OpenADK.Util;
 
 namespace OpenADK.Library.Impl
 {
+    /// <summary/>
     public class Sif1xFormatter : SifFormatter
     {
         private const string SIF1XTIMEFORMAT = "HH:mm:ss";
         private const string SIF1XDATEFORMAT = "yyyyMMdd";
 
 
+        /// <summary/>
         public static string FormatTimeZone(DateTime date)
         {
             TimeSpan difference = TimeZoneInfo.Local.GetUtcOffset(date);
@@ -24,6 +26,7 @@ namespace OpenADK.Library.Impl
                     ("UTC{0:00}:{1:00}", new object[] {difference.Hours, difference.Minutes});
         }
 
+        /// <summary/>
         public override string ToDateString(DateTime? date)
         {
             if (!date.HasValue)
@@ -45,6 +48,7 @@ namespace OpenADK.Library.Impl
             return ToDateString( date );
         }
 
+        /// <summary/>
         public override string ToTimeString(DateTime? time)
         {
             if (!time.HasValue)
@@ -54,6 +58,7 @@ namespace OpenADK.Library.Impl
             return time.Value.ToString(SIF1XTIMEFORMAT);
         }
 
+        /// <summary/>
         public override string ToString(int? intValue)
         {
             if (!intValue.HasValue)
@@ -63,6 +68,7 @@ namespace OpenADK.Library.Impl
             return Convert.ToString(intValue.Value);
         }
 
+        /// <summary/>
         public override string ToString(long? longValue)
         {
             if (!longValue.HasValue)
@@ -72,6 +78,7 @@ namespace OpenADK.Library.Impl
             return Convert.ToString(longValue.Value);
         }
 
+        /// <summary/>
         public override string ToString(decimal? decimalValue)
         {
             if (!decimalValue.HasValue)
@@ -81,6 +88,7 @@ namespace OpenADK.Library.Impl
             return Convert.ToString(decimalValue.Value);
         }
 
+        /// <summary/>
         public override string ToString(bool? boolValue)
         {
             if (!boolValue.HasValue)
@@ -97,6 +105,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public override DateTime? ToDate(string dateValue)
         {
             if (dateValue == null)
@@ -112,11 +121,13 @@ namespace OpenADK.Library.Impl
                 (dateValue, SIF1XDATEFORMAT, null, DateTimeStyles.AllowWhiteSpaces);
         }
 
+        /// <summary/>
         public override DateTime? ToDateTime(string xmlValue)
         {
             return ToDate( xmlValue );
         }
 
+        /// <summary/>
         public override DateTime? ToTime(string xmlValue)
         {
             if (xmlValue == null)
@@ -133,6 +144,7 @@ namespace OpenADK.Library.Impl
                 (xmlValue, SIF1XTIMEFORMAT, null, DateTimeStyles.AllowWhiteSpaces);
         }
 
+        /// <summary/>
         public override int? ToInt(string intValue)
         {
             if (intValue == null)
@@ -165,6 +177,7 @@ namespace OpenADK.Library.Impl
             return long.Parse(longValue);
         }
 
+        /// <summary/>
         public override decimal? ToDecimal(string decimalValue)
         {
             if (decimalValue == null)
@@ -185,6 +198,7 @@ namespace OpenADK.Library.Impl
             return Decimal.Parse(decimalValue);
         }
 
+        /// <summary/>
         public override bool? ToBool(string inValue)
         {
             if (inValue == null)
@@ -207,6 +221,7 @@ namespace OpenADK.Library.Impl
             return Boolean.Parse(inValue);
         }
 
+        /// <summary/>
         public override bool SupportsNamespaces
         {
             get { return false; }

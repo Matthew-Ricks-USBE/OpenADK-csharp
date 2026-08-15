@@ -7,10 +7,12 @@ using System.Xml.Xsl;
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public class AdkStaticValue : AdkExpression
     {
         private object fValue;
 
+        /// <summary/>
         public AdkStaticValue( object value )
         {
             fValue = value;
@@ -36,6 +38,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             return false;
         }
 
+        /// <summary/>
         public override string ToString()
         {
             if ( fValue is string )

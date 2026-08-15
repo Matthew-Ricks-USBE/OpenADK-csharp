@@ -2,20 +2,24 @@ using System;
 
 namespace OpenADK.Library.Impl
 {
+    /// <summary/>
     public sealed class SifObjectFactory : ISifObjectFactory
     {
         private readonly IAdkRuntime _runtime;
 
+        /// <summary/>
         public SifObjectFactory(IAdkRuntime runtime)
         {
             _runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
         }
 
+        /// <summary/>
         public T Create<T>() where T : SifElement, new()
         {
             return (T)Configure(new T());
         }
 
+        /// <summary/>
         public SifElement Create(Type objectType)
         {
             if (objectType == null)
@@ -31,6 +35,7 @@ namespace OpenADK.Library.Impl
             return Configure((SifElement)Activator.CreateInstance(objectType));
         }
 
+        /// <summary/>
         public Query CreateQuery(IElementDef objectType)
         {
             EnsureInitialized();

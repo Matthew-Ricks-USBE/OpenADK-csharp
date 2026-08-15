@@ -54,6 +54,7 @@ namespace OpenADK.Library
             }
         }
 
+        /// <summary/>
         public abstract IElementDef[] KeyFields
         { get; }
 

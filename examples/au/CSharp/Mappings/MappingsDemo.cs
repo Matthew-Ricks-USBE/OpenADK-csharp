@@ -68,6 +68,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
     /// <param name="args">Command-line arguments (run with no arguments to display help)
     /// 
     /// </param>
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public virtual void startAgent( string[] args )
     {
         Console.WriteLine( "Initializing agent..." );
@@ -257,7 +258,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
                 {
                     fConn.Close();
                 }
-                catch ( Exception ignored )
+                catch ( Exception )
                 {
                 }
             }
@@ -360,6 +361,7 @@ public class MappingsDemo : Agent, IPublisher, IQueryResults
     /// <summary>  Runs the agent from the command-line.
     /// </summary>
     [STAThread]
+    [System.Runtime.Versioning.SupportedOSPlatform("windows")]
     public static void Main( string[] args )
     {
         MappingsDemo agent = null;

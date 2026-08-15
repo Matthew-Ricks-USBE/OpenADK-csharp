@@ -74,12 +74,17 @@ namespace OpenADK.Library
         /// </returns>
         SifMessageType GetElementType(string name);
 
+        /// <summary/>
         IElementDef LookupElementDefBySQP(IElementDef relativeTo, string query);
 
+        /// <summary/>
         String TranslateSQP(IElementDef objectType, String path, SifVersion version);
 
+        /// <summary/>
         String SDOAssembly { get;}
+        /// <summary/>
         SifDataObject CreateSIFDataObject(IElementDef objType);
+        /// <summary/>
         String BaseNamespace{get;}
     }
 }

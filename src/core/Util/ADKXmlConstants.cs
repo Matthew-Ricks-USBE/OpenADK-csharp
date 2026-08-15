@@ -12,10 +12,14 @@ namespace OpenADK.Util
     /// </summary>
     public sealed class AdkXmlConstants
     {
+        /// <summary/>
         public sealed class Property
         {
+            /// <summary/>
             public const string ELEMENT = "property";
+            /// <summary/>
             public const string NAME = "name";
+            /// <summary/>
             public const string VALUE = "value";
         }
     }

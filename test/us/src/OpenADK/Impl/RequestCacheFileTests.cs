@@ -24,7 +24,7 @@ namespace Library.Nunit.US.Impl
             fAgent.Initialize();
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
             if (fRC != null)
             {

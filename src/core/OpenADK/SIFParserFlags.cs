@@ -14,6 +14,7 @@ namespace OpenADK.Library
     public enum SifParserFlags
     {
 
+        /// <summary/>
         None = 0,
         /// <summary>
         /// Flag that indicates that SIFParser should expect a nested SIF_Message 

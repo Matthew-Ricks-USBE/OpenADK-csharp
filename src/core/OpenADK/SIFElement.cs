@@ -102,6 +102,7 @@ namespace OpenADK.Library
 
 
         // TODO: This API may be removed If not, revert back to the original API
+        /// <summary/>
         public virtual string Key
         {
             get { return null; }
@@ -164,7 +165,7 @@ namespace OpenADK.Library
         /// The formatter user for parsing, by default, is the SIF 1.x formatter,
         /// which means that this value must be albe to be parsed using SIF 1.x
         /// formatting rules. The change the format used for getting and setting text
-        /// values, set the <see cref="Adk.TextFormatter"/> property.
+        /// values, set the <c>TextFormatter</c> property.
         /// </remarks>
         /// <value> The text value of this element (e.g. &lt;element&gt;text&lt;element&gt;)</value>
         public override string TextValue
@@ -393,7 +394,7 @@ namespace OpenADK.Library
             element.Parent = this;
             element.ElementDef = def;
 
-            /// SifElementList sel = ChildList();
+            // SifElementList sel = ChildList();
 
             ICollection<SifElement> v = (ICollection<SifElement>)ChildList();
             lock (fSyncLock)
@@ -659,10 +660,8 @@ namespace OpenADK.Library
 
 
 
-        ///<summary>
-        ///Gets all child objects 
-        /// Returns an array of all SifElement children
-        ///</summary>
+        //Gets all child objects 
+        ///// Returns an array of all SifElement children
         //public SifElement[] GetChildren()
         //{
         //   List<SifElement> v = (List<SifElement>)ChildList();
@@ -888,6 +887,7 @@ namespace OpenADK.Library
             return null;
         }
 
+        /// <summary/>
         public virtual SimpleField GetField(string name)
         {
             if (fFields != null)
@@ -1347,6 +1347,7 @@ namespace OpenADK.Library
         }
 
 
+        /// <summary/>
         public override object Clone()
         {
             SifElement elementCopy = null;
@@ -1413,4 +1414,5 @@ namespace OpenADK.Library
         }
     }
 }
+
 

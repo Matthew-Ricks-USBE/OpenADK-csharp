@@ -23,10 +23,12 @@ namespace OpenADK.Library
    [Serializable]
     public class SifTime : AdkDataType<DateTime?>
     {
+        /// <summary/>
         public SifTime( DateTime? timeValue )
             : base( timeValue ) {}
 
 
+        /// <summary/>
         protected override SifTypeConverter<DateTime?> GetTypeConverter()
         {
             return SifTypeConverters.TIME;

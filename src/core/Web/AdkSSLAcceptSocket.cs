@@ -21,11 +21,13 @@ namespace OpenADK.Web
         private X509Certificate2 fCertificate;
         private RemoteCertificateValidationCallback fClientCertificateValidator;
 
+        /// <summary/>
         public AdkSSLAcceptSocket(X509Certificate2 certificate, RemoteCertificateValidationCallback validator = null)
         {
             fCertificate = certificate;
             fClientCertificateValidator = validator;
         }
+        /// <summary/>
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Bind(IPEndPoint endPoint)
@@ -39,6 +41,7 @@ namespace OpenADK.Web
             fAcceptSocket.Listen(10);
         }
 
+        /// <summary/>
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Close()
         {
@@ -49,12 +52,14 @@ namespace OpenADK.Web
             }
         }
 
+        /// <summary/>
         public void BeginAccept(AsyncCallback callback,
                                  object state)
         {
             fAcceptSocket.BeginAccept(callback, state);
         }
 
+        /// <summary/>
         public IConnectedSocket EndAccept(IAsyncResult result)
         {
             Socket clientSocket = fAcceptSocket.EndAccept(result);

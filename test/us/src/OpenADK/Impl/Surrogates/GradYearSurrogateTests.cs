@@ -49,10 +49,10 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Original']" );
             Assert.NotNull( gradValue);
             int gradYear = (int) gradValue.SifValue.RawValue;
-            Assert.NotNull(gradYear);
             Assert.Equal(8877, gradYear);
         }
 
+        [Fact]
         public void testParseProjectedGradYear()
         {
             String sXML = "<StudentPersonal RefId='12345678901234567890'>"
@@ -73,10 +73,10 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Element gradValue = sp.GetElementOrAttribute( "GradYear[@Type='Projected']" );
             Assert.NotNull( gradValue);
             int gradYear = (int) gradValue.SifValue.RawValue;
-            Assert.NotNull( gradYear);
             Assert.Equal( 2089, gradYear);
         }
 
+        [Fact]
         public void testParseGraduationDate()
         {
             String sXML = "<StudentPersonal RefId='12345678901234567890'>"
@@ -103,6 +103,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.Equal( 2054, pdt.Year.Value);
         }
 
+        [Fact]
         public void testParseOnTimeGradYearSS()
         {
             String sXML = "<StudentSnapshot StudentPersonalRefId='12345678901234567890'>"
@@ -126,6 +127,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.Equal( 8877, intValue.RawValue);
         }
 
+        [Fact]
         public void testParseProjectedGradYearSS()
         {
             String sXML = "<StudentSnapshot StudentPersonalRefId='12345678901234567890'>"
@@ -149,6 +151,7 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
             Assert.Equal( 2089, intValue.Value.Value);
         }
 
+        [Fact]
         public void testParseGraduationDateSS()
         {
             String sXML = "<StudentSnapshot StudentPersonalRefId='12345678901234567890'>"

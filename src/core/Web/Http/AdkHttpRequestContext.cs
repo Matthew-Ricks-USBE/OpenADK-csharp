@@ -12,6 +12,7 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpRequestContext
     {
+        /// <summary/>
         public AdkHttpRequestContext( AdkHttpConnection connection,
                                       AdkHttpRequest request,
                                       AdkHttpResponse response,
@@ -23,21 +24,25 @@ namespace OpenADK.Web.Http
             fServer = server;
         }
 
+        /// <summary/>
         public AdkHttpRequest Request
         {
             get { return fRequest; }
         }
 
+        /// <summary/>
         public AdkHttpResponse Response
         {
             get { return fResponse; }
         }
 
+        /// <summary/>
         public AdkHttpServer Server
         {
             get { return fServer; }
         }
 
+        /// <summary/>
         public AdkHttpConnection Connection
         {
             get { return fConnection; }

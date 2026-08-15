@@ -279,6 +279,7 @@ namespace OpenADK.Library
          }
       }
 
+      /// <summary/>
       public String AgentVersion
       {
          get
@@ -581,6 +582,7 @@ namespace OpenADK.Library
          set { this.SetProperty(PROP_PROVISIONING_OVERRIDESIFVERSIONS, value); }
       }
 
+      /// <summary/>
       public virtual string OverrideSifMessageVersionForSifRequests
       {
           get { return this.GetProperty(PROP_PROVISIONING_OVERRIDE_REQUEST_VERSION); }

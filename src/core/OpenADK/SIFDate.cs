@@ -42,11 +42,13 @@ namespace OpenADK.Library
             : base( ParseSifDateString( yyyyMMdd, SifVersion.SIF15r1 ) ) {}
 
 
+        /// <summary/>
         protected override SifTypeConverter<DateTime?> GetTypeConverter()
         {
             return SifTypeConverters.DATE;
         }
 
+        /// <summary/>
         public DateTime? ToDate()
         {
             return this.Value;

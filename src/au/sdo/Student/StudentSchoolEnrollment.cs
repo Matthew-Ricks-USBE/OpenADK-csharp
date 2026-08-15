@@ -924,7 +924,7 @@ public class StudentSchoolEnrollment : SifDataObject
     /// </summary>
     /// <param name="compareDate">The timestamp to base the calculation on. 
     /// For SIF_Requests, this must be the date of the SIF_Request, 
-    /// and should be the value returned from <see cref="SifMessageInfo#TimeStamp"/> 
+    /// and should be the value returned from <see cref="SifMessageInfo.Timestamp"/> 
     /// For SIF_Events, this must be the timestamp of when the event is 
     /// going to be published, and can be the current time.</param>
     /// <returns>The TimeFrame value that was computed and set as the TimeFrame
@@ -958,3 +958,5 @@ public class StudentSchoolEnrollment : SifDataObject
 
 		#endregion // EXTRA METHODS
 }}
+
+

@@ -102,6 +102,7 @@ namespace OpenADK.Library
         /// <summary>Identifies the latest SIF Specification supported by the Library Adk </summary>
         public static readonly SifVersion LATEST = SIF26;
 
+        /// <summary/>
         public static SifVersion[] SupportedVersions { get; } =
         [
             SIF11,
@@ -449,6 +450,7 @@ namespace OpenADK.Library
         #region Comparison
 
 
+        /// <summary/>
         public override bool Equals(object obj)
         {
             // Test reference comparison first ( fastest )
@@ -464,6 +466,7 @@ namespace OpenADK.Library
             return false;
         }
 
+        /// <summary/>
         public override int GetHashCode()
         {
             return fVersion.GetHashCode();
@@ -490,30 +493,35 @@ namespace OpenADK.Library
             return fVersion.CompareTo(((SifVersion)version).fVersion);
         }
 
+        /// <summary/>
         public static bool operator >(SifVersion version1,
                                        SifVersion version2)
         {
             return version1.fVersion > version2.fVersion;
         }
 
+        /// <summary/>
         public static bool operator <(SifVersion version1,
                                        SifVersion version2)
         {
             return version1.fVersion < version2.fVersion;
         }
 
+        /// <summary/>
         public static bool operator >=(SifVersion version1,
                                         SifVersion version2)
         {
             return version1.fVersion >= version2.fVersion;
         }
 
+        /// <summary/>
         public static bool operator <=(SifVersion version1,
                                         SifVersion version2)
         {
             return version1.fVersion <= version2.fVersion;
         }
 
+        /// <summary/>
         public static bool operator ==(SifVersion version1,
                                        SifVersion version2)
         {
@@ -528,6 +536,7 @@ namespace OpenADK.Library
             return version1.fVersion == version2.fVersion;
         }
 
+        /// <summary/>
         public static bool operator !=(SifVersion version1,
                                SifVersion version2)
         {

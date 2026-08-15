@@ -9,11 +9,13 @@ using OpenADK.Library.Infra;
 
 namespace OpenADK.Library.Tools.Policy
 {
+    /// <summary/>
     public class PolicyManagerImpl : PolicyManager
     {
         private readonly IAdkRuntime fRuntime;
         private readonly PolicyFactory fPolicyFactory;
 	
+	/// <summary/>
 	public PolicyManagerImpl(IAdkRuntime runtime, PolicyFactory policyFactory)
 	{
 		fRuntime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -22,6 +24,7 @@ namespace OpenADK.Library.Tools.Policy
 	
 	
 	
+	/// <summary/>
 	public override void ApplyOutboundPolicy(SifMessagePayload msg, IZone zone ) {
 		
 		SifMessageType pload = fRuntime.Dtd.GetElementType(msg.ElementDef.Name);

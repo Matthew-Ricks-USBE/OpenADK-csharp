@@ -42,10 +42,7 @@ namespace OpenADK.Library.us.Programs
 	/// <item><term><c>SIFDTD.STUDENTPERSONAL</c></term><description>Identifies the StudentPersonal data object</description></item>
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
-	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
-	/// method is an IElementDef:
-	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
+	/// Many of the Adk's public interfaces require an ElementDef constant to be passed as a parameter.
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
 	/// <code>
 	/// Query query = new Query( SifDtd.STUDENTPERSONAL );
@@ -527,7 +524,8 @@ namespace OpenADK.Library.us.Programs
 	public static IElementDef WHENSERVICEPROVIDED_CODE = null;
 	/** Defines the &lt;OtherCodeList&gt; element as a child of &lt;WhenServiceProvided&gt; */
 	public static IElementDef WHENSERVICEPROVIDED_OTHERCODELIST = null;
-
+		
+	/// <inheritdoc />
 	public override void Load()
 	{
 		//  Objects defined by this SDO Library...
@@ -823,6 +821,7 @@ namespace OpenADK.Library.us.Programs
 	}
 
 	#region Update SifDtd
+	/// <inheritdoc />
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "Accommodation" ] = ACCOMMODATION;

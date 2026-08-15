@@ -19,6 +19,7 @@ namespace OpenADK.Library.Impl
     /// </version>
     public abstract class TransportImpl : ITransport
     {
+        /// <summary/>
         protected TransportProperties fProps;
 
         #region abstract methods

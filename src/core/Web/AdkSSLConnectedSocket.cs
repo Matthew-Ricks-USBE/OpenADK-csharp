@@ -19,17 +19,20 @@ namespace OpenADK.Web
         private SslStream fStream;
         private Socket fSocket;
 
+        /// <summary/>
         public AdkSSLConnectedSocket(Socket socket, SslStream sslStream)
         {
             fSocket = socket;
             fStream = sslStream;
         }
 
+        /// <summary/>
         public bool Connected
         {
             get { return fSocket.Connected; }
         }
 
+        /// <summary/>
         public void SetSocketOption(SocketOptionLevel level,
                                      SocketOptionName name,
                                      int val)
@@ -37,28 +40,33 @@ namespace OpenADK.Web
             fSocket.SetSocketOption(level, name, val);
         }
 
+        /// <summary/>
         public void Close()
         {
             fStream?.Close();
             fSocket?.Close();
         }
 
+        /// <summary/>
         public void Shutdown(SocketShutdown shutDownType)
         {
             fSocket.Shutdown(shutDownType);
         }
 
+        /// <summary/>
         public EndPoint LocalEndPoint
         {
             get { return fSocket.LocalEndPoint; }
         }
 
 
+        /// <summary/>
         public EndPoint RemoteEndPoint
         {
             get { return fSocket.RemoteEndPoint; }
         }
 
+        /// <summary/>
         public Stream CreateStream(FileAccess access,
                                     bool ownsSocket)
         {

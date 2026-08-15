@@ -25,6 +25,7 @@ namespace OpenADK.Library
             IEnumerable<TValue>
         where TValue : SifElement
     {
+        /// <summary/>
         protected SifList(IElementDef def)
             : base(def)
         {

@@ -16,13 +16,18 @@ namespace OpenADK.Library
     /// </summary>
     public interface IProtocolHandler
     {
+        /// <summary/>
         string Name { get; }
+        /// <summary/>
         void Open( ZoneImpl zone );
 
+        /// <summary/>
         void Close( IZone zone );
 
+        /// <summary/>
         void Start();
 
+        /// <summary/>
         void Shutdown();
 
         /// <summary>  Send a SIF infrastructure message</summary>

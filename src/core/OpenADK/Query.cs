@@ -539,7 +539,7 @@ namespace OpenADK.Library
         /// From the list of SifVersions associated with this Query, returns the latest SifVersion
         /// supported by the current ADK instance.
         /// </summary>
-        /// <seealso cref="Adk.GetLatestSupportedVersion"/>
+        /// <c>Adk.GetLatestSupportedVersion</c>
         public SifVersion EffectiveVersion
         {
             get { return GetLatestVersion(fVersions); }
@@ -1120,3 +1120,4 @@ namespace OpenADK.Library
         }
     }
 }
+

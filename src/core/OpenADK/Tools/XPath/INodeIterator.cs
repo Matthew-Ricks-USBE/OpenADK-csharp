@@ -25,8 +25,10 @@ namespace OpenADK.Library.Tools.XPath
         /// </summary>
         INodePointer MovePrevious();
 
+        /// <summary/>
         INodeIterator Clone();
 
+        /// <summary/>
         int Count { get;}
     }
 }

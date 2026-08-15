@@ -8,15 +8,18 @@ using System.Xml.XPath;
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public abstract class AbstractNodePointer : INodePointer
     {
         private INodePointer fParentPointer;
 
+        /// <summary/>
         public AbstractNodePointer( INodePointer parent )
         {
             fParentPointer = parent;
         }
 
+        /// <summary/>
         public abstract object GetBaseValue();
 
 
@@ -36,6 +39,7 @@ namespace OpenADK.Library.Tools.XPath
             }
         }
 
+        /// <summary/>
         public abstract void SetValue( object value );
 
         /// <summary>
@@ -43,6 +47,7 @@ namespace OpenADK.Library.Tools.XPath
         /// </summary>
         public abstract XPathNodeType NodeType { get; }
 
+        /// <summary/>
         public virtual INodePointer CreateAttribute( SifXPathContext context, string name )
         {
             throw new InvalidOperationException(
@@ -58,6 +63,7 @@ namespace OpenADK.Library.Tools.XPath
         public abstract string Name { get; }
 
 
+        /// <summary/>
         public virtual INodePointer CreateChild( SifXPathContext context, string name, int i )
         {
             throw new InvalidOperationException( "Cannot create an object for path " + Name + "/" + name +

@@ -309,9 +309,13 @@ namespace OpenADK.Library.Tools.Mapping
         }
 
         //  These are not declared final so vendors can change them at runtime if needed
+        /// <summary/>
         public static string XML_MAPPINGS = "mappings";
+        /// <summary/>
         public static string XML_OBJECT = "object";
+        /// <summary/>
         public static string XML_FIELD = "field";
+        /// <summary/>
         public static string XML_VALUESET = "valueset";
 
 
@@ -736,6 +740,7 @@ namespace OpenADK.Library.Tools.Mapping
             Populate(doc.DocumentElement, this);
         }
 
+        /// <summary/>
         protected internal void Populate(XmlElement node,
                                          Mappings parent)
         {
@@ -1511,7 +1516,6 @@ namespace OpenADK.Library.Tools.Mapping
         /// SifDataObject.
         /// 
         /// </param>
-        /// <param name="adaptor">An IFieldAdaptor containing field values</param>
         /// <param name="data">The SifDataObject to assign field values to
         /// 
         /// </param>
@@ -2296,6 +2300,7 @@ namespace OpenADK.Library.Tools.Mapping
             return arr;
         }
 
+        /// <summary/>
         public ObjectMapping GetObjectMapping(string objectType,
                                               bool inherit)
         {

@@ -80,6 +80,7 @@ namespace OpenADK.Library.Tools.Queries
             return "";
         }
 
+        /// <summary/>
         public override string GetOperator( GroupOperator op )
         {
             switch ( op ) {
@@ -93,6 +94,7 @@ namespace OpenADK.Library.Tools.Queries
         }
 
 
+            /// <summary/>
             public String Format( Query query, bool isExplicit )
     {
         if ( fFields == null && query.HasConditions )
@@ -184,7 +186,7 @@ namespace OpenADK.Library.Tools.Queries
 
         /// <summary>
         ///   Adds an SQLField to use for rendering an SQL Where clause using
-        /// the <see cref="SQLQueryFormatter.Query"/> method.
+        /// the <c>Format</c> method.
         /// </summary>
         /// <param name="def"> The ElementDef that is represented by the field</param>
         /// <param name="field">The SQL representation of the field</param>
@@ -285,3 +287,4 @@ namespace OpenADK.Library.Tools.Queries
         }
     }
 }
+

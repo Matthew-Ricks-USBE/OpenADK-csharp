@@ -23,6 +23,7 @@ namespace OpenADK.Library
             set { fXml = value; }
         }
 
+        /// <summary/>
         protected internal String fXml;
 
         /// <summary>  Constructs a SifDataObject with XML content</summary>

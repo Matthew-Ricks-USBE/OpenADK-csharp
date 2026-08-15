@@ -11,19 +11,23 @@ using OpenADK.Util;
 
 namespace OpenADK.Library.Tools
 {
+    /// <summary/>
     public class VariantAssisstant
     {
         private readonly IDtd fDtd;
         private readonly ISifObjectFactory fObjects;
 
+        /// <summary/>
         public VariantAssisstant(IDtd dtd, ISifObjectFactory objects)
         {
             fDtd = dtd ?? throw new ArgumentNullException(nameof(dtd));
             fObjects = objects ?? throw new ArgumentNullException(nameof(objects));
         }
 
+        /// <summary/>
         public static readonly string README = "THIS CLASS HAS NOT BEEN TESTED.  USE AT YOUR OWN RISK.";
 
+        /// <summary/>
         public Type GetSifElementType(string library, string sdoName)
         {
             string sdoAssembly = fDtd.SDOAssembly;
@@ -38,6 +42,7 @@ namespace OpenADK.Library.Tools
         }
 
 
+        /// <summary/>
         public Type GetSifElementType(string sdoName)
         {
             string sdoAssembly = fDtd.SDOAssembly;
@@ -59,6 +64,7 @@ namespace OpenADK.Library.Tools
 
 
 
+        /// <summary/>
         public SifElement GetSifElement(string sdoName)
         {
             string sdoAssembly = fDtd.SDOAssembly;
@@ -79,6 +85,7 @@ namespace OpenADK.Library.Tools
         }
 
 
+        /// <summary/>
         public SifElement GetSifElement(string library, string sdoName)
         {
             string sdoAssembly = fDtd.SDOAssembly;

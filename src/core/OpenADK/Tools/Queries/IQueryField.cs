@@ -10,7 +10,7 @@ namespace OpenADK.Library.Tools.Queries
     /// <summary>
     /// This interface defines an optional interface that can be implemented by a class and mapped to an element to satisfy a SIF_Query.</summary>
     /// <remarks>
-    /// When mapped to a a SIF_Query element and passed in as part of the table to the <see cref="QueryFormatter.Format"/> method, this class
+    /// When mapped to a a SIF_Query element and passed in as part of the table to the <c>QueryFormatter.Format</c> method, this class
     /// will be invoked if query contains a condition that maps to the field
     /// </remarks>
     public interface IQueryField
@@ -27,3 +27,4 @@ namespace OpenADK.Library.Tools.Queries
                        Condition cond );
     }
 }
+

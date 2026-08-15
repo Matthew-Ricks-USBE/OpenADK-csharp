@@ -190,6 +190,7 @@ namespace OpenADK.Util
             return null;
         }
 
+        /// <summary/>
         public static string ReplaceFirst( string src,
                                            string searchString,
                                            string replaceString )

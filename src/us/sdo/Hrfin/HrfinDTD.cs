@@ -42,10 +42,7 @@ namespace OpenADK.Library.us.Hrfin
 	/// <item><term><c>SIFDTD.STUDENTPERSONAL</c></term><description>Identifies the StudentPersonal data object</description></item>
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
-	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
-	/// method is an IElementDef:
-	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
+	/// Many of the Adk's public interfaces require an ElementDef constant to be passed as a parameter.
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
 	/// <code>
 	/// Query query = new Query( SifDtd.STUDENTPERSONAL );
@@ -789,7 +786,8 @@ namespace OpenADK.Library.us.Hrfin
 	public static IElementDef W4_SIF_EXTENDEDELEMENTS = null;
 	/** SIF 2.0 and later: Defines the built-in SIF_Metadata element common to all SIF Data Objects */
 	public static IElementDef W4_SIF_METADATA = null;
-
+		
+	/// <inheritdoc />
 	public override void Load()
 	{
 		//  Objects defined by this SDO Library...
@@ -1307,6 +1305,7 @@ namespace OpenADK.Library.us.Hrfin
 	}
 
 	#region Update SifDtd
+	/// <inheritdoc />
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "FinancialAccountAccountingPeriodLocationInfo" ] = FINANCIALACCOUNTACCOUNTINGPERIODLOCATIONINFO;

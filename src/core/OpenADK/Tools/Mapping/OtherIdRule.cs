@@ -21,15 +21,19 @@ namespace OpenADK.Library.Tools.Mapping
     //[Serializable]
     public class OtherIdRule : Rule //, System.Runtime.Serialization.ISerializable
     {
+        /// <summary/>
         protected internal OtherIdMapping fMapping;
 
+        /// <summary/>
         protected internal XmlElement fNode;
 
+        /// <summary/>
         public OtherIdRule(OtherIdMapping mapping)
             : this(mapping, null)
         {
         }
 
+        /// <summary/>
         public OtherIdRule(OtherIdMapping mapping,
                            XmlElement node)
         {
@@ -107,6 +111,7 @@ namespace OpenADK.Library.Tools.Mapping
             return null;
         }
 
+        /// <summary/>
         public override SifSimpleType Evaluate(SifXPathContext context, SifVersion version)
         {
             SifDataObject sdo = (SifDataObject) context.ContextElement;

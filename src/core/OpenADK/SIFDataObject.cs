@@ -374,13 +374,14 @@ namespace OpenADK.Library
         //* This method is provided as a convenience to agents that need more control or
         //* wish to set or completely replace the existing SIF_ExtendedElements container. 
 
+        /// <summary/>
         public void AddSifExtendedElementsContainer( SIF_ExtendedElements container )
         {
             RemoveChild( GlobalDTD.SIF_EXTENDEDELEMENTS );
             AddChild( container );
         }
 
-        /**
+        /*
        * Sets an array of <code>SIF_ExtendedElement</code> objects. All existing 
        * <code>SIF_ExtendedElement</code> instances 
        * are removed and replaced with this list. Calling this method with the 

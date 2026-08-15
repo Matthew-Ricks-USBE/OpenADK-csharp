@@ -12,6 +12,7 @@ using OpenADK.Library.Tools.XPath.Functions;
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public class SifXPathContext : IXPathNavigable
     {
         private SifElement fContextElement;
@@ -20,6 +21,7 @@ namespace OpenADK.Library.Tools.XPath
         private SifXPathNavigator fDefaultNavigator;
 
 
+        /// <summary/>
         public SifElement ContextElement
         {
             get { return fContextElement; }
@@ -238,6 +240,7 @@ namespace OpenADK.Library.Tools.XPath
         }
 
 
+        /// <summary/>
         public void SetElementOrAttribute( String xPath, Object value )
         {
             String adkXPath = ConvertLegacyXPath( xPath );
@@ -573,6 +576,7 @@ namespace OpenADK.Library.Tools.XPath
         }
 
 
+        /// <summary/>
         public static SifXPathExpression Compile( string xPath )
         {
             String convertedXPath = ConvertLegacyXPath( xPath );

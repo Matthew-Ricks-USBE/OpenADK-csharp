@@ -71,11 +71,17 @@ namespace OpenADK.Library.Tools.Mapping
 
 
         private MappingBehavior fNullBehavior = MappingBehavior.IfNullUnspecified;
+        /// <summary/>
         protected internal Rule fRule;
+        /// <summary/>
         protected string fField;
+        /// <summary/>
         protected string fDefValue;
+        /// <summary/>
         protected string fAlias;
+        /// <summary/>
         protected string fValueSet;
+        /// <summary/>
         protected MappingsFilter fFilter;
         internal XmlElement fNode;
         private SifDataType fDatatype = SifDataType.String;
@@ -99,6 +105,7 @@ namespace OpenADK.Library.Tools.Mapping
         {
         }
 
+        /// <summary/>
         public FieldMapping(string name,
                             string rule,
                             XmlElement node)
@@ -606,6 +613,7 @@ namespace OpenADK.Library.Tools.Mapping
             return m;
         }
 
+        /// <summary/>
         public SifSimpleType Evaluate(SifXPathContext xpathContext, SifVersion version, bool returnDefault)
         {
             SifSimpleType value = null;
@@ -659,6 +667,7 @@ namespace OpenADK.Library.Tools.Mapping
             }
         }
 
+        /// <summary/>
         public void SetRule(OtherIdMapping otherId,
                             XmlElement node)
         {
@@ -678,6 +687,7 @@ namespace OpenADK.Library.Tools.Mapping
             fNode = element;
         }
 
+        /// <summary/>
         public MappingBehavior NullBehavior
         {
             get { return fNullBehavior; }

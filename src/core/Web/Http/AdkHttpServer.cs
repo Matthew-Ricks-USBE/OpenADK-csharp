@@ -24,6 +24,7 @@ namespace OpenADK.Web.Http
         private AdkHttpListener fListener;
         private bool fIsStarted = false;
 
+        /// <summary/>
         protected AdkHttpServer(IAdkRuntime runtime)
         {
             Runtime = runtime ?? throw new ArgumentNullException(nameof(runtime));
@@ -37,11 +38,13 @@ namespace OpenADK.Web.Http
 
         internal IAdkRuntime Runtime { get; }
 
+        /// <summary/>
         public virtual string Name
         {
             get { return fServerName; }
         }
 
+        /// <summary/>
         public virtual AdkHttpRequestContext CreateContext(AdkHttpConnection connection,
                                                             AdkHttpRequest request,
                                                             AdkHttpResponse response)
@@ -75,6 +78,7 @@ namespace OpenADK.Web.Http
             fListener.RemoveHandlerContext(hostname, virtualPath);
         }
 
+        /// <summary/>
         public virtual void AddListener(AdkSocketBinding binding)
         {
             lock (fBindings.SyncRoot)
@@ -90,6 +94,7 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         public virtual AdkSocketBinding CreateHttpListener()
         {
             AdkSocketBinding binding =
@@ -111,6 +116,7 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public AdkSocketBinding GetListener(int port)
         {
             lock (fBindings.SyncRoot)
@@ -126,6 +132,7 @@ namespace OpenADK.Web.Http
             return null;
         }
 
+        /// <summary/>
         protected void RemoveBinding(int port)
         {
             lock (fBindings.SyncRoot)
@@ -139,12 +146,14 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         protected AdkHttpListener Listener
         {
             get { return fListener; }
         }
 
 
+        /// <summary/>
         protected AdkSocketBinding[] GetPortBindings()
         {
             lock (fBindings.SyncRoot)
@@ -155,6 +164,7 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         protected void StartServer()
         {
             lock (fBindings.SyncRoot)
@@ -177,11 +187,13 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         public bool IsStarted
         {
             get { return fIsStarted; }
         }
 
+        /// <summary/>
         protected void StopServer(bool clearAllListeners)
         {
             lock (fBindings.SyncRoot)
@@ -209,12 +221,14 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         public ILogger Log
         {
             get { return fLog; }
             set { fLog = value; }
         }
 
+        /// <summary/>
         public void Error(string message,
                            Exception ex)
         {

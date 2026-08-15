@@ -429,6 +429,7 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         protected internal virtual AdkSocketBinding ConfigureHttp( IZone zone )
         {
             int port = Port;
@@ -796,6 +797,7 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         public override IProtocolHandler CreateProtocolHandler( AgentMessagingMode mode )
         {
             if ( mode == AgentMessagingMode.Pull )
@@ -1031,6 +1033,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public void DebugTransport( string message,
                                     params object[] args )
         {
@@ -1055,6 +1058,7 @@ namespace OpenADK.Library.Impl
 
         #endregion
 
+        /// <summary/>
         public void ConfigureSIF_Protocol( SIF_Protocol proto, IZone zone )
         {
             proto.Type = Protocol.ToUpperInvariant();

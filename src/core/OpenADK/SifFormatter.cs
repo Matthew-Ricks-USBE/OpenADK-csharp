@@ -298,6 +298,7 @@ namespace OpenADK.Library
             return contentParent.SetField(fieldDef, data);
         }
 
+        /// <summary/>
         public virtual SifElement AddChild(SifElement contentParent, SifElement content, SifVersion version)
         {
             return contentParent.AddChild(content);

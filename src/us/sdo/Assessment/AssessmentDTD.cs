@@ -42,10 +42,7 @@ namespace OpenADK.Library.us.Assessment
 	/// <item><term><c>SIFDTD.STUDENTPERSONAL</c></term><description>Identifies the StudentPersonal data object</description></item>
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
-	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
-	/// method is an IElementDef:
-	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
+	/// Many of the Adk's public interfaces require an ElementDef constant to be passed as a parameter.
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
 	/// <code>
 	/// Query query = new Query( SifDtd.STUDENTPERSONAL );
@@ -334,45 +331,80 @@ namespace OpenADK.Library.us.Assessment
 	public static IElementDef UNUSUALEVENTS = null;
 
 	// SIF 1.5r1 Assessment fields
+	/** Defines the &lt;AssessmentLanguage&gt; SIF Data Object */
 	public static IElementDef ASSESSMENT_LANGUAGE = null;
+	/** Defines the &lt;AssessmentTitle&gt; SIF Data Object */
 	public static IElementDef ASSESSMENT_TITLE = null;
+	/** Defines the &lt;AssessmentInstanceForm&gt; SIF Data Object */
 	public static IElementDef ASSESSMENT_ASSESSMENTINSTANCEFORM = null;
+	/** Defines the &lt;PauseFlag&gt; SIF Data Object */
 	public static IElementDef ASSESSMENT_PAUSEFLAG = null;
 	// SIF 1.5r1 AssessmentSection fields
+	/** Defines the &lt;AssessmentSectionRefId&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTSECTION_REFID = null;
+	/** Defines the &lt;AssessmentSectionLanguage&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTSECTION_LANGUAGE = null;
+	/** Defines the &lt;AssessmentSectionTitle&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTSECTION_TITLE = null;
+	/** Defines the &lt;AssessmentSectionPauseFlag&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTSECTION_PAUSEFLAG = null;
 	// SIF 1.5r1 AssessmentItem fields
+	/** Defines the &lt;AssessmentItemLanguage&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_LANGUAGE = null;
+	/** Defines the &lt;AssessmentItemTitle&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_TITLE = null;
+	/** Defines the &lt;AssessmentItemPresentation&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION = null;
+	/** Defines the &lt;AssessmentItemPresentationInstruction&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION_INSTRUCTION = null;
+	/** Defines the &lt;AssessmentItemPresentationContent&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION_CONTENT = null;
+	/** Defines the &lt;AssessmentItemPresentationWidth&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION_WIDTH = null;
+	/** Defines the &lt;AssessmentItemPresentationHeight&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION_HEIGHT = null;
+	/** Defines the &lt;AssessmentItemPresentationX0&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION_X0 = null;
+	/** Defines the &lt;AssessmentItemPresentationY0&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION_Y0 = null;
+	/** Defines the &lt;AssessmentItemPresentationLanguage&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_PRESENTATION_LANGUAGE = null;
+	/** Defines the &lt;AssessmentItemItemContent&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_ITEMCONTENT = null;
+	/** Defines the &lt;AssessmentItemItemContentView&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_ITEMCONTENT_VIEW = null;
+	/** Defines the &lt;AssessmentItemItemContentItemAnswer&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTITEM_ITEMCONTENT_ITEMANSWER = null;
 	// SIF 1.5r1 AssessmentSubTest fields
+	/** Defines the &lt;AssessmentSubTestLanguage&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTSUBTEST_LANGUAGE = null;
+	/** Defines the &lt;AssessmentSubTestAssessmentRefId&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTSUBTEST_ASSESSMENTREFID = null;
+	/** Defines the &lt;AssessmentSubTestSubTestName&gt; SIF Data Object */
 	public static IElementDef ASSESSMENTSUBTEST_SUBTESTNAME = null;
 	// SIF 1.5r1 StudentResultSet
+	/** Defines the &lt;StudentResultSet&gt; SIF Data Object */
 	public static IElementDef STUDENTRESULTSET = null;
+	/** Defines the &lt;StudentResultSetRefId&gt; SIF Data Object */
 	public static IElementDef STUDENTRESULTSET_REFID = null;
+	/** Defines the &lt;StudentResultSetLanguage&gt; SIF Data Object */
 	public static IElementDef STUDENTRESULTSET_LANGUAGE = null;
+	/** Defines the &lt;StudentResultSetStudentPersonalRefId&gt; SIF Data Object */
 	public static IElementDef STUDENTRESULTSET_STUDENTPERSONALREFID = null;
+	/** Defines the &lt;StudentResultSetResult&gt; SIF Data Object */
 	public static IElementDef STUDENTRESULTSET_RESULT = null;
+	/** Defines the &lt;StudentResultSetResultType&gt; SIF Data Object */
 	public static IElementDef STUDENTRESULTSET_RESULT_TYPE = null;
+	/** Defines the &lt;StudentResultSetResultScore&gt; SIF Data Object */
 	public static IElementDef STUDENTRESULTSET_RESULT_SCORE = null;
 	// SIF 1.5r1 Score children
+	/** Defines the &lt;ScoreMin&gt; SIF Data Object */
 	public static IElementDef SCORE_MIN = null;
+	/** Defines the &lt;ScoreMax&gt; SIF Data Object */
 	public static IElementDef SCORE_MAX = null;
+	/** Defines the &lt;ScoreScoreRefId&gt; SIF Data Object */
 	public static IElementDef SCORE_SCOREREFID = null;
+	/** Defines the &lt;ScoreRefIdType&gt; SIF Data Object */
 	public static IElementDef SCORE_REFIDTYPE = null;
 
 	// Field elements of ADMINISTRATIONASSESSMENT (0 fields)
@@ -1655,6 +1687,7 @@ namespace OpenADK.Library.us.Assessment
 	/** Defines the &lt;UnusualEvent&gt; element as a child of &lt;UnusualEvents&gt; */
 	public static IElementDef UNUSUALEVENTS_UNUSUALEVENT = null;
 
+	/// <inheritdoc />
 	public override void Load()
 	{
 		//  Objects defined by this SDO Library...
@@ -2625,6 +2658,7 @@ namespace OpenADK.Library.us.Assessment
 	}
 
 	#region Update SifDtd
+	/// <inheritdoc/>
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "Sif3AssessmentForm" ] = SIF3ASSESSMENTFORM;

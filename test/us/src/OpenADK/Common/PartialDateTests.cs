@@ -30,22 +30,20 @@ namespace Library.Nunit.US.Common
             assertPartialDate(date, 2006, 6, 1, "2006-06-01Z");
         }
 
-        //[Fact]
-        public void assertPartialDate(PartialDateType date, int year, int month, int day, String lexicalValue)
+        private void assertPartialDate(PartialDateType date, int year, int month, int day, String lexicalValue)
         {
             Assert.Equal(year, date.Year.Value);
             Assert.Equal(month, date.Month.Value);
             Assert.Equal(day, date.Day.Value);
 
             DateTime cal = date.Date;
-            Assert.NotNull(cal);
 
             Assert.Equal(year, cal.Year);
             Assert.Equal(month, cal.Month);
             Assert.Equal(day, cal.Day);
 
-            Assert.Equal(date.Value, lexicalValue);
-            Assert.Equal(date.TextValue, lexicalValue);
+            Assert.Equal(lexicalValue, date.Value);
+            Assert.Equal(lexicalValue, date.TextValue);
 
             Assert.Equal(PartialDateType.DateType.Date, date.DataType);
         }
@@ -54,7 +52,7 @@ namespace Library.Nunit.US.Common
         public void testPartialDate010()
         {
             PartialDateType date = new PartialDateType(1999);
-            Assert.Equal((int) date.Year, 1999);
+            Assert.Equal(1999, (int) date.Year);
             Assert.Equal(PartialDateType.DateType.GYear, date.DataType);
         }
 
@@ -62,9 +60,9 @@ namespace Library.Nunit.US.Common
         public void testPartialDate011()
         {
             PartialDateType date = new PartialDateType("1999");
-            Assert.Equal((int) date.Year, 1999);
-            Assert.Equal(date.Value, "1999");
-            Assert.Equal(date.TextValue, "1999");
+            Assert.Equal(1999, (int) date.Year);
+            Assert.Equal("1999", date.Value);
+            Assert.Equal("1999", date.TextValue);
             Assert.Equal(PartialDateType.DateType.GYear, date.DataType);
         }
 
@@ -72,9 +70,9 @@ namespace Library.Nunit.US.Common
         public void testPartialDate014()
         {
             PartialDateType date = new PartialDateType(1999);
-            Assert.Equal((int) date.Year, 1999);
-            Assert.Equal(date.Value, "1999");
-            Assert.Equal(date.TextValue, "1999");
+            Assert.Equal(1999, (int) date.Year);
+            Assert.Equal("1999", date.Value);
+            Assert.Equal("1999", date.TextValue);
             Assert.Equal(PartialDateType.DateType.GYear, date.DataType);
         }
 
@@ -149,8 +147,8 @@ namespace Library.Nunit.US.Common
             Assert.Equal(1999, (int) date.Year);
             Assert.Equal(12, (int) date.Month);
             Assert.Null(date.Day);
-            Assert.Equal(date.Value, "1999-12-06:00");
-            Assert.Equal(date.TextValue, "1999-12-06:00");
+            Assert.Equal("1999-12-06:00", date.Value);
+            Assert.Equal("1999-12-06:00", date.TextValue);
 
             date.TextValue = "2007-06-01";
             assertPartialDate(date, 2007, 06, 01, "2007-06-01");

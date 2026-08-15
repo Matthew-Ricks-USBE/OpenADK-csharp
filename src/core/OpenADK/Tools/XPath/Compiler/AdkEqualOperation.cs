@@ -7,8 +7,10 @@ using System.Xml.Xsl;
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public class AdkEqualOperation : AdkOperation
     {
+        /// <summary/>
         public AdkEqualOperation( AdkExpression arg1, AdkExpression arg2 ) : base( arg1, arg2 )
         {
         }

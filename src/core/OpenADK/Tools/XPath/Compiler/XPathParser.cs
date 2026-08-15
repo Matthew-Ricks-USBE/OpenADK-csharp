@@ -15,6 +15,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
     /// </summary>
     public class XPathParser
     {
+        /// <summary/>
         public static AdkXPathStep[] Parse( String expression )
         {
             List<AdkXPathStep> steps = new List<AdkXPathStep>();
@@ -331,12 +332,15 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             }
         }
 
+        /// <summary/>
         public class SimpleFragment : Fragment
         {
+            /// <summary/>
             public SimpleFragment( String fragment ) : base( fragment )
             {
             }
 
+            /// <summary/>
             protected internal SimpleFragment( StringBuilder expression, int start, int end )
                 : base( expression, start, end )
             {
@@ -354,8 +358,10 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             }
         }
 
+        /// <summary/>
         public abstract class Fragment
         {
+            /// <summary/>
             protected StringBuilder fBuffer;
 
             ///
@@ -369,11 +375,13 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             /// </summary>
             protected int fStartChar = 0;
 
+            /// <summary/>
             protected Fragment( String fragment ) : this( new StringBuilder( fragment ), 0, fragment.Length - 1 )
             {
             }
 
 
+            /// <summary/>
             protected Fragment( StringBuilder expression, int start, int end )
             {
                 fBuffer = expression;
@@ -404,6 +412,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             }
 
 
+            /// <summary/>
             protected Fragment[] Split( string s, int start, int end )
             {
                 List<Fragment> returnValue = new List<Fragment>();
@@ -465,6 +474,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             }
 
 
+            /// <summary/>
             protected Fragment FindBoundedFragment( char startChar, char endChar, int startLocation, int endLocation )
             {
                 int start = IndexOfNextToken( startChar, startLocation, endLocation );
@@ -512,6 +522,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             private delegate Boolean CompareTokenDelegate( int location );
 
 
+            /// <summary/>
             public override string ToString()
             {
                 return fBuffer.ToString( fStartChar, fEndChar + 1 - fStartChar );

@@ -8,10 +8,12 @@ using OpenADK.Library.Tools.Cfg;
 
 namespace OpenADK.Library.Tools.Policy
 {
+    /// <summary/>
     public class AdkDefaultPolicy : PolicyFactory
     {
         private AgentConfig fConfig;
 
+        /// <summary/>
         public AdkDefaultPolicy( Agent agent )
         {
             if ( agent != null )

@@ -63,6 +63,7 @@ namespace OpenADK.Library.Tools
             }
         }
 
+        /// <summary/>
         public static bool TRACE = false;
 
         /// <summary>  LoadBalancer ID</summary>

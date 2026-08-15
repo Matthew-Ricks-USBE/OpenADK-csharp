@@ -43,7 +43,7 @@ namespace OpenADK.Library.au.Datamodel
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
 	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
+	/// as a parameter. For example, the first parameter to the <c>IZone.SetSubscriber</c>
 	/// method is an IElementDef:
 	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
@@ -219,6 +219,7 @@ namespace OpenADK.Library.au.Datamodel
 	// Field elements of TIMEELEMENTS (1 fields)
 	/** Defines the &lt;TimeElement&gt; element as a child of &lt;TimeElements&gt; */
 	public static IElementDef TIMEELEMENTS_TIMEELEMENT = null;
+	/// <summary/>
 
 	public override void Load()
 	{
@@ -314,6 +315,7 @@ namespace OpenADK.Library.au.Datamodel
 	}
 
 	#region Update SifDtd
+	/// <summary/>
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "LifeCycle" ] = LIFECYCLE;
@@ -375,3 +377,5 @@ namespace OpenADK.Library.au.Datamodel
 	}
 	#endregion
 }}
+
+

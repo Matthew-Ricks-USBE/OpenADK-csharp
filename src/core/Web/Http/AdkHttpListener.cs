@@ -20,21 +20,25 @@ namespace OpenADK.Web.Http
         private AdkHttpServer fServer;
         private IAdkHttpHandler fAnonymousHandler;
 
+        /// <summary/>
         public AdkHttpListener( AdkHttpServer server )
         {
             fServer = server;
         }
 
+        /// <summary/>
         public void Attach( AdkSocketBinding server )
         {
             server.DataReceived += new AdkSocketMessageHandler( HandleSocketMessage );
         }
 
+        /// <summary/>
         public void Detach( AdkSocketBinding server )
         {
             server.DataReceived -= new AdkSocketMessageHandler( HandleSocketMessage );
         }
 
+        /// <summary/>
         protected void HandleSocketMessage( AdkSocketConnection socketConnection )
         {
             AdkHttpConnection.ProcessRequest( socketConnection, this );
@@ -52,6 +56,7 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public AdkHttpServer Server
         {
             get { return fServer; }
@@ -78,6 +83,7 @@ namespace OpenADK.Web.Http
             fHandlerContexts[contextPath] = factory;
         }
 
+        /// <summary/>
         public IAdkHttpHandler AnonymousHandler
         {
             get
@@ -91,12 +97,14 @@ namespace OpenADK.Web.Http
             set { fAnonymousHandler = value; }
         }
 
+        /// <summary/>
         public void RemoveHandlerContext( string hostName,
                                           string virtualPath )
         {
             fHandlerContexts.Remove( BuildContextString( virtualPath ) );
         }
 
+        /// <summary/>
         public IAdkHttpHandlerFactory SearchForContextHandler( Uri requestUri )
         {
             string searchPath = requestUri.AbsolutePath;
@@ -114,6 +122,7 @@ namespace OpenADK.Web.Http
             return null;
         }
 
+        /// <summary/>
         public bool HasHandlerContext( string hostName,
                                        String virtualPath )
         {
@@ -121,6 +130,7 @@ namespace OpenADK.Web.Http
             return fHandlerContexts.Contains( contextPath );
         }
 
+        /// <summary/>
         public bool KeepAlivesEnabled
         {
             get { return fKeepAlivesEnabled; }

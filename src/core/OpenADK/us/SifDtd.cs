@@ -42,7 +42,7 @@ using System.Text;
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
 	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
+	/// as a parameter. For example, the first parameter to the <c>IZone.SetSubscriber</c>
 	/// method is an IElementDef:
 	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
@@ -57,7 +57,7 @@ using System.Text;
 	/// ElementDef metadata is grouped into "SDO Libraries", which are organized along 
 	/// SIF Working Group boundaries. SDO Libraries are loaded into the <c>SifDdt</c> 
 	/// class when the Adk is initialized. All or part of the metadata is loaded into depending on the flags passed to the
-	/// <see cref="Adk.Initialize(SifVersion, SdoLibraryType)"/> method,
+	/// <c>Adk.Initialize</c> method,
 	/// metadata from one or more SDO Libraries may be loaded. For example, the following
 	/// call loads metadata for the <c>Student Information Working Group Objects</c>  
 	/// and <c>Transportation And Geographic Information Working Group Objects</c> 
@@ -111,11 +111,13 @@ public sealed partial class SifDtd : OpenADK.Library.SifDtd
 	public const string HRFIN = "Hrfin";
 
 	// The name of the data model variant this class is defined in
+	/// <summary/>
 	public override string Variant { 
 		get{
 			return "us";
 		}
 	}
+	/// <summary/>
 	public override List<string> LoadedLibraryNames
 	{
 	get
@@ -147,6 +149,7 @@ public sealed partial class SifDtd : OpenADK.Library.SifDtd
 // BEGIN EXTRA METHODS (SIFDTD_Template_CS.txt)
 
 
+    /// <summary/>
     protected override String GetLibraryName(int type)
     {
         return ((SdoLibraryType)type).ToString("G");
@@ -180,6 +183,7 @@ public sealed partial class SifDtd : OpenADK.Library.SifDtd
         get { return (SdoLibraryType)fLoaded; }
     }
 
+    /// <summary/>
     protected override List<int> GetSdoTypes(int libraryTypes)
     {
         List<int> libTypes = new List<int>();
@@ -199,3 +203,5 @@ public sealed partial class SifDtd : OpenADK.Library.SifDtd
 // END EXTRA METHODS
 
 }}
+
+

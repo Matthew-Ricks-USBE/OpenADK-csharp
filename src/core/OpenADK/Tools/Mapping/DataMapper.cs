@@ -7,6 +7,7 @@ using System.Data;
 
 namespace OpenADK.Library.Tools.Mapping
 {
+    /// <summary/>
     public abstract class DataMapper : IFieldAdaptor
     {
         private DataColumnCollection fColumns;

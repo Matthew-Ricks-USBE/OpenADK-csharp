@@ -20,12 +20,14 @@ namespace OpenADK.Library.Impl.Surrogates
         private String fFieldName;
         private bool fIsAttribute;
 
+        /// <summary/>
         protected FauxElementPointer( INodePointer parent, String fauxName, bool isAttribute ) : base( parent )
         {
             fFieldName = fauxName;
             fIsAttribute = isAttribute;
         }
 
+        /// <summary/>
         public bool IsAttribute
         {
             get { return fIsAttribute; }
@@ -58,11 +60,13 @@ namespace OpenADK.Library.Impl.Surrogates
             get { return false; }
         }
 
+        /// <summary/>
         public override string Name
         {
             get { return fFieldName; }
         }
 
+        /// <summary/>
         protected void SetFieldValue( Element field, Object value )
         {
             SifSimpleType sifValue = null;

@@ -26,6 +26,7 @@ namespace OpenADK.Library.Impl
         // Cached array of supported SIF versions for faster lookups
         private static readonly SifVersion[] sSifVersions = SifVersion.SupportedVersions;
 
+        /// <summary/>
         public IDtd Dtd { get; internal set; }
 
 
@@ -208,9 +209,8 @@ namespace OpenADK.Library.Impl
         /// <param name="flags"></param>
         /// <param name="earliestVersion"></param>
         /// <param name="latestVersion"></param>
-        /// <param name="typeConverter"></param>
         /// 
-        public ElementDefImpl(IElementDef parent,  
+        public ElementDefImpl(IElementDef parent,
                               string name,
                               string tag,
                               int sequence,
@@ -274,6 +274,7 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         public virtual string SDOPath
         {
             get
@@ -290,6 +291,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public virtual IElementDef Parent
         {
             get { return fParent; }
@@ -333,11 +335,13 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public virtual string ClassName
         {
             get { return fName; }
         }
 
+        /// <summary/>
         public virtual string FQClassName
         {
             get
@@ -369,32 +373,38 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public virtual bool IsAttribute(SifVersion version)
         {
             return Info(version).GetFlag(AbstractVersionInfo.FLAG_ATTRIBUTE);
         }
 
+        /// <summary/>
         public bool HasSimpleContent
         {
             get { return fTypeConverter != null; }
         }
 
+        /// <summary/>
         public virtual bool Field
         {
             get { return (fFlags & FD_FIELD) != 0; }
         }
 
 
+        /// <summary/>
         public virtual bool Object
         {
             get { return (fFlags & FD_OBJECT) != 0; }
         }
 
+        /// <summary/>
         public virtual string Package
         {
             get { return fPackage; }
         }
 
+        /// <summary/>
         public virtual SifVersion EarliestVersion
         {
             get
@@ -411,6 +421,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public virtual SifVersion LatestVersion
         {
             get { return fLatestVersion; }
@@ -521,6 +532,7 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         public virtual string GetSQPPath(SifVersion version)
         {
             StringBuilder b = new StringBuilder();
@@ -547,6 +559,7 @@ namespace OpenADK.Library.Impl
             return fName;
         }
 
+        /// <summary/>
         public virtual int GetSequence(SifVersion version)
         {
             return Info(version).Sequence;
@@ -586,27 +599,32 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public virtual bool IsDeprecated(SifVersion version)
         {
             return Info(version).GetFlag(AbstractVersionInfo.FLAG_DEPRECATED);
         }
 
+        /// <summary/>
         public virtual bool IsRepeatable(SifVersion version)
         {
             return Info(version).GetFlag(AbstractVersionInfo.FLAG_REPEATABLE);
         }
 
+        /// <summary/>
         public TypeConverter TypeConverter
         {
             get { return fTypeConverter; }
         }
 
 
+        /// <summary/>
         public bool IsCollapsed(SifVersion version)
         {
             return Info(version).GetFlag(AbstractVersionInfo.FLAG_COLLAPSE);
         }
 
+        /// <summary/>
         public bool DoNotEncode
         {
             get { return (fFlags & FD_DO_NOT_ENCODE) != 0; }
@@ -645,6 +663,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public IElementVersionInfo GetVersionInfo(SifVersion version)
         {
             return GetAbstractVersionInfo(version, false);

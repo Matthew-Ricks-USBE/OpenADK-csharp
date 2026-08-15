@@ -25,7 +25,7 @@ namespace OpenADK.Util
         /// </summary>
         /// <param name="inSource"></param>
         /// <param name="inDestination"></param>
-        /// <param name="inRewindStreams">If set to true, rewinds the source before the copy and rewinds both after the copy</param>
+        /// <param name="blockSize">The number of bytes to copy in each iteration</param>
         public static void CopyStream( Stream inSource,
                                        Stream inDestination,
                                        int blockSize )
@@ -52,6 +52,7 @@ namespace OpenADK.Util
         /// </summary>
         /// <param name="inSource">The stream to copy from</param>
         /// <param name="inDestination">The stream to copy to. Flush() will be called when the copy is complete</param>
+        /// <param name="bufferSize">The size of the buffer to use when copying</param>
         /// <param name="endHandler">The delegate to call when the async copy operation is complete</param>
         /// <param name="state">The state, if any that the delegate would like returned to it</param>
         public static void BeginCopyStream( Stream inSource,
@@ -95,8 +96,8 @@ namespace OpenADK.Util
         /// <summary>
         /// Copies a stream
         /// </summary>
-        /// <param name="in_Source">The source stream</param>
-        /// <param name="in_Destination">The destination stream</param>
+        /// <param name="inSource">The source stream</param>
+        /// <param name="inDestination">The destination stream</param>
         /// <remarks>
         /// If the source stream supports seeking, it is rewound before reading and rewound again after copying.
         /// If the destination stream supports seeking, it is rewound after the copy
@@ -189,6 +190,7 @@ namespace OpenADK.Util
             }
         }
 
+        /// <summary/>
         public EduAsyncHandler AsyncHandler
         {
             get { return fAsyncDelegate; }

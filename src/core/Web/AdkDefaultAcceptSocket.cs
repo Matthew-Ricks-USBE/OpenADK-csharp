@@ -17,10 +17,12 @@ namespace OpenADK.Web
     {
         private Socket fAcceptSocket;
 
+        /// <summary/>
         public AdkDefaultAcceptSocket()
         {
            
         }
+        /// <summary/>
 
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void Bind(IPEndPoint endPoint)
@@ -36,6 +38,7 @@ namespace OpenADK.Web
         }
 
        
+        /// <summary/>
         public void Close()
         {
             if (fAcceptSocket != null)
@@ -45,12 +48,14 @@ namespace OpenADK.Web
             }
         }
 
+        /// <summary/>
         public void BeginAccept( AsyncCallback callback,
                                  object state )
         {
             fAcceptSocket.BeginAccept( callback, state );
         }
 
+        /// <summary/>
         public IConnectedSocket EndAccept( IAsyncResult result )
         {
             return new AdkDefaultConnectSocket( fAcceptSocket.EndAccept( result ) );

@@ -8,6 +8,7 @@ using System.Text;
 
 namespace OpenADK.Library.Impl
 {
+    /// <summary/>
     public class SifIOFormatter
     {
         private static Encoding sUTF8 = new UTF8Encoding( false );
@@ -28,11 +29,13 @@ namespace OpenADK.Library.Impl
             get { return "application/xml;charset=\"utf-8\""; }
         }
 
+        /// <summary/>
         public static string CONTENTTYPE_BASE 
         {
             get { return "application/xml"; }
         }
         
+        /// <summary/>
         public static string CONTENTTYPE_UTF8
         {
             get { return "utf-8"; }

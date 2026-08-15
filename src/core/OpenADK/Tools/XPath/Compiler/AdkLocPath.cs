@@ -9,10 +9,12 @@ using System.Xml.Xsl;
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public class AdkLocPath : AdkXPath
     {
         private bool fIsAbsolute = false;
 
+        /// <summary/>
         public AdkLocPath( bool absolute, params AdkXPathStep[] steps )
             : base( steps )
         {
@@ -31,6 +33,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
         }
 
 
+        /// <summary/>
         protected override bool ComputeContextDependent()
         {
             if( !fIsAbsolute)
@@ -41,6 +44,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
         }
 
 
+        /// <summary/>
         public override string ToString()
         {
             StringBuilder buffer = new StringBuilder();

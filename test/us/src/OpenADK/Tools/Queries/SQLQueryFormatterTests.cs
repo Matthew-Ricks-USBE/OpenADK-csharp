@@ -16,12 +16,6 @@ namespace Library.Nunit.US.Tools.Queries
     
     public class SQLQueryFormatterTests : AdkTest
     {
-        
-        public void Setup()
-        {
-            Runtime.Initialize();
-        }
-
         [Fact]
         public void testSQLQueryFormatter010()
         {

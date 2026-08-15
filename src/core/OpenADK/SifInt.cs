@@ -7,13 +7,17 @@ using System;
 
 namespace OpenADK.Library
 {
+   /// <summary/>
+   /// <summary/>
    [Serializable]
     public class SifInt : AdkDataType<int?>
     {
+        /// <summary/>
         public SifInt( int? value )
             : base( value ) {}
 
 
+        /// <summary/>
         protected override SifTypeConverter<int?> GetTypeConverter()
         {
             return SifTypeConverters.INT;

@@ -20,6 +20,7 @@ namespace OpenADK.Library.Tools.Mapping
         private DataRow fDataRow;
 
 
+        /// <summary/>
         public DataRowAdaptor(DataRow row) : base(row.Table.Columns)
         {
             fDataRow = row;   

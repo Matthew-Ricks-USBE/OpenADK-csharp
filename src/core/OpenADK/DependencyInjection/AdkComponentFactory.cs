@@ -8,26 +8,31 @@ namespace OpenADK.Library
     {
         private readonly AdkComponentOptions _options;
 
+        /// <summary/>
         public AdkComponentFactory(AdkOptions options)
         {
             _options = (options ?? throw new System.ArgumentNullException(nameof(options))).Components;
         }
 
+        /// <summary/>
         public virtual IZoneFactory CreateZoneFactory(Agent agent)
         {
             return _options.ZoneFactory?.Invoke(agent) ?? new ZoneFactoryImpl(agent);
         }
 
+        /// <summary/>
         public virtual ITopicFactory CreateTopicFactory(Agent agent)
         {
             return _options.TopicFactory?.Invoke(agent) ?? new TopicFactoryImpl(agent);
         }
 
+        /// <summary/>
         public virtual ITransportManager CreateTransportManager(Agent agent)
         {
             return _options.TransportManager?.Invoke(agent) ?? new TransportManagerImpl(agent.Runtime);
         }
 
+        /// <summary/>
         public virtual RequestCache CreateRequestCache(Agent agent)
         {
             RequestCache cache = _options.RequestCache?.Invoke(agent) ?? new RequestCacheFile();
@@ -35,11 +40,13 @@ namespace OpenADK.Library
             return cache;
         }
 
+        /// <summary/>
         public virtual PolicyFactory CreatePolicyFactory(Agent agent)
         {
             return _options.PolicyFactory?.Invoke(agent) ?? new AdkDefaultPolicy(agent);
         }
 
+        /// <summary/>
         public virtual PolicyManager CreatePolicyManager(Agent agent)
         {
             if (_options.PolicyManager != null)
@@ -50,11 +57,13 @@ namespace OpenADK.Library
             return new PolicyManagerImpl(agent.Runtime, CreatePolicyFactory(agent));
         }
 
+        /// <summary/>
         public virtual ISIFPrimitives CreateSifPrimitives(Agent agent)
         {
             return _options.SifPrimitives?.Invoke(agent) ?? new SIFPrimitives(agent.Runtime);
         }
 
+        /// <summary/>
         public virtual DataObjectOutputStreamImpl CreateDataObjectOutputStream(Agent agent)
         {
             return _options.DataObjectOutputStream?.Invoke(agent) ?? new DataObjectOutputFileStream();

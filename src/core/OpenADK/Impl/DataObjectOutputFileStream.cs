@@ -344,6 +344,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         protected virtual void OnCommitted()
         {
             fZone.GetResponseDelivery().Process();

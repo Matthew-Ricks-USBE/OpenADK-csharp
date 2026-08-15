@@ -11,24 +11,27 @@ namespace Library.Nunit.US.Library.Student
     
     public class StaffAssignmentTests
     {
-        	public void testReadWriteStaffAssignmentSIF1x() {
-		StaffAssignment sa = ObjectCreator.CreateStaffAssignment();
-		Console.WriteLine(sa.GetContent().Count );
+        [Fact]
+        public void testReadWriteStaffAssignmentSIF1x()
+		{
+			StaffAssignment sa = ObjectCreator.CreateStaffAssignment();
+			Console.WriteLine(sa.GetContent().Count );
 
-		sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
-				SifVersion.SIF15r1);
-		Assert.Null(sa.PrimaryAssignment);
-	}
+			sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
+					SifVersion.SIF15r1);
+			Assert.Null(sa.PrimaryAssignment);
+		}
 
-    [Fact]
-	public void testReadWriteStaffAssignmentSIF2x() {
-		StaffAssignment sa = ObjectCreator.CreateStaffAssignment();
-		sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
-				SifVersion.SIF20r1);
+		[Fact]
+		public void testReadWriteStaffAssignmentSIF2x()
+		{
+			StaffAssignment sa = ObjectCreator.CreateStaffAssignment();
+			sa = (StaffAssignment) AdkObjectParseHelper.WriteParseAndReturn(sa,
+					SifVersion.SIF20r1);
 
-		Assert.Equal("Yes", sa.PrimaryAssignment);
+			Assert.Equal("Yes", sa.PrimaryAssignment);
 
-	}
+		}
     }
 }
 

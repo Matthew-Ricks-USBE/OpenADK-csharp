@@ -9,6 +9,7 @@ using System.Threading;
 
 namespace OpenADK.Util
 {
+    /// <summary/>
     public sealed class AdkConsoleWait
     {
         /// <summary>
@@ -25,6 +26,7 @@ namespace OpenADK.Util
             }
         }
 
+        /// <summary/>
         public void Exit( AdkConsoleEvent c )
         {
             if ( !fIsExiting ) {
@@ -39,6 +41,7 @@ namespace OpenADK.Util
             }
         }
 
+        /// <summary/>
         public bool IsExiting
         {
             get { return fIsExiting; }
@@ -51,11 +54,13 @@ namespace OpenADK.Util
             Exit( args.Event );
         }
 
+        /// <summary/>
         public AdkConsoleEvent ExitCode
         {
             get { return fReceivedEvent; }
         }
 
+        /// <summary/>
         public event AdkControlEventHandler Exiting;
 
         private AdkConsoleEvent fReceivedEvent;
@@ -97,13 +102,16 @@ namespace OpenADK.Util
     public delegate void AdkControlEventHandler( object src,
                                                  AdkConsoleEventArgs args );
 
+    /// <summary/>
     public sealed class AdkConsoleEventArgs : EventArgs
     {
+        /// <summary/>
         public AdkConsoleEventArgs( AdkConsoleEvent e )
         {
             fEvent = e;
         }
 
+        /// <summary/>
         public AdkConsoleEvent Event
         {
             get { return fEvent; }
@@ -135,11 +143,13 @@ namespace OpenADK.Util
             SetConsoleCtrlHandler( eventHandler, true );
         }
 
+        /// <summary/>
         ~AdkConsoleEventWatcher()
         {
             Dispose( false );
         }
 
+        /// <summary/>
         public void Dispose()
         {
             Dispose( true );

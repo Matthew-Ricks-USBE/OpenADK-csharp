@@ -9,9 +9,11 @@ using System.Text;
 
 namespace OpenADK.Library.Tools.Queries
 {
+    /// <summary/>
     public abstract class Dialect
     {
         private char fQuoteCharacter;
+        /// <summary/>
         protected Dialect( char quoteCharacter)
         {
             fQuoteCharacter = quoteCharacter;

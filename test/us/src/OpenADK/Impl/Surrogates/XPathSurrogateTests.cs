@@ -13,19 +13,6 @@ namespace Library.Nunit.US.Library.Impl.Surrogates
     
     public class XPathSurrogateTests : AdkTest
     {
-		protected SifVersion fOriginalVersion;
-
-        
-		public void SetUp() {
-			Runtime.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student );
-			fOriginalVersion = Runtime.SifVersion;
-        }
-
-		
-		public void TearDown() {
-			Runtime.SifVersion = fOriginalVersion;
-        }
-
         /**
 		 * This test asserts that SIF 1.x elements that are rendered using the XPathSurrogate
 		 * in the StudentSchoolEnrollment class return the proper and expected values.

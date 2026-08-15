@@ -15,6 +15,7 @@ namespace OpenADK.Library.Tools.Policy
         private String fRequestVersion;
         private String fSourceId;
 
+        /// <summary/>
         public ObjectRequestPolicy( IElementDef objectType ) : base( objectType )
         {
         }

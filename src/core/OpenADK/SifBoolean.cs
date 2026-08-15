@@ -7,13 +7,17 @@ using System;
 
 namespace OpenADK.Library
 {
+   /// <summary/>
+   /// <summary/>
    [Serializable]
     public class SifBoolean : AdkDataType<bool?>
     {
+        /// <summary/>
         public SifBoolean( bool? value )
             : base( value ) {}
 
 
+        /// <summary/>
         protected override SifTypeConverter<bool?> GetTypeConverter()
         {
             return SifTypeConverters.BOOLEAN;

@@ -10,8 +10,10 @@ using OpenADK.Library.Impl.Surrogates;
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public class SifElementPointer : AdkElementPointer
     {
+        /// <summary/>
         protected SifElement fSifElement;
 
         /// <summary>
@@ -159,6 +161,7 @@ namespace OpenADK.Library.Tools.XPath
         }
 
 
+        /// <summary/>
         public override INodePointer CreateAttribute( SifXPathContext context, String name )
         {
             IElementDef subEleDef = GetChildDef( name );
@@ -177,6 +180,7 @@ namespace OpenADK.Library.Tools.XPath
                 + "/" + name );
         }
 
+        /// <summary/>
         public override INodePointer CreateChild( SifXPathContext context, string name, int i )
         {
             SifVersion version = Version;
@@ -205,6 +209,7 @@ namespace OpenADK.Library.Tools.XPath
             }
         }
 
+        /// <summary/>
         public override void SetValue( object rawValue )
         {
             SifSimpleType sst = GetSIFSimpleTypeValue( fElementDef, rawValue );

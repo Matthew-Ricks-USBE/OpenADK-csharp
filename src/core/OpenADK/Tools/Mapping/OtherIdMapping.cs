@@ -20,8 +20,11 @@ namespace OpenADK.Library.Tools.Mapping
     {
 
 
+        /// <summary/>
         protected internal string fType;
+        /// <summary/>
         protected internal string fPrefix;
+        /// <summary/>
         protected internal XmlElement fNode;
 
         /// <summary>  Constructor</summary>
@@ -41,6 +44,7 @@ namespace OpenADK.Library.Tools.Mapping
         {
         }
 
+        /// <summary/>
         public OtherIdMapping(string type,
                               string prefix,
                               XmlElement node)
@@ -128,6 +132,7 @@ namespace OpenADK.Library.Tools.Mapping
             return m;
         }
 
+        /// <summary/>
         public static OtherIdMapping FromXml(ObjectMapping parent, FieldMapping field, XmlElement element)
         {
             //  The OtherId type= attribute is required

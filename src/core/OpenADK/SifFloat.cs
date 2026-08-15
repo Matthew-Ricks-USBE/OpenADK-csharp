@@ -7,13 +7,17 @@ using System;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
+    /// <summary/>
     [Serializable]
     public class SifFloat : AdkDataType<float?>
     {
+        /// <summary/>
         public SifFloat(float? value)
             : base(value) { }
 
 
+        /// <summary/>
         protected override SifTypeConverter<float?> GetTypeConverter()
         {
             return SifTypeConverters.FLOAT;

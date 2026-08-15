@@ -30,7 +30,7 @@ namespace OpenADK.Library
    /// <listheader><term>Items</term><description>Descriptions</description></listheader>
    /// <item><term>Set the <c>adk.transport.https.port</c> system property prior to creating your agent's Zones and/or Topics. This property can be set programmatically by adding it to the "appSettings" node in the application's configuration file.</term></item>
    /// <item><term>Set the Port property on the default HttpProperties and/or HttpsProperties objects prior to creating and your agent's Zones instances. </term></item>
-   /// <item><term>Use an agent configuration file that can be read by the <see cref="OpenADK.Library.Tool.Cfg.AgentConfig"/> class </term></item>
+   /// <item><term>Use an agent configuration file that can be read by the <c>AgentConfig</c> class </term></item>
    /// </list>
    /// </remarks>
    /// <example>

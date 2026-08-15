@@ -48,11 +48,13 @@ namespace OpenADK.Web.Http
             this.AddHandlerContext(hostName, virtualPath, contextHandler, force);
         }
 
+        /// <summary/>
         public void RemoveHandlerContext(string virtualPath)
         {
             this.RemoveHandlerContext("", virtualPath);
         }
 
+        /// <summary/>
         public void SetAnonymousHandler(IAdkHttpHandler handler)
         {
             this.Listener.AnonymousHandler = handler;
@@ -87,11 +89,13 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         public void Shutdown()
         {
             base.StopServer(false);
         }
 
+        /// <summary/>
         public void Shutdown(bool clearAllListeners)
         {
             if (clearAllListeners)

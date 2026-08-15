@@ -43,7 +43,7 @@ namespace OpenADK.Library.uk.Learner
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
 	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
+	/// as a parameter. For example, the first parameter to the <c>IZone.SetSubscriber</c>
 	/// method is an IElementDef:
 	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
@@ -789,6 +789,7 @@ namespace OpenADK.Library.uk.Learner
 	// Field elements of UPN (0 fields)
 
 	// Field elements of WEIGHTING (0 fields)
+	/// <summary/>
 
 	public override void Load()
 	{
@@ -1207,6 +1208,7 @@ namespace OpenADK.Library.uk.Learner
 	}
 
 	#region Update SifDtd
+	/// <summary/>
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "ExitType" ] = EXITTYPE;
@@ -1520,3 +1522,5 @@ namespace OpenADK.Library.uk.Learner
 	}
 	#endregion
 }}
+
+

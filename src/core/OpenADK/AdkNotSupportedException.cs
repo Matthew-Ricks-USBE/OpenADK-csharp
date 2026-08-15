@@ -46,6 +46,7 @@ namespace OpenADK.Library
             fZone = zone;
         }
 
+        /// <summary/>
         public AdkNotSupportedException(String msg,
                                  IZone zone, Exception ex )
             : base(msg, ex)

@@ -14,6 +14,7 @@ namespace OpenADK.Library
         /// <summary>Named <see cref="System.Net.Http.HttpClient"/> used by the SIF HTTP transport.</summary>
         internal const string SifHttpClientName = "sif";
 
+        /// <summary/>
         public static IServiceCollection AddOpenAdk(
             this IServiceCollection services,
             Action<AdkOptions> configure = null)

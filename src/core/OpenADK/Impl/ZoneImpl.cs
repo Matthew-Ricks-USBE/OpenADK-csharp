@@ -246,6 +246,7 @@ namespace OpenADK.Library.Impl
             get { return (fState & SHUTDOWN) == SHUTDOWN; }
         }
 
+        /// <summary/>
         public virtual IUndeliverableMessageHandler ErrorHandler
         {
             get
@@ -270,6 +271,7 @@ namespace OpenADK.Library.Impl
             set { fUserData = value; }
         }
 
+        /// <summary/>
         protected virtual void CheckConnect()
         {
             if (!Connected)
@@ -290,6 +292,7 @@ namespace OpenADK.Library.Impl
         public virtual ServerLog ServerLog =>
             fServerLog?.Value ?? throw new InvalidOperationException("Zone has not been initialized.");
 
+        /// <summary/>
         public IProtocolHandler ProtocolHandler
         {
             get { return fProtocolHandler; }
@@ -447,6 +450,7 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         public virtual void Connect(ProvisioningFlags provOptions)
         {
             lock ( fConnLock )
@@ -1335,6 +1339,7 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         protected virtual string ArrayToStr( string[] arr )
         {
             return string.Join(", ", arr);
@@ -1515,12 +1520,14 @@ namespace OpenADK.Library.Impl
             return (fState & GETZONESTATUS) != 0;
         }
 
+        /// <summary/>
         public virtual void ReportEvent(SifDataObject obj,
                                          EventAction actionCode)
         {
             ReportEvent(new Event(new SifDataObject[] { obj }, actionCode), null, null);
         }
 
+        /// <summary/>
         public virtual void ReportEvent(SifDataObject obj,
                                          EventAction actionCode,
                                          string destinationId)
@@ -1528,17 +1535,20 @@ namespace OpenADK.Library.Impl
             ReportEvent(new Event(new SifDataObject[] { obj }, actionCode), destinationId, null);
         }
 
+        /// <summary/>
         public virtual void ReportEvent(Event evnt)
         {
             ReportEvent(evnt, null, null);
         }
 
+        /// <summary/>
         public virtual void ReportEvent(Event evnt,
                                          string destinationId)
         {
             ReportEvent(evnt, destinationId, null);
         }
 
+        /// <summary/>
         public void ReportEvent(Event evnt,
                                  String destinationId,
                                  string sifMsgId)
@@ -1835,18 +1845,21 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         public void SetQueryResults(IQueryResults queryResults)
         {
             fProvMatrix.SetQueryResults(queryResults, null, null);
         }
 
 
+        /// <summary/>
         public void SetQueryResults(IQueryResults queryResults, IElementDef objectType)
         {
             fProvMatrix.SetQueryResults(queryResults, objectType);
         }
 
 
+        /// <summary/>
         public void SetQueryResults(IQueryResults queryResults, IElementDef objectType, QueryResultsOptions flags)
         {
             fProvMatrix.SetQueryResults(queryResults, objectType, flags);
@@ -1897,23 +1910,27 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         public virtual string Query(Query query)
         {
             return Query(query, null, null, 0, null);
         }
 
+        /// <summary/>
         public virtual string Query(Query query,
                                      IMessagingListener listener)
         {
             return Query(query, listener, null, 0, null);
         }
 
+        /// <summary/>
         public virtual string Query(Query query,
                                      AdkQueryOptions queryOptions)
         {
             return Query(query, null, null, queryOptions, null);
         }
 
+        /// <summary/>
         public virtual string Query(Query query,
                                      IMessagingListener listener,
                                      AdkQueryOptions queryOptions)
@@ -1921,6 +1938,7 @@ namespace OpenADK.Library.Impl
             return Query(query, listener, null, queryOptions, null);
         }
 
+        /// <summary/>
         public virtual string Query(Query query,
                                      string destinationId,
                                      AdkQueryOptions queryOptions)
@@ -1928,6 +1946,7 @@ namespace OpenADK.Library.Impl
             return Query(query, null, destinationId, queryOptions, null);
         }
 
+        /// <summary/>
         public virtual string Query(Query query,
                                      IMessagingListener listener,
                                      string destinationId,
@@ -2290,6 +2309,7 @@ namespace OpenADK.Library.Impl
             fMessagingListeners.Remove(listener);
         }
 
+        /// <summary/>
         public virtual SIF_Ack SifSend(string xml)
         {
             CheckConnect();
@@ -2436,6 +2456,7 @@ namespace OpenADK.Library.Impl
             return fPrimitives.SifPing(this);
         }
 
+        /// <summary/>
         public virtual SIF_Ack SifSleep()
         {
             CheckConnect();
@@ -2443,6 +2464,7 @@ namespace OpenADK.Library.Impl
             return fPrimitives.SifSleep(this);
         }
 
+        /// <summary/>
         public virtual SIF_Ack SifWakeup()
         {
             CheckConnect();
@@ -2450,6 +2472,7 @@ namespace OpenADK.Library.Impl
             return fPrimitives.SifWakeup(this);
         }
 
+        /// <summary/>
         public virtual void PurgeQueue(bool incoming,
                                         bool outgoing)
         {

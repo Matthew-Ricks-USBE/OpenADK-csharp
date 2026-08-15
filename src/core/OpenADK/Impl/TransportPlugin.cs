@@ -5,6 +5,7 @@
 
 namespace OpenADK.Library.Impl
 {
+    /// <summary/>
     public abstract class TransportPlugin
     {
         /// <summary>

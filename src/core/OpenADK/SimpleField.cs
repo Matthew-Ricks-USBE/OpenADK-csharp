@@ -90,7 +90,6 @@ namespace OpenADK.Library
         /// The string is parsed using the default SIF formatter, which is the 
         /// SIF 1.x formatter by default</summary>
         /// <value> The text value of this element</value>
-        /// <seealso cref="Adk.TextFormatter"/>
     public override string TextValue
         {
             get { return fValue.ToString(Impl.DTDInternals.SIF_1X_FORMATTER); }
@@ -144,11 +143,9 @@ namespace OpenADK.Library
 
 
 
-        /// <summary>
-        /// Called when the object is being deserialized
-        /// </summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
+        // Called when the object is being deserialized
+        // <param name="info"></param>
+        // <param name="context"></param>
         //protected override void OnGetObjectData( SerializationInfo info,
         //                                         StreamingContext context )
         //{
@@ -156,4 +153,6 @@ namespace OpenADK.Library
         //}
     }
 }
+
+
 

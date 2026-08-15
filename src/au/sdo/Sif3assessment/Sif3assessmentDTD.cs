@@ -43,7 +43,7 @@ namespace OpenADK.Library.au.Sif3assessment
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
 	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
+	/// as a parameter. For example, the first parameter to the <c>IZone.SetSubscriber</c>
 	/// method is an IElementDef:
 	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
@@ -1203,6 +1203,7 @@ namespace OpenADK.Library.au.Sif3assessment
 	// Field elements of UNUSUALEVENTSLIST (1 fields)
 	/** Defines the &lt;UnusualEvent&gt; element as a child of &lt;UnusualEventsList&gt; */
 	public static IElementDef UNUSUALEVENTSLIST_UNUSUALEVENT = null;
+	/// <summary/>
 
 	public override void Load()
 	{
@@ -1879,6 +1880,7 @@ namespace OpenADK.Library.au.Sif3assessment
 	}
 
 	#region Update SifDtd
+	/// <summary/>
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "SoftwareRequirement" ] = SOFTWAREREQUIREMENT;
@@ -2343,3 +2345,5 @@ namespace OpenADK.Library.au.Sif3assessment
 	}
 	#endregion
 }}
+
+

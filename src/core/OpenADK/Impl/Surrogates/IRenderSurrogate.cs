@@ -9,6 +9,7 @@ using OpenADK.Library.Tools.XPath;
 
 namespace OpenADK.Library.Impl.Surrogates
 {
+    /// <summary/>
     public interface IRenderSurrogate
     {
         /// <summary>

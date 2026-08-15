@@ -13,11 +13,13 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpHeadersReader : TextReader
     {
+        /// <summary/>
         public AdkHttpHeadersReader( Stream stream )
         {
             fStream = stream;
         }
 
+        /// <summary/>
         public override int Read()
         {
             if ( fSequencePosition == 4 ) // || !fStream.DataAvailable )
@@ -43,12 +45,14 @@ namespace OpenADK.Web.Http
             }
         }
 
+        /// <summary/>
         public override int Peek()
         {
             // Our stream does not support seeking
             return -1;
         }
 
+        /// <summary/>
         public long Position
         {
             get { return fStream.Position; }

@@ -12,6 +12,7 @@ using OpenADK.Library.Impl;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
     public class SifKeyedList<TValue> : SifList<TValue>
         where TValue : SifKeyedElement
     {

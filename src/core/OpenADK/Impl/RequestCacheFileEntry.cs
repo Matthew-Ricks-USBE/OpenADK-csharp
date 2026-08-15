@@ -34,7 +34,6 @@ namespace OpenADK.Library
       /// <summary>
       /// Creates an Entry instance
       /// </summary>
-      /// <param name="active"></param>
       internal RequestCacheFileEntry(bool active)
       {
          fIsActive = active;
@@ -46,8 +45,6 @@ namespace OpenADK.Library
       /// so that if read fails upon deserialization due to State,
       /// the rest of the class still gets returned.
       /// </summary>
-      /// <param name="active"></param>
-
       public object State
       {
          get
@@ -116,7 +113,7 @@ namespace OpenADK.Library
 
       /// <summary>
       /// Returns the Serializable UserData state object that was placed in the 
-      /// <see cref="OpenADK.Library.Queries"/> query class at the time of the original request.
+      /// <see cref="OpenADK.Library.Query"/> query class at the time of the original request.
       /// </summary>
       public object UserData
       {
@@ -139,3 +136,4 @@ namespace OpenADK.Library
       }
    }
 }
+

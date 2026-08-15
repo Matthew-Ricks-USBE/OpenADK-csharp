@@ -33,7 +33,7 @@ namespace OpenADK.Library
 
         /// <summary>
         /// Returns the Serializable UserData state object that was placed in the 
-        /// <see cref="OpenADK.Library.Queries"/> query class at the time of the original request.
+        /// <see cref="OpenADK.Library.Query"/> query class at the time of the original request.
         /// </summary>
         object UserData { get; }
     }

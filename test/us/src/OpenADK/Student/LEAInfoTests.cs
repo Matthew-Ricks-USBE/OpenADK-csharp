@@ -17,10 +17,8 @@ namespace Library.Nunit.US.Library.Student
     
     public class LEAInfoTests : AdkTest
     {
-        protected SifVersion fOriginalVersion;
 
-        
-        public void SetUp()
+        public LEAInfoTests()
         {
             Runtime.Initialize(SifVersion.SIF15r1, SIFVariant.SIF_US, (int)SdoLibraryType.Student);
             fOriginalVersion = Runtime.SifVersion;
@@ -28,8 +26,9 @@ namespace Library.Nunit.US.Library.Student
         }
 
         
-        public void TearDown()
+        public override void Dispose()
         {
+            base.Dispose();
             Runtime.SifVersion = fOriginalVersion;
         }
 

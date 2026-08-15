@@ -9,6 +9,7 @@ using System.Text;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
     public enum SIFVariant : int
     {
         /**	

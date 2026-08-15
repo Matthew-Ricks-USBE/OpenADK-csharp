@@ -15,6 +15,7 @@ namespace OpenADK.Library
     /// </summary>
     public class AdkRuntime : IAdkRuntime
     {
+        /// <summary/>
         public const string LogIdentifier = "ADK";
 
         private static readonly SifVersion[] SupportedVersions = SifVersion.SupportedVersions;
@@ -31,6 +32,7 @@ namespace OpenADK.Library
         private IDtd _dtd;
         private SifVersion _sifVersion;
 
+        /// <summary/>
         public AdkRuntime(AdkOptions options, ILoggerFactory loggerFactory, IHttpClientFactory httpClientFactory)
         {
             _options = options ?? throw new ArgumentNullException(nameof(options));
@@ -42,10 +44,13 @@ namespace OpenADK.Library
             Debug = options.Debug;
         }
 
+        /// <summary/>
         public bool Initialized { get; private set; }
 
+        /// <summary/>
         public SifVersion[] SupportedSIFVersions => (SifVersion[])SupportedVersions.Clone();
 
+        /// <summary/>
         public virtual SifVersion SifVersion
         {
             get
@@ -69,6 +74,7 @@ namespace OpenADK.Library
             }
         }
 
+        /// <summary/>
         public IDtd Dtd
         {
             get
@@ -78,20 +84,28 @@ namespace OpenADK.Library
             }
         }
 
+        /// <summary/>
         public ILogger Log => _log;
 
+        /// <summary/>
         public ILoggerFactory LoggerFactory => _loggerFactory;
 
+        /// <summary/>
         public ServerLog ServerLog => _serverLog;
 
+        /// <summary/>
         public AdkDebugFlags Debug { get; set; }
 
+        /// <summary/>
         public Version AdkVersion => typeof(AdkRuntime).Assembly.GetName().Version;
 
+        /// <summary/>
         public ISifObjectFactory Objects => _objects;
 
+        /// <summary/>
         public IHttpClientFactory HttpClientFactory => _httpClientFactory;
 
+        /// <summary/>
         public string[] TransportProtocols
         {
             get
@@ -102,16 +116,19 @@ namespace OpenADK.Library
             }
         }
 
+        /// <summary/>
         public void Initialize()
         {
             Initialize(_options.SifVersion, _options.Variant, _options.SdoLibraries);
         }
 
+        /// <summary/>
         public void Initialize(SIFVariant variant)
         {
             Initialize(_options.SifVersion, variant, _options.SdoLibraries);
         }
 
+        /// <summary/>
         public virtual void Initialize(SifVersion version, SIFVariant variant, int sdoLibraries)
         {
             lock (_initializationLock)
@@ -147,6 +164,7 @@ namespace OpenADK.Library
             }
         }
 
+        /// <summary/>
         public SifVersion GetLatestSupportedVersion(SifVersion[] candidates)
         {
             CheckInitialized();
@@ -167,11 +185,13 @@ namespace OpenADK.Library
             return latest ?? SifVersion;
         }
 
+        /// <summary/>
         public bool IsSIFVersionSupported(SifVersion version)
         {
             return version != null && Array.BinarySearch(SupportedVersions, version) > -1;
         }
 
+        /// <summary/>
         public void Install(TransportPlugin transportPlugin)
         {
             if (transportPlugin == null)
@@ -183,6 +203,7 @@ namespace OpenADK.Library
             InstallCoreTransport(transportPlugin);
         }
 
+        /// <summary/>
         public TransportPlugin GetTransportProtocol(string protocol)
         {
             if (protocol == null)
@@ -195,11 +216,13 @@ namespace OpenADK.Library
             return plugin;
         }
 
+        /// <summary/>
         public string MakeGuid()
         {
             return SifFormatter.GuidToSifRefID(Guid.NewGuid());
         }
 
+        /// <summary/>
         public void SetLogFile(string logFilePath)
         {
             if (string.IsNullOrWhiteSpace(logFilePath))

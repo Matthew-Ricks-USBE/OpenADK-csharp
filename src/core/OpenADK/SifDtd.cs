@@ -33,7 +33,7 @@ namespace OpenADK.Library
     /// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
     /// </list>
     /// Many of the Adk's public interfaces require an ElementDef constant to be passed
-    /// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
+    /// as a parameter. For example, the first parameter to the <c>IZone.SetSubscriber</c>
     /// method is an IElementDef:
     /// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
     /// ElementDef also identifies child elements and attributes as demonstrated by the <c>Query.AddCondition</c> method:
@@ -48,7 +48,7 @@ namespace OpenADK.Library
     /// ElementDef metadata is grouped into "SDO Libraries", which are organized along
     /// SIF Working Group boundaries. SDO Libraries are loaded into the <c>SifDtd</c>
     /// class when the Adk is initialized. All or part of the metadata is loaded into depending on the flags passed to the
-    /// <see cref="Adk.Initialize(SifVersion, SdoLibraryType)"/> method,
+    /// <c>Adk.Initialize</c> method,
     /// metadata from one or more SDO Libraries may be loaded. For example, the following
     /// call loads metadata for the <c>Student Information Working Group Objects</c>
     /// and <c>Transportation And Geographic Information Working Group Objects</c>
@@ -71,17 +71,23 @@ namespace OpenADK.Library
         // supported by the class framework.
 
         // Package names that comprise the SIF Data Objects library
+        /// <summary/>
         public const string COMMON = "Common";
+        /// <summary/>
         public const string DATAMODEL = "Datamodel";
+        /// <summary/>
         public const string GLOBAL = "Global";
+        /// <summary/>
         public const string INFRA = "Infra";
 
         // The name of the data model variant this class is defined in
+        /// <summary/>
         public virtual string Variant
         {
             get { return null; }
         }
 
+        /// <summary/>
         public virtual List<string> LoadedLibraryNames
         {
             get { return null; }
@@ -125,6 +131,7 @@ namespace OpenADK.Library
             get { return null; }
         }
 
+        /// <summary/>
         public override string SDOAssembly
         {
             // TODO: This will use reflection in the future
@@ -134,3 +141,5 @@ namespace OpenADK.Library
     }
 
 }
+
+

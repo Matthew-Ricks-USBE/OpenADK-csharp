@@ -23,13 +23,6 @@ namespace OpenADK.Library.Tools.Policy
     public abstract class PolicyFactory
     {
         /// <summary>
-        /// Returns an implementation of the PolicyFactory class that returns
-        /// an implementation-specific set of policies for managing the agent
-        /// </summary>
-        /// <param name="agent">The Agent instance to retrieve policy information for</param>
-        /// <returns>an instance of PolicyFactory</returns>
-        /// <exception cref="AdkException">If the PolicyFactory instance cannot be created</exception>
-        /// <summary>
         /// Returns the ObjectRequestyPolicy for the specified SIF Data Object
         /// </summary>
         /// <param name="zone">The zone to get policy information for</param>

@@ -97,22 +97,6 @@ namespace OpenADK.Library.Log
         /// rather than directly calling this method.
         /// 
         /// </summary>
-        /// <param name="id">The ID identifying the ServerLog to return
-        /// </param>
-        /// <param name="zone">The zone that is currently in scope</param>
-        /// <returns> A ServerLog instance 
-        /// </returns>
-        /// <summary> 	Adda a ServerLogModule to the chain of loggers.
-        /// 
-        /// </summary>
-        /// <param name="logger">A <i>ServerLogModule</i> implementation
-        /// 
-        /// </param>
-        /// <seealso cref="RemoveLogger">
-        /// </seealso>
-        /// <seealso cref="ClearLoggers">
-        /// </seealso>
-        /// @since Adk 1.5
         public virtual void AddLogger( IServerLogModule logger )
         {
             lock ( fLoggers ) {
@@ -233,7 +217,7 @@ namespace OpenADK.Library.Log
         /// <param name="category">The SIF_Category value to assign to this log entry, as
         /// defined by the SIF Specification
         /// </param>
-        /// <param name="category">The SIF_Code value to assign to this log entry, as
+        /// <param name="code">The SIF_Code value to assign to this log entry, as
         /// defined by the SIF Specification
         /// </param>
         public virtual void Log( LogLevel level,
@@ -332,7 +316,7 @@ namespace OpenADK.Library.Log
         /// <param name="category">The SIF_Category value to assign to this log entry, as
         /// defined by the SIF Specification
         /// </param>
-        /// <param name="category">The SIF_Code value to assign to this log entry, as
+        /// <param name="code">The SIF_Code value to assign to this log entry, as
         /// defined by the SIF Specification
         /// </param>
         /// <param name="info">The <i>SifMessageInfo</i> instance from the Adk message

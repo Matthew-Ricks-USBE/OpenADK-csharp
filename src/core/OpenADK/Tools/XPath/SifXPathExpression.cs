@@ -8,21 +8,25 @@ using System.Xml.XPath;
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public class SifXPathExpression
     {
         private string fExpression;
         private XPathExpression fCompiledExpression;
 
+        /// <summary/>
         public SifXPathExpression( String expression )
         {
             fExpression = expression;
         }
 
+        /// <summary/>
         public INodePointer CreatePath( SifXPathContext context )
         {
             return context.CreatePath( this );
         }
 
+        /// <summary/>
         public object GetValue( SifXPathContext context )
         {
             return context.GetValue( this );
@@ -34,6 +38,7 @@ namespace OpenADK.Library.Tools.XPath
             set { fCompiledExpression = value; }
         }
 
+        /// <summary/>
         public String Expression
         {
             get { return fExpression; }

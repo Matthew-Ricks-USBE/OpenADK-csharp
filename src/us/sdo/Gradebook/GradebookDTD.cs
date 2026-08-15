@@ -42,10 +42,7 @@ namespace OpenADK.Library.us.Gradebook
 	/// <item><term><c>SIFDTD.STUDENTPERSONAL</c></term><description>Identifies the StudentPersonal data object</description></item>
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
-	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
-	/// method is an IElementDef:
-	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
+	/// Many of the Adk's public interfaces require an ElementDef constant to be passed as a parameter.
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
 	/// <code>
 	/// Query query = new Query( SifDtd.STUDENTPERSONAL );
@@ -399,7 +396,8 @@ namespace OpenADK.Library.us.Gradebook
 	public static IElementDef VALIDMARK_NUMERICEQUIVALENT = null;
 	/** Defines the &lt;Description&gt; element as a child of &lt;ValidMark&gt; */
 	public static IElementDef VALIDMARK_DESCRIPTION = null;
-
+		
+	/// <inheritdoc />
 	public override void Load()
 	{
 		//  Objects defined by this SDO Library...
@@ -593,6 +591,7 @@ namespace OpenADK.Library.us.Gradebook
 	}
 
 	#region Update SifDtd
+	/// <inheritdoc />
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "MarkValueInfo" ] = MARKVALUEINFO;

@@ -15,10 +15,12 @@ namespace OpenADK.Library
     /// </summary>
     public class AdkTypeParseException : AdkParsingException
     {
+        /// <summary/>
         public AdkTypeParseException( string msg, IZone zone, Exception innerException ) : base( msg, zone, innerException )
         {
         }
 
+        /// <summary/>
         public AdkTypeParseException( string msg, IZone zone ) : base( msg, zone )
         {
         }

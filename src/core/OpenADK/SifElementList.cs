@@ -8,6 +8,7 @@ using System.Collections.Generic;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
     public class SifElementList : TypedElementList<SifElement>
     {
         internal SifElementList( IList<SifElement> items )

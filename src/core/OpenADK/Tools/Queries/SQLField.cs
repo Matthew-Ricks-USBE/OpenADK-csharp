@@ -43,11 +43,13 @@ namespace OpenADK.Library.Tools.Queries
         private readonly string fName;
         private readonly DbType fDbType;
 
+        /// <summary/>
         public string Name
         {
             get { return fName; }
         }
 
+        /// <summary/>
         public DbType DbType
         {
             get { return fDbType; }

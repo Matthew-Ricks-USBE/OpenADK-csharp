@@ -8,8 +8,10 @@ using System.Text;
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public abstract class AdkOperation : AdkOpExpression
     {
+        /// <summary/>
         protected AdkOperation( params AdkExpression[] args ) : base( args )
         {
         }
@@ -31,6 +33,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
         /// </summary>
         protected abstract bool Symmetric { get; }
 
+        /// <summary/>
         public override String ToString()
         {
             if ( fArgs.Length == 1 )

@@ -7,5 +7,6 @@ using System;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
     public class SifKey {}
 }

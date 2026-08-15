@@ -40,6 +40,7 @@ namespace OpenADK.Web.Http
         {
             fCode = _getErrorCode( code );
         }
+        /// <summary/>
 
 
         [Obsolete]
@@ -72,6 +73,7 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public AdkHttpStatusCode HttpExceptionCode
         {
             get { return fCode; }

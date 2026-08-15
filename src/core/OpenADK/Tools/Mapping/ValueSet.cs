@@ -115,6 +115,7 @@ namespace OpenADK.Library.Tools.Mapping
             fNode = node;
         }
 
+        /// <summary/>
         public virtual string Id
         {
             get { return fId; }
@@ -122,6 +123,7 @@ namespace OpenADK.Library.Tools.Mapping
             set { fId = value; }
         }
 
+        /// <summary/>
         public virtual string Title
         {
             get { return fTitle == null ? fId : fTitle; }
@@ -129,6 +131,7 @@ namespace OpenADK.Library.Tools.Mapping
             set { fTitle = value; }
         }
 
+        /// <summary/>
         public virtual XmlElement XmlElement
         {
             get { return fNode; }
@@ -150,17 +153,20 @@ namespace OpenADK.Library.Tools.Mapping
             }
         }
 
+        /// <summary/>
         public virtual IDictionary Map
         {
             get { return fTable; }
         }
 
+        /// <summary/>
         public virtual IDictionary ReverseMap
         {
             get { return fReverseTable; }
         }
 
 
+        /// <summary/>
         public virtual ValueSet Copy( Mappings newParent )
         {
             ValueSet copy = new ValueSet( fId, fTitle );
@@ -190,6 +196,7 @@ namespace OpenADK.Library.Tools.Mapping
             return copy;
         }
 
+        /// <summary/>
         public override string ToString()
         {
             return Title;
@@ -361,6 +368,7 @@ namespace OpenADK.Library.Tools.Mapping
         }
 
 
+        /// <summary/>
         public string TranslateReverse( string sifValue, string defaultValue )
         {
             ValueSetEntry e = GetReverseEntry( sifValue );
@@ -389,6 +397,7 @@ namespace OpenADK.Library.Tools.Mapping
             return e;
         }
 
+        /// <summary/>
         public ValueSetEntry[] GetEntries()
         {
             ValueSetEntry[] entries = new ValueSetEntry[fTable.Count];
@@ -521,11 +530,13 @@ namespace OpenADK.Library.Tools.Mapping
             }
         }
 
+        /// <summary/>
         public IDictionary Dictionary
         {
             get { return fTable; }
         }
 
+        /// <summary/>
         public IDictionary ReverseDictionary
         {
             get { return fReverseTable; }

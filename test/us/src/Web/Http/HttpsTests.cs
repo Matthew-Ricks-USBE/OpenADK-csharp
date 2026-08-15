@@ -6,7 +6,9 @@ using OpenADK.Library.Infra;
 using OpenADK.Util;
 using System;
 using System.IO;
+using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 
 namespace OpenADK.Web.Http
@@ -85,11 +87,6 @@ namespace OpenADK.Web.Http
             Runtime.Debug = AdkDebugFlags.All;
             fAgent = CreateTestAgent();
             fAgent.Initialize();
-
-            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors)
-                =>
-            { return errors == System.Net.Security.SslPolicyErrors.None; };
-            ServicePointManager.CheckCertificateRevocationList = false;
 
             fTransport = (HttpTransport)fAgent.TransportManager.GetTransport("https");
 
@@ -222,31 +219,27 @@ namespace OpenADK.Web.Http
 
         private void RunConnectionTest(bool useClientCert, bool shouldPass)
         {
-            HttpWebRequest request = (HttpWebRequest) WebRequest.Create(SERVER_TEST_URL);
+            var handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) =>
+                errors == System.Net.Security.SslPolicyErrors.None;
             if (useClientCert)
             {
                 X509Certificate2 cert = X509CertificateLoader.LoadPkcs12FromFile($"{fProps.ClientCertName}.pfx", HttpsTestFixture.CertificatePassword);
-                request.ClientCertificates.Add(cert);
+                handler.ClientCertificates.Add(cert);
             }
 
             bool sslConnectError = false;
             string errorMessage = string.Empty;
             try
             {
-                HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+                using var httpClient = new HttpClient(handler);
+                HttpResponseMessage response = httpClient.GetAsync(SERVER_TEST_URL).GetAwaiter().GetResult();
                 fHandler.AssertResponse(response);
             }
-            catch (WebException wex)
+            catch (HttpRequestException ex)
             {
-                if(wex.Status == WebExceptionStatus.SecureChannelFailure || wex.Status == WebExceptionStatus.SendFailure )
-                {
-                    sslConnectError = true;
-                    errorMessage = wex.Message;
-                }
-                else
-                {
-                    throw;
-                }
+                sslConnectError = true;
+                errorMessage = ex.Message;
             }
 
             if (shouldPass)
@@ -271,22 +264,18 @@ namespace OpenADK.Web.Http
                 context.Response.Write("OK");
             }
 
-            public void AssertResponse(HttpWebResponse response)
+            public void AssertResponse(HttpResponseMessage response)
             {
                 // Write out the received headers for debugging purposes
-                foreach (string key in response.Headers.AllKeys)
+                foreach (var header in response.Headers)
                 {
-                    Console.WriteLine("Header:{0} = \"{1}\"", key, response.Headers[key]);
+                    Console.WriteLine("Header:{0} = \"{1}\"", header.Key, string.Join(",", header.Value));
                 }
 
-                Assert.Equal(OK_VALUE, response.Headers[OK_HEADER]);
+                Assert.Equal(OK_VALUE, response.Headers.GetValues(OK_HEADER).FirstOrDefault());
 
-                using (Stream stream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(stream))
-                {
-                    string responseValue = reader.ReadToEnd();
-                    Assert.Equal(OK_VALUE, responseValue);
-                }
+                string responseValue = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+                Assert.Equal(OK_VALUE, responseValue);
             }
         }
 

@@ -16,6 +16,7 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpResponse
     {
+        /// <summary/>
         public AdkHttpResponse( AdkHttpConnection connection )
         {
             fResponseStream = new MemoryStream();
@@ -32,11 +33,13 @@ namespace OpenADK.Web.Http
                 DateTime.Now.ToUniversalTime().ToString( "ddd, dd MMM yyyy HH:mm:ss" ) + " GMT";
         }
 
+        /// <summary/>
         public Stream GetResponseStream()
         {
             return fResponseStream;
         }
 
+        /// <summary/>
         public void Clear()
         {
             fWriter.Flush();
@@ -45,34 +48,40 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public void Write( string inValue )
         {
             fWriter.Write( inValue );
         }
 
+        /// <summary/>
         public void Flush()
         {
             fWriter.Flush();
         }
 
 
+        /// <summary/>
         public AdkHttpStatusCode Status
         {
             get { return fStatus; }
             set { fStatus = value; }
         }
 
+        /// <summary/>
         public NameValueCollection Headers
         {
             get { return fHeaders; }
         }
 
+        /// <summary/>
         public string ContentType
         {
             get { return fHeaders["Content-Type"]; }
             set { fHeaders["Content-Type"] = value; }
         }
 
+        /// <summary/>
         public string AdditionalInfo
         {
             get { return fAdditionalInfo; }
@@ -84,8 +93,7 @@ namespace OpenADK.Web.Http
         /// </summary>
         /// <param name="socket">The socket to write the result to</param>
         /// <param name="request">The source request</param>
-        /// <param name="finishHandler">The delegate to call when the asynchronous operation is complete</param>
-        /// <param name="asyncState">The state that should be returned to the async delegate</param>
+        /// <param name="keepAlive">Whether to keep the connection alive after the response.</param>
         internal void AsyncFinishRequest( AdkSocketConnection socket,
                                           AdkHttpRequest request,
                                           bool keepAlive )

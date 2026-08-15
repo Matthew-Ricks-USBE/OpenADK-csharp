@@ -7,6 +7,7 @@ using System.Xml.Xsl;
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public abstract class AdkExpression
 
     {

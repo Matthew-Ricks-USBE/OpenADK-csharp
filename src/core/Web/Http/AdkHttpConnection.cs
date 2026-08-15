@@ -15,6 +15,7 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpConnection
     {
+        /// <summary/>
         public static void ProcessRequest( AdkSocketConnection socket,
                                            AdkHttpListener listener )
         {
@@ -130,22 +131,26 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public bool IsConnected
         {
             get { return fSocketConnection.Connected; }
         }
 
 
+        /// <summary/>
         public IPEndPoint ServerEndPoint
         {
             get { return (IPEndPoint) fSocketConnection.Socket.LocalEndPoint; }
         }
 
+        /// <summary/>
         public IPEndPoint ClientEndPoint
         {
             get { return (IPEndPoint) fSocketConnection.Socket.RemoteEndPoint; }
         }
 
+        /// <summary/>
         public AdkHttpListener Listener
         {
             get { return fListener; }

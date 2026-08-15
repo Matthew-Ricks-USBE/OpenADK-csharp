@@ -48,6 +48,7 @@ namespace OpenADK.Library.Tools
     /// </since>
     public class Baton
     {
+        /// <summary/>
         public Baton() {}
     }
 }

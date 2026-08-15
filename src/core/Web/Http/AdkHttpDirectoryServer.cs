@@ -14,6 +14,7 @@ namespace OpenADK.Web.Http
     /// </summary>
     public class AdkHttpDirectoryServer : IAdkHttpHandlerFactory
     {
+        /// <summary/>
         public AdkHttpDirectoryServer( string inPhysicalPath,
                                        string inVirtualPath,
                                        string inDefaultFileName )
@@ -30,6 +31,7 @@ namespace OpenADK.Web.Http
             fDefaultFileName = inDefaultFileName;
         }
 
+        /// <summary/>
         public string DefaultFileName
         {
             get { return fDefaultFileName; }
@@ -37,22 +39,26 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public string NormalizedVirtualPath
         {
             get { return fLowerCasedVirtualPathWithTrailingSlash; }
         }
 
+        /// <summary/>
         public string PhysicalPath
         {
             get { return fPhysicalPath; }
         }
 
+        /// <summary/>
         public String VirtualPath
         {
             get { return fVirtualPath; }
         }
 
 
+        /// <summary/>
         public bool IsVirtualPathInApp( String path )
         {
             if ( path == null ) {
@@ -77,6 +83,7 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public bool IsVirtualPathAppPath( String path )
         {
             if ( path == null ) {
@@ -89,6 +96,7 @@ namespace OpenADK.Web.Http
         }
 
 
+        /// <summary/>
         public string MapPath( Uri url )
         {
             // Replace the forward slashes with back-slashes to make a file name
@@ -111,6 +119,7 @@ namespace OpenADK.Web.Http
 
         #region IAdkHttpHandlerFactory Members
 
+        /// <summary/>
         public IAdkHttpHandler CreateHandler( AdkHttpRequest request )
         {
             if ( request.Method != "GET" ) {

@@ -5,9 +5,12 @@
 
 namespace OpenADK.Library.Tools.XPath.Compiler
 {
+    /// <summary/>
     public enum AdkAxisType
     {
+        /// <summary/>
         Child,
+        /// <summary/>
         Attribute
     }
 }

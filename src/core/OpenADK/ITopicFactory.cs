@@ -53,6 +53,7 @@ namespace OpenADK.Library
       ICollection<SifContext> AllSupportedContexts
       { get;}
 
+      /// <summary/>
       ITopic GetInstance(IElementDef objectType, SifContext context);
 
       ///<summary>

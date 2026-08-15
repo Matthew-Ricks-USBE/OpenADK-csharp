@@ -431,7 +431,7 @@ namespace Library.Nunit.US.Library.Tools.Mapping
 
             StudentAddressList[] list = sp.AddressLists;
             SifElementList children = sp.GetChildList( CommonDTD.ADDRESSLIST );
-            Assert.Equal(1, children.Count);
+            Assert.Single(children);
             Assert.Equal(2, children[0].ChildCount);
         }
 

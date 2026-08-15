@@ -67,11 +67,13 @@ namespace OpenADK.Library.Tools.Mapping
             return fDef;
         }
 
+        /// <summary/>
         public String XPath
         {
             get { return fDef; }
         }
 
+        /// <summary/>
         public String ValueExpression
         {
             get
@@ -84,6 +86,7 @@ namespace OpenADK.Library.Tools.Mapping
             }
         }
 
+        /// <summary/>
         public String PathExpression
         {
             get
@@ -135,6 +138,7 @@ namespace OpenADK.Library.Tools.Mapping
             }
         }
 
+        /// <summary/>
         public INodePointer CreatePath(SifXPathContext context, SifVersion version)
         {
             if (fExpression == null)

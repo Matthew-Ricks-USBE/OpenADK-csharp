@@ -59,7 +59,6 @@ namespace OpenADK.Library.Tools.Mapping
     /// </list>
     /// </para>
     /// </remarks>
-    /// <seealso cref="Adk.TextFormatter"/>
     public class StringMapAdaptor : ObjectMapAdaptor
     {
         private SifFormatter fDataFormatter;
@@ -118,3 +117,5 @@ namespace OpenADK.Library.Tools.Mapping
         }
     }
 }
+
+

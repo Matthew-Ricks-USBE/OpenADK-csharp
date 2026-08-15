@@ -8,11 +8,13 @@ using OpenADK.Library.Tools.XPath;
 
 namespace OpenADK.Library.Impl.Surrogates
 {
+    /// <summary/>
     public class FauxAttribute : FauxElementPointer, INodeIterator
     {
         private String fValue;
         private int fPosition = -1;
 
+        /// <summary/>
         public FauxAttribute( INodePointer parent, string fauxName, String value ) : base( parent, fauxName, true )
         {
             fValue = value;
@@ -26,6 +28,7 @@ namespace OpenADK.Library.Impl.Surrogates
             return fValue;
         }
 
+        /// <summary/>
         public override void SetValue( object value )
         {
             if ( value == null )
@@ -39,6 +42,7 @@ namespace OpenADK.Library.Impl.Surrogates
         }
 
 
+        /// <summary/>
         public override Object Node
         {
             get { return fValue; }
@@ -67,6 +71,7 @@ namespace OpenADK.Library.Impl.Surrogates
             get { return this.Parent; }
         }
 
+        /// <summary/>
         public int Count
         {
             get { return 1; }

@@ -17,6 +17,7 @@ namespace OpenADK.Util
     /// </remarks>
     public abstract class EnumeratorWrapper : IEnumerator, IDisposable
     {
+        /// <summary/>
         protected EnumeratorWrapper( IEnumerator inWrappedEnumerator )
         {
             fWrappedEnumerator = inWrappedEnumerator;
@@ -24,6 +25,7 @@ namespace OpenADK.Util
 
         #region IEnumerator
 
+        /// <summary/>
         public virtual bool MoveNext()
         {
             return fWrappedEnumerator.MoveNext();
@@ -34,6 +36,7 @@ namespace OpenADK.Util
             fWrappedEnumerator.Reset();
         }
 
+        /// <summary/>
         public virtual object Current
         {
             get { return fWrappedEnumerator.Current; }
@@ -41,6 +44,7 @@ namespace OpenADK.Util
 
         #endregion
 
+        /// <summary/>
         protected IEnumerator WrappedEnumerator
         {
             get { return fWrappedEnumerator; }
@@ -63,6 +67,7 @@ namespace OpenADK.Util
 //			}
         }
 
+        /// <summary/>
         public virtual void Dispose()
         {
             Dispose( true );

@@ -75,7 +75,7 @@ namespace Library.Nunit.US
             Query reparsedQuery = new Query( sifR.SIF_Query );
 
             Assert.Equal( StudentDTD.STUDENTPERSONAL, reparsedQuery.ObjectType);
-            Assert.Equal( 1, reparsedQuery.FieldRestrictions.Length);
+            Assert.Single( reparsedQuery.FieldRestrictions);
             Assert.Equal( StudentDTD.STUDENTPERSONAL_NAME, reparsedQuery.FieldRestrictions[0]);
 
 
@@ -423,7 +423,7 @@ namespace Library.Nunit.US
 
             Assert.True( query.HasConditions );
             ConditionGroup[] conditions = query.Conditions;
-            Assert.Equal( 1, conditions.Length);
+            Assert.Single( conditions);
             Assert.Equal( GroupOperator.None, conditions[0].Operator);
             Condition condition = conditions[0].Conditions[0];
             Assert.Equal( "2001", condition.Value);
@@ -709,7 +709,7 @@ namespace Library.Nunit.US
             Condition c = q.HasCondition( CommonDTD.OTHERID );
             Assert.NotNull( c );
             String xPath = c.GetXPath( q, SifVersion.SIF15r1 );
-            Assert.Equal( xPath, "OtherId[@Type='ZZ']");
+            Assert.Equal( "OtherId[@Type='ZZ']", xPath);
 
             xPath = c.GetXPath( q, SifVersion.SIF20 );
             Assert.Equal( "OtherIdList/OtherId[@Type='ZZ']", xPath);
@@ -756,7 +756,7 @@ namespace Library.Nunit.US
             // element content, so the following line is different than
             // the java test
             //searchFor = searchFor.Replace( "'", "&apos;" );
-            Assert.True( sifQueryXML.Contains( searchFor ));
+            Assert.Contains( searchFor, sifQueryXML );
 
             SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( "<SIF_Request>"
@@ -802,7 +802,7 @@ namespace Library.Nunit.US
             Console.WriteLine( sifQueryXML );
 
             String searchFor = "<SIF_Element>" + sqp + "</SIF_Element>";
-            Assert.True( sifQueryXML.Contains( searchFor ));
+            Assert.Contains( searchFor, sifQueryXML );
 
             SifParser parser = new SifParser(Runtime);
             SIF_Request sifR = (SIF_Request) parser.Parse( "<SIF_Request>"
@@ -832,3 +832,4 @@ namespace Library.Nunit.US
         }
     }
 }
+

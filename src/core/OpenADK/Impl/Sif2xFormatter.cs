@@ -8,10 +8,12 @@ using System.Xml;
 
 namespace OpenADK.Library.Impl
 {
+    /// <summary/>
     public class Sif2xFormatter : SifFormatter
     {
         private const string DATE_FORMAT = "yyyy-MM-dd";
 
+        /// <summary/>
         public override string ToDateString( DateTime? date )
         {
             if ( !date.HasValue ) {
@@ -20,6 +22,7 @@ namespace OpenADK.Library.Impl
             return date.Value.ToString( DATE_FORMAT );
         }
 
+        /// <summary/>
         public override string ToDateTimeString( DateTime? date )
         {
             if ( !date.HasValue ) {
@@ -33,6 +36,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToString( dt, XmlDateTimeSerializationMode.Utc );
         }
 
+        /// <summary/>
         public override string ToTimeString( DateTime? time )
         {
             if ( !time.HasValue ) {
@@ -53,6 +57,7 @@ namespace OpenADK.Library.Impl
             return xmlDateTime;
         }
 
+        /// <summary/>
         public override string ToString( int? intValue )
         {
             if ( !intValue.HasValue ) {
@@ -62,6 +67,7 @@ namespace OpenADK.Library.Impl
         }
 
 
+        /// <summary/>
         public override string ToString(long? longValue)
         {
             if (!longValue.HasValue)
@@ -71,6 +77,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToString(longValue.Value);
         }
 
+        /// <summary/>
         public override string ToString( decimal? decimalValue )
         {
             if ( !decimalValue.HasValue ) {
@@ -79,6 +86,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToString( decimalValue.Value );
         }
 
+        /// <summary/>
         public override string ToString( bool? boolValue )
         {
             if ( !boolValue.HasValue ) {
@@ -87,6 +95,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToString( boolValue.Value );
         }
 
+        /// <summary/>
         public override DateTime? ToDate( string dateValue )
         {
             if ( dateValue == null ) {
@@ -95,6 +104,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToDateTime( dateValue, DATE_FORMAT );
         }
 
+        /// <summary/>
         public override DateTime? ToDateTime( string xmlValue )
         {
             if ( xmlValue == null ) {
@@ -103,6 +113,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToDateTime( xmlValue, XmlDateTimeSerializationMode.Local );
         }
 
+        /// <summary/>
         public override DateTime? ToTime( string xmlValue )
         {
             if ( xmlValue == null ) {
@@ -111,6 +122,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToDateTime( xmlValue, XmlDateTimeSerializationMode.Local );
         }
 
+        /// <summary/>
         public override int? ToInt( string intValue )
         {
             if ( intValue == null ) {
@@ -119,6 +131,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToInt32( intValue );
         }
 
+        /// <summary/>
         public override long? ToLong(string longValue)
         {
             if (longValue == null)
@@ -128,6 +141,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToInt64(longValue);
         }
 
+        /// <summary/>
         public override decimal? ToDecimal( string decimalValue )
         {
             if ( decimalValue == null ) {
@@ -136,6 +150,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToDecimal(decimalValue);
         }
 
+        /// <summary/>
         public override bool? ToBool( string inValue )
         {
             if ( inValue == null ) {
@@ -144,6 +159,7 @@ namespace OpenADK.Library.Impl
             return XmlConvert.ToBoolean( inValue );
         }
 
+        /// <summary/>
         public override bool SupportsNamespaces
         {
             get { return true; }

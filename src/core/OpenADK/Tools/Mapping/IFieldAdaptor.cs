@@ -7,6 +7,7 @@ using System;
 
 namespace OpenADK.Library.Tools.Mapping
 {
+    /// <summary/>
     public interface IFieldAdaptor
     {
         /// <summary>

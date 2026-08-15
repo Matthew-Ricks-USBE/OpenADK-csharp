@@ -8,6 +8,7 @@ using OpenADK.Library.Tools.XPath;
 
 namespace OpenADK.Library.Tools.Mapping
 {
+    /// <summary/>
     public class MappingsContext
     {
         private SifXPathContext fRootContext;

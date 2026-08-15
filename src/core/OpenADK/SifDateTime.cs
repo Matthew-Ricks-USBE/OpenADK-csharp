@@ -7,13 +7,17 @@ using System;
 
 namespace OpenADK.Library
 {
+   /// <summary/>
+   /// <summary/>
    [Serializable]
     public class SifDateTime : AdkDataType<DateTime?>
     {
+        /// <summary/>
         public SifDateTime( DateTime? value )
             : base( value ) {}
 
 
+        /// <summary/>
         protected override SifTypeConverter<DateTime?> GetTypeConverter()
         {
             return SifTypeConverters.DATETIME;

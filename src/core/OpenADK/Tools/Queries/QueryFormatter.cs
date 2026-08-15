@@ -77,6 +77,7 @@ namespace OpenADK.Library.Tools.Queries
             return Format(query, table, true);
         }
 
+       /// <summary/>
        public virtual string Format(Library.Query query,
                                      IDictionary table, bool isExplicit)
         {
@@ -99,6 +100,7 @@ namespace OpenADK.Library.Tools.Queries
         }
 
 
+       /// <summary/>
        protected internal virtual void EvaluateConditionGroup(Library.Query query,
                                                                ConditionGroup grp,
                                                                StringBuilder str,

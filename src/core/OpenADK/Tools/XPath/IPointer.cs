@@ -7,6 +7,7 @@ using System.Xml.XPath;
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public interface IPointer
     {
         /// <summary>
@@ -14,6 +15,7 @@ namespace OpenADK.Library.Tools.XPath
         /// </summary>
         object Value { get; }
 
+        /// <summary/>
         void SetValue( object value );
 
         /// <summary>

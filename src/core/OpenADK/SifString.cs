@@ -7,13 +7,17 @@ using System;
 
 namespace OpenADK.Library
 {
+   /// <summary/>
+   /// <summary/>
    [Serializable]
     public class SifString : AdkDataType<string>
     {
+        /// <summary/>
         public SifString( string value )
             : base( value ) {}
 
 
+        /// <summary/>
         protected override SifTypeConverter<string> GetTypeConverter()
         {
             return SifTypeConverters.STRING;
@@ -43,7 +47,7 @@ namespace OpenADK.Library
         /// </summary>
         /// <remarks>
         /// To change the default formatter used for rendering text values, call
-        /// <see cref="Adk.TextFormatter"/>
+        /// <c>TextFormatter</c>
         /// </remarks>
         /// <returns></returns>
         public override String ToString()
@@ -84,3 +88,4 @@ namespace OpenADK.Library
 
     }
 }
+

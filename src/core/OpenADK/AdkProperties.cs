@@ -187,7 +187,7 @@ namespace OpenADK.Library
         /// The indexer for the property collection
         /// </summary>
         /// <remarks>
-        /// This indexer has the same behavior as the <see cref="GetProperty"/> and <see cref="SetProperty"/> methods.
+        /// This indexer has the same behavior as the <c>GetProperty</c> and <c>SetProperty</c> methods.
         /// </remarks>
         public string this[ string key ]
         {

@@ -51,12 +51,12 @@ namespace OpenADK.Library
     ///		that was received at an earlier time, instantiate a SifResponseSender.
     ///	</li>
     ///	<li>
-    ///		Call the <see cref="SifResponseSender.Open"/> method and pass it the Zone you wish to send 
+    ///		Call the <c>Open</c> method and pass it the Zone you wish to send 
     ///		SIF_Response messages to. You must also pass the SIF_Version and 
     ///		SIF_MaxBufferSize value from the original SIF_Request message. (Be sure
     ///		to obtain these values from the <c>SifMessageInfo</c> parameter 
     ///		in your <c>Publisher.OnRequest</c> implementation so you can pass them to 
-    ///		the <see cref="SifResponseSender.Open"/> method when using this class.)
+    ///		the <c>Open</c> method when using this class.)
     ///	</li>
     ///	<li>
     ///		Repeatedly call the <see cref="SifResponseSender.Write(SifDataObject)"/> method, once for each 
@@ -77,7 +77,9 @@ namespace OpenADK.Library
     /// <since>ADK 1.5.1</since>
     public class SifResponseSender : IDisposable
     {
+        /// <summary/>
         protected IZone fZone;
+        /// <summary/>
         protected DataObjectOutputStreamImpl fOut = null;
 
 
@@ -252,6 +254,7 @@ namespace OpenADK.Library
 
         #region IDisposable Members
 
+        /// <summary/>
         public void Dispose()
         {
             if ( fOut != null ) {
@@ -263,3 +266,4 @@ namespace OpenADK.Library
         #endregion
     }
 }
+

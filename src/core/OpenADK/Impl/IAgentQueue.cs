@@ -24,9 +24,6 @@ namespace OpenADK.Library.Impl
         IZone Zone { get; }
 
         /// <summary>  Initialize the queue</summary>
-        /// <param name="agent">The agent that owns the queue. Each agent has one queue
-        /// per zone to which it is connected.
-        /// </param>
         /// <param name="zone">The zone that owns the queue. Each zone to which an agent
         /// is connected is represented by its own queue.
         /// </param>

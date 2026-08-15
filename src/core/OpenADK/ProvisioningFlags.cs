@@ -7,6 +7,8 @@ using System;
 
 namespace OpenADK.Library
 {
+    /// <summary/>
+    /// <summary/>
     [Flags]
     public enum ProvisioningFlags
     {

@@ -23,6 +23,7 @@ namespace OpenADK.Library.Tools.Mapping
         private readonly IDataReader fReader;
         private readonly ArrayList fColumns;
 
+        /// <summary/>
         public DataReaderAdaptor( IDataReader reader )
         {
             fReader = reader;

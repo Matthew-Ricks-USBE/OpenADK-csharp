@@ -19,6 +19,7 @@
     <DocumentationFile>bin\Release\SifWorks.Adk.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
+
   </PropertyGroup>
   <ItemGroup>
     <Reference Update="System">

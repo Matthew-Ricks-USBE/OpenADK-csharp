@@ -12,10 +12,13 @@ namespace OpenADK.Library
     /// </summary>
     public interface ITransportManager
     {
+        /// <summary/>
         IProtocolHandler Activate(ZoneImpl zone);
 
+        /// <summary/>
         void Activate(Agent agent);
 
+        /// <summary/>
         TransportProperties GetDefaultTransportProperties(string protocol);
 
         /// <summary>
@@ -26,6 +29,7 @@ namespace OpenADK.Library
         /// <exception cref="AdkTransportException">If the protocol is not supported by the ADK</exception>
         ITransport GetTransport( string protocol );
 
+        /// <summary/>
         void Shutdown();
     }
 }

@@ -13,7 +13,7 @@ using OpenADK.Util;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-/**
+/*
  * 	This private interface is implemented by the SIFDTD classes of each 
  * 	data model variant. The methods in this interface are considered internal
  * 	to the ADK and therefore not exposed through the DTD interface.
@@ -23,16 +23,21 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace OpenADK.Library.Impl
 {
+    /// <summary/>
     public abstract class DTDInternals : IDtd
     {
         private static readonly object MetadataLoadLock = new object();
 
+        /// <summary/>
         public ILogger Logger { get; internal set; } = NullLogger.Instance;
 
         // SIF_Message mapping used internally by SIFParser
+        /// <summary/>
         public static IElementDef SIF_MESSAGE = new ElementDefImpl(null, "SIF_Message", null, 0, "Impl", SifVersion.SIF11, SifVersion.LATEST);
+        /// <summary/>
         public static IElementDef SIF_MESSAGE_VERSION = new ElementDefImpl(SIF_MESSAGE, "Version", null, 1, SifDtd.INFRA, null, (byte)(ElementDefImpl.FD_FIELD), SifVersion.SIF11, SifVersion.LATEST);
 
+        /// <summary/>
         protected DTDInternals()
 	    {
             fElementDefs = new ConcurrentDictionary<String, IElementDef>(StringComparer.Ordinal);
@@ -41,10 +46,14 @@ namespace OpenADK.Library.Impl
 	    }
 
 
+        /// <summary/>
         protected int fLoaded = 0;
+        /// <summary/>
         protected ConcurrentDictionary<String, IElementDef> fElementDefs;
 
+        /// <summary/>
         public abstract string BaseNamespace { get;}
+        /// <summary/>
         public abstract string BasePackageName { get; }
 
         /// <summary>
@@ -59,6 +68,7 @@ namespace OpenADK.Library.Impl
             return returnValue;
         }
 
+        /// <summary/>
         public void AddElementDef(string key, IElementDef definition)
         {
             if (key == null) throw new ArgumentNullException(nameof(key));
@@ -124,6 +134,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public abstract String SDOAssembly
         { get;
         }
@@ -141,6 +152,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         protected abstract String GetLibraryName(int type);
 
         /// <summary>
@@ -197,7 +209,7 @@ namespace OpenADK.Library.Impl
 
         /// <summary>  Gets the individual SdoLibrary type values represented in the given
         /// set of flags</summary>
-        /// <param name="library">The library identifier (e.g. SdoLibraryType.Food)</param>
+        /// <param name="libraryTypes">The library identifier (e.g. SdoLibraryType.Food)</param>
         /// <returns>An array of SdoLibraryTypes naming all Sdo Libraries identified by the
         /// libraries value</returns>
         protected abstract List<int> GetSdoTypes(int libraryTypes);
@@ -230,6 +242,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public SifMessageType GetElementType(string name)
         {
             try
@@ -1439,6 +1452,7 @@ namespace OpenADK.Library.Impl
             }
         }
 
+        /// <summary/>
         public SifFormatter GetFormatter(SifVersion version)
         {
             if (version.Major == 2)
@@ -1460,3 +1474,4 @@ namespace OpenADK.Library.Impl
     }
 
 }
+

@@ -5,6 +5,7 @@
 
 namespace OpenADK.Library.Tools.Mapping
 {
+    /// <summary/>
     public enum MappingBehavior
     {
         /// <summary>

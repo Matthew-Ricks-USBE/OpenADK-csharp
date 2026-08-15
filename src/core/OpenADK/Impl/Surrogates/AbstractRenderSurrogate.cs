@@ -8,15 +8,19 @@ using System.Xml;
 
 namespace OpenADK.Library.Impl.Surrogates
 {
+    /// <summary/>
     public class AbstractRenderSurrogate
     {
+        /// <summary/>
         protected IElementDef fElementDef;
 
+        /// <summary/>
         public AbstractRenderSurrogate( IElementDef def )
         {
             fElementDef = def;
         }
 
+        /// <summary/>
         protected static String ConsumeElementTextValue( XmlReader reader,
                                                          SifVersion version )
 
@@ -62,6 +66,7 @@ namespace OpenADK.Library.Impl.Surrogates
         }
 
 
+        /// <summary/>
         protected static void ThrowParseException( Exception ex,
                                                    String elementDefName,
                                                    SifVersion version )
@@ -71,12 +76,14 @@ namespace OpenADK.Library.Impl.Surrogates
                   (ex == null ? "" : ex.Message) + " (SIF " + version.ToString() + ")", null, ex );
         }
 
+        /// <summary/>
         protected static void ThrowParseException( String errorMessage,
                                                    SifVersion version )
         {
             throw new AdkParsingException( errorMessage + " (SIF " + version.ToString() + ")", null );
         }
 
+        /// <summary/>
         protected static void WriteSimpleElement( XmlWriter writer,
                                                   String elementName,
                                                   String xmlValue )

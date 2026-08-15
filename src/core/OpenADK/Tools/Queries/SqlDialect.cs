@@ -9,6 +9,7 @@ using System.Text;
 
 namespace OpenADK.Library.Tools.Queries
 {
+    /// <summary/>
     public class SqlDialect : Dialect
     {
         /// <summary>
@@ -21,6 +22,7 @@ namespace OpenADK.Library.Tools.Queries
         /// </summary>
         public static Dialect MS_ACCESS = new SqlDialect( '"' );
 
+        /// <summary/>
         protected SqlDialect( char quoteCharacter ) : base( quoteCharacter ) { }
 
     }

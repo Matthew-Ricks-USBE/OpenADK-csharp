@@ -60,6 +60,7 @@ namespace OpenADK.Library.Tools.Mapping
 
     public class ObjectMapAdaptor : IFieldAdaptor, IXPathVariableLibrary
     {
+        /// <summary/>
         protected IDictionary fMap;
         private bool fOverwriteValues = false;
 
@@ -191,6 +192,7 @@ namespace OpenADK.Library.Tools.Mapping
 
 
 
+        /// <summary/>
         public IXsltContextVariable ResolveVariable(string prefix, string name)
         {
             return new ObjectMapVariable(name, this );

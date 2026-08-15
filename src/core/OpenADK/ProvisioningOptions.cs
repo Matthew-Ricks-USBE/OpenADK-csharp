@@ -11,6 +11,7 @@ using System.Text;
 namespace OpenADK.Library
 {
 
+   /// <summary/>
    public class ProvisioningOptions
    {
 
@@ -24,6 +25,7 @@ namespace OpenADK.Library
          fSupportedContexts.Add(SifContext.DEFAULT);
       }
 
+      /// <summary/>
       protected ProvisioningOptions(params SifContext[] contexts)
       {
          addSupportedContext(contexts);
@@ -62,6 +64,7 @@ namespace OpenADK.Library
          return false;
       }
 
+      /// <summary/>
       public List<SifContext> SupportedContexts
       {
          get

@@ -41,7 +41,7 @@ namespace OpenADK.Library.Global
 	/// <item><term><c>SIFDTD.SCHOOLINFO</c></term><description>Identifies the SchoolInfo data object</description></item>
 	/// </list>
 	/// Many of the Adk's public interfaces require an ElementDef constant to be passed
-	/// as a parameter. For example, the first parameter to the <see cref="IZone.SetSubscriber"/>
+	/// as a parameter. For example, the first parameter to the <c>IZone.SetSubscriber</c>
 	/// method is an IElementDef:
 	/// <code>myZone.setSubscriber( SIFDTD.BUSINFO, this, ADKFlags.PROV_SUBSCRIBE );</code>
 	/// ElementDef also identifies child elements and attributes as demonstrated by the	<c>Query.AddCondition</c> method:
@@ -120,6 +120,7 @@ namespace OpenADK.Library.Global
 	/** Defines the Description attribute as a child of &lt;XMLData&gt; */
 	public static IElementDef XMLDATA_DESCRIPTION = null;
 
+	/// <summary/>
 	public override void Load()
 	{
 		//  Objects defined by this SDO Library...
@@ -157,6 +158,7 @@ namespace OpenADK.Library.Global
 	}
 
 	#region Update SifDtd
+	/// <summary/>
 	public override void AddElementMappings( IDictionary<String, IElementDef> dictionary )
 	{
 		dictionary[ "SIF_ExtendedElement" ] = SIF_EXTENDEDELEMENT;
@@ -177,3 +179,4 @@ namespace OpenADK.Library.Global
 	}
 	#endregion
 }}
+

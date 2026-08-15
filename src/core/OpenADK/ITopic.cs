@@ -86,7 +86,7 @@ namespace OpenADK.Library
         /// </summary>
         /// <remarks>
         /// For Topics created to represent the SIF_ReportObject object type, register 
-        /// a publisher message handler with the <see cref="ITopic.SetReportPublisher"/> 
+        /// a publisher message handler with the <c>SetReportPublisher</c> 
         /// method instead
         /// </remarks>
         /// <param name="publisher">An object that implements the <see cref="IPublisher"/> interface</param>
@@ -101,7 +101,7 @@ namespace OpenADK.Library
         /// </summary>
         /// <remarks>
         /// For Topics created to represent the SIF_ReportObject object type, register 
-        /// a publisher message handler with the <see cref="ITopic.SetReportPublisher"/> 
+        /// a publisher message handler with the <c>SetReportPublisher</c> 
         /// method instead
         /// </remarks>
         /// <param name="publisher">An object that implements the <see cref="IPublisher"/> interface</param>
@@ -318,3 +318,4 @@ namespace OpenADK.Library
                          bool outgoing);
     }
 }
+

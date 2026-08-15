@@ -27,6 +27,7 @@ namespace OpenADK.Library.Impl
 
         private List<ContextMatrix> fAllContexts = new List<ContextMatrix>();
 
+        /// <summary/>
         public void SetPublisher(IPublisher publisher)
         {
             SetPublisher(publisher, null, null );

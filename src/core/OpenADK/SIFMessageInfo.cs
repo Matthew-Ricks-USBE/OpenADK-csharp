@@ -252,8 +252,6 @@ namespace OpenADK.Library
         /// <returns> A SifVersion object identifying the version of SIF associated
         /// with the message
         /// </returns>
-        /// <seealso cref="SifRequestVersion">
-        /// </seealso>
         public SifVersion SifVersion
         {
             get { return fPayloadVersion; }
@@ -359,12 +357,14 @@ namespace OpenADK.Library
             get { return (int?) fObjects["SIF_MaxBufferSize"]; }
         }
 
+        /// <summary/>
         public string [] AttributeNames
         {
             get { return null; }
         }
 
 
+        /// <summary/>
         public string GetAttribute( string attr )
         {
             string attributeValue = null;
@@ -372,6 +372,7 @@ namespace OpenADK.Library
             return attributeValue;
         }
 
+        /// <summary/>
         public void SetAttribute( string attr,
                                   string val )
         {
@@ -387,6 +388,7 @@ namespace OpenADK.Library
             get { return fContexts; }
         }
 
+        /// <summary/>
         public static SifMessageInfo Parse(TextReader reader, bool keepMessage, IZone zone)
         {
             StringWriter writer = null;
@@ -593,6 +595,7 @@ namespace OpenADK.Library
             }
         }
 
+        /// <summary/>
         public override string ToString()
         {
             StringBuilder str = new StringBuilder();
@@ -630,3 +633,4 @@ namespace OpenADK.Library
         }
     }
 }
+

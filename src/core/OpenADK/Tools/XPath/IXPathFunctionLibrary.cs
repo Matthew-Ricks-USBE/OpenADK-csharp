@@ -9,8 +9,10 @@ using System.Xml.Xsl;
 
 namespace OpenADK.Library.Tools.XPath
 {
+    /// <summary/>
     public interface IXPathFunctionLibrary
     {
+        /// <summary/>
         IXsltContextFunction ResolveFunction( String prefix, String name, XPathResultType[] argTypes );
     }
 }

@@ -18,6 +18,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
         private AdkExpression[] fPredicates;
 
 
+        /// <summary/>
         public AdkXPathStep( AdkAxisType axis, AdkNodeTest nodeTest, params AdkExpression[] predicates )
         {
             fAxis = axis;
@@ -25,16 +26,19 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             fPredicates = predicates;
         }
 
+        /// <summary/>
         public AdkNodeTest NodeTest
         {
             get { return fNodeTest; }
         }
 
+        /// <summary/>
         public AdkExpression[] Predicates
         {
             get { return fPredicates; }
         }
 
+        /// <summary/>
         public bool IsContextDependent()
         {
             if ( fPredicates != null )
@@ -50,6 +54,7 @@ namespace OpenADK.Library.Tools.XPath.Compiler
             return false;
         }
 
+        /// <summary/>
         public override string ToString()
         {
             StringBuilder buffer = new StringBuilder();

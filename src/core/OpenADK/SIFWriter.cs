@@ -43,8 +43,11 @@ namespace OpenADK.Library
 
         private SifFormatter fFormatter;
 
+        /// <summary/>
         public const string XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace";
+        /// <summary/>
         public const string XSI_PREFIX = "xsi";
+        /// <summary/>
         public const string NIL = "nil";
         
 
@@ -85,6 +88,7 @@ namespace OpenADK.Library
         /// <summary>  Constructor</summary>
         /// <param name="outStream">The OutputStream to Write to
         /// </param>
+        /// <param name="runtime">The ADK runtime instance.</param>
         public SifWriter(Stream outStream, IAdkRuntime runtime)
             : this(runtime?.Dtd, runtime?.SifVersion, runtime?.Log)
         {
@@ -95,6 +99,7 @@ namespace OpenADK.Library
         /// Creates an instance of a SifWriter using a TextWriter
         /// </summary>
         /// <param name="writer">The writer to write to. The writer needs to be using the proper encoding for the purpose in which it is used</param>
+        /// <param name="runtime">The ADK runtime instance.</param>
         public SifWriter(TextWriter writer, IAdkRuntime runtime)
             : this(runtime?.Dtd, runtime?.SifVersion, runtime?.Log)
         {
@@ -103,24 +108,28 @@ namespace OpenADK.Library
 
 
 
+        /// <summary/>
         public SifWriter(XmlWriter writer, IAdkRuntime runtime)
             : this(runtime?.Dtd, runtime?.SifVersion, runtime?.Log)
         {
             fWriter = XmlWriter.Create(writer, fSettings);
         }
 
+        /// <summary/>
         public SifWriter(XmlWriter writer, IDtd dtd, SifVersion version)
             : this(dtd, version, null)
         {
             fWriter = writer ?? throw new ArgumentNullException(nameof(writer));
         }
 
+        /// <summary/>
         public SifWriter(Stream outStream, IDtd dtd, SifVersion version)
             : this(dtd, version, null)
         {
             fWriter = XmlWriter.Create(outStream, fSettings);
         }
 
+        /// <summary/>
         public SifWriter(TextWriter writer, IDtd dtd, SifVersion version)
             : this(dtd, version, null)
         {

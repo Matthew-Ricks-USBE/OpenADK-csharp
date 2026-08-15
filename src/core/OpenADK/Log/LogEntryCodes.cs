@@ -11,29 +11,43 @@ namespace OpenADK.Library.Log
     public class LogEntryCodes
     {
         //	Categories
+        /// <summary/>
         public const int CATEGORY_SUCCESS = 1;
+        /// <summary/>
         public const int CATEGORY_DATA_ISSUES_WITH_SUCCESS = 2;
+        /// <summary/>
         public const int CATEGORY_DATA_ISSUES_WITH_FAILURE = 3;
+        /// <summary/>
         public const int CATEGORY_ERROR = 4;
 
         //	Success Category Codes
+        /// <summary/>
         public const int CODE_SUCCESS = 1;
 
         //	Data Issues with Success Result Category Codes
+        /// <summary/>
         public const int CODE_DATA_CHANGED_SUCCESS = 1;
+        /// <summary/>
         public const int CODE_DATA_ADDED_SUCCESS = 2;
 
         //	Data Issues with Failure Result Category Codes
+        /// <summary/>
         public const int CODE_INSUFFICIENT_INFO_FAILURE = 1;
+        /// <summary/>
         public const int CODE_BUSINESS_RULE_FAILURE = 2;
+        /// <summary/>
         public const int CODE_INCOMPLETE_DATA_FAILURE = 3;
 
         //	Agent Error Conditions Category Codes
+        /// <summary/>
         public const int CODE_AGENT_FAILURE = 1;
 
         //	ZIS Error Conditions Category Codes
+        /// <summary/>
         public const int CODE_ZIS_FAILURE = 1;
+        /// <summary/>
         public const int CODE_MAXBUFFERSIZE_FAILURE = 2;
+        /// <summary/>
         public const int CODE_INSECURE_CHANNEL_FAILURE = 3;
     }
 }

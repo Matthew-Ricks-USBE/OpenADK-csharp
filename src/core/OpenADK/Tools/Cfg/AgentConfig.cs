@@ -928,6 +928,7 @@ namespace OpenADK.Library.Tools.Cfg
             XmlUtils.SetProperty( node, property, val );
         }
 
+        /// <summary/>
         public virtual void SetProperty( XmlElement node,
                                          string elementName,
                                          string property,

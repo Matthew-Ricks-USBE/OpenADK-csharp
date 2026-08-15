@@ -17,6 +17,7 @@ namespace OpenADK.Library
     [Serializable]
     public class SifEnum : SifString
     {
+        /// <summary/>
         public SifEnum( String value )
             : base( value ) {}
     }

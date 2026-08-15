@@ -13,6 +13,7 @@ namespace OpenADK.Library
     /// </summary>
     public class SifContext
     {
+        /// <summary/>
         protected internal const string SIF_DEFAULT = "SIF_Default";
 
         /// <summary>

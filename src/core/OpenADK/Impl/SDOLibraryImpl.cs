@@ -22,8 +22,10 @@ namespace OpenADK.Library.Impl
         /// <summary>The DTD instance into which this library is being loaded.</summary>
         protected internal IDtd Dtd { get; internal set; }
 
+        /// <summary/>
         public abstract void Load();
 
+        /// <summary/>
         public abstract void AddElementMappings( IDictionary<String, IElementDef> dtdMap );
     }
 }

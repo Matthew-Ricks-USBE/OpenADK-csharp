@@ -7,12 +7,16 @@ namespace OpenADK.Library
     /// </summary>
     public sealed class AdkOptions
     {
+        /// <summary/>
         public SifVersion SifVersion { get; set; } = SifVersion.LATEST;
 
+        /// <summary/>
         public SIFVariant Variant { get; set; } = SIFVariant.SIF_US;
 
+        /// <summary/>
         public int SdoLibraries { get; set; } = int.MaxValue;
 
+        /// <summary/>
         public AdkDebugFlags Debug { get; set; } = AdkDebugFlags.Very_Detailed;
 
         /// <summary>
@@ -20,6 +24,7 @@ namespace OpenADK.Library
         /// </summary>
         public Func<SIFVariant, IDtd> DtdFactory { get; set; } = CreateDefaultDtd;
 
+        /// <summary/>
         public AdkComponentOptions Components { get; } = new AdkComponentOptions();
 
         private static IDtd CreateDefaultDtd(SIFVariant variant)
