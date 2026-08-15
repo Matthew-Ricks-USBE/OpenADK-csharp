@@ -107,7 +107,7 @@ namespace Library.NUnit.Core.Library
             foreach ( SIF_Version version in sr.GetSIF_Versions() )
             {
                 String versionString = version.TextValue;
-                Assert.True( versionString.StartsWith( "1" ));
+                Assert.StartsWith("1", versionString);
             }
         }
 
@@ -257,7 +257,7 @@ namespace Library.NUnit.Core.Library
             foreach ( SIF_Version version in sr.GetSIF_Versions() )
             {
                 String versionString = version.TextValue;
-                Assert.True( versionString.StartsWith( "1" ));
+                Assert.StartsWith("1", versionString);
             }
         }
 
@@ -321,7 +321,7 @@ namespace Library.NUnit.Core.Library
         /// <param name="evnt">The event data</param>
         /// <param name="zone">The zone from which this event originated</param>
         /// <param name="info">Information about the SIF_Event message</param>
-        public void OnEvent( Event evnt, IZone zone, IMessageInfo info )
+        void ISubscriber.OnEvent( Event evnt, IZone zone, IMessageInfo info )
         {
             throw new NotImplementedException();
         }

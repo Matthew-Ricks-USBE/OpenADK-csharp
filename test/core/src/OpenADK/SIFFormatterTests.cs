@@ -140,9 +140,7 @@ namespace Library.Nunit.Core
             Assert.Equal(value.GetMonth(testValue), testValue.Month);
             Assert.Equal(value.GetDayOfMonth(testValue), testValue.Day);
             Assert.Equal(stringValue, (String) formatter.ToDateString(testValue));
-
-            testValue = (DateTime) formatter.ToDate(null);
-            Assert.Null(testValue);
+            Assert.Null(formatter.ToDate(null));
         }
 
         [Fact]

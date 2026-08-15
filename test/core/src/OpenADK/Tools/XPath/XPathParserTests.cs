@@ -12,11 +12,11 @@ namespace Library.Nunit.Core.Tools.XPath
         {
             AdkXPathStep[] steps = XPathParser.Parse("Foo");
 
-            Assert.Equal(1, steps.Length);
+            Assert.Single(steps);
             Assert.Equal("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
 
             steps = XPathParser.Parse("/Foo");
-            Assert.Equal(1, steps.Length);
+            Assert.Single(steps);
             Assert.Equal("Foo", ((AdkNodeNameTest) steps[0].NodeTest).NodeName);
 
             Console.WriteLine(steps[0]);
@@ -82,7 +82,7 @@ namespace Library.Nunit.Core.Tools.XPath
         {
             Assert.Equal(name, ((AdkNodeNameTest) step.NodeTest).NodeName);
             Assert.NotNull(step.Predicates);
-            Assert.Equal(1, step.Predicates.Length);
+            Assert.Single(step.Predicates);
             Assert.IsType<AdkEqualOperation>(step.Predicates[0]);
 
             AdkExpression[] components = ((AdkEqualOperation) step.Predicates[0]).Arguments;

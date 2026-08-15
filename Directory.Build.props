@@ -21,7 +21,7 @@
     <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
 
     <LangVersion Condition="'$(MSBuildProjectExtension)' == '.csproj'">latest</LangVersion>
-    <Nullable Condition="'$(MSBuildProjectExtension)' == '.csproj'">enable</Nullable>
+    <Nullable Condition="'$(MSBuildProjectExtension)' == '.csproj'">disable</Nullable><!-- TODO: Enable -->
     <Deterministic Condition="'$(MSBuildProjectExtension)' == '.csproj'">true</Deterministic>
 
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

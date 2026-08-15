@@ -35,7 +35,7 @@ namespace Library.Nunit.Core
             Assert.Equal(0, el.ChildCount);
 
             children = el.ToArray();
-            Assert.Equal(0, children.Length);
+            Assert.Empty(children);
         }
 
 
