@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using OpenADK.Library;
 
-namespace Library.NUnit.Core
+namespace Library.xUnit.Core
 {
     
     public class AdkPropertiesTests

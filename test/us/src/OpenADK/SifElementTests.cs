@@ -7,7 +7,7 @@ using Xunit;
 using Library.UnitTesting.Framework;
 using OpenADK.Library.Infra;
 using OpenADK.Library.us.Reporting;
-namespace Library.Nunit.US
+namespace Library.xUnit.US
 {
    /// <summary>
    /// Summary description for SifElementTests.

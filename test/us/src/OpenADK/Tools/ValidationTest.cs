@@ -5,7 +5,7 @@ using Xunit;
 using Library.UnitTesting.Framework;
 using Library.UnitTesting.Framework.Validation;
 
-namespace Library.Nunit.US.Library.Tools
+namespace Library.xUnit.US.Library.Tools
 {
     public class ValidationTest : AdkTest
     {

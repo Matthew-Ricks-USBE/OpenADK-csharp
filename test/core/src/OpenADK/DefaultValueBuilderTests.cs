@@ -1,7 +1,7 @@
-﻿using OpenADK.Library;
+using OpenADK.Library;
 using Xunit;
 
-namespace Library.Nunit.Core
+namespace Library.xUnit.Core
 {
     /// <summary>
     /// Summary description for DefaultValueBuilderTests.

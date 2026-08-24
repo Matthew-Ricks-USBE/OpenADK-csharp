@@ -5,9 +5,9 @@ using OpenADK.Library;
 using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using Xunit;
-using Library.Nunit.US.Library.Tools;
+using Library.xUnit.US.Library.Tools;
 
-namespace Library.Nunit.US.Library.Student
+namespace Library.xUnit.US.Library.Student
 {
     
     public class SIF20StudentValidationTests : ValidationTest

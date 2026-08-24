@@ -1,6 +1,6 @@
 using UsAdkTest = Library.UnitTesting.Framework.AdkTest;
 
-namespace OpenADK.Library.Nunit.UK;
+namespace OpenADK.Library.xUnit.UK;
 
 public class UkAdkTest : UsAdkTest
 {

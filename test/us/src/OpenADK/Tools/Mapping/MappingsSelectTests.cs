@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Library.Tools.Mapping
+namespace Library.xUnit.US.Library.Tools.Mapping
 {
     
     public class MappingsSelectTests : AdkTest

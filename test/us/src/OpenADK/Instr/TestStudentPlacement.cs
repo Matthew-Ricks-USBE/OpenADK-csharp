@@ -5,7 +5,7 @@ using OpenADK.Library.us.Programs;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Instr
+namespace Library.xUnit.US.Instr
 {
     /// <summary>
     /// Summary description for TestStudentPlacement.

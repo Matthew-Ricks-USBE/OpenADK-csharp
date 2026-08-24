@@ -5,7 +5,7 @@ using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
 using Xunit;
 
-namespace Library.Nunit.US.Tools.Mapping
+namespace Library.xUnit.US.Tools.Mapping
 {
     
     public class OtherIdMappingsTests : BaseMappingsTest

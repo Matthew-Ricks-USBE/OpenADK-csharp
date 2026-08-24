@@ -5,7 +5,7 @@ using OpenADK.Library.us.Reporting;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Reporting
+namespace Library.xUnit.US.Reporting
 {
     /// <summary>
     /// Summary description for TestReportManifest.

@@ -7,7 +7,7 @@ using OpenADK.Library.us.Infrastructure;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US
+namespace Library.xUnit.US
 {
     /// <summary>
     /// Summary description for SifEncryptionTests.

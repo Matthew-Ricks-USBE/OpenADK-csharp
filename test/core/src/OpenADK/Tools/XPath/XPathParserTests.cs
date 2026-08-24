@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using OpenADK.Library.Tools.XPath.Compiler;
 using Xunit;
 
-namespace Library.Nunit.Core.Tools.XPath
+namespace Library.xUnit.Core.Tools.XPath
 {
     
     public class XPathParserTests

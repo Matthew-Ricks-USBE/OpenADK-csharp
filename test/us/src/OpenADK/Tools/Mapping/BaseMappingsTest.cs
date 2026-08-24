@@ -9,7 +9,7 @@ using OpenADK.Library.Tools.Mapping;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Tools.Mapping
+namespace Library.xUnit.US.Tools.Mapping
 {
     public abstract class BaseMappingsTest : AdkTest
     {

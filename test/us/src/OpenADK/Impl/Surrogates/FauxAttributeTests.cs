@@ -6,7 +6,7 @@ using OpenADK.Library.Tools.XPath;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Library.Impl.Surrogates
+namespace Library.xUnit.US.Library.Impl.Surrogates
 {
     
     public class FauxAttributeTests : AdkTest

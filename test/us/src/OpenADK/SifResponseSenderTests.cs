@@ -10,7 +10,7 @@ using OpenADK.Library.Tools.XPath;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Library
+namespace Library.xUnit.US.Library
 {
     
     public class SifResponseSenderTests : InMemoryProtocolTest

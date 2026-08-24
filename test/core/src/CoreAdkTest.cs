@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using Library.UnitTesting.Framework;
 
-namespace Library.NUnit.Core
+namespace Library.xUnit.Core
 {
     public class CoreAdkTest : AdkTest
     {

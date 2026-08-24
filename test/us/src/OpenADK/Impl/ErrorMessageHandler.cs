@@ -5,7 +5,7 @@ using OpenADK.Library.Infra;
 using OpenADK.Library.us.Reporting;
 using Xunit;
 
-namespace Library.Nunit.US.Impl
+namespace Library.xUnit.US.Impl
 {
     /// <summary>
     /// Summary description for ErrorMessageHandler.

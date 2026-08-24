@@ -8,7 +8,7 @@ using Xunit;
 using Library.UnitTesting.Framework;
 using OpenADK.Library.us;
 
-namespace Library.Nunit.US.Library.Impl.Surrogates
+namespace Library.xUnit.US.Library.Impl.Surrogates
 {
     
     public class XPathSurrogateTests : AdkTest

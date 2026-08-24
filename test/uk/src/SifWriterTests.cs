@@ -8,7 +8,7 @@ using OpenADK.Library.uk.Learner;
 using OpenADK.Library.uk.School;
 using Xunit;
 
-namespace OpenADK.Library.Nunit.UK
+namespace OpenADK.Library.xUnit.UK
 {
     
     public class SifWriterTests : UkAdkTest

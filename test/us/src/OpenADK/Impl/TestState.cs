@@ -3,7 +3,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using OpenADK.Library;
 
-namespace Library.Nunit.US.Impl
+namespace Library.xUnit.US.Impl
 {
     /**
     * @author administrator

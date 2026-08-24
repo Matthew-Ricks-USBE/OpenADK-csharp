@@ -12,7 +12,7 @@ using Library.UnitTesting.Framework;
 using System.Collections;
 using OpenADK.Library.us;
 
-namespace Library.Nunit.US.Library.Student
+namespace Library.xUnit.US.Library.Student
 {
     
     public class LEAInfoTests : AdkTest

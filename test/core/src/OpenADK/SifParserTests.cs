@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenADK.Library;
@@ -6,7 +6,7 @@ using Xunit;
 using OpenADK.Library.us;
 using Library.UnitTesting.Framework;
 
-namespace Library.NUnit.Core.Library
+namespace Library.xUnit.Core.Library
 {
     
     public class SifParserTests : AdkTest

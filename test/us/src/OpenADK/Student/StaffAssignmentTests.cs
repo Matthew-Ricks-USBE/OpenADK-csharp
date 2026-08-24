@@ -6,7 +6,7 @@ using OpenADK.Library.us.Student;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Library.Student
+namespace Library.xUnit.US.Library.Student
 {
     
     public class StaffAssignmentTests

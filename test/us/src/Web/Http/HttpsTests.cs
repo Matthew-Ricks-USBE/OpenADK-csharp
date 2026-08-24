@@ -33,8 +33,8 @@ namespace OpenADK.Web.Http
         {
             foreach (var fileName in Certificates)
             {
-                using Stream stream = typeof(HttpsTests).Assembly.GetManifestResourceStream("Library.Nunit.US.res." + fileName) ??
-                    throw new FileNotFoundException("Could not find embedded resource: Library.Nunit.US.res." + fileName);
+                using Stream stream = typeof(HttpsTests).Assembly.GetManifestResourceStream("Library.xUnit.US.res." + fileName) ??
+                    throw new FileNotFoundException("Could not find embedded resource: Library.xUnit.US.res." + fileName);
 
                 var fullPath = Path.Combine(Environment.CurrentDirectory, fileName);
                 using Stream certFile = File.OpenWrite(fullPath);
@@ -73,8 +73,8 @@ namespace OpenADK.Web.Http
     }
 
     // These tests shouldn't normally run.
-    // Using `abstract` to prevent xUnit from discovering them automatically.
-    // NUnit `[Explicit]` attribute had better behavior for this.
+    // xUnit doesn't have a direct equivalent to NUnit's `[Explicit]` attribute;
+    // using `abstract` to prevent xUnit from discovering them automatically.
     // Remove `abstract` if you want to run these tests (locally).
     public abstract class HttpsTests : AdkTest, IClassFixture<HttpsTestFixture>
     {

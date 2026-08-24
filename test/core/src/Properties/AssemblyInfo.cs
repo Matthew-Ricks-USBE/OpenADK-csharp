@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("LibraryADK-Nunit-Core")]
+[assembly: AssemblyProduct("LibraryADK-xUnit-Core")]
 [assembly: AssemblyCopyright("Copyright © 2011 Pearson Education, Inc., or associates.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

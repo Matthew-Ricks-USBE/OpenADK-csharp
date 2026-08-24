@@ -4,7 +4,7 @@ using OpenADK.Library.us.Common;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Common
+namespace Library.xUnit.US.Common
 {
     
     public class PartialDateTests : AdkTest

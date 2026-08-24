@@ -8,7 +8,7 @@ using OpenADK.Library.Tools.Mapping;
 using Xunit;
 using Library.UnitTesting.Framework.Validation;
 
-namespace Library.Nunit.US.Library.Tools.Mapping
+namespace Library.xUnit.US.Library.Tools.Mapping
 {
     
     public class SASIMappingsTests : UsAdkTest

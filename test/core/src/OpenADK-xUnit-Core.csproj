@@ -2,8 +2,8 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <RootNamespace>OpenADK.NUnit.Core</RootNamespace>
-    <AssemblyName>OpenADK.NUnit.Core</AssemblyName>
+    <RootNamespace>OpenADK.xUnit.Core</RootNamespace>
+    <AssemblyName>OpenADK.xUnit.Core</AssemblyName>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>

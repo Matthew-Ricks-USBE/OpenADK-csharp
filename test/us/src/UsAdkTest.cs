@@ -5,7 +5,7 @@ using Xunit;
 using Library.UnitTesting.Framework;
 
 
-namespace Library.Nunit.US
+namespace Library.xUnit.US
 {
     public class UsAdkTest : AdkTest
     {

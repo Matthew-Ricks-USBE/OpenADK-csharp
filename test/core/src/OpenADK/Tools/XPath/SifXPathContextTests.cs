@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Xml.XPath;
 using OpenADK.Library;
 using OpenADK.Library.Infra;
@@ -7,7 +7,7 @@ using Xunit;
 using OpenADK.Library.us;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.Core.Tools.XPath
+namespace Library.xUnit.Core.Tools.XPath
 {
     
     public class SifXPathContextTests : AdkTest

@@ -7,7 +7,7 @@ using OpenADK.Library.Tools.Cfg;
 using OpenADK.Library.Tools.Mapping;
 using Xunit;
 
-namespace Library.Nunit.US.Library.Tools.Mapping
+namespace Library.xUnit.US.Library.Tools.Mapping
 {
     
     public class DestinyMappingTests : UsAdkTest

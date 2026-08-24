@@ -8,7 +8,7 @@ using OpenADK.Library.Tools.Queries;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Tools.Queries
+namespace Library.xUnit.US.Tools.Queries
 {
     /// <summary>
     /// Summary description for SQLQueryFormatterTests.

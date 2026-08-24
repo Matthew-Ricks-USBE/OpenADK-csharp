@@ -10,7 +10,7 @@ using Library.UnitTesting.Framework;
 using OpenADK.Library.Infra;
 
 
-namespace Library.Nunit.US
+namespace Library.xUnit.US
 {
    /// <summary>
    /// Summary description for SifWriterTests.
@@ -19,7 +19,7 @@ namespace Library.Nunit.US
    public class SifWriterTests : AdkTest
    {
       /// <summary>
-      /// This method is not a true NUnit test, in that it doesn't do assertions.
+      /// This method is not a true xUnit test, in that it doesn't do assertions.
       /// </summary>
       /// <remarks>
       /// However, it is useful when changing the behavior of the SIFWriter to see

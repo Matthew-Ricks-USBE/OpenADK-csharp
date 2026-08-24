@@ -1,7 +1,7 @@
 using OpenADK.Library;
 using OpenADK.Library.Tools.Mapping;
 
-namespace Library.Nunit.US.Tools.Mapping
+namespace Library.xUnit.US.Tools.Mapping
 {
     internal class TestValueBuilder : DefaultValueBuilder
     {

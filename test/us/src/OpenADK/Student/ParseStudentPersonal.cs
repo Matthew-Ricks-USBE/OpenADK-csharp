@@ -5,7 +5,7 @@ using OpenADK.Library.us.Student;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Student
+namespace Library.xUnit.US.Student
 {
     /// <summary>
     /// Summary description for ParseStudentPersonal.

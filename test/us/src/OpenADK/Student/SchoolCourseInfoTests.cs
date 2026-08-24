@@ -6,7 +6,7 @@ using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.XPath;
 using Xunit;
 
-namespace Library.Nunit.US.Library.Student
+namespace Library.xUnit.US.Library.Student
 {
     
     public class SchoolCourseInfoTests : UsAdkTest

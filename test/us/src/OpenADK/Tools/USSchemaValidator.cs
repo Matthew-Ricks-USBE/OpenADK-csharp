@@ -5,7 +5,7 @@ using System.Text;
 using OpenADK.Library;
 using Library.UnitTesting.Framework.Validation;
 
-namespace Library.Nunit.US.Library.Tools
+namespace Library.xUnit.US.Library.Tools
 {
     public class USSchemaValidator
     {

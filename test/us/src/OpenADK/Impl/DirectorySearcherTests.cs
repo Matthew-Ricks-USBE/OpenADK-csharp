@@ -4,7 +4,7 @@ using System.IO;
 using OpenADK.Util;
 using Xunit;
 
-namespace Library.Nunit.US.Impl
+namespace Library.xUnit.US.Impl
 {
     /// <summary>
     /// Summary description for DirectorySearcherTests.

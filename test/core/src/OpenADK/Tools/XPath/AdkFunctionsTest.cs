@@ -1,7 +1,7 @@
-﻿using OpenADK.Library.Tools.XPath;
+using OpenADK.Library.Tools.XPath;
 using Xunit;
 
-namespace Library.Nunit.Core.Tools.XPath
+namespace Library.xUnit.Core.Tools.XPath
 {
     
     public class AdkFunctionsTest

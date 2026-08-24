@@ -8,7 +8,7 @@ using OpenADK.Library.Tools.Mapping;
 using Xunit;
 using OpenADK.Library.us;
 
-namespace Library.Nunit.US.Tools.Mapping
+namespace Library.xUnit.US.Tools.Mapping
 {
     
     public class AdvancedMappingsTests : BaseMappingsTest

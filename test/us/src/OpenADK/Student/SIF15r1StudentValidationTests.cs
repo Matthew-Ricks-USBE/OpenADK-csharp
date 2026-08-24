@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using OpenADK.Library;
 using Xunit;
-using Library.Nunit.US.Library.Tools;
+using Library.xUnit.US.Library.Tools;
 
-namespace Library.Nunit.US.Library.Student
+namespace Library.xUnit.US.Library.Student
 {
     
     public class SIF15r1StudentValidationTests : ValidationTest

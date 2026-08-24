@@ -17,9 +17,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleSubscriber", "example
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIFQuery", "examples\us\CSharp\SIFQuery\SIFQuery.csproj", "{746564BE-479B-4408-8DBA-79DF129C0B7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.Nunit.us", "test\us\src\OpenADK.Nunit.us.csproj", "{95C75EB1-9CD1-42B1-AA8F-F615B0C8DE96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.xUnit.us", "test\us\src\OpenADK.xUnit.us.csproj", "{95C75EB1-9CD1-42B1-AA8F-F615B0C8DE96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-Nunit-Core", "test\core\src\OpenADK-Nunit-Core.csproj", "{96E593B8-5673-4F26-BAD8-746174CE802A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK-xUnit-Core", "test\core\src\OpenADK-xUnit-Core.csproj", "{96E593B8-5673-4F26-BAD8-746174CE802A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenADK.UnitTesting", "test\framework\src\OpenADK.UnitTesting.csproj", "{50DACA02-66FB-47A4-93AD-B87AF55CFAF9}"
 EndProject

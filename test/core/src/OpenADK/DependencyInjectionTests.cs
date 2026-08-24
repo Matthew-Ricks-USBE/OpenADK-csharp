@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -6,7 +6,7 @@ using Xunit;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
 
-namespace OpenADK.Library.Nunit.Core
+namespace OpenADK.Library.xUnit.Core
 {
     
     public class DependencyInjectionTests

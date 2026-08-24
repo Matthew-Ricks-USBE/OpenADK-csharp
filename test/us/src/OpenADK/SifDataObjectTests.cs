@@ -7,7 +7,7 @@ using Xunit;
 using Library.UnitTesting.Framework;
 using System.Collections;
 
-namespace Library.Nunit.US
+namespace Library.xUnit.US
 {
    /// <summary>
    /// Summary description for SifDataObjectTests.

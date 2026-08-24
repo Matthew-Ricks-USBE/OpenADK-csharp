@@ -9,7 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Library.Nunit.US.Impl
+namespace Library.xUnit.US.Impl
 {
     
     public class RequestCacheFileTests : AdkTest, IDisposable

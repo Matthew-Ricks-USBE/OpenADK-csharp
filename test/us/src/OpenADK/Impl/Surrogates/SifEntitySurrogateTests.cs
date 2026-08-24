@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Library.Nunit.US.Library.Impl.Surrogates
+namespace Library.xUnit.US.Library.Impl.Surrogates
 {
     class SifEntitySurrogateTests
     {

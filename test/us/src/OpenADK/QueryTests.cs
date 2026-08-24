@@ -10,7 +10,7 @@ using OpenADK.Library.us.Student;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US
+namespace Library.xUnit.US
 {
     /// <summary>
     /// Summary description for QueryTests.

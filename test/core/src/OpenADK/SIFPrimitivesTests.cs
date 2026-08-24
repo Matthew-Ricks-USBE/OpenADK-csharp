@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using OpenADK.Library;
 using OpenADK.Library.Infra;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.NUnit.Core.Library
+namespace Library.xUnit.Core.Library
 {
     
     public class SIFPrimitivesTests : InMemoryProtocolTest, ISubscriber

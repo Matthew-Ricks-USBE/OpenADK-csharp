@@ -4,12 +4,12 @@ using System.Text;
 using System.Xml.Schema;
 using OpenADK.Library;
 using Xunit;
-using Library.Nunit.US;
-using Library.Nunit.US.Library.Tools;
+using Library.xUnit.US;
+using Library.xUnit.US.Library.Tools;
 using Library.UnitTesting.Framework;
 using Library.UnitTesting.Framework.Validation;
 
-namespace OpenADK.Library.Nunit.US.Validation
+namespace OpenADK.Library.xUnit.US.Validation
 {
     
     public class VersioningTests : AdkTest

@@ -5,9 +5,9 @@ using OpenADK.Library;
 using OpenADK.Library.Impl;
 using OpenADK.Library.Infra;
 using Xunit;
-using Library.Nunit.US;
+using Library.xUnit.US;
 
-namespace Library.Nunit.US.Impl
+namespace Library.xUnit.US.Impl
 {
     /// <summary>
     /// Summary description for MessageStreamerTests.

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Xml;
@@ -8,7 +8,7 @@ using OpenADK.Library.Infra;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.Core
+namespace Library.xUnit.Core
 {
     
     public class SifFormatterTests : AdkTest

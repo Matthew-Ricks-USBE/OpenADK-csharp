@@ -6,7 +6,7 @@ using OpenADK.Library.us.Library;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Versioning
+namespace Library.xUnit.US.Versioning
 {
     public class MetadataVersioningTests : AdkTest
     {

@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 using OpenADK.Library.Global;
 using OpenADK.Library.us.Common;
 using Xunit;
 
-namespace Library.Nunit.Core
+namespace Library.xUnit.Core
 {
     /// <summary>
     /// Summary description for EnumTests.

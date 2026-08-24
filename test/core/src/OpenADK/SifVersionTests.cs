@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using OpenADK.Library;
 using Xunit;
 using Library.UnitTesting.Framework;
 using OpenADK.Library.us;
 
-namespace Library.Nunit.Core
+namespace Library.xUnit.Core
 {
     
     public class SifVersionTests : AdkTest

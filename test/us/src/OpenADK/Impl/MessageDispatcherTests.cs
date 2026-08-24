@@ -9,7 +9,7 @@ using OpenADK.Util;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Impl
+namespace Library.xUnit.US.Impl
 {
    /// <summary>
    /// Summary description for MessageDispatcherTests.

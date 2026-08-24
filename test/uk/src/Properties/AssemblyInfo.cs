@@ -6,11 +6,11 @@ using System;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Library.nunit.uk")]
+[assembly: AssemblyTitle("Library.xUnit.uk")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Library.nunit.uk")]
+[assembly: AssemblyProduct("Library.xUnit.uk")]
 [assembly: AssemblyCopyright("Copyright © 2011 Pearson Education, Inc., or associates.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

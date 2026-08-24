@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using System.Net;
 
-namespace Library.NUnit.Core.Library.Impl
+namespace Library.xUnit.Core.Library.Impl
 {
     
     public class ZoneImplTests

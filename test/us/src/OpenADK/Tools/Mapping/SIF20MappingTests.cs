@@ -2,9 +2,9 @@ using System.Collections;
 using OpenADK.Library;
 using OpenADK.Library.us.Programs;
 using Xunit;
-using Library.Nunit.US.Tools.Mapping;
+using Library.xUnit.US.Tools.Mapping;
 
-namespace Library.Nunit.US.Library.Tools.Mapping
+namespace Library.xUnit.US.Library.Tools.Mapping
 {
     
     public class SIF20MappingTests : MappingTests

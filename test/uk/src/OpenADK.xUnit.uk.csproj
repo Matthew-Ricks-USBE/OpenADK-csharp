@@ -2,15 +2,13 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Library.Nunit.US</RootNamespace>
-    <AssemblyName>Library.Nunit.US</AssemblyName>
-    <LangVersion>latest</LangVersion>
+    <RootNamespace>Edustructures.SIFWorks.xUnit.UK</RootNamespace>
+    <AssemblyName>Edustructures.SIFWorks.xUnit.uk</AssemblyName>
+	<LangVersion>latest</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <OutputPath>bin\</OutputPath>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>bin\</OutputPath>
     <Optimize>true</Optimize>
     <DebugType>none</DebugType>
   </PropertyGroup>
@@ -21,17 +19,17 @@
     <PackageReference Include="coverlet.collector" Version="6.0.4" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="res\*" />
-    <EmbeddedResource Include="schemas\SIF*\**\*.xsd">
+    <Content Include="data\SIF*\*.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Update="schemas\SIF*\*.xsd">
       <SubType></SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="data\**\*.xml" />
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\core\OpenADK-NET-Core.csproj" />
-    <ProjectReference Include="..\..\..\src\us\OpenADK-US-SDO.csproj" />
-    <ProjectReference Include="..\..\core\src\OpenADK-Nunit-Core.csproj" />
+    <ProjectReference Include="..\..\..\src\uk\OpenADK-UK-SDO.csproj" />
+    <ProjectReference Include="..\..\core\src\OpenADK-xUnit-Core.csproj" />
   </ItemGroup>
 </Project>

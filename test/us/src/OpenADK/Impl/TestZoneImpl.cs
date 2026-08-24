@@ -2,7 +2,7 @@ using System;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
 
-namespace Library.Nunit.US.Impl
+namespace Library.xUnit.US.Impl
 {
    /// <summary>
    /// Summary description for TestZoneImpl.

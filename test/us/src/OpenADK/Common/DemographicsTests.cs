@@ -5,7 +5,7 @@ using OpenADK.Library.us.Student;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Common
+namespace Library.xUnit.US.Common
 {
     /// <summary>
     /// Summary description for DemographicsTests.

@@ -12,7 +12,7 @@ using OpenADK.Library.Tools.XPath;
 using Xunit;
 using Library.UnitTesting.Framework;
 
-namespace Library.Nunit.US.Tools.Mapping
+namespace Library.xUnit.US.Tools.Mapping
 {
     /// <summary>
     /// Summary description for MappingTests.

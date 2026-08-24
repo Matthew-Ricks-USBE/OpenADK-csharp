@@ -6,7 +6,7 @@ using Library.UnitTesting.Framework;
 using Library.UnitTesting.Framework.Validation;
 using System.Xml;
 
-namespace OpenADK.Library.Nunit.UK.Validation
+namespace OpenADK.Library.xUnit.UK.Validation
 {
     
     public class VersioningTests : UkAdkTest

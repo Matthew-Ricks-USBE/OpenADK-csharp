@@ -5,9 +5,9 @@ using OpenADK.Library.us.Common;
 using OpenADK.Library.us.Student;
 using OpenADK.Library.Tools.Mapping;
 using Xunit;
-using Library.Nunit.US.Tools.Mapping;
+using Library.xUnit.US.Tools.Mapping;
 
-namespace Library.Nunit.US.Library.Tools.Mapping
+namespace Library.xUnit.US.Library.Tools.Mapping
 {
     
     public class AttributeMappingTests : BaseMappingsTest
