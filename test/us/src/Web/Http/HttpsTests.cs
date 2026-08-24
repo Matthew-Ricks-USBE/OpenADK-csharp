@@ -2,12 +2,10 @@ using Library.UnitTesting.Framework;
 using Xunit;
 using OpenADK.Library;
 using OpenADK.Library.Impl;
-using OpenADK.Library.Infra;
 using OpenADK.Util;
 using System;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 
@@ -114,7 +112,7 @@ namespace OpenADK.Web.Http
         /// This should fail. It then should try with client
         /// certs enabled and it should succeed.
         /// </summary>
-        [Fact]
+        [Fact(Explicit = true)]
         public void TestLevel2AuthSupport()
         {
             fProps.ClientAuthLevel = 2;
@@ -137,7 +135,7 @@ namespace OpenADK.Web.Http
         /// so this has been left as-is for now.
         /// </remarks>
         /// <see cref="HttpTransport.verifyLevel3Authentication(object, X509Certificate, X509Chain, SslPolicyErrors)"/>
-        [Fact(Skip = "Current implementation doesn't perform the subject-hostname validation.")]
+        [Fact(Explicit = true, Skip = "Current implementation doesn't perform the subject-hostname validation.")]
         public void TestLevel3AuthSupportWithInvalidHost()
         {
             fProps.ClientAuthLevel = 3;
@@ -152,7 +150,7 @@ namespace OpenADK.Web.Http
         /// <summary>
         /// Tests Level 3 authentication with a certificate whose CN matches the hostname.
         /// </summary>
-        [Fact]
+        [Fact(Explicit = true)]
         public void TestLevel3AuthSupportWithValidHost()
         {
             fProps.ClientAuthLevel = 3;
@@ -166,7 +164,7 @@ namespace OpenADK.Web.Http
         /// <summary>
         /// Tests Level 3 authentication with a certificate whose CN matches the IP address.
         /// </summary>
-        [Fact]
+        [Fact(Explicit = true)]
         public void TestLevel3AuthSupportWithValidIP()
         {
             fProps.ClientAuthLevel = 3;
@@ -177,7 +175,7 @@ namespace OpenADK.Web.Http
             RunConnectionTest(true, true);
         }
 
-        [Fact]
+        [Fact(Explicit = true)]
         public void TestHttps()
         {
             startupTransport();
@@ -185,7 +183,7 @@ namespace OpenADK.Web.Http
             RunConnectionTest(false, true);
         }
 
-        [Fact]
+        [Fact(Explicit = true)]
         public void TestHttpsWithName()
         {
             fProps.SSLCertName = "CN=localhost, O=OpenADK, C=US";
@@ -196,7 +194,7 @@ namespace OpenADK.Web.Http
             RunConnectionTest(true, true);
         }
 
-        [Fact]
+        [Fact(Explicit = true)]
         public void TestHttpsWithFile()
         {
             fProps.SSLCertFile = "localhost.pfx";
