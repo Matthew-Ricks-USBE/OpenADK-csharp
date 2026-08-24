@@ -72,7 +72,11 @@ namespace OpenADK.Web.Http
         }
     }
 
-    public class HttpsTests : AdkTest, IClassFixture<HttpsTestFixture>
+    // These tests shouldn't normally run.
+    // Using `abstract` to prevent xUnit from discovering them automatically.
+    // NUnit `[Explicit]` attribute had better behavior for this.
+    // Remove `abstract` if you want to run these tests (locally).
+    public abstract class HttpsTests : AdkTest, IClassFixture<HttpsTestFixture>
     {
         private HttpTransport fTransport = null;
         private SimpleHandler fHandler = null;
